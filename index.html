@@ -909,6 +909,41 @@ function assessPhase() {
       banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 100);
   }
+
+  // ── Send to GHL CRM via webhook ──
+  const activities = [];
+  if (actLeads) activities.push('Get Leads');
+  if (actPhones) activities.push('Answer Phones');
+  if (actSales) activities.push('Sales');
+  if (actService) activities.push('Service');
+  if (actInstalls) activities.push('Installs');
+
+  const payload = {
+    first_name: document.getElementById('fname').value || '',
+    last_name: document.getElementById('lname').value || '',
+    business_name: document.getElementById('biz').value || '',
+    zip: document.getElementById('zip').value || '',
+    email: document.getElementById('email').value || '',
+    phone: document.getElementById('phone').value || '',
+    monthly_revenue: rev,
+    owner_activities: activities.join(', '),
+    office_staff: office,
+    electricians_selling: selling,
+    demand_call_techs: demand,
+    installers: inst,
+    total_staff: totalStaff + 1,
+    assessed_phase: 'Phase ' + final + ': ' + phaseNames[final],
+    revenue_phase: revPhase,
+    structure_phase: structPhase,
+    has_gap: hasGap ? 'Yes' : 'No',
+    source: 'SLE Scaling Guide - Self Assessment'
+  };
+
+  fetch('https://services.leadconnectorhq.com/hooks/mJnVWDiUtQrpHnyom1qR/webhook-trigger/3240f3bb-dbc4-43f5-b8c3-12c1f85bc963', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function() { /* silent fail — don't block UX */ });
 }
 
 function formatCurrency(n) {
