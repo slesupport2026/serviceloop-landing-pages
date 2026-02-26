@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Loop Electrical | Scale Past $100K/Month</title>
+<meta name="description" content="The service operating system for electrical companies doing $400K-$900K who are ready to systematize, train their team, and stop being the bottleneck. Proven across 300+ companies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0A0A0A;--gold:#E3C575;--bright-gold:#FDC33E;--dark-gold:#A78227;--navy:#1B2A45;--charcoal:#333333;--white:#FFFFFF;--red:#CE302A}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Open Sans',sans-serif;background:var(--black);color:var(--white);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+section,.proof-ticker,footer{position:relative;z-index:1}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.section-pad{padding:100px 0}
+.serif-italic{font-family:'Playfair Display',serif;font-style:italic}
+.gold-text{color:var(--gold)}
+.bright-gold{color:var(--bright-gold)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(227,197,117,0.1);transition:all .3s}
+.nav.scrolled{padding:10px 32px;box-shadow:0 4px 30px rgba(0,0,0,0.4)}
+.nav-logo{height:44px}
+.nav-cta{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;padding:10px 28px;background:linear-gradient(135deg,var(--gold),var(--bright-gold));color:var(--black);border-radius:4px;letter-spacing:.5px;text-transform:uppercase;transition:all .3s;border:none;cursor:pointer}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(227,197,117,0.3)}
+
+/* BUTTONS */
+.btn-primary{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;padding:16px 40px;background:linear-gradient(135deg,var(--gold),var(--bright-gold));color:var(--black);border:none;border-radius:4px;cursor:pointer;text-transform:uppercase;letter-spacing:1px;transition:all .3s;display:inline-block;text-align:center}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(227,197,117,0.3)}
+.btn-ghost{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.9rem;padding:15px 32px;background:transparent;color:var(--gold);border:1px solid rgba(227,197,117,0.3);border-radius:4px;cursor:pointer;transition:all .3s;display:inline-block;text-align:center}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(227,197,117,0.05)}
+
+/* HERO */
+.hero{display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(227,197,117,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-content{max-width:720px;position:relative;z-index:2}
+.hero-eyebrow{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--gold)}
+.hero h1{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(2.2rem,4.5vw,3.4rem);line-height:1.15;margin-bottom:28px}
+.hero h1 .highlight{color:var(--bright-gold)}
+.hero-sub{font-size:1.1rem;color:rgba(255,255,255,0.8);max-width:600px;margin-bottom:40px;line-height:1.7}
+.hero-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px;padding:28px 0;border-top:1px solid rgba(227,197,117,0.1);border-bottom:1px solid rgba(227,197,117,0.1)}
+.metric{text-align:center}
+.metric-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.6rem;color:var(--bright-gold);line-height:1;margin-bottom:4px}
+.metric-label{font-size:.75rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px}
+.hero-cta-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.hero-trust{margin-top:48px;font-size:.82rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:8px}
+
+/* DIAGNOSTIC */
+.diagnostic{background:linear-gradient(180deg,var(--black),#060608);border-top:1px solid rgba(227,197,117,0.05)}
+.diag-header{text-align:center;max-width:640px;margin:0 auto 56px}
+.diag-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.4rem);line-height:1.2;margin-bottom:16px}
+.diag-header p{color:rgba(255,255,255,0.6);font-size:1rem}
+.diag-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.diag-card{background:rgba(27,42,69,0.35);border:1px solid rgba(227,197,117,0.06);border-radius:12px;padding:32px 28px;position:relative;transition:all .3s}
+.diag-card:hover{border-color:rgba(227,197,117,0.15)}
+.diag-card-icon{font-size:1.4rem;margin-bottom:12px}
+.diag-card h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;margin-bottom:8px;color:var(--gold)}
+.diag-card p{color:rgba(255,255,255,0.7);font-size:.9rem;line-height:1.6}
+
+/* TICKER */
+.proof-ticker{background:var(--navy);border-top:1px solid rgba(227,197,117,0.08);border-bottom:1px solid rgba(227,197,117,0.08);padding:48px 0;overflow:hidden}
+.ticker-track{display:flex;gap:64px;animation:ticker 45s linear infinite;width:max-content}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{flex-shrink:0;display:flex;align-items:center;gap:16px;white-space:nowrap}
+.ticker-amount{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.3rem;color:var(--bright-gold)}
+.ticker-detail{font-size:.85rem;color:rgba(255,255,255,0.5)}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.3}
+
+/* METHOD */
+.method{background:var(--navy);border-top:1px solid rgba(227,197,117,0.08);border-bottom:1px solid rgba(227,197,117,0.08)}
+.method-header{text-align:center;max-width:660px;margin:0 auto 64px}
+.method-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:16px}
+.method-header p{color:rgba(255,255,255,0.6);font-size:1rem}
+.method-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+.method-step{padding:40px 32px;text-align:center;position:relative;border-right:1px solid rgba(227,197,117,0.08)}
+.method-step:last-child{border-right:none}
+.method-step-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.method-step h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:8px}
+.method-step .sub{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--gold);margin-bottom:16px}
+.method-step p{color:rgba(255,255,255,0.65);font-size:.9rem;line-height:1.6}
+.method-cta{text-align:center;margin-top:56px}
+
+/* WINS */
+.wins{background:linear-gradient(180deg,var(--black),#060608)}
+.wins-header{text-align:center;margin-bottom:60px}
+.wins-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:16px}
+.wins-header p{color:rgba(255,255,255,0.5);font-size:1rem}
+.wins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.win-card{background:rgba(27,42,69,0.3);border:1px solid rgba(227,197,117,0.06);border-radius:12px;padding:32px 28px;transition:all .3s}
+.win-card:hover{border-color:rgba(227,197,117,0.15)}
+.win-result{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.4rem;color:var(--bright-gold);margin-bottom:4px}
+.win-context{font-size:.75rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.win-quote{font-size:.9rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:16px;font-style:italic}
+.win-name{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.85rem}
+.win-company{font-size:.78rem;color:rgba(255,255,255,0.4)}
+
+/* ORIGIN */
+.origin{background:var(--black)}
+.origin-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;align-items:center}
+.origin-card{background:var(--navy);border-radius:16px;padding:48px 36px;border:1px solid rgba(227,197,117,0.1);position:relative}
+.origin-card::before{content:'"';font-family:'Playfair Display',serif;font-size:8rem;color:rgba(227,197,117,0.08);position:absolute;top:-20px;left:20px;line-height:1}
+.origin-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;line-height:1.5;color:rgba(255,255,255,0.9);margin-bottom:24px}
+.origin-attr{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.85rem;color:var(--gold)}
+.origin-text h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,3vw,2rem);line-height:1.3;margin-bottom:28px}
+.origin-text p{color:rgba(255,255,255,0.75);margin-bottom:20px;font-size:.95rem}
+.origin-text p strong{color:var(--gold)}
+
+/* WHO */
+.who{background:linear-gradient(180deg,var(--black),#060608)}
+.who-header{text-align:center;margin-bottom:64px}
+.who-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:16px}
+.who-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.who-card{background:rgba(27,42,69,0.3);border:1px solid rgba(227,197,117,0.06);border-radius:12px;padding:36px 32px}
+.who-card.yes{border-left:3px solid var(--gold)}
+.who-card.no{border-left:3px solid var(--red)}
+.who-card-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+.who-card.yes .who-card-label{color:var(--gold)}
+.who-card.no .who-card-label{color:var(--red)}
+.who-list{list-style:none}
+.who-list li{padding:10px 0;font-size:.93rem;color:rgba(255,255,255,0.8);display:flex;gap:12px;align-items:flex-start}
+
+/* FINAL CTA */
+.final-cta{background:linear-gradient(180deg,#060608,var(--black));text-align:center;padding:120px 24px}
+.final-cta h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(2rem,4vw,2.8rem);margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto}
+.final-cta p{color:rgba(255,255,255,0.6);font-size:1.05rem;max-width:540px;margin:0 auto 40px}
+.final-cta .btn-primary{font-size:1.05rem;padding:18px 52px}
+.final-trust{margin-top:28px;font-size:.82rem;color:rgba(255,255,255,0.35)}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid rgba(227,197,117,0.06);padding:48px 24px;text-align:center}
+footer p{font-size:.78rem;color:rgba(255,255,255,0.3);line-height:1.8}
+footer a{color:var(--gold)}
+footer .disclaimer{max-width:700px;margin:20px auto 0;font-size:.72rem;color:rgba(255,255,255,0.2)}
+
+/* RESPONSIVE */
+@media(max-width:900px){.diag-grid,.origin-grid,.who-grid{grid-template-columns:1fr}.wins-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr}.method-step{border-right:none;border-bottom:1px solid rgba(227,197,117,0.08)}.method-step:last-child{border-bottom:none}.hero-metrics{grid-template-columns:repeat(3,1fr);gap:16px}}
+@media(max-width:600px){.nav{padding:12px 16px}.nav-logo{height:36px}.nav-cta{padding:8px 20px;font-size:.75rem}.hero{padding-top:80px}.hero-cta-row{flex-direction:column;align-items:stretch}.hero-metrics{grid-template-columns:1fr 1fr 1fr}}
+
+/* ANIMATIONS */
+.fade-up{opacity:1;transform:translateY(0);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAA4CAYAAABJ7S5PAAARqklEQVR42t1beXBb5bU/5+pqsbzFipfYjkOcrYnj7JQtKU4oj2VKgS7OQKZ9TBneC8OW0sfSVyiy20mgpX3FpdCaBgptCR2bNCSFNBuxzRLXicHxHjt2JFmWrcXS3bRYV9I974/cGxRjOw44JOWb0Vi+y3fv+X1n/Z1PABdhEBESEUNEqB2rqanRjT32pRtExNTU1Og+A1is1WplvoyAIABAeXm5zuVyrXM6nbMBAI4cOZLicDjW9fT0LBkaGsqZ6L4LOdgLISwiUvL3oaGhJYiYj4iHXS6XOT09/U1ZlltlWfZXV1dXmc1mxmKx3MkwzPVer3czANQ7nc7laWlpV3AcdxARHSoYCACkzT+dY9rVDhEJEaGjo8MAACAIQmVqampNOBxe39vba+Q4jkFEi16vV1iWTV20aJFu5cqVoVgs1hiLxd4vLi6uBwCwWCz/y7KsNTs7u1YQhG+qcytJIFx6vsRqtZ5xcnv27DEnnxME4QfBYNDjdru3OxyOywEAWlpaZgQCgXU2m22Gdl1vb29GW1tbFhHpAAACgcCPvV7vPcFgsHdoaGgNAADHcZXDw8PfSDaVS8a5EhGTDAjP8wdHRkZucLlc6+x2e/7x48dT3W731T6fL/2zvPiJEycW19XVsXa7vTgUCvk9Hs8CAID+/v7MS875uVyuOf39/XkAAKIo/ncwGOx0u91beJ7Pmmr4VI8l/89o2gEA0NfXl+t0Oq8DAHC73VeFw+HGkZGRPwwNDV2mzXfRQCAi5Hn++uHh4Xe6u7s3tbS0zLBarWxbW1veZEKfNY8VGKJP27t2/VgBiQj9fv9GnuffdrlcD/h8vnsvGgjqC+lUDfhLMBj0DQ4O7hocHFyFiGedn/B+AKQaOHMN1YCOAJCswNTUlOvGA0ZNuhAAwOfzbfL5fJVlZWUsAMD+/ftTz/XMC2oWzc3NZkEQXvJ6vYuSVHpSP5AMQOMjqcv/eANYxgayqqqqHKvVap7s2drgOO46SZJODA8P5441sSlHu/OPjkiKoqAWKifKIcbTAKgBBspBQQS6rwTSfvJfM35auMDyWIiTOf+QeK+YXtQotXbmBK54dKm+6MbIkSPvv1VRAQpipUJEWFtby5SXlwMAKCpiiIjxQCDwOgDst1gsf1a1QjnfXGM6Qg8SEVNRUUGVlZXK2ccBoBYY6ATESohrJ2xbUzflzcl8NmVudoE/lLGdjY9mMlLg6ojH9TE/8xa/tGyr6fJVKzchjIKi0ESg6xAxMW35z/mYASKCIAhvMAyjHxwcfHDx4sXu88j09I6tqd/KKsz8afp8S2koktblCmdu+crt+w+diQzHj5ZC7tLXhbe//1rQ/n5n1+K/uWdm6nJnz0pLKygoYIgxGtJS2NCg49R7q1at4omIQUSFiJj6+npmyZIl21JTU6+SZfmk3++/b+HChfJUNWOqQOgQMREIBJ4moqsNBkN4ZGTkJ/PmzTuuKAqDiMrYe6oeXGBcFO2zFOcbl8zMy7jVnJV6p7lwRm5ENp0MJFK3zr7R8leA2gR1WA2wtDI2MODIz8rKajt67Nhrazzfv3JGQdba8KmAXRSjnEfE5qje0hM0LRFzrvkf3eyFy7+pKIlXsrOzd6oRgwAAw+FwgSzL23U63cz09PS1ABBXgaBpixDNzc16nuefiEQiUkNDQ9F4oU0NhywAwMBz2dsiO+dItL+UQntXyfzBdX+37bvhpmTsm5ur9QAAbW1tWbIsn+jq6rADANN94I4C98END4f2Xd5K75QS7ZxHwe25gcMPwRoAgGG7vTgYlPxer3c1IgIRMXV1dayakX5vZGRki+q0L1xY7e/vX+ZyubKTiqBxgRh8NvMHVL+aevfd8p1fbL87/eyoUX6Ge6ipqUmJxWLv8TxPr7766oaxivrxgW8v5Os3/CW0c0nkT2Vg0oQLBoO7OY77nbogrGbC1dXV+vLy0+FXC63TFiL7+/vzAoHAU1rZPPk9gESATffBLOGNRcH+3dctV4U3kJofJGWCukgk8g8ion379u0AAKgh0hEBUl0ZS81r9AAAgX9c8Yr/tfkHAACot8qoAtEUCASeSgZC82NExAqCUBkKhfqGh4ev1Iifz1OGIxFhIBC432QylTAM8ygRPQwAOkSMTVjSMkBE4B75atSWYRLLiaAd6r0KbmhIqOAyiJgIhUI7TCbTLY2NjacaGxvvISL86KOPGLwcEgANcSJAsFoZkHdvkDjxEdU5Rp1O55WIuDoYDH4bEaGiokJJWjzo7Oxk8vPzhXg83i2KoggAWF5eTp8VCGQYRunp6TEWFhaujcfjw9FotFn10jiRNiAC7X1wgXHZfPEPihy2USS8EhGJrA1KUvRJ8DxfbTab72xtbZWJSNmwYcNNiLgbAGJa6o0Iin3n4VWxUGikq3/N23MRlebm5szs7Oy9kUjkR3PmzHGNDaMqWHJTU9NrJSUlD+Xk5LzY1tZ2ByJ6JstzplRZ+v3+m4PB4JOTVY+aSey1WjLcv8s9NlSV+xSAAXpeLP69629rVgMAUF0dW11drff5fK+QOjiOo76+Puru7qZjx44dO3z48Gar1WqiutP27fjzksq231+xGQDA3tWVHw6H+yRJ+uVEabz2fgMDAxZRFJ/1+XwbOjo6DOfKNqerlkeqAQY3AnlfyG2IxfHdwi2eirZ+d17s1P5v+P55l7cx3boXoBIKCqp1t91227VGo3G5Xq9fbzQal7AsO9/n88myLJv6+vreaW1t/c6WLQ9H/2K9PGNhDvyne9Hz/ypbNS/TYDb/SZbl57Oysp4lIhYR419IHcHzvMVms/28t7d3NhGxE4WjT0JmrtXzfM7B06t/l4kI0O0NPHXkvf1rJwq3brf7CSKKO51OamhoeD3J4ekAAOwDA0/yPP+BJElNXq+3bKxznEwGj8eTZrfbHxFF8eWpaMWnhuZh/X7/NRzHuWw2283n8rzbrXcU+F7I6fj4Z9kLT3t9KwsAMDw8XMoLQkN1dbUeEaG5uVmvAcLz/INERC6Xiw4dOvRSMnsNAOD1er82OjrKC4JQWV19OueYCgga8x0IBOb4fD6v3+9XPB7P2qlUxZ/yDUSEdrt9dTgc3i8Iwg4tgoynOfuPU+6/dm7d7Pq/1J0ACBq/oD2U5/ntoijut9lsJo3Oi0ajvyEi6u7upn379v04mYxBROjq6soPBoMep9N5VZKWMOej1UTEiKL4V5fL9cbAwEAhAODnag9oWdtEzrShoeHa9vb2ioN3wE0vPVY2m4hYdeX1RMRUV1frBUE42NXVtWh0dPQboVDoFBFRU1NT15tvvnn9mAYPU1ZWxkYikW5BEJ5Xn2O8qGTtuSgwrfavqanJ6ejo7PGKdO141wWDwXyv13sPz/Nt0WiU2tvbXe++++6TVqs1TdOc5JQ4HA6/E41G7eXl5TrVN31mEFRNwgseNbQK8MCBA7fOm1f8XEpKWo+ixE/pdLq42ssoicfjS2KxGCMIwr8CgcBbBoPh6Lp16+oQEQ4fPsyuX79eYRhGISIIhUI7jEbjnb29vV8pKSnp1eb/t+pg3X333elNTU2bWltbt504caKqtbX1142NjT86cODA17du3ZqnOrAHiIgCgcBPk83LarWaJEl6S3We/3Heju1S6m9O4Rr2+PHjqZIkvUhEJAjCdgCA9vb2okgk0qyCcPtUo8MlrRmqvbPap66ujtVIVzXFBZV8fZyIKBKJfByNRjlZliWn07n+kgVBdWLsdNX2GlgAAENDQzdFo1EhHA43trS0zJ1uEKb73S9oO2DXrl0zNOr6kvQJmiq73e7l4XD4tz6f73tT6ld8Yh443kdLuHDMXMmrNtH9mllN1V/ZbLarPR7Pz9xu97Kp+rFxHRsAgCAIvxBF8aTH43mprq5u2tVsbIyfqrBTAYLjuL2KopAgCM+cy+wmPFFbW0sAAJIkvWE2m28zm81fz8nJyUDEwHh1vSZMU1NTeklJyXM6nW598kshYgIRGac39sCMlmvujGL223Nub/gb1G5kcGNtIrkv4vf7HzcajT9ARK0uUQCAEUWx3+fzvbxixYo3zpVfEBErSVKP1+vNAYDdyTKdFxAbN25MICLMnj27VRCEt2RZristLQ2M12NQhw4R44IgPG4ymTbKsvwzlmUTSQwyMQCGmByzpaWlrtXH8RgAAOR4cQxT/kBaWto2WZafAgAOEZFhGEVRFCQil8FgOPZJz2jCbFJRwXu4qqrKuGXLlqgm07So8Z49e8xqjxEnMiVJkv4UDodbJptHPHStzffPtZtPl+tlbLLvCYfDjTzPV01yO3OuTLm3tzfD7/c/brfb86fqG5gp2pwRAGD16tW3rlix4npEpHEKMUXlALYBgDEYDI4IguCTJGlEkiRfMBj0hsOhnq6BaCmjjIaQWAMRIKQH8XS1Wo+k0oPxeDwwNDS0XZKkhCiKsiiKCUmSopIkxUdGRl6bhJ0CAIAnnnhi1GAw3JKTk9PywQcfpJ8+NXmtMdXaPnby5MkFWVlZ22KxWHtPT0/zokWLhpN9hcZlLliw4CQAlHz44Ye5siwzAABGo1Gn0+kSy5Yt/d2sLPx5Qpaiii4tcroe+iiOCAT49TgAwCiQDhEZn89XpdPp9sZisTgiIhERy7LIcZxLA36sj2IYhjo6OiyXXXbZu6Ojo/UA8Mu1a9eGJjHnqQNRUVFBiEg2my0eDAYfYVk2lEgkshDRpYJ01saxI0eOWIqKimZbLBYjAJBer4dYLKaLxWLEIOYwrN4Wi8dd5nTauMu64s36F2Lxml9nJArml7DrXr8pHI8rJ81m8+2hUOiZvLy89kn8wFjBUFEU9ujRowgAxw0Gw+LMzMyHp0rYTkf1qS0YAwDU2dl5f2Fh4f2pqalzk7rWChGhoiSc/GjKTSM7ZprmLVtRT4lEGihKDAhBZyCGD6afdBc+9/fFi4ruJIKFACAnmW8CEXWxWOy9jIyMm88VNTo6OmYtXbrUN9VGMZ6PwEkvdVbbPQkM/PDDD9NKS0tZjuM+tQrFxcV8Um804zs353wVo8AmEgA6I8BoRFE6jPf3HTp0bOjRRx+9SqfTmQAAEokEAgCxLIuRSCQwf/78o8nPRERyOBzzzWbzMoPB4HE4HCeWL1/OqfJN+1bET+UMZWVlbFtbW9ZkNP/4CdT0sE1qLWFQy/tfSZIkchy3v6WlpfB8tzOznxEE7OjoSJ07d+4riqIUO53OTQDQp23SmIwt+mQzKiDUlp8VtWoBoLOzhCoqKihpU8inXkEzCfWvTEQoimIbEXVmZWXdmKTtF1QbGCLCgYGBUkmSnE6nc9fAwMBjX1TBRESMupkVBwcHrxkcHFwFADA4OFjU39//teTq9gsjYRwOx9ccDsevtOMOh2OpxlSPx3pPl0lqw+PxfDcUCnE8z8+76PRcc3OzGQBAFMV1kiR1trS0zEgupD7vTw+Sq1mVwyjxer0/1Pocbrf7XpfLtTq5H3KxSBtERAgEAk9zHPe2x+NJU1UTm5qaZo7lIMYSJWOrT5XNYscKpVICV3Mct9flcj3kcDjuutQIlzOUv9vt3uR0Or8HADAyMnJVKBQ64Xa7n+7r61v4WbXi1KlTlw0PD9+tdr6uDYfD7X6//2W/33+zCqJ+OkxwOlTpzGayWbNm7TgzMct+i4hmSJKUYjKZIqog5QzDfCWRSPwjLy+vta6uLs1oNGYCAJjNZn7lypVhp9N5pcFgWIyIGaFQ6KX09PR4SkrKbxwOR0Nubu57Pp/vu0Qk5ubmail+bDpWk51mUzkTPgcGBp5JSUk5bjKZZhUVFQ3a7fbi7Ozsl0Kh0BOKopTX1dV1pqenz547d+6LAMD6/f7NANBtsVj+GIvFgnq9/gpFUeqzs7PbfD7fz4koUxW8J7mfMm1q/QVGGTYQCGxhWXZOMBg8XFBQsBsRFY7jtimKYp45c+YPVVbptwDgkGU5kEgkmvLz87vHZrFTKaIuRWofx9QABi20EhGePHmyqLOzU9thj1arlR1P075UP3qbaqKj7Y/4Uv/ibzzNGdOqvyjC/z83rxeMR+haRAAAAABJRU5ErkJggg==" alt="Service Loop Electrical" class="nav-logo">
+  <a href="https://milliondollarservice.com/service-info-session-951026" class="nav-cta">Book a Strategy Call</a>
+</nav>
+
+<!-- HERO: Hustler-focused -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow fade-up">Best for Electrical Companies Doing $400K-$900K</div>
+      <h1 class="fade-up stagger-1">
+        You built the business.<br>
+        Now build the <span class="highlight">machine.</span>
+      </h1>
+      <p class="hero-sub fade-up stagger-2">
+        You're past the startup phase. Revenue is real. But you're still running every call, quoting every job, and training on the fly. The system that got you here won't get you to $100K/month. We built the one that will.
+      </p>
+      <div class="hero-metrics fade-up stagger-3">
+        <div class="metric">
+          <div class="metric-num">$900K→$1.8M</div>
+          <div class="metric-label">In 12 Months of Training</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">300+</div>
+          <div class="metric-label">Companies Worldwide</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">Under $100K→$305K</div>
+          <div class="metric-label">Highest Member Month</div>
+        </div>
+      </div>
+      <div class="hero-cta-row fade-up stagger-4">
+        <a href="https://milliondollarservice.com/service-info-session-951026" class="btn-primary">Diagnose Your Bottleneck</a>
+        <a href="https://go.serviceloopelectrical.com/scale" class="btn-ghost">See The System</a>
+      </div>
+      <div class="hero-trust fade-up stagger-4">
+        &#9679;&nbsp; Bring your questions, not your credit card. We won't offer if you don't ask.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNOSTIC: The 4 Bottlenecks -->
+<section class="diagnostic section-pad">
+  <div class="container">
+    <div class="diag-header fade-up">
+      <h2>The four bottlenecks keeping you <span class="gold-text">stuck at the same revenue.</span></h2>
+      <p>You don't have a skill problem. You have a systems problem. Most electrical companies plateau between $40-80K/month because of one (or all) of these.</p>
+    </div>
+    <div class="diag-grid">
+      <div class="diag-card fade-up stagger-1">
+        <div class="diag-card-icon">&#9632;</div>
+        <h3>You don't have a skill issue</h3>
+        <p>You can wire anything. You can troubleshoot anything. But closing $8K service calls? Presenting options that don't feel salesy? That's a different discipline. And nobody in the trade taught you how.</p>
+      </div>
+      <div class="diag-card fade-up stagger-2">
+        <div class="diag-card-icon">&#9632;</div>
+        <h3>Your demand doesn't match your capacity</h3>
+        <p>Some months the phone won't stop. Others it's dead. You don't have a lead engine, you have a lead lottery. And when calls are slow, you discount to fill the board instead of building a pipeline that compounds.</p>
+      </div>
+      <div class="diag-card fade-up stagger-3">
+        <div class="diag-card-icon">&#9632;</div>
+        <h3>Your team can't replicate you</h3>
+        <p>You hired people but they can't sell at your level. No scripts, no option framework, no post-call process. They run the call, collect a check, and move on. The upsell dies with you.</p>
+      </div>
+      <div class="diag-card fade-up stagger-4">
+        <div class="diag-card-icon">&#9632;</div>
+        <h3>You're spreading too thin</h3>
+        <p>Service, installs, commercial, resi. You're chasing revenue in every direction instead of building depth in one lane. Slow season panics you into discounting. The cash flow roller coaster never stops.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF TICKER: Hustler-scale numbers -->
+<div class="proof-ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-amount">$174K month</span><span class="ticker-detail">record — Smartron Electric</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$159K month</span><span class="ticker-detail">record — Christian Farella</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$70K first month</span><span class="ticker-detail">new sales hire — Stauffer Electric</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$53K platinum</span><span class="ticker-detail">tech's first 6-option attempt</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$1M year one</span><span class="ticker-detail">— Billy Harper</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">3 platinums / 1 week</span><span class="ticker-detail">— Alex G.</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <!-- Duplicate for loop -->
+    <div class="ticker-item"><span class="ticker-amount">$174K month</span><span class="ticker-detail">record — Smartron Electric</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$159K month</span><span class="ticker-detail">record — Christian Farella</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$70K first month</span><span class="ticker-detail">new sales hire — Stauffer Electric</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$53K platinum</span><span class="ticker-detail">tech's first 6-option attempt</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$1M year one</span><span class="ticker-detail">— Billy Harper</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">3 platinums / 1 week</span><span class="ticker-detail">— Alex G.</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+  </div>
+</div>
+
+<!-- THE LOOP METHOD: Hustler framing -->
+<section class="method section-pad" id="method">
+  <div class="container">
+    <div class="method-header fade-up">
+      <div class="hero-eyebrow" style="justify-content:center">The Loop Method</div>
+      <h2>Your <span class="gold-text" style="position:relative"><span style="font-size:1.15em;letter-spacing:1px">S</span>ervice <span style="font-size:1.15em;letter-spacing:1px">O</span>perating <span style="font-size:1.15em;letter-spacing:1px">S</span>ystem.</span></h2>
+      <p>This isn't a script you memorize. It's a framework your techs, your CSR, and your service team can execute consistently, whether you're in the van or not.</p>
+    </div>
+    <div class="method-steps fade-up stagger-1">
+      <div class="method-step">
+        <div class="method-step-num">Systematize</div>
+        <h3>Pricing & Options Framework</h3>
+        <div class="sub">More options. Better options. Every call.</div>
+        <p>Build a pricing framework your team can run without calling you. Give your customers real choices at every level of service. Your average ticket jumps because the process invites it.</p>
+      </div>
+      <div class="method-step">
+        <div class="method-step-num">Scale</div>
+        <h3>Team Service Training</h3>
+        <div class="sub">They serve like you. Then better.</div>
+        <p>Your techs learn the same service and presentation framework that's produced record-breaking months across 300+ companies. Daily classes. Live coaching. Real call reviews. Not a PDF they'll never read.</p>
+      </div>
+      <div class="method-step">
+        <div class="method-step-num">Compound</div>
+        <h3>Revenue Per Van Optimization</h3>
+        <div class="sub">$200K+/staff. That's the target.</div>
+        <p>CSR process. Demand call flow. Opportunity conversion. Post-service follow-up. Memberships. Every touchpoint is a revenue lever. We help you tighten all of them until the math works at scale.</p>
+      </div>
+    </div>
+    <div class="method-cta fade-up stagger-2">
+      <a href="https://milliondollarservice.com/service-info-session-951026" class="btn-primary">Get The Operating System</a>
+    </div>
+  </div>
+</section>
+
+<!-- WINS: Hustler-scale proof -->
+<section class="wins section-pad">
+  <div class="container">
+    <div class="wins-header fade-up">
+      <h2>Companies that <span class="gold-text">look like yours.</span> Results that don't.</h2>
+      <p>These aren't solo operators closing their first big job. These are multi-van companies that systematized their sales and scaled.</p>
+    </div>
+    <div class="wins-grid">
+      <div class="win-card fade-up stagger-1">
+        <div class="win-result">$900K → $1.8M</div>
+        <div class="win-context">12 Months of Training</div>
+        <p class="win-quote">"Doubled the business in one year. The systems are running. The team is executing. We're not the same company we were 12 months ago."</p>
+        <div class="win-name">Christian Farella</div>
+        <div class="win-company">Multi-Van Operation</div>
+      </div>
+      <div class="win-card fade-up stagger-2">
+        <div class="win-result">$70K First Month</div>
+        <div class="win-context">New Sales Hire Results</div>
+        <p class="win-quote">"New sales guy Bill is really enjoying the new pricing method. $70K in his first month. Have a fleet with 4 vans now. Actually feels like a real business."</p>
+        <div class="win-name">John Stauffer</div>
+        <div class="win-company">Stauffer Electric</div>
+      </div>
+      <div class="win-card fade-up stagger-3">
+        <div class="win-result">$53K Platinum</div>
+        <div class="win-context">Tech's First 6-Option Presentation</div>
+        <p class="win-quote">"Hans's technician sold a $53,000 platinum package on their very first attempt at presenting six options. First time."</p>
+        <div class="win-name">Hans</div>
+        <div class="win-company">Member Electrician</div>
+      </div>
+      <div class="win-card fade-up stagger-1">
+        <div class="win-result">$1M Year One</div>
+        <div class="win-context">Annual Revenue Milestone</div>
+        <p class="win-quote">"Billy Harper hit $1 million in their first year. His tech Juan did his first 6-option presentation and sold a $13K platinum."</p>
+        <div class="win-name">Billy Harper</div>
+        <div class="win-company">Harper Electric</div>
+      </div>
+      <div class="win-card fade-up stagger-2">
+        <div class="win-result">$90K → $168K</div>
+        <div class="win-context">Revenue in 3 Months</div>
+        <p class="win-quote">"Professional electricians sharing with other electricians. Almost unheard of in this market. The community is what makes this different."</p>
+        <div class="win-name">Mike Hurley</div>
+        <div class="win-company">Hurley Electrical</div>
+      </div>
+      <div class="win-card fade-up stagger-3">
+        <div class="win-result">3 Platinums in 1 Week</div>
+        <div class="win-context">Circuit Breaker Award</div>
+        <p class="win-quote">"First time we've seen a client hit 3 platinum sales in just one week. The process is compounding."</p>
+        <div class="win-name">Alex G.</div>
+        <div class="win-company">Member Electrician</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN: Hustler-focused authority -->
+<section class="origin section-pad">
+  <div class="container">
+    <div class="origin-grid">
+      <div class="origin-visual fade-up">
+        <div class="origin-card">
+          <p class="origin-quote">We didn't build this from a theory. We built it in the field, broke it, rebuilt it, and proved it works across 300+ companies at every stage of growth.</p>
+          <p class="origin-attr">— Clay Neumeyer & Joseph Lucanie</p>
+        </div>
+      </div>
+      <div class="origin-text fade-up stagger-2">
+        <h2>The guys you want <span class="gold-text">in the room with you.</span></h2>
+        <p><strong>Clay</strong> is a Master Electrician who's been where you are. Couldn't close. Learned the hard way. Grew to run 8-figure electrical operations with 100+ staff. Built SLE from $0 to $1.1M in year one. He doesn't teach from a textbook. He teaches from scars.</p>
+        <p><strong>Joseph</strong> closed over $1.3M/year consistently from the front seat of his own van. Coached thousands of techs worldwide to do the same. The industry calls him the Wizard of Options. He's the guy who can watch your service call and tell you exactly where the money walked out the door.</p>
+        <p>Together they built the <strong>Million Dollar Service Framework</strong> for companies at your stage: past startup, stuck at a plateau, ready to build the machine that gets you off the tools and past $100K/month. <strong>You want to be in that room, training with those guys.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO: Hustler qualification -->
+<section class="who section-pad">
+  <div class="container">
+    <div class="who-header fade-up">
+      <h2>Built for companies doing <span class="gold-text">$0-$1M.</span><br><span style="font-size:.65em;font-style:normal;font-family:'Montserrat',sans-serif;color:rgba(255,255,255,0.5);letter-spacing:1px">BEST FOR $400K-$900K</span></h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card yes fade-up">
+        <div class="who-card-label">&#10003; You're ready if...</div>
+        <ul class="who-list">
+          <li><span style="color:var(--gold)">&#10003;</span> You're running an electrical service company doing $400K-$900K and know there's more in the tank</li>
+          <li><span style="color:var(--gold)">&#10003;</span> You have 2-5 people and need them performing at a higher level of service</li>
+          <li><span style="color:var(--gold)">&#10003;</span> You're the bottleneck and you know it</li>
+          <li><span style="color:var(--gold)">&#10003;</span> You want a sales system your team can execute without you</li>
+          <li><span style="color:var(--gold)">&#10003;</span> You've outgrown YouTube advice and Facebook groups</li>
+        </ul>
+      </div>
+      <div class="who-card no fade-up stagger-1">
+        <div class="who-card-label">&#10007; Not the right fit if...</div>
+        <ul class="who-list">
+          <li><span style="color:var(--red)">&#10007;</span> You're still doing all the work solo with no intention to hire</li>
+          <li><span style="color:var(--red)">&#10007;</span> You only run construction or commercial (no residential service)</li>
+          <li><span style="color:var(--red)">&#10007;</span> You think premium pricing means ripping people off</li>
+          <li><span style="color:var(--red)">&#10007;</span> You're not ready to implement a structured service process</li>
+          <li><span style="color:var(--red)">&#10007;</span> You want a motivational speaker, not an operating system</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <div class="fade-up">
+      <h2>You've already proven you can sell. <span class="gold-text">Now prove your team can too.</span></h2>
+      <p>Book a strategy call. We'll identify your specific bottleneck, show you the framework, and map out what $100K+ months actually look like for your operation.</p>
+      <a href="https://milliondollarservice.com/service-info-session-951026" class="btn-primary">Book Your Strategy Call</a>
+      <div class="final-trust">No pitch deck. No pressure. Just a diagnostic conversation about your business with people who've built what you're building.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Property of Service Loop Electrical Inc<br>
+  <a href="https://serviceloopelectrical.com">ServiceLoopElectrical.com</a> &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection#b1fdd4c7d4dde4c1f1c2d4c3c7d8d2d4dddedec1d4ddd4d2c5c3d8d2d0dd9fd2dedc"><span class="__cf_email__" data-cfemail="08446d7e6d645d78487b6d7a7e616b6d646767786d646d6b7c7a616b6964266b6765">[email&#160;protected]</span></a><br>
+  <a href="https://milliondollarservice.com/privacy-policy-920361">Privacy</a> &nbsp;|&nbsp; <a href="https://milliondollarservice.com/terms-of-service">Terms of Service</a></p>
+  <p class="disclaimer">Client examples shown by Service Loop Electrical are aspirational only. These are actual client results, but not typical of all clients, and results will vary. Results are highly dependent on each client's application of the guidance provided by Service Loop Electrical.</p>
+  <p style="margin-top:12px;font-size:.72rem;color:rgba(255,255,255,0.2)">&copy; 2025 Service Loop Electrical, All Rights Reserved</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)});
+cons
