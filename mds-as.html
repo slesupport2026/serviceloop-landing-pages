@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Loop Electrical | Scale & Optimize Your Electrical Operation</title>
+<meta name="description" content="For electrical companies doing $1M+ who need team training, process optimization, and revenue-per-van improvement. Proven across 300+ companies worldwide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0A0A0A;--gold:#E3C575;--bright-gold:#FDC33E;--dark-gold:#A78227;--navy:#1B2A45;--charcoal:#333333;--white:#FFFFFF;--red:#CE302A}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Open Sans',sans-serif;background:var(--black);color:var(--white);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+section,.proof-ticker,footer{position:relative;z-index:1}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.section-pad{padding:100px 0}
+.gold-text{color:var(--gold)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(227,197,117,0.1);transition:all .3s}
+.nav.scrolled{padding:10px 32px;box-shadow:0 4px 30px rgba(0,0,0,0.4)}
+.nav-logo{height:44px}
+.nav-cta{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;padding:10px 28px;background:linear-gradient(135deg,var(--gold),var(--bright-gold));color:var(--black);border-radius:4px;letter-spacing:.5px;text-transform:uppercase;transition:all .3s;border:none;cursor:pointer}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(227,197,117,0.3)}
+
+/* BUTTONS */
+.btn-primary{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;padding:16px 40px;background:linear-gradient(135deg,var(--gold),var(--bright-gold));color:var(--black);border:none;border-radius:4px;cursor:pointer;text-transform:uppercase;letter-spacing:1px;transition:all .3s;display:inline-block;text-align:center}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(227,197,117,0.3)}
+.btn-ghost{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.9rem;padding:15px 32px;background:transparent;color:var(--gold);border:1px solid rgba(227,197,117,0.3);border-radius:4px;cursor:pointer;transition:all .3s;display:inline-block;text-align:center}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(227,197,117,0.05)}
+
+/* HERO */
+.hero{display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(227,197,117,0.04) 0%,transparent 70%);pointer-events:none}
+.hero-content{max-width:740px;position:relative;z-index:2}
+.hero-eyebrow{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--gold)}
+.hero h1{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(2.2rem,4.5vw,3.4rem);line-height:1.15;margin-bottom:28px}
+.hero h1 .highlight{color:var(--bright-gold)}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.8);max-width:620px;margin-bottom:40px;line-height:1.7}
+.hero-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px;padding:28px 0;border-top:1px solid rgba(227,197,117,0.1);border-bottom:1px solid rgba(227,197,117,0.1)}
+.metric{text-align:center}
+.metric-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.4rem;color:var(--bright-gold);line-height:1.2;margin-bottom:4px}
+.metric-label{font-size:.72rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px}
+.hero-cta-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.hero-trust{margin-top:48px;font-size:.82rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:8px}
+
+/* DIAGNOSTIC */
+.diagnostic{background:linear-gradient(180deg,var(--black),#060608);border-top:1px solid rgba(227,197,117,0.05)}
+.diag-header{text-align:center;max-width:680px;margin:0 auto 56px}
+.diag-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.4rem);line-height:1.2;margin-bottom:16px}
+.diag-header p{color:rgba(255,255,255,0.6);font-size:1rem}
+.diag-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.diag-card{background:rgba(27,42,69,0.35);border:1px solid rgba(227,197,117,0.06);border-radius:12px;padding:28px 24px;transition:all .3s}
+.diag-card:hover{border-color:rgba(227,197,117,0.15)}
+.diag-card h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.92rem;margin-bottom:8px;color:var(--gold)}
+.diag-card p{color:rgba(255,255,255,0.65);font-size:.85rem;line-height:1.6}
+
+/* CASE STUDY */
+.case-study{background:var(--navy);border-top:1px solid rgba(227,197,117,0.08);border-bottom:1px solid rgba(227,197,117,0.08)}
+.case-header{text-align:center;margin-bottom:56px}
+.case-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:12px}
+.case-header p{color:rgba(255,255,255,0.5);font-size:.95rem}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.case-before,.case-after{background:rgba(10,10,10,0.4);border-radius:12px;padding:36px 32px;border:1px solid rgba(227,197,117,0.06)}
+.case-label{font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(227,197,117,0.1)}
+.case-before .case-label{color:var(--red)}
+.case-after .case-label{color:var(--gold)}
+.case-stat{margin-bottom:16px}
+.case-stat-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.8rem;color:var(--bright-gold);line-height:1}
+.case-stat-label{font-size:.78rem;color:rgba(255,255,255,0.5);margin-top:2px}
+.case-detail{font-size:.88rem;color:rgba(255,255,255,0.65);line-height:1.6;margin-top:20px;padding-top:16px;border-top:1px solid rgba(227,197,117,0.06)}
+.case-cta{text-align:center;margin-top:56px}
+.case-footnote{text-align:center;margin-top:20px;font-size:.78rem;color:rgba(255,255,255,0.35);font-style:italic}
+
+/* TICKER */
+.proof-ticker{background:rgba(27,42,69,0.5);border-top:1px solid rgba(227,197,117,0.08);border-bottom:1px solid rgba(227,197,117,0.08);padding:44px 0;overflow:hidden}
+.ticker-track{display:flex;gap:56px;animation:ticker 40s linear infinite;width:max-content}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{flex-shrink:0;display:flex;align-items:center;gap:14px;white-space:nowrap}
+.ticker-amount{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.2rem;color:var(--bright-gold)}
+.ticker-detail{font-size:.82rem;color:rgba(255,255,255,0.5)}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.3}
+
+/* METHOD */
+.method{background:var(--black)}
+.method-header{text-align:center;max-width:680px;margin:0 auto 64px}
+.method-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:16px}
+.method-header p{color:rgba(255,255,255,0.6);font-size:1rem}
+.method-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.method-step{padding:40px 28px;text-align:center;border-right:1px solid rgba(227,197,117,0.08);background:rgba(27,42,69,0.2)}
+.method-step:last-child{border-right:none}
+.method-step-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.method-step h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.method-step .sub{font-family:'Playfair Display',serif;font-style:italic;font-size:.92rem;color:var(--gold);margin-bottom:16px}
+.method-step p{color:rgba(255,255,255,0.65);font-size:.87rem;line-height:1.6}
+.method-cta{text-align:center;margin-top:56px}
+
+/* ORIGIN */
+.origin{background:linear-gradient(180deg,#060608,var(--black))}
+.origin-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center}
+.origin-card{background:var(--navy);border-radius:16px;padding:44px 32px;border:1px solid rgba(227,197,117,0.1);position:relative}
+.origin-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:7rem;color:rgba(227,197,117,0.08);position:absolute;top:-16px;left:16px;line-height:1}
+.origin-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;line-height:1.5;color:rgba(255,255,255,0.9);margin-bottom:20px}
+.origin-attr{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.82rem;color:var(--gold)}
+.origin-text h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,3vw,2rem);line-height:1.3;margin-bottom:28px}
+.origin-text p{color:rgba(255,255,255,0.75);margin-bottom:18px;font-size:.93rem}
+.origin-text p strong{color:var(--gold)}
+
+/* WHO */
+.who{background:var(--black)}
+.who-header{text-align:center;margin-bottom:56px}
+.who-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:8px}
+.who-header .who-sub{font-family:'Montserrat',sans-serif;font-size:.85rem;color:rgba(255,255,255,0.4);letter-spacing:1px}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.who-card{background:rgba(27,42,69,0.3);border:1px solid rgba(227,197,117,0.06);border-radius:12px;padding:36px 32px}
+.who-card.yes{border-left:3px solid var(--gold)}
+.who-card.no{border-left:3px solid var(--red)}
+.who-card-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+.who-card.yes .who-card-label{color:var(--gold)}
+.who-card.no .who-card-label{color:var(--red)}
+.who-list{list-style:none}
+.who-list li{padding:9px 0;font-size:.9rem;color:rgba(255,255,255,0.8);display:flex;gap:12px;align-items:flex-start}
+
+/* FINAL CTA */
+.final-cta{background:linear-gradient(180deg,#060608,var(--black));text-align:center;padding:100px 24px}
+.final-cta h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,3.5vw,2.6rem);margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto}
+.final-cta p{color:rgba(255,255,255,0.6);font-size:1rem;max-width:560px;margin:0 auto 40px}
+.final-trust{margin-top:28px;font-size:.82rem;color:rgba(255,255,255,0.35)}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid rgba(227,197,117,0.06);padding:48px 24px;text-align:center}
+footer p{font-size:.78rem;color:rgba(255,255,255,0.3);line-height:1.8}
+footer a{color:var(--gold)}
+footer .disclaimer{max-width:700px;margin:20px auto 0;font-size:.72rem;color:rgba(255,255,255,0.2)}
+
+/* RESPONSIVE */
+@media(max-width:900px){.diag-grid,.case-grid,.origin-grid,.who-grid,.method-steps{grid-template-columns:1fr}.method-step{border-right:none;border-bottom:1px solid rgba(227,197,117,0.08)}.method-step:last-child{border-bottom:none}}
+@media(max-width:600px){.nav{padding:12px 16px}.nav-logo{height:36px}.nav-cta{padding:8px 20px;font-size:.75rem}.hero-cta-row{flex-direction:column;align-items:stretch}.hero-metrics{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <img src="data:image/png;base64,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" alt="Service Loop Electrical" class="nav-logo">
+  <a href="https://milliondollarservice.com/service-info-session-951026" class="nav-cta">Book a Strategy Call</a>
+</nav>
+
+<!-- ══════════════════════════════════════ -->
+<!-- HERO: AllStar - Precision, not motivation -->
+<!-- ══════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">For Electrical Companies Doing $1M+</div>
+      <h1>
+        Your business grew.<br>
+        Your systems <span class="highlight">didn't.</span>
+      </h1>
+      <p class="hero-sub">
+        You crossed a million. You have the team, the trucks, the revenue. But profit margins are thin, your best people can't replicate what you do, and every department runs on a different version of "the process." You don't need another coach. You need an operating partner who's fixed this before.
+      </p>
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="metric-num">$10.5M → $14M</div>
+          <div class="metric-label">Negative to 13% Net Profit</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">300+</div>
+          <div class="metric-label">Companies Worldwide</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">$200K+</div>
+          <div class="metric-label">Revenue/Staff Target</div>
+        </div>
+      </div>
+      <div class="hero-cta-row">
+        <a href="https://milliondollarservice.com/service-info-session-951026" class="btn-primary">Request a Diagnostic Call</a>
+        <a href="https://go.serviceloopelectrical.com/scale" class="btn-ghost">See The Framework</a>
+      </div>
+      <div class="hero-trust">
+        &#9679;&nbsp; Executive-level conversation. No pitch deck. We diagnose before we prescribe.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- DIAGNOSTIC: 6 symptoms AllStars recognize -->
+<!-- ══════════════════════════════════════ -->
+<section class="diagnostic section-pad">
+  <div class="container">
+    <div class="diag-header">
+      <h2>The symptoms of a business that <span class="gold-text">outgrew its infrastructure.</span></h2>
+      <p>You don't have a revenue problem. You have an execution gap between what you've built and what your team can consistently deliver without you.</p>
+    </div>
+    <div class="diag-grid">
+      <div class="diag-card">
+        <h3>Your team won't follow the process</h3>
+        <p>You've built it. You've trained it. They nod in the meeting and do their own thing in the field. Adoption is your bottleneck, not knowledge.</p>
+      </div>
+      <div class="diag-card">
+        <h3>No time to train</h3>
+        <p>You know your people need development but you're buried in operations. Training gets pushed to "next week" every week. The gap widens.</p>
+      </div>
+      <div class="diag-card">
+        <h3>Chaos across departments</h3>
+        <p>CSR says one thing, dispatch does another, techs freelance in the field. No unified service flow from phone to invoice. Every department is its own island.</p>
+      </div>
+      <div class="diag-card">
+        <h3>Hiring is broken</h3>
+        <p>You can't find good people, or you find them and can't keep them. No recruiting pipeline. No onboarding system. Every new hire feels like starting over.</p>
+      </div>
+      <div class="diag-card">
+        <h3>Migrating to Service Titan</h3>
+        <p>You're switching CRMs or already on Service Titan and drowning in configuration. You need someone who's been through the transition and can make it actually work for your operation.</p>
+      </div>
+      <div class="diag-card">
+        <h3>Revenue is up. Profit isn't.</h3>
+        <p>More trucks, more people, more overhead. But net margin is flat or worse. You're working harder for the same take-home. The math doesn't scale without the systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CASE STUDY: The 8-figure transformation -->
+<!-- ══════════════════════════════════════ -->
+<section class="case-study section-pad">
+  <div class="container">
+    <div class="case-header">
+      <h2>From <span class="gold-text">negative profit at $10.5M</span> to 13% net at $14M.</h2>
+      <p>An 8-figure electrical company. Big 3 provider. Hourly billing. No options. Electrical division lagging behind. Here's what two years looked like.</p>
+    </div>
+    <div class="case-grid">
+      <div class="case-before">
+        <div class="case-label">Before SLE</div>
+        <div class="case-stat">
+          <div class="case-stat-num" style="color:var(--red)">$10.5M</div>
+          <div class="case-stat-label">Annual Revenue</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num" style="color:var(--red)">Negative</div>
+          <div class="case-stat-label">Net Profit Margin</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num" style="color:var(--red)">Hourly</div>
+          <div class="case-stat-label">Billing Model</div>
+        </div>
+        <p class="case-detail">No options framework. No structured service presentation. Techs billing by the hour with no upsell path. Electrical was the weakest division in a multi-trade operation. Revenue looked impressive on paper. The P&L told a different story.</p>
+      </div>
+      <div class="case-after">
+        <div class="case-label">Year 1 → Year 2 with SLE</div>
+        <div class="case-stat">
+          <div class="case-stat-num">$12M → $14M</div>
+          <div class="case-stat-label">Revenue Growth</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">12% → 13%</div>
+          <div class="case-stat-label">Net Profit Margin</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">Options-Based</div>
+          <div class="case-stat-label">Billing Model</div>
+        </div>
+        <p class="case-detail">We rebuilt their pricing. Introduced a full options framework. Trained their techs weekly. Trained their service managers bi-weekly. The result wasn't just more revenue. It was profitable revenue. $14M with 13% net means real money hitting the owner's account.</p>
+      </div>
+    </div>
+    <div class="case-cta">
+      <a href="https://milliondollarservice.com/service-info-session-951026" class="btn-primary">See If This Applies to Your Operation</a>
+    </div>
+    <p class="case-footnote">Results vary by company. This was a committed multi-year engagement with full team participation.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- PROOF TICKER: AllStar-scale numbers -->
+<!-- ══════════════════════════════════════ -->
+<div class="proof-ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-amount">$10.5M → $14M</span><span class="ticker-detail">8-figure client, 2 years</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$900K → $1.8M</span><span class="ticker-detail">12 months — Christian Farella</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$174K month</span><span class="ticker-detail">company record — Smartron Electric</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">Negative → 13% net</span><span class="ticker-detail">profit turnaround, year 1</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">300+ companies</span><span class="ticker-detail">worldwide</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$53K single job</span><span class="ticker-detail">tech's first 6-option attempt</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><span class="ticker-amount">$10.5M → $14M</span><span class="ticker-detail">8-figure client, 2 years</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$900K → $1.8M</span><span class="ticker-detail">12 months — Christian Farella</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$174K month</span><span class="ticker-detail">company record — Smartron Electric</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">Negative → 13% net</span><span class="ticker-detail">profit turnaround, year 1</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">300+ companies</span><span class="ticker-detail">worldwide</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-amount">$53K single job</span><span class="ticker-detail">tech's first 6-option attempt</span></div>
+    <div class="ticker-item"><span class="ticker-dot"></span></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- METHOD: What we actually do at this level -->
+<!-- ══════════════════════════════════════ -->
+<section class="method section-pad" id="method">
+  <div class="container">
+    <div class="method-header">
+      <div class="hero-eyebrow" style="justify-content:center">What We Deploy</div>
+      <h2>Embedded training. <span class="gold-text">Not another course.</span></h2>
+      <p>At your scale, you don't need a library of videos. You need someone in the room with your team every week, building the muscle memory that changes behavior on the truck.</p>
+    </div>
+    <div class="method-steps">
+      <div class="method-step">
+        <div class="method-step-num">Diagnose</div>
+        <h3>Operational Audit</h3>
+        <div class="sub">Find the specific leak.</div>
+        <p>We map your service flow end-to-end: phone answer to invoice close. We identify where revenue, margin, and customer experience are breaking down. No guessing. Data-driven.</p>
+      </div>
+      <div class="method-step">
+        <div class="method-step-num">Deploy</div>
+        <h3>Team-Level Training</h3>
+        <div class="sub">Weekly techs. Bi-weekly managers.</div>
+        <p>Your technicians get live weekly training on service presentation, options, and customer communication. Your service managers get bi-weekly strategic sessions on process, KPIs, and team development.</p>
+      </div>
+      <div class="method-step">
+        <div class="method-step-num">Optimize</div>
+        <h3>Pricing & Process Rebuild</h3>
+        <div class="sub">Options. Memberships. Margin.</div>
+        <p>We rebuild your pricing from hourly or low flat-rate to a full options framework. Introduce memberships. Structure deposits, warranties, and follow-up. Every touchpoint becomes a revenue and retention lever.</p>
+      </div>
+    </div>
+    <div class="method-cta">
+      <a href="https://milliondollarservice.com/service-info-session-951026" class="btn-primary">Discuss Your Operation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ORIGIN: Authority positioning for AllStars -->
+<!-- ══════════════════════════════════════ -->
+<section class="origin section-pad">
+  <div class="container">
+    <div class="origin-grid">
+      <div class="origin-card">
+        <p class="origin-quote">We've trained technicians who've never presented an option in their life to close $53K jobs on their first attempt. We've taken companies from negative profit to 13% net. We know what breaks at your scale because we've fixed it. Repeatedly.</p>
+        <p class="origin-attr">— Clay Neumeyer & Joseph Lucanie</p>
+      </div>
+      <div class="origin-text">
+        <h2>We've been in the <span class="gold-text">seat you're sitting in.</span></h2>
+        <p><strong>Clay</strong> is a Master Electrician who learned the hard way. Couldn't close early on. Grew to run 8-figure electrical operations with 100+ staff. Built SLE from $0 to $1.1M in year one. He's navigated the exact growing pains you're managing right now: departmental chaos, team adoption, and the profit margin squeeze.</p>
+        <p><strong>Joseph</strong> closed over $1.3M/year consistently from his own van. Trained thousands of technicians worldwide to do the same. The industry calls him the Wizard of Options. When your techs aren't converting, he's the one who watches the call and tells them exactly where the money left.</p>
+        <p>Together they've built the training infrastructure behind <strong>300+ electrical companies</strong> across North America and beyond. At your level, they're not motivational speakers. They're operational partners who embed with your team and drive measurable change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- WHO: AllStar qualification -->
+<!-- ══════════════════════════════════════ -->
+<section class="who section-pad">
+  <div class="container">
+    <div class="who-header">
+      <h2>Built for companies doing <span class="gold-text">$1M+.</span></h2>
+      <p class="who-sub">Especially operators at $1M-$3M ready to professionalize, and multi-million dollar shops retooling for margin.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card yes">
+        <div class="who-card-label">&#10003; This is built for you if...</div>
+        <ul class="who-list">
+          <li><span style="color:var(--gold)">&#10003;</span> You're doing $1M+ but your net margin doesn't reflect it</li>
+          <li><span style="color:var(--gold)">&#10003;</span> Your team has a process on paper but won't execute it consistently</li>
+          <li><span style="color:var(--gold)">&#10003;</span> You're migrating to or struggling with Service Titan</li>
+          <li><span style="color:var(--gold)">&#10003;</span> You need your techs trained by someone other than you</li>
+          <li><span style="color:var(--gold)">&#10003;</span> You're ready for embedded, ongoing support, not a one-time workshop</li>
+        </ul>
+      </div>
+      <div class="who-card no">
+        <div class="who-card-label">&#10007; Probably not the right fit if...</div>
+        <ul class="who-list">
+          <li><span style="color:var(--red)">&#10007;</span> You're still a solo operator on the tools full-time</li>
+          <li><span style="color:var(--red)">&#10007;</span> You only do new construction or commercial (no residential service)</li>
+          <li><span style="color:var(--red)">&#10007;</span> You believe premium service means overcharging customers</li>
+          <li><span style="color:var(--red)">&#10007;</span> Your team isn't open to outside training</li>
+          <li><span style="color:var(--red)">&#10007;</span> You're looking for a quick fix, not a systematic rebuild</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- FINAL CTA -->
+<!-- ══════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="container">
+    <h2>You've already built something real. <span class="gold-text">Let's make it run without you in every seat.</span></h2>
+    <p>Book a diagnostic call. We'll identify where your operation is leaking margin, map the fix, and show you what "systematized" actually looks like at your scale.</p>
+    <a href="https://milliondollarservice.com/service-info-session-951026" class="btn-primary">Request Your Diagnostic Call</a>
+    <div class="final-trust">No pitch deck. No pressure. Just an operational conversation with people who've built and fixed companies at your level.</div>
+  </div>
+</section>
+
+<footer>
+  <p>Property of Service Loop Electrical Inc<br>
+  <a href="https://serviceloopelectrical.com">ServiceLoopElectrical.com</a> &nbsp;|&nbsp; <a href="mailto:LevelUp@serviceloopelectrical.com">LevelUp@serviceloopelectrical.com</a><br>
+  <a href="https://milliondollarservice.com/privacy-policy-920361">Privacy</a> &nbsp;|&nbsp; <a href="https://milliondollarservice.com/terms-of-service">Terms of Service</a></p>
+  <p class="disclaimer">Client examples shown by Service Loop Electrical are aspirational only. These are actual client results, but not typical of all clients, and results will vary. Results are highly dependent on each client's application of the guidance provided by Service Loop Electrical.</p>
+  <p style="margin-top:12px;font-size:.72rem;color:rgba(255,255,255,0.2)">&copy; 2025 Service Loop Electrical, All Rights Reserved</p>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)});
+</script>
+</body>
+</html>
