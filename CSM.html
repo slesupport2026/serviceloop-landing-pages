@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLE Daily Quiz | CSM Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --gold: #E3C575;
+    --bright-gold: #FDC33E;
+    --dark-gold: #A78227;
+    --navy: #1B2A45;
+    --charcoal: #1a1a1a;
+    --white: #FFFFFF;
+    --red: #CE302A;
+    --green: #2E7D32;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  /* Geometric background */
+  body::before {
+    content: '';
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      linear-gradient(135deg, rgba(27,42,69,0.15) 25%, transparent 25%),
+      linear-gradient(225deg, rgba(27,42,69,0.10) 25%, transparent 25%),
+      linear-gradient(45deg, rgba(227,197,117,0.03) 25%, transparent 25%),
+      linear-gradient(315deg, rgba(227,197,117,0.03) 25%, transparent 25%);
+    background-size: 60px 60px;
+    background-position: 0 0, 0 30px, 30px -30px, -30px 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .container { max-width: 560px; margin: 0 auto; padding: 24px 20px 60px; }
+  .logo { display: block; margin: 0 auto 8px; height: 72px; }
+  .brand-label {
+    text-align: center; font-size: 10px; letter-spacing: 3px;
+    color: var(--dark-gold); text-transform: uppercase; font-weight: 700; margin-bottom: 4px;
+  }
+  h1 {
+    text-align: center; font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 2px;
+  }
+  h1 .gold-line {
+    display: block; width: 60px; height: 3px; margin: 8px auto 0;
+    background: linear-gradient(90deg, var(--dark-gold), var(--gold));
+    border-radius: 2px;
+  }
+  .subtitle {
+    text-align: center; font-size: 13px; color: #888; margin-top: 10px; margin-bottom: 28px;
+    line-height: 1.5;
+  }
+  /* Name input */
+  .name-section { margin-bottom: 28px; }
+  .name-section label { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 8px; }
+  .name-input {
+    width: 100%; padding: 14px 16px; border-radius: 10px;
+    border: 1.5px solid #333; background: var(--charcoal); color: var(--white);
+    font-family: 'Montserrat', sans-serif; font-size: 15px; outline: none;
+    transition: border 0.2s;
+  }
+  .name-input:focus { border-color: var(--gold); }
+  .name-input::placeholder { color: #555; }
+  /* Question card */
+  .question-card {
+    background: var(--charcoal); border-radius: 14px; padding: 24px 20px;
+    margin-bottom: 16px; border: 1px solid #2a2a2a;
+    transition: border 0.3s;
+  }
+  .question-card.correct { border-color: var(--green); }
+  .question-card.incorrect { border-color: var(--red); }
+  .q-number { font-size: 11px; color: var(--dark-gold); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+  .q-text { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.5; margin-bottom: 16px; }
+  .option {
+    padding: 12px 16px; border-radius: 10px; cursor: pointer;
+    background: #111; border: 1.5px solid #333; font-size: 13px;
+    color: #ccc; transition: all 0.2s; margin-bottom: 8px; line-height: 1.4;
+  }
+  .option:hover { border-color: #555; }
+  .option.selected { background: var(--navy); border-color: var(--gold); color: var(--white); }
+  .option.correct-answer { background: #1b3a1b; border-color: var(--green); color: #8eff8e; }
+  .option.wrong-answer { background: #3a1b1b; border-color: var(--red); color: #ff8e8e; }
+  .option.disabled { pointer-events: none; }
+  /* Buttons */
+  .btn {
+    display: block; width: 100%; padding: 16px; border-radius: 12px; border: none;
+    font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: all 0.3s; text-align: center;
+  }
+  .btn-gold {
+    background: linear-gradient(135deg, var(--dark-gold), var(--gold));
+    color: var(--black); box-shadow: 0 4px 20px rgba(227,197,117,0.25);
+  }
+  .btn-gold:hover { box-shadow: 0 6px 28px rgba(227,197,117,0.4); }
+  .btn-gold:disabled { background: #333; color: #666; box-shadow: none; cursor: default; }
+  .btn-outline {
+    background: transparent; border: 1.5px solid rgba(227,197,117,0.4);
+    color: var(--gold);
+  }
+  .btn-outline:hover { border-color: var(--gold); }
+  /* Score card */
+  .score-card {
+    border-radius: 20px; padding: 36px 28px; text-align: center; margin-bottom: 28px;
+    border: 2px solid;
+  }
+  .score-card.pass { background: linear-gradient(135deg, #0a2e0a, var(--charcoal)); border-color: var(--green); }
+  .score-card.fail { background: linear-gradient(135deg, #2e0a0a, var(--charcoal)); border-color: var(--red); }
+  .score-big { font-size: 64px; font-weight: 800; line-height: 1; }
+  .score-big.pass { color: #4CAF50; }
+  .score-big.fail { color: #ef5350; }
+  .score-detail { font-size: 18px; font-weight: 600; margin-top: 12px; }
+  .badge {
+    display: inline-block; margin-top: 16px; padding: 8px 24px;
+    border-radius: 30px; font-size: 13px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--white);
+  }
+  .badge.pass { background: var(--green); }
+  .badge.fail { background: var(--red); }
+  /* Progress */
+  .progress-bar { height: 4px; background: #222; border-radius: 4px; margin-bottom: 24px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--dark-gold), var(--gold)); border-radius: 4px; transition: width 0.3s; }
+  .progress-text { font-size: 12px; color: #555; margin-bottom: 12px; }
+  .footer {
+    text-align: center; font-size: 10px; color: #444; letter-spacing: 1px;
+    margin-top: 40px; padding-top: 20px; border-top: 1px solid #222;
+  }
+  /* Spinner */
+  .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid #333; border-top-color: var(--gold); border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .submit-status { text-align: center; font-size: 13px; color: #888; margin-top: 12px; }
+  .submit-status.success { color: #4CAF50; }
+  .submit-status.error { color: var(--red); }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- HEADER -->
+  <img class="logo" src="data:image/png;base64,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" alt="SLE Logo">
+  <div class="brand-label">Service Loop Electrical</div>
+  <h1>Daily 5 Quiz<span class="gold-line"></span></h1>
+  <p class="subtitle">5 random questions from the CSM Training Manual.<br>Practice every day. Stay sharp. Raise the standard.</p>
+
+  <!-- SCREEN: NAME INPUT -->
+  <div id="screen-name">
+    <div class="name-section">
+      <label for="staffName">Your Name</label>
+      <input type="text" id="staffName" class="name-input" placeholder="Enter your full name to begin..." autocomplete="off">
+    </div>
+    <button class="btn btn-gold" id="btnStart" disabled>Start Today's Quiz</button>
+  </div>
+
+  <!-- SCREEN: QUIZ -->
+  <div id="screen-quiz" class="hidden">
+    <div class="progress-text" id="progressText">0/5 answered</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div id="questionsContainer"></div>
+    <button class="btn btn-gold" id="btnSubmit" disabled style="margin-top:12px">Submit Quiz</button>
+  </div>
+
+  <!-- SCREEN: RESULTS -->
+  <div id="screen-results" class="hidden">
+    <div id="scoreCard"></div>
+    <div id="reviewContainer"></div>
+    <div id="submitStatus" class="submit-status"></div>
+    <button class="btn btn-outline" id="btnRetry" style="margin-top:20px">Try 5 New Questions</button>
+  </div>
+
+  <div class="footer">PROPERTY OF SERVICE LOOP ELECTRICAL INC<br>ServiceLoopElectrical.com</div>
+</div>
+
+<script>
+// ===== ALL 35 QUESTIONS =====
+const ALL_QUESTIONS = [
+  { q: "SLE's guiding quote says that service to others is the highest form of what?", options: ["Profit", "Speed", "Distinction (standing out)", "Popularity"], correct: 2 },
+  { q: "The Three Keys must be done in this order:", options: ["Great Service, then Strong Relationships, then Real Results", "Real Results, then Great Service, then Strong Relationships", "Strong Relationships, then Real Results, then Great Service", "Real Results, then Strong Relationships, then Great Service"], correct: 0 },
+  { q: "Key 1 (Great Service) builds what feeling in the client?", options: ["Excitement", "Safety", "Urgency", "Loyalty"], correct: 1 },
+  { q: "FORD stands for Family, Occupation, Recreation, and ___.", options: ["Delivery", "Data", "Direction", "Dreams"], correct: 3 },
+  { q: "Which Pillar teaches that silence and delay say 'I don\u2019t care'?", options: ["You Cannot Not Communicate", "Progress = Happiness", "Influence Happens from the Same Side", "The Standard"], correct: 0 },
+  { q: "What does 'Influence Happens from the Same Side' mean?", options: ["Push harder until the client agrees", "See their view first, then help them take the next step", "Always agree with the client", "Let the client lead every conversation"], correct: 1 },
+  { q: "The Value Formula says to help clients get results that are:", options: ["Bigger and faster, with less effort", "Perfect, no matter how long it takes", "Cheap and fast, even if quality drops", "Delayed until all training is complete"], correct: 0 },
+  { q: "A CSM\u2019s main job is to:", options: ["Handle billing and contracts", "Provide admin support", "Own the client\u2019s results and keep them moving forward", "Manage the sales pipeline"], correct: 2 },
+  { q: "The CSMA\u2019s #1 rule is:", options: ["Run calls alone within 30 days", "Know every SLE process by heart", "Close upgrades as fast as possible", "You don\u2019t need to know everything \u2014 just don\u2019t disappear"], correct: 3 },
+  { q: "A CSM\u2019s daily focus goes in this order:", options: ["Revenue, then retention, then referrals", "Relationship, then results, then Always Be Valuable", "Results, then value, then relationship", "Value, then results, then relationship"], correct: 1 },
+  { q: "What is the first thing a CSM does each morning?", options: ["Review last month\u2019s revenue", "Plan next week\u2019s schedule", "Clear all client messages so nobody is waiting", "Write call scripts for the day"], correct: 2 },
+  { q: "How many stages are in the SLE client journey?", options: ["5", "7", "9", "4"], correct: 1 },
+  { q: "Service One Cert\u2122 is:", options: ["A free community membership", "A monthly marketing add-on", "A 3-month starter program", "A 9-month premium certification track"], correct: 3 },
+  { q: "A \u2018Noob\u2019 client\u2019s biggest need is:", options: ["Hope, a plan, and a first win", "Advanced data and diagnostics", "Team training at scale", "Precision pricing systems"], correct: 0 },
+  { q: "SLE\u2019s tone rule says to write for which client type?", options: ["The AllStar", "The Noob", "The Hustler", "The CEO"], correct: 2 },
+  { q: "The Sprint Roadmap covers how many weeks?", options: ["12", "16", "30", "21"], correct: 3 },
+  { q: "What should every roadmap call cover?", options: ["Where they are, what is next, and what done looks like", "Their revenue, their team size, and their ad spend", "Which classes are coming up next month", "How they compare to other clients"], correct: 0 },
+  { q: "A client happiness score of 3.8 means you should:", options: ["Wait and see if it improves next call", "Follow up that same week", "Celebrate \u2014 that is a good score", "Move them to Green"], correct: 1 },
+  { q: "High engagement + low happiness most likely means:", options: ["They are overwhelmed with too much work", "They have a scheduling conflict", "Something is wrong with how they are being served", "They need to be upgraded to a higher tier"], correct: 2 },
+  { q: "Low engagement + high happiness most likely means:", options: ["Something is wrong with delivery", "They stopped believing in the program", "They need a new CSM", "They are overwhelmed \u2014 simplify their workload"], correct: 3 },
+  { q: "Revenue Trend is what kind of signal?", options: ["The first thing to check", "The most important gauge", "A slow, trailing signal \u2014 never leads the conversation", "Only checked at renewal time"], correct: 2 },
+  { q: "In the intensity system, RED means:", options: ["The client is a bad fit for SLE", "The client should be removed", "High need \u2014 steady them and get them going", "Time to push for an upgrade"], correct: 2 },
+  { q: "A CSM should have no more than how many Red clients at once?", options: ["5\u20138", "20\u201325", "30+", "10\u201315"], correct: 3 },
+  { q: "A Red client moves to Yellow when:", options: ["30 days pass automatically", "Their revenue goes up", "They ask to change status", "They get a real win and happiness hits 4.5+ for 2 calls in a row"], correct: 3 },
+  { q: "Green intensity means:", options: ["Ignore the client until they reach out", "Check in less often, but with the same level of care", "They no longer need a CSM", "Only contact them about upgrades"], correct: 1 },
+  { q: "The first step of the Huddle Sweep is:", options: ["Challenge", "Data", "Accountability", "Celebrate"], correct: 3 },
+  { q: "Why must you celebrate wins BEFORE you challenge a client?", options: ["It saves time on the call", "Clients refuse to be challenged", "It is just a polite habit", "You earn the right to push by first making them feel safe"], correct: 3 },
+  { q: "The last step of the Huddle Sweep is:", options: ["Accountability", "What\u2019s Next", "CSat \u2014 collect their star rating", "Celebrate"], correct: 2 },
+  { q: "When something goes wrong with a client, Step 1 is:", options: ["Call the client right away", "Move them to Red", "Ask your Sr. CSM what to do", "Pick ONE signal \u2014 what exactly went wrong?"], correct: 3 },
+  { q: "The 5 root cause categories are:", options: ["Confused, Stuck, Overwhelmed, Avoiding, Life Happened", "Price, Product, People, Process, Platform", "Fast, Medium, Slow, Stalled, Gone", "Revenue, Retention, Referrals, Results, Relationships"], correct: 0 },
+  { q: "A client wants strategy but hasn\u2019t done the basics. You should say:", options: ["Here is the strategy \u2014 we'll do the basics later", "You are behind and need to catch up", "Let\u2019s finish the basics first so we build on real data, not guesses", "I need to check with my Sr. CSM before I can help"], correct: 2 },
+  { q: "The \u20183/10 response\u2019 is the WRONG way to handle an upset client. Which IS a 3/10 response?", options: ["I\u2019m sorry \u2014 tell me how I let you down", "That\u2019s on us, let\u2019s fix it together", "I\u2019ll check with the team and get back to you", "What would make this a 5 for you?"], correct: 2 },
+  { q: "Step 1 of a retention talk when a client wants to leave is:", options: ["Offer a discount", "Explain why the program works", "Listen without defending and take the blame", "Ask them to give it one more month"], correct: 2 },
+  { q: "A retention talk is successful when:", options: ["The client re-signs on the spot", "The client calms down, sees you care, and has clear next steps", "You save the contract no matter what", "The client stops bringing up complaints"], correct: 1 },
+  { q: "In their first 30 days, a new CSM handles how many clients?", options: ["25\u201335", "55\u201370", "10\u201315", "1\u20135"], correct: 2 },
+];
+
+// ===== NOTION CONFIG =====
+const NOTION_DATA_SOURCE_ID = "65853b4d-7f8e-4bbb-92bc-567728f317b7";
+
+// ===== STATE =====
+let quizQuestions = [];
+let answers = [];
+let staffName = "";
+let submitted = false;
+
+// ===== DOM =====
+const $ = id => document.getElementById(id);
+const screenName = $("screen-name");
+const screenQuiz = $("screen-quiz");
+const screenResults = $("screen-results");
+const nameInput = $("staffName");
+const btnStart = $("btnStart");
+const btnSubmit = $("btnSubmit");
+const btnRetry = $("btnRetry");
+const questionsContainer = $("questionsContainer");
+const progressText = $("progressText");
+const progressFill = $("progressFill");
+const scoreCard = $("scoreCard");
+const reviewContainer = $("reviewContainer");
+const submitStatus = $("submitStatus");
+
+// ===== HELPERS =====
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pick5() {
+  return shuffle(ALL_QUESTIONS).slice(0, 5);
+}
+
+function todayISO() {
+  return new Date().toISOString().split("T")[0];
+}
+
+// ===== RENDER QUIZ =====
+function renderQuiz() {
+  questionsContainer.innerHTML = "";
+  answers = new Array(5).fill(null);
+  submitted = false;
+  updateProgress();
+  btnSubmit.disabled = true;
+
+  quizQuestions.forEach((q, qi) => {
+    const card = document.createElement("div");
+    card.className = "question-card";
+    card.id = "qcard-" + qi;
+    card.innerHTML = `
+      <div class="q-number">QUESTION ${qi + 1} OF 5</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="opts-${qi}">
+        ${q.options.map((opt, oi) => `<div class="option" data-qi="${qi}" data-oi="${oi}">${opt}</div>`).join("")}
+      </div>
+    `;
+    questionsContainer.appendChild(card);
+  });
+
+  document.querySelectorAll(".option").forEach(el => {
+    el.addEventListener("click", function () {
+      if (submitted) return;
+      const qi = parseInt(this.dataset.qi);
+      const oi = parseInt(this.dataset.oi);
+      answers[qi] = oi;
+      // Update selected state
+      document.querySelectorAll(`#opts-${qi} .option`).forEach(o => o.classList.remove("selected"));
+      this.classList.add("selected");
+      updateProgress();
+    });
+  });
+}
+
+function updateProgress() {
+  const count = answers.filter(a => a !== null).length;
+  progressText.textContent = `${count}/5 answered`;
+  progressFill.style.width = `${(count / 5) * 100}%`;
+  btnSubmit.disabled = count < 5;
+}
+
+// ===== GRADE & SHOW RESULTS =====
+function gradeQuiz() {
+  submitted = true;
+  let score = 0;
+  const details = [];
+
+  quizQuestions.forEach((q, qi) => {
+    const isCorrect = answers[qi] === q.correct;
+    if (isCorrect) score++;
+    details.push(`Q${qi + 1}: ${isCorrect ? "\u2713" : "\u2717"} (answered ${String.fromCharCode(65 + answers[qi])}, correct ${String.fromCharCode(65 + q.correct)})`);
+
+    // Style the card
+    const card = $("qcard-" + qi);
+    card.className = "question-card " + (isCorrect ? "correct" : "incorrect");
+
+    // Style options
+    document.querySelectorAll(`#opts-${qi} .option`).forEach((o, oi) => {
+      o.classList.add("disabled");
+      if (oi === q.correct) o.classList.add("correct-answer");
+      if (oi === answers[qi] && !isCorrect) o.classList.add("wrong-answer");
+    });
+  });
+
+  const pct = Math.round((score / 5) * 100);
+  const passed = pct >= 80;
+
+  scoreCard.innerHTML = `
+    <div class="score-card ${passed ? "pass" : "fail"}">
+      <div class="score-big ${passed ? "pass" : "fail"}">${pct}%</div>
+      <div class="score-detail">${score}/5 correct</div>
+      <div class="badge ${passed ? "pass" : "fail"}">${passed ? "GREAT WORK" : "REVIEW & RETRY"}</div>
+    </div>
+  `;
+
+  // Move questions into review
+  reviewContainer.innerHTML = questionsContainer.innerHTML;
+  questionsContainer.innerHTML = "";
+
+  // Show results screen
+  screenQuiz.classList.add("hidden");
+  screenResults.classList.remove("hidden");
+
+  // Submit to Notion
+  submitToNotion(staffName, score, 5, details.join(" | "));
+}
+
+// ===== NOTION SUBMISSION via Anthropic API + MCP =====
+async function submitToNotion(name, score, total, questionsText) {
+  submitStatus.innerHTML = '<span class="spinner"></span>Saving to Notion...';
+  submitStatus.className = "submit-status";
+
+  const today = todayISO();
+  const passed = (score / total) >= 0.8;
+
+  const prompt = `Create a new page in the Notion data source with ID "${NOTION_DATA_SOURCE_ID}". Use these exact property values:
+- Name (title): "${name}"
+- date:Date:start: "${today}"
+- date:Date:is_datetime: 0
+- Score: ${score}
+- Total: ${total}
+- Passed: "${passed ? "__YES__" : "__NO__"}"
+- Questions: "${questionsText.replace(/"/g, '\\"')}"
+
+Use the notion-create-pages tool with parent data_source_id "${NOTION_DATA_SOURCE_ID}". Do NOT include any content, only properties.`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }],
+        mcp_servers: [{ type: "url", url: "https://mcp.notion.com/mcp", name: "notion-mcp" }]
+      })
+    });
+
+    const data = await response.json();
+
+    // Check for tool use success
+    const hasToolUse = data.content && data.content.some(b => b.type === "mcp_tool_use" || b.type === "mcp_tool_result");
+    const hasError = data.content && data.content.some(b => b.type === "mcp_tool_result" && b.is_error);
+
+    if (hasToolUse && !hasError) {
+      submitStatus.innerHTML = "\u2713 Saved to Notion successfully!";
+      submitStatus.className = "submit-status success";
+    } else {
+      submitStatus.innerHTML = "\u26a0 Quiz completed. Notion sync may be delayed.";
+      submitStatus.className = "submit-status";
+    }
+  } catch (err) {
+    console.error("Notion submit error:", err);
+    submitStatus.innerHTML = "\u26a0 Quiz completed. Could not reach Notion \u2014 please screenshot your score.";
+    submitStatus.className = "submit-status error";
+  }
+}
+
+// ===== EVENT LISTENERS =====
+nameInput.addEventListener("input", () => {
+  btnStart.disabled = nameInput.value.trim().length < 2;
+});
+
+btnStart.addEventListener("click", () => {
+  staffName = nameInput.value.trim();
+  if (!staffName) return;
+  quizQuestions = pick5();
+  screenName.classList.add("hidden");
+  screenQuiz.classList.remove("hidden");
+  renderQuiz();
+});
+
+nameInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !btnStart.disabled) btnStart.click();
+});
+
+btnSubmit.addEventListener("click", () => {
+  if (answers.filter(a => a !== null).length < 5) return;
+  gradeQuiz();
+});
+
+btnRetry.addEventListener("click", () => {
+  quizQuestions = pick5();
+  screenResults.classList.add("hidden");
+  screenQuiz.classList.remove("hidden");
+  submitStatus.innerHTML = "";
+  scoreCard.innerHTML = "";
+  reviewContainer.innerHTML = "";
+  renderQuiz();
+});
+</script>
+</body>
+</html>
