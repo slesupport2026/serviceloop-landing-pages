@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESTI — Electric Service Takeover Intelligence</title>
+<meta name="description" content="Free market intelligence for electrical service operators. Powered by Service Loop Electrical.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+/* ====================================================================
+   ESTI — SLE Brand System (Self-Contained)
+   ==================================================================== */
+:root {
+  --black: #0A0A0A;
+  --dark: #1A1A1A;
+  --navy: #1B2A45;
+  --charcoal: #333333;
+  --gold: #E3C575;
+  --gold-bright: #FDC33E;
+  --gold-dark: #A78227;
+  --white: #FFFFFF;
+  --gray: #AAAAAA;
+  --gray-dim: #666666;
+  --red: #CE302A;
+  --amber: #E67E22;
+  --green: #27AE60;
+  --red-bg: #3D0B07;
+  --amber-bg: #3D2008;
+  --green-bg: #072D18;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-heading: 'Montserrat', 'Helvetica Neue', sans-serif;
+  --font-body: 'Open Sans', 'Helvetica', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { color: var(--gold-bright); }
+img { max-width: 100%; height: auto; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+main { flex: 1; }
+
+/* Nav */
+.nav { background: var(--black); border-bottom: 2px solid var(--gold); padding: 12px 0; position: sticky; top: 0; z-index: 100; }
+.nav__inner { display: flex; align-items: center; justify-content: space-between; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.nav__brand { display: flex; align-items: center; gap: 12px; }
+.nav__logo { height: 40px; width: auto; }
+.nav__title { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: var(--gold); }
+.nav__title span { color: var(--gray); font-weight: 400; font-size: 0.85rem; }
+.nav__date { color: var(--gray-dim); font-size: 0.8rem; }
+
+/* Footer */
+.footer { background: var(--black); border-top: 1px solid var(--gold-dark); padding: 20px 0; text-align: center; color: var(--gray-dim); font-size: 0.75rem; letter-spacing: 0.5px; }
+
+/* Hero */
+.hero { position: relative; padding: 80px 0 60px; text-align: center; overflow: hidden; }
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cpolygon points='0,0 150,0 75,130' fill='%23111' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='150,0 300,0 225,130' fill='%230e0e0e' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='75,130 225,130 150,260' fill='%23101010' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='0,0 75,130 0,260' fill='%230d0d0d' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='225,130 300,0 300,260' fill='%230f0f0f' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='0,260 150,260 75,300' fill='%23121212' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='150,260 300,260 225,300' fill='%230e0e0e' stroke='%231a1a1a' stroke-width='0.5'/%3E%3C/svg%3E") repeat;
+  opacity: 0.4;
+  z-index: 0;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero__headline { font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; color: var(--white); margin-bottom: 12px; line-height: 1.15; }
+.hero__headline em { color: var(--gold); font-style: italic; }
+.hero__sub { font-size: 1.1rem; color: var(--gray); max-width: 560px; margin: 0 auto 40px; }
+
+/* Form Card */
+.form-card { background: var(--navy); border: 1px solid var(--gold-dark); border-radius: 12px; padding: 36px 32px; max-width: 560px; margin: 0 auto; text-align: left; }
+.form-card__title { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--gold); margin-bottom: 24px; text-align: center; }
+.form-row { display: flex; gap: 16px; margin-bottom: 16px; }
+.form-row > * { flex: 1; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--gray); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-group input, .form-group select { width: 100%; padding: 10px 14px; background: var(--dark); border: 1px solid var(--charcoal); border-radius: 6px; color: var(--white); font-size: 0.95rem; font-family: var(--font-body); transition: border-color 0.2s; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--gold); }
+.form-group input::placeholder { color: var(--gray-dim); }
+.form-group select option { background: var(--dark); color: var(--white); }
+.btn-scan { display: block; width: 100%; padding: 14px; background: var(--gold); color: var(--black); font-family: var(--font-heading); font-size: 1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s, transform 0.1s; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+.btn-scan:hover { background: var(--gold-bright); transform: translateY(-1px); }
+.btn-scan:active { transform: translateY(0); }
+
+/* Proof Strip */
+.proof-strip { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; padding: 32px 0; max-width: 800px; margin: 0 auto; }
+.proof-item { font-size: 0.8rem; color: var(--gold-dark); white-space: nowrap; }
+.proof-item strong { color: var(--gold); }
+
+/* Loading Overlay */
+.loading-overlay { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.95); z-index: 1000; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
+.loading-overlay.active { display: flex; }
+.loading-logo { height: 64px; animation: pulse 1.5s ease-in-out infinite; }
+.loading-bar { width: 280px; height: 4px; background: var(--navy); border-radius: 2px; overflow: hidden; }
+.loading-bar__fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-bright)); border-radius: 2px; animation: loading-sweep 2s ease-in-out infinite; }
+.loading-text { font-family: var(--font-heading); font-size: 0.9rem; color: var(--gray); letter-spacing: 0.5px; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.7;transform:scale(0.96)} }
+@keyframes loading-sweep { 0%{width:0;margin-left:0} 50%{width:70%;margin-left:15%} 100%{width:0;margin-left:100%} }
+
+/* Flash */
+.flash { padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+.flash--error { background: var(--red-bg); border: 1px solid var(--red); color: #ff9999; }
+
+/* ---- Report Styles ---- */
+.report-section { background: var(--dark); border: 1px solid var(--charcoal); border-radius: 10px; padding: 28px 28px 24px; margin-bottom: 24px; }
+.section-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--gold-dark); }
+.section-header__title { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--gold-bright); text-transform: uppercase; letter-spacing: 1px; }
+.section-header__sub { font-size: 0.8rem; color: var(--gray); }
+.section-header__logo { height: 36px; width: auto; }
+
+/* Cover */
+.cover { position: relative; padding: 48px 32px; border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cpolygon points='0,0 150,0 75,130' fill='%23111' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='150,0 300,0 225,130' fill='%230e0e0e' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='75,130 225,130 150,260' fill='%23101010' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='0,0 75,130 0,260' fill='%230d0d0d' stroke='%231a1a1a' stroke-width='0.5'/%3E%3Cpolygon points='225,130 300,0 300,260' fill='%230f0f0f' stroke='%231a1a1a' stroke-width='0.5'/%3E%3C/svg%3E") repeat;
+  opacity: 0.25;
+  z-index: 0;
+}
+.cover > * { position: relative; z-index: 1; }
+.cover__prepared { font-size: 0.75rem; color: var(--gray-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.cover__recipient { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: var(--white); margin-bottom: 2px; }
+.cover__recipient em { font-style: italic; color: var(--gold); font-weight: 600; }
+.cover__label { font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.cover__city { font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 8px; }
+.cover__address { font-size: 0.85rem; color: var(--gray); }
+.cover__radius { font-size: 0.8rem; color: var(--gray-dim); }
+.cover__top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; }
+.cover__info { flex: 1; min-width: 260px; }
+.cover__score { text-align: center; }
+.score-ring { margin: 0 auto; }
+.score-ring__value { font-family: var(--font-heading); font-weight: 700; fill: var(--white); }
+.score-ring__label { fill: var(--gray); }
+.score-ring__sublabel { fill: var(--gold); font-weight: 700; }
+.verdict-badge { display: inline-flex; flex-direction: column; align-items: center; padding: 10px 32px; border-radius: 6px; border: 1.5px solid; margin-top: 12px; }
+.verdict-badge__label { font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; }
+.score-pills { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 24px; }
+.score-pill { text-align: center; }
+.score-pill__ring { margin: 0 auto 6px; }
+.score-pill__label { font-family: var(--font-heading); font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.blue-ocean { background: var(--navy); border: 1px solid var(--gold-dark); border-radius: 8px; padding: 16px 20px; margin-top: 24px; }
+.blue-ocean__title { font-family: var(--font-heading); font-size: 0.7rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.blue-ocean__text { font-size: 0.85rem; color: var(--white); line-height: 1.5; }
+
+/* Bar Chart */
+.bar-chart { width: 100%; }
+.bar-row { display: flex; align-items: center; margin-bottom: 10px; gap: 12px; }
+.bar-row__label { flex: 0 0 130px; font-size: 0.82rem; color: var(--gray); text-align: right; }
+.bar-row__track { flex: 1; height: 14px; background: var(--navy); border-radius: 3px; overflow: hidden; }
+.bar-row__fill { height: 100%; border-radius: 3px; transition: width 0.6s ease-out; }
+.bar-row__score { flex: 0 0 40px; font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; color: var(--white); }
+.fill--green { background: var(--green); }
+.fill--amber { background: var(--gold); }
+.fill--red { background: var(--amber); }
+
+/* Demo Grid */
+.demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.demo-item { display: flex; justify-content: space-between; padding: 8px 14px; background: var(--navy); border-radius: 6px; }
+.demo-item__label { font-size: 0.8rem; color: var(--gray); }
+.demo-item__value { font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; color: var(--white); }
+.signal-msg { padding: 8px 0 8px 14px; border-left: 3px solid var(--gold); margin-bottom: 10px; font-size: 0.85rem; color: var(--white); line-height: 1.5; }
+.signal-msg--storm { border-left-color: var(--gold-bright); background: rgba(253,195,62,0.05); padding: 10px 14px; border-radius: 0 6px 6px 0; }
+
+/* Comp Table */
+.comp-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.comp-table th { text-align: left; padding: 8px 10px; font-family: var(--font-heading); font-weight: 700; font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--gold-dark); }
+.comp-table td { padding: 10px; border-bottom: 1px solid var(--charcoal); color: var(--white); }
+.comp-table tr:last-child td { border-bottom: none; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
+.tag--franchise { background: var(--amber-bg); color: var(--amber); }
+.tag--pe { background: var(--red-bg); color: var(--red); }
+
+/* Overtake Table */
+.overtake-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.overtake-table th { text-align: left; padding: 8px 10px; font-family: var(--font-heading); font-weight: 700; font-size: 0.7rem; color: var(--gold); text-transform: uppercase; border-bottom: 1px solid var(--gold-dark); }
+.overtake-table td { padding: 10px; border-bottom: 1px solid var(--charcoal); color: var(--white); }
+.months--fast { color: var(--green); font-weight: 700; }
+.months--medium { color: var(--amber); font-weight: 700; }
+.months--slow { color: var(--red); font-weight: 700; }
+.months--never { color: var(--gray-dim); font-style: italic; }
+
+/* Target Cards */
+.target-cards { display: flex; flex-direction: column; gap: 12px; }
+.target-card { display: flex; justify-content: space-between; align-items: flex-start; padding: 16px 18px; background: var(--navy); border: 1px solid var(--charcoal); border-radius: 8px; gap: 16px; }
+.target-card__info { flex: 1; min-width: 0; }
+.target-card__name { font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; color: var(--white); }
+.target-card__address { font-size: 0.75rem; color: var(--gray-dim); margin-top: 2px; }
+.target-card__meta-grid { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 8px; font-size: 0.78rem; color: var(--gray); }
+.target-card__meta-grid strong { color: var(--gray-dim); font-weight: 600; }
+.target-card__signal-text { font-size: 0.75rem; color: var(--gray-dim); margin-top: 6px; font-style: italic; }
+.target-card__score-box { text-align: center; flex-shrink: 0; }
+.target-card__signal { font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; }
+.target-card__signal-label { font-size: 0.6rem; color: var(--gray); display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Callout */
+.callout-box { background: var(--navy); border: 1px solid var(--gold-dark); border-left: 4px solid var(--gold); border-radius: 8px; padding: 18px 22px; margin-top: 20px; }
+.callout-box__title { font-family: var(--font-heading); font-weight: 700; font-size: 0.8rem; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+.callout-box__text { font-size: 0.82rem; color: var(--white); line-height: 1.6; }
+
+/* Letter */
+.letter-section { background: #111; padding: 48px 32px; border-radius: 10px; text-align: center; margin-bottom: 24px; }
+.letter-section__logo { height: 56px; margin-bottom: 16px; }
+.letter-section__from { font-family: var(--font-heading); font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+.letter-section__name { font-family: var(--font-display); font-size: 1.6rem; font-style: italic; color: var(--white); margin: 4px 0; }
+.letter-section__role { font-size: 0.8rem; color: var(--gray); margin-bottom: 20px; }
+.letter-body { text-align: left; max-width: 560px; margin: 24px auto 0; font-size: 0.9rem; line-height: 1.7; color: var(--white); }
+.letter-body p { margin-bottom: 16px; }
+.letter-body .signature { color: var(--gray); }
+.letter-ps { text-align: left; max-width: 560px; margin: 24px auto; padding: 16px 20px; border-left: 3px solid var(--gold); background: rgba(227,197,117,0.05); border-radius: 0 8px 8px 0; font-size: 0.85rem; color: var(--gold); font-style: italic; line-height: 1.6; }
+.letter-ps a { display: inline-block; margin-top: 6px; color: var(--gold-bright); font-weight: 700; font-style: normal; }
+
+/* CTA */
+.cta-box { border-radius: 10px; padding: 24px 32px; text-align: center; margin-top: 32px; }
+.cta-box--gold { background: linear-gradient(135deg, var(--gold), var(--gold-bright)); }
+.cta-box__title { font-family: var(--font-heading); font-weight: 700; font-size: 1.2rem; color: var(--black); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+.cta-box__sub { font-size: 0.85rem; color: var(--navy); margin-bottom: 4px; }
+.cta-box__details { font-size: 0.75rem; color: var(--navy); margin-bottom: 14px; opacity: 0.8; }
+.cta-box__link { display: inline-block; padding: 10px 28px; background: var(--black); color: var(--gold-bright); font-family: var(--font-heading); font-weight: 700; border-radius: 6px; font-size: 0.9rem; transition: background 0.2s; }
+.cta-box__link:hover { background: var(--navy); color: var(--white); }
+
+/* Strategy */
+.strategy-roadmap { display: flex; flex-direction: column; }
+.roadmap-step { display: flex; gap: 16px; }
+.roadmap-step__connector { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 36px; }
+.roadmap-step__num { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; color: var(--black); flex-shrink: 0; }
+.roadmap-step__line { width: 2px; flex: 1; min-height: 16px; }
+.roadmap-step__content { padding: 4px 0 20px; flex: 1; }
+.roadmap-step__headline { font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; color: var(--white); margin-bottom: 6px; }
+.roadmap-step__detail { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+
+/* Belief */
+.belief { text-align: center; padding: 28px 32px; border: 2px solid var(--gold); border-radius: 10px; background: linear-gradient(135deg, var(--navy), #1a2a40); margin-bottom: 24px; }
+.belief__title { font-family: var(--font-heading); font-weight: 700; font-size: 0.8rem; color: var(--gold-bright); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+.belief__text { font-size: 1rem; color: var(--white); line-height: 1.6; max-width: 600px; margin: 0 auto; }
+.belief__proof { font-size: 0.78rem; color: var(--gold); margin-top: 14px; line-height: 1.7; }
+
+/* Verdict Summary */
+.verdict-summary { border: 1.5px solid; border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+.verdict-summary__label { font-family: var(--font-heading); font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+.verdict-summary__text { font-size: 0.85rem; color: var(--white); line-height: 1.5; margin-bottom: 12px; }
+.verdict-summary__bar { height: 8px; background: var(--charcoal); border-radius: 4px; overflow: hidden; margin-bottom: 4px; }
+.verdict-summary__fill { height: 100%; border-radius: 4px; }
+.verdict-summary__score { text-align: right; font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; color: var(--white); }
+.score-strip { display: flex; gap: 8px; margin-bottom: 20px; }
+.score-strip__item { flex: 1; text-align: center; padding: 10px 8px; border-radius: 6px; border: 1px solid; }
+.score-strip__value { font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem; }
+.score-strip__label { font-size: 0.65rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+/* Action Bar */
+.action-bar { position: sticky; bottom: 0; background: var(--black); border-top: 1px solid var(--gold-dark); padding: 12px 0; z-index: 50; }
+.action-bar__inner { display: flex; justify-content: center; gap: 16px; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: 6px; font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; cursor: pointer; border: none; transition: background 0.2s, transform 0.1s; text-transform: uppercase; letter-spacing: 0.5px; }
+.btn:hover { transform: translateY(-1px); }
+.btn--gold { background: var(--gold); color: var(--black); }
+.btn--gold:hover { background: var(--gold-bright); }
+.btn--outline { background: transparent; color: var(--gold); border: 1.5px solid var(--gold); }
+.btn--outline:hover { background: var(--navy); }
+
+/* Error Page */
+.error-page { text-align: center; padding: 100px 24px; }
+.error-page__code { font-family: var(--font-heading); font-size: 4rem; color: var(--red); font-weight: 700; }
+.error-page__msg { font-size: 1.1rem; color: var(--gray); margin: 16px 0 32px; }
+
+/* Print */
+@media print {
+  body { background: white; color: black; }
+  .nav, .footer, .action-bar, .loading-overlay { display: none; }
+  .report-section { break-inside: avoid; border: 1px solid #ddd; }
+  .cover::before, .hero::before { display: none; }
+  .cover { background: #f5f5f5; }
+  .score-ring__value { fill: black; }
+  a { color: black; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero__headline { font-size: 2rem; }
+  .cover__city { font-size: 1.8rem; }
+  .cover__top { flex-direction: column; }
+  .form-row { flex-direction: column; gap: 0; }
+  .demo-grid { grid-template-columns: 1fr; }
+  .score-pills { gap: 12px; }
+  .score-strip { flex-wrap: wrap; }
+  .score-strip__item { min-width: 45%; }
+  .comp-table, .overtake-table { font-size: 0.72rem; display: block; overflow-x: auto; }
+  .comp-table th, .comp-table td, .overtake-table th, .overtake-table td { padding: 6px; white-space: nowrap; }
+  .form-card { padding: 24px 18px; }
+  .report-section { padding: 20px 16px; }
+  .target-card { flex-direction: column; }
+  .target-card__score-box { align-self: flex-end; }
+  .letter-section { padding: 32px 20px; }
+  .action-bar__inner { flex-direction: column; align-items: stretch; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     NAV
+     ================================================================ -->
+<nav class="nav">
+  <div class="nav__inner">
+    <div class="nav__brand">
+      <svg class="nav__logo" viewBox="0 0 120 100" width="48" height="40">
+        <defs><linearGradient id="gld" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E3C575"/><stop offset="100%" stop-color="#A78227"/></linearGradient></defs>
+        <path d="M60 5 L110 30 L110 75 L60 95 L10 75 L10 30 Z" fill="none" stroke="url(#gld)" stroke-width="3"/>
+        <ellipse cx="60" cy="50" rx="50" ry="22" fill="none" stroke="url(#gld)" stroke-width="1.5" opacity="0.5" transform="rotate(-15 60 50)"/>
+        <text x="60" y="58" text-anchor="middle" fill="url(#gld)" font-family="Montserrat,sans-serif" font-weight="700" font-size="28">SLE</text>
+      </svg>
+      <div>
+        <div class="nav__title">ESTI <span>Electric Service Takeover Intelligence</span></div>
+      </div>
+    </div>
+    <div class="nav__date" id="nav-date"></div>
+  </div>
+</nav>
+
+<main>
+  <!-- Flash messages -->
+  <div id="flash-container" class="container" style="padding-top: 16px;"></div>
+
+  <!-- ================================================================
+       LANDING PAGE
+       ================================================================ -->
+  <section id="landing-page" class="hero">
+    <h1 class="hero__headline">How <em>Takeover-Ready</em> Is Your Market?</h1>
+    <p class="hero__sub">Get your free ESTI Market Intelligence Report in under 10 seconds. No cost. No commitment. Just data.</p>
+
+    <div class="form-card">
+      <div class="form-card__title">Run Your ESTI Scan</div>
+      <form id="scan-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="Dorian Hayes" required>
+          </div>
+          <div class="form-group">
+            <label for="company">Company Name</label>
+            <input type="text" id="company" name="company" placeholder="Hayes Electrical LLC">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="dorian@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="website_url">Your Website URL</label>
+          <input type="url" id="website_url" name="website_url" placeholder="https://hayeselectrical.com">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="service_city">Service City / Area *</label>
+            <input type="text" id="service_city" name="service_city" placeholder="Lake Charles, LA" required>
+          </div>
+          <div class="form-group">
+            <label for="service_radius">Service Radius</label>
+            <select id="service_radius" name="service_radius">
+              <option value="30">30-minute drive</option>
+              <option value="45">45-minute drive</option>
+              <option value="60" selected>60-minute drive</option>
+              <option value="90">90-minute drive</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-scan">Run My ESTI Scan</button>
+      </form>
+    </div>
+
+    <div class="proof-strip">
+      <div class="proof-item"><strong>Nathan:</strong> $0 &rarr; $110K/mo in 150 days</div>
+      <div class="proof-item"><strong>Mike:</strong> $80K &rarr; $160K/mo in 90 days</div>
+      <div class="proof-item"><strong>Sherman:</strong> ~$100K/mo &rarr; $300K/mo in 60 days</div>
+      <div class="proof-item"><strong>Christian:</strong> ~$70K/mo &rarr; avg $200K/mo in 6 months</div>
+    </div>
+  </section>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loading-overlay">
+    <svg viewBox="0 0 120 100" width="80" height="67" class="loading-logo">
+      <defs><linearGradient id="gld2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E3C575"/><stop offset="100%" stop-color="#A78227"/></linearGradient></defs>
+      <path d="M60 5 L110 30 L110 75 L60 95 L10 75 L10 30 Z" fill="none" stroke="url(#gld2)" stroke-width="3"/>
+      <text x="60" y="58" text-anchor="middle" fill="url(#gld2)" font-family="Montserrat,sans-serif" font-weight="700" font-size="28">SLE</text>
+    </svg>
+    <div class="loading-bar"><div class="loading-bar__fill"></div></div>
+    <div class="loading-text" id="loading-text">Geocoding your market...</div>
+  </div>
+
+  <!-- ================================================================
+       REPORT PAGE (hidden until scan completes)
+       ================================================================ -->
+  <div id="report-page" style="display:none;" class="container" style="padding: 24px 24px 80px;">
+  </div>
+</main>
+
+<!-- Action Bar (hidden until report) -->
+<div id="action-bar" class="action-bar" style="display:none;">
+  <div class="action-bar__inner">
+    <button class="btn btn--gold" onclick="window.print()">Print / Save PDF</button>
+    <button class="btn btn--outline" id="copy-link-btn" onclick="copyReportLink()">Copy Link</button>
+    <button class="btn btn--outline" onclick="emailReport()">Email Report</button>
+    <button class="btn btn--outline" onclick="newScan()">New Scan</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <a href="https://milliondollarservice.com" target="_blank" rel="noopener">SERVICE LOOP ELECTRICAL</a> &nbsp;|&nbsp; $1M+ Electric Service Academy &nbsp;|&nbsp; For Electricians. By Electricians.
+  </div>
+</footer>
+
+<!-- ================================================================
+     JAVASCRIPT — ESTI ENGINE + RENDERER
+     ================================================================ -->
+<script>
+/* ====================================================================
+   CONFIGURATION — Set your API keys here
+   ==================================================================== */
+const CONFIG = {
+  GOOGLE_API_KEY: 'AIzaSyDcv9KMy96AWNID7553hcrgLvPJYnUesw8',
+  CENSUS_API_KEY: 'e9bde4936304544486d91278b3225829c61bc1a8',
+  GHL_WEBHOOK_URL: '',
+};
+
+/* ====================================================================
+   CONSTANTS
+   ==================================================================== */
+const INCOME_FLOOR = 65000;
+const HARD_MARKET_VELOCITY = 15;
+const REVIEW_CAPTURE_RATE = 0.50;
+const CLIENTS_PER_VAN_PER_WEEK = 10;
+const REVIEWS_PER_VAN_PER_YEAR = Math.floor(CLIENTS_PER_VAN_PER_WEEK * REVIEW_CAPTURE_RATE * 50);
+const PLACES_PHOTO_API_LIMIT = 10;
+
+const FRANCHISES = [
+  "mr. electric","mister sparky","one hour heating",
+  "mr. sparky","service experts","ars rescue rooter",
+  "home service heroes","yellow van"
+];
+
+const STORM_EXPOSURE = {
+  FL:2,LA:2,TX:2,NC:2,SC:2,AL:2,MS:2,GA:2,VA:2,
+  OK:2,KS:2,NE:2,IA:2,MO:2,AR:2,IL:2,IN:2,OH:2,
+  MN:2,WI:2,MI:2,ND:2,SD:2,ME:2,VT:2,NH:2,
+  MA:2,CT:2,NY:2,NJ:2,PA:2,WV:2,
+  TN:1,KY:1,MD:1,DE:1,RI:1,CO:1,WY:1,MT:1,
+  ID:1,WA:1,OR:1,NM:1,
+};
+
+const STORM_DESCRIPTORS = {
+  FL:"hurricanes and tropical storms",LA:"hurricanes and tropical storms",
+  TX:"hurricanes, tornadoes, and severe thunderstorms",NC:"hurricanes and severe storms",
+  SC:"hurricanes and tropical storms",AL:"tornadoes and hurricanes",
+  MS:"hurricanes and tornadoes",GA:"hurricanes and severe thunderstorms",
+  VA:"hurricanes and nor'easters",OK:"tornadoes and severe thunderstorms",
+  KS:"tornadoes and severe thunderstorms",NE:"tornadoes and blizzards",
+  IA:"tornadoes and severe thunderstorms",MO:"tornadoes and ice storms",
+  AR:"tornadoes and ice storms",IL:"tornadoes and severe thunderstorms",
+  IN:"tornadoes and severe thunderstorms",OH:"tornadoes and ice storms",
+  MN:"blizzards and severe thunderstorms",WI:"blizzards and ice storms",
+  MI:"blizzards and ice storms",ND:"blizzards and extreme winter storms",
+  SD:"blizzards and severe thunderstorms",ME:"nor'easters and blizzards",
+  VT:"nor'easters and ice storms",NH:"nor'easters and ice storms",
+  MA:"nor'easters and blizzards",CT:"nor'easters and blizzards",
+  NY:"nor'easters, blizzards, and ice storms",NJ:"nor'easters and severe storms",
+  PA:"blizzards and ice storms",WV:"ice storms and severe winter weather",
+  TN:"occasional tornadoes and ice storms",KY:"occasional ice storms and severe thunderstorms",
+  CO:"blizzards and hailstorms",
+};
+
+const US_STATES = {
+  Alabama:"AL",Alaska:"AK",Arizona:"AZ",Arkansas:"AR",California:"CA",Colorado:"CO",
+  Connecticut:"CT",Delaware:"DE",Florida:"FL",Georgia:"GA",Hawaii:"HI",Idaho:"ID",
+  Illinois:"IL",Indiana:"IN",Iowa:"IA",Kansas:"KS",Kentucky:"KY",Louisiana:"LA",
+  Maine:"ME",Maryland:"MD",Massachusetts:"MA",Michigan:"MI",Minnesota:"MN",Mississippi:"MS",
+  Missouri:"MO",Montana:"MT",Nebraska:"NE",Nevada:"NV","New Hampshire":"NH","New Jersey":"NJ",
+  "New Mexico":"NM","New York":"NY","North Carolina":"NC","North Dakota":"ND",Ohio:"OH",
+  Oklahoma:"OK",Oregon:"OR",Pennsylvania:"PA","Rhode Island":"RI","South Carolina":"SC",
+  "South Dakota":"SD",Tennessee:"TN",Texas:"TX",Utah:"UT",Vermont:"VT",Virginia:"VA",
+  Washington:"WA","West Virginia":"WV",Wisconsin:"WI",Wyoming:"WY","District of Columbia":"DC",
+};
+
+/* ====================================================================
+   YEAR EXTRACTION (founding year from text)
+   ==================================================================== */
+const YEAR_PATTERNS = [
+  /\bsince\s+(\d{4})\b/i,
+  /\bestablished\s+(?:in\s+)?(\d{4})\b/i,
+  /\bfounded\b.{0,60}\bin\s+(\d{4})\b/i,
+  /\bfounded\s+(?:in\s+)?(\d{4})\b/i,
+  /\bserving\b.{0,40}\bsince\s+(\d{4})\b/i,
+  /\bin\s+business\s+since\s+(\d{4})\b/i,
+  /\bopened\b.{0,40}\bin\s+(\d{4})\b/i,
+  /\bstarted\b.{0,40}\bin\s+(\d{4})\b/i,
+  /\bEST\.?\s*[-.]?\s*(\d{4})\b/,
+];
+const YEARS_AGO_PATTERN = /\b(\d{1,2})\+?\s*years?\s+(?:in\s+business|of\s+(?:experience|service))\b/i;
+
+function extractYearFromText(text) {
+  if (!text) return null;
+  const nowYear = new Date().getFullYear();
+  for (const pat of YEAR_PATTERNS) {
+    const m = text.match(pat);
+    if (m) {
+      const year = parseInt(m[1]);
+      if (year >= 1950 && year <= nowYear) return year;
+    }
+  }
+  const m2 = text.match(YEARS_AGO_PATTERN);
+  if (m2) {
+    const ago = parseInt(m2[1]);
+    if (ago >= 1 && ago <= 80) return nowYear - ago;
+  }
+  return null;
+}
+
+/* ====================================================================
+   1. GEOCODING (Nominatim — free, no key)
+   ==================================================================== */
+async function geocodeCity(cityName) {
+  const resp = await fetch(
+    `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(cityName)}&format=json&limit=1&addressdetails=1`,
+    { headers: { 'User-Agent': 'ESTI/1.0' } }
+  );
+  const data = await resp.json();
+  if (!data.length) throw new Error(`Could not geocode "${cityName}"`);
+  const r = data[0];
+  const addr = r.address || {};
+  const stateName = addr.state || '';
+  const stateAbbr = US_STATES[stateName] || (stateName.length === 2 ? stateName.toUpperCase() : stateName.substring(0,2).toUpperCase());
+  return {
+    lat: parseFloat(r.lat),
+    lng: parseFloat(r.lon),
+    formatted_address: r.display_name || cityName,
+    state: stateAbbr,
+  };
+}
+
+/* ====================================================================
+   2. COMPETITION DATA (Google Places API New)
+   ==================================================================== */
+async function searchElectricians(lat, lng, radiusMeters) {
+  const resp = await fetch('https://places.googleapis.com/v1/places:searchText', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Goog-Api-Key': CONFIG.GOOGLE_API_KEY,
+      'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.websiteUri,places.types,places.currentOpeningHours,places.photos,places.reviews,places.editorialSummary,places.businessStatus,places.id,places.primaryType',
+    },
+    body: JSON.stringify({
+      textQuery: 'electrician',
+      locationBias: { circle: { center: { latitude: lat, longitude: lng }, radius: radiusMeters } },
+      maxResultCount: 20,
+    }),
+  });
+  if (!resp.ok) { console.error('Places API error:', resp.status); return []; }
+  const data = await resp.json();
+  return data.places || [];
+}
+
+function oldestReviewDate(reviews) {
+  if (!reviews || !reviews.length) return null;
+  let oldest = null;
+  for (const r of reviews) {
+    const t = r.publishTime;
+    if (t) {
+      try {
+        const d = new Date(t);
+        if (!oldest || d < oldest) oldest = d;
+      } catch(e) {}
+    }
+  }
+  return oldest;
+}
+
+function determineAgeAndVelocity(place, foundingYear, foundingSource) {
+  const now = new Date();
+  const totalReviews = place.userRatingCount || 0;
+  const reviews = place.reviews || [];
+  const oldest = oldestReviewDate(reviews);
+
+  if (foundingYear) {
+    const ageYears = Math.min(Math.max(1, (now - new Date(foundingYear, 0, 1)) / (365.25*86400000)), 100);
+    const velocity = totalReviews / (ageYears * 12);
+    return { years: Math.round(ageYears*10)/10, velocity_monthly: Math.round(velocity*10)/10, velocity_yearly: Math.round(velocity*12), source: foundingSource, factual: true };
+  }
+
+  if (oldest) {
+    let minAge = Math.max(1, (now - oldest) / (365.25*86400000));
+    let velocity = totalReviews / (minAge * 12);
+    const MAX_VEL = 15;
+    if (velocity > MAX_VEL && totalReviews > 50) {
+      minAge = totalReviews / (MAX_VEL * 12);
+      velocity = MAX_VEL;
+    }
+    return { years: Math.round(minAge*10)/10, velocity_monthly: Math.round(velocity*10)/10, velocity_yearly: Math.round(velocity*12), source: 'oldest review', factual: false };
+  }
+
+  let estAge;
+  if (totalReviews < 50) estAge = Math.max(1, totalReviews / 12);
+  else if (totalReviews < 200) estAge = 5 + (totalReviews - 50) / 150 * 5;
+  else if (totalReviews < 500) estAge = 5 + (totalReviews - 200) / 300 * 5;
+  else estAge = 8 + (totalReviews - 500) / 500 * 7;
+  estAge = Math.max(1, Math.min(estAge, 25));
+  const vel = totalReviews / (estAge * 12);
+  return { years: Math.round(estAge*10)/10, velocity_monthly: Math.round(vel*10)/10, velocity_yearly: Math.round(vel*12), source: 'estimated', factual: false };
+}
+
+function scoreGBP(place) {
+  let score = 0;
+  if ((place.types || []).length > 2) score += 2;
+  const photos = (place.photos || []).length;
+  if (photos >= PLACES_PHOTO_API_LIMIT) score += 2;
+  else if (photos >= 5) score += 1;
+  if (place.currentOpeningHours) score += 1;
+  if (place.websiteUri) score += 1;
+  if ((place.rating || 0) >= 4.5 && (place.userRatingCount || 0) > 50) score += 2;
+  else if ((place.rating || 0) >= 4.0) score += 1;
+  return Math.min(score, 10);
+}
+
+function gbpNotes(place, score) {
+  const notes = [];
+  const photos = (place.photos || []).length;
+  if (photos < 5) notes.push('Very few photos');
+  else if (photos < PLACES_PHOTO_API_LIMIT) notes.push(`Only ${photos} photos`);
+  if (!place.websiteUri) notes.push('No website linked');
+  if (!place.currentOpeningHours) notes.push('No hours listed');
+  if (score <= 3) notes.push('Weak overall GBP presence');
+  else if (score <= 5) notes.push('Average GBP optimization');
+  else notes.push('Well-optimized GBP');
+  return notes.join('; ');
+}
+
+function acquisitionScore(reviews, velocity, years, hasWebsite, gbpScore) {
+  if (!years || years < 7) return 0;
+  let score = 0;
+  if (years >= 15) score += 4; else if (years >= 10) score += 3; else score += 2;
+  if (velocity < 2) score += 2; else if (velocity < 3) score += 1;
+  if (!hasWebsite) score += 1;
+  if (gbpScore <= 3) score += 2;
+  if (reviews < 100) score += 1;
+  return Math.min(score, 10);
+}
+
+function analyzeCompetitors(places) {
+  const competitors = [];
+  for (let i = 0; i < places.length; i++) {
+    const place = places[i];
+    const name = (place.displayName || {}).text || 'Unknown';
+    const reviews = place.userRatingCount || 0;
+    const rating = place.rating || 0;
+    const hasWebsite = !!place.websiteUri;
+    const photoCount = (place.photos || []).length;
+    const hasHours = !!place.currentOpeningHours;
+    const types = place.types || [];
+
+    const serviceSignals = ['electrician','electrical','emergency','repair'];
+    const classification = serviceSignals.some(s => types.join(' ').toLowerCase().includes(s)) ? 'service' : 'project';
+    const nameLower = name.toLowerCase();
+    const isFranchise = FRANCHISES.some(f => nameLower.includes(f));
+    const isPeSignal = reviews > 800;
+
+    // Founding year from editorial summary + reviews
+    let year = null, source = '';
+    const summary = place.editorialSummary || {};
+    const summaryText = typeof summary === 'object' ? (summary.text || '') : String(summary);
+    year = extractYearFromText(summaryText);
+    if (year) { source = 'Google description'; }
+    else {
+      for (const r of (place.reviews || [])) {
+        const orig = r.originalText || {};
+        const rText = typeof orig === 'object' ? (orig.text || '') : String(orig);
+        year = extractYearFromText(rText);
+        if (year) { source = 'review mention'; break; }
+      }
+    }
+
+    const ageVel = determineAgeAndVelocity(place, year, source);
+    const gbp = scoreGBP(place);
+    const estYears = ageVel.years;
+    const reviewVel = ageVel.velocity_monthly;
+
+    competitors.push({
+      name, reviews, rating, has_website: hasWebsite, website_url: place.websiteUri || '',
+      photo_count: photoCount, has_hours: hasHours, classification, is_franchise: isFranchise,
+      is_pe_signal: isPeSignal, estimated_years: estYears, age_source: ageVel.source,
+      age_factual: ageVel.factual, review_velocity_monthly: reviewVel,
+      review_velocity_yearly: ageVel.velocity_yearly, gbp_score: gbp,
+      gbp_notes: gbpNotes(place, gbp), address: place.formattedAddress || '',
+      acquisition_signal: acquisitionScore(reviews, reviewVel, estYears, hasWebsite, gbp),
+    });
+  }
+  competitors.sort((a, b) => b.reviews - a.reviews);
+  return competitors;
+}
+
+/* ====================================================================
+   3. DEMOGRAPHICS (US Census ACS + FCC FIPS lookup)
+   ==================================================================== */
+async function getFips(lat, lng) {
+  try {
+    const resp = await fetch(`https://geo.fcc.gov/api/census/area?lat=${lat}&lon=${lng}&format=json`);
+    const data = await resp.json();
+    if (data.results && data.results.length) return data.results[0].county_fips || '';
+  } catch(e) {}
+  return '';
+}
+
+async function getStateMedIncome(stateFips) {
+  try {
+    const resp = await fetch(`https://api.census.gov/data/2022/acs/acs5?get=B19013_001E&for=state:${stateFips}&key=${CONFIG.CENSUS_API_KEY}`);
+    const data = await resp.json();
+    if (data.length >= 2) return parseInt(data[1][0]) || 65000;
+  } catch(e) {}
+  return 65000;
+}
+
+async function getDemographics(lat, lng, stateAbbr) {
+  const fips = await getFips(lat, lng);
+  if (!fips) return defaultDemographics();
+  const stateFips = fips.substring(0, 2);
+  const countyFips = fips.substring(2, 5);
+  try {
+    const resp = await fetch(`https://api.census.gov/data/2022/acs/acs5?get=B25035_001E,B19013_001E,B25003_002E,B25003_001E,B01003_001E&for=county:${countyFips}&in=state:${stateFips}&key=${CONFIG.CENSUS_API_KEY}`);
+    const data = await resp.json();
+    if (data.length < 2) return defaultDemographics();
+    const row = data[1];
+    const medianYearBuilt = parseInt(row[0]) || 0;
+    const medianIncome = parseInt(row[1]) || 0;
+    const ownerOcc = parseInt(row[2]) || 0;
+    const totalOcc = parseInt(row[3]) || 0;
+    const population = parseInt(row[4]) || 0;
+    const ownerPct = totalOcc > 0 ? Math.round(ownerOcc / totalOcc * 1000) / 10 : 0;
+    const stateIncome = await getStateMedIncome(stateFips);
+    return {
+      population, median_income: medianIncome, state_median_income: stateIncome,
+      income_vs_state: medianIncome > stateIncome ? 'above' : 'below',
+      median_year_built: medianYearBuilt,
+      home_age_years: medianYearBuilt > 1900 ? new Date().getFullYear() - medianYearBuilt : 0,
+      owner_occupancy_pct: ownerPct, owner_occupied_units: ownerOcc,
+      total_occupied_units: totalOcc, state: stateAbbr, country: 'US',
+    };
+  } catch(e) { return defaultDemographics(); }
+}
+
+function defaultDemographics() {
+  return { population:0, median_income:0, state_median_income:0, income_vs_state:'unknown',
+    median_year_built:0, home_age_years:0, owner_occupancy_pct:0, owner_occupied_units:0,
+    total_occupied_units:0, state:'', country:'US' };
+}
+
+/* ====================================================================
+   4. SCORING ENGINE
+   ==================================================================== */
+function scoreDemand(demographics) {
+  const scores = {};
+  const age = demographics.home_age_years || 0;
+  scores.home_age = age >= 25 ? 7 : age >= 20 ? 5 : age >= 15 ? 3 : 0;
+  const income = demographics.median_income || 0;
+  scores.income = income >= INCOME_FLOOR ? 5 : income >= 50000 ? 3 : 0;
+  const ownerPct = demographics.owner_occupancy_pct || 0;
+  scores.owner_occupancy = ownerPct >= 70 ? 4 : ownerPct >= 50 ? 2 : 0;
+  const pop = demographics.population || 0;
+  scores.population = pop >= 100000 ? 4 : pop >= 50000 ? 3 : pop >= 20000 ? 2 : 0;
+  scores.population_growth = 2;
+  const stAbbr = demographics.state || '';
+  scores.generator_bonus = STORM_EXPOSURE[stAbbr] || 0;
+  const total = Object.values(scores).reduce((a,b) => a+b, 0);
+  return { total: Math.min(total, 25), breakdown: scores };
+}
+
+function scoreCompetition(competitors) {
+  const scores = {};
+  const top5 = competitors.slice(0, 5);
+  if (!top5.length || top5.length < 2) return { total: 25, breakdown: { note: 'Less than 2 competitors -- wide open' } };
+  const maxVel = Math.max(top5[0].review_velocity_monthly, top5[1].review_velocity_monthly);
+  scores.top2_velocity = maxVel < 5 ? 10 : maxVel < 10 ? 7 : maxVel < 15 ? 4 : 0;
+  const avgRev = top5.reduce((s,c) => s + c.reviews, 0) / top5.length;
+  scores.avg_reviews = avgRev < 100 ? 5 : avgRev < 200 ? 3 : avgRev < 400 ? 1 : 0;
+  scores.density = competitors.length < 10 ? 4 : competitors.length < 20 ? 2 : 0;
+  scores.ad_saturation = 2;
+  const avgGBP = top5.reduce((s,c) => s + c.gbp_score, 0) / top5.length;
+  scores.gbp_optimization = avgGBP < 4 ? 3 : avgGBP < 6 ? 2 : 0;
+  const total = Object.values(scores).reduce((a,b) => a+b, 0);
+  return { total: Math.min(total, 25), breakdown: scores };
+}
+
+function scoreAcquisition(competitors) {
+  const scores = {};
+  const aging = competitors.filter(c => c.acquisition_signal >= 6);
+  const lowDigital = competitors.filter(c => !c.has_website || c.gbp_score <= 3);
+  scores.aging_operators = aging.length >= 3 ? 10 : aging.length >= 2 ? 7 : aging.length >= 1 ? 4 : 0;
+  scores.low_digital = lowDigital.length >= 2 ? 5 : lowDigital.length >= 1 ? 3 : 0;
+  const serviceAging = aging.filter(c => c.classification === 'service');
+  scores.service_focused = serviceAging.length >= 2 ? 5 : serviceAging.length >= 1 ? 3 : 0;
+  scores.market_room = 3;
+  const total = Object.values(scores).reduce((a,b) => a+b, 0);
+  return { total: Math.min(total, 25), breakdown: scores, targets: competitors.filter(c => c.acquisition_signal >= 5) };
+}
+
+function scoreGrowth(demographics, competitors) {
+  const scores = {};
+  const top5 = competitors.slice(0, 5);
+  const pop = demographics.population || 0;
+  const homeAge = demographics.home_age_years || 0;
+  scores.client_feasibility = (pop >= 50000 && homeAge >= 20) ? 10 : (pop >= 30000 && homeAge >= 15) ? 7 : pop >= 20000 ? 5 : 2;
+  const yb = demographics.median_year_built || 2000;
+  scores.panel_potential = yb <= 2000 ? 5 : yb <= 2005 ? 3 : 1;
+  scores.search_volume = 3;
+  if (top5.length) {
+    const top = top5[0];
+    const ourMonthly = REVIEWS_PER_VAN_PER_YEAR / 12;
+    if (ourMonthly > top.review_velocity_monthly) {
+      const months = top.reviews / (ourMonthly - top.review_velocity_monthly);
+      scores.overtake_timeline = months <= 18 ? 5 : months <= 24 ? 3 : 1;
+    } else scores.overtake_timeline = 0;
+  } else scores.overtake_timeline = 5;
+  const total = Object.values(scores).reduce((a,b) => a+b, 0);
+  return { total: Math.min(total, 25), breakdown: scores };
+}
+
+function calculateOvertakeModel(competitors) {
+  if (!competitors.length) return [];
+  const scenarios = [
+    { name: 'Starter (2 vans)', vans: 2, reviews_year: REVIEWS_PER_VAN_PER_YEAR },
+    { name: 'Growth (4 vans)', vans: 4, reviews_year: REVIEWS_PER_VAN_PER_YEAR * 2 },
+    { name: 'Scale (6 vans)', vans: 6, reviews_year: REVIEWS_PER_VAN_PER_YEAR * 3 },
+  ];
+  return competitors.slice(0, 5).map(comp => ({
+    name: comp.name, current_reviews: comp.reviews, monthly_velocity: comp.review_velocity_monthly,
+    scenarios: scenarios.map(sc => {
+      const ourM = sc.reviews_year / 12;
+      const theirM = comp.review_velocity_monthly;
+      if (ourM > theirM) {
+        const months = comp.reviews / (ourM - theirM);
+        return { scenario: sc.name, our_monthly: Math.round(ourM*10)/10, months_to_overtake: Math.round(months*10)/10, feasible: months <= 36 };
+      }
+      return { scenario: sc.name, our_monthly: Math.round(ourM*10)/10, months_to_overtake: null, feasible: false, needed_monthly: Math.round((theirM+1)*10)/10 };
+    }),
+  }));
+}
+
+/* ====================================================================
+   5. VERDICT SYSTEM
+   ==================================================================== */
+function buildVerdictLabel(totalScore, scores) {
+  if (!scores) return totalScore >= 60 ? 'Strong Market Opportunity' : totalScore >= 30 ? 'Emerging Opportunity' : 'Challenging Market';
+  const dp = (scores.demand?.total || 0) / 25;
+  const cp = (scores.competition?.total || 0) / 25;
+  const ap = (scores.acquisition?.total || 0) / 25;
+  const gp = (scores.growth?.total || 0) / 25;
+  const strengths = [[dp,'High Demand'],[cp,'Low Competition'],[ap,'Acquisition Rich'],[gp,'High Growth']].sort((a,b) => b[0]-a[0]);
+  if (totalScore >= 60) {
+    const top = strengths.filter(s => s[0] >= 0.5).slice(0,2).map(s => s[1]);
+    return top.length >= 2 ? `${top[0]}, ${top[1]}` : top.length ? `${top[0]} Market` : 'Strong Market Opportunity';
+  } else if (totalScore >= 30) {
+    const top = strengths.filter(s => s[0] >= 0.4).slice(0,1).map(s => s[1]);
+    return top.length ? `${top[0]} — Room to Grow` : 'Emerging Opportunity';
+  } else {
+    const top = strengths.filter(s => s[0] >= 0.3).slice(0,1).map(s => s[1]);
+    return top.length ? `Tough Market — ${top[0]} Path` : 'Challenging Market — Acquisition Path';
+  }
+}
+
+function determineVerdict(totalScore, scores) {
+  const label = buildVerdictLabel(totalScore, scores);
+  if (totalScore >= 60) return { level: 'V3', label, color: 'green', letter: '' };
+  if (totalScore >= 30) return { level: 'V2', label, color: 'amber', letter: '' };
+  return { level: 'V1', label, color: 'red', letter: '' };
+}
+
+/* ====================================================================
+   STRATEGY PLAN BUILDER
+   ==================================================================== */
+function buildStrategyPlan(report) {
+  const demographics = report.demographics;
+  const top5 = report.competitors.top5;
+  const overtake = report.overtake_model;
+  const acqTargets = report.acquisition_targets || [];
+  const franchises = report.competitors.franchises_found || [];
+  const steps = [];
+
+  const avgGBP = top5.length ? Math.round(top5.reduce((s,c) => s + c.gbp_score, 0) / top5.length * 10) / 10 : 5;
+  if (avgGBP < 5) {
+    steps.push({ headline: 'Dominate GBP from day one', detail: `The average competitor GBP score in this market is ${avgGBP}/10 -- very weak. Launch with 20+ photos, every service category filled, and post weekly. You'll out-rank most of them within 60 days at zero ad spend.` });
+  } else {
+    steps.push({ headline: 'Match GBP quality at launch -- then outpace them', detail: `Competitors average ${avgGBP}/10 on GBP -- reasonably optimized. Match them at launch: 20+ photos, complete service listings. Pull ahead with consistent weekly posts and 50%+ review reply rate.` });
+  }
+
+  if (top5.length) {
+    const top = top5[0];
+    const vel = top.review_velocity_monthly;
+    let fastest = null;
+    for (const cd of overtake) {
+      if (cd.name === top.name) {
+        for (const s of cd.scenarios) {
+          const m = s.months_to_overtake;
+          if (m && (!fastest || m < fastest[0])) fastest = [m, s.scenario];
+        }
+      }
+    }
+    if (fastest && fastest[0] <= 36) {
+      steps.push({ headline: 'Hit 21+ reviews/month -- this is how you become #1', detail: `The #1 competitor (${top.name}) has ${top.reviews.toLocaleString()} reviews growing at ${vel.toFixed(1)}/mo. At starter pace (${fastest[1]}), you overtake them in ${Math.round(fastest[0])} months. Reviews are the proof of demand. They drive calls, close deals, and justify premium pricing. SLE partners who hit $1M+ in year one averaged 25+ reviews/month.` });
+    } else {
+      steps.push({ headline: 'Start review velocity now -- it compounds every month', detail: `The top competitor (${top.name}) has ${top.reviews.toLocaleString()} reviews. Every job is a review opportunity -- capture every one from day one. Reviews drive inbound, justify premium pricing, and create the social proof that turns a new name in the market into the trusted name.` });
+    }
+  }
+
+  if (acqTargets.length) {
+    const best = acqTargets[0];
+    steps.push({ headline: `Call ${best.name || 'the top target'} -- this is the baby boomer exit opportunity`, detail: `~${Math.round(best.estimated_years || 0)} years in business. ${best.reviews || 0} reviews. ${(best.review_velocity_monthly || 0).toFixed(1)}/month growth. This owner built something real -- and they're likely wondering what comes next. Millions of trade business owners are heading toward retirement with no exit plan. Seller financing = they carry the loan, you pay them from their own business's revenue.` });
+  } else {
+    steps.push({ headline: 'The baby boomer exit wave is your real entry point', detail: 'Millions of trade business owners are heading toward retirement with no exit plan. Seller financing means the owner carries the loan -- you pay them from the revenue their own business already generates. No bank required. Little to no cash upfront. The conversation costs nothing. The upside can be immediate.' });
+  }
+
+  const homeAge = demographics.home_age_years || 0;
+  const yearBuilt = demographics.median_year_built || 0;
+  if (homeAge >= 25) steps.push({ headline: `Lead with panel upgrades -- homes here are ${homeAge} years old on average`, detail: `Median build year is ${yearBuilt}. Think Zinsco, FPE, and undersized 100A panels. A targeted campaign to pre-2000 homes generates high-ticket work fast. Highest-margin service category in this market.` });
+  else if (homeAge >= 20) steps.push({ headline: 'Target aging housing stock for safety and upgrade work', detail: `Homes average ${homeAge} years old. Panel and wiring upgrades are a real, recurring need. Use service agreements as the foot-in-the-door -- panel upsells follow naturally.` });
+
+  const income = demographics.median_income || 0;
+  if (income >= 80000) steps.push({ headline: 'Price at the top -- this market will pay for quality', detail: `Median household income is $${income.toLocaleString()}. Don't discount. Price high, frame around safety and trust, and let your reviews justify the number.` });
+  else if (income >= 65000) steps.push({ headline: 'Strong income market -- launch service agreements from week one', detail: `$${income.toLocaleString()} median income supports recurring service agreement revenue. Your most stable income and best referral source are agreement customers.` });
+
+  if (franchises.length) {
+    const names = franchises.slice(0,2).map(f => f.name || 'Unknown').join(' and ');
+    steps.push({ headline: "Beat the franchises where they can't compete -- on being human", detail: `${names} ${franchises.length > 1 ? 'are' : 'is'} in this market. Franchises are slow, scripted, and impersonal. You're the owner who shows up. Lean into it at every touchpoint.` });
+  }
+
+  return steps.slice(0, 6).map((s, i) => ({ number: i + 1, ...s }));
+}
+
+/* ====================================================================
+   PERSONALIZED LETTER
+   ==================================================================== */
+function buildPersonalizedLetter(report) {
+  const recipient = report.recipient || {};
+  const nameParts = (recipient.name || '').trim().split(/\s+/);
+  const name = nameParts[0] || '';
+  const city = report.city || 'your market';
+  const totalScore = (report.scores || {}).total || 0;
+  const strategy = report.strategy_plan || [];
+  const greeting = name ? `${name},` : 'Hey,';
+
+  let marketTake;
+  if (totalScore >= 60) marketTake = `The data for ${city} is clear -- this market has real opportunity. The competition is beatable, the demand is proven, and homeowners here are underserved right now.`;
+  else if (totalScore >= 30) marketTake = `The data for ${city} shows solid opportunity. There's room in this market for an operator who shows up with a plan, executes fast, and builds a review engine from day one.`;
+  else marketTake = `The data for ${city} shows a tougher entry from a cold start. But here's what we know: most markets look hard from the outside. And almost every one still has a path -- usually through acquisition.`;
+
+  let stratPreview = '';
+  if (strategy.length) {
+    stratPreview = "Here's what I'd focus on first:\n\n" + strategy.slice(0,2).map(s => `- ${s.headline || ''}`).join('\n') + "\n\nThe full breakdown is in the strategy section of your report.\n\n";
+  }
+
+  const proof = "We've seen operators go from $80K to $160K per month in 90 days. Green fields hitting $110K their first month within 150 days. The difference isn't luck -- it's systems, speed, and an obsession with the customer experience.";
+
+  return `${greeting}\n\nThanks for running your ESTI scan on ${city}.\n\n${marketTake}\n\n${proof}\n\n${stratPreview}The goal isn't just to be busy. It's $1M+ at 20%+ net margin. In year one. That's what the right market combined with the right systems makes possible -- and we've documented every step of how to get there.\n\nCheers,\nClay Neumeyer\nCo-Founder, Service Loop Electrical`;
+}
+
+/* ====================================================================
+   6. MAIN REPORT GENERATOR
+   ==================================================================== */
+async function generateReport(city, radiusMinutes, recipient, websiteUrl, updateStatus) {
+  updateStatus('Geocoding your market...');
+  const geo = await geocodeCity(city);
+
+  updateStatus('Scanning competitors...');
+  const radiusM = Math.min(radiusMinutes * 1200, 50000);
+  const rawPlaces = await searchElectricians(geo.lat, geo.lng, radiusM);
+  const competitors = analyzeCompetitors(rawPlaces);
+
+  updateStatus('Pulling demographics...');
+  const demographics = await getDemographics(geo.lat, geo.lng, geo.state);
+
+  updateStatus('Scoring opportunity...');
+  const demand = scoreDemand(demographics);
+  const competition = scoreCompetition(competitors);
+  const acquisition = scoreAcquisition(competitors);
+  const growth = scoreGrowth(demographics, competitors);
+  const totalScore = Math.min(demand.total + competition.total + acquisition.total + growth.total, 100);
+
+  updateStatus('Calculating overtake model...');
+  const overtake = calculateOvertakeModel(competitors);
+
+  const scoresDict = { demand, competition, acquisition, growth };
+  const verdict = determineVerdict(totalScore, scoresDict);
+
+  const top2 = competitors.slice(0, 2);
+  let blueOcean;
+  if (top2.length >= 2) {
+    const highVel = top2.filter(c => c.review_velocity_monthly >= HARD_MARKET_VELOCITY).length;
+    blueOcean = highVel === 0 ? 'Both top competitors have low velocity. #1 position is potentially achievable.' :
+      highVel === 1 ? 'Only 1 of top 2 has high velocity. The #3 podium position is likely open for a fast mover.' :
+      'Both top competitors have high velocity (15+ reviews/month). This is a hard market. Consider acquisition strategy over greenfield entry.';
+  } else blueOcean = 'Very few competitors found. This market appears wide open.';
+
+  const stAbbr = demographics.state || '';
+
+  const report = {
+    generated_at: new Date().toISOString(),
+    city, location: geo, radius_minutes: radiusMinutes, demographics,
+    competitors: {
+      total_found: competitors.length, top5: competitors.slice(0,5), all: competitors,
+      franchises_found: competitors.filter(c => c.is_franchise),
+      pe_signals: competitors.filter(c => c.is_pe_signal),
+    },
+    scores: { demand, competition, acquisition, growth, total: totalScore },
+    overtake_model: overtake, blue_ocean_assessment: blueOcean, verdict,
+    acquisition_targets: acquisition.targets || [],
+    storm_data: { level: STORM_EXPOSURE[stAbbr] || 0, descriptor: STORM_DESCRIPTORS[stAbbr] || '', state: stAbbr },
+  };
+
+  updateStatus('Building strategy plan...');
+  report.strategy_plan = buildStrategyPlan(report);
+  report.recipient = recipient || {};
+
+  try { report.verdict.letter = buildPersonalizedLetter(report); } catch(e) { report.verdict.letter = ''; }
+
+  return report;
+}
+
+/* ====================================================================
+   REPORT RENDERER — builds all HTML sections
+   ==================================================================== */
+function scoreColor(score, max) {
+  const pct = max > 0 ? score / max * 100 : 0;
+  return pct >= 60 ? '#27AE60' : pct >= 30 ? '#E3C575' : '#E67E22';
+}
+function scoreBg(score, max) {
+  const pct = max > 0 ? score / max * 100 : 0;
+  return pct >= 60 ? '#072D18' : pct >= 30 ? '#3D2F08' : '#3D2008';
+}
+function fillClass(pct) { return pct >= 60 ? 'fill--green' : pct >= 30 ? 'fill--amber' : 'fill--red'; }
+function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmt(n) { return (n || 0).toLocaleString(); }
+
+const SLE_LOGO_SVG = `<svg viewBox="0 0 120 100" width="36" height="30"><defs><linearGradient id="gld3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E3C575"/><stop offset="100%" stop-color="#A78227"/></linearGradient></defs><path d="M60 5 L110 30 L110 75 L60 95 L10 75 L10 30 Z" fill="none" stroke="url(#gld3)" stroke-width="3"/><text x="60" y="58" text-anchor="middle" fill="url(#gld3)" font-family="Montserrat,sans-serif" font-weight="700" font-size="28">SLE</text></svg>`;
+
+function renderReport(report) {
+  const r = report;
+  const s = r.scores;
+  const d = r.demographics;
+  const v = r.verdict;
+  const vc = scoreColor(s.total, 100);
+  const vbg = scoreBg(s.total, 100);
+  const genDate = new Date(r.generated_at).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+
+  document.getElementById('nav-date').textContent = genDate;
+
+  let html = `<div style="padding: 24px 0 80px;">`;
+
+  // COVER
+  html += `<div class="cover">`;
+  if (r.recipient && r.recipient.name) {
+    html += `<div class="cover__prepared">PREPARED FOR</div><div class="cover__recipient">${esc(r.recipient.name)}${r.recipient.company ? ` &nbsp;<em>${esc(r.recipient.company)}</em>` : ''}</div><div style="height:16px"></div>`;
+  }
+  html += `<div class="cover__top"><div class="cover__info"><div class="cover__label">Market Report For</div><h1 class="cover__city">${esc(r.city).toUpperCase()}</h1><div class="cover__address">${esc(r.location.formatted_address)}</div><div class="cover__radius">Service Radius: ${r.radius_minutes}-minute drive time</div></div>`;
+  // Score ring
+  const dashOff = 314 - (314 * (s.total || 0) / 100);
+  html += `<div class="cover__score"><svg class="score-ring" viewBox="0 0 120 120" width="160" height="160"><circle cx="60" cy="60" r="50" fill="none" stroke="#1B2A45" stroke-width="10"/><circle cx="60" cy="60" r="50" fill="none" stroke="${vc}" stroke-width="10" stroke-dasharray="314" stroke-dashoffset="${dashOff}" stroke-linecap="round" transform="rotate(-90 60 60)"/><text x="60" y="54" text-anchor="middle" class="score-ring__value" font-size="32">${s.total}</text><text x="60" y="70" text-anchor="middle" class="score-ring__label" font-size="9">out of 100</text><text x="60" y="84" text-anchor="middle" class="score-ring__sublabel" font-size="7">OPPORTUNITY SCORE</text></svg><div class="verdict-badge" style="border-color:${vc};background:${vbg}"><span class="verdict-badge__label" style="color:${vc}">${esc(v.label)}</span></div></div></div>`;
+
+  // Sub-score pills
+  const pills = [['Demand',s.demand.total,25],['Competition',s.competition.total,25],['Acquisition',s.acquisition.total,25],['Growth',s.growth.total,25]];
+  html += `<div class="score-pills">`;
+  for (const [label, sc, mx] of pills) {
+    const pc = scoreColor(sc, mx);
+    const doff = 163 - (163 * sc / mx);
+    html += `<div class="score-pill"><svg class="score-pill__ring" viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="26" fill="none" stroke="#1B2A45" stroke-width="5"/><circle cx="32" cy="32" r="26" fill="none" stroke="${pc}" stroke-width="5" stroke-dasharray="163" stroke-dashoffset="${doff}" stroke-linecap="round" transform="rotate(-90 32 32)"/><text x="32" y="30" text-anchor="middle" fill="white" font-size="14" font-weight="bold">${sc}</text><text x="32" y="42" text-anchor="middle" fill="#aaa" font-size="8">/${mx}</text></svg><div class="score-pill__label" style="color:${pc}">${label}</div></div>`;
+  }
+  html += `</div>`;
+  if (r.blue_ocean_assessment) html += `<div class="blue-ocean"><div class="blue-ocean__title">Blue Ocean Assessment</div><div class="blue-ocean__text">${esc(r.blue_ocean_assessment)}</div></div>`;
+  html += `</div>`;
+
+  // SECTION 2: MARKET DEMAND
+  const demand = s.demand.breakdown;
+  const bars = [['Home Age',demand.home_age,7],['Median Income',demand.income,5],['Owner Occupancy',demand.owner_occupancy,4],['Population',demand.population,4],['Pop. Growth',demand.population_growth,3],['Generator Bonus',demand.generator_bonus,2]];
+  html += `<div class="report-section"><div class="section-header"><div><div class="section-header__title">Market Demand Analysis</div><div class="section-header__sub">Demographics & Demand Scoring</div></div><span class="section-header__logo">${SLE_LOGO_SVG}</span></div>`;
+  html += `<h3 style="font-family:var(--font-heading);font-size:0.85rem;color:var(--gold);margin-bottom:14px">DEMAND SCORE BREAKDOWN</h3><div class="bar-chart">`;
+  for (const [label,sc,mx] of bars) {
+    const pct = mx > 0 ? sc/mx*100 : 0;
+    html += `<div class="bar-row"><div class="bar-row__label">${label}</div><div class="bar-row__track"><div class="bar-row__fill ${fillClass(pct)}" style="width:${pct}%"></div></div><div class="bar-row__score">${sc}/${mx}</div></div>`;
+  }
+  html += `</div>`;
+  html += `<div style="border-top:1px solid var(--gold-dark);margin:20px 0;padding-top:20px"><h3 style="font-family:var(--font-heading);font-size:0.85rem;color:var(--gold);margin-bottom:14px">MARKET DEMOGRAPHICS</h3><div class="demo-grid">`;
+  const demoItems = [['Population',fmt(d.population)],['Median Income','$'+fmt(d.median_income)],['State Median','$'+fmt(d.state_median_income)],['Income vs State',(d.income_vs_state||'').charAt(0).toUpperCase()+(d.income_vs_state||'').slice(1)],['Median Year Built',d.median_year_built],['Home Age',d.home_age_years+' years'],['Owner Occupancy',d.owner_occupancy_pct+'%'],['Owner-Occ Units',fmt(d.owner_occupied_units)]];
+  for (const [l,v2] of demoItems) html += `<div class="demo-item"><span class="demo-item__label">${l}</span><span class="demo-item__value">${v2}</span></div>`;
+  html += `</div></div>`;
+
+  // Signals
+  html += `<div style="margin-top:16px"><h3 style="font-family:var(--font-heading);font-size:0.85rem;color:var(--gold);margin-bottom:14px">HOUSING STOCK DEMAND SIGNAL</h3>`;
+  if (d.home_age_years >= 30) html += `<div class="signal-msg">Housing stock averages ${d.home_age_years} years old (built ~${d.median_year_built}). Aging wiring, outdated panels, and code compliance work create natural demand.</div>`;
+  if (d.owner_occupancy_pct >= 70) html += `<div class="signal-msg">High owner-occupancy (${d.owner_occupancy_pct}%) — homeowners who authorize and fund repairs. Strong service market.</div>`;
+  else if (d.owner_occupancy_pct >= 50) html += `<div class="signal-msg">Mixed renter/owner market (${d.owner_occupancy_pct}% owner-occupied). Target owner-occupied neighborhoods for highest-ticket work.</div>`;
+  if (d.median_income >= 65000) html += `<div class="signal-msg">Median income $${fmt(d.median_income)} supports premium service pricing — whole-home rewires, generator installs, smart home packages.</div>`;
+  if (r.storm_data && r.storm_data.level >= 2) html += `<div style="border-top:1px solid var(--gold-dark);margin:16px 0;padding-top:16px"><h3 style="font-family:var(--font-heading);font-size:0.85rem;color:var(--gold);margin-bottom:14px">WEATHER & STORM DEMAND SIGNAL</h3><div class="signal-msg signal-msg--storm">This area experiences ${r.storm_data.descriptor} — creating extreme demand surges for backup generators, emergency panel repairs, and utility restoration work.</div></div>`;
+  else if (r.storm_data && r.storm_data.level === 1) html += `<div style="border-top:1px solid var(--gold-dark);margin:16px 0;padding-top:16px"><h3 style="font-family:var(--font-heading);font-size:0.85rem;color:var(--gold);margin-bottom:14px">WEATHER & STORM DEMAND SIGNAL</h3><div class="signal-msg">This area experiences ${r.storm_data.descriptor} — moderate storm exposure creates seasonal demand for generator installs and emergency electrical service.</div></div>`;
+  html += `</div></div>`;
+
+  // SECTION 3: COMPETITIVE LANDSCAPE
+  html += `<div class="report-section"><div class="section-header"><div><div class="section-header__title">Competitive Landscape</div><div class="section-header__sub">${r.competitors.total_found} electricians found in market</div></div><span class="section-header__logo">${SLE_LOGO_SVG}</span></div>`;
+  html += `<div style="margin-bottom:12px"><span style="font-family:var(--font-heading);font-weight:700;color:var(--white)">Competition Score: ${s.competition.total}/25</span><span style="font-size:0.8rem;color:var(--gray);margin-left:12px">(higher = weaker competition = better for you)</span></div>`;
+  html += `<table class="comp-table"><thead><tr><th>Business Name</th><th>Reviews</th><th>Rating</th><th>Vel/mo</th><th>GBP</th><th>Acq</th><th>Yrs</th><th>Flags</th></tr></thead><tbody>`;
+  for (let i = 0; i < r.competitors.top5.length; i++) {
+    const c = r.competitors.top5[i];
+    html += `<tr><td><span style="color:var(--gold-bright);font-weight:700">${i+1}.</span> ${esc(c.name)}</td><td>${fmt(c.reviews)}</td><td>${c.rating}</td><td>${c.review_velocity_monthly}</td><td>${c.gbp_score}/10</td><td>${c.acquisition_signal}/10</td><td title="${esc(c.age_source||'estimated')}">${c.age_factual ? Math.round(c.estimated_years||0) : '~'+Math.round(c.estimated_years||0)} yrs</td><td>${c.is_franchise ? '<span class="tag tag--franchise">FRAN</span>' : ''}${c.is_pe_signal ? '<span class="tag tag--pe">PE</span>' : ''}</td></tr>`;
+  }
+  html += `</tbody></table>`;
+  html += `<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--charcoal)"><h4 style="font-family:var(--font-heading);font-size:0.75rem;color:var(--gold);margin-bottom:8px;text-transform:uppercase">GBP Profile Notes</h4>`;
+  for (const c of r.competitors.top5) html += `<div style="font-size:0.78rem;color:var(--gray);margin-bottom:4px"><strong style="color:var(--white)">${esc(c.name)}:</strong> ${esc(c.gbp_notes)}</div>`;
+  html += `</div></div>`;
+
+  // SECTION 4: OVERTAKE MODEL
+  html += `<div class="report-section"><div class="section-header"><div><div class="section-header__title">Review Velocity Overtake Model</div><div class="section-header__sub">Months to claim #1 position at each fleet size</div></div><span class="section-header__logo">${SLE_LOGO_SVG}</span></div>`;
+  html += `<div class="callout-box" style="margin-bottom:20px"><div class="callout-box__title">Model Assumptions</div><div class="callout-box__text" style="font-size:0.8rem">50% review capture rate | 10 clients/van/week | 50 working weeks/yr = ~250 reviews/van/yr<br><strong>Overtake</strong> = when YOUR cumulative reviews exceed THEIR current count, assuming their velocity continues.</div></div>`;
+  html += `<table class="overtake-table"><thead><tr><th>Competitor</th><th>Starter (2 vans)<br><span style="font-weight:400;font-size:0.6rem">~21 rev/mo</span></th><th>Growth (4 vans)<br><span style="font-weight:400;font-size:0.6rem">~42 rev/mo</span></th><th>Scale (6 vans)<br><span style="font-weight:400;font-size:0.6rem">~63 rev/mo</span></th><th>Their Velocity</th></tr></thead><tbody>`;
+  for (const o of r.overtake_model) {
+    html += `<tr><td><strong>${esc(o.name)}</strong><br><span style="font-size:0.75rem;color:var(--gray)">${fmt(o.current_reviews)} reviews now</span></td>`;
+    for (const sc of o.scenarios) {
+      if (sc.months_to_overtake === null || sc.months_to_overtake > 36) html += `<td><span class="months--never">Not feasible<br><span style="font-size:0.7rem">Need ${(sc.needed_monthly||0).toFixed(1)}/mo</span></span></td>`;
+      else if (sc.months_to_overtake <= 12) html += `<td><span class="months--fast">${Math.round(sc.months_to_overtake)} months</span></td>`;
+      else if (sc.months_to_overtake <= 24) html += `<td><span class="months--medium">${Math.round(sc.months_to_overtake)} months</span></td>`;
+      else html += `<td><span class="months--slow">${Math.round(sc.months_to_overtake)} months</span></td>`;
+    }
+    html += `<td><span style="color:var(--gold-bright);font-weight:700">${o.monthly_velocity} rev/mo</span></td></tr>`;
+  }
+  html += `</tbody></table><div style="margin-top:14px;font-size:0.72rem;color:var(--gray-dim);border-top:1px solid var(--charcoal);padding-top:10px"><strong>Timeline guide:</strong> <span style="color:var(--green)"><=12 months</span> &nbsp; <span style="color:var(--gold)">13-24 months</span> &nbsp; <span style="color:var(--red)">25-36 months</span> &nbsp; <span style="color:var(--gray-dim)">>36 months / Not feasible</span></div></div>`;
+
+  // SECTION 5: ACQUISITION
+  const acq = s.acquisition.breakdown;
+  html += `<div class="report-section"><div class="section-header"><div><div class="section-header__title">Acquisition Opportunity</div><div class="section-header__sub">${r.acquisition_targets.length} Potential Targets Identified</div></div><span class="section-header__logo">${SLE_LOGO_SVG}</span></div>`;
+  const acqBars = [['Aging Operators',acq.aging_operators||0,10],['Low Digital Invest',acq.low_digital||0,5],['Service-Focused',acq.service_focused||0,5],['Market Room',acq.market_room||0,5]];
+  html += `<div class="bar-chart" style="margin-bottom:20px">`;
+  for (const [label,sc,mx] of acqBars) { const pct = mx > 0 ? sc/mx*100 : 0; html += `<div class="bar-row"><div class="bar-row__label">${label}</div><div class="bar-row__track"><div class="bar-row__fill ${fillClass(pct)}" style="width:${pct}%"></div></div><div class="bar-row__score">${sc}/${mx}</div></div>`; }
+  html += `</div>`;
+
+  html += `<h3 style="font-family:var(--font-heading);font-size:0.85rem;color:var(--gold);margin-bottom:14px">ACQUISITION TARGETS IDENTIFIED: ${r.acquisition_targets.length}</h3><div class="target-cards">`;
+  for (const t of r.acquisition_targets.slice(0, 8)) {
+    const acqPct = (t.acquisition_signal || 0) / 10 * 100;
+    const acqColor = acqPct >= 60 ? '#27AE60' : acqPct >= 30 ? '#E3C575' : '#E67E22';
+    const signals = [];
+    if (t.review_velocity_monthly < 3) signals.push('very low review velocity (stagnant)');
+    if (!t.has_website) signals.push('no website');
+    if (t.reviews < 200) signals.push('low total reviews');
+    if (t.estimated_years >= 10) signals.push('Long-tenured operator (>10 yrs)');
+    html += `<div class="target-card"><div class="target-card__info"><div class="target-card__name">${esc(t.name)}</div>${t.address ? `<div class="target-card__address">${esc(t.address)}</div>` : ''}<div class="target-card__meta-grid"><span><strong>Reviews</strong> ${t.reviews}</span><span><strong>Rating</strong> ${t.rating}*</span><span><strong>Velocity</strong> ${t.review_velocity_monthly}/mo</span><span><strong>Age</strong> ${t.age_factual ? Math.round(t.estimated_years||0) : '~'+Math.round(t.estimated_years||0)} yrs <small style="opacity:0.6">(${t.age_source||'est'})</small></span><span><strong>GBP</strong> ${t.gbp_score}/10</span><span><strong>Website</strong> ${t.has_website ? 'Yes' : 'No'}</span></div>${signals.length ? `<div class="target-card__signal-text">Signal: ${signals.join('; ')}</div>` : ''}</div><div class="target-card__score-box"><div class="target-card__signal" style="color:${acqColor}">${t.acquisition_signal}/10</div><span class="target-card__signal-label">ACQ SIGNAL</span></div></div>`;
+  }
+  html += `</div>`;
+  html += `<div class="callout-box" style="margin-top:24px"><div class="callout-box__title">Why Acquisition is Always Worth Exploring</div><div class="callout-box__text">* Millions of trade business owners across North America are retiring with no exit plan and no buyer lined up.<br><br>* Most have never heard of seller financing — where the owner carries the loan and you pay them from their own business's revenue. No bank. Little to no cash upfront.<br><br>* You walk away with their customer list, their techs, and their phone number. Years of built trust, transferred overnight.<br><br>* SLE has guided operators through both greenfield launches and acquisitions. The $1M+ path exists in both — the acquisition path is often faster.</div></div></div>`;
+
+  // CLAY'S LETTER
+  html += `<div class="letter-section">${SLE_LOGO_SVG.replace('width="36" height="30"','width="56" height="47"').replace('class="section-header__logo"','class="letter-section__logo"')}<div class="letter-section__from">From the Desk of</div><div class="letter-section__name">Clay Neumeyer</div><div class="letter-section__role">Co-Founder, Service Loop Electrical</div><div class="letter-body">`;
+  const letterText = v.letter || '';
+  for (const para of letterText.split('\n\n')) {
+    if (para.trim().startsWith('Cheers')) html += `<p class="signature">${para.replace(/\n/g,'<br>')}</p>`;
+    else if (para.trim()) html += `<p>${esc(para)}</p>`;
+  }
+  html += `</div><div class="letter-ps">PS — Want to see the full Electric Service Scale Map? Discover the exact systems behind $1M+ electric service companies. <a href="https://go.serviceloopelectrical.com/scale" target="_blank">See the ESSM &rarr;</a></div><div class="cta-box cta-box--gold"><div class="cta-box__title">Claim Your Free Strategy Call</div><div class="cta-box__sub">SLE has helped electricians go from $0 to $300K/month. Let's talk about your market.</div><div class="cta-box__details">$1M+ Electric Service Academy | For Electricians. By Electricians.</div><a href="https://milliondollarservice.com" class="cta-box__link" target="_blank">Book Your Free Strategy Call</a></div></div>`;
+
+  // SECTION 7: VERDICT & STRATEGY
+  html += `<div class="report-section"><div class="section-header"><div><div class="section-header__title">Verdict & Strategy</div><div class="section-header__sub">${esc(v.label)}</div></div><span class="section-header__logo">${SLE_LOGO_SVG}</span></div>`;
+  html += `<div class="verdict-summary" style="border-color:${vc};background:${vbg}"><div class="verdict-summary__label" style="color:${vc}">${esc(v.label)}</div><div class="verdict-summary__text">${esc(r.blue_ocean_assessment)}</div><div class="verdict-summary__bar"><div class="verdict-summary__fill" style="width:${s.total}%;background:${vc}"></div></div><div class="verdict-summary__score">${s.total}/100</div></div>`;
+  // Score strip
+  html += `<div class="score-strip">`;
+  for (const [label,sc,mx] of [['DEMAND',s.demand.total,25],['COMPETITION',s.competition.total,25],['ACQUISITION',s.acquisition.total,25],['GROWTH',s.growth.total,25]]) {
+    const pc = scoreColor(sc,mx);
+    html += `<div class="score-strip__item" style="border-color:${pc};background:linear-gradient(135deg,${pc}22,${pc}11)"><div class="score-strip__value" style="color:${pc}">${sc}/${mx}</div><div class="score-strip__label">${label}</div></div>`;
+  }
+  html += `</div>`;
+  // Belief
+  html += `<div class="belief"><div class="belief__title">SLE'S BELIEF</div><div class="belief__text">Most markets are still ripe for a $1M+ takeover.<br>Customer-focused electricians with the right systems reach $1M+ at 20%+ net margin in year one.</div><div class="belief__proof">* Nathan: $0 &rarr; $110K/mo in 150 days &nbsp; * Sherman: ~$100K/mo &rarr; $300K/mo in 60 days &nbsp; * Christian: ~$70K/mo &rarr; avg $200K/mo in 6 months &nbsp; * Mike: $80K &rarr; $160K/mo in 90 days</div></div>`;
+  // Strategy Roadmap
+  html += `<h3 style="font-family:var(--font-heading);font-size:1rem;color:var(--gold-bright);margin:24px 0 16px;text-transform:uppercase;letter-spacing:1px">TO WIN HERE YOU MUST:</h3><div class="strategy-roadmap">`;
+  const stPlan = r.strategy_plan || [];
+  for (let i = 0; i < stPlan.length; i++) {
+    const step = stPlan[i];
+    const stepPct = (i + 1) / (stPlan.length || 1) * 100;
+    const stepColor = scoreColor(Math.round(stepPct), 100);
+    html += `<div class="roadmap-step"><div class="roadmap-step__connector"><div class="roadmap-step__num" style="background:${stepColor}">${step.number}</div>${i < stPlan.length-1 ? `<div class="roadmap-step__line" style="background:linear-gradient(to bottom,${stepColor},var(--charcoal))"></div>` : ''}</div><div class="roadmap-step__content"><div class="roadmap-step__headline">${esc(step.headline)}</div><div class="roadmap-step__detail">${esc(step.detail)}</div></div></div>`;
+  }
+  html += `</div></div>`;
+
+  html += `</div>`;
+  return html;
+}
+
+/* ====================================================================
+   UI WIRING
+   ==================================================================== */
+let currentReport = null;
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('scan-form');
+  form.addEventListener('submit', handleFormSubmit);
+});
+
+async function handleFormSubmit(e) {
+  e.preventDefault();
+
+  // Validate API keys
+  if (!CONFIG.GOOGLE_API_KEY || CONFIG.GOOGLE_API_KEY === 'YOUR_GOOGLE_PLACES_API_KEY') {
+    showFlash('Please set your Google Places API key in the script CONFIG section.');
+    return;
+  }
+  if (!CONFIG.CENSUS_API_KEY || CONFIG.CENSUS_API_KEY === 'YOUR_CENSUS_API_KEY') {
+    showFlash('Please set your Census API key in the script CONFIG section.');
+    return;
+  }
+
+  const name = document.getElementById('name').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const city = document.getElementById('service_city').value.trim();
+  const radius = parseInt(document.getElementById('service_radius').value) || 60;
+  const websiteUrl = document.getElementById('website_url').value.trim();
+
+  if (!city) { showFlash('Please enter a service city.'); return; }
+  if (!name) { showFlash('Please enter your name.'); return; }
+
+  const overlay = document.getElementById('loading-overlay');
+  const loadingText = document.getElementById('loading-text');
+  overlay.classList.add('active');
+
+  try {
+    currentReport = await generateReport(
+      city, radius,
+      { name, company },
+      websiteUrl,
+      (msg) => { loadingText.textContent = msg; }
+    );
+
+    // Fire GHL webhook if configured
+    if (CONFIG.GHL_WEBHOOK_URL) {
+      try {
+        fetch(CONFIG.GHL_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name, company, email,
+            phone: document.getElementById('phone').value.trim(),
+            website: websiteUrl, city, radius,
+            report_score: currentReport.scores.total,
+            verdict: currentReport.verdict.level,
+            verdict_label: currentReport.verdict.label,
+          }),
+        }).catch(() => {});
+      } catch(e) {}
+    }
+
+    // Render report
+    document.getElementById('report-page').innerHTML = renderReport(currentReport);
+    document.getElementById('landing-page').style.display = 'none';
+    document.getElementById('report-page').style.display = 'block';
+    document.getElementById('action-bar').style.display = 'block';
+    window.scrollTo(0, 0);
+
+  } catch(err) {
+    showFlash(`Scan failed: ${err.message}`);
+  } finally {
+    overlay.classList.remove('active');
+  }
+}
+
+function showFlash(msg) {
+  const container = document.getElementById('flash-container');
+  container.innerHTML = `<div class="flash flash--error">${esc(msg)}</div>`;
+  setTimeout(() => { container.innerHTML = ''; }, 8000);
+}
+
+function copyReportLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.getElementById('copy-link-btn');
+    if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = 'Copy Link'; }, 2000); }
+  });
+}
+
+function emailReport() {
+  const city = currentReport ? currentReport.city : '';
+  const subject = encodeURIComponent('Your ESTI Market Report: ' + city);
+  const body = encodeURIComponent('Here is your ESTI Market Intelligence Report:\n\n' + window.location.href);
+  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+}
+
+function newScan() {
+  document.getElementById('landing-page').style.display = '';
+  document.getElementById('report-page').style.display = 'none';
+  document.getElementById('action-bar').style.display = 'none';
+  document.getElementById('report-page').innerHTML = '';
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
