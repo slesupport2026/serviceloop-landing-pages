@@ -313,10 +313,18 @@ header {
   text-align: center;
   font-size: 0.78rem;
   color: rgba(255,255,255,0.75);
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, background 0.3s, transform 0.2s;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
 }
 
-.action-item:hover { border-color: rgba(227,197,117,0.3); }
+.action-item:hover { 
+  border-color: rgba(227,197,117,0.4); 
+  background: rgba(27,42,69,0.55);
+  transform: translateY(-2px);
+  color: var(--white);
+}
 
 .action-icon {
   font-size: 1.3rem;
@@ -585,12 +593,12 @@ footer a {
     </div>
 
     <div class="actions-grid">
-      <div class="action-item"><span class="action-icon">🎬</span>Subscribe on YouTube</div>
-      <div class="action-item"><span class="action-icon">🍎</span>Review on Apple Podcasts</div>
-      <div class="action-item"><span class="action-icon">🎧</span>Review on Spotify</div>
-      <div class="action-item"><span class="action-icon">📘</span>Follow on Facebook</div>
-      <div class="action-item"><span class="action-icon">📸</span>Follow on Instagram</div>
-      <div class="action-item"><span class="action-icon">💼</span>Follow on LinkedIn</div>
+      <a href="https://www.youtube.com/@milliondollarelectrician" target="_blank" rel="noopener" class="action-item"><span class="action-icon">🎬</span>Subscribe on YouTube</a>
+      <a href="https://podcasts.apple.com/us/podcast/million-dollar-electrician-sale-to-scale-for-home-service/id1655181789" target="_blank" rel="noopener" class="action-item"><span class="action-icon">🍎</span>Review on Apple Podcasts</a>
+      <a href="https://open.spotify.com/show/3JCw0SE2SnHhg2APT5wau9" target="_blank" rel="noopener" class="action-item"><span class="action-icon">🎧</span>Review on Spotify</a>
+      <a href="https://www.facebook.com/groups/milliondollarelectrician" target="_blank" rel="noopener" class="action-item"><span class="action-icon">📘</span>Follow on Facebook</a>
+      <a href="https://www.instagram.com/clay.neumeyer" target="_blank" rel="noopener" class="action-item"><span class="action-icon">📸</span>Follow on Instagram</a>
+      <a href="https://www.linkedin.com/company/service-loop-electrical" target="_blank" rel="noopener" class="action-item"><span class="action-icon">💼</span>Follow on LinkedIn</a>
     </div>
   </div>
 </section>
@@ -601,13 +609,13 @@ footer a {
     <h2>Enter the <span class="gold">Scholarship Draw</span></h2>
     <p class="form-sub">Complete the actions above, then submit your entry below.</p>
 
-    <div class="form-embed">
-      <!-- ============================================
-           EMBED YOUR FORM HERE
-           Replace this entire div's contents with your
-           form embed code (iframe, script, etc.)
-           ============================================ -->
-      <p class="form-placeholder">⚡ Entry form loading shortly — embed your form code here</p>
+    <div class="form-embed" style="padding:0; border:none; background:transparent;">
+      <iframe 
+        src="https://serviceloop.notion.site/2f39c35f2d23424688b853597ec9fd9c?v=6e153d52dfa64cc2845a1dc7b2f70702" 
+        style="width:100%; min-height:750px; border:none; border-radius:8px;"
+        title="MDE Scholarship Entry Form"
+        loading="lazy">
+      </iframe>
     </div>
   </div>
 </section>
