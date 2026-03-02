@@ -717,30 +717,47 @@ function analyzeCompetitors(places) {
 async function getFips(lat, lng) {
   try {
     const resp = await fetch(`https://geo.fcc.gov/api/census/area?lat=${lat}&lon=${lng}&format=json`);
+    if (!resp.ok) { console.error('FCC API error:', resp.status, resp.statusText); return ''; }
     const data = await resp.json();
     if (data.results && data.results.length) return data.results[0].county_fips || '';
-  } catch(e) {}
+    console.warn('FCC API: no results for', lat, lng);
+  } catch(e) { console.error('getFips error:', e); }
   return '';
 }
 
+async function fetchCensusACS(fields, geo, key) {
+  const vintages = ['2024', '2023', '2022'];
+  for (const yr of vintages) {
+    try {
+      const url = `https://api.census.gov/data/${yr}/acs/acs5?get=${fields}&${geo}&key=${key}`;
+      const resp = await fetch(url);
+      if (!resp.ok) { console.warn(`Census ACS ${yr} returned ${resp.status}`); continue; }
+      const data = await resp.json();
+      if (Array.isArray(data) && data.length >= 2) return data;
+      console.warn(`Census ACS ${yr}: unexpected response shape`, data);
+    } catch(e) { console.warn(`Census ACS ${yr} fetch error:`, e); }
+  }
+  return null;
+}
+
 async function getStateMedIncome(stateFips) {
-  try {
-    const resp = await fetch(`https://api.census.gov/data/2022/acs/acs5?get=B19013_001E&for=state:${stateFips}&key=${CONFIG.CENSUS_API_KEY}`);
-    const data = await resp.json();
-    if (data.length >= 2) return parseInt(data[1][0]) || 65000;
-  } catch(e) {}
+  const data = await fetchCensusACS('B19013_001E', `for=state:${stateFips}`, CONFIG.CENSUS_API_KEY);
+  if (data) return parseInt(data[1][0]) || 65000;
   return 65000;
 }
 
 async function getDemographics(lat, lng, stateAbbr) {
   const fips = await getFips(lat, lng);
-  if (!fips) return defaultDemographics();
+  if (!fips) { console.warn('No FIPS code — returning default demographics'); return defaultDemographics(); }
   const stateFips = fips.substring(0, 2);
   const countyFips = fips.substring(2, 5);
+  const data = await fetchCensusACS(
+    'B25035_001E,B19013_001E,B25003_002E,B25003_001E,B01003_001E',
+    `for=county:${countyFips}&in=state:${stateFips}`,
+    CONFIG.CENSUS_API_KEY
+  );
+  if (!data) { console.error('All Census ACS vintages failed for FIPS', fips); return defaultDemographics(); }
   try {
-    const resp = await fetch(`https://api.census.gov/data/2022/acs/acs5?get=B25035_001E,B19013_001E,B25003_002E,B25003_001E,B01003_001E&for=county:${countyFips}&in=state:${stateFips}&key=${CONFIG.CENSUS_API_KEY}`);
-    const data = await resp.json();
-    if (data.length < 2) return defaultDemographics();
     const row = data[1];
     const medianYearBuilt = parseInt(row[0]) || 0;
     const medianIncome = parseInt(row[1]) || 0;
@@ -757,7 +774,7 @@ async function getDemographics(lat, lng, stateAbbr) {
       owner_occupancy_pct: ownerPct, owner_occupied_units: ownerOcc,
       total_occupied_units: totalOcc, state: stateAbbr, country: 'US',
     };
-  } catch(e) { return defaultDemographics(); }
+  } catch(e) { console.error('Demographics parse error:', e); return defaultDemographics(); }
 }
 
 function defaultDemographics() {
