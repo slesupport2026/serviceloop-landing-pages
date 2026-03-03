@@ -711,16 +711,16 @@ function analyzeCompetitors(places) {
    ==================================================================== */
 const STATE_FIPS = {AL:'01',AK:'02',AZ:'04',AR:'05',CA:'06',CO:'08',CT:'09',DE:'10',DC:'11',FL:'12',GA:'13',HI:'15',ID:'16',IL:'17',IN:'18',IA:'19',KS:'20',KY:'21',LA:'22',ME:'23',MD:'24',MA:'25',MI:'26',MN:'27',MS:'28',MO:'29',MT:'30',NE:'31',NV:'32',NH:'33',NJ:'34',NM:'35',NY:'36',NC:'37',ND:'38',OH:'39',OK:'40',OR:'41',PA:'42',RI:'44',SC:'45',SD:'46',TN:'47',TX:'48',UT:'49',VT:'50',VA:'51',WA:'53',WV:'54',WI:'55',WY:'56'};
 
-async function getFips(lat, lng) {
+async function getCountyFips(lat, lng) {
   try {
-    const resp = await fetch(`https://geo.fcc.gov/api/census/area?lat=${lat}&lon=${lng}&format=json`);
-    if (!resp.ok) { console.error('FCC API HTTP', resp.status); return ''; }
-    const text = await resp.text();
-    const data = JSON.parse(text);
-    if (data.results && data.results.length) return data.results[0].county_fips || '';
-    console.warn('FCC: no results', lat, lng);
-  } catch(e) { console.error('getFips error:', e.message || e); }
-  return '';
+    const resp = await fetch(`https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=${lng}&y=${lat}&benchmark=Public_AR_Current&vintage=Current_Current&format=json`);
+    if (!resp.ok) { console.error('Census geocoder HTTP', resp.status); return null; }
+    const data = await resp.json();
+    const counties = (data.result && data.result.geographies && data.result.geographies.Counties) || [];
+    if (counties.length) return { state: counties[0].STATE, county: counties[0].COUNTY, name: counties[0].NAME };
+    console.warn('Census geocoder: no county found', lat, lng);
+  } catch(e) { console.error('getCountyFips error:', e.message || e); }
+  return null;
 }
 
 async function fetchCensus(url) {
@@ -758,10 +758,21 @@ async function getDemographics(lat, lng, stateAbbr, updateStatus) {
   const stateFips = STATE_FIPS[stateAbbr] || '';
   let data = null;
   let level = 'none';
+  let countyInfo = null;
 
-  // Pull state-level demographics (reliable, no FIPS lookup dependency)
-  if (stateFips) {
-    if (updateStatus) updateStatus('Pulling state demographics...');
+  // Try county-level first via Census geocoder
+  if (updateStatus) updateStatus('Looking up county demographics...');
+  try {
+    countyInfo = await getCountyFips(lat, lng);
+    if (countyInfo) {
+      data = await fetchCensusACS(fields, `for=county:${countyInfo.county}&in=state:${countyInfo.state}`, CONFIG.CENSUS_API_KEY);
+      if (data) level = 'county';
+    }
+  } catch(e) { console.warn('County demographics failed:', e.message || e); }
+
+  // Fallback to state-level
+  if (!data && stateFips) {
+    if (updateStatus) updateStatus('County unavailable — pulling state demographics...');
     data = await fetchCensusACS(fields, `for=state:${stateFips}`, CONFIG.CENSUS_API_KEY);
     if (data) level = 'state';
   }
@@ -776,7 +787,7 @@ async function getDemographics(lat, lng, stateAbbr, updateStatus) {
     const p = parseCensusRow(data);
     // State median income (separate call)
     let stateIncome = 65000;
-    const useFips = level === 'county' ? (fips ? fips.substring(0, 2) : stateFips) : stateFips;
+    const useFips = countyInfo ? countyInfo.state : stateFips;
     if (useFips) {
       const sid = await fetchCensusACS('B19013_001E', `for=state:${useFips}`, CONFIG.CENSUS_API_KEY);
       if (sid) stateIncome = parseInt(sid[1][0]) || 65000;
@@ -789,6 +800,7 @@ async function getDemographics(lat, lng, stateAbbr, updateStatus) {
       home_age_years: p.medianYearBuilt > 1900 ? new Date().getFullYear() - p.medianYearBuilt : 0,
       owner_occupancy_pct: p.ownerPct, owner_occupied_units: p.ownerOcc,
       total_occupied_units: p.totalOcc, state: stateAbbr, country: 'US',
+      county_name: countyInfo ? countyInfo.name : '',
       data_level: level,
     };
   } catch(e) { console.error('Demographics parse error:', e); return defaultDemographics(stateAbbr); }
@@ -1225,7 +1237,8 @@ function renderReport(report) {
   }
   html += `</div>`;
   html += `<div style="border-top:1px solid var(--gold-dark);margin:20px 0;padding-top:20px"><h3 style="font-family:var(--font-heading);font-size:0.85rem;color:var(--gold);margin-bottom:14px">MARKET DEMOGRAPHICS</h3>`;
-  if (d.data_level === 'state') html += `<div style="background:rgba(253,195,62,0.1);border:1px solid var(--gold-dark);border-radius:6px;padding:8px 12px;margin-bottom:12px;font-size:0.78rem;color:var(--gold-bright)">County-level data unavailable — showing state-level demographics.</div>`;
+  if (d.data_level === 'county') html += `<div style="background:rgba(253,195,62,0.1);border:1px solid var(--gold-dark);border-radius:6px;padding:8px 12px;margin-bottom:12px;font-size:0.78rem;color:var(--gold-bright)">${d.county_name ? d.county_name + ' — ' : ''}County-level demographics from US Census ACS.</div>`;
+  else if (d.data_level === 'state') html += `<div style="background:rgba(253,195,62,0.1);border:1px solid var(--gold-dark);border-radius:6px;padding:8px 12px;margin-bottom:12px;font-size:0.78rem;color:var(--gold-bright)">County lookup unavailable — showing state-level demographics.</div>`;
   else if (d.data_level === 'none' || (!d.population && !d.median_income)) html += `<div style="background:rgba(192,57,43,0.15);border:1px solid #C0392B;border-radius:6px;padding:8px 12px;margin-bottom:12px;font-size:0.78rem;color:#E74C3C">Demographics data could not be loaded. Check browser console (F12) for details.</div>`;
   html += `<div class="demo-grid">`;
   const demoItems = [['Population',fmt(d.population)],['Median Income','$'+fmt(d.median_income)],['State Median','$'+fmt(d.state_median_income)],['Income vs State',(d.income_vs_state||'').charAt(0).toUpperCase()+(d.income_vs_state||'').slice(1)],['Median Year Built',d.median_year_built],['Home Age',d.home_age_years+' years'],['Owner Occupancy',d.owner_occupancy_pct+'%'],['Owner-Occ Units',fmt(d.owner_occupied_units)]];
