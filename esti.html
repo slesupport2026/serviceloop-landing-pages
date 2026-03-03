@@ -888,7 +888,7 @@ function calculateOvertakeModel(competitors) {
       const theirM = comp.review_velocity_monthly;
       if (ourM > theirM) {
         const months = comp.reviews / (ourM - theirM);
-        return { scenario: sc.name, our_monthly: Math.round(ourM*10)/10, months_to_overtake: Math.round(months*10)/10, feasible: months <= 36, needed_monthly: Math.round(theirM*10)/10 };
+        return { scenario: sc.name, our_monthly: Math.round(ourM*10)/10, months_to_overtake: Math.round(months*10)/10, feasible: months <= 36 };
       }
       const neededM = Math.round((comp.reviews / 36 + theirM) * 10) / 10;
       return { scenario: sc.name, our_monthly: Math.round(ourM*10)/10, months_to_overtake: null, feasible: false, needed_monthly: neededM };
@@ -1021,7 +1021,7 @@ function buildPersonalizedLetter(report) {
     for (const cd of overtake) {
       if (cd.name === topComp.name) {
         for (const s of cd.scenarios) {
-          if (s.months_to_overtake && s.feasible && (!fastestOvertake || s.months_to_overtake < fastestOvertake.months)) {
+          if (s.months_to_overtake && (!fastestOvertake || s.months_to_overtake < fastestOvertake.months)) {
             fastestOvertake = { months: Math.round(s.months_to_overtake), scenario: s.scenario };
           }
         }
@@ -1262,14 +1262,15 @@ function renderReport(report) {
   for (const o of r.overtake_model) {
     html += `<tr><td><strong>${esc(o.name)}</strong><br><span style="font-size:0.75rem;color:var(--gray)">${fmt(o.current_reviews)} reviews now</span></td>`;
     for (const sc of o.scenarios) {
-      if (sc.months_to_overtake === null || sc.months_to_overtake > 36) html += `<td><span class="months--never">Not feasible<br><span style="font-size:0.7rem">Need ${(sc.needed_monthly||0).toFixed(1)}/mo</span></span></td>`;
+      if (sc.months_to_overtake === null) html += `<td><span class="months--never">Not feasible<br><span style="font-size:0.7rem">Need ${(sc.needed_monthly||0).toFixed(1)}/mo</span></span></td>`;
       else if (sc.months_to_overtake <= 12) html += `<td><span class="months--fast">${Math.round(sc.months_to_overtake)} months</span></td>`;
       else if (sc.months_to_overtake <= 24) html += `<td><span class="months--medium">${Math.round(sc.months_to_overtake)} months</span></td>`;
-      else html += `<td><span class="months--slow">${Math.round(sc.months_to_overtake)} months</span></td>`;
+      else if (sc.months_to_overtake <= 36) html += `<td><span class="months--slow">${Math.round(sc.months_to_overtake)} months</span></td>`;
+      else html += `<td><span class="months--never">${Math.round(sc.months_to_overtake)} months</span></td>`;
     }
     html += `<td><span style="color:var(--gold-bright);font-weight:700">${o.monthly_velocity} rev/mo</span></td></tr>`;
   }
-  html += `</tbody></table><div style="margin-top:14px;font-size:0.72rem;color:var(--gray-dim);border-top:1px solid var(--charcoal);padding-top:10px"><strong>Timeline guide:</strong> <span style="color:var(--green)"><=12 months</span> &nbsp; <span style="color:var(--gold)">13-24 months</span> &nbsp; <span style="color:var(--red)">25-36 months</span> &nbsp; <span style="color:var(--gray-dim)">>36 months / Not feasible</span></div></div>`;
+  html += `</tbody></table><div style="margin-top:14px;font-size:0.72rem;color:var(--gray-dim);border-top:1px solid var(--charcoal);padding-top:10px"><strong>Timeline guide:</strong> <span style="color:var(--green)"><=12 months</span> &nbsp; <span style="color:var(--gold)">13-24 months</span> &nbsp; <span style="color:var(--red)">25-36 months</span> &nbsp; <span style="color:var(--gray-dim)">>36 months (long play)</span> &nbsp; <span style="color:var(--gray-dim)">Not feasible = your rate is slower than theirs</span></div></div>`;
 
   // SECTION 5: ACQUISITION
   const acq = s.acquisition.breakdown;
