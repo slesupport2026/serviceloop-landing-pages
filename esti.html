@@ -274,13 +274,19 @@ main { flex: 1; }
 
 /* Print */
 @media print {
-  body { background: white; color: black; }
-  .nav, .footer, .action-bar, .loading-overlay { display: none; }
-  .report-section { break-inside: avoid; border: 1px solid #ddd; }
-  .cover::before, .hero::before { display: none; }
-  .cover { background: #f5f5f5; }
-  .score-ring__value { fill: black; }
-  a { color: black; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+  html, body { background: var(--black) !important; color: var(--white) !important; }
+  .nav, .footer, .action-bar, .loading-overlay, #landing-page { display: none !important; }
+  #report-page { display: block !important; }
+  .report-section { break-inside: avoid; border: 1px solid var(--gold-dark); background: var(--black) !important; }
+  .cover { background: var(--black) !important; }
+  .letter-section { background: #111 !important; }
+  .cta-box--gold { background: var(--gold) !important; }
+  .demo-grid .demo-item { background: var(--navy) !important; }
+  .comp-table, .overtake-table { background: transparent !important; }
+  .comp-table th, .overtake-table th { color: var(--gold) !important; }
+  a { color: var(--gold-bright) !important; }
+  @page { margin: 0.4in; size: letter; }
 }
 
 /* Responsive */
