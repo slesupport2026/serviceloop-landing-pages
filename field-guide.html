@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLE Field Guide — Language &amp; Inspection Reference</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+  :root {
+    --bg: #0D0D0D;
+    --bg2: #141414;
+    --bg3: #1A1A1A;
+    --card: #1E1E1E;
+    --card-hover: #242424;
+    --gold: #C9A45A;
+    --gold-bright: #E8C97A;
+    --gold-dim: #8B7340;
+    --white: #FFFFFF;
+    --gray: #A0A0A0;
+    --gray-light: #CCCCCC;
+    --red: #C0392B;
+    --teal: #00B4C8;
+    --green: #2ECC71;
+    --orange: #E67E22;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--bg) 0%, #1a1510 50%, var(--bg) 100%);
+    border-bottom: 1px solid var(--gold-dim);
+    padding: 60px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,164,90,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    color: var(--bg);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 5vw, 48px);
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 40px rgba(201,164,90,0.15);
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+  }
+  .hero p {
+    color: var(--gray);
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── NAV TABS ── */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #2a2a2a;
+    padding: 0 24px;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-tab {
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 16px 18px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav-tab:hover { color: var(--white); }
+  .nav-tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── SECTIONS ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .section {
+    display: none;
+    padding: 40px 0 60px;
+    animation: fadeIn 0.3s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+  .section-header h2 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .section-header h2 em {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-style: italic;
+  }
+  .section-header p {
+    color: var(--gray);
+    font-size: 15px;
+  }
+
+  /* ── GOLDEN RULES ── */
+  .rules-grid {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .rule-card {
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .rule-card:hover { border-color: var(--gold-dim); }
+  .rule-num {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .rule-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .rule-card p {
+    font-size: 14px;
+    color: var(--gray-light);
+  }
+
+  /* ── TABLES ── */
+  .table-group { margin-bottom: 36px; }
+  .table-group h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    padding-left: 14px;
+    border-left: 3px solid var(--gold);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+  }
+  thead th {
+    background: var(--bg3);
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid #2a2a2a;
+  }
+  tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #1a1a1a;
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--card-hover); }
+  td:first-child {
+    color: var(--white);
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 180px;
+  }
+  td:last-child {
+    color: var(--gray-light);
+  }
+  td .remove-tag {
+    display: inline-block;
+    background: rgba(192,57,43,0.15);
+    color: #e74c3c;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── OUTCOME CARDS ── */
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .outcome-card {
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    transition: border-color 0.2s;
+  }
+  .outcome-card:hover { border-color: var(--gold-dim); }
+  .outcome-bad {
+    color: var(--gray);
+    font-size: 13px;
+    text-decoration: line-through;
+    margin-bottom: 6px;
+  }
+  .outcome-good {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gold-bright);
+    line-height: 1.5;
+  }
+
+  /* ── TIER BADGES ── */
+  .tier-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .tier-card {
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 18px;
+    text-align: center;
+  }
+  .tier-card .tier-label {
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .tier-card .tier-label.platinum { color: var(--gold-bright); }
+  .tier-card .tier-label.gold { color: #FFD700; }
+  .tier-card .tier-label.silver { color: #C0C0C0; }
+  .tier-card .tier-label.bronze { color: #CD7F32; }
+  .tier-card .tier-label.economy { color: var(--orange); }
+  .tier-card .tier-label.basic { color: var(--gray); }
+  .tier-card .tier-tagline {
+    font-size: 13px;
+    color: var(--gray-light);
+    font-style: italic;
+  }
+  .tier-card .tier-desc {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 6px;
+  }
+
+  /* ── BANNED LIST ── */
+  .banned-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .banned-item {
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .banned-x {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    background: rgba(192,57,43,0.15);
+    color: #e74c3c;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+  }
+  .banned-item strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .banned-item span {
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  /* ── ANALOGY CARDS ── */
+  .analogy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .analogy-card {
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .analogy-card .concept {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .analogy-card .quote {
+    font-size: 14px;
+    color: var(--gray-light);
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  /* ── 4 WHATS FRAMEWORK ── */
+  .whats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .what-card {
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .what-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--gold-bright);
+  }
+  .what-card p {
+    font-size: 13px;
+    color: var(--gray-light);
+    line-height: 1.55;
+  }
+  .what-card .example {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: rgba(201,164,90,0.06);
+    border-left: 2px solid var(--gold-dim);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--gray);
+  }
+  .what-card .example strong { color: var(--gray-light); }
+
+  /* ── HOTLIST ── */
+  .hotlist-area { margin-bottom: 32px; }
+  .hotlist-area h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--gold-bright);
+  }
+
+  .room-card {
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .room-card:hover { border-color: var(--gold-dim); }
+  .room-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .room-header h4 {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .room-count {
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+    background: rgba(201,164,90,0.1);
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+  .room-chevron {
+    color: var(--gray);
+    font-size: 18px;
+    transition: transform 0.2s;
+    margin-left: 12px;
+  }
+  .room-card.open .room-chevron { transform: rotate(180deg); }
+  .room-body {
+    display: none;
+    padding: 0 20px 16px;
+  }
+  .room-card.open .room-body { display: block; }
+  .room-body ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 6px;
+  }
+  .room-body li {
+    font-size: 13px;
+    color: var(--gray-light);
+    padding: 6px 0 6px 20px;
+    position: relative;
+  }
+  .room-body li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+  }
+
+  /* ── HOW TO CHOOSE ── */
+  .choose-grid {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+  .choose-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 14px 20px;
+  }
+  .choose-row .arrow {
+    color: var(--gold);
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .choose-row .question {
+    flex: 1;
+    font-size: 14px;
+    color: var(--gray-light);
+  }
+  .choose-row .answer {
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid #2a2a2a;
+    color: var(--gray);
+    font-size: 12px;
+  }
+  .footer strong { color: var(--gold); }
+
+  /* ── TIER EXAMPLE BOX ── */
+  .tier-example {
+    background: var(--card);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 40px;
+  }
+  .tier-example h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FFD700;
+    margin-bottom: 14px;
+  }
+  .tier-example .te-section {
+    margin-bottom: 12px;
+  }
+  .tier-example .te-section h5 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-bright);
+    margin-bottom: 6px;
+  }
+  .tier-example ul {
+    list-style: none;
+    padding-left: 16px;
+  }
+  .tier-example li {
+    font-size: 13px;
+    color: var(--gray-light);
+    padding: 3px 0;
+    position: relative;
+  }
+  .tier-example li::before {
+    content: '>';
+    position: absolute;
+    left: -14px;
+    color: var(--gold-dim);
+    font-weight: 700;
+  }
+  .tier-example .te-summary {
+    font-size: 13px;
+    color: var(--gray);
+    font-style: italic;
+    padding-top: 8px;
+    border-top: 1px solid #2a2a2a;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    margin-bottom: 24px;
+  }
+  .search-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    padding: 12px 16px 12px 44px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 14px center;
+  }
+  .search-input:focus { border-color: var(--gold-dim); }
+  .search-input::placeholder { color: #555; }
+
+  /* ── PRINT ── */
+  @media print {
+    .nav-bar, .search-wrap { display: none; }
+    .section { display: block !important; page-break-before: always; }
+    body { background: #fff; color: #000; }
+    .hero { background: none; border: none; }
+    table, .room-card, .rule-card { break-inside: avoid; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .nav-tab { font-size: 12px; padding: 14px 12px; }
+    td:first-child { white-space: normal; min-width: 120px; }
+    .outcome-grid, .analogy-grid { grid-template-columns: 1fr; }
+    .tier-strip { grid-template-columns: repeat(3, 1fr); }
+    .room-body ul { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-badge">For Electricians. By Electricians.</div>
+  <h1>The <em>Field</em> Guide</h1>
+  <p>Tech-to-homeowner language translation + room-by-room inspection hotlist. Everything you need on the truck.</p>
+</div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<div class="nav-bar">
+  <button class="nav-tab active" data-tab="rules">Golden Rules</button>
+  <button class="nav-tab" data-tab="translate">Translation Tables</button>
+  <button class="nav-tab" data-tab="outcomes">Outcome Language</button>
+  <button class="nav-tab" data-tab="tiers">Tier Framing</button>
+  <button class="nav-tab" data-tab="banned">Never Say</button>
+  <button class="nav-tab" data-tab="analogies">Analogies</button>
+  <button class="nav-tab" data-tab="hotlist">Inspection Hotlist</button>
+</div>
+
+<!-- ═══════════ GOLDEN RULES ═══════════ -->
+<div class="container">
+<div class="section active" id="sec-rules">
+  <div class="section-header">
+    <h2>The <em>Golden</em> Rules</h2>
+    <p>Five non-negotiable principles for every word a homeowner reads or hears.</p>
+  </div>
+
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-num">1</div>
+      <div>
+        <h3>Describe the benefit, not the component</h3>
+        <p>They don't care what it's called. They care what it does for them. "Spark-sensing protection" beats "AFCI breaker" every time.</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">2</div>
+      <div>
+        <h3>Lead with the feeling, follow with the fix</h3>
+        <p>"No more tripping breakers every time you run the microwave" beats "Install dedicated 20A circuit."</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">3</div>
+      <div>
+        <h3>Use their words back to them</h3>
+        <p>If Karen said "it's driving me crazy," your option sheet says "eliminates the frustrating kitchen shutdowns." Mirror their language.</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">4</div>
+      <div>
+        <h3>Never assume they know what's normal</h3>
+        <p>Explain what should be there, not just what's missing. "Your outlets near water should have shock protection" not "no GFCI present."</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">5</div>
+      <div>
+        <h3>Danger in plain English</h3>
+        <p>"Fire risk" lands. "Arc fault" doesn't. If a homeowner has to Google it, rewrite it. Grade 3 reading level.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 Whats -->
+  <div class="section-header">
+    <h2>The 4 <em>Whats</em></h2>
+    <p>Every observation section follows this framework — it's your cue cards during presentation.</p>
+  </div>
+
+  <div class="whats-grid">
+    <div class="what-card">
+      <h4>What They Called For</h4>
+      <p>State it in their words exactly. Don't translate it into technical language.</p>
+      <div class="example">
+        <strong>Not:</strong> "Overloaded kitchen branch circuit"<br>
+        <strong>Say:</strong> "Breakers keep tripping in the kitchen when I run the microwave and dishwasher"
+      </div>
+    </div>
+    <div class="what-card">
+      <h4>What's Connected</h4>
+      <p>Explain what's related in terms they understand — the full scope of what's fair game.</p>
+      <div class="example">
+        <strong>Say:</strong> "Your bedroom fan, the switch that controls it, and all the wiring between them are all connected — a problem in any one of those spots can cause what you're seeing."
+      </div>
+    </div>
+    <div class="what-card">
+      <h4>What's Good</h4>
+      <p>Genuine positives. Shows you're not just looking for problems. Builds trust.</p>
+      <div class="example">
+        <strong>Say:</strong> "Your panel is newer and in good shape." "You were smart to call before this got worse."
+      </div>
+    </div>
+    <div class="what-card">
+      <h4>What's MORE</h4>
+      <p>Additional findings framed as opportunities, not scare tactics. This is where the 4 Forces live.</p>
+      <div class="example">
+        <strong>Not:</strong> "No AFCI protection on bedroom circuits"<br>
+        <strong>Say:</strong> "Your bedrooms don't have spark-sensing protection yet — an upgrade that's now standard in modern homes"
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TRANSLATION TABLES ═══════════ -->
+<div class="section" id="sec-translate">
+  <div class="section-header">
+    <h2>Master <em>Translation</em> Tables</h2>
+    <p>100+ term-by-term translations from tech speak to homeowner language.</p>
+  </div>
+
+  <div class="search-wrap">
+    <input type="text" class="search-input" id="tableSearch" placeholder="Search any term... (e.g. GFCI, panel, generator)">
+  </div>
+
+  <!-- Panel & Service -->
+  <div class="table-group" data-search-group>
+    <h3>Panel &amp; Service</h3>
+    <table>
+      <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
+      <tbody>
+        <tr><td>200A service upgrade</td><td>Upgrading your home's main power system so it can handle everything you need — now and in the future</td></tr>
+        <tr><td>100A / 150A service</td><td>Your home's current power capacity (think of it like the size of the pipe that feeds everything)</td></tr>
+        <tr><td>Panel replacement</td><td>Replacing the main electrical hub that powers your entire home</td></tr>
+        <tr><td>Panel restoration / reconditioning</td><td>Restoring all the connections inside your electrical hub — tightening, organizing, and relabeling everything</td></tr>
+        <tr><td>Federal Pacific / Zinsco / Pushmatic</td><td>A panel type that was recalled due to safety concerns — the breakers don't always shut off when they should, which is a fire risk</td></tr>
+        <tr><td>Load center</td><td>The main box where all your home's electrical circuits connect</td></tr>
+        <tr><td>Bus bar</td><td><span class="remove-tag">REMOVE</span> Never mention to homeowner</td></tr>
+        <tr><td>Tandem / twin breakers</td><td>Your panel is maxed out — there's no room to add anything new without upgrading</td></tr>
+        <tr><td>Double-tapped neutral</td><td>A wiring connection that's not properly landed — two wires sharing a spot meant for one</td></tr>
+        <tr><td>Breaker won't trip</td><td>The safety shutoff that's supposed to protect your home isn't doing its job</td></tr>
+        <tr><td>Panel labeling / circuit ID</td><td>Clearly marking every circuit so anyone can quickly find and shut off power to any area</td></tr>
+        <tr><td>Service capacity planning</td><td>Making sure your system is ready for what you want to add later (EV, hot tub, workshop, etc.)</td></tr>
+        <tr><td>Dead front</td><td><span class="remove-tag">REMOVE</span> Just say "panel cover" or remove reference entirely</td></tr>
+        <tr><td>Load balancing</td><td>Distributing your home's electrical demand evenly so nothing gets overworked</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Protection & Safety -->
+  <div class="table-group" data-search-group>
+    <h3>Protection &amp; Safety Devices</h3>
+    <table>
+      <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
+      <tbody>
+        <tr><td>GFCI (outlet or breaker)</td><td>Water shock protection / shock protection near water</td></tr>
+        <tr><td>AFCI (breaker)</td><td>Spark-sensing shutoff / spark-sensing protection system</td></tr>
+        <tr><td>Arc fault protection</td><td>Detects dangerous sparks inside your walls and shuts them down before they can cause a fire</td></tr>
+        <tr><td>Surge protection / SPD / Type 2</td><td>Home electronics protection — guards your TV, fridge, computers, and HVAC from power spikes</td></tr>
+        <tr><td>KVAR system</td><td>A system that helps your home use electricity more efficiently</td></tr>
+        <tr><td>Ground fault</td><td>Electricity escaping the intended path — usually near water, which can cause a shock</td></tr>
+        <tr><td>Smoke / CO detector</td><td>Your home's early warning system</td></tr>
+        <tr><td>Interconnected smoke detectors</td><td>When one detector senses danger, every detector in the home sounds the alarm</td></tr>
+        <tr><td>Hardwired detectors</td><td>Permanently powered by your home — no dead batteries to worry about</td></tr>
+        <tr><td>Wireless interconnected</td><td>Detectors that talk to each other wirelessly — when one goes off, they all go off</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Wiring & Circuits -->
+  <div class="table-group" data-search-group>
+    <h3>Wiring &amp; Circuits</h3>
+    <table>
+      <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
+      <tbody>
+        <tr><td>Dedicated circuit</td><td>Its own private electrical line — nothing else shares it</td></tr>
+        <tr><td>20A circuit</td><td>A standard-capacity line for things like kitchen appliances or bathroom outlets</td></tr>
+        <tr><td>240V circuit / line</td><td>A high-power line (the kind your dryer or oven uses)</td></tr>
+        <tr><td>12/3 wire / 14/2 wire</td><td><span class="remove-tag">REMOVE</span> Never mention wire gauge to homeowner</td></tr>
+        <tr><td>Run a new circuit</td><td>Install a new electrical line from the panel to where you need power</td></tr>
+        <tr><td>Backstabbed connections</td><td>Wiring pushed in rather than properly secured — these loosen over time and can overheat</td></tr>
+        <tr><td>Daisy-chained wiring</td><td>Every outlet on this line depends on the one before it — if one fails, everything downstream goes dark</td></tr>
+        <tr><td>Parallel splice-through</td><td>Each outlet has its own secure connection to the power line — much more reliable</td></tr>
+        <tr><td>Shared neutral / MWBC</td><td>Two circuits sharing the same return path — can cause flickering and unexpected behavior</td></tr>
+        <tr><td>Knob and tube</td><td>Original wiring from when the home was built — outdated, wasn't designed for today's demands</td></tr>
+        <tr><td>Cloth wiring</td><td>Older wiring with fabric insulation that breaks down over time — a fire concern</td></tr>
+        <tr><td>Exposed wiring</td><td>Wiring that's visible and unprotected — a safety hazard</td></tr>
+        <tr><td>Open splice / open junction</td><td>An exposed wire connection that should be inside a covered box</td></tr>
+        <tr><td>Surface-mounted wiring</td><td>Wiring run along the wall surface in protective tubing (vs. hidden inside the wall)</td></tr>
+        <tr><td>Recessed wiring</td><td>Wiring hidden inside the walls for a clean, finished look</td></tr>
+        <tr><td>Voltage drop</td><td>Power losing strength over a long run — like water pressure dropping at the end of a long hose</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Outlets & Devices -->
+  <div class="table-group" data-search-group>
+    <h3>Outlets &amp; Devices</h3>
+    <table>
+      <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
+      <tbody>
+        <tr><td>Receptacle</td><td>Outlet / power point</td></tr>
+        <tr><td>Duplex receptacle</td><td>Standard outlet (two plug spots)</td></tr>
+        <tr><td>Quad receptacle</td><td>Double outlet (four plug spots) — more room for everything you need</td></tr>
+        <tr><td>USB outlet</td><td>Outlet with built-in charging ports — plug your phone right into the wall</td></tr>
+        <tr><td>Tamper-resistant outlet</td><td>Childproof outlet — built-in shutters so kids can't stick anything in</td></tr>
+        <tr><td>Weather-resistant outlet</td><td>An outdoor outlet designed to handle rain and moisture</td></tr>
+        <tr><td>In-use / bubble cover</td><td>A protective cover that keeps your outdoor outlet safe even when something's plugged in</td></tr>
+        <tr><td>Floor outlet</td><td>An outlet in the floor — perfect for lamps or chargers without running cords</td></tr>
+        <tr><td>Switched outlet</td><td>An outlet controlled by a wall switch</td></tr>
+        <tr><td>Re-device / device changeout</td><td>Replacing your outlets and switches with new, reliable ones</td></tr>
+        <tr><td>Smart switch</td><td>A switch you can control from your phone or by voice</td></tr>
+        <tr><td>Dimmer</td><td>A switch that lets you adjust how bright or dim your lights are</td></tr>
+        <tr><td>3-way switch</td><td>A light controlled from two different spots (top and bottom of stairs)</td></tr>
+        <tr><td>Occupancy sensor</td><td>Turns lights on when you walk in and off when you leave</td></tr>
+        <tr><td>Nightlight outlet</td><td>An outlet with a built-in soft glow — nobody trips in the dark</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Lighting -->
+  <div class="table-group" data-search-group>
+    <h3>Lighting</h3>
+    <table>
+      <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
+      <tbody>
+        <tr><td>Recessed can / recessed lighting</td><td>Ceiling lights that sit flush — clean, modern look with no hanging fixtures</td></tr>
+        <tr><td>Slim recessed can</td><td>Ultra-thin ceiling lights that work even where space is tight</td></tr>
+        <tr><td>LED conversion</td><td>Energy-efficient lights that last years longer and use less power</td></tr>
+        <tr><td>Under-cabinet lighting</td><td>Lights tucked under your cabinets — brightens your countertop workspace</td></tr>
+        <tr><td>Accent lighting</td><td>Lights that highlight something specific — art, shelves, features</td></tr>
+        <tr><td>Fandelier</td><td>A ceiling fan with a built-in decorative light fixture</td></tr>
+        <tr><td>Chandelier lift</td><td>A motorized system that lowers your chandelier for easy cleaning and bulb changes</td></tr>
+        <tr><td>Shatterproof lighting</td><td>Impact-safe lights — especially important in garages, playrooms, and gyms</td></tr>
+        <tr><td>Perimeter ring lighting</td><td>Lights around the outside of your home for safety, security, and curb appeal</td></tr>
+        <tr><td>Post lighting</td><td>Lights at the end of your driveway — welcoming and easy to find your home</td></tr>
+        <tr><td>Landscape lighting</td><td>Lights along walkways, gardens, and features — beauty and safety combined</td></tr>
+        <tr><td>Motion-activated lighting</td><td>Lights that turn on automatically when someone approaches</td></tr>
+        <tr><td>Photocell</td><td>A sensor that turns lights on at dusk and off at dawn — fully automatic</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Fans & Ventilation -->
+  <div class="table-group" data-search-group>
+    <h3>Fans &amp; Ventilation</h3>
+    <table>
+      <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
+      <tbody>
+        <tr><td>Exhaust / ventilation fan</td><td>Bathroom fan that removes moisture and prevents mold</td></tr>
+        <tr><td>Whisper-quiet fan</td><td>A bathroom fan so quiet you won't even know it's running</td></tr>
+        <tr><td>CFM rating</td><td><span class="remove-tag">REMOVE</span> Just say "properly sized for the room"</td></tr>
+        <tr><td>Sone rating</td><td><span class="remove-tag">REMOVE</span> Just say "whisper quiet" or "nearly silent"</td></tr>
+        <tr><td>Fan-rated box / brace</td><td>A ceiling mount designed to safely hold the weight and vibration of a fan</td></tr>
+        <tr><td>Fan wobble correction</td><td>Securing and balancing the fan so it runs smooth and quiet</td></tr>
+        <tr><td>Downrod / set screws</td><td><span class="remove-tag">REMOVE</span> Just say "fan mounting hardware"</td></tr>
+        <tr><td>Bath fan with light</td><td>A combo unit — ventilation plus lighting in one</td></tr>
+        <tr><td>Heat lamp</td><td>A built-in heater above your shower or vanity — warm air right where you need it</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Generators & Backup -->
+  <div class="table-group" data-search-group>
+    <h3>Generators &amp; Backup Power</h3>
+    <table>
+      <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
+      <tbody>
+        <tr><td>Interlock</td><td>A manual switch that lets you safely connect a portable generator to your home</td></tr>
+        <tr><td>Transfer switch</td><td>A system that switches your home to generator power — manually or automatically</td></tr>
+        <tr><td>Homelink / MTS</td><td>A one-touch transfer system — flip one switch and your generator powers the house</td></tr>
+        <tr><td>ATS (automatic transfer switch)</td><td>Your home detects a power outage and automatically switches to generator — you do nothing</td></tr>
+        <tr><td>Whole-home generator</td><td>A permanently installed generator that powers your entire home automatically</td></tr>
+        <tr><td>Essential circuits generator</td><td>A generator sized to keep the most important things running — fridge, heat, lights, sump pump</td></tr>
+        <tr><td>Inlet</td><td>The plug point on the outside of your home where the generator connects</td></tr>
+        <tr><td>Winterization</td><td>A heating system for the generator so it starts reliably even in freezing temperatures</td></tr>
+        <tr><td>Remote monitoring</td><td>Check your generator's status from your phone — anywhere, anytime</td></tr>
+        <tr><td>UPS</td><td>A battery backup for your computer — keeps you running through short outages</td></tr>
+        <tr><td>Emergency backup lighting</td><td>Lights that automatically turn on during a power outage so you're never in the dark</td></tr>
+        <tr><td>Anti-theft anchor</td><td>A security mount that bolts the generator to its base so it can't be stolen</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Panel Components -->
+  <div class="table-group" data-search-group>
+    <h3>Panel Components &amp; Connections</h3>
+    <table>
+      <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
+      <tbody>
+        <tr><td>Torque verification</td><td>Making sure every connection is properly tightened to manufacturer specs</td></tr>
+        <tr><td>Re-torque</td><td>Retightening all connections — wires loosen naturally over time from heat cycling</td></tr>
+        <tr><td>Bonding / grounding</td><td>The safety connection that gives electricity a safe path to earth if something goes wrong</td></tr>
+        <tr><td>Water bond / bonding clamp</td><td>A safety connection at your water pipe that helps protect against shock</td></tr>
+        <tr><td>Grounding electrode</td><td>The connection between your electrical system and the earth — your ultimate safety backup</td></tr>
+        <tr><td>Neutral bar</td><td><span class="remove-tag">REMOVE</span> Never mention to homeowner</td></tr>
+        <tr><td>Lug / termination</td><td><span class="remove-tag">REMOVE</span> Just say "connection point"</td></tr>
+        <tr><td>Knockouts</td><td><span class="remove-tag">REMOVE</span> Just say "openings in the panel" if needed</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Specialty Systems -->
+  <div class="table-group" data-search-group>
+    <h3>Specialty Systems</h3>
+    <table>
+      <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
+      <tbody>
+        <tr><td>EV charging circuit / EVSE</td><td>An electric vehicle charging station — charge your car overnight in your garage</td></tr>
+        <tr><td>Hot tub circuit</td><td>A dedicated high-power line for your hot tub</td></tr>
+        <tr><td>Sump pump circuit</td><td>A dedicated line for your sump pump so it never loses power when you need it most</td></tr>
+        <tr><td>Flood sensor / alarm</td><td>A small device that alerts you immediately if water starts pooling</td></tr>
+        <tr><td>Spoil notification / shrieker</td><td>An alarm on your fridge or freezer that sounds if power goes out — before you lose hundreds in food</td></tr>
+        <tr><td>Cord management</td><td>Organizing and securing cables — clean look, no trip hazards</td></tr>
+        <tr><td>Deicing system</td><td>A heating element along walkways that melts ice automatically — no more slipping</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ OUTCOME LANGUAGE ═══════════ -->
+<div class="section" id="sec-outcomes">
+  <div class="section-header">
+    <h2><em>Outcome</em> Language</h2>
+    <p>Don't describe the thing — describe what it does for their life. Joseph's core teaching.</p>
+  </div>
+
+  <div class="outcome-grid">
+    <div class="outcome-card">
+      <div class="outcome-bad">Install smart thermostat</div>
+      <div class="outcome-good">Turn on the heat before you even get home</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Install electronics protection</div>
+      <div class="outcome-good">Protect your TV, fridge, computers, and HVAC from power spikes</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Install GFCI outlets</div>
+      <div class="outcome-good">Protect your family from shock near water</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Upgrade to 200A</div>
+      <div class="outcome-good">Give your home room to grow — EV charger, hot tub, workshop, whatever's next</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Install dedicated circuit</div>
+      <div class="outcome-good">No more tripping breakers when you run two things at once</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Panel restoration</div>
+      <div class="outcome-good">Organize and secure every connection so your system runs reliably</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Install UPS</div>
+      <div class="outcome-good">Never lose work during a power outage again</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Install recessed lighting</div>
+      <div class="outcome-good">Clean, modern lighting that opens up the room</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Install whole-home generator</div>
+      <div class="outcome-good">Your home keeps running — heat, lights, fridge — even when the neighborhood goes dark</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Install interconnected smokes</div>
+      <div class="outcome-good">Every detector in the house sounds the alarm, no matter where the danger starts</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Whisper-quiet bath fan</div>
+      <div class="outcome-good">A fan so quiet your family will actually use it — no more foggy mirrors</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Wire management behind desk</div>
+      <div class="outcome-good">A clean workspace with no cords crossing the floor</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Perimeter lighting</div>
+      <div class="outcome-good">See who's at your door and light up the driveway — safety and curb appeal</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">Install floor outlets</div>
+      <div class="outcome-good">Power right where you need it — no extension cords across the room</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-bad">First Class Pass</div>
+      <div class="outcome-good">Priority scheduling, waived diagnostic fees, and an annual safety check — the VIP experience</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TIER FRAMING ═══════════ -->
+<div class="section" id="sec-tiers">
+  <div class="section-header">
+    <h2><em>Tier</em> Framing</h2>
+    <p>How Joseph frames each tier level — internal thinking vs. what the homeowner hears.</p>
+  </div>
+
+  <div class="tier-strip">
+    <div class="tier-card">
+      <div class="tier-label platinum">Platinum</div>
+      <div class="tier-tagline">"Do it once, do it right"</div>
+      <div class="tier-desc">Complete solution, no compromises</div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label gold">Gold</div>
+      <div class="tier-tagline">"Premium results, smarter investment"</div>
+      <div class="tier-desc">High-end outcome, trimmed extras</div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label silver">Silver</div>
+      <div class="tier-tagline">"Safety &amp; function first"</div>
+      <div class="tier-desc">Fix the core issues dependably</div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label bronze">Bronze</div>
+      <div class="tier-tagline">"Address the immediate concerns"</div>
+      <div class="tier-desc">Solve what's bothering you now</div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label economy">Economy</div>
+      <div class="tier-tagline">"Minimum safe stabilization"</div>
+      <div class="tier-desc">Smallest step that still moves forward</div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label basic">Basic</div>
+      <div class="tier-tagline">"Bare minimum professional fix"</div>
+      <div class="tier-desc">Address the call with clear limitations</div>
+    </div>
+  </div>
+
+  <!-- Format Template -->
+  <div class="section-header" style="margin-top:20px;">
+    <h2>Client-Facing <em>Format</em></h2>
+    <p>Every tier on a homeowner-facing document uses this three-part structure.</p>
+  </div>
+
+  <div class="tier-example">
+    <h4>Example: Gold Tier — Client-Facing</h4>
+    <div class="te-section">
+      <h5>What This Does for You</h5>
+      <ul>
+        <li>Fixes the fan wobble/noise and resolves the random light behavior</li>
+        <li>Corrects the important safety issues we found</li>
+        <li>Updates smoke detectors</li>
+        <li>Keeps your future EV/hot tub plan in mind so you're not boxed in later</li>
+      </ul>
+    </div>
+    <div class="te-section">
+      <h5>What This Doesn't Do</h5>
+      <ul>
+        <li>Doesn't include the ongoing membership/maintenance perks</li>
+        <li>Doesn't include the man cave airflow upgrade (we can still plan for it)</li>
+      </ul>
+    </div>
+    <div class="te-summary">
+      <strong>Outcome Summary:</strong> Premium-level repair and safety improvements, with a tighter overall scope.
+    </div>
+  </div>
+
+  <!-- How to Choose -->
+  <div class="section-header">
+    <h2>How to <em>Choose</em></h2>
+    <p>Always close the client-facing document with this simple decision guide.</p>
+  </div>
+
+  <div class="choose-grid">
+    <div class="choose-row">
+      <span class="question">Want maximum peace of mind and no redo work later?</span>
+      <span class="arrow">&rarr;</span>
+      <span class="answer" style="color:var(--gold-bright)">Platinum</span>
+    </div>
+    <div class="choose-row">
+      <span class="question">Want premium results with a tighter budget?</span>
+      <span class="arrow">&rarr;</span>
+      <span class="answer" style="color:#FFD700">Gold</span>
+    </div>
+    <div class="choose-row">
+      <span class="question">Want safety and reliability restored?</span>
+      <span class="arrow">&rarr;</span>
+      <span class="answer" style="color:#C0C0C0">Silver</span>
+    </div>
+    <div class="choose-row">
+      <span class="question">Need the biggest concerns handled right now?</span>
+      <span class="arrow">&rarr;</span>
+      <span class="answer" style="color:#CD7F32">Bronze</span>
+    </div>
+    <div class="choose-row">
+      <span class="question">Want the smallest step that still moves things forward?</span>
+      <span class="arrow">&rarr;</span>
+      <span class="answer" style="color:var(--orange)">Economy</span>
+    </div>
+    <div class="choose-row">
+      <span class="question">Need the absolute minimum to address what you called for?</span>
+      <span class="arrow">&rarr;</span>
+      <span class="answer" style="color:var(--gray)">Basic</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ NEVER SAY ═══════════ -->
+<div class="section" id="sec-banned">
+  <div class="section-header">
+    <h2>Words to <em>Never</em> Say</h2>
+    <p>If it appears on a client-facing document, you've already lost them.</p>
+  </div>
+
+  <div class="banned-grid">
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>Amps, volts, watts</strong><span>Means nothing to them — describe the result instead</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>Model numbers / part numbers</strong><span>They don't need to shop for it</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>Brand names</strong><span>Describe the quality and features instead</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>NEC / code reference numbers</strong><span>Say "current safety standards" or "what's required today"</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>Wire gauge (12/2, 14/3, etc.)</strong><span>They don't know what this means</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>Breaker amperage</strong><span>Say "properly sized" or just remove it</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>AFCI / GFCI (as acronyms)</strong><span>Use "spark-sensing" and "water shock protection" instead</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>"Deficiency" / "violation"</strong><span>Sounds like they're in trouble — say "finding" or "opportunity"</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>"Obsolete"</strong><span>Sounds harsh — say "outdated" or "wasn't designed for today's demands"</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>"Failure"</strong><span>Say "concern" or "issue we identified"</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>"Upgrade" (alone)</strong><span>Always pair with WHY — "upgrade so your home is ready for..."</span></div>
+    </div>
+    <div class="banned-item">
+      <div class="banned-x">&times;</div>
+      <div><strong>"We recommend"</strong><span>Too clinical — say "here's what this does for you"</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ANALOGIES ═══════════ -->
+<div class="section" id="sec-analogies">
+  <div class="section-header">
+    <h2>Joseph's <em>Analogy</em> Toolkit</h2>
+    <p>Use these when explaining concepts in person or on an option sheet. Straight from the clinics.</p>
+  </div>
+
+  <div class="analogy-grid">
+    <div class="analogy-card">
+      <div class="concept">Panel Capacity</div>
+      <div class="quote">"It's like the size of the pipe that feeds everything in your home."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">Why Inspect the Panel for a Ceiling Fan</div>
+      <div class="quote">"It's like checking the engine before you add a turbocharger — I want to make sure everything can support what we're about to do."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">Overloaded Circuit</div>
+      <div class="quote">"Imagine running your car at redline RPM all day, every day — something's going to give."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">Backstabbed Wiring</div>
+      <div class="quote">"The wires were just pushed in, not actually secured — over time they work loose."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">Generator Transfer Switch</div>
+      <div class="quote">"One flip and your home switches to backup power — no running extension cords in the rain."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">Daisy-Chained Outlets</div>
+      <div class="quote">"Every outlet depends on the one before it — like Christmas lights, if one goes out..."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">Surge Protection</div>
+      <div class="quote">"It's a bodyguard for everything you've plugged in — your TV, your fridge, your computer."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">Water + Electricity</div>
+      <div class="quote">"Should water and electricity ever mix? That's exactly what this protection prevents."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">Federal Pacific Panel</div>
+      <div class="quote">"These panels were recalled because the breakers don't always shut off when they should — that's a fire risk."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">Old Wiring</div>
+      <div class="quote">"It wasn't designed for today's electrical demands — like running a fire hose through a garden hose connector."</div>
+    </div>
+    <div class="analogy-card">
+      <div class="concept">First Class Pass</div>
+      <div class="quote">"Think of it like a VIP membership — priority scheduling, no diagnostic fees, annual safety check."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ INSPECTION HOTLIST ═══════════ -->
+<div class="section" id="sec-hotlist">
+  <div class="section-header">
+    <h2>Inspection <em>Hotlist</em></h2>
+    <p>Room-by-room options reference. Tap any room to expand. These are the opportunities that emerge when you look beyond the original call.</p>
+  </div>
+
+  <div class="hotlist-area">
+    <h3>Interior Areas</h3>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Attic / Crawl Space</h4><span class="room-count">11 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Spare circuits for future expansion</li>
+        <li>Service outlets</li>
+        <li>Recessed lighting for future finishing</li>
+        <li>Enhanced lighting with switch control at entrance</li>
+        <li>Camera for observation</li>
+        <li>Flood sensors</li>
+        <li>Wire management and recessing into beams</li>
+        <li>Dedicated circuits for appliances/equipment</li>
+        <li>Rodent-proof wiring</li>
+        <li>Upgrade of ventilation</li>
+        <li>Upgrade of whole home fan</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Hallways</h4><span class="room-count">6 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Night-activated lit pathway outlets</li>
+        <li>Upgrade of thermostats</li>
+        <li>Installation of attic "light on" switch</li>
+        <li>Additional outlets for vacuums/appliances</li>
+        <li>Upgrade of whole home fan switches</li>
+        <li>Upgrade of lighting</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Basement / Storage / Utility</h4><span class="room-count">19 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Spare circuits for future finishing</li>
+        <li>Upgraded lighting</li>
+        <li>Consolidated lighting controls</li>
+        <li>Additional outlets</li>
+        <li>Dedicated circuitry to major systems (furnaces, sump pumps, chest freezers)</li>
+        <li>Water and flooding sensors/alarms</li>
+        <li>Additional CO and smoke detectors</li>
+        <li>Relocation of main panel to first floor</li>
+        <li>Restoration of main panel</li>
+        <li>Installation of electronics protection</li>
+        <li>KVAR protection system</li>
+        <li>Service outlet near equipment</li>
+        <li>Battery backup lighting over panel</li>
+        <li>Interlock, MTS, Homelink installation</li>
+        <li>Installation of ATS (automatic transfer switch)</li>
+        <li>Full identification of home service</li>
+        <li>Load balancing</li>
+        <li>Installation of arc fault protection</li>
+        <li>Installation of raised outlet and dehumidifier + drain</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Home Office</h4><span class="room-count">16 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Installation of electronics protection</li>
+        <li>Cord management</li>
+        <li>Raised/relocated outlets for desks</li>
+        <li>Dedicated LED work lighting with dimmers</li>
+        <li>Ceiling or wall-mounted fans</li>
+        <li>Dedicated circuit for window AC or desk equipment</li>
+        <li>Dedicated podcast or conference lighting</li>
+        <li>Speaker systems</li>
+        <li>USB charging outlets</li>
+        <li>Camera systems with wall monitors</li>
+        <li>Generator system/connections for backup</li>
+        <li>UPS for computers</li>
+        <li>Ventilation systems for smokers</li>
+        <li>TV mounting</li>
+        <li>Dedicated heat for desk comfort</li>
+        <li>Underglow for wall decor</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Kitchen</h4><span class="room-count">12 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Additional circuitry under cabinetry (garbage disposal, instant hot water, future appliances)</li>
+        <li>Cut-off switches for dishwashers and under-cabinet appliances</li>
+        <li>Localized GFCI protection</li>
+        <li>Upgraded venting and smoke removal</li>
+        <li>Relocated smoke detectors (too close to kitchen)</li>
+        <li>Upgraded lighting trims / recessed lighting</li>
+        <li>Cleaning of over-table chandeliers</li>
+        <li>Installation of under cabinet lighting</li>
+        <li>Power-outage notification outlets / beeper outlets for fridge</li>
+        <li>USB outlets for countertops</li>
+        <li>Dedicated circuitry for overloaded circuits</li>
+        <li>Dedicated power to island if not present</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Living Room</h4><span class="room-count">11 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Installation of floor outlets</li>
+        <li>GFCI protection of floor points</li>
+        <li>Installation of raised outlets behind couch</li>
+        <li>Entertainment wiring behind TV</li>
+        <li>Surge protected outlet behind TV</li>
+        <li>Cord management</li>
+        <li>Ceiling fan / recessed lighting</li>
+        <li>Speaker bulbs or speaker systems</li>
+        <li>Remove switched outlets &rarr; dedicated light controls</li>
+        <li>TV mounting</li>
+        <li>Accent lighting for art/showcase items</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Dining Room</h4><span class="room-count">6 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Chandelier enhancement + dimmers</li>
+        <li>Cleaning chandeliers</li>
+        <li>Accent lighting for curios/hutch/china cabinet</li>
+        <li>USB charging outlets</li>
+        <li>Speaker systems</li>
+        <li>Accent lighting for art</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Front Foyer</h4><span class="room-count">5 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Chandelier lifts</li>
+        <li>LED bulb conversion for hard-to-reach fixtures</li>
+        <li>Upgrade of door chime</li>
+        <li>Cleaning of hard-to-reach fixtures</li>
+        <li>Relocation of security monitor</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Bedrooms</h4><span class="room-count">16 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Ceiling fans</li>
+        <li>Enhanced lighting</li>
+        <li>TV wall mounts</li>
+        <li>Cord management</li>
+        <li>Additional outlets by bedside</li>
+        <li>Switch controls for lights</li>
+        <li>Bedside 3-way switch for lighting</li>
+        <li>Bed/furniture underglow</li>
+        <li>USB outlets</li>
+        <li>Enhanced closet lighting</li>
+        <li>Fandeliers</li>
+        <li>Escutcheons</li>
+        <li>Speakers</li>
+        <li>Dedicated power for hidden safes</li>
+        <li>Home cameras + wall-mounted monitor</li>
+        <li>Wall/smart controls for exterior lights</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Bathrooms</h4><span class="room-count">9 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Upgraded ventilation systems</li>
+        <li>Heat lamps/fans</li>
+        <li>Enhanced lighting (showers, ceiling, vanity)</li>
+        <li>Additional outlets</li>
+        <li>Motion controls for ventilation</li>
+        <li>Dedicated circuitry</li>
+        <li>Bidet power circuit</li>
+        <li>Localized GFCI</li>
+        <li>Heated floors</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Laundry Room</h4><span class="room-count">4 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Iron circuit with easy-reach outlets</li>
+        <li>Dedicated appliance circuits</li>
+        <li>Better lighting</li>
+        <li>Proper GFCI protection</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Gym</h4><span class="room-count">9 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Dedicated circuitry to equipment</li>
+        <li>Shatterproof lighting</li>
+        <li>Speaker systems</li>
+        <li>Raised outlets for TV</li>
+        <li>Ceiling fans / wall-mounted fans</li>
+        <li>Electric heat</li>
+        <li>Ventilation system</li>
+        <li>Finishing ceilings/walls (prevent fiberglass inhalation)</li>
+        <li>Additional outlets (reduce extension cords)</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Playroom</h4><span class="room-count">5 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Shatterproof recessed lighting</li>
+        <li>Childproof outlets</li>
+        <li>Raised outlets for TV/camera</li>
+        <li>Ceiling fans</li>
+        <li>In-wall speakers or speaker bulbs</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="hotlist-area">
+    <h3>Exterior Areas</h3>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Driveway &amp; Perimeter</h4><span class="room-count">15 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Post lighting at end of driveway</li>
+        <li>Landscape lighting along driveway</li>
+        <li>"Landscaper-proof" pathway lighting</li>
+        <li>Additional outlets around perimeter</li>
+        <li>Camera systems</li>
+        <li>Motion/photo controls</li>
+        <li>Upgrade exterior lighting fixtures</li>
+        <li>Bubble cover all exterior outlets with in-use covers</li>
+        <li>Home accent lighting</li>
+        <li>Repair/upgrade doorbells</li>
+        <li>Doorbell for back doors</li>
+        <li>Keypad/enhanced door locks</li>
+        <li>Permanent holiday lighting</li>
+        <li>De-icing cables</li>
+        <li>Heated driveways and pathways</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Landscaped Areas</h4><span class="room-count">9 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Landscape accent lighting</li>
+        <li>Recessed/hidden outlets for equipment</li>
+        <li>Road camera systems</li>
+        <li>Electric fencing</li>
+        <li>Festoon lighting</li>
+        <li>Timers/remote controls for outlets</li>
+        <li>Localized GFCI protection</li>
+        <li>Spare conduit/circuit pulls for future expansion</li>
+        <li>Dynatrap installations</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Pools / Hot Tubs</h4><span class="room-count">10 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Dynatrap to reduce insects</li>
+        <li>Enhanced/proper bonding and grounding</li>
+        <li>Dedicated pool panels near equipment</li>
+        <li>Built-out Trex pool panel mounting</li>
+        <li>Yard lighting for night swimming</li>
+        <li>Landscape and path lighting</li>
+        <li>Speakers</li>
+        <li>Heated walkways/towel racks</li>
+        <li>Upgraded circuitry for future expansion</li>
+        <li>Electronics protection</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Exterior Shed</h4><span class="room-count">12 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Dedicated power with subpanel</li>
+        <li>Workshop outlets + circuits</li>
+        <li>Dynatrap exterior outlet</li>
+        <li>Ventilation systems</li>
+        <li>Exterior lighting + service outlets</li>
+        <li>Keypad locks</li>
+        <li>Camera systems</li>
+        <li>Dedicated wall-mounted heat</li>
+        <li>Localized GFCI protection</li>
+        <li>Rodent-proof wiring</li>
+        <li>Generator inlet for easy storage/hookup</li>
+        <li>Spare conduit for future expansion</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Garage</h4><span class="room-count">10 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Genie door lifts</li>
+        <li>Battery backups for garage openers</li>
+        <li>Dedicated circuitry for chest freezers, workbench appliances</li>
+        <li>Installation of subpanels for future expansion</li>
+        <li>Notification outlets for freezers</li>
+        <li>Enhanced lighting (shatterproof)</li>
+        <li>Motion controls for lighting</li>
+        <li>Wall-mounted room heaters</li>
+        <li>Recess of all surface-mounted wiring</li>
+        <li>Installation of EV charging point</li>
+      </ul></div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-header" onclick="toggleRoom(this)">
+        <div style="display:flex;align-items:center;gap:12px"><h4>Generator System Add-ons</h4><span class="room-count">18 items</span></div>
+        <span class="room-chevron">&#9660;</span>
+      </div>
+      <div class="room-body"><ul>
+        <li>Winterization system</li>
+        <li>Electronics protection</li>
+        <li>Remote monitoring</li>
+        <li>Annual membership/maintenance</li>
+        <li>Elevation/leveling of base</li>
+        <li>Wire/pipe management</li>
+        <li>First Class Service plan</li>
+        <li>Landscaping/lattice fencing around unit</li>
+        <li>Addition/removal of circuits from ATS</li>
+        <li>Emergency backup lighting</li>
+        <li>Inlet points routed near unit storage</li>
+        <li>Upgraded circuitry for expansion</li>
+        <li>Homelink, MTS, Interlocks</li>
+        <li>Anti-theft anchor</li>
+        <li>Shrieker notification</li>
+        <li>Power return notification outlets</li>
+        <li>Assembly/provision of unit</li>
+        <li>Rain cover / snow roof construction</li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="footer">
+  <strong>Service Loop Electrical</strong> &mdash; For Electricians. By Electricians.<br>
+  Compiled from Joseph Lucanie's Options Design Clinics &amp; SLE Inspection Process.<br>
+  SLE proprietary intellectual property. Not for external distribution.
+</div>
+
+<!-- ═══════════ SCRIPT ═══════════ -->
+<script>
+// Tab navigation
+const tabs = document.querySelectorAll('.nav-tab');
+const sections = document.querySelectorAll('.section');
+const tabMap = {
+  'rules': 'sec-rules',
+  'translate': 'sec-translate',
+  'outcomes': 'sec-outcomes',
+  'tiers': 'sec-tiers',
+  'banned': 'sec-banned',
+  'analogies': 'sec-analogies',
+  'hotlist': 'sec-hotlist'
+};
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tabMap[tab.dataset.tab]).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// Room card toggle
+function toggleRoom(header) {
+  header.closest('.room-card').classList.toggle('open');
+}
+
+// Table search
+const searchInput = document.getElementById('tableSearch');
+if (searchInput) {
+  searchInput.addEventListener('input', function() {
+    const q = this.value.toLowerCase().trim();
+    const groups = document.querySelectorAll('[data-search-group]');
+    groups.forEach(group => {
+      const rows = group.querySelectorAll('tbody tr');
+      let anyVisible = false;
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const match = !q || text.includes(q);
+        row.style.display = match ? '' : 'none';
+        if (match) anyVisible = true;
+      });
+      group.style.display = anyVisible ? '' : 'none';
+    });
+  });
+}
+</script>
+
+</body>
+</html>
