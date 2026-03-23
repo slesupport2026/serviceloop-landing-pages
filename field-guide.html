@@ -592,6 +592,40 @@
   .search-input:focus { border-color: var(--gold-dim); }
   .search-input::placeholder { color: #555; }
 
+  /* ── CALLOUT BOX ── */
+  .callout-box {
+    background: rgba(201,164,90,0.06);
+    border: 1px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    color: var(--gray-light);
+    line-height: 1.55;
+  }
+  .callout-box strong { color: var(--gold-bright); }
+
+  /* ── MISSING TERM BANNER ── */
+  .missing-term-banner {
+    background: var(--card);
+    border: 2px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    margin-top: 36px;
+    margin-bottom: 40px;
+  }
+  .missing-term-banner h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold-bright);
+    margin-bottom: 6px;
+  }
+  .missing-term-banner p {
+    font-size: 13px;
+    color: var(--gray);
+  }
+
   /* ── PRINT ── */
   @media print {
     .nav-bar, .search-wrap { display: none; }
@@ -665,14 +699,14 @@
       <div class="rule-num">4</div>
       <div>
         <h3>Never assume they know what's normal</h3>
-        <p>Explain what should be there, not just what's missing. "Your outlets near water should have shock protection" not "no GFCI present."</p>
+        <p>Explain what should be there, not just what's missing. "The electrical points near water should have water shock protection" not "no GFCI present."</p>
       </div>
     </div>
     <div class="rule-card">
       <div class="rule-num">5</div>
       <div>
         <h3>Danger in plain English</h3>
-        <p>"Fire risk" lands. "Arc fault" doesn't. If a homeowner has to Google it, rewrite it. Grade 3 reading level.</p>
+        <p>"Unreliable fire detection systems" lands. "Old smoke detector" doesn't. If a homeowner has to Google it, rewrite it. Grade 3 reading level.</p>
       </div>
     </div>
   </div>
@@ -689,21 +723,21 @@
       <p>State it in their words exactly. Don't translate it into technical language.</p>
       <div class="example">
         <strong>Not:</strong> "Overloaded kitchen branch circuit"<br>
-        <strong>Say:</strong> "Breakers keep tripping in the kitchen when I run the microwave and dishwasher"
+        <strong>Say:</strong> "Safety shutoffs keep tripping in the kitchen whenever the microwave and dishwasher are on at the same time."
       </div>
     </div>
     <div class="what-card">
       <h4>What's Connected</h4>
       <p>Explain what's related in terms they understand — the full scope of what's fair game.</p>
       <div class="example">
-        <strong>Say:</strong> "Your bedroom fan, the switch that controls it, and all the wiring between them are all connected — a problem in any one of those spots can cause what you're seeing."
+        <strong>Say:</strong> "Your bedroom fan, the control point, and all the wiring in between them are connected — a problem in any of those spots can cause what you're seeing."
       </div>
     </div>
     <div class="what-card">
       <h4>What's Good</h4>
       <p>Genuine positives. Shows you're not just looking for problems. Builds trust.</p>
       <div class="example">
-        <strong>Say:</strong> "Your panel is newer and in good shape." "You were smart to call before this got worse."
+        <strong>Say:</strong> "Your main electrical control system is newer and in great shape." "You were smart to call before this got worse." "The wiring within the walls is in great shape, which is really good news!"
       </div>
     </div>
     <div class="what-card">
@@ -711,7 +745,7 @@
       <p>Additional findings framed as opportunities, not scare tactics. This is where the 4 Forces live.</p>
       <div class="example">
         <strong>Not:</strong> "No AFCI protection on bedroom circuits"<br>
-        <strong>Say:</strong> "Your bedrooms don't have spark-sensing protection yet — an upgrade that's now standard in modern homes"
+        <strong>Say:</strong> "Your bedrooms don't have spark-sensing shutoffs, which is a safety system required in modern homes. Is there a reason you chose not to have it?"
       </div>
     </div>
   </div>
@@ -736,17 +770,17 @@
       <tbody>
         <tr><td>200A service upgrade</td><td>Upgrading your home's main power system so it can handle everything you need — now and in the future</td></tr>
         <tr><td>100A / 150A service</td><td>Your home's current power capacity (think of it like the size of the pipe that feeds everything)</td></tr>
-        <tr><td>Panel replacement</td><td>Replacing the main electrical hub that powers your entire home</td></tr>
-        <tr><td>Panel restoration / reconditioning</td><td>Restoring all the connections inside your electrical hub — tightening, organizing, and relabeling everything</td></tr>
-        <tr><td>Federal Pacific / Zinsco / Pushmatic</td><td>A panel type that was recalled due to safety concerns — the breakers don't always shut off when they should, which is a fire risk</td></tr>
+        <tr><td>Panel replacement</td><td>Replacing the main electrical control system that powers your entire home</td></tr>
+        <tr><td>Panel restoration / reconditioning</td><td>Fully reconditioning and restoring your main electrical control system — it's like a classic car rebuild, the outside stays the same but everything inside is new and up to safety standards</td></tr>
+        <tr><td>Federal Pacific / Zinsco / Pushmatic</td><td>A panel type that was recalled due to safety concerns — the emergency shutoffs don't always turn off when they should, which is a major fire risk</td></tr>
         <tr><td>Load center</td><td>The main box where all your home's electrical circuits connect</td></tr>
-        <tr><td>Bus bar</td><td><span class="remove-tag">REMOVE</span> Never mention to homeowner</td></tr>
-        <tr><td>Tandem / twin breakers</td><td>Your panel is maxed out — there's no room to add anything new without upgrading</td></tr>
-        <tr><td>Double-tapped neutral</td><td>A wiring connection that's not properly landed — two wires sharing a spot meant for one</td></tr>
+        <tr><td>Bus bar</td><td>The backbone of your main electrical control system</td></tr>
+        <tr><td>Tandem / twin breakers</td><td>Your main electrical control system is maxed out, but there are some ways we can stretch it a little bit further if absolutely necessary</td></tr>
+        <tr><td>Double-tapped neutral</td><td>A wiring connection that has been improperly installed, increasing the danger of the wiring overheating or failing</td></tr>
         <tr><td>Breaker won't trip</td><td>The safety shutoff that's supposed to protect your home isn't doing its job</td></tr>
-        <tr><td>Panel labeling / circuit ID</td><td>Clearly marking every circuit so anyone can quickly find and shut off power to any area</td></tr>
+        <tr><td>Panel labeling / circuit ID</td><td>Clearly marking every emergency shutoff so you can know for a fact you're turning the right thing off in an emergency</td></tr>
         <tr><td>Service capacity planning</td><td>Making sure your system is ready for what you want to add later (EV, hot tub, workshop, etc.)</td></tr>
-        <tr><td>Dead front</td><td><span class="remove-tag">REMOVE</span> Just say "panel cover" or remove reference entirely</td></tr>
+        <tr><td>Dead front</td><td>Fire or shock containment cover (or omit entirely if not 100% needed)</td></tr>
         <tr><td>Load balancing</td><td>Distributing your home's electrical demand evenly so nothing gets overworked</td></tr>
       </tbody>
     </table>
@@ -779,15 +813,15 @@
       <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
       <tbody>
         <tr><td>Dedicated circuit</td><td>Its own private electrical line — nothing else shares it</td></tr>
-        <tr><td>20A circuit</td><td>A standard-capacity line for things like kitchen appliances or bathroom outlets</td></tr>
+        <tr><td>20A circuit</td><td>A standard-capacity line for things like kitchen appliances or bathroom electrical points</td></tr>
         <tr><td>240V circuit / line</td><td>A high-power line (the kind your dryer or oven uses)</td></tr>
         <tr><td>12/3 wire / 14/2 wire</td><td><span class="remove-tag">REMOVE</span> Never mention wire gauge to homeowner</td></tr>
-        <tr><td>Run a new circuit</td><td>Install a new electrical line from the panel to where you need power</td></tr>
+        <tr><td>Run a new circuit</td><td>Install a new electrical line from the main electrical control system to where you need power</td></tr>
         <tr><td>Backstabbed connections</td><td>Wiring pushed in rather than properly secured — these loosen over time and can overheat</td></tr>
-        <tr><td>Daisy-chained wiring</td><td>Every outlet on this line depends on the one before it — if one fails, everything downstream goes dark</td></tr>
-        <tr><td>Parallel splice-through</td><td>Each outlet has its own secure connection to the power line — much more reliable</td></tr>
+        <tr><td>Daisy-chained wiring</td><td>Every electrical point on this line depends on the one before it — like Christmas lights, when one goes out they all go out</td></tr>
+        <tr><td>Parallel splice-through</td><td>Each electrical point has its own secure connection to the power line — much more reliable</td></tr>
         <tr><td>Shared neutral / MWBC</td><td>Two circuits sharing the same return path — can cause flickering and unexpected behavior</td></tr>
-        <tr><td>Knob and tube</td><td>Original wiring from when the home was built — outdated, wasn't designed for today's demands</td></tr>
+        <tr><td>Knob and tube</td><td>Original wiring from when electricity was first introduced — outdated, wasn't designed for today's demands, lacking any safety system, and soaked in a known carcinogen</td></tr>
         <tr><td>Cloth wiring</td><td>Older wiring with fabric insulation that breaks down over time — a fire concern</td></tr>
         <tr><td>Exposed wiring</td><td>Wiring that's visible and unprotected — a safety hazard</td></tr>
         <tr><td>Open splice / open junction</td><td>An exposed wire connection that should be inside a covered box</td></tr>
@@ -798,27 +832,27 @@
     </table>
   </div>
 
-  <!-- Outlets & Devices -->
+  <!-- Electrical Points & Controls -->
   <div class="table-group" data-search-group>
-    <h3>Outlets &amp; Devices</h3>
+    <h3>Electrical Points &amp; Controls</h3>
     <table>
       <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
       <tbody>
-        <tr><td>Receptacle</td><td>Outlet / power point</td></tr>
-        <tr><td>Duplex receptacle</td><td>Standard outlet (two plug spots)</td></tr>
-        <tr><td>Quad receptacle</td><td>Double outlet (four plug spots) — more room for everything you need</td></tr>
-        <tr><td>USB outlet</td><td>Outlet with built-in charging ports — plug your phone right into the wall</td></tr>
-        <tr><td>Tamper-resistant outlet</td><td>Childproof outlet — built-in shutters so kids can't stick anything in</td></tr>
-        <tr><td>Weather-resistant outlet</td><td>An outdoor outlet designed to handle rain and moisture</td></tr>
-        <tr><td>In-use / bubble cover</td><td>A protective cover that keeps your outdoor outlet safe even when something's plugged in</td></tr>
-        <tr><td>Floor outlet</td><td>An outlet in the floor — perfect for lamps or chargers without running cords</td></tr>
-        <tr><td>Switched outlet</td><td>An outlet controlled by a wall switch</td></tr>
-        <tr><td>Re-device / device changeout</td><td>Replacing your outlets and switches with new, reliable ones</td></tr>
-        <tr><td>Smart switch</td><td>A switch you can control from your phone or by voice</td></tr>
-        <tr><td>Dimmer</td><td>A switch that lets you adjust how bright or dim your lights are</td></tr>
-        <tr><td>3-way switch</td><td>A light controlled from two different spots (top and bottom of stairs)</td></tr>
-        <tr><td>Occupancy sensor</td><td>Turns lights on when you walk in and off when you leave</td></tr>
-        <tr><td>Nightlight outlet</td><td>An outlet with a built-in soft glow — nobody trips in the dark</td></tr>
+        <tr><td>Receptacle</td><td>Electrical point / electrical distribution point</td></tr>
+        <tr><td>Duplex receptacle</td><td>Standard electrical point (two plug spots)</td></tr>
+        <tr><td>Quad receptacle</td><td>Double electrical point (four plug spots) — more room for everything you need</td></tr>
+        <tr><td>USB electrical point</td><td>Rapid charge electrical point — no more searching for a wall charger</td></tr>
+        <tr><td>Tamper-resistant electrical point</td><td>Childproof electrical point — no more dealing with frustrating plastic plugs</td></tr>
+        <tr><td>Weather-resistant electrical point</td><td>An outdoor electrical point designed to handle rain and moisture</td></tr>
+        <tr><td>In-use / bubble cover</td><td>A protective cover that makes your electrical point waterproof even when something is plugged in</td></tr>
+        <tr><td>Floor electrical point</td><td>An electrical point installed in the floor — perfect for lamps or chargers without running cords</td></tr>
+        <tr><td>Switched distribution point</td><td>A distribution point controlled by a wall control — one of the most outdated and frustrating kinds of home lighting, the barest of minimums in safety and convenience</td></tr>
+        <tr><td>Re-device / device changeout</td><td>Replacing all the electrical distribution and control points in your home — enhances the aesthetic by having everything match, designed for your family, and drastically increases safety</td></tr>
+        <tr><td>Smart control point</td><td>A control point you can manage from your phone or by voice</td></tr>
+        <tr><td>Dimmer control</td><td>A control point that lets you adjust how bright or dim your lights are</td></tr>
+        <tr><td>3-way control</td><td>A light controlled from two different control points (like top and bottom of stairs)</td></tr>
+        <tr><td>Occupancy sensor</td><td>A control point that turns lights on when you walk in and off when you leave</td></tr>
+        <tr><td>Nightlight electrical point</td><td>An electrical point with a built-in soft glow — nobody trips in the dark</td></tr>
       </tbody>
     </table>
   </div>
@@ -834,7 +868,7 @@
         <tr><td>LED conversion</td><td>Energy-efficient lights that last years longer and use less power</td></tr>
         <tr><td>Under-cabinet lighting</td><td>Lights tucked under your cabinets — brightens your countertop workspace</td></tr>
         <tr><td>Accent lighting</td><td>Lights that highlight something specific — art, shelves, features</td></tr>
-        <tr><td>Fandelier</td><td>A ceiling fan with a built-in decorative light fixture</td></tr>
+        <tr><td>Fandelier</td><td>A decorative light fixture with a built-in retractable ceiling fan</td></tr>
         <tr><td>Chandelier lift</td><td>A motorized system that lowers your chandelier for easy cleaning and bulb changes</td></tr>
         <tr><td>Shatterproof lighting</td><td>Impact-safe lights — especially important in garages, playrooms, and gyms</td></tr>
         <tr><td>Perimeter ring lighting</td><td>Lights around the outside of your home for safety, security, and curb appeal</td></tr>
@@ -846,18 +880,18 @@
     </table>
   </div>
 
-  <!-- Fans & Ventilation -->
+  <!-- Ventilation Systems -->
   <div class="table-group" data-search-group>
-    <h3>Fans &amp; Ventilation</h3>
+    <h3>Ventilation Systems</h3>
     <table>
       <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
       <tbody>
-        <tr><td>Exhaust / ventilation fan</td><td>Bathroom fan that removes moisture and prevents mold</td></tr>
-        <tr><td>Whisper-quiet fan</td><td>A bathroom fan so quiet you won't even know it's running</td></tr>
-        <tr><td>CFM rating</td><td><span class="remove-tag">REMOVE</span> Just say "properly sized for the room"</td></tr>
+        <tr><td>Exhaust / ventilation fan</td><td>Bathroom ventilation system that removes moisture and prevents mold</td></tr>
+        <tr><td>Whisper-quiet fan</td><td>A ventilation system so quiet you won't even know it's running</td></tr>
+        <tr><td>CFM rating</td><td><span class="remove-tag">REMOVE</span> Properly sized for room — or oversized for fastest ventilation possible</td></tr>
         <tr><td>Sone rating</td><td><span class="remove-tag">REMOVE</span> Just say "whisper quiet" or "nearly silent"</td></tr>
-        <tr><td>Fan-rated box / brace</td><td>A ceiling mount designed to safely hold the weight and vibration of a fan</td></tr>
-        <tr><td>Fan wobble correction</td><td>Securing and balancing the fan so it runs smooth and quiet</td></tr>
+        <tr><td>Fan-rated box / brace</td><td>A ceiling mount designed to safely hold the weight and vibration of a ventilation system</td></tr>
+        <tr><td>Fan wobble correction</td><td>Securing and balancing the system so it runs smooth and quiet</td></tr>
         <tr><td>Downrod / set screws</td><td><span class="remove-tag">REMOVE</span> Just say "fan mounting hardware"</td></tr>
         <tr><td>Bath fan with light</td><td>A combo unit — ventilation plus lighting in one</td></tr>
         <tr><td>Heat lamp</td><td>A built-in heater above your shower or vanity — warm air right where you need it</td></tr>
@@ -883,6 +917,10 @@
         <tr><td>UPS</td><td>A battery backup for your computer — keeps you running through short outages</td></tr>
         <tr><td>Emergency backup lighting</td><td>Lights that automatically turn on during a power outage so you're never in the dark</td></tr>
         <tr><td>Anti-theft anchor</td><td>A security mount that bolts the generator to its base so it can't be stolen</td></tr>
+        <tr><td>Modified whole home generator</td><td>A generator sized to power your entire home, but drops higher-power loads if too much is running at the same time</td></tr>
+        <tr><td>Soft start system</td><td>A device installed in your HVAC system to reduce the amount of power it needs to start — protects your generator and saves you money</td></tr>
+        <tr><td>Flood-ready generator foundation</td><td>An extra-tall generator foundation to protect your system from potential flooding and prevent snow from blocking air vents</td></tr>
+        <tr><td>Annual/biannual generator servicing</td><td>An agreement for us to prioritize your system during storm seasons and emergencies, maintaining it to ensure it always starts when you need it</td></tr>
       </tbody>
     </table>
   </div>
@@ -893,14 +931,14 @@
     <table>
       <thead><tr><th>Technical Term</th><th>Homeowner Language</th></tr></thead>
       <tbody>
-        <tr><td>Torque verification</td><td>Making sure every connection is properly tightened to manufacturer specs</td></tr>
+        <tr><td>Torque verification</td><td>Making sure every electrical connection is properly made to ensure it meets modern safety standards</td></tr>
         <tr><td>Re-torque</td><td>Retightening all connections — wires loosen naturally over time from heat cycling</td></tr>
-        <tr><td>Bonding / grounding</td><td>The safety connection that gives electricity a safe path to earth if something goes wrong</td></tr>
-        <tr><td>Water bond / bonding clamp</td><td>A safety connection at your water pipe that helps protect against shock</td></tr>
-        <tr><td>Grounding electrode</td><td>The connection between your electrical system and the earth — your ultimate safety backup</td></tr>
+        <tr><td>Bonding / grounding</td><td>The home's main shock diversion system</td></tr>
+        <tr><td>Water bond / bonding clamp</td><td>The shock diversion system that diverts shock risk from any water pipes away from you and your home</td></tr>
+        <tr><td>Grounding electrode</td><td>The point of the main shock diversion system that sends excess power or shocks into the earth and away from you and your home</td></tr>
         <tr><td>Neutral bar</td><td><span class="remove-tag">REMOVE</span> Never mention to homeowner</td></tr>
         <tr><td>Lug / termination</td><td><span class="remove-tag">REMOVE</span> Just say "connection point"</td></tr>
-        <tr><td>Knockouts</td><td><span class="remove-tag">REMOVE</span> Just say "openings in the panel" if needed</td></tr>
+        <tr><td>Knockouts</td><td><span class="remove-tag">REMOVE</span> If needed to describe further, ask: "Do you feel it would be safe to have open holes in your main electrical system?" or "Are you aware of how small of a hole a mouse can squeeze through?"</td></tr>
       </tbody>
     </table>
   </div>
@@ -917,9 +955,23 @@
         <tr><td>Flood sensor / alarm</td><td>A small device that alerts you immediately if water starts pooling</td></tr>
         <tr><td>Spoil notification / shrieker</td><td>An alarm on your fridge or freezer that sounds if power goes out — before you lose hundreds in food</td></tr>
         <tr><td>Cord management</td><td>Organizing and securing cables — clean look, no trip hazards</td></tr>
-        <tr><td>Deicing system</td><td>A heating element along walkways that melts ice automatically — no more slipping</td></tr>
+        <tr><td>Deicing system</td><td>A heating element along roof and gutter lines that melts snow and ice — no more risk of ice damming or dangerous icicles falling</td></tr>
+        <tr><td>Driveway/walkway deicing</td><td>A heating element installed within your driveway or walkway so you never need to shovel or slip again</td></tr>
+        <tr><td>Dynatrap</td><td>Flying insect and pest removal system</td></tr>
+        <tr><td>Heated towel warmers / poolside heaters</td><td>Shiver-free warming systems</td></tr>
+        <tr><td>Bi-directional EV charger</td><td>Multi-function EV power supply system</td></tr>
+        <tr><td>Ring / security cameras</td><td>Automated home backup security</td></tr>
+        <tr><td>Keypad / fingerprint locks</td><td>Enhanced door security systems</td></tr>
+        <tr><td>Stormlight outlet covers</td><td>Runway-style power outage guide lights</td></tr>
+        <tr><td>Podcast / studio lighting</td><td>High-impact, high-resolution lighting for home studios</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- Missing Term Banner -->
+  <div class="missing-term-banner">
+    <h4>Don't see what you're looking for?</h4>
+    <p>Submit what's missing and we'll add it! This guide is ever-growing — built by the field, for the field.</p>
   </div>
 </div>
 
@@ -933,11 +985,11 @@
   <div class="outcome-grid">
     <div class="outcome-card">
       <div class="outcome-bad">Install smart thermostat</div>
-      <div class="outcome-good">Turn on the heat before you even get home</div>
+      <div class="outcome-good">Automatically adjusts heat before you even get home</div>
     </div>
     <div class="outcome-card">
       <div class="outcome-bad">Install electronics protection</div>
-      <div class="outcome-good">Protect your TV, fridge, computers, and HVAC from power spikes</div>
+      <div class="outcome-good">Protect all your home's sensitive electronics from excess power spikes from utility or nature</div>
     </div>
     <div class="outcome-card">
       <div class="outcome-bad">Install GFCI outlets</div>
@@ -1004,69 +1056,66 @@
   <div class="tier-strip">
     <div class="tier-card">
       <div class="tier-label platinum">Platinum</div>
-      <div class="tier-tagline">"Do it once, do it right"</div>
-      <div class="tier-desc">Complete solution, no compromises</div>
+      <div class="tier-tagline">The apex of quality, reliability, and service.</div>
+      <div class="tier-desc">Complete solution at the highest level — the best of the best, even if it's unaffordable to most.</div>
     </div>
     <div class="tier-card">
       <div class="tier-label gold">Gold</div>
-      <div class="tier-tagline">"Premium results, smarter investment"</div>
-      <div class="tier-desc">High-end outcome, trimmed extras</div>
+      <div class="tier-tagline">A premium solution designed to be fully turnkey.</div>
+      <div class="tier-desc">Often cuts or reduces the Platinum services to make it the best option for those who want the best without ALL the bells and whistles.</div>
     </div>
     <div class="tier-card">
       <div class="tier-label silver">Silver</div>
-      <div class="tier-tagline">"Safety &amp; function first"</div>
-      <div class="tier-desc">Fix the core issues dependably</div>
+      <div class="tier-tagline">The highest level of the midrange choices.</div>
+      <div class="tier-desc">Best for those who want a permanent fix, are willing to listen to enhancement solutions, but don't want to exceed a certain investment level. What they called for, in a great way, without major enhancement.</div>
     </div>
     <div class="tier-card">
       <div class="tier-label bronze">Bronze</div>
-      <div class="tier-tagline">"Address the immediate concerns"</div>
-      <div class="tier-desc">Solve what's bothering you now</div>
+      <div class="tier-tagline">The middle of the road between premium and economy.</div>
+      <div class="tier-desc">Solves the problem in a reliable way without any real add-ons. Reliable, but often limited to the original scope.</div>
     </div>
     <div class="tier-card">
       <div class="tier-label economy">Economy</div>
-      <div class="tier-tagline">"Minimum safe stabilization"</div>
-      <div class="tier-desc">Smallest step that still moves forward</div>
+      <div class="tier-tagline">The most economical way to get the fault fixed.</div>
+      <div class="tier-desc">The lowest level we feel we can go to reasonably address it without massively cutting corners.</div>
     </div>
     <div class="tier-card">
       <div class="tier-label basic">Basic</div>
-      <div class="tier-tagline">"Bare minimum professional fix"</div>
-      <div class="tier-desc">Address the call with clear limitations</div>
+      <div class="tier-tagline">The cheapest and most minimal way to restore functionality.</div>
+      <div class="tier-desc">This isn't a fix, it's a repair. Even if we don't suggest it, we always give the client the dignity of knowing this option is available.</div>
     </div>
   </div>
 
   <!-- Format Template -->
   <div class="section-header" style="margin-top:20px;">
     <h2>Client-Facing <em>Format</em></h2>
-    <p>Every tier on a homeowner-facing document uses this three-part structure.</p>
+    <p>Every tier on a homeowner-facing document uses value-framed bullet points. Never describe what something doesn't do — only describe what it does for them.</p>
   </div>
 
   <div class="tier-example">
     <h4>Example: Gold Tier — Client-Facing</h4>
     <div class="te-section">
-      <h5>What This Does for You</h5>
+      <h5>Gold</h5>
       <ul>
-        <li>Fixes the fan wobble/noise and resolves the random light behavior</li>
-        <li>Corrects the important safety issues we found</li>
-        <li>Updates smoke detectors</li>
-        <li>Keeps your future EV/hot tub plan in mind so you're not boxed in later</li>
-      </ul>
-    </div>
-    <div class="te-section">
-      <h5>What This Doesn't Do</h5>
-      <ul>
-        <li>Doesn't include the ongoing membership/maintenance perks</li>
-        <li>Doesn't include the man cave airflow upgrade (we can still plan for it)</li>
+        <li>Turnkey restoration of master bedroom ceiling fan system, removing all flickering and noise to keep Melanie from waking up at night</li>
+        <li>Removal of all safety hazards found in kitchen electrical points, and installation of water shock protection</li>
+        <li>Turnkey renovation and upgrade of home's fire/gas detection systems</li>
+        <li>Upgrade of home's power capacity to prepare for future EV charger and hot tub</li>
       </ul>
     </div>
     <div class="te-summary">
-      <strong>Outcome Summary:</strong> Premium-level repair and safety improvements, with a tighter overall scope.
+      <strong>Key principle:</strong> Never write "What This Doesn't Do" — that only provides ammunition for why the client shouldn't buy. Only describe what the tier does for them, framed in their language and tied to their life.
     </div>
   </div>
 
   <!-- How to Choose -->
   <div class="section-header">
     <h2>How to <em>Choose</em></h2>
-    <p>Always close the client-facing document with this simple decision guide.</p>
+    <p>Verbal guides for helping a confused client navigate tiers.</p>
+  </div>
+
+  <div class="callout-box">
+    <strong>Important:</strong> These are verbal guides only — never print them on the option sheet. Showing preference for a tier can communicate bias and reduce impact if the client chooses a different level.
   </div>
 
   <div class="choose-grid">
@@ -1113,11 +1162,11 @@
   <div class="banned-grid">
     <div class="banned-item">
       <div class="banned-x">&times;</div>
-      <div><strong>Amps, volts, watts</strong><span>Means nothing to them — describe the result instead</span></div>
+      <div><strong>Amps, volts, watts</strong><span>The client isn't an electrician. If you need to describe something to this depth, you're on the right path to confusing them and getting a "think it over." Describe the result instead.</span></div>
     </div>
     <div class="banned-item">
       <div class="banned-x">&times;</div>
-      <div><strong>Model numbers / part numbers</strong><span>They don't need to shop for it</span></div>
+      <div><strong>Model numbers / part numbers</strong><span>Describe the quality of the outcome. Including these puts emphasis on the material rather than the service and quality experience. It devalues the solution as a whole.</span></div>
     </div>
     <div class="banned-item">
       <div class="banned-x">&times;</div>
@@ -1125,15 +1174,15 @@
     </div>
     <div class="banned-item">
       <div class="banned-x">&times;</div>
-      <div><strong>NEC / code reference numbers</strong><span>Say "current safety standards" or "what's required today"</span></div>
+      <div><strong>NEC / code reference numbers</strong><span>Instead say "modern safety standards" or "what's required today"</span></div>
     </div>
     <div class="banned-item">
       <div class="banned-x">&times;</div>
-      <div><strong>Wire gauge (12/2, 14/3, etc.)</strong><span>They don't know what this means</span></div>
+      <div><strong>Wire gauge (12/2, 14/3, etc.)</strong><span>They don't know what it means AND it devalues the solution. Instead: "12/2 MC line" = "high-capacity wiring to prevent frequent tripping and fully rodent-proof"</span></div>
     </div>
     <div class="banned-item">
       <div class="banned-x">&times;</div>
-      <div><strong>Breaker amperage</strong><span>Say "properly sized" or just remove it</span></div>
+      <div><strong>Breaker amperage</strong><span>Say "properly designed/sized emergency electrical shutoff"</span></div>
     </div>
     <div class="banned-item">
       <div class="banned-x">&times;</div>
@@ -1172,7 +1221,7 @@
   <div class="analogy-grid">
     <div class="analogy-card">
       <div class="concept">Panel Capacity</div>
-      <div class="quote">"It's like the size of the pipe that feeds everything in your home."</div>
+      <div class="quote">"This is the heart and brain of your home's electrical capability. What do you think would happen if we tried to pull more power than the system was physically capable of handling?"</div>
     </div>
     <div class="analogy-card">
       <div class="concept">Why Inspect the Panel for a Ceiling Fan</div>
@@ -1196,7 +1245,7 @@
     </div>
     <div class="analogy-card">
       <div class="concept">Surge Protection</div>
-      <div class="quote">"It's a bodyguard for everything you've plugged in — your TV, your fridge, your computer."</div>
+      <div class="quote">"Imagine it as a giant sponge for your home — so that if you get too much power from the utility or at worst a lightning strike, it would absorb it and protect all the sensitive electronics in your home."</div>
     </div>
     <div class="analogy-card">
       <div class="concept">Water + Electricity</div>
@@ -1204,7 +1253,7 @@
     </div>
     <div class="analogy-card">
       <div class="concept">Federal Pacific Panel</div>
-      <div class="quote">"These panels were recalled because the breakers don't always shut off when they should — that's a fire risk."</div>
+      <div class="quote">"These systems have actually been banned to the extent that you can't even buy replacement parts for them — because even if you were drawing more power than the wiring in the walls could handle, it wouldn't turn itself off. What do you think could happen in that situation?"</div>
     </div>
     <div class="analogy-card">
       <div class="concept">Old Wiring</div>
@@ -1212,7 +1261,7 @@
     </div>
     <div class="analogy-card">
       <div class="concept">First Class Pass</div>
-      <div class="quote">"Think of it like a VIP membership — priority scheduling, no diagnostic fees, annual safety check."</div>
+      <div class="quote">"Imagine it as a first-class flight with our company. At that level you'd be receiving priority scheduling, absolutely no diagnostic or troubleshooting fees, after-hours emergency service, and a whole home electrical safety evaluation."</div>
     </div>
   </div>
 </div>
