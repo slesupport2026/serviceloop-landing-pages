@@ -64,6 +64,12 @@
           d.appendChild(l);d.appendChild(s);container.appendChild(d);
         });
 
+        // Move Daily Sparks checkbox below dropdowns, above submit
+        var checkbox=form.querySelector('input[type="checkbox"]');
+        if(checkbox){
+          var cbRow=checkbox.parentElement;
+          container.appendChild(cbRow);
+        }
         submitBtn.parentElement.insertBefore(container,submitBtn);
       },200);
     })();
