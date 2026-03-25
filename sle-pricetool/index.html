@@ -74,5 +74,27 @@ Error generating stack: `+l.message+`
 </script>
 
     <div id="root"></div>
+    <script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
+    <script>
+    (function(){
+      var attempts=0;
+      var iv=setInterval(function(){
+        attempts++;
+        if(attempts>100){clearInterval(iv);return;}
+        if(document.getElementById('wistia-hero-video'))return;
+        var eyebrow=document.querySelector('.sle-eyebrow');
+        if(!eyebrow)return;
+        var hero=eyebrow.closest('section')||eyebrow.parentElement.parentElement;
+        if(!hero)return;
+        clearInterval(iv);
+        var wrap=document.createElement('div');
+        wrap.id='wistia-hero-video';
+        wrap.style.cssText='max-width:800px;margin:2.5rem auto 0;border-radius:12px;overflow:hidden;border:1px solid rgba(201,164,90,0.2);position:relative;';
+        wrap.innerHTML='<div style="padding:56.25% 0 0 0;position:relative;"><div style="height:100%;left:0;position:absolute;top:0;width:100%;"><iframe src="https://fast.wistia.net/embed/iframe/4ejfm1cgjn?seo=true&videoFoam=true" title="Mastering Pricing for Wealthy Trades Business" allow="autoplay;fullscreen" allowtransparency="true" frameborder="0" scrolling="no" style="height:100%;width:100%;"></iframe></div></div>';
+        var container=eyebrow.parentElement;
+        container.appendChild(wrap);
+      },200);
+    })();
+    </script>
   </body>
 </html>
