@@ -96,5 +96,61 @@ Error generating stack: `+l.message+`
       },200);
     })();
     </script>
+    <script>
+    (function(){
+      var a2=0;
+      var iv2=setInterval(function(){
+        a2++;
+        if(a2>100){clearInterval(iv2);return;}
+        if(document.getElementById('sle-q-years'))return;
+        var form=document.querySelector('#signup-form form');
+        if(!form)return;
+        var phoneField=form.querySelector('input[name="phone"]');
+        if(!phoneField)return;
+        var phoneWrap=phoneField.closest('div[style]');
+        if(phoneWrap&&phoneWrap.parentElement)phoneWrap=phoneWrap.parentElement;
+        if(!phoneWrap)return;
+        clearInterval(iv2);
+
+        var ss='width:100%;padding:14px 16px;border-radius:8px;border:1px solid rgba(227,197,117,0.2);background:rgba(15,25,45,0.6);color:#fff;font-family:Open Sans,sans-serif;font-size:0.95rem;appearance:none;-webkit-appearance:none;cursor:pointer;outline:none;';
+        var ls='display:block;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#FDC33E;margin-bottom:8px;';
+        var ws='margin-top:1rem;';
+
+        var questions=[
+          {id:'sle-q-years',label:'How long have you been in business? *',opts:['','Less than 1 year','1 to 3 years','3 to 5 years','5+ years']},
+          {id:'sle-q-techs',label:'Number of Service Techs (Incl Owner): *',opts:['','1','2-4','5-9','10+']},
+          {id:'sle-q-revenue',label:'Monthly Revenue (Approximate): *',opts:['','Under $30k/mo','$31-80k/mo','$80-100k/mo','$100K+/mo']}
+        ];
+
+        var container=document.createElement('div');
+        container.style.cssText='margin-top:1.25rem;';
+        questions.forEach(function(q){
+          var d=document.createElement('div');
+          d.style.cssText=ws;
+          var l=document.createElement('label');
+          l.style.cssText=ls;
+          l.textContent=q.label;
+          l.setAttribute('for',q.id);
+          var s=document.createElement('select');
+          s.id=q.id;s.name=q.id;s.required=true;
+          s.style.cssText=ss;
+          q.opts.forEach(function(o){
+            var opt=document.createElement('option');
+            opt.value=o;opt.textContent=o||'Select...';
+            if(!o)opt.disabled=true;opt.selected=!o;
+            s.appendChild(opt);
+          });
+          d.appendChild(l);d.appendChild(s);container.appendChild(d);
+        });
+
+        var submitBtn=form.querySelector('button[type="submit"]');
+        if(submitBtn){
+          submitBtn.parentElement.insertBefore(container,submitBtn);
+        }else{
+          phoneWrap.after(container);
+        }
+      },200);
+    })();
+    </script>
   </body>
 </html>
