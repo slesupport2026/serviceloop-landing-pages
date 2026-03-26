@@ -74,5 +74,25 @@
       },200);
     })();
     </script>
+    <script>
+    (function(){
+      var a=0;
+      var iv=setInterval(function(){
+        a++;
+        if(a>200){clearInterval(iv);return;}
+        var footer=document.querySelector('footer');
+        if(!footer)return;
+        if(document.getElementById('sle-disclaimer'))return;
+        clearInterval(iv);
+        var d=document.createElement('div');
+        d.id='sle-disclaimer';
+        d.style.cssText='max-width:900px;margin:2.5rem auto 0;padding:2rem 1.5rem 0;border-top:1px solid rgba(255,255,255,0.08);font-family:Open Sans,sans-serif;font-size:0.72rem;line-height:1.7;color:rgba(255,255,255,0.35);text-align:center;';
+        d.innerHTML='<p style="margin:0 0 0.75rem">Results are not guaranteed and will vary based on individual effort, market conditions, business experience, and execution. The testimonials, statistics, and case studies presented on this page represent the experiences and results of individual users and do not constitute typical or average results. The Simple Service Rate (SSR) Tool is an educational resource designed to help you calculate your service rate based on your specific business inputs.</p>'
+          +'<p style="margin:0 0 0.75rem">Past performance and results of others do not guarantee future results. Individual results may vary significantly. Service Loop Electrical Inc makes no representation or warranty regarding future earnings, income, or business results. This page is for educational purposes only and should not be considered financial, business, or legal advice. Consult with a qualified professional before making business decisions.</p>'
+          +'<p style="margin:0">The statistics and metrics displayed (1,000+ electricians, $21.6M+ wins, $304K single month record, $1.1M first year business record, 350+ active SLE Pros, $91K largest single sale) represent reported results from individual users in our community and are not typical or average results. These represent outlier achievements and should not be considered as representative of what you can expect.</p>';
+        footer.appendChild(d);
+      },300);
+    })();
+    </script>
   </body>
 </html>
