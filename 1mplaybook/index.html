@@ -81,23 +81,24 @@
         a++;
         if(a>200){clearInterval(iv);return;}
         if(document.getElementById('sle-calc'))return;
-        // Find the static $1M Math section by its heading text
-        var allH=document.querySelectorAll('div');
-        var target=null;
-        for(var i=0;i<allH.length;i++){
-          if(allH[i].textContent&&allH[i].textContent.indexOf('Simpler Than You Think')>-1
-              &&allH[i].textContent.indexOf('Calls per day')>-1){
-            target=allH[i];break;
+        // Find the heading that says "Simpler Than You Think"
+        var allDivs=document.querySelectorAll('div');
+        var heading=null;
+        for(var i=0;i<allDivs.length;i++){
+          var t=allDivs[i].textContent||'';
+          if(t.indexOf('Simpler Than You Think')>-1 && t.length<60){
+            heading=allDivs[i];break;
           }
         }
+        if(!heading)return;
+        // The section container is the heading's parent
+        var target=heading.parentElement;
         if(!target)return;
         clearInterval(iv);
 
-        // Hide the static content
-        var staticChildren=target.children;
-        for(var i=0;i<staticChildren.length;i++){
-          staticChildren[i].style.display='none';
-        }
+        // Hide only the static content inside this section
+        var staticChildren=Array.from(target.children);
+        staticChildren.forEach(function(ch){ch.style.display='none';});
 
         var calc=document.createElement('div');
         calc.id='sle-calc';
