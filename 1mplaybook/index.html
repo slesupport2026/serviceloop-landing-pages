@@ -80,6 +80,148 @@
       var iv=setInterval(function(){
         a++;
         if(a>200){clearInterval(iv);return;}
+        if(document.getElementById('sle-calc'))return;
+        // Find the static $1M Math section by its heading text
+        var allH=document.querySelectorAll('div');
+        var target=null;
+        for(var i=0;i<allH.length;i++){
+          if(allH[i].textContent&&allH[i].textContent.indexOf('Simpler Than You Think')>-1
+              &&allH[i].textContent.indexOf('Calls per day')>-1){
+            target=allH[i];break;
+          }
+        }
+        if(!target)return;
+        clearInterval(iv);
+
+        // Hide the static content
+        var staticChildren=target.children;
+        for(var i=0;i<staticChildren.length;i++){
+          staticChildren[i].style.display='none';
+        }
+
+        var calc=document.createElement('div');
+        calc.id='sle-calc';
+        calc.style.cssText='padding:2rem;';
+
+        // Heading
+        var h=document.createElement('div');
+        h.style.cssText="font-family:'Playfair Display',serif;font-style:italic;font-size:1.6rem;color:#E3C575;font-weight:700;margin-bottom:1.5rem;text-align:center;";
+        h.textContent="The $1M Math. It\u2019s Simpler Than You Think";
+        calc.appendChild(h);
+
+        // Subtitle
+        var sub=document.createElement('div');
+        sub.style.cssText="text-align:center;font-family:'Open Sans',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.55);margin-bottom:2rem;";
+        sub.textContent="Adjust the sliders below. The average ticket auto-calculates to hit $83,333/month.";
+        calc.appendChild(sub);
+
+        // Slider config
+        var sliders=[
+          {id:'sc-calls',label:'Calls Per Day',min:1,max:10,step:1,val:3,fmt:function(v){return v;}},
+          {id:'sc-days',label:'Working Days / Month',min:10,max:26,step:1,val:20,fmt:function(v){return v;}},
+          {id:'sc-conv',label:'Conversion Rate',min:20,max:95,step:5,val:60,fmt:function(v){return v+'%';}}
+        ];
+
+        var sliderEls={};
+        var grid=document.createElement('div');
+        grid.style.cssText='display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;margin-bottom:1.5rem;';
+
+        sliders.forEach(function(s){
+          var card=document.createElement('div');
+          card.style.cssText='text-align:center;padding:1.25rem 1rem;background:rgba(10,10,10,0.5);border-radius:6px;border:1px solid rgba(227,197,117,0.15);';
+
+          var valDisplay=document.createElement('div');
+          valDisplay.id=s.id+'-val';
+          valDisplay.style.cssText="font-family:'Playfair Display',serif;font-style:italic;font-size:1.75rem;color:#FDC33E;font-weight:700;";
+          valDisplay.textContent=s.fmt(s.val);
+
+          var lbl=document.createElement('div');
+          lbl.style.cssText="font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.72rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.25rem;margin-bottom:0.75rem;";
+          lbl.textContent=s.label;
+
+          var slider=document.createElement('input');
+          slider.type='range';slider.min=s.min;slider.max=s.max;slider.step=s.step;slider.value=s.val;
+          slider.id=s.id;
+          slider.style.cssText='width:100%;accent-color:#FDC33E;cursor:pointer;height:6px;';
+          sliderEls[s.id]=slider;
+
+          slider.addEventListener('input',recalc);
+          card.appendChild(valDisplay);card.appendChild(lbl);card.appendChild(slider);
+          grid.appendChild(card);
+        });
+        calc.appendChild(grid);
+
+        // Results row
+        var results=document.createElement('div');
+        results.style.cssText='display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:1.5rem;';
+
+        var resultCards=[
+          {id:'sc-leads',label:'Leads / Month'},
+          {id:'sc-closed',label:'Closed Jobs'},
+          {id:'sc-ticket',label:'Avg Ticket Needed'},
+          {id:'sc-annual',label:'Annual Revenue'}
+        ];
+
+        resultCards.forEach(function(r){
+          var card=document.createElement('div');
+          card.style.cssText='text-align:center;padding:1rem;background:rgba(10,10,10,0.5);border-radius:6px;border:1px solid rgba(227,197,117,0.15);';
+
+          var v=document.createElement('div');
+          v.id=r.id;
+          v.style.cssText="font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:#FDC33E;font-weight:700;";
+
+          var l=document.createElement('div');
+          l.style.cssText="font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.72rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.25rem;";
+          l.textContent=r.label;
+
+          card.appendChild(v);card.appendChild(l);results.appendChild(card);
+        });
+        calc.appendChild(results);
+
+        // Formula bar
+        var formula=document.createElement('div');
+        formula.id='sc-formula';
+        formula.style.cssText="text-align:center;padding:1.25rem;background:rgba(10,10,10,0.35);border-radius:8px;border:1px solid rgba(227,197,117,0.1);";
+        calc.appendChild(formula);
+
+        target.appendChild(calc);
+        recalc();
+
+        function recalc(){
+          var calls=parseInt(sliderEls['sc-calls'].value);
+          var days=parseInt(sliderEls['sc-days'].value);
+          var conv=parseInt(sliderEls['sc-conv'].value)/100;
+          var TARGET=83333;
+
+          var leads=calls*days;
+          var closed=Math.round(leads*conv);
+          var ticket=closed>0?Math.round(TARGET/closed):0;
+          var annual=TARGET*12;
+
+          document.getElementById('sc-calls-val').textContent=calls;
+          document.getElementById('sc-days-val').textContent=days;
+          document.getElementById('sc-conv-val').textContent=Math.round(conv*100)+'%';
+
+          document.getElementById('sc-leads').textContent=leads;
+          document.getElementById('sc-closed').textContent=closed;
+          document.getElementById('sc-ticket').textContent='$'+ticket.toLocaleString();
+          document.getElementById('sc-annual').textContent='$'+annual.toLocaleString();
+
+          var f=document.getElementById('sc-formula');
+          f.innerHTML='<div style="font-family:\'Open Sans\',sans-serif;font-size:0.95rem;color:rgba(255,255,255,0.75);">'
+            +calls+' calls \u00d7 '+days+' days \u00d7 '+Math.round(conv*100)+'% \u00d7 <span style="color:#FDC33E;font-weight:700;">$'+ticket.toLocaleString()+'</span> = '
+            +'<span style="font-family:\'Playfair Display\',serif;font-style:italic;font-size:1.4rem;color:#FDC33E;font-weight:700;">$'+TARGET.toLocaleString()+'/month</span></div>'
+            +'<div style="font-family:\'Open Sans\',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.45);margin-top:0.35rem;">That\u2019s $'+annual.toLocaleString()+' in annual sales. The line of safety.</div>';
+        }
+      },200);
+    })();
+    </script>
+    <script>
+    (function(){
+      var a=0;
+      var iv=setInterval(function(){
+        a++;
+        if(a>200){clearInterval(iv);return;}
         var footer=document.querySelector('footer');
         if(!footer)return;
         if(document.getElementById('sle-disclaimer'))return;
