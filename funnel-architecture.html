@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLE Funnel Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0A0A0A;--surface:#111;--card:#151515;--card-hover:#1a1a1a;--border:rgba(255,255,255,0.06);
+  --gold:#C9A45A;--bright:#E8C97A;--accent:#FDC33E;
+  --white:#fff;--gray:#777;--light:#aaa;
+  --red:#CE302A;--green:#2d7a2d;--teal:#1a7a6e;--blue:#4466cc;--purple:#8855cc;
+  --radius:14px;
+}
+body{background:var(--bg);color:var(--white);font-family:"Open Sans",sans-serif;display:flex;height:100vh;overflow:hidden;}
+
+/* SIDEBAR */
+.sidebar{width:260px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;}
+.sidebar-header{padding:20px;border-bottom:1px solid var(--border);}
+.sidebar-logo{font-family:Montserrat;font-weight:900;font-size:1rem;color:var(--gold);}
+.sidebar-sub{font-size:0.6rem;color:var(--gray);margin-top:4px;letter-spacing:2px;text-transform:uppercase;font-family:Montserrat;font-weight:600;}
+.sidebar-nav{flex:1;overflow-y:auto;padding:8px 0;}
+.nav-section{padding:14px 16px 4px;font-family:Montserrat;font-size:0.55rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 16px;cursor:pointer;font-size:0.75rem;color:var(--light);transition:all 0.12s;border-left:3px solid transparent;}
+.nav-item:hover{background:rgba(255,255,255,0.03);color:var(--white);}
+.nav-item.active{background:rgba(201,164,90,0.06);color:var(--accent);border-left-color:var(--accent);}
+.nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.dot-empty{border:2px solid #444;background:transparent;}
+.dot-draft{border:2px solid var(--accent);background:rgba(253,195,62,0.3);}
+.dot-done{border:2px solid var(--green);background:var(--green);}
+.dot-flag{border:2px solid var(--red);background:var(--red);}
+.sidebar-footer{padding:14px 16px;border-top:1px solid var(--border);font-size:0.65rem;color:#555;}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0;}
+.topbar-crumb{font-family:Montserrat;font-size:0.72rem;color:var(--gray);}
+.topbar-crumb b{color:var(--white);}
+.topbar-btns{display:flex;gap:6px;}
+.btn{font-family:Montserrat;font-size:0.68rem;font-weight:700;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--bright));color:#000;}
+.btn-outline{background:transparent;color:var(--gold);border:1px solid rgba(201,164,90,0.3);}
+.content-area{flex:1;overflow-y:auto;padding:0;}
+
+/* FLOW VIEW */
+.flow{max-width:960px;margin:0 auto;padding:32px 24px 80px;}
+.flow-title{font-family:Montserrat;font-size:1.4rem;font-weight:900;text-align:center;margin-bottom:4px;}
+.flow-sub{text-align:center;font-size:0.82rem;color:var(--gray);margin-bottom:32px;line-height:1.5;}
+
+.funnel-section{margin-bottom:4px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:border-color 0.2s;}
+.funnel-section:hover{border-color:rgba(201,164,90,0.15);}
+.funnel-header{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;background:var(--card);transition:background 0.15s;user-select:none;}
+.funnel-header:hover{background:var(--card-hover);}
+.funnel-badge{font-family:Montserrat;font-size:0.55rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:6px;flex-shrink:0;}
+.badge-tofu{background:rgba(206,48,42,0.12);color:#ff8888;border:1px solid rgba(206,48,42,0.25);}
+.badge-mofu{background:rgba(253,195,62,0.1);color:var(--accent);border:1px solid rgba(253,195,62,0.2);}
+.badge-bofu{background:rgba(26,122,110,0.1);color:#88ffee;border:1px solid rgba(26,122,110,0.25);}
+.funnel-info{flex:1;}
+.funnel-name{font-family:Montserrat;font-size:0.88rem;font-weight:800;color:var(--white);}
+.funnel-sells{font-size:0.72rem;color:var(--gray);margin-top:2px;}
+.funnel-sells b{color:var(--accent);}
+.funnel-chev{color:var(--gray);font-size:0.9rem;transition:transform 0.2s;flex-shrink:0;}
+.funnel-section.open .funnel-chev{transform:rotate(180deg);}
+.funnel-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease;background:rgba(0,0,0,0.25);}
+.funnel-section.open .funnel-body{max-height:5000px;}
+.funnel-inner{padding:20px 24px;}
+
+/* SECTION CONTENT */
+.sec-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+@media(max-width:800px){.sec-grid{grid-template-columns:1fr;}.sidebar{width:220px;}}
+.sec-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;transition:border-color 0.15s;}
+.sec-card:hover{border-color:rgba(201,164,90,0.15);}
+.sec-card.full{grid-column:1/-1;}
+.sec-label{font-family:Montserrat;font-size:0.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.label-green{color:#6bff6b;}.label-red{color:#ff6b6b;}.label-gold{color:var(--accent);}.label-blue{color:#6b9fff;}.label-teal{color:#6bffee;}.label-purple{color:#bb88ff;}
+.sec-body{font-size:0.78rem;color:var(--light);line-height:1.55;}
+.sec-body b{color:var(--white);}
+.sec-body ul{margin:6px 0 0 14px;}
+.sec-body li{margin-bottom:3px;}
+
+/* RULE CHECKS */
+.rule{display:flex;align-items:flex-start;gap:8px;padding:5px 0;font-size:0.75rem;color:var(--light);}
+.rbox{width:14px;height:14px;border-radius:3px;border:1px solid #444;flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.55rem;transition:all 0.1s;}
+.rbox.on{border-color:var(--green);background:rgba(45,122,45,0.25);color:var(--green);}
+
+/* DOC UPLOAD */
+.upload{border:2px dashed rgba(201,164,90,0.15);border-radius:10px;padding:16px;text-align:center;cursor:pointer;font-size:0.75rem;color:var(--gray);transition:border-color 0.15s;}
+.upload:hover{border-color:var(--gold);}
+.doc{display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:8px;margin-top:6px;font-size:0.75rem;}
+.doc-name{flex:1;color:var(--white);font-weight:600;}
+.doc-st{font-family:Montserrat;font-size:0.55rem;font-weight:700;padding:2px 8px;border-radius:8px;letter-spacing:1px;text-transform:uppercase;}
+.st-pending{background:rgba(253,195,62,0.12);color:var(--accent);}
+.st-ok{background:rgba(45,122,45,0.12);color:#88ff88;}
+.st-flag{background:rgba(206,48,42,0.12);color:#ff8888;}
+.doc-btn{font-size:0.6rem;padding:3px 7px;border-radius:5px;border:none;cursor:pointer;font-family:Montserrat;font-weight:700;}
+.db-ok{background:rgba(45,122,45,0.15);color:#88ff88;}.db-no{background:rgba(206,48,42,0.15);color:#ff8888;}.db-mv{background:rgba(68,102,204,0.15);color:#88bbff;}
+
+/* FLOW ARROW */
+.flow-arrow{text-align:center;padding:6px 0;color:var(--gold);font-size:1.1rem;}
+
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">SLE Funnel System</div>
+    <div class="sidebar-sub">Architecture + Review</div>
+  </div>
+  <div class="sidebar-nav" id="sideNav"></div>
+  <div class="sidebar-footer">For Electricians. By Electricians.<br>&copy; 2026 Service Loop Electrical</div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-crumb" id="crumb"><b>System Overview</b></div>
+    <div class="topbar-btns">
+      <button class="btn btn-outline" onclick="viewOverview()">Overview</button>
+      <button class="btn btn-gold" onclick="exportReport()">Export Report</button>
+    </div>
+  </div>
+  <div class="content-area" id="contentArea"></div>
+</div>
+
+<script>
+const S = [
+{id:'attract',stage:'TOFU',badge:'badge-tofu',name:'Attraction Marketing',
+ sells:'Sells the <b>CLICK</b>. Gets an electrician to stop scrolling and watch.',
+ desc:'MDE podcast episodes, YouTube Shorts, Instagram Reels, TikTok, organic social, SEO, podcast guest recruitment ads. Pure awareness. The only job here is to make electricians notice that SLE exists and that the content is worth watching. Testimonials and partner wins live heavily here as proof that something real is happening.',
+ doesNot:['Does NOT sell coaching, programs, or tools','Does NOT capture contact info','Does NOT mention SLE program pricing','Does NOT filter for business owners yet. An employed electrician watching is fine at this stage.','Does NOT solve problems. Creates curiosity.'],
+ rules:['All content orbits the current monthly ACDC chapter','MDE podcast: 2-3 episodes/week on the monthly chapter topic from different angles','Reels/Shorts/TikTok: 5-7/week. Clips pulled from podcast + Friday deep dives.','Podcast guest recruitment ads run here (two buckets: great stories or great struggles)','Partner win clips and testimonials run frequently. Real names, real numbers, real timelines.','Friday YouTube long-form: Clay deep dive on the monthly chapter. "Open your playbook to Chapter X."','Monday YouTube/social: Joseph touches the chapter from the sales/options angle','Use Hustler Heaven hooks library for all captions and openers','Content opener template: "Today we are diving into Chapter X. By the end of this you will know [specific outcome]."','Grade 5 reading level. Zero em-dashes. No jargon.','Outdoors, kinetic, alive locations when possible (not sterile desk)'],
+ docs:[]},
+
+{id:'filter-biz',stage:'TOFU',badge:'badge-tofu',name:'Business Owner Filter (Pain Engage)',
+ sells:'Sells the <b>RESONANCE</b>. "That is me. That is my exact problem."',
+ desc:'Pain-engage content that separates employed electricians from business owners, and hobbyists from Hustlers. Names the pain so clearly that the right person thinks "how do they know my life?" Testimonials from partners who WERE in that exact pain are the strongest content here.',
+ doesNot:['Does NOT pitch coaching or programs','Does NOT capture contact info yet','Does NOT solve the problem. Just names it with total accuracy.','Does NOT target Noobs or All-Stars. Speaks to $350K-$800K Hustler pain specifically.','Does NOT use the word "upsell." Ever. The word is "serve."'],
+ rules:['Speak to daily Hustler reality: inconsistent tickets, hiring headaches, revenue rollercoaster, owner burnout, 60-70 hour weeks','Use all 4 Big Questions from Hustler Heaven V2. BQ1 (bottleneck/leadership) is priority at 57% frequency.','Two Big Goals thread through: $83,333/month + Get Off The Tools','Lead with freedom and family, not revenue. Saturday morning with no phone is the destination.','Identity hooks: "You built a job, not a business." "You started this to be your own boss. Now you hired yourself as an employee."','Use real verbatim quotes from market intelligence: "Running around like a chicken with its head cut off" / "I cannot step away for two days without everything falling apart"','Partner testimonials matched to pain: Nathan for "too small," Sherman for "already doing well but stuck," Edwin for "price shock"','Haynes Layer distribution: Questions + Objections heavy (these stop the scroll)','Every piece must make them feel SEEN, not sold. The filter is self-selection through recognition.','Grade 5. Zero em-dashes. For Electricians, By Electricians is the filter.'],
+ docs:[]},
+
+{id:'value-offer',stage:'MOFU',badge:'badge-mofu',name:'Value Marketing: Pricing Tool or Leads Now',
+ sells:'Sells the <b>OPT-IN</b>. "Give me your email, get this tool that solves your problem right now."',
+ desc:'Landing pages for Pricing Tool and/or Leads Now lead magnets. Free value in exchange for contact info. $97 webinar order bump on every page. They see BOTH tools. They grab whichever pain resonates. Either one leads to the same place.',
+ doesNot:['Does NOT sell SLE programs','Does NOT mention program pricing','Does NOT require commitment beyond email','Delivers real, usable value. Not a teaser.'],
+ rules:['Form: first name + email + phone (3 fields max). No other fields.','$97 webinar order bump checkbox. Includes current month webinar + past replay library access.','Both tools (Pricing Tool AND Leads Now) visible on the page. They grab whichever pain resonates.','Webhook fires to GHL on submit. Syncs to Close.io for sales team.','Pixel fires Lead event on submit. CompleteRegistration on delivery page.','UTM params captured in hidden fields on every form.','Delivery page: interactive HTML version of tool + PDF emailed. Keep them on your property (pixel fires, time tracked).','Landing page must include proof points. Nathan, Edwin, or Dorian matched to the tool topic.','Headline speaks to BQ2 (undercutting/effort) for Pricing Tool or BQ1 (bottleneck/leads) for Leads Now.','No SLE program pricing anywhere on these pages. The tool is the offer. Not coaching.','Grade 5 copy. Zero em-dashes. CTA button: gold, high contrast.'],
+ docs:[]},
+
+{id:'email-onramp',stage:'MOFU',badge:'badge-mofu',name:'Email On-Ramp: Pricing Tool or Leads Now',
+ sells:'Sells the <b>PLAYBOOK</b>. Day 14: "You fixed your rate. Here is the full system."',
+ desc:'14-day PM evening sequence (7:28 PM EST). Teaches the tool they downloaded. Builds trust through depth. Bridges to the $1M Playbook at Day 14. AM morning coffee emails run independently in parallel.',
+ doesNot:['Does NOT sell coaching or programs','Does NOT push calls','Does NOT mention SLE program pricing','Just teaches. Just bridges. Trust first.'],
+ rules:['Sender: SLE address (clay@ or team@). Time: 7:28 PM EST.','Grade 5 reading level. Zero em-dashes. Short sentences. Simple words.','No specific SLE program pricing. No program names. No coaching pitch.','Day 14 is the bridge email: "You fixed your [rate/leads]. Here is the full system." Links to Playbook.','Pauses newsletter_day counter while active. Resumes at exact position when complete.','Tags: seq-pricing-active / seq-pricing-complete OR seq-leads-active / seq-leads-complete','Each email must answer a relevant Big Question (BQ2/BQ3 for pricing, BQ1/BQ2 for leads)','Include 2-3 case studies across the 14 days, matched to the tool topic','Day 7-10: include a "go deeper" soft CTA for the $97 webinar (not a hard sell)','AM morning coffee runs completely independently. Never pauses. Never references sequences.','Clay reads and replies to every email. Sign off with phone: 778 653 4769.'],
+ docs:[]},
+
+{id:'playbook-delivery',stage:'MOFU',badge:'badge-mofu',name:'$1M Playbook + Survey Offer + Replay Library',
+ sells:'Sells the <b>JOURNEY</b>. Gets them into the 45-day ACDC chain and past 7+ hours of content.',
+ desc:'The $1M Playbook (ACDC framework) is delivered free. Interactive HTML app with login. Includes order bump for $97 webinar which also unlocks past webinar replay library. Survey offer included for deeper personalization. This is the HUB. Everything feeds here.',
+ doesNot:['Does NOT sell a program directly','Does NOT gate the playbook behind payment (it is free)','The $97 is for the WEBINAR + REPLAY LIBRARY, not the playbook','Gives them 80% of the system. For free. By design.'],
+ rules:['Playbook delivered as interactive HTML app (login required, feels like SLE Pro access) + PDF emailed','$97 order bump: current month webinar + FULL past replay library. This is the "textbook + all past lectures" bundle.','Survey offer alongside: Service Pro Survey for personalized 5-Pillar diagnostic','This is the HUB. All 3 on-ramp sequences bridge here at Day 14. Everything feeds in. Nothing bypasses this.','The 45-day ACDC journey starts from this delivery. They are now in the main engine.','Goal: 7+ hours of content consumed within 3-7 days (playbook reading + 1-2 replay watches + daily content + emails)','Scale Map link prominent: go.serviceloopelectrical.com/scale. "Start here before you read a single chapter."','Proof points throughout the playbook matched to chapters. Nathan for pricing. Dorian for leads. Sherman for presentations.','The playbook is the TEXTBOOK. The webinar is the CLASS. They must have the textbook before the class.','No SLE program pricing in the playbook. The 80% solution is free. The 20% is coaching. Make that distinction clear.','Grade 5. Zero em-dashes. "For Electricians, By Electricians."'],
+ docs:[]},
+
+{id:'acdc-journey',stage:'MOFU',badge:'badge-mofu',name:'ACDC Playbook Email Chain (45 Days)',
+ sells:'Sells the <b>WEBINAR</b> ($97). Each chapter ends with "want to go deeper? Here is the masterclass."',
+ desc:'THE MAIN EVENT. 9 chapters x 5 days. Walks through AMPLIFY, CONNECT, DELIVER, CHARGE. Each 5-day block: intro, framework, case study, tool drop, "go deeper" + webinar CTA. All content that month (podcast, YouTube, Reels) orbits the same chapter.',
+ doesNot:['Does NOT sell coaching directly','Does NOT mention SLE program pricing','Does NOT rush. One chapter per 5-day block.','Teaches and bridges to the $97. The content sells the webinar, not the email.'],
+ rules:['5-day chapter block template repeats 9x. Same rhythm every chapter.','Day 1: Chapter intro. "Open your playbook to Chapter X. This week we are in [ACDC Phase]."','Day 2: The framework with depth. The math. The method. Teach it for real.','Day 3: Case study. Real partner, real name, real numbers, real timeline. Speed is the persuasion layer.','Day 4: Tool drop. Deliver a specific asset for this chapter (worksheet, template, script, checklist).','Day 5: "Go deeper" + $97 webinar CTA for the matching chapter + bridge to next chapter.','The current monthly webinar is promoted throughout. The chapter the ACDC is on may differ from the monthly webinar topic. That is OK. The webinar CTA always points to the current/next webinar regardless.','Pauses for $97 webinar purchase (Taki 7-day deadline sequence takes over). Resumes at exact position after.','ALL monthly content (podcast, Friday YT, Monday Joseph, Reels) orbits the same chapter as the webinar, creating a surround-sound effect.','Each email must address at least one Big Question. Match BQ to chapter.','Grade 5. Zero em-dashes. No SLE program pricing. No coaching pitch. Just teach and bridge.','Content opener on all supporting media: "Today we are diving into Chapter X. By the end you will know [outcome]. If you make the webinar, [presenter] builds it with you live. If you do not, take this and go win with it right now."'],
+ docs:[]},
+
+{id:'webinar-offer',stage:'MOFU',badge:'badge-mofu',name:'Webinar Offer: Elevator or Stairs',
+ sells:'Sells the <b>DECISION</b>. Elevator: skip to call. Stairs: attend the class.',
+ desc:'The fork. Thank You page after $97 purchase offers a 15-minute Game Plan call immediately (elevator people). Or they attend the webinar with their playbook open (stairs people). 66% of booked calls come from people who never attend the webinar.',
+ doesNot:['Does NOT pressure one path over the other','Does NOT hide the call option behind the webinar','Lets them self-select their speed'],
+ rules:['Thank You page (after $97 purchase): "Want to skip ahead? Book a 15-min Game Plan call now." This catches elevator people.','Taki data: 66% of booked calls come from people who never attend the webinar. The Thank You shortcut is critical.','Game Plan call: "Skittles not snakes." Transparent, benefit-rich, 3-step action plan, 90-day possibilities. Not a pitch.','Stairs people attend the webinar with their playbook open. They should already have it.','Webinar opener: "Into the playbook we go! Who has already covered this chapter?"','Webinar = the class. Playbook = the textbook. Everyone in the room should have the textbook.','Best days: Tue/Wed/Thu. Best time: 8:30 PM EST. Length: 1.5-2 hrs for webinar-to-call.','Pre-webinar sequence: 12-14 emails + 5-8 text reminders. Target show rate: 20-40%.','Present Kickspark + Inner Loop at end of webinar. $97 credits toward Kickspark.','Proof points in the webinar matched to the chapter. Use the partner who best represents that chapter win.'],
+ docs:[]},
+
+{id:'bofu-convert',stage:'BOFU',badge:'badge-bofu',name:'Elevator (Call) or Stairs (Webinar)',
+ sells:'Sells the <b>PARTNERSHIP</b>. Both paths present Kickspark + Inner Loop.',
+ desc:'Elevator goes straight to strategy call. Stairs watches the webinar, gets the offer at the end. Both paths lead to the same place. Webinar presents programs at the end. Call presents based on fit.',
+ doesNot:['Does NOT force one path','Does NOT teach on the call (Hammer + content did that)','The call confirms what the content already sold'],
+ rules:['Webinar: present Kickspark + Inner Loop at end. "You just built [deliverable]. That is one chapter. There are eight more."','Call: 4 Whats framework, 4 Forces, Deal Formula. Closer assumes education.','The call CONFIRMS what the content already sold. It does not teach. If the closer is teaching, the funnel failed above.','Both paths have Offer Doc available for self-checkout (Amazon-style, binary: yes or not yet)','$97 credits toward Kickspark. It was always a deposit. Frame it that way.','Pre-call sequence: immediate SMS confirmation, email with "what to expect" + prep questions, 24hr reminder, 1hr reminder, FAQ page link','By the time they call, you know: survey answers, Scale Map gaps, engagement history, value pieces consumed, UTM source','FAQ page (26 FAQs) linked from pre-call email. Kills objections before the call.','Win pattern from market intelligence: prospect in active pain, tried to solve it alone, has real timeline, received personalized roadmap, flexible payment removed cash blocker, coach showed more belief than prospect had in themselves','Loss pattern to avoid: no follow-up structure, objections acknowledged but not resolved, spouse not involved (Silver+), "think about it" ended without next step'],
+ docs:[]},
+
+{id:'hammer',stage:'BOFU',badge:'badge-bofu',name:'Hammer Them Campaign',
+ sells:'Sells <b>TRUST</b> and kills <b>OBJECTIONS</b>. Does NOT make a new offer.',
+ desc:'Jeremy Haynes system. 15-20+ touchpoints in 72 hours for anyone approaching a call or post-opt-in. 12 emails over 4 days (3/day) + Meta retargeting with 30-50 ad sets. Runs in PARALLEL with everything else.',
+ doesNot:['Does NOT introduce new information or new offers','Does NOT replace the PM engine (runs alongside it)','Does NOT use specific pricing or program names','Repeats, reinforces, and resolves doubt. That is all.'],
+ rules:['12 emails, 3/day for 4 days','Pillar distribution: Questions 17% / 2nd Layer 17% / Objections 50% / Expectations 17%','Every email: standalone hook + backward thread + forward tease','Meta: 30-50 ad sets, 1 video per ad set, 3-sec view exclusion','CBO $100-200/day','No specific pricing. No program names. Sells SLE and The Loop Method.','At 40% open rate, any lead sees 3-5 of 12 and hits 2-3 pillars minimum'],
+ docs:[]},
+
+{id:'sold-out',stage:'BOFU',badge:'badge-bofu',name:'Sold Out Sequence (Monthly)',
+ sells:'Sells <b>URGENCY</b>. "15 spots this month. Here is the doc. Yes or not yet."',
+ desc:'Taki Moore scarcity system. Monthly cohort cap. Week 3: open enrollment, sell for 5-7 days. Weeks 1, 2, 4: pure value, no selling. Trains the market that your word is absolute.',
+ doesNot:['Does NOT run year-round (Week 3 only)','Does NOT negotiate or extend deadlines','Does NOT discount. The cap is the cap.','Weeks 1, 2, 4 are pure value content. Zero selling.'],
+ rules:['Cap at 80% of actual capacity initially','Week 3: open enrollment for 5-7 days','Day 0: Announcement ("X spots this month")','Day 3: Social proof push','Day 5: Scarcity reminder','Day 7: Close ("Enrollment closed. Next month.")','Honor the close date. No exceptions.','Offer Doc available for self-checkout during open week','Broadcast to full list during open week'],
+ docs:[]},
+
+{id:'enrollment',stage:'BOFU',badge:'badge-bofu',name:'Enrollment: Sales Call or Offer Doc',
+ sells:'Sells the <b>COMMITMENT</b>. Right-fit program based on conversation or self-checkout.',
+ desc:'Two paths to enrollment. The Offer Doc (Taki Moore salesless system) allows self-checkout for qualified buyers who do not need a call. The Strategy Call handles everyone who wants a conversation. The call confirms what the content already sold.',
+ doesNot:['Does NOT cold-pitch','Does NOT teach (the content did that)','The human is the cashier, confirming what the content already sold'],
+ rules:['Strategy Call: 4 Whats, 4 Forces, Deal Formula. The human is the cashier, confirming what the content already sold.','Offer Doc: Promise, Plan, Guarantee, Payment, Scarcity. Binary: yes or not yet. No negotiation. Amazon-style self-checkout.','7-day try-it-and-see policy. "Never had a refund." No specific guarantee dollar amounts in the doc or call script.','$97 credits toward Kickspark. Frame as deposit, not cost.','Taki deadline sequence (7 days post-webinar) drives to this moment. Day +5 is scarcity. Day +6 is final call. Day +7 is soft close.','Monthly Sold Out cadence: enrollment only open Week 3. Cap at 80% of capacity initially. Honor the close date. No exceptions.','Hustler conversion triggers (from market intelligence): feel understood not sold, social proof from a peer at their level, specific 90-day roadmap they can picture, payment structure that removes risk, explicit permission to stop being the technician','Never cold-pitch. If someone reaches this stage without consuming content, route them back to playbook delivery first.','Spouse/partner consideration: for Silver+ deals, both decision-makers must be in the conversation. Send spouse PDF asset if needed.','Follow up unsold calls up to 10x. Next monthly Sold Out cycle catches them again. They are never "lost." They are "waiting."'],
+ docs:[]},
+];
+
+// Build sidebar
+function buildSidebar(){
+  let html='';
+  let lastStage='';
+  S.forEach((s,i)=>{
+    if(s.stage!==lastStage){
+      const colors={TOFU:'#ff6b6b',MOFU:'var(--accent)',BOFU:'#6bffee'};
+      html+=`<div class="nav-section" style="color:${colors[s.stage]}">${s.stage}</div>`;
+      lastStage=s.stage;
+    }
+    const docs=JSON.parse(localStorage.getItem('docs-'+s.id)||'[]');
+    const dotCls=docs.length===0?'dot-empty':docs.some(d=>d.st==='flag')?'dot-flag':docs.every(d=>d.st==='ok')?'dot-done':'dot-draft';
+    html+=`<div class="nav-item${i===0?' active':''}" id="nav-${s.id}" onclick="scrollToSection('${s.id}')">`+
+      `<div class="nav-dot ${dotCls}"></div>${s.name}</div>`;
+  });
+  document.getElementById('sideNav').innerHTML=html;
+}
+
+// Build flow view
+function buildFlow(){
+  let html=`<div class="flow">
+    <div class="flow-title">SLE 2026 Funnel Architecture</div>
+    <div class="flow-sub">Coach them every day until they're ready. Be there the moment they are.<br>Click any section to expand. Attach docs. Review compliance. Track progress.</div>`;
+
+  S.forEach((s,i)=>{
+    if(i>0) html+=`<div class="flow-arrow">&darr;</div>`;
+    html+=buildSection(s,i===0);
+  });
+
+  html+=`</div>`;
+  document.getElementById('contentArea').innerHTML=html;
+}
+
+function buildSection(s,startOpen){
+  const docs=JSON.parse(localStorage.getItem('docs-'+s.id)||'[]');
+  let h=`<div class="funnel-section${startOpen?' open':''}" id="sec-${s.id}">
+    <div class="funnel-header" onclick="toggleSec('sec-${s.id}')">
+      <span class="funnel-badge ${s.badge}">${s.stage}</span>
+      <div class="funnel-info">
+        <div class="funnel-name">${s.name}</div>
+        <div class="funnel-sells">${s.sells}</div>
+      </div>
+      <span class="funnel-chev">&#9660;</span>
+    </div>
+    <div class="funnel-body"><div class="funnel-inner">
+      <div class="sec-grid">`;
+
+  // What it does
+  h+=`<div class="sec-card"><div class="sec-label label-green">What It Does</div>
+    <div class="sec-body">${s.desc}</div></div>`;
+
+  // What it does NOT do
+  h+=`<div class="sec-card"><div class="sec-label label-red">What It Does NOT Do</div>
+    <div class="sec-body"><ul>${(s.doesNot||[]).map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;
+
+  // What it sells next
+  h+=`<div class="sec-card"><div class="sec-label label-gold">Sells Next Step</div>
+    <div class="sec-body">${s.sells}</div></div>`;
+
+  // Rules
+  h+=`<div class="sec-card full"><div class="sec-label label-blue">Rules and Requirements</div>`;
+  (s.rules||[]).forEach((r,ri)=>{
+    const ck=localStorage.getItem(s.id+'-r-'+ri)==='1';
+    h+=`<div class="rule"><div class="rbox${ck?' on':''}" onclick="togRule('${s.id}',${ri},this)">${ck?'&#10003;':''}</div><span>${r}</span></div>`;
+  });
+  h+=`</div>`;
+
+  // Documents
+  h+=`<div class="sec-card full"><div class="sec-label label-purple">Attached Documents</div>
+    <div class="upload" onclick="addDoc('${s.id}')">Click to <b>attach a document</b> to this section</div>`;
+  docs.forEach((d,di)=>{
+    h+=`<div class="doc"><span style="color:var(--accent)">&#128196;</span>
+      <span class="doc-name">${d.n}</span>
+      <span class="doc-st st-${d.st==='ok'?'ok':d.st==='flag'?'flag':'pending'}">${d.st==='ok'?'Approved':d.st==='flag'?'Flagged':'Pending'}</span>
+      <button class="doc-btn db-ok" onclick="setDoc('${s.id}',${di},'ok')">Approve</button>
+      <button class="doc-btn db-no" onclick="setDoc('${s.id}',${di},'flag')">Flag</button>
+      <button class="doc-btn db-mv" onclick="rmDoc('${s.id}',${di})">Remove</button>
+    </div>`;
+  });
+  h+=`</div>`;
+
+  h+=`</div></div></div></div>`;
+  return h;
+}
+
+function toggleSec(id){document.getElementById(id).classList.toggle('open');}
+function togRule(sid,ri,el){
+  const on=el.classList.toggle('on');
+  el.innerHTML=on?'&#10003;':'';
+  localStorage.setItem(sid+'-r-'+ri,on?'1':'0');
+}
+function addDoc(sid){
+  const n=prompt('Document name:');
+  if(!n)return;
+  const docs=JSON.parse(localStorage.getItem('docs-'+sid)||'[]');
+  docs.push({n:n,st:'pending'});
+  localStorage.setItem('docs-'+sid,JSON.stringify(docs));
+  buildFlow();buildSidebar();
+}
+function setDoc(sid,i,st){
+  const docs=JSON.parse(localStorage.getItem('docs-'+sid)||'[]');
+  if(docs[i]){docs[i].st=st;localStorage.setItem('docs-'+sid,JSON.stringify(docs));buildFlow();buildSidebar();}
+}
+function rmDoc(sid,i){
+  if(!confirm('Remove?'))return;
+  const docs=JSON.parse(localStorage.getItem('docs-'+sid)||'[]');
+  docs.splice(i,1);localStorage.setItem('docs-'+sid,JSON.stringify(docs));buildFlow();buildSidebar();
+}
+function scrollToSection(id){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('nav-'+id).classList.add('active');
+  const el=document.getElementById('sec-'+id);
+  if(el){
+    if(!el.classList.contains('open'))el.classList.add('open');
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+function viewOverview(){
+  document.querySelectorAll('.funnel-section').forEach(s=>s.classList.remove('open'));
+  document.getElementById('contentArea').scrollTo({top:0,behavior:'smooth'});
+}
+function exportReport(){
+  let r='SLE FUNNEL REVIEW REPORT\n'+new Date().toLocaleDateString()+'\n\n';
+  S.forEach(s=>{
+    const docs=JSON.parse(localStorage.getItem('docs-'+s.id)||'[]');
+    let rc=0;(s.rules||[]).forEach((x,i)=>{if(localStorage.getItem(s.id+'-r-'+i)==='1')rc++;});
+    r+=`[${s.stage}] ${s.name}\n  Rules: ${rc}/${(s.rules||[]).length} | Docs: ${docs.length} (${docs.filter(d=>d.st==='ok').length} approved)\n\n`;
+  });
+  const b=new Blob([r],{type:'text/plain'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='sle-funnel-report.txt';a.click();
+}
+
+buildSidebar();
+buildFlow();
+</script>
+</body>
+</html>
