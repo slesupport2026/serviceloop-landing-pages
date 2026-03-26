@@ -81,24 +81,22 @@
         a++;
         if(a>200){clearInterval(iv);return;}
         if(document.getElementById('sle-calc'))return;
-        // Find the heading that says "Simpler Than You Think"
-        var allDivs=document.querySelectorAll('div');
+        // Find the h3 heading "Simpler Than You Think" inside the .sle-card
+        var headings=document.querySelectorAll('h3');
         var heading=null;
-        for(var i=0;i<allDivs.length;i++){
-          var t=allDivs[i].textContent||'';
-          if(t.indexOf('Simpler Than You Think')>-1 && t.length<60){
-            heading=allDivs[i];break;
+        for(var i=0;i<headings.length;i++){
+          if((headings[i].textContent||'').indexOf('Simpler Than You Think')>-1){
+            heading=headings[i];break;
           }
         }
         if(!heading)return;
-        // The section container is the heading's parent
+        // The .sle-card is the heading's parent
         var target=heading.parentElement;
         if(!target)return;
         clearInterval(iv);
 
-        // Hide only the static content inside this section
-        var staticChildren=Array.from(target.children);
-        staticChildren.forEach(function(ch){ch.style.display='none';});
+        // Hide only the static children inside this card
+        Array.from(target.children).forEach(function(ch){ch.style.display='none';});
 
         var calc=document.createElement('div');
         calc.id='sle-calc';
@@ -113,7 +111,7 @@
         // Subtitle
         var sub=document.createElement('div');
         sub.style.cssText="text-align:center;font-family:'Open Sans',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.55);margin-bottom:2rem;";
-        sub.textContent="Adjust the sliders below. The average ticket auto-calculates to hit $83,333/month.";
+        sub.textContent="Adjust the sliders below. The average ticket auto-calculates to hit $83,334/month.";
         calc.appendChild(sub);
 
         // Slider config
@@ -192,7 +190,7 @@
           var calls=parseInt(sliderEls['sc-calls'].value);
           var days=parseInt(sliderEls['sc-days'].value);
           var conv=parseInt(sliderEls['sc-conv'].value)/100;
-          var TARGET=83333;
+          var TARGET=83334;
 
           var leads=calls*days;
           var closed=Math.round(leads*conv);
