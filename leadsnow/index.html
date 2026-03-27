@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Leads Now — The Million Dollar Leads Roadmap for Electricians | Service Loop Electrical</title>
+<meta name="description" content="The exact marketing roadmap SLE uses to help electricians fill their calendars and double revenue. Free instant access to the Million Dollar Leads Playbook.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* ===== DESIGN TOKENS ===== */
+:root{
+  --bg:#0A0A0A;
+  --surface:#0d1520;
+  --card:rgba(27,42,69,0.55);
+  --card-hover:rgba(27,42,69,0.7);
+  --navy:#1B2A45;
+  --gold:#FDC33E;
+  --gold-dark:#E3A800;
+  --gold-muted:#A78227;
+  --gold-subtle:#E3C575;
+  --white:#FFFFFF;
+  --text:rgba(255,255,255,0.88);
+  --text-muted:rgba(255,255,255,0.6);
+  --text-dim:rgba(255,255,255,0.45);
+  --red:#CE302A;
+  --green:#2d7a2d;
+  --teal:#1a7a6e;
+  --border-gold:rgba(227,197,117,0.15);
+  --border-gold-bright:rgba(253,195,62,0.35);
+  --glow-gold:rgba(253,195,62,0.07);
+  --radius:8px;
+  --radius-lg:12px;
+}
+
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Open Sans',sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ===== BLUEPRINT GRID TEXTURE ===== */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(27,42,69,0.08) 59px,rgba(27,42,69,0.08) 60px),
+    repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(27,42,69,0.08) 59px,rgba(27,42,69,0.08) 60px);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ===== LAYOUT ===== */
+.page{position:relative;z-index:1}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+.wrap-wide{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* ===== STAT BAR ===== */
+.stat-bar{
+  background:linear-gradient(90deg,var(--navy),#162035,var(--navy));
+  border-bottom:1px solid var(--border-gold);
+  padding:14px 24px;
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.stat-bar-item{text-align:center}
+.stat-bar-num{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:1.15rem;
+  color:var(--gold);
+}
+.stat-bar-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.6rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-top:2px;
+}
+
+/* ===== SLE EYEBROW ===== */
+.sle-eyebrow{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.72rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.sle-eyebrow::before,
+.sle-eyebrow::after{
+  content:'';
+  width:24px;
+  height:1px;
+  background:var(--gold-muted);
+}
+
+/* ===== SECTION TITLE ===== */
+.sle-section-title{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  color:var(--white);
+  line-height:1.15;
+  font-size:clamp(1.6rem,4vw,2.6rem);
+}
+.sle-section-title span{color:var(--gold)}
+
+/* ===== GOLD RULE ===== */
+.sle-gold-rule{
+  width:52px;
+  height:3px;
+  background:linear-gradient(90deg,var(--gold-muted),var(--gold));
+  border:none;
+  margin:1rem 0 1.75rem;
+}
+
+/* ===== BODY TEXT ===== */
+.sle-body{
+  font-size:1rem;
+  color:var(--text);
+  line-height:1.75;
+  max-width:680px;
+}
+.sle-body strong{color:var(--white)}
+
+/* ===== CARDS ===== */
+.sle-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:1.75rem;
+  transition:transform 0.25s ease,border-color 0.25s ease;
+}
+.sle-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--border-gold-bright);
+}
+
+/* ===== BUTTONS ===== */
+.sle-btn-gold{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;
+  font-size:0.85rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:#000;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  border:none;
+  border-radius:4px;
+  padding:16px 36px;
+  cursor:pointer;
+  transition:all 0.25s ease;
+  text-decoration:none;
+}
+.sle-btn-gold:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 40px rgba(253,195,62,0.45);
+}
+
+.sle-btn-outline{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.8rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:var(--gold);
+  background:transparent;
+  border:2px solid var(--gold-muted);
+  border-radius:4px;
+  padding:14px 32px;
+  cursor:pointer;
+  transition:all 0.25s ease;
+  text-decoration:none;
+}
+.sle-btn-outline:hover{
+  background:rgba(253,195,62,0.08);
+  border-color:var(--gold);
+}
+
+/* ===== FORM INPUTS ===== */
+.sle-input{
+  width:100%;
+  font-family:'Open Sans',sans-serif;
+  font-size:0.95rem;
+  color:var(--white);
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(227,197,117,0.2);
+  border-radius:4px;
+  padding:14px 16px;
+  outline:none;
+  transition:border-color 0.2s;
+}
+.sle-input:focus{
+  border-color:var(--gold);
+}
+.sle-input::placeholder{
+  color:var(--text-dim);
+}
+.sle-select{
+  width:100%;
+  font-family:'Open Sans',sans-serif;
+  font-size:0.95rem;
+  color:var(--white);
+  background:rgba(15,25,45,0.6);
+  border:1px solid rgba(227,197,117,0.2);
+  border-radius:4px;
+  padding:14px 16px;
+  outline:none;
+  appearance:none;
+  cursor:pointer;
+  transition:border-color 0.2s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A78227' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+}
+.sle-select:focus{border-color:var(--gold)}
+.sle-select option{background:var(--navy);color:var(--white)}
+
+.form-label{
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.68rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:6px;
+  display:block;
+}
+
+/* ===== HERO ===== */
+.hero{
+  text-align:center;
+  padding:64px 24px 56px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:600px;
+  height:600px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--glow-gold) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.hero .sle-eyebrow{margin-bottom:24px}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:clamp(2rem,5vw,3.4rem);
+  color:var(--white);
+  line-height:1.12;
+  margin-bottom:20px;
+}
+.hero h1 span{color:var(--gold)}
+.hero-sub{
+  font-size:1.1rem;
+  color:var(--text-muted);
+  max-width:600px;
+  margin:0 auto 12px;
+  line-height:1.65;
+}
+.hero-sub strong{color:var(--white)}
+.hero-body{
+  font-size:0.95rem;
+  color:var(--text-dim);
+  max-width:560px;
+  margin:0 auto 32px;
+  line-height:1.6;
+}
+.hero-trust{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.7rem;
+  font-weight:600;
+  color:var(--text-dim);
+  letter-spacing:0.5px;
+  margin-top:16px;
+}
+.hero-quote{
+  margin-top:36px;
+  padding:20px 28px;
+  background:rgba(27,42,69,0.4);
+  border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;
+  display:inline-block;
+  text-align:left;
+  max-width:560px;
+}
+.hero-quote p{
+  font-style:italic;
+  color:var(--text);
+  font-size:0.95rem;
+  line-height:1.6;
+}
+.hero-quote cite{
+  display:block;
+  margin-top:8px;
+  font-style:normal;
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.72rem;
+  color:var(--gold-muted);
+  letter-spacing:0.5px;
+}
+
+/* ===== VIDEO EMBED ===== */
+.video-wrap{
+  max-width:720px;
+  margin:0 auto 48px;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  border:2px solid rgba(227,197,117,0.2);
+  position:relative;
+  background:#000;
+}
+.video-aspect{
+  position:relative;
+  padding-top:56.25%;
+}
+.video-aspect iframe{
+  position:absolute;
+  top:0;left:0;width:100%;height:100%;border:0;
+}
+
+/* ===== SECTIONS ===== */
+.section{padding:72px 0}
+.section-alt{background:var(--surface)}
+.section-dark{background:rgba(10,10,10,0.96)}
+.section-center{text-align:center}
+.section-center .sle-gold-rule{margin-left:auto;margin-right:auto}
+.section-center .sle-body{margin-left:auto;margin-right:auto}
+
+/* ===== IS THIS YOU? ===== */
+.pain-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:36px;
+}
+.pain-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:28px 24px;
+  transition:transform 0.25s ease,border-color 0.25s ease;
+}
+.pain-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--border-gold-bright);
+}
+.pain-num{
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;
+  font-size:0.7rem;
+  color:var(--gold);
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+.pain-title{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:1rem;
+  color:var(--white);
+  margin-bottom:8px;
+}
+.pain-body{
+  font-size:0.88rem;
+  color:var(--text-muted);
+  line-height:1.65;
+}
+
+/* ===== NOT FOR YOU ===== */
+.disqualify{margin-top:32px}
+.disqualify-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(206,48,42,0.1);
+}
+.disqualify-icon{
+  flex-shrink:0;
+  width:22px;
+  height:22px;
+  background:rgba(206,48,42,0.12);
+  border:1px solid rgba(206,48,42,0.3);
+  border-radius:3px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--red);
+  font-size:0.7rem;
+  font-weight:900;
+  margin-top:2px;
+}
+.disqualify-text{
+  font-size:0.92rem;
+  color:rgba(255,180,180,0.85);
+  line-height:1.55;
+}
+
+/* ===== STATS ROW ===== */
+.stats-row{
+  display:flex;
+  justify-content:center;
+  gap:32px;
+  flex-wrap:wrap;
+  margin:40px 0;
+}
+.stat-block{
+  text-align:center;
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:24px 32px;
+  min-width:160px;
+}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:2.2rem;
+  color:var(--gold);
+  line-height:1;
+}
+.stat-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.65rem;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-top:8px;
+}
+
+/* ===== ROADMAP ===== */
+.roadmap{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  margin-top:40px;
+  position:relative;
+}
+.roadmap::before{
+  content:'';
+  position:absolute;
+  left:28px;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:linear-gradient(to bottom,var(--gold),rgba(253,195,62,0.1));
+}
+.roadmap-step{
+  display:flex;
+  gap:24px;
+  padding:24px 0;
+  position:relative;
+}
+.roadmap-marker{
+  flex-shrink:0;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--navy),#162035);
+  border:2px solid var(--gold-muted);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:1.3rem;
+  color:var(--gold);
+  z-index:1;
+}
+.roadmap-content{flex:1;padding-top:6px}
+.roadmap-title{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:1.05rem;
+  color:var(--white);
+  margin-bottom:6px;
+}
+.roadmap-desc{
+  font-size:0.88rem;
+  color:var(--text-muted);
+  line-height:1.65;
+}
+.roadmap-tag{
+  display:inline-block;
+  font-family:'Montserrat',sans-serif;
+  font-size:0.6rem;
+  font-weight:800;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:3px 10px;
+  border-radius:3px;
+  margin-top:8px;
+}
+.tag-free{background:rgba(45,122,45,0.15);color:#88ff88;border:1px solid rgba(45,122,45,0.3)}
+.tag-paid{background:rgba(253,195,62,0.1);color:var(--gold);border:1px solid rgba(253,195,62,0.2)}
+.tag-scale{background:rgba(26,122,110,0.12);color:#88ffee;border:1px solid rgba(26,122,110,0.25)}
+
+/* ===== COMPARISON TABLE ===== */
+.compare-table{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  margin-top:36px;
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.compare-header{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.85rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  padding:18px 20px;
+  text-align:center;
+}
+.compare-header.bad{background:rgba(206,48,42,0.18);color:#ff8888}
+.compare-header.good{background:rgba(253,195,62,0.15);color:var(--gold)}
+.compare-cell{
+  padding:16px 20px;
+  font-size:0.88rem;
+  text-align:center;
+  line-height:1.5;
+}
+.compare-cell.bad{background:rgba(206,48,42,0.06);color:rgba(255,180,180,0.8)}
+.compare-cell.good{background:rgba(253,195,62,0.04);color:var(--text)}
+.compare-cell strong{color:var(--white)}
+.compare-row-label{
+  grid-column:1/-1;
+  font-family:'Montserrat',sans-serif;
+  font-size:0.6rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  padding:10px 20px 4px;
+  background:rgba(0,0,0,0.3);
+}
+
+/* ===== CONCEPT CARDS ===== */
+.concept-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:36px;
+}
+.concept-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:28px 22px;
+  text-align:center;
+  transition:transform 0.25s ease,border-color 0.25s ease;
+}
+.concept-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--border-gold-bright);
+}
+.concept-icon{
+  font-size:2rem;
+  margin-bottom:14px;
+  display:block;
+}
+.concept-name{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.82rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:10px;
+}
+.concept-body{
+  font-size:0.85rem;
+  color:var(--text-muted);
+  line-height:1.6;
+}
+
+/* ===== FORMULA BAR ===== */
+.formula-bar{
+  background:linear-gradient(90deg,var(--navy),#162035,var(--navy));
+  border:1px solid rgba(227,197,117,0.25);
+  border-radius:6px;
+  padding:22px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin:36px 0;
+}
+.formula-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.6rem;
+  font-weight:800;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold-muted);
+}
+.formula-text{
+  font-family:'Courier New',monospace;
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--gold);
+  letter-spacing:1px;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonial-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:36px;
+}
+.testimonial-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:28px 24px;
+  transition:transform 0.25s ease,border-color 0.25s ease;
+}
+.testimonial-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--border-gold-bright);
+}
+.testimonial-quote{
+  font-style:italic;
+  font-size:0.92rem;
+  color:var(--text);
+  line-height:1.65;
+  margin-bottom:16px;
+  border-left:3px solid var(--gold-muted);
+  padding-left:16px;
+}
+.testimonial-name{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.82rem;
+  color:var(--white);
+}
+.testimonial-detail{
+  font-size:0.75rem;
+  color:var(--text-dim);
+  margin-top:2px;
+}
+.win-badge{
+  display:inline-block;
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.6rem;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:3px 10px;
+  border-radius:2px;
+  margin-top:10px;
+}
+.badge-gold{background:rgba(253,195,62,0.12);color:var(--gold);border:1px solid rgba(253,195,62,0.25)}
+.badge-platinum{background:rgba(192,192,192,0.12);color:#ccc;border:1px solid rgba(192,192,192,0.25)}
+.badge-ultimate{background:rgba(136,85,255,0.12);color:#bb88ff;border:1px solid rgba(136,85,255,0.25)}
+
+/* ===== FOUNDERS ===== */
+.founders-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:36px;
+}
+.founder-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:28px 22px;
+  text-align:center;
+}
+.founder-name{
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;
+  font-size:1rem;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.founder-role{
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.6rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.founder-body{
+  font-size:0.85rem;
+  color:var(--text-muted);
+  line-height:1.6;
+}
+
+/* ===== FORM SECTION ===== */
+.form-section{
+  background:linear-gradient(135deg,rgba(27,42,69,0.9),var(--surface));
+  border:2px solid rgba(227,197,117,0.2);
+  border-radius:var(--radius-lg);
+  padding:48px 40px;
+  max-width:560px;
+  margin:0 auto;
+}
+.form-section h3{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:1.6rem;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.form-section .form-sub{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:28px;
+}
+.form-row{margin-bottom:16px}
+.form-row-half{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:16px;
+}
+.form-submit{width:100%;margin-top:8px}
+.form-trust{
+  text-align:center;
+  font-family:'Montserrat',sans-serif;
+  font-size:0.65rem;
+  font-weight:600;
+  color:var(--text-dim);
+  margin-top:14px;
+  letter-spacing:0.5px;
+}
+
+/* ===== ORDER BUMP ===== */
+.order-bump{
+  background:linear-gradient(135deg,rgba(27,42,69,0.9),rgba(13,21,32,0.95));
+  border:2px solid rgba(253,195,62,0.3);
+  border-radius:10px;
+  padding:28px 24px;
+  margin-top:28px;
+  overflow:hidden;
+}
+.bump-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+.bump-check{
+  width:20px;
+  height:20px;
+  border-radius:3px;
+  border:2px solid var(--gold);
+  cursor:pointer;
+  accent-color:var(--gold);
+}
+.bump-title{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.82rem;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.bump-body{
+  font-size:0.88rem;
+  color:var(--text-muted);
+  line-height:1.65;
+  margin-bottom:12px;
+}
+.bump-price{
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+}
+.bump-price .crossed{
+  text-decoration:line-through;
+  color:var(--text-dim);
+  font-size:0.85rem;
+}
+.bump-price .free{
+  color:var(--gold);
+  font-weight:900;
+  font-size:1.05rem;
+  margin-left:8px;
+}
+
+/* ===== SUCCESS STATE ===== */
+.success-state{
+  display:none;
+  text-align:center;
+  padding:48px 24px;
+}
+.success-state.active{display:block}
+.success-icon{font-size:3rem;margin-bottom:16px}
+.success-title{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:2rem;
+  color:var(--gold);
+  margin-bottom:8px;
+}
+.success-body{
+  font-size:1rem;
+  color:var(--text-muted);
+  max-width:480px;
+  margin:0 auto;
+}
+
+/* ===== FAQ ===== */
+.faq-list{margin-top:36px}
+.faq-item{
+  border-bottom:1px solid var(--border-gold);
+}
+.faq-btn{
+  width:100%;
+  background:none;
+  border:none;
+  color:var(--white);
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.92rem;
+  text-align:left;
+  padding:20px 0;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  transition:color 0.2s;
+}
+.faq-btn:hover{color:var(--gold)}
+.faq-icon{
+  flex-shrink:0;
+  font-size:1.2rem;
+  color:var(--gold-muted);
+  transition:transform 0.3s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+.faq-body-inner{
+  padding:0 0 20px;
+  font-size:0.9rem;
+  color:var(--text-muted);
+  line-height:1.7;
+}
+
+/* ===== FINAL CTA ===== */
+.final-cta{
+  text-align:center;
+  padding:80px 24px;
+  position:relative;
+}
+.final-cta::before{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  width:500px;height:500px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--glow-gold) 0%,transparent 65%);
+  pointer-events:none;
+}
+.final-cta>*{position:relative;z-index:1}
+
+/* ===== FOOTER ===== */
+.footer{
+  text-align:center;
+  padding:40px 24px;
+  border-top:1px solid var(--border-gold);
+}
+.footer p{
+  font-size:0.72rem;
+  color:var(--text-dim);
+  line-height:1.8;
+  max-width:680px;
+  margin:0 auto;
+}
+.footer a{color:var(--gold-muted);text-decoration:none}
+
+/* ===== COUNTDOWN ===== */
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin:24px 0;
+}
+.countdown-block{
+  background:rgba(10,10,10,0.7);
+  border:1px solid rgba(253,195,62,0.3);
+  border-radius:6px;
+  padding:12px 16px;
+  text-align:center;
+  min-width:64px;
+}
+.countdown-num{
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;
+  font-size:1.6rem;
+  color:var(--gold);
+  line-height:1;
+}
+.countdown-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.5rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-top:4px;
+}
+
+/* ===== FADE ANIMATION ===== */
+.fade-up{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity 0.65s ease,transform 0.65s ease;
+}
+.fade-up.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .stat-bar{gap:20px;padding:12px 16px}
+  .stat-bar-num{font-size:0.95rem}
+  .hero{padding:48px 16px 40px}
+  .pain-grid{grid-template-columns:1fr}
+  .concept-grid{grid-template-columns:1fr}
+  .compare-table{grid-template-columns:1fr}
+  .compare-header.bad,.compare-cell.bad{display:none}
+  .testimonial-grid{grid-template-columns:1fr}
+  .founders-grid{grid-template-columns:1fr}
+  .form-section{padding:32px 20px}
+  .form-row-half{grid-template-columns:1fr}
+  .section{padding:48px 0}
+  .roadmap::before{left:20px}
+  .roadmap-marker{width:40px;height:40px;font-size:1rem}
+}
+@media(max-width:480px){
+  .stat-bar{flex-direction:column;gap:8px}
+  .stats-row{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ===== STAT BAR ===== -->
+<div class="stat-bar">
+  <div class="stat-bar-item">
+    <div class="stat-bar-num">1,000+</div>
+    <div class="stat-bar-label">Electricians Trained</div>
+  </div>
+  <div class="stat-bar-item">
+    <div class="stat-bar-num">$143K/mo</div>
+    <div class="stat-bar-label">New Location in 6 Months</div>
+  </div>
+  <div class="stat-bar-item">
+    <div class="stat-bar-num">400+</div>
+    <div class="stat-bar-label">Leads/Month (Single Shop)</div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="sle-eyebrow">Service Loop Electrical</div>
+    <h1>For Electricians Who Need More <span>Leads Now</span></h1>
+    <p class="hero-sub">The exact <strong>Million Dollar Leads Roadmap</strong> we use to help electricians fill their calendars, double their revenue, and stop relying on word-of-mouth alone.</p>
+    <p class="hero-body">Inside: the 5-channel marketing stack in the exact order you should deploy them, the speed-to-lead system that 10x's your contact rate, and the front-end math that turns marketing into a predictable machine.</p>
+    <a href="#signup-form" class="sle-btn-gold">Get the Free Leads Playbook</a>
+    <p class="hero-trust">Free. No credit card. Instant access.</p>
+    <div class="hero-quote">
+      <p>"From a few reviews and fewer leads to 400+ leads a month -- and a second shop both doing $100K+."</p>
+      <cite>Forrest Schwartz, CMO -- Service Loop Electrical / Kylo Electric</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEO ===== -->
+<div class="wrap fade-up">
+  <div class="video-wrap">
+    <div class="video-aspect">
+      <div id="wistia-video"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== IS THIS YOU? ===== -->
+<section class="section section-alt fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">Pre-Qualify Yourself</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Is This <span>You?</span></h2>
+    <hr class="sle-gold-rule">
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-num">01</div>
+        <div class="pain-title">Word-of-Mouth Ceiling</div>
+        <div class="pain-body">You built your book of business on referrals and your reputation. It got you here -- but it won't get you to $83K/month. You need a system that generates leads on demand, not when someone happens to mention your name.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">02</div>
+        <div class="pain-title">The Feast-or-Famine Cycle</div>
+        <div class="pain-body">Some weeks you're turning work away. Other weeks your guys are standing around. You've tried ads, maybe Angie's, maybe a "marketing guy." Results were inconsistent. You need the right channels in the right order.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">03</div>
+        <div class="pain-title">You're the Call Center</div>
+        <div class="pain-body">Leads come in while you're in the attic or under a panel. By the time you call back, they've already booked with someone else. You're doing $17/hour work instead of $400/hour work.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">04</div>
+        <div class="pain-title">No Idea What to Spend</div>
+        <div class="pain-body">You don't know your cost per lead, your booking rate, or your allowable spend. Marketing feels like gambling instead of math. You're either overspending on junk leads or underspending and leaving money on the table.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NOT FOR YOU ===== -->
+<section class="section fade-up">
+  <div class="wrap">
+    <h2 class="sle-section-title">This Is <span>Not</span> For You If...</h2>
+    <hr class="sle-gold-rule">
+    <div class="disqualify">
+      <div class="disqualify-item">
+        <div class="disqualify-icon">X</div>
+        <div class="disqualify-text">You don't have a Google Business Profile set up yet and aren't willing to spend 30 minutes creating one. This playbook builds on a foundation -- no foundation, no results.</div>
+      </div>
+      <div class="disqualify-item">
+        <div class="disqualify-icon">X</div>
+        <div class="disqualify-text">You think marketing is someone else's job. If you're the owner, marketing is your job until you have the revenue to delegate it. This playbook shows you how to do it yourself first.</div>
+      </div>
+      <div class="disqualify-item">
+        <div class="disqualify-icon">X</div>
+        <div class="disqualify-text">You want a magic button, not a system. These channels work -- but they require consistency. If you're not willing to follow up on leads within 5 minutes, no amount of ad spend will save you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE NUMBERS DON'T LIE ===== -->
+<section class="section section-alt section-center fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">The Numbers Don't Lie</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Results From the <span>Roadmap</span></h2>
+    <hr class="sle-gold-rule">
+    <div class="stats-row">
+      <div class="stat-block">
+        <div class="stat-num">$0</div>
+        <div class="stat-label">to $143K/mo in 6 Months</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">293</div>
+        <div class="stat-label">Panel Leads in 5 Months</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">$18</div>
+        <div class="stat-label">Cost Per Lead (Best Ad)</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">$4M+</div>
+        <div class="stat-label">Single Shop Revenue</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE REAL PROBLEM ===== -->
+<section class="section fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">The Real Problem</div>
+    <h2 class="sle-section-title" style="margin-top:12px">You Don't Have a Lead <span>Problem.</span><br>You Have a Lead <span>System</span> Problem.</h2>
+    <hr class="sle-gold-rule">
+    <p class="sle-body">Most electricians are fighting over the same 3% of buyers who are Googling "electrician near me" right now. Everyone's competing for those same leads, driving up costs, and racing to be the cheapest bid.</p>
+    <p class="sle-body" style="margin-top:16px">But there's another 7% of your market that's <strong>open to buying right now</strong> -- twice the size, half the competition. They just don't know they have a problem yet. The roadmap inside this playbook shows you how to capture both.</p>
+
+    <div class="formula-bar" style="margin-top:32px">
+      <span class="formula-label">The Math</span>
+      <span class="formula-text">3% Intent + 7% Interrupt = 10% of Your Market Ready to Buy</span>
+    </div>
+
+    <p class="sle-body" style="margin-top:24px">Once you know your numbers -- your cost per lead, your booking rate, your close rate, your average ticket -- the question shifts from <em>"How do I get leads?"</em> to <strong>"How many leads do I want?"</strong></p>
+    <p class="sle-body" style="margin-top:16px">That's the shift. From gambling to math. From hoping to controlling.</p>
+  </div>
+</section>
+
+<!-- ===== 3 KEY CONCEPTS ===== -->
+<section class="section section-alt section-center fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">The Foundation</div>
+    <h2 class="sle-section-title" style="margin-top:12px">3 Concepts That Underpin <span>All</span> Successful Marketing</h2>
+    <hr class="sle-gold-rule">
+    <p class="sle-body" style="margin-left:auto;margin-right:auto">Master these three and every marketing decision becomes clear. Skip them and every ad dollar you spend is a guess.</p>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="concept-icon">&#9889;</span>
+        <div class="concept-name">Intent vs. Interrupt</div>
+        <div class="concept-body"><strong>Intent:</strong> They're searching for you (Google). <strong>Interrupt:</strong> You show up in their feed and create the need (Facebook). You need both -- intent first, interrupt to scale.</div>
+      </div>
+      <div class="concept-card">
+        <span class="concept-icon">&#9650;</span>
+        <div class="concept-name">The Buyer's Pyramid</div>
+        <div class="concept-body"><strong>3%</strong> are buying now. <strong>7%</strong> are open to it. Everyone fights for the 3%. The playbook shows you how to capture the 7% -- twice the market, half the competition.</div>
+      </div>
+      <div class="concept-card">
+        <span class="concept-icon">&#128065;</span>
+        <div class="concept-name">Stages of Awareness</div>
+        <div class="concept-body">Unaware &rarr; Problem Aware &rarr; Solution Aware &rarr; Product Aware &rarr; Most Aware. Most electricians skip to "hire us" without ever making the prospect realize they have a problem.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE MILLION DOLLAR LEADS ROADMAP ===== -->
+<section class="section fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">What's Inside</div>
+    <h2 class="sle-section-title" style="margin-top:12px">The Million Dollar <span>Leads Roadmap</span></h2>
+    <hr class="sle-gold-rule">
+    <p class="sle-body">Deploy these channels in this exact order. Start with the lowest-hanging fruit. Layer up as each one compounds. By the time you reach Step 5, you have more leads than you need.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-step">
+        <div class="roadmap-marker">1</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">Google Business Profile</div>
+          <div class="roadmap-desc">The holy grail of service leads. Intent-based, exclusive to you, and free once you rank. Inside: the review strategy that is 80% of the ranking equation, the profile setup checklist, photo and media requirements, and how to get 20 reviews/month starting this week.</div>
+          <span class="roadmap-tag tag-free">Free Channel</span>
+        </div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-marker">2</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">Local Service Ads (LSA)</div>
+          <div class="roadmap-desc">If you can't rank in the top 3 organically, buy the position. $40-80 per lead, high intent, exclusive. Inside: setup requirements, the "mark as booked" trick that unlocks more leads, and the budget strategy that signals Google to send you volume.</div>
+          <span class="roadmap-tag tag-paid">Paid Channel</span>
+        </div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-marker">3</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">Meta / Facebook Ads</div>
+          <div class="roadmap-desc">Interrupt marketing that unlocks the other 7% of your market. Inside: the 3-tier ad strategy (Problem &rarr; Solution &rarr; Product), viral hook formulas that produced 293 leads in 5 months at $18/lead, and the modular script system so you never wonder "what do I say?"</div>
+          <span class="roadmap-tag tag-paid">Paid Channel</span>
+        </div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-marker">4</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">Speed-to-Lead System</div>
+          <div class="roadmap-desc">MIT/Harvard study: after 5 minutes, you lose 90% of your chance to contact a lead. Inside: the 10-attempt follow-up cadence that achieves 90% contact rate, the CSR hiring playbook (your next hire), and the exact script to book 40-50% of leads as appointments.</div>
+          <span class="roadmap-tag tag-scale">Force Multiplier</span>
+        </div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-marker">5</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">The Front-End Math</div>
+          <div class="roadmap-desc">Turn marketing from gambling into a calculator. Inside: cost per lead, booking rate, close rate, average opportunity, allowable CPL, and ROAS -- all worked out with your numbers. Once you know the math, you control your growth dial.</div>
+          <span class="roadmap-tag tag-scale">The Unlock</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON ===== -->
+<section class="section section-alt section-center fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">The Speed-to-Lead Gap</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Same Leads. Completely Different <span>Outcome.</span></h2>
+    <hr class="sle-gold-rule">
+    <p class="sle-body" style="margin-left:auto;margin-right:auto">30% of leads are never contacted at all. Most reps call once and quit. Here's what happens when you follow the system instead.</p>
+
+    <div class="compare-table" style="max-width:680px;margin-left:auto;margin-right:auto">
+      <div class="compare-header bad">Without the System</div>
+      <div class="compare-header good">With the System</div>
+
+      <div class="compare-row-label">Response Time</div>
+      <div class="compare-cell bad">Hours or next day</div>
+      <div class="compare-cell good"><strong>Under 5 minutes</strong></div>
+
+      <div class="compare-row-label">Follow-Up Attempts</div>
+      <div class="compare-cell bad">1 call, maybe 2</div>
+      <div class="compare-cell good"><strong>10 structured attempts</strong></div>
+
+      <div class="compare-row-label">Contact Rate</div>
+      <div class="compare-cell bad">~30%</div>
+      <div class="compare-cell good"><strong>90%+</strong></div>
+
+      <div class="compare-row-label">Booking Rate</div>
+      <div class="compare-cell bad">15-20%</div>
+      <div class="compare-cell good"><strong>40-50%</strong></div>
+
+      <div class="compare-row-label">Result</div>
+      <div class="compare-cell bad">"Facebook leads don't work"</div>
+      <div class="compare-cell good"><strong>$27K in 28 days from 3 jobs</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FRONT-END MATH PREVIEW ===== -->
+<section class="section fade-up">
+  <div class="wrap section-center">
+    <div class="sle-eyebrow">It's a Math Problem</div>
+    <h2 class="sle-section-title" style="margin-top:12px">The Million Dollar <span>Calculator</span></h2>
+    <hr class="sle-gold-rule">
+    <p class="sle-body" style="margin-left:auto;margin-right:auto">Once you know these numbers, marketing stops being a gamble and starts being a dial you turn.</p>
+
+    <div class="formula-bar" style="margin-top:32px;flex-direction:column;gap:12px;padding:28px 32px">
+      <span class="formula-label">Your Growth Formula</span>
+      <span class="formula-text" style="font-size:0.95rem">Avg Ticket ($2,000) &times; Close Rate (50%) = $1,000 Avg Opportunity</span>
+      <span class="formula-text" style="font-size:0.95rem">$1,000 &divide; 10 = $100 Allowable CPL (10:1 ROAS)</span>
+    </div>
+
+    <div class="stats-row" style="margin-top:28px">
+      <div class="stat-block">
+        <div class="stat-num">216</div>
+        <div class="stat-label">Leads/Mo for $1M/yr</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">$10K</div>
+        <div class="stat-label">Marketing Spend/Mo</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">7.7x</div>
+        <div class="stat-label">Return on Ad Spend</div>
+      </div>
+    </div>
+    <p class="sle-body" style="margin:24px auto 0;text-align:center;font-style:italic;color:var(--text-dim)">The complete calculator and worked examples are inside the playbook.</p>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section section-alt fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">Real Results. Real Electricians.</div>
+    <h2 class="sle-section-title" style="margin-top:12px">What Happens When the <span>Roadmap</span> Meets Follow-Through</h2>
+    <hr class="sle-gold-rule">
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"Zero paid ads. Just a website and Google -- and January was my busiest month ever. Booked out 2-3 weeks with $0 ad spend. Getting off the tools in March."</div>
+        <div class="testimonial-name">Alexis</div>
+        <div class="testimonial-detail">LeadSurge Pro &bull; Top 3 Google in under 6 months</div>
+        <span class="win-badge badge-gold">Gold Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"From a few reviews and fewer leads to 400+ leads a month. $11K single job from a Facebook ad. Two shops, both averaging $100K+/month."</div>
+        <div class="testimonial-name">Forrest Schwartz</div>
+        <div class="testimonial-detail">Kylo Electric &bull; 200+ Google Reviews</div>
+        <span class="win-badge badge-ultimate">Ultimate Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"$27K in 28 days from 3 Facebook jobs. Spent $2,500 on leads. That's the kind of math I can get behind."</div>
+        <div class="testimonial-name">Roman</div>
+        <div class="testimonial-detail">SLE Partner &bull; First 30 Days on Meta Ads</div>
+        <span class="win-badge badge-gold">Gold Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"One shop. Three selling techs. Over $4 million in 2025. Every channel firing: GBP, LSA, PPC, Meta, lead scoring. The system works."</div>
+        <div class="testimonial-name">Allen Black</div>
+        <div class="testimonial-detail">Watt's Right Electrical &bull; Full-Channel Coverage</div>
+        <span class="win-badge badge-ultimate">Ultimate Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"She only texted back. Gave red flags about the diagnostic fee. I followed the 10-attempt cadence. Attempt #10 turned into a $25,000 sale."</div>
+        <div class="testimonial-name">Dylan</div>
+        <div class="testimonial-detail">SLE Partner &bull; Speed-to-Lead Discipline</div>
+        <span class="win-badge badge-platinum">Platinum Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"$0 to $300K/month over 25 months. $305K in month 26 alone. The leads roadmap plus the sales system is the full picture."</div>
+        <div class="testimonial-name">Dan Totten</div>
+        <div class="testimonial-detail">DT Electric &bull; $1.1M First Year</div>
+        <span class="win-badge badge-ultimate">Ultimate Award</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOUNDERS ===== -->
+<section class="section fade-up">
+  <div class="wrap section-center">
+    <div class="sle-eyebrow">Built By Electricians Who Did It</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Not Coaches. <span>Operators.</span></h2>
+    <hr class="sle-gold-rule">
+    <div class="founders-grid">
+      <div class="founder-card">
+        <div class="founder-name">Clay Neumeier</div>
+        <div class="founder-role">CEO &bull; 16+ Years</div>
+        <div class="founder-body">Built the $1M+ Electric Service Academy from the field up. Runs the numbers, builds the systems, and proves every framework with real data before it ever reaches a client.</div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-name">Joseph Lucanie</div>
+        <div class="founder-role">CCO &bull; $1.3M in Sales</div>
+        <div class="founder-body">Created the 6-option pricing system and the sales methodology that turned average tickets from $850 into $2,000+. The voice behind every close rate improvement.</div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-name">Forrest Schwartz</div>
+        <div class="founder-role">CMO &bull; Marketing + AI</div>
+        <div class="founder-body">Took Kylo Electric from $0 to $143K/month in 6 months. Built the Million Dollar Leads Roadmap, the ad systems, and the speed-to-lead framework inside this playbook.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORM ===== -->
+<section class="section section-dark section-center fade-up" id="signup-form">
+  <div class="wrap">
+    <div class="sle-eyebrow">Free Instant Access</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Service Leads <span>Now</span></h2>
+    <p style="color:var(--text-muted);margin-top:8px;margin-bottom:4px;font-size:0.95rem">The Million Dollar Leads Playbook</p>
+    <hr class="sle-gold-rule">
+
+    <div class="form-section" id="form-container">
+      <h3>Get Your Free <span style="color:var(--gold)">Playbook</span></h3>
+      <p class="form-sub">Instant Download &bull; No Credit Card Required</p>
+
+      <form id="leads-form" onsubmit="return handleSubmit(event)">
+        <div class="form-row-half">
+          <div>
+            <label class="form-label" for="firstName">First Name</label>
+            <input class="sle-input" type="text" id="firstName" name="firstName" placeholder="First Name" required>
+          </div>
+          <div>
+            <label class="form-label" for="lastName">Last Name</label>
+            <input class="sle-input" type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="businessName">Business Name</label>
+          <input class="sle-input" type="text" id="businessName" name="businessName" placeholder="Your Electrical Company">
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="email">Email Address</label>
+          <input class="sle-input" type="email" id="email" name="email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="phone">Phone Number</label>
+          <input class="sle-input" type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="yearsInBusiness">How Long in Business?</label>
+          <select class="sle-select" id="yearsInBusiness" name="yearsInBusiness">
+            <option value="" disabled selected>Select...</option>
+            <option value="less-than-1">Less than 1 year</option>
+            <option value="1-3">1-3 years</option>
+            <option value="3-5">3-5 years</option>
+            <option value="5+">5+ years</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="teamSize">Service Techs (incl. Owner)</label>
+          <select class="sle-select" id="teamSize" name="teamSize">
+            <option value="" disabled selected>Select...</option>
+            <option value="1">Just me</option>
+            <option value="2-4">2-4</option>
+            <option value="5-9">5-9</option>
+            <option value="10+">10+</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="monthlyRevenue">Approximate Monthly Revenue</label>
+          <select class="sle-select" id="monthlyRevenue" name="monthlyRevenue">
+            <option value="" disabled selected>Select...</option>
+            <option value="under-30k">Under $30K</option>
+            <option value="31-80k">$31K - $80K</option>
+            <option value="80-100k">$80K - $100K</option>
+            <option value="100k+">$100K+</option>
+          </select>
+        </div>
+
+        <button type="submit" class="sle-btn-gold form-submit">Get the Free Leads Playbook</button>
+        <p class="form-trust">Free. No credit card. Instant access.</p>
+      </form>
+
+      <!-- ORDER BUMP -->
+      <div class="order-bump">
+        <div class="bump-header">
+          <input type="checkbox" class="bump-check" id="webinarBump" name="webinarBump">
+          <label class="bump-title" for="webinarBump">Add-On: Live Leads Webinar</label>
+        </div>
+        <p class="bump-body"><strong style="color:var(--white)">Service Leads Now: The 90-Minute Deep Dive</strong> -- Watch Forrest walk through every channel live, answer your questions in real time, and show you exactly how to deploy the roadmap in your market.</p>
+        <p class="bump-price"><span class="crossed">$97</span><span class="free">FREE SEAT</span></p>
+        <p style="font-size:0.75rem;color:var(--text-dim);margin-top:8px"><strong style="color:var(--text-muted)">Bonuses included:</strong> Full replay access, the Front-End Math Calculator spreadsheet, and the 10-Attempt Follow-Up Script.</p>
+      </div>
+
+      <!-- DAILY SPARKS BUMP -->
+      <div style="margin-top:16px;display:flex;align-items:flex-start;gap:10px;padding:12px 16px;background:rgba(253,195,62,0.04);border:1px solid rgba(253,195,62,0.12);border-radius:6px">
+        <input type="checkbox" class="bump-check" id="sparksBump" name="sparksBump" checked>
+        <label for="sparksBump" style="font-size:0.82rem;color:var(--text-muted);cursor:pointer;line-height:1.5"><strong style="color:var(--white)">Daily Sparks</strong> -- Free morning insights from Clay Neumeier. One short email every day to sharpen your service business thinking.</label>
+      </div>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-state" id="success-state">
+      <div class="success-icon">&#9889;</div>
+      <div class="success-title">You're In.</div>
+      <p class="success-body">Check your email for the Million Dollar Leads Playbook. If you grabbed the webinar seat, you'll get a separate confirmation with date and Zoom link.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">Common Questions Answered</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Frequently <span>Asked</span></h2>
+    <hr class="sle-gold-rule">
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>Is this really free? What's the catch?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">100% free, no credit card, instant access. We created this playbook because we know the electricians who implement it often become our partners down the road. The playbook stands on its own -- you don't need to buy anything else to get results from it.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>I've tried Facebook ads before and they didn't work. Why is this different?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Most electricians who say "Facebook ads don't work" actually have a speed-to-lead problem, not an ad problem. The playbook covers the 3-tier ad strategy (Problem &rarr; Solution &rarr; Product) plus the 10-attempt follow-up cadence. One of our partners turned a lead who only texted back and gave red flags into a $25,000 sale on attempt #10.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>How long before I see results?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Google Business Profile and SEO take 6-12 months to build real momentum. But LSA and Meta ads can generate leads within the first week. One partner generated $27K in revenue within 28 days of starting Facebook ads with just $2,500 in ad spend. The roadmap is designed so you get quick wins while building the long-term foundation.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>How much do I need to spend on ads?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Step 1 (Google Business Profile) is completely free. LSA runs $40-80 per lead. Facebook ads can start at $500-1,000/month. But the playbook's Front-End Math section shows you exactly how to calculate your allowable cost per lead so you never overspend. The target is 10% of revenue allocated to marketing once you're scaling.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>I'm just one guy. Can I really do all of this?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Yes -- and the playbook is sequenced specifically for that. Start with GBP (free, one-time setup). Layer LSA next. When you're ready for Facebook, the playbook includes the CSR hiring guide so you're not answering leads from the attic. One of our partners started solo, ranked top 3 on Google in under 6 months, and was stepping off the tools by month 7.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">Now It's Your Move</div>
+    <h2 class="sle-section-title" style="margin-top:12px;margin-bottom:16px">Stop Hoping for Leads.<br>Start <span>Controlling</span> Them.</h2>
+    <p class="sle-body" style="margin:0 auto 32px;text-align:center">A full calendar isn't luck. It's a system. The roadmap, the math, and the follow-up cadence are all inside -- free.</p>
+    <a href="#signup-form" class="sle-btn-gold">Get the Free Leads Playbook</a>
+    <p class="hero-trust" style="margin-top:16px">Free. No credit card. Instant access.</p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p><strong style="color:var(--gold-muted)">SERVICE LOOP ELECTRICAL INC.</strong></p>
+  <p style="margin-top:8px">The results shared on this page are real but represent exceptional outcomes. Individual results will vary based on market, effort, and implementation. This playbook provides frameworks and strategies -- your execution determines your results.</p>
+  <p style="margin-top:12px"><a href="https://serviceloopelectrical.com">serviceloopelectrical.com</a> &bull; <a href="mailto:info@serviceloopelectrical.com">info@serviceloopelectrical.com</a></p>
+  <p style="margin-top:8px">&copy; 2026 Service Loop Electrical Inc. All rights reserved.</p>
+</footer>
+
+</div><!-- /.page -->
+
+<script>
+// ===== FADE-UP ANIMATION =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ===== FAQ ACCORDION =====
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const body = item.querySelector('.faq-body');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-body').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+}
+
+// ===== FORM SUBMISSION =====
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
+
+  const data = {
+    firstName: form.firstName.value,
+    lastName: form.lastName.value,
+    businessName: form.businessName.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    yearsInBusiness: form.yearsInBusiness.value,
+    teamSize: form.teamSize.value,
+    monthlyRevenue: form.monthlyRevenue.value,
+    webinarBump: document.getElementById('webinarBump').checked,
+    dailySparks: document.getElementById('sparksBump').checked,
+    source: 'service-leads-now',
+    tags: ['service-leads-now', 'lead-magnet']
+  };
+
+  try {
+    await fetch('https://services.leadconnectorhq.com/hooks/mJnVWDiUtQrpHnyom1qR/webhook-trigger/serviceleadsnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    // Webhook may not echo back -- still show success
+  }
+
+  document.getElementById('form-container').style.display = 'none';
+  document.getElementById('success-state').classList.add('active');
+}
+</script>
+
+</body>
+</html>
