@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>Free Electrician Price Tool — Build Your $400/hr Rate in Minutes</title>
+    <title>Free Electrician Price Tool - Build Your $400/hr Rate in Minutes</title>
     <meta name="description" content="Stop guessing your rate. Get the free Service Profit Blueprint tool used by 300+ electricians to calculate their true service rate and build a $1M run rate." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -149,6 +149,124 @@ Error generating stack: `+l.message+`
         }else{
           phoneWrap.after(container);
         }
+      },200);
+    })();
+    </script>
+    <script>
+    (function(){
+      var attempts=0;
+      var iv=setInterval(function(){
+        attempts++;
+        if(attempts>150){clearInterval(iv);return;}
+        if(document.getElementById('sle-glossary-section'))return;
+        var eyebrows=document.querySelectorAll('.sle-eyebrow');
+        var faqEyebrow=null;
+        for(var i=0;i<eyebrows.length;i++){
+          if(eyebrows[i].textContent.trim()==='Common Questions'){
+            faqEyebrow=eyebrows[i];break;
+          }
+        }
+        if(!faqEyebrow)return;
+        var faqSection=faqEyebrow.closest('section')||faqEyebrow.closest('[style]');
+        var target=faqEyebrow;
+        while(target&&target.parentElement){
+          if(target.parentElement.tagName==='SECTION'||
+             (target.parentElement.children.length>1&&target.parentElement.querySelector('.container'))){
+            break;
+          }
+          target=target.parentElement;
+        }
+        var sectionParent=target.parentElement;
+        if(!sectionParent)return;
+        clearInterval(iv);
+
+        var section=document.createElement('div');
+        section.id='sle-glossary-section';
+        section.style.cssText='padding:4rem 1.5rem;background:linear-gradient(180deg,rgba(10,10,10,0.95),rgba(15,20,35,0.95));position:relative;';
+
+        var container=document.createElement('div');
+        container.className='container';
+        container.style.cssText='max-width:720px;margin:0 auto;';
+
+        var header=document.createElement('div');
+        header.className='fade-up';
+        header.style.cssText='text-align:center;margin-bottom:2.5rem;';
+
+        var eyebrow=document.createElement('div');
+        eyebrow.className='sle-eyebrow';
+        eyebrow.style.cssText='justify-content:center;';
+        eyebrow.textContent='GLOSSARY';
+
+        var title=document.createElement('h2');
+        title.className='sle-section-title';
+        title.style.cssText='font-size:clamp(1.4rem, 2.5vw, 2rem);';
+        title.innerHTML='Not sure what a term means? Here is the <span class="gold">plain English</span> version.';
+
+        header.appendChild(eyebrow);
+        header.appendChild(title);
+        container.appendChild(header);
+
+        var terms=[
+          {term:'Burden Rate',def:'What it costs your business to exist every hour. Rent, insurance, trucks, fuel, tools. Everything before you make a dollar.'},
+          {term:'Growth Rate',def:'What it costs to grow. Marketing, hiring, training. The money that builds your future.'},
+          {term:'Markup',def:'The percentage you add on top to make sure you actually profit. 30% is the minimum.'},
+          {term:'Billable Hours',def:'The hours you can actually charge for. Drive time, breaks, materials runs do not count. Roughly 50% of your day.'},
+          {term:'SSR (Simple Service Rate)',def:'Your real hourly rate. The number that makes the math work.'},
+          {term:'Run Rate',def:'Your monthly revenue multiplied by 12. What you are on pace to do for the year.'},
+          {term:'Close Rate',def:'Out of every 10 calls you run, how many say yes. 60% is the target.'},
+          {term:'Average Ticket',def:'The average dollar amount per job. Higher tickets mean fewer jobs needed to hit your number.'}
+        ];
+
+        var listWrap=document.createElement('div');
+        listWrap.style.cssText='max-width:720px;margin:0 auto;';
+
+        terms.forEach(function(t){
+          var item=document.createElement('div');
+          item.className='faq-item';
+
+          var btn=document.createElement('button');
+          btn.className='faq-btn';
+          btn.style.cssText='text-align:left;color:#fff;cursor:pointer;background:0 0;border:none;justify-content:space-between;align-items:center;gap:1rem;width:100%;padding:1.25rem 0;font-family:Montserrat,sans-serif;font-size:.97rem;font-weight:700;transition:color .2s;display:flex;';
+
+          var termSpan=document.createElement('span');
+          termSpan.textContent=t.term;
+
+          var icon=document.createElement('span');
+          icon.className='faq-icon';
+          icon.style.cssText='color:#fdc33e;flex-shrink:0;font-size:1.4rem;font-weight:300;line-height:1;transition:transform .3s;';
+          icon.textContent='+';
+
+          btn.appendChild(termSpan);
+          btn.appendChild(icon);
+
+          var body=document.createElement('div');
+          body.className='faq-body';
+          body.style.cssText='color:rgba(255,255,255,0.7);font-size:.95rem;line-height:1.8;transition:max-height .4s,padding .3s;overflow:hidden;max-height:0;padding-bottom:0;';
+          body.textContent=t.def;
+
+          var open=false;
+          btn.addEventListener('click',function(){
+            open=!open;
+            if(open){
+              body.style.maxHeight='500px';
+              body.style.paddingBottom='1.25rem';
+              icon.style.transform='rotate(45deg)';
+            }else{
+              body.style.maxHeight='0';
+              body.style.paddingBottom='0';
+              icon.style.transform='rotate(0deg)';
+            }
+          });
+
+          item.appendChild(btn);
+          item.appendChild(body);
+          listWrap.appendChild(item);
+        });
+
+        container.appendChild(listWrap);
+        section.appendChild(container);
+
+        sectionParent.insertBefore(section,target);
       },200);
     })();
     </script>
