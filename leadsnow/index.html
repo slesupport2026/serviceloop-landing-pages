@@ -986,6 +986,135 @@ body::before{
   .stat-bar{flex-direction:column;gap:8px}
   .stats-row{flex-direction:column;align-items:center}
 }
+
+/* ===== INTERACTIVE CALCULATOR ===== */
+.calc-sliders{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+  margin-top:36px;
+}
+.calc-slider-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:22px 18px 18px;
+  text-align:center;
+}
+.calc-slider-value{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:1.6rem;
+  color:var(--gold);
+  line-height:1;
+  margin-bottom:6px;
+}
+.calc-slider-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.58rem;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-bottom:14px;
+}
+.calc-range{
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+  height:6px;
+  border-radius:3px;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--gold) var(--fill,50%),rgba(255,255,255,0.12) var(--fill,50%),rgba(255,255,255,0.12) 100%);
+  outline:none;
+  cursor:pointer;
+}
+.calc-range::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--gold);
+  border:3px solid var(--bg);
+  box-shadow:0 0 8px rgba(253,195,62,0.5);
+  cursor:pointer;
+  transition:box-shadow 0.2s;
+}
+.calc-range::-webkit-slider-thumb:hover{
+  box-shadow:0 0 16px rgba(253,195,62,0.7);
+}
+.calc-range::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--gold);
+  border:3px solid var(--bg);
+  box-shadow:0 0 8px rgba(253,195,62,0.5);
+  cursor:pointer;
+}
+.calc-range::-moz-range-track{
+  height:6px;border-radius:3px;
+  background:rgba(255,255,255,0.12);
+}
+.calc-range::-moz-range-progress{
+  height:6px;border-radius:3px;
+  background:var(--gold);
+}
+
+.calc-outputs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:24px;
+}
+.calc-outputs .calc-out-card:nth-child(5),
+.calc-outputs .calc-out-card:nth-child(6),
+.calc-outputs .calc-out-card:nth-child(7){
+  /* second row spans */
+}
+.calc-out-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:20px 14px;
+  text-align:center;
+  transition:border-color 0.25s;
+}
+.calc-out-card.highlight{
+  border-color:var(--gold);
+  background:rgba(253,195,62,0.06);
+}
+.calc-out-card.highlight-green{
+  border-color:rgba(45,122,45,0.5);
+  background:rgba(45,122,45,0.08);
+}
+.calc-out-num{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:1.5rem;
+  color:var(--gold);
+  line-height:1;
+  margin-bottom:6px;
+}
+.calc-out-card.highlight-green .calc-out-num{
+  color:#88ff88;
+}
+.calc-out-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.55rem;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+}
+
+/* Calculator responsive */
+@media(max-width:768px){
+  .calc-sliders{grid-template-columns:repeat(2,1fr)}
+  .calc-sliders .calc-slider-card:last-child{grid-column:1/-1}
+  .calc-outputs{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  .calc-sliders{grid-template-columns:1fr}
+  .calc-outputs{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -1246,33 +1375,79 @@ body::before{
   </div>
 </section>
 
-<!-- ===== FRONT-END MATH PREVIEW ===== -->
-<section class="section fade-up">
-  <div class="wrap section-center">
+<!-- ===== $1M INTERACTIVE CALCULATOR ===== -->
+<section class="section fade-up" id="calculator-section">
+  <div class="wrap-wide section-center">
     <div class="sle-eyebrow">It's a Math Problem</div>
-    <h2 class="sle-section-title" style="margin-top:12px">The Million Dollar <span>Calculator</span></h2>
+    <h2 class="sle-section-title" style="margin-top:12px">The <span>$1M</span> Math. It's Simpler Than You Think</h2>
     <hr class="sle-gold-rule">
-    <p class="sle-body" style="margin-left:auto;margin-right:auto">Once you know these numbers, marketing stops being a gamble and starts being a dial you turn.</p>
+    <p class="sle-body" style="margin-left:auto;margin-right:auto">Adjust the sliders below. The calculator auto-solves for <strong>$83,334/month</strong> -- the line of safety.</p>
 
-    <div class="formula-bar" style="margin-top:32px;flex-direction:column;gap:12px;padding:28px 32px">
-      <span class="formula-label">Your Growth Formula</span>
-      <span class="formula-text" style="font-size:0.95rem">Avg Ticket ($2,000) &times; Close Rate (50%) = $1,000 Avg Opportunity</span>
-      <span class="formula-text" style="font-size:0.95rem">$1,000 &divide; 10 = $100 Allowable CPL (10:1 ROAS)</span>
+    <!-- SLIDERS -->
+    <div class="calc-sliders">
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-cpl">$50</div>
+        <div class="calc-slider-label">Cost Per Lead</div>
+        <input type="range" class="calc-range" id="slider-cpl" min="20" max="80" value="50" step="1">
+      </div>
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-ticket">$2,000</div>
+        <div class="calc-slider-label">Average Ticket</div>
+        <input type="range" class="calc-range" id="slider-ticket" min="500" max="5000" value="2000" step="50">
+      </div>
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-close">50%</div>
+        <div class="calc-slider-label">Close Rate</div>
+        <input type="range" class="calc-range" id="slider-close" min="30" max="80" value="50" step="1">
+      </div>
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-book">40%</div>
+        <div class="calc-slider-label">Booking Rate</div>
+        <input type="range" class="calc-range" id="slider-book" min="25" max="90" value="40" step="1">
+      </div>
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-budget">10%</div>
+        <div class="calc-slider-label">Marketing Budget (% of Rev)</div>
+        <input type="range" class="calc-range" id="slider-budget" min="1" max="15" value="10" step="0.5">
+      </div>
     </div>
 
-    <div class="stats-row" style="margin-top:28px">
-      <div class="stat-block">
-        <div class="stat-num">216</div>
-        <div class="stat-label">Leads/Mo for $1M/yr</div>
+    <!-- OUTPUT CARDS -->
+    <div class="calc-outputs">
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-leads">216</div>
+        <div class="calc-out-label">Total Leads / Month</div>
       </div>
-      <div class="stat-block">
-        <div class="stat-num">$10K</div>
-        <div class="stat-label">Marketing Spend/Mo</div>
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-booked">86</div>
+        <div class="calc-out-label">Booked Calls</div>
       </div>
-      <div class="stat-block">
-        <div class="stat-num">7.7x</div>
-        <div class="stat-label">Return on Ad Spend</div>
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-closed">43</div>
+        <div class="calc-out-label">Closed Jobs</div>
       </div>
+      <div class="calc-out-card highlight">
+        <div class="calc-out-num" id="out-paid">167</div>
+        <div class="calc-out-label">Paid Leads</div>
+      </div>
+      <div class="calc-out-card highlight-green">
+        <div class="calc-out-num" id="out-organic">49</div>
+        <div class="calc-out-label">Organic Leads Req'd</div>
+      </div>
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-spend">$8,333</div>
+        <div class="calc-out-label">Marketing Spend / Mo</div>
+      </div>
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-roas">10.0x</div>
+        <div class="calc-out-label">Return on Ad Spend</div>
+      </div>
+    </div>
+
+    <!-- FORMULA RESULT BAR -->
+    <div class="formula-bar" style="margin-top:28px;flex-direction:column;gap:6px;padding:24px 32px">
+      <span class="formula-text" id="calc-formula" style="font-size:1rem"></span>
+      <span style="font-size:0.85rem;color:var(--text-dim)">That's <strong style="color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem">$1,000,000</strong> in annual revenue. The line of safety.</span>
     </div>
     <p class="sle-body" style="margin:24px auto 0;text-align:center;font-style:italic;color:var(--text-dim)">The complete calculator and worked examples are inside the playbook.</p>
   </div>
@@ -1584,6 +1759,106 @@ async function handleSubmit(e) {
   document.getElementById('form-container').style.display = 'none';
   document.getElementById('success-state').classList.add('active');
 }
+
+// ===== $1M INTERACTIVE CALCULATOR =====
+(function(){
+  const ANNUAL_TARGET = 1000000;
+  const MONTHLY_TARGET = ANNUAL_TARGET / 12; // 83333.33
+
+  const slCpl    = document.getElementById('slider-cpl');
+  const slTicket = document.getElementById('slider-ticket');
+  const slClose  = document.getElementById('slider-close');
+  const slBook   = document.getElementById('slider-book');
+  const slBudget = document.getElementById('slider-budget');
+
+  const vCpl    = document.getElementById('val-cpl');
+  const vTicket = document.getElementById('val-ticket');
+  const vClose  = document.getElementById('val-close');
+  const vBook   = document.getElementById('val-book');
+  const vBudget = document.getElementById('val-budget');
+
+  const oLeads   = document.getElementById('out-leads');
+  const oBooked  = document.getElementById('out-booked');
+  const oClosed  = document.getElementById('out-closed');
+  const oPaid    = document.getElementById('out-paid');
+  const oOrganic = document.getElementById('out-organic');
+  const oSpend   = document.getElementById('out-spend');
+  const oRoas    = document.getElementById('out-roas');
+  const oFormula = document.getElementById('calc-formula');
+
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function fmtD(n){ return '$' + fmt(n); }
+
+  function fillTrack(el){
+    const min = parseFloat(el.min), max = parseFloat(el.max), val = parseFloat(el.value);
+    const pct = ((val - min) / (max - min)) * 100;
+    el.style.setProperty('--fill', pct + '%');
+  }
+
+  function calc(){
+    const cpl      = parseFloat(slCpl.value);
+    const ticket   = parseFloat(slTicket.value);
+    const close    = parseFloat(slClose.value) / 100;
+    const book     = parseFloat(slBook.value) / 100;
+    const budgetPc = parseFloat(slBudget.value) / 100;
+
+    // Solve for total leads needed to hit $83,334/mo
+    // Monthly revenue = totalLeads * bookingRate * closeRate * avgTicket
+    // totalLeads = monthlyTarget / (book * close * ticket)
+    const totalLeads = MONTHLY_TARGET / (book * close * ticket);
+    const booked     = totalLeads * book;
+    const closed     = booked * close;
+
+    // Marketing spend = budgetPc * monthlyTarget
+    const monthlySpend = budgetPc * MONTHLY_TARGET;
+
+    // Paid leads = spend / cpl
+    const paidLeads = monthlySpend / cpl;
+
+    // Organic leads = whatever is left
+    const organicLeads = Math.max(0, totalLeads - paidLeads);
+
+    // ROAS = revenue from paid leads / spend
+    // Revenue from paid = paidLeads * book * close * ticket
+    const paidRevenue = paidLeads * book * close * ticket;
+    const roas = monthlySpend > 0 ? paidRevenue / monthlySpend : 0;
+
+    // Annual from the math
+    const annual = closed * ticket * 12;
+
+    // Update display values
+    vCpl.textContent    = fmtD(cpl);
+    vTicket.textContent = fmtD(ticket);
+    vClose.textContent  = Math.round(close * 100) + '%';
+    vBook.textContent   = Math.round(book * 100) + '%';
+    vBudget.textContent = parseFloat(slBudget.value) + '%';
+
+    oLeads.textContent   = fmt(Math.ceil(totalLeads));
+    oBooked.textContent  = fmt(Math.round(booked));
+    oClosed.textContent  = fmt(Math.round(closed));
+    oPaid.textContent    = fmt(Math.round(paidLeads));
+    oOrganic.textContent = fmt(Math.ceil(organicLeads));
+    oSpend.textContent   = fmtD(Math.round(monthlySpend));
+    oRoas.textContent    = roas >= 100 ? fmt(Math.round(roas)) + 'x' : roas.toFixed(1) + 'x';
+
+    // Formula bar
+    oFormula.innerHTML =
+      fmt(Math.ceil(totalLeads)) + ' leads &times; ' +
+      Math.round(book * 100) + '% booked &times; ' +
+      Math.round(close * 100) + '% close &times; ' +
+      fmtD(ticket) + ' = <strong style="color:var(--gold);font-family:Playfair Display,serif;font-style:italic;font-size:1.3rem">' +
+      fmtD(Math.round(closed * ticket)) + '/month</strong>';
+
+    // Fill tracks
+    [slCpl, slTicket, slClose, slBook, slBudget].forEach(fillTrack);
+  }
+
+  [slCpl, slTicket, slClose, slBook, slBudget].forEach(el => {
+    el.addEventListener('input', calc);
+  });
+
+  calc(); // initial render
+})();
 </script>
 
 </body>
