@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$1M Service Playbook - SLE</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#0A0A0A;--dark:#111111;--card:#141414;--card-hover:#1a1a1a;
+  --gold:#C9A45A;--bright:#E8C97A;--accent:#FDC33E;
+  --white:#FFFFFF;--gray:#888;--light-gray:#aaa;--faint:rgba(255,255,255,0.06);
+  --red:#CE302A;--green:#2d7a2d;--teal:#1a7a6e;--blue:#3366cc;
+  --glow:0 0 30px rgba(201,164,90,0.15);
+  --radius:16px;
+}
+body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-serif;min-height:100vh;overflow-x:hidden;}
+
+/* ========== LOGIN SCREEN ========== */
+.login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;display:flex;align-items:center;justify-content:center;transition:opacity 0.5s,visibility 0.5s;}
+.login-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.login-bg{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--black);overflow:hidden;}
+.login-bg::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:
+  linear-gradient(135deg,rgba(201,164,90,0.03) 0%,transparent 50%),
+  linear-gradient(225deg,rgba(201,164,90,0.02) 0%,transparent 50%),
+  repeating-linear-gradient(60deg,transparent,transparent 80px,rgba(201,164,90,0.015) 80px,rgba(201,164,90,0.015) 81px),
+  repeating-linear-gradient(120deg,transparent,transparent 80px,rgba(201,164,90,0.015) 80px,rgba(201,164,90,0.015) 81px),
+  repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,164,90,0.01) 80px,rgba(201,164,90,0.01) 81px);}
+.login-card{position:relative;z-index:1;width:420px;max-width:90vw;padding:48px 40px;border-radius:var(--radius);background:var(--card);border:1px solid rgba(201,164,90,0.15);box-shadow:var(--glow);text-align:center;}
+.login-shield{width:80px;height:80px;margin:0 auto 24px;background:linear-gradient(135deg,var(--gold),var(--bright));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:var(--black);font-family:Montserrat;box-shadow:0 0 40px rgba(201,164,90,0.3);}
+.login-title{font-family:"Playfair Display",serif;font-style:italic;font-size:1.6rem;color:var(--white);margin-bottom:6px;}
+.login-sub{font-family:Montserrat;font-size:0.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;}
+.login-input{width:100%;padding:14px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--white);font-family:"Open Sans";font-size:0.9rem;margin-bottom:14px;outline:none;transition:border-color 0.2s;}
+.login-input:focus{border-color:var(--gold);}
+.login-input::placeholder{color:var(--gray);}
+.login-btn{width:100%;padding:16px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--gold),var(--bright));color:var(--black);font-family:Montserrat;font-size:0.85rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;margin-top:8px;}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,164,90,0.3);}
+.login-footer{margin-top:24px;font-size:0.75rem;color:var(--gray);}
+.login-footer a{color:var(--gold);text-decoration:none;}
+
+/* ========== TOP BAR ========== */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid rgba(201,164,90,0.12);background:var(--dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
+.topbar-left{display:flex;align-items:center;gap:14px;}
+.topbar-logo{font-family:Montserrat;font-weight:900;font-size:1.1rem;color:var(--gold);letter-spacing:1px;}
+.topbar-divider{width:1px;height:20px;background:rgba(255,255,255,0.1);}
+.topbar-title{font-family:Montserrat;font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
+.topbar-user{display:flex;align-items:center;gap:10px;}
+.topbar-badge{font-family:Montserrat;font-size:0.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:20px;background:rgba(201,164,90,0.12);color:var(--gold);border:1px solid rgba(201,164,90,0.25);}
+.topbar-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bright));display:flex;align-items:center;justify-content:center;font-family:Montserrat;font-weight:800;font-size:0.8rem;color:var(--black);}
+
+/* ========== MAIN CONTENT ========== */
+.app{display:none;min-height:100vh;}
+.app.visible{display:block;}
+.hero{text-align:center;padding:60px 32px 40px;}
+.hero-label{font-family:Montserrat;font-size:0.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.hero h1{font-family:"Playfair Display",serif;font-style:italic;font-size:2.6rem;color:var(--white);line-height:1.2;margin-bottom:12px;}
+.hero-sub{font-size:0.95rem;color:var(--gray);max-width:600px;margin:0 auto 24px;line-height:1.6;}
+.hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-family:Montserrat;font-size:1.8rem;font-weight:900;color:var(--bright);}
+.hero-stat-label{font-family:Montserrat;font-size:0.65rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-top:2px;}
+
+/* ========== PROGRESS BAR ========== */
+.progress-wrap{max-width:800px;margin:0 auto 48px;padding:0 32px;}
+.progress-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;width:15%;background:linear-gradient(90deg,var(--gold),var(--bright));border-radius:3px;transition:width 0.5s;}
+.progress-label{display:flex;justify-content:space-between;margin-top:8px;font-family:Montserrat;font-size:0.7rem;color:var(--gray);}
+
+/* ========== ACDC SECTIONS ========== */
+.sections{max-width:900px;margin:0 auto;padding:0 24px 80px;}
+.section{margin-bottom:16px;border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,0.06);transition:border-color 0.3s;}
+.section:hover{border-color:rgba(201,164,90,0.2);}
+.section-header{display:flex;align-items:center;gap:18px;padding:24px 28px;cursor:pointer;background:var(--card);transition:background 0.2s;user-select:none;}
+.section-header:hover{background:var(--card-hover);}
+.section-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+.section-icon-a{background:linear-gradient(135deg,rgba(253,195,62,0.15),rgba(253,195,62,0.05));border:1px solid rgba(253,195,62,0.25);}
+.section-icon-c1{background:linear-gradient(135deg,rgba(45,122,45,0.15),rgba(45,122,45,0.05));border:1px solid rgba(45,122,45,0.25);}
+.section-icon-d{background:linear-gradient(135deg,rgba(26,122,110,0.15),rgba(26,122,110,0.05));border:1px solid rgba(26,122,110,0.25);}
+.section-icon-c2{background:linear-gradient(135deg,rgba(206,48,42,0.15),rgba(206,48,42,0.05));border:1px solid rgba(206,48,42,0.25);}
+.section-info{flex:1;}
+.section-letter{font-family:Montserrat;font-size:0.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:2px;}
+.section-letter-a{color:var(--accent);}
+.section-letter-c1{color:#6bff6b;}
+.section-letter-d{color:#6bffee;}
+.section-letter-c2{color:#ff6b6b;}
+.section-name{font-family:Montserrat;font-size:1.15rem;font-weight:800;color:var(--white);}
+.section-tagline{font-size:0.8rem;color:var(--gray);margin-top:2px;}
+.section-chevron{font-size:1.2rem;color:var(--gray);transition:transform 0.3s;flex-shrink:0;}
+.section.open .section-chevron{transform:rotate(180deg);}
+.section-chapters{max-height:0;overflow:hidden;transition:max-height 0.4s ease;background:rgba(0,0,0,0.3);}
+.section.open .section-chapters{max-height:80000px;}
+.ch-objection{background:rgba(206,48,42,0.04);border:1px solid rgba(206,48,42,0.2);border-radius:12px;padding:20px 24px;margin:24px 0;}
+.ch-objection-title{font-family:Montserrat;font-size:0.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#ff6b6b;margin-bottom:8px;}
+.ch-expect{background:rgba(68,102,204,0.05);border:1px solid rgba(68,102,204,0.2);border-radius:12px;padding:20px 24px;margin:24px 0;}
+.ch-expect-title{font-family:Montserrat;font-size:0.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#6b9fff;margin-bottom:8px;}
+.ch-body h4{font-family:Montserrat;font-size:0.95rem;font-weight:700;color:var(--white);margin:24px 0 8px;}
+.ch-body ol,.ch-body ul{margin:0 0 16px 20px;font-size:0.88rem;color:var(--light-gray);line-height:1.7;}
+.ch-body li{margin-bottom:6px;}
+.ch-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.82rem;}
+.ch-table th{font-family:Montserrat;font-weight:700;text-align:left;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--accent);font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;}
+.ch-table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--light-gray);}
+.ch-table td strong{color:var(--white);}
+
+/* ========== CHAPTER CARDS ========== */
+.chapter{display:flex;align-items:center;gap:16px;padding:18px 28px 18px 44px;border-top:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s;}
+.chapter:hover{background:rgba(255,255,255,0.03);}
+.chapter-num{font-family:Montserrat;font-size:0.7rem;font-weight:800;color:var(--gray);min-width:28px;}
+.chapter-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:2px solid var(--gray);background:transparent;transition:all 0.2s;}
+.chapter-dot.complete{background:var(--gold);border-color:var(--gold);}
+.chapter-dot.active{border-color:var(--accent);box-shadow:0 0 8px rgba(253,195,62,0.4);}
+.chapter-content{flex:1;}
+.chapter-title{font-family:Montserrat;font-size:0.9rem;font-weight:700;color:var(--white);}
+.chapter-meta{font-size:0.75rem;color:var(--gray);margin-top:2px;}
+.chapter-presenter{font-family:Montserrat;font-size:0.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:20px;flex-shrink:0;}
+.presenter-clay{background:rgba(253,195,62,0.1);color:var(--accent);border:1px solid rgba(253,195,62,0.2);}
+.presenter-joseph{background:rgba(45,122,45,0.1);color:#88ff88;border:1px solid rgba(45,122,45,0.2);}
+.presenter-forrest{background:rgba(26,122,110,0.1);color:#88ffee;border:1px solid rgba(26,122,110,0.2);}
+.chapter-arrow{color:var(--gray);font-size:0.9rem;flex-shrink:0;}
+
+/* ========== CHAPTER EXPANDED VIEW ========== */
+.chapter-expanded{display:none;padding:0 28px 28px 44px;border-top:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.2);}
+.chapter-expanded.visible{display:block;}
+.ch-body{max-width:720px;padding:28px 0;}
+.ch-body h3{font-family:Montserrat;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:16px;}
+.ch-body p{font-size:0.88rem;color:var(--light-gray);line-height:1.7;margin-bottom:16px;}
+.ch-body strong{color:var(--white);}
+.ch-body blockquote{border-left:3px solid var(--gold);padding:12px 20px;margin:20px 0;background:rgba(201,164,90,0.04);border-radius:0 8px 8px 0;font-style:italic;color:var(--light-gray);}
+.ch-framework{background:var(--card);border:1px solid rgba(201,164,90,0.15);border-radius:12px;padding:20px 24px;margin:24px 0;}
+.ch-framework-title{font-family:Montserrat;font-size:0.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.ch-proof{background:rgba(45,122,45,0.05);border:1px solid rgba(45,122,45,0.2);border-radius:12px;padding:20px 24px;margin:24px 0;}
+.ch-proof-title{font-family:Montserrat;font-size:0.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#6bff6b;margin-bottom:8px;}
+.ch-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;}
+.ch-btn{font-family:Montserrat;font-size:0.78rem;font-weight:700;padding:12px 24px;border-radius:10px;border:none;cursor:pointer;transition:transform 0.15s;}
+.ch-btn-gold{background:linear-gradient(135deg,var(--gold),var(--bright));color:var(--black);}
+.ch-btn-gold:hover{transform:translateY(-2px);}
+.ch-btn-outline{background:transparent;color:var(--gold);border:1px solid rgba(201,164,90,0.3);}
+.ch-btn-outline:hover{border-color:var(--gold);transform:translateY(-2px);}
+.ch-btn-green{background:linear-gradient(135deg,#2d7a2d,#3d9a3d);color:var(--white);}
+.ch-btn-green:hover{transform:translateY(-2px);}
+
+/* ========== SCALE MAP INTRO ========== */
+.scale-intro{padding:18px 28px 18px 44px;border-top:1px solid rgba(255,255,255,0.04);}
+.scale-card{background:linear-gradient(135deg,rgba(253,195,62,0.06),rgba(253,195,62,0.02));border:1px dashed rgba(253,195,62,0.25);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px;cursor:pointer;transition:border-color 0.2s;}
+.scale-card:hover{border-color:var(--gold);}
+.scale-icon{font-size:2rem;flex-shrink:0;}
+.scale-info h4{font-family:Montserrat;font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:4px;}
+.scale-info p{font-size:0.78rem;color:var(--gray);line-height:1.5;}
+.scale-link{font-family:Montserrat;font-size:0.7rem;font-weight:700;color:var(--accent);text-decoration:none;display:inline-block;margin-top:6px;}
+
+/* ========== FOOTER ========== */
+.app-footer{text-align:center;padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);}
+.app-footer p{font-size:0.75rem;color:var(--gray);}
+.app-footer a{color:var(--gold);text-decoration:none;}
+
+/* ========== CTA BANNER ========== */
+.cta-banner{max-width:900px;margin:0 auto 48px;padding:0 24px;}
+.cta-card{background:linear-gradient(135deg,rgba(201,164,90,0.08),rgba(201,164,90,0.03));border:1px solid rgba(201,164,90,0.2);border-radius:var(--radius);padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.cta-card h3{font-family:Montserrat;font-size:1rem;font-weight:800;color:var(--white);}
+.cta-card p{font-size:0.82rem;color:var(--gray);margin-top:4px;}
+
+@media(max-width:640px){
+  .hero h1{font-size:1.8rem;}
+  .section-header{padding:18px 20px;gap:12px;}
+  .section-icon{width:44px;height:44px;font-size:1.2rem;}
+  .chapter{padding:14px 20px 14px 32px;}
+  .cta-card{flex-direction:column;text-align:center;}
+  .topbar{padding:12px 16px;}
+  .hero{padding:40px 20px 30px;}
+  .login-card{padding:36px 28px;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ==================== LOGIN SCREEN ==================== -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-bg"></div>
+  <div class="login-card">
+    <div class="login-shield">SLE</div>
+    <div class="login-title">$1M Service Playbook</div>
+    <div class="login-sub">For Electricians. By Electricians.</div>
+    <input type="email" class="login-input" id="loginEmail" placeholder="Your email address">
+    <input type="password" class="login-input" id="loginCode" placeholder="Access code">
+    <button class="login-btn" onclick="doLogin()">Enter the Playbook</button>
+    <div class="login-footer">
+      Don't have an access code? <a href="#">Get the Playbook free &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== APP ==================== -->
+<div class="app" id="mainApp">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">SLE</div>
+    <div class="topbar-divider"></div>
+    <div class="topbar-title">$1M Service Playbook</div>
+  </div>
+  <div class="topbar-user">
+    <div class="topbar-badge">Service Pro</div>
+    <div class="topbar-avatar" id="userAvatar">CN</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">The $1M+ Electric Service Academy</div>
+  <h1>The $1M Service Playbook</h1>
+  <div class="hero-sub">The complete system for building a million-dollar electrical service business. Not theory. Not motivation. A system built by electricians who have done it. For the Hustler doing $350K to $800K who is ready to stop grinding and start operating.</div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">$1M+</div><div class="hero-stat-label">Revenue Target</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">9</div><div class="hero-stat-label">Chapters</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-label">Phases</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">27+</div><div class="hero-stat-label">Tools Inside</div></div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill"></div></div>
+  <div class="progress-label"><span>Your Progress</span><span>1 of 9 chapters</span></div>
+</div>
+
+<!-- ==================== ACDC SECTIONS ==================== -->
+<div class="sections">
+
+<!-- ===== A - AMPLIFY ===== -->
+<div class="section open" id="sec-amplify">
+  <div class="section-header" onclick="toggleSection('sec-amplify')">
+    <div class="section-icon section-icon-a">&#9889;</div>
+    <div class="section-info">
+      <div class="section-letter section-letter-a">A - Amplify</div>
+      <div class="section-name">Turn Up the Signal</div>
+      <div class="section-tagline">Know your rate. Get the leads. Build the pipeline that feeds everything.</div>
+    </div>
+    <div class="section-chevron">&#9660;</div>
+  </div>
+  <div class="section-chapters">
+    <!-- Scale Map Intro -->
+    <div class="scale-intro">
+      <div class="scale-card" onclick="window.open('https://go.serviceloopelectrical.com/scale','_blank')">
+        <div class="scale-icon">&#128506;</div>
+        <div class="scale-info">
+          <h4>Start Here: Your Scale Map</h4>
+          <p>Before you read a single chapter, you need to know where you are. The Scale Map covers all 9 areas and shows exactly where the gaps are costing you money. Take 10 minutes. Be honest. Nobody sees this but you.</p>
+          <span class="scale-link">Open the Scale Map &rarr; go.serviceloopelectrical.com/scale</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chapter" onclick="toggleChapter('ch1')">
+      <div class="chapter-dot active"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 1: Pricing Services</div>
+        <div class="chapter-meta">Build your real service rate. The math behind $1M.</div>
+      </div>
+      <span class="chapter-presenter presenter-clay">Clay</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded visible" id="ch1">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">The Biggest Mistake Electricians Make</h3>
+        <p>Every electrician on this planet shares the same journey.</p>
+        <p>You decided electrical was a great trade. You got a job and received technical training. You survived the field pressure to not make mistakes and to get quicker. You became licensed. You realized how much you don't know. You got confident in what you do know. And then you realized either an opportunity or a conflict to go on your own.</p>
+        <p><strong>At no point in that journey did you receive business, marketing, or sales training.</strong></p>
+        <p>So what did you do when you opened the doors?</p>
+        <ul>
+        <li>You opened a business</li>
+        <li>You chose some branding</li>
+        <li>You got to work with some clients you knew</li>
+        <li>You realized you DO NOT know what to charge</li>
+        <li>So you called around and pretended to be a customer, learning what others charge</li>
+        <li>Then you just charged a little less with the intent to do a little bit more</li>
+        </ul>
+        <p>That's value, right?</p>
+        <blockquote>
+        <em>Positioning yourself as a low-cost provider is a strategy. But without training and an actual supporting business model... it's death by 1,000 cuts.</em>
+        </blockquote>
+        <p>Here's the uncomfortable truth. You're not underpaid because of the market. You're underpaid because of your model. Both paths (underpricing to compete and copying someone else's rate) lead to the same place: burnout and instability.</p>
+        <p>What would have to change for your effort to finally pay like it should? That's the question this chapter answers.</p>
+        <blockquote>
+        "If you don't understand your price, you don't understand how long you can survive."
+        </blockquote>
+        <h3 style="margin-top:28px;">How to Price Yourself as a Premium Service Provider</h3>
+        <p>We're not accountants either. And we don't expect you to become one. But if you can get the hang of the foundations, it's going to change your business and your life:</p>
+        <ul>
+        <li>Fair and accurate pricing that makes room for an all-star staff</li>
+        <li>The ability to budget personally and professionally to reach your vision</li>
+        <li>Performance pay structures that attract and retain great people</li>
+        <li>The ability to recognize trends in growth, profitability, and cash flow</li>
+        <li>Simplified pricing you can build right in front of clients with custom options</li>
+        </ul>
+        <p>We're about to work through <strong>3 stages and a markup</strong> to discover your "Simple Service Rate." This is the rate you can apply to all of your service work until the next review (we recommend twice a year for growing companies, and always following annual budgeting).</p>
+        <p>Edwin from North Virginia was doing $140 fixture swap jobs when he started this process. Ten weeks later he was doing $35K months. Six months after that: 3 wrapped vans, an office manager, and $35K weeks. The only thing that changed was his rate. And his belief in it.</p>
+        <p><strong>What to expect from this chapter:</strong> You'll need about 2 hours with your P&L statement (or your best guess at one) and a calculator. By the end, you'll have your Simple Service Rate. It will probably shock you. That's normal. Every electrician who's done this felt the same thing. The ones who trusted the math anyway are the ones sending us screenshots of $30K weeks.</p>
+        <h3 style="margin-top:28px;">Stage 1: Burden Rate. What It Costs to Keep the Doors Open</h3>
+        <p>Your burden rate starts with one question: <em>What does it cost to operate my business for one billable hour?</em></p>
+        <h4>Step-by-Step:</h4>
+        <p><strong>1. Identify your total expenses.</strong> Pull from your accounting software, P&L sheet, or bookkeeping records. Include:</p>
+        <ul>
+        <li>Your personal salary (this is a REQUIRED business expense. If you're not profitable on top of your base salary, everything else falls apart)</li>
+        <li>Investments and retirement savings (10% recommended)</li>
+        <li>A 90-day nest egg for stability</li>
+        <li>All business overhead and operations</li>
+        </ul>
+        <p><strong>2. Categorize your expenses:</strong></p>
+        <p>A P&L statement always follows the same flow:</p>
+        <div class="ch-framework"><div class="ch-framework-title">&#9889; Formula</div><p style="font-size:0.85rem;color:var(--light-gray);line-height:1.9;margin:0;font-family:monospace;">
+        SALES REVENUE<br>
+        (-) VARIABLE EXPENSES (COGS: Costs of Goods Sold)<br>
+        = GROSS PROFIT<br>
+        (-) FIXED EXPENSES (Overhead)<br>
+        = NET PROFIT<br>
+        </div>
+        <p>Here's the simple test:</p>
+        <ul>
+        <li>Does the expense increase with more work? It's a <strong>variable expense (COGS)</strong></li>
+        <li>Does it decrease with less work? It's a <strong>variable expense (COGS)</strong></li>
+        <li>Is it fixed no matter how much you work? It's a <strong>fixed expense (overhead)</strong></li>
+        </ul>
+        <p><strong>Important:</strong> Materials are COGS, but we <strong>exclude materials</strong> from the burden rate. They get their own calculation later. Trust the process.</p>
+        <p><strong>3. Define your billable units.</strong> Each active van/truck equals one unit. Only include what you currently have.</p>
+        <blockquote>
+        <strong>Key Warning:</strong> Many contractors project future vans or employees into their pricing model. This mistake lowers their rate and destroys profitability before those team members even exist. Price for what you have today.
+        </blockquote>
+        <p><strong>4. Apply the 50% Rule.</strong></p>
+        <p>You do not have 40 billable hours in a 40-hour week. Drive time. Materials runs. Callbacks. Setup. Training. Admin. That eats half your clock.</p>
+        <ul>
+        <li>Full-time = 40 hours x 50 weeks = 2,000 hours/year</li>
+        <li>Apply the 50% rule: <strong>1,000 billable hours per van, per year</strong></li>
+        </ul>
+        <p>Think of each unit not as a person, but as a working unit. A van and crew.</p>
+        <p><strong>5. Calculate:</strong></p>
+        <div class="ch-framework"><div class="ch-framework-title">&#9889; Formula</div><p style="font-size:0.85rem;color:var(--light-gray);line-height:1.9;margin:0;font-family:monospace;">
+        Total Variable Expenses + Total Fixed Expenses = Total Burden<br>
+        Total Burden / Total Billable Hours = BURDEN RATE<br>
+        </div>
+        <p><strong>Example:</strong> $236,000 in total expenses / 1,000 billable hours = <strong>$236/hr burden rate</strong></p>
+        <p>Your burden rate should fall between <strong>$150 to $350/hr.</strong> This is your absolute basement. The cost of staying alive. You should RARELY use this number for anything other than reference.</p>
+        <p>If you looked at your number and felt a knot in your stomach, that's normal. Most electricians have never seen what it actually costs them to show up. That awareness alone is worth more than most business courses. But awareness without action is just anxiety. Let's keep building.</p>
+        <h3 style="margin-top:28px;">Stage 2: Growth Rate. What It Costs to Get Where You're Going</h3>
+        <p>To build a rate that keeps you growing is critical. Electricians don't need to borrow money from banks or find investors. But you need to <strong>build growth into your rate</strong> or you'll be funding expansion out of personal sacrifice.</p>
+        <h4>What the Growth Rate Covers:</h4>
+        <ul>
+        <li>New vans or vehicle deposits</li>
+        <li>Branding, wraps, and marketing investments</li>
+        <li>Team development and training (like this program)</li>
+        <li>Salary increases or performance incentives</li>
+        <li>Website upgrades and technology</li>
+        <li>Professional development and continued education</li>
+        </ul>
+        <h4>How to Calculate:</h4>
+        <ul>
+        <li>Look at your goals for the next 1 to 3 years</li>
+        <li>Estimate what these growth initiatives will cost</li>
+        <li>Divide by your total billable hours</li>
+        </ul>
+        <p><strong>Example:</strong> $90,000 in growth expenses / 1,000 billable hours = <strong>$90/hr growth rate</strong></p>
+        <p>Your growth rate should fall between <strong>$50 to $150/hr.</strong></p>
+        <blockquote>
+        "It is always better to be looking at the money than looking for it."
+        </blockquote>
+        <p><strong>Pause here.</strong> Add your Burden Rate + Growth Rate. That combined number ($236 + $90 = <strong>$326/hr</strong> in our example) is your total rate BEFORE profit and materials.</p>
+        <p>If you kept working this hard for 12 months without changing this number... would anything actually change? That's the question most electricians never ask. And it's the reason they stay stuck.</p>
+        <h3 style="margin-top:28px;">The Profitable Rate. Your Non-Negotiable 30% Markup</h3>
+        <p>Many contractors operate at or near break-even because they never intentionally build profit into pricing. Profit is not a bonus. It's a requirement. It funds reinvestment, financial security, unexpected expenses, and long-term stability.</p>
+        <h4>The Calculation:</h4>
+        <div class="ch-framework"><div class="ch-framework-title">&#9889; Formula</div><p style="font-size:0.85rem;color:var(--light-gray);line-height:1.9;margin:0;font-family:monospace;">
+        (Burden Rate + Growth Rate) x 0.30 = Markup<br>
+        (Burden Rate + Growth Rate) + Markup = PROFITABLE RATE<br>
+        </div>
+        <p><strong>Example:</strong></p>
+        <ul>
+        <li>Burden: $236/hr + Growth: $90/hr = $326/hr</li>
+        <li>30% markup: $326 x 0.30 = $98/hr</li>
+        <li><strong>Profitable Rate: $424/hr</strong></li>
+        </ul>
+        <h4>Markup vs. Margin. Know the Difference.</h4>
+        <p>A 30% markup does NOT equal a 30% margin. A 30% markup typically yields about 23% net profit once all operating costs are accounted for. This is intentional. It gives you real profit after the reality of running a business.</p>
+        <h4>The Big Picture Math</h4>
+        <p>If you work 1,000 billable hours/year and earn $100 profit/hour = <strong>$100,000 in net profit annually.</strong> That's what intentional pricing creates. That's what separates electricians who are busy from electricians who are building wealth.</p>
+        <p>Your profitable rate should fall between <strong>$250 to $500/hr.</strong></p>
+        <p>There's a structure behind every consistent $80K+ month. And it starts right here, with this number.</p>
+        <h3 style="margin-top:28px;">Stage 3: Material Rate. The Secret Spice</h3>
+        <p>This is where the magic happens. And this is where most electricians push back the hardest.</p>
+        <p><strong>"There's no way I can estimate materials without a pricebook."</strong> We hear this every single week. And every single week, the electrician who tries it reports back: "I can't believe how much faster I am now." Joseph priced 5 jobs off the cuff within 5% accuracy while another electrician fumbled through his pricebook for 20 minutes. Speed wins. Accuracy follows.</p>
+        <p>We're going to suggest a totally counter-intuitive approach that's so different from the pricebook mentality it may even make you mad.</p>
+        <p><strong>We're going to make an educated guess in favor of speed and service.</strong></p>
+        <p>In residential service work, there's a fairly predictable amount of consumable materials per hour that you will likely never exceed. That amount is approximately <strong>$50 to $75 of consumable materials per billable hour.</strong></p>
+        <h4>What's a Consumable Material?</h4>
+        <p>Anything that would not exceed $50 in an hour of work: staples, romex, screws, boxes, plates, receptacles, switches, wire nuts, connectors, spackle.</p>
+        <p>Instead of wasting time building a work order BEFORE they sell (estimating every part or relying on pricebooks), this method embraces the <strong>"Sales First" methodology.</strong> Sell it, then build it.</p>
+        <p>This is the part where most electricians stall. They can't let go of the pricebook. They've been trained to estimate every screw before they open their mouth. And that habit is costing them hours of productivity and thousands in lost opportunities every single month.</p>
+        <h3 style="margin-top:28px;">The Simple Service Rate (SSR). Your Final Number.</h3>
+        <div class="ch-framework"><div class="ch-framework-title">&#9889; Formula</div><p style="font-size:0.85rem;color:var(--light-gray);line-height:1.9;margin:0;font-family:monospace;">
+        Burden Rate + Growth Rate + Profit Markup + Material Rate = SIMPLE SERVICE RATE<br>
+        </div>
+        <p><strong>Example:</strong></p>
+        <ul>
+        <li>Burden: $236/hr</li>
+        <li>Growth: $90/hr</li>
+        <li>Profit (30%): $98/hr</li>
+        <li>Materials: $50/hr</li>
+        <li><strong>Simple Service Rate: $474/hr</strong></li>
+        </ul>
+        <p>Your SSR should fall between <strong>$350 to $550/hr.</strong></p>
+        <p>We have experienced businesses from coast to coast, internationally, selling at these rates. <strong>You can too.</strong> They're founded on your expenses and your service value. Any thoughts contradicting this are just you, and the natural forces of fear to something new.</p>
+        <h3 style="margin-top:28px;">The Estimation Formula. Pricing Any Job in Minutes.</h3>
+        <p>Once you have your SSR, pricing any job is simple:</p>
+        <div class="ch-framework"><div class="ch-framework-title">&#9889; Formula</div><p style="font-size:0.85rem;color:var(--light-gray);line-height:1.9;margin:0;font-family:monospace;">
+        (Estimated Hours x SSR) + Specialty Materials = Job Price<br>
+        </div>
+        <ul>
+        <li><strong>Consumable materials</strong> (romex, boxes, receptacles) are already baked into your SSR at $50/hr</li>
+        <li><strong>Specialty materials</strong> (panels, generators, anything beyond consumables) get added on top</li>
+        <li><strong>Third-party services</strong> (permits, inspections, subcontractors) get added on top</li>
+        <li><strong>Memberships</strong> (if offered as part of the option) get added on top</li>
+        </ul>
+        <p><strong>Example:</strong> Panel replacement, 10 hours:</p>
+        <ul>
+        <li>Labor: 10 x $424/hr = $4,240</li>
+        <li>Consumable materials: 10 x $50/hr = $500 (already in your SSR)</li>
+        <li>Specialty materials (arc fault breakers, surge protectors, permits): quoted separately</li>
+        <li><strong>Base price before specialty: $4,740</strong></li>
+        </ul>
+        <p>That's it. No 1,000-item pricebook. No fumbling through catalogs. No estimating every screw.</p>
+        <p>Joseph actually did a standoff in our class with an electrician in our group. The rules were simple: look around the room and price 5 jobs at the same time to see who was quickest and most accurate. Joseph was several minutes quicker every time, and his pricing (off the cuff) was <strong>within 5%</strong> for each of the 5 options.</p>
+        <p>The electricians who charge more and still win? This is how they do it. They don't fumble. They don't hesitate. They know their number and they present it like it's the most natural thing in the world. Because it is. It's math.</p>
+        <h3 style="margin-top:28px;">Price Shock. Yours and Theirs.</h3>
+        <h4>Your Price Shock</h4>
+        <p>When you first calculate your true rate, it will feel uncomfortable. Most electricians have been undercharging for years. Internal price shock comes from disbelief in your numbers or fear that customers will walk away.</p>
+        <blockquote>
+        Trust your math more than your emotions.
+        </blockquote>
+        <p>This feeling comes from NOT KNOWING and NOT EXPERIENCING transactions at this level. This is new to you, not to us. Once you have charged your true rate several times and customers continue to say yes, price shock fades. The same customer who once said $30/hr was too high may later hire you at $300/hr because they trust the experience you deliver.</p>
+        <p>Edwin almost didn't triple his rates. He had to overcome his own self-objection before any customer ever objected. Ten weeks later he was doing $35K months. The barrier was never the customer. It was him.</p>
+        <h4>Their Price Shock</h4>
+        <p>Customers experience price shock because they were not expecting it. Not because they cannot afford it. Most homeowners have no real understanding of what it costs to run a business.</p>
+        <p><strong>When they ask "Can you break this price down?":</strong></p>
+        <blockquote>
+        "There are more things that we factor into the cost of every service that we provide outside of just labor and material. Health insurance, workers' compensation insurance, general liability insurance, vehicle insurance, taxes, vehicle payments, continuing education, licensing, and bonding, just to name a few. A simple labor and material breakdown wouldn't paint a clear picture of what all goes into the service that we provide."
+        </blockquote>
+        <p><strong>When they say "That's more than I expected":</strong></p>
+        <blockquote>
+        "I understand. What you are paying for is reliability, safety, and the peace of mind that the job is done right the first time."
+        </blockquote>
+        <h3 style="margin-top:28px;">Your Non-Negotiables</h3>
+        <h4>Trip Charges</h4>
+        <p>A trip charge is not a profit center. It offsets the cost of doing business when a job doesn't move forward. When you send a technician to a home, you've already paid for office staff, advertising, the tech's time, fuel, insurance, and vehicle costs.</p>
+        <p><strong>Positioning script:</strong></p>
+        <blockquote>
+        "There is a diagnostic service of $150. This covers the full inspection, design, and presentation of options. If you decide to move forward with any of the solutions we provide, that fee is waived. The only time it applies is if you choose to do nothing."
+        </blockquote>
+        <p><strong>Finding the right price:</strong> About 50% of your billable hourly rate. $300/hr rate = $150 trip charge.</p>
+        <p><strong>When they say "other companies give free estimates":</strong></p>
+        <blockquote>
+        "I completely understand, and I want to apologize if I gave the impression that we charge for estimates. What we do is different. We perform a certified diagnostic to identify the full cause of the issue and then design a range of guaranteed solutions so you can choose what fits best. This ensures the problem is fixed right the first time."
+        </blockquote>
+        <p>></p>
+        <blockquote>
+        "When would be the best time for us to come out and help you with this?"
+        </blockquote>
+        <p>That script alone has changed more first calls than any ad campaign we've ever run. The electricians who use it report that the objection almost never comes back a second time. And the ones who used to give free estimates? They can't believe how much time and money they were leaving on the table.</p>
+        <h4>Deposits. You Need Them.</h4>
+        <p><strong>Standard: 50% of total project cost.</strong> This covers material expenses, a portion of labor, and part of profit.</p>
+        <p><strong>The Casino Principle:</strong> Structure your pricing so that you cannot lose. If a client backs out after paying a deposit, your costs are still protected.</p>
+        <p><strong>How to ask:</strong></p>
+        <blockquote>
+        "I'm really looking forward to getting this project started for you. Before we can schedule the installation, we just need to collect a 50% deposit. How would you like to take care of that?"
+        </blockquote>
+        <p><strong>When they say "I've never had to pay a deposit before":</strong></p>
+        <blockquote>
+        "I understand. Because our services are in high demand, we schedule only with clients who are fully committed. This guarantees your date will not move and that all materials will be ready in advance."
+        </blockquote>
+        <h3 style="margin-top:28px;">Proof Points</h3>
+        <p><strong>Nathan Miles.</strong> 14 years in the trade before going on his own. He studied full-time in January to pass his Master's exam on the first try, joined SLE mid-February, and launched March 1st. Month 1: $75,005, all organic leads, zero ad spend. He turned a doorbell visit into a $10,000 safety upgrade using the 6-option framework. He converted a $300 generator tune-up into a $4,780 safety and panel upgrade. A 10x upsell. By month 5 he hit $110K. By his 1-year anniversary: <strong>$900,000+ in sales, 2 vans, 3 full-time electricians, a CSR, and a shop.</strong> His biggest single sale: $30K. And it "feels normal now."</p>
+        <p>Could Nathan have figured this out alone? Maybe. In 3 years. Maybe 5. But he did it in 150 days because he had the formula AND the coaching to believe it.</p>
+        <p><strong>Edwin (North Virginia).</strong> Was doing $140 fixture swap jobs with no light at the end of the tunnel. After overcoming his own price shock and tripling his rates: first $35K month in 10 weeks. Used his growth-rate cash to buy a new van, branding, full wrap, professional website, and fresh uniforms. Six months later: 3 wrapped vans, happy staff, an office manager, and a prime location. Now hitting <strong>$35K weeks.</strong></p>
+        <p><strong>A Bronze partner's first 3 presentations after learning SSR pricing:</strong> Basic option sold for $694 (previously would have been about $225. A 3x increase). Two Gold options at $2,794 and $2,523. Total from 3 calls: <strong>$6,011 vs. estimated $675 under old pricing.</strong> His words: <em>"I'm loving not feeling tied to a pricebook. Using my new service rate, I felt more comfortable and confident in my options and sold more!"</em></p>
+        <p>Three calls. $6,011 instead of $675. That's not theory. That's Tuesday.</p>
+        <h3 style="margin-top:28px;">The 20% You Need Us For</h3>
+        <p>You now have the formula. You can calculate your Burden Rate, Growth Rate, Profitable Rate, and Simple Service Rate. You can price any job in minutes with the Estimation Formula.</p>
+        <p>But here's what we've seen hundreds of times. The electrician who builds his rate on paper, believes it in his head, and then flinches at the kitchen table. The gap between knowing your number and presenting it with total confidence is where the money lives.</p>
+        <p>The pricing tool builds your number. The masterclass shows you how to <strong>present it without flinching.</strong> And the partners who do both? They stop guessing what to charge within a week. They stop losing jobs on price within a month. They stop worrying about money within a quarter.</p>
+        <p>$83,333 a month isn't a fantasy. It's a rate, a formula, and a system. You just built the rate. The rest of this playbook builds the system.</p>
+        <p><strong>Download:</strong> [Pricing Tool (PDF + Google Sheet)]</p>
+        <p><strong>Go Deeper:</strong> [Pricing Services Masterclass, $97]</p>
+        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+
+        <div class="ch-actions">
+          <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Pricing Tool</button>
+          <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
+          <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chapter" onclick="toggleChapter('ch2')">
+      <div class="chapter-dot"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 2: Marketing & Lead Generation</div>
+        <div class="chapter-meta">Build the pipeline. Paid, organic, referral. The balanced approach.</div>
+      </div>
+      <span class="chapter-presenter presenter-forrest">Forrest</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded" id="ch2">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">Your Calendar Is Full. Your Tickets Aren't.</h3>
+        <p>You fixed your pricing. Now every lead that comes in is worth more than it was yesterday. A $150/hr electrician and a $450/hr electrician running the same number of calls live in completely different financial realities. And you just moved to the right side of that equation.</p>
+        <p>But here's the next problem. Most electricians over-invest in one lead source and ignore the other two. They either spend all their money on ads and pray, or they rely entirely on word-of-mouth and hope the phone keeps ringing.</p>
+        <p>Neither is a business model. Both are gambling. And if your income stayed the same for 12 months... would you still work this hard?</p>
+        <p><strong>What to expect from this chapter:</strong> You're not going to build a marketing department overnight. But you can have one lead engine running properly within a week, and all three humming within 90 days. The Good Neighbor Program costs nothing but discipline. Speed-to-lead costs nothing but a phone. Organic social costs nothing but consistency. Start where the cost is zero and the return is immediate.</p>
+        <p><strong>"But I hate marketing."</strong> You don't hate marketing. You hate marketing that doesn't work. When Nathan posted on Facebook about a generator install he'd just finished and got 3 referral calls that week, that didn't feel like marketing. It felt like sharing. That's the point. Marketing for electricians isn't billboards and jingles. It's being visible, being consistent, and being the first name that comes to mind.</p>
+        <h3 style="margin-top:28px;">The 9 Truths of Marketing</h3>
+        <p>Before we talk tactics, you need to internalize these truths. Think of them as a compass that brings you back to what works whenever you feel lost or overwhelmed.</p>
+        <h4>1. Be the One with the Megaphone</h4>
+        <p>If you don't tell the world who you are and what you do, no one else will. The loud and consistent voices win. Confidence is not arrogance. It's service with conviction. Get on the hill and let people know you exist.</p>
+        <h4>2. Message and Frequency Are Everything</h4>
+        <p>It's not just what you say, but how often you say it. Use the language your customers understand, not technical jargon. Speak about what your service <em>does for them</em>, not what it's called. Repeat your message often so it becomes familiar and trusted.</p>
+        <h4>3. You Are Renting, Not Owning</h4>
+        <p>You don't own Facebook, Google, or any social media platform. They can change overnight. Use them to attract attention, but always bring leads into <strong>your own system.</strong> Email lists, text updates, newsletters. Own the relationship, not just the attention.</p>
+        <h4>4. Your Service IS Your Marketing</h4>
+        <p>Every conversation, every follow-up, every thank-you message is marketing. Stay in touch with past clients through regular communication. Be human, be consistent, and remind them you're there to help.</p>
+        <h4>5. Leads Have a Definite Cost</h4>
+        <p>There is no such thing as a free lead. Every lead costs either time, money, or both. When you recognize that, you stop treating marketing as an expense and start treating it as an investment.</p>
+        <h4>6. Don't Let Marketing Burn You Out</h4>
+        <p>Marketing can feel like a full-time job, but you're not meant to do it alone. Build systems and hire help as you grow.</p>
+        <h4>7. Repetition Builds Recognition</h4>
+        <p>Don't be afraid to repeat yourself. People rarely see your message the first time. Say it again and again until your audience can repeat it for you. That's when you know it's stuck.</p>
+        <h4>8. Marketing Is a Skill You Practice</h4>
+        <p>Just like electrical work, marketing takes repetition and refinement. Plan, Do, Check, Act. Test ideas, study results, adjust, improve.</p>
+        <h4>9. More Beats Less</h4>
+        <p>Consistency always wins. Your business runs in waves: leads, sales, installs. If you stop marketing, those waves crash.</p>
+        <p>These aren't suggestions. They're the truths that every partner who's broken $83K/month has internalized. Nathan didn't run a single ad his first month and still did $75K. Because he lived Truth #1 and Truth #4 every single day.</p>
+        <h3 style="margin-top:28px;">The Lead System: Three Engines</h3>
+        <p>A real lead system has three engines running at the same time. When one slows down, the others carry. When all three are firing, you're not chasing work. You're choosing it.</p>
+        <h4>Engine 1: Paid (Fast, Controllable, Requires Budget)</h4>
+        <p><strong>Google Local Service Ads (LSA):</strong> Appear at the very top of search results for "electrician near me." You're paying for position, and Google rewards companies that respond quickly.</p>
+        <p><strong>Meta Ads (Facebook/Instagram):</strong> Start by creating organic videos that showcase your work and your personality. Once you identify which videos perform best, boost those proven posts with ad spend. Many companies see 10x to 20x returns on their ad investment.</p>
+        <p><strong>Lead Aggregators (Angi, Thumbtack, HomeAdvisor):</strong> Immediate opportunities to fill your schedule. Success here comes from fast follow-up and professional communication. These are excellent training grounds for your speed-to-lead systems.</p>
+        <p>Dorian Hayes turned a $24 Angi lead into $66,700. Not because the lead was special. Because his system was.</p>
+        <h4>Engine 2: Organic (Slow Start, Compounds Forever)</h4>
+        <p><strong>Facebook Organic:</strong> Most customers and hires come from your second and third-degree networks. Friends of friends, coworkers, local community members. Post consistently: 4 to 5 times per week. Show who you are as both a person and a business. Build recognition and trust.</p>
+        <p><strong>Google Business Profile (GBP):</strong> Your online storefront. Set it up, verify it, make it complete with photos, contact details, and your service area. <strong>Aim for 100 reviews as a starting point, then 1,000 as you grow.</strong> A professional website adds credibility. Think of it as your digital storefront.</p>
+        <p><strong>SEO:</strong> A marathon, not a sprint. Start now and stay consistent, and your website will eventually generate qualified leads without paid ads.</p>
+        <h4>Engine 3: Referral (Highest Quality, Most Overlooked)</h4>
+        <p><strong>The Good Neighbor Program:</strong></p>
+        <ul>
+        <li><strong>Van wraps.</strong> Every job is a rolling billboard.</li>
+        <li><strong>Door hangers.</strong> Leave 5 at every job. If you make eye contact, hand one personally.</li>
+        <li><strong>Yard signs.</strong> Place one at every completed job.</li>
+        <li><strong>Photos and reviews.</strong> Take photos at every job and ask for reviews immediately.</li>
+        <li><strong>Every Door Direct Mail (EDDM).</strong> 1,000+ mailers in high-performing neighborhoods.</li>
+        </ul>
+        <p><strong>Database Reactivation:</strong> Your best lead source is already in your phone. Call, text, or email unsold leads up to 10 times before closing the file. Treat every unclosed lead as someone "waiting for help," not "lost."</p>
+        <p><strong>Happy Calls:</strong> Follow up after completed jobs to ensure satisfaction. Have your CSR, not the technician, make these calls.</p>
+        <p>Most electricians are sitting on a database worth tens of thousands of dollars in potential revenue. They just never pick up the phone.</p>
+        <h3 style="margin-top:28px;">Speed-to-Lead: The 5-Minute Rule</h3>
+        <p>The first company to call back wins <strong>78% of the time.</strong> Not the cheapest. Not the most experienced. The fastest.</p>
+        <p>Every minute you wait after a lead comes in, your close rate drops. By 30 minutes, it's cut in half. This isn't a marketing problem. It's a call center problem. And it's the reason most electricians blame their leads when the real issue is their response time.</p>
+        <h4>Lead Scoring System</h4>
+        <p>Not all leads are equal. Score them so your best techs run the best calls:</p>
+        <p>Dispatch your top tech to 5-star calls. Train junior techs on 3-star calls. Don't run 1-star calls at all.</p>
+        <p>The difference between a $350K van and a $780K van? It's not more calls. It's about 10% fewer calls run, but run better. Better leads. Better response time. Better options on every call.</p>
+        <h3 style="margin-top:28px;">Proof Points</h3>
+        <p><strong>Dorian Hayes (Lake Charles, LA).</strong> Was a $40K/year moonlighter with a full-time industrial job. Month 1 full-time: $63K sold out of his truck. Month 2: attracted his old boss to come work for him, sold $58K. 3.5 months in: $225K+ sold, team of 4 including a CSR, office secured. How? He turned a <strong>$24 Angi lead into $66,700</strong> using a two-call close and 6-option presentation. A simple call for bad kitchen ballasts became a full-home renovation. Recessed lighting redesign, panel upgrade, whole-home device renovation, smart dimmers, ceiling fans, and a family safety plan. Dorian sold $28K. His installers, using the upgrade process, closed another $38K+ in follow-up work.</p>
+        <p>His organic Facebook post for a part-time CSR generated <strong>79 applicants in 48 hours.</strong> Zero Indeed, zero LinkedIn spend. Why? 4 to 5 posts per week on personal profiles. Family, community, jobs, wins. Consistent presence made his company a place people wanted to join before a position even opened.</p>
+        <p><strong>Nathan Miles.</strong> $75,005 in month 1, all organic. BNI, referrals, social conversations. Zero ad spend. He turned a doorbell visit into a $10,000 safety upgrade. Converted a $300 generator tune-up into a $4,780 safety and panel upgrade. Proof that you don't need ads to start. You need conversations. And the right system to convert them.</p>
+        <p>Both of them had the system before they had the leads. That's the order that matters.</p>
+        <h3 style="margin-top:28px;">The 20% You Need Us For</h3>
+        <p>You know the 9 Truths. You know the 3 Engines. You know speed-to-lead matters. But which channels, in which order, with which budget, for your specific market? That's where most electricians spin their wheels for 6 months before finding what works.</p>
+        <p>Our partners don't spin. Dorian's first full-time month was $63K. Not because he's smarter than you. Because he had Forrest in his corner telling him exactly where to spend, exactly how to track, and exactly when to scale.</p>
+        <p>You're not far off. You're just misaligned. Let's fix that.</p>
+        <p><strong>Download:</strong> [Lead Gen Playbook (PDF)]</p>
+        <p><strong>Go Deeper:</strong> [Lead Generation Masterclass, $97]</p>
+        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+        <p># CONNECT</p>
+        <h3 style="margin-top:28px;">Complete the Circuit</h3>
+        <blockquote>
+        "Why do some electricians charge more... and still win?"
+        </blockquote>
+        <p>You have the rate. You have the leads. Now the question is: what happens when the phone rings? Because getting them to call is half the battle. What happens when they do?</p>
+        <p>The electricians who break through $83K/month don't work harder. They present differently. This section is where pricing meets psychology, and leads become partnerships.</p>
+
+        <div class="ch-actions">
+          <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Lead Gen Playbook</button>
+          <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
+          <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C - CONNECT ===== -->
+<div class="section" id="sec-connect">
+  <div class="section-header" onclick="toggleSection('sec-connect')">
+    <div class="section-icon section-icon-c1">&#128268;</div>
+    <div class="section-info">
+      <div class="section-letter section-letter-c1">C - Connect</div>
+      <div class="section-name">Complete the Circuit</div>
+      <div class="section-tagline">Options, objections, presentations. Turn every lead into a partnership.</div>
+    </div>
+    <div class="section-chevron">&#9660;</div>
+  </div>
+  <div class="section-chapters">
+    
+    <div class="chapter" onclick="toggleChapter('ch3')">
+      <div class="chapter-dot"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 3: Offer & Options</div>
+        <div class="chapter-meta">The 6-tier framework that ends price shopping before it starts.</div>
+      </div>
+      <span class="chapter-presenter presenter-joseph">Joseph</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded" id="ch3">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">No Options = Price War. Every Time.</h3>
+        <p>If you offer a single option, you're not offering a choice at all. There are only two possible outcomes: the customer accepts it or walks away. And when they walk away, they walk straight to the next guy's quote. You just trained your customer to compare you.</p>
+        <p>You didn't lose on price. You lost on clarity. Your offer was invisible, so price became the only thing they could see.</p>
+        <blockquote>
+        "If price was everything, luxury wouldn't exist. Customers don't buy the lowest price. They buy the clearest value."
+        </blockquote>
+        <p>When you provide multiple options, something shifts. Instead of focusing on <em>whether</em> they want to buy, they begin deciding <em>how</em> they want to buy. The conversation changes from "Is this expensive?" to <strong>"Which option fits my home best?"</strong></p>
+        <p>You're not bidding anymore. You're advising. And advisors don't get undercut.</p>
+        <p><strong>What to expect from this chapter:</strong> Building your first 6-option set will take about 45 minutes. It will feel awkward. Your instinct will be to offer 3 and call it done. Push through. By your third or fourth option set, you'll be building them in 15 minutes. By your tenth, it's muscle memory. The partner who went from $675 to $6,011 on his first 3 presentations? He built his options the night before. Imperfectly. And it still 9x'd his revenue.</p>
+        <p><strong>"My customers won't sit through 6 options."</strong> They won't sit through you reading 6 options. That's true. You present the top option, explain it briefly, then hand the tablet over and let them look. They choose. You don't read. Joseph covers this in Secret 7 of Chapter 5. But the short version: customers LOVE having choices. What they hate is being lectured. Six options with silence beats one option with a 20-minute pitch every single time.</p>
+        <h3 style="margin-top:28px;">Why Three Options Aren't Enough</h3>
+        <p>In a three-option system ("Good, Better, Best"), each buyer type only gets one true selection. It's still an ultimatum dressed up as choice.</p>
+        <h4>The Six-Option Model</h4>
+        <ul>
+        <li><strong>2 Premium options</strong> (Platinum, Gold)</li>
+        <li><strong>2 Mid-range options</strong> (Silver, Bronze)</li>
+        <li><strong>2 Economy options</strong> (Economy, Basic)</li>
+        </ul>
+        <p>Why six? Because it prevents "take it or leave it" pressure. Covers every buyer type without prejudging. Keeps the technician out of the way of the sale. Reduces the need for customers to seek other estimates. And provides the perfect balance: enough variety to feel empowered, not so many they're overwhelmed.</p>
+        <p>Most electricians present one or two options and wonder why they get price-shopped. The six-option model raises your conversion rate AND your average ticket at the same time. Those two things aren't supposed to move together. But they do, because you've changed the entire psychology of the conversation.</p>
+        <h4>Why We Use Precious Metals</h4>
+        <p>People instantly understand them, like the Olympic podium:</p>
+        <ul>
+        <li><strong>Platinum.</strong> The finest and most complete option available.</li>
+        <li><strong>Gold.</strong> A premium solution delivering excellent results.</li>
+        <li><strong>Silver.</strong> A strong mid-range option offering solid value.</li>
+        <li><strong>Bronze.</strong> A practical and efficient mid-range choice.</li>
+        <li><strong>Economy.</strong> The most cost-effective way to solve the issue.</li>
+        <li><strong>Basic.</strong> The minimum required fix (safety or functionality).</li>
+        </ul>
+        <h4>Two Critical Truths</h4>
+        <p><strong>Platinum isn't meant to be sold.</strong> It sets the bar for what's possible. It represents excellence and capability. It anchors the conversation so everything below it feels reasonable.</p>
+        <p><strong>Basic must always be physical work.</strong> Never just an evaluation or "we'll come back and look at it." Basic solves the immediate problem. It demonstrates integrity. You're not pushing, you're informing.</p>
+        <h3 style="margin-top:28px;">Constructing Your Six Options</h3>
+        <h4>Build from Bottom Up, Price from Top Down</h4>
+        <p><strong>Build from the bottom.</strong> Start with the immediate need (Basic), then build upward through each level, adding scope, materials, and value.</p>
+        <p><strong>Price from the top.</strong> Start with Platinum and work down. Each step should drop <strong>15 to 30% consistently.</strong> If you skip too far (from $4,200 to $1,500 for example), it creates a mental gap that makes customers question what they're missing.</p>
+        <h4>Example Pricing Spread:</h4>
+        <h4>The "Same as Above" Technique</h4>
+        <ul>
+        <li><strong>Platinum:</strong> Full description of everything</li>
+        <li><strong>Gold:</strong> "Same as above, without [one or two enhancements]"</li>
+        <li><strong>Silver:</strong> Full description of this tier</li>
+        <li><strong>Bronze:</strong> "Same as above, without [specific item]"</li>
+        <li><strong>Economy:</strong> Full description</li>
+        <li><strong>Basic:</strong> Separate description (usually significantly different)</li>
+        </ul>
+        <p>Each pair (Platinum/Gold, Silver/Bronze, Economy/Basic) becomes easy to compare.</p>
+        <h4>Odd Number Pricing</h4>
+        <p>End prices with odd numbers (3, 7, 9). $6,689 feels more carefully calculated than $6,700. Studies show prices ending in odd numbers appear more intentional. Start by making your hourly rate an odd number.</p>
+        <h3 style="margin-top:28px;">Verbal Packaging. Describe the Outcome, Not the Part.</h3>
+        <p>This is where most electricians accidentally train their customers to price-shop. If you say "install a duplex outlet," they can Google what that costs. If you say "upgrade your home's electrical points for safer power distribution," they can't.</p>
+        <p><strong>All-Star move:</strong> Instead of "You don't have a surge protector," say:</p>
+        <blockquote>
+        "You don't have a whole-home electronics safety system. Is there a reason why you haven't installed one yet?"
+        </blockquote>
+        <p>This opens curiosity, invites questions, and lets the client see value without pressure. It's not a trick. It's the truth, packaged in language that actually communicates the value.</p>
+        <p>What are higher-priced electricians doing differently? This. Exactly this.</p>
+        <h3 style="margin-top:28px;">Handling the "Laundry List"</h3>
+        <p>When a customer gives you a long list of wants, find the order of importance:</p>
+        <ul>
+        <li>"If we did nothing else, what's the one thing you most want to get done?"</li>
+        <li>"What would be next on your priority list?"</li>
+        </ul>
+        <p>Mark from 1 through 6, then map into the framework:</p>
+        <ul>
+        <li><strong>Basic:</strong> Most immediate and pressing safety concern only</li>
+        <li><strong>Economy:</strong> Same safety issue, improved materials/methods</li>
+        <li><strong>Bronze:</strong> Safety concerns + customer's #1 "want"</li>
+        <li><strong>Silver:</strong> Everything on their list using residential-grade materials</li>
+        <li><strong>Gold:</strong> Finest available materials for everything requested</li>
+        <li><strong>Platinum:</strong> Best possible version + upgrades (premium materials, advanced electronics protection, memberships, turnkey finishing like paint and patch)</li>
+        </ul>
+        <h4>When There's "Nothing There"</h4>
+        <p>If a tech says "There's nothing here," it's almost never true. Ask:</p>
+        <ul>
+        <li>Why did they call in the first place?</li>
+        <li>What's the emotional driver behind the request?</li>
+        <li>How can you improve their quality of life?</li>
+        </ul>
+        <p>Even in new homes, there are opportunities beyond minimum code compliance. <strong>The code represents the bare minimum standard to prevent a fire, not a benchmark for comfort or longevity.</strong></p>
+        <p>Not offering options guarantees missed revenue. Joseph calls it the "demand call lotto." Every small service call can turn into a large project. But only if options are offered. One platinum sale can dramatically change your monthly numbers. Nathan converted a $300 generator tune-up into $4,780. That's the lotto. And it's available on every single call.</p>
+        <h3 style="margin-top:28px;">The Six Pillars of the Irresistible Offer</h3>
+        <p>Options are only one piece. A complete offer includes:</p>
+        <ul>
+        <li><strong>Sustainable Pricing.</strong> Your SSR from Chapter 1.</li>
+        <li><strong>Trip Charges.</strong> Qualify leads and protect your time (Chapter 1).</li>
+        <li><strong>Club Memberships.</strong> Defeat slow seasons, build loyalty, create predictable work ($250 to $450/yr, priced around the cost of one service hour).</li>
+        <li><strong>Value Drivers.</strong> Convenience, professionalism, speed, communication. Premium clients don't just buy electrical work. They buy confidence and ease.</li>
+        <li><strong>Six Options.</strong> Clear, ethical choices for every buyer type.</li>
+        <li><strong>Lifetime Warranty + Financing.</strong> Position yourself as the safe and obvious choice. A lifetime guarantee shows confidence in your work. Financing makes premium work accessible.</li>
+        </ul>
+        <p>When your offer is structured correctly:</p>
+        <ul>
+        <li>Customers stop comparing you to low-priced competitors</li>
+        <li>Your team presents with confidence and consistency</li>
+        <li>Price objections become much easier to handle</li>
+        <li>Your average ticket rises significantly</li>
+        <li>You create repeat customers who trust you long-term</li>
+        </ul>
+        <p>Your offer is your competitive advantage. It's the reason a homeowner chooses you instead of a competitor who is cheaper or faster. And once you have it dialed? Getting undercut stops being a problem. Because you're not competing anymore. You're being chosen.</p>
+        <h3 style="margin-top:28px;">Proof Points</h3>
+        <p><strong>Allen Black.</strong> $182,500 single-van month (SLE record). $97K single-van week (also a record). On track for $1.75M. Learned the generator niche and added $100K+ in generator revenue alone. All built on 6-option presentations where the client chooses the scope.</p>
+        <p><strong>A Bronze partner's first 3 presentations.</strong> Basic at $694 (was $225, a 3x increase). Two Golds at $2,794 and $2,523. Total: $6,011 vs. about $675 under old pricing. <em>"I'm loving not feeling tied to a pricebook."</em></p>
+        <p>The difference between $675 and $6,011 from the same three calls is not skill. It's structure. The structure you just learned.</p>
+        <h3 style="margin-top:28px;">The 20% You Need Us For</h3>
+        <p>You understand the framework. But building your own 6-tier option sets, for your market, your services, your rate, takes guided practice. Every partner who's broken through says the same thing: "I understood options in theory. But the first time Joseph sat next to me and built them live, everything clicked."</p>
+        <p>That's what the masterclass is. Joseph building options with you, job by job, in real time. Not theory. Construction.</p>
+        <p><strong>Download:</strong> [Options Template]</p>
+        <p><strong>Go Deeper:</strong> [Offer & Options Masterclass, $97]</p>
+        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+
+        <div class="ch-actions">
+          <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Options Template</button>
+          <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
+          <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chapter" onclick="toggleChapter('ch4')">
+      <div class="chapter-dot"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 4: Sales Process</div>
+        <div class="chapter-meta">The 4 Whats. Objection handling. From first call to closed deal.</div>
+      </div>
+      <span class="chapter-presenter presenter-joseph">Joseph</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded" id="ch4">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">You're Not Losing Jobs on Price. You're Losing Them on Presentation.</h3>
+        <p>Most electricians stay stuck because they never fix how they sell. They have the skills, the rate, the options. But the conversation falls apart in the home. Why?</p>
+        <p>Because there are three types of electricians, and most are the wrong one:</p>
+        <h4>Mr. Fix It. The Quick Fixer.</h4>
+        <p>"Fast and cheap is what the customer wants." Rushes through jobs. Avoids deeper inspections. Speed without substance doesn't create value.</p>
+        <h4>Mr. Sell It. The Hard Closer.</h4>
+        <p>"Everyone should buy the best." Focuses on quotas and upsells instead of needs. Uses pressure. Customers can sense when sales pressure replaces genuine care.</p>
+        <h4>Mr. Service. The Trusted Professional.</h4>
+        <p>"Service comes first. Sales follow trust." Listens carefully. Performs full inspections. Communicates findings clearly. Focuses on education, options, and safety. Balances expertise with empathy. Builds relationships, not transactions.</p>
+        <p><strong>Which type have you been operating as lately?</strong> Be honest. The answer determines whether you're building trust or burning it.</p>
+        <p>Here's the hardest part of this chapter: if you've been Mr. Fix It or Mr. Sell It for years, the habits are deep. You don't just read about Mr. Service and become him. You practice. You role-play. You get coached until the new habits replace the old ones. That's why the electricians who transform fastest have someone watching, correcting, and reinforcing every week. But let's get the framework in your hands first.</p>
+        <p><strong>What to expect from this chapter:</strong> The 4 Whats will feel simple when you read it. It will feel hard on your first call. By your fifth call, it will feel natural. By your twentieth, you won't even think about it. Christian went from $80K to $200K/month average using this framework, but it took him 6 months of deliberate practice. Not 6 months of reading about it. 6 months of doing it on every single call, reviewing what worked, and adjusting what didn't.</p>
+        <p><strong>"I'm not a salesperson."</strong> Good. Neither is Joseph. He's a service professional who happens to be the best in the world at helping homeowners make informed decisions. The difference between "selling" and "serving" is intent. If your intent is to help them understand their options so they can choose what's best for their home, that's not sales. That's service. And service closes at 60%+.</p>
+        <h3 style="margin-top:28px;">The 4 Whats Framework</h3>
+        <p>This is how you structure every conversation naturally. No scripts that sound robotic. No pressure. No upselling. Just a logical flow that earns trust and builds options organically.</p>
+        <h4>What They Called You For</h4>
+        <p>This is the primary reason you're in their home. If you skip this and jump to other concerns, the client will immediately suspect you're trying to upsell them. You risk this every time you bring up a panel issue before discussing the ceiling fan they actually called about.</p>
+        <h4>What's Directly Connected</h4>
+        <p>Expand on the situation by showing what's directly tied to the original call. Customers won't naturally see these connections. You have to draw them. Example: They called for a tripped GFCI. You point out how that single GFCI protects 3 bathrooms, the outside, and the garage, and why it should be localized now.</p>
+        <h4>What's Good</h4>
+        <p>If you only focus on the negative, the customer becomes overwhelmed and shuts down. That's what leads to "email it over." Acknowledge what's working. This reframes the situation as less involved than they feared. Example: The wiring in the walls is all copper. Or insurance will cover the service upgrade.</p>
+        <h4>What's More</h4>
+        <p>These are the items that can feel unrelated but are still relevant. Save these for last because they can appear as the "upsell" parts. The homeowner didn't foresee them, so you need extra time to explain. Example: They called for ceiling fans, but you found no smoke detectors in the bedrooms. They called for an outlet change, but you found melting on another circuit in the panel.</p>
+        <p>Most electricians rush to "What's More" because that's where the big ticket lives. But if you skip "What They Called For" and "What's Good," you've lost trust before you ever present a price. The order matters. The patience matters. The listening matters.</p>
+        <h3 style="margin-top:28px;">The 4 Forces. Why People Actually Buy.</h3>
+        <p>Every homeowner sits in a quadrant of emotion. Understanding which force drives them changes how you speak:</p>
+        <p><strong>80% of people react "Away From"</strong> (pains and fears). Speak to the pain first. "What worries you most about this panel?" works better than "Would you like us to upgrade it?" for 8 out of 10 homeowners.</p>
+        <p>The top 20% move "Towards" (wants and wishes). "What would it feel like to have a home that's completely dialed in?" works for them.</p>
+        <p>If you can identify which force is driving the homeowner in the first 10 minutes, you can speak their language for the rest of the call. And when you speak their language, they stop shopping. Because nobody else is listening the way you are.</p>
+        <h3 style="margin-top:28px;">The Deal Formula</h3>
+        <blockquote>
+        <em>(Trust x Desire) / (Risk x Cost) = Partnership</em>
+        </blockquote>
+        <ul>
+        <li><strong>Trust.</strong> Built through professionalism, the 4 Whats, genuine listening.</li>
+        <li><strong>Desire.</strong> Amplified by identifying their dominant Force.</li>
+        <li><strong>Risk.</strong> Reduced by warranty, guarantee, reviews, professionalism.</li>
+        <li><strong>Cost.</strong> Reframed by options, financing, and ROI proof.</li>
+        </ul>
+        <p>When the top of that equation is bigger than the bottom, they buy. Your entire job at the kitchen table is to increase trust and desire while decreasing perceived risk and cost.</p>
+        <p>Every chapter in this playbook feeds this formula. Chapter 1 handles cost (your rate is justified). Chapter 2 handles trust (you showed up fast, professionally). Chapter 3 handles desire (options let them envision what's possible). This chapter handles all four at once.</p>
+        <h3 style="margin-top:28px;">The 3 Golden Rules</h3>
+        <ul>
+        <li><strong>Can't shift someone's view until you've shared theirs.</strong> Listen first. Understand their perspective. Only then can you guide them.</li>
+        <li><strong>Silence communicates. Delay communicates.</strong> When you present and stop talking, the homeowner fills the silence with their own reasoning. Let them sell themselves.</li>
+        <li><strong>Progress = Happiness (present, not perfect).</strong> Don't wait until everything is perfect. Start now. Improve continuously.</li>
+        </ul>
+        <h3 style="margin-top:28px;">Storytelling: How to Make Lessons Stick</h3>
+        <p>Facts inform, but stories transform. Our minds filter out facts, but stories bypass the "security guard" in the brain and go straight to long-term memory.</p>
+        <p><strong>The Hero's Journey (use this in every presentation):</strong></p>
+        <ul>
+        <li><strong>The Ordinary World.</strong> "It was just another service call..."</li>
+        <li><strong>The Transformative Journey.</strong> "When I opened the panel, I saw burn marks..."</li>
+        <li><strong>The Revelation.</strong> "That's why I always check the panel first now..."</li>
+        <li><strong>The Return.</strong> "Because of that lesson, our customers trust us even more."</li>
+        </ul>
+        <p>Share real stories from your own work. They build trust faster than any data point. And they make the customer feel like they're part of something, not just buying something.</p>
+        <h3 style="margin-top:28px;">Proof Points</h3>
+        <p><strong>Christian Farella.</strong> Stuck around $80K/month. Implemented the 4 Whats, learned to identify the 4 Forces, started presenting options instead of quotes. Result: first $304,000 month. Now averages about $200K/month. The work didn't change. <strong>The conversation did.</strong></p>
+        <p>How fast did it change? Six months. From $70K average to $200K average. That's not a slow grind. That's a system shift.</p>
+        <h3 style="margin-top:28px;">The 20% You Need Us For</h3>
+        <p>Reading about objection handling and doing it live are two different skills. You can memorize the 4 Whats, study the 4 Forces, and understand the Deal Formula. But the first time a homeowner says "That's way more than I expected" and stares at you in silence, your training takes over or your fear does.</p>
+        <p>The masterclass is role-play intensive. Real scenarios, real objections, real-time coaching from Joseph. You practice the conversation before you're in the home. So when the moment comes, you don't think about what to say. You just say it.</p>
+        <p>The guys who close at 60%+ didn't get there by reading. They got there by practicing with someone better than them. Every week.</p>
+        <p><strong>Download:</strong> [Sales Process Checklist + 4 Whats Template]</p>
+        <p><strong>Go Deeper:</strong> [Sales Process Masterclass, $97]</p>
+        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+
+        <div class="ch-actions">
+          <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Sales Process Checklist</button>
+          <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
+          <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chapter" onclick="toggleChapter('ch5')">
+      <div class="chapter-dot"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 5: Presentations</div>
+        <div class="chapter-meta">In-home delivery. Premium-first anchoring. Let them choose, not shop.</div>
+      </div>
+      <span class="chapter-presenter presenter-joseph">Joseph</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded" id="ch5">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">The 8 Secrets of a $1M Presentation</h3>
+        <h4>Secret 1: Undefeatable Mindset</h4>
+        <p>The objection you believe will defeat you IS the objection that will defeat you. When you walk in worried about a particular objection, it usually means you're aware of a gap in your business but don't have a plan to handle it.</p>
+        <p>Before you ever sit at the table: be abundantly convinced that you are the right person to solve this problem, REGARDLESS of your price point. If you truly believe you're the best person to help them, objection handling becomes natural.</p>
+        <p><strong>Action:</strong> List every objection you fear. Those are the ones you NEED to train on. They point to internalized objections that are costing you money every single week.</p>
+        <p>Most electricians skip this step because it's uncomfortable. The ones who do it report closing more within days. Not because the market changed. Because they did.</p>
+        <p><strong>What to expect from this chapter:</strong> This is the longest chapter in the playbook because the presentation is where everything comes together. Your rate (Ch 1), your options (Ch 3), your sales process (Ch 4) all converge in this moment at the kitchen table. You won't master it from reading. Plan to practice the full 11-step flow at least 5 times before your next live call. Record yourself. Watch it back. The cringe is the learning.</p>
+        <p><strong>"I don't have time to practice presentations."</strong> Sherman's team went from $100K to $300K/month in 60 days. They practiced every week. The techs who say they don't have time to practice are the same techs who spend an extra 30 minutes on every call fumbling through a presentation that should take 10 minutes. Practice saves time. Fumbling costs money.</p>
+        <h4>Secret 2: Proper Preparation Prevents Poor Performance</h4>
+        <ul>
+        <li>Devices charged, backup charger with cord</li>
+        <li>Review the presentation 24 hours before</li>
+        <li>Screenshot presentation WITH and WITHOUT prices (you present without prices first)</li>
+        <li>Fresh uniform in the van, ready to go</li>
+        <li>Review client names and any special connections</li>
+        </ul>
+        <h4>Secret 3: Right Place, Right People, Right Time</h4>
+        <p><strong>Right people.</strong> Present to the decision-maker. Not the tenant, relative, or groundskeeper. If both spouses need to be involved, schedule when both are present. When someone else presents your solutions for you, they'll never do so with your clarity, passion, or intention.</p>
+        <p><strong>Right place.</strong> Inside the home, at the kitchen table. This is where families break bread and make big decisions. Strangers aren't welcome there. If you're at the table, you've earned trust. Sit side-by-side with the client, not across from them. You're part of the solution, not part of the problem.</p>
+        <p><strong>Right time.</strong> Ask "Is now a good time to review this together?" If they're not mentally present, it won't land.</p>
+        <h4>Secret 4: Presentation Etiquette</h4>
+        <ul>
+        <li>Avoid overtalking. Engage with questions instead of statements.</li>
+        <li>Don't one-up client stories. Empathize instead.</li>
+        <li>Be silent when clients review the options. Let them think.</li>
+        <li>Use real-world comparisons (smoke detector = seatbelt, generator = insurance).</li>
+        </ul>
+        <h4>Secret 5: The 4 Whats (See Chapter 4)</h4>
+        <p>Follow the format: Called for, Connected, Good, More. Present options from premium to economical. Present the top option first, then let the client review the rest. <strong>Do not read every option aloud.</strong></p>
+        <h4>Secret 6: Building Value. Less Is More.</h4>
+        <p>Remember you're preparing for a <strong>discussion, not a lecture.</strong> The more the customer sits and listens without involvement, the higher the chance they zone off and say "email it over."</p>
+        <p>Ask questions rather than making statements:</p>
+        <ul>
+        <li>Instead of "You don't have GFCI protection so I'm including it," try: <strong>"Do you feel water and electricity should mix? No? I agree. That's why I included..."</strong></li>
+        </ul>
+        <p>When they can't follow you, they won't buy from you. Make real-world comparisons. Equate a smoke detector to a seatbelt. A generator to "I'd rather have it and not need it."</p>
+        <h4>Secret 7: Brace for Impact. The Price Conditioning Script.</h4>
+        <blockquote>
+        "So what I've done is designed a range of ways we can address this, from the finest and most permanent to the most economical and temporary, so that you're fully in control of the project and budget. For transparency, I don't expect you to take the top option. With it being the finest, it may be more of an investment than you were expecting. That being said, there are also more economical options that are likely closer to what you had in mind. Either way, just take a look and let me know which one works best for you."
+        </blockquote>
+        <p>This sets the understanding that there's a wide range, that you don't expect them to take the top (which motivates the right person to take it), frames it as an investment, and opens the door for them to hear you out.</p>
+        <p>This single script has changed more outcomes than any other technique in our system. Partners report that when they use it word-for-word, the "sticker shock" reaction drops dramatically. Why? Because you've already acknowledged it before they felt it. You shared their view before trying to shift it.</p>
+        <h4>Secret 8: The Full Presentation Flow</h4>
+        <ul>
+        <li>Ask if now's a good time to discuss</li>
+        <li>Confirm both partners are available</li>
+        <li>Walk through observations using the 4 Whats</li>
+        <li>Show the presentation WITHOUT prices first</li>
+        <li>Build value through discussion, not lecture</li>
+        <li>Deliver the disclaimer script (Secret 7)</li>
+        <li>Describe the top option</li>
+        <li>Hand over the tablet and let them review</li>
+        <li>When they choose: "Great choice. What did you like most about that option?"</li>
+        <li>Remorse removal: "Just so you're aware, there were cheaper options available..."</li>
+        <li>Collect payment (financing, card reader, CRM)</li>
+        </ul>
+        <h3 style="margin-top:28px;">Handling Objections</h3>
+        <h4>The Framework: Acknowledge, Reframe, Ask Again</h4>
+        <p><strong>"I need to talk to my spouse":</strong></p>
+        <blockquote>
+        "I completely understand. Most of my best clients say the same thing. It's a sign you're a thoughtful decision-maker. If your spouse were here right now, what do you think they'd be most concerned about: the investment itself, or making sure this is the right solution?"
+        </blockquote>
+        <p><strong>"Can you email it over?"</strong></p>
+        <blockquote>
+        "Absolutely. Which option would you like me to email?"
+        </blockquote>
+        <p>(Forces decision clarity. Moves the conversation forward instead of stalling.)</p>
+        <p><strong>"Why is your price so much higher?":</strong></p>
+        <blockquote>
+        "That's a great question. Our price includes warranty, insurance, licensing, quality materials, and a trained team. When other companies leave those out, it lowers the price, but it also lowers what you actually get. Would you like me to walk through what's included?"
+        </blockquote>
+        <p><strong>"That's more than I budgeted":</strong></p>
+        <blockquote>
+        "I hear you. Have I given the impression this all has to be paid today? We have in-house payment options with 0% interest. If we could make this work for your budget, would you like to move forward?"
+        </blockquote>
+        <p><strong>"You're double the other quotes!":</strong></p>
+        <blockquote>
+        "I appreciate you sharing that. Can I ask: did the other quote include the same scope of work, the same warranty, the same insurance coverage? In my experience, when quotes look very different, it's usually because the scope is very different. Would you like me to help you compare what's actually included?"
+        </blockquote>
+        <p><strong>"I just want it fixed. I don't need all these options."</strong></p>
+        <blockquote>
+        "Hey, I totally respect that. The reason we take this approach is because we've found that many homeowners were being underserved. We want to make sure every customer has a full understanding of their system so they can make the best choice for their home."
+        </blockquote>
+        <p>></p>
+        <blockquote>
+        Then ask: <strong>"Would it be wrong of me to want to serve you at that level?"</strong>
+        </blockquote>
+        <p>That last question stops conflict before it starts. It's respectful, confident, and rooted in care. It shifts the tone from argument to alignment.</p>
+        <h3 style="margin-top:28px;">The Two-Call Close</h3>
+        <p>For larger projects, this changes everything:</p>
+        <p><strong>Call 1:</strong> Diagnose. Learn the "why." Understand the home and the decision-makers. Build trust. Ask permission to come back with a full plan.</p>
+        <p><strong>Call 2:</strong> Deliver 6 clear options built on what you learned. The first call builds trust. The second call earns the partnership.</p>
+        <p>Dorian Hayes turned a $24 Angi lead for bad kitchen ballasts into $66,700 using this exact method. First visit diagnosed. Second visit presented 6 options. The homeowner didn't just fix the ballasts. They renovated their entire home's electrical system. Because Dorian listened, identified the family's fears and wishes, and presented a full range of solutions that gave them control.</p>
+        <h3 style="margin-top:28px;">Proof Points</h3>
+        <p><strong>Sherman Hatley.</strong> Solid operation at about $100K/month. Couldn't break through. After implementing premium-first presentations and training his team on the framework: <strong>$300K/month in 60 days.</strong> His new sales tech closed a $54K rewire, collected a $26K deposit, and ran 8 opportunities per day.</p>
+        <p>60 days. Not 6 months. Not a year. 60 days. Because Sherman didn't just read about presentations. He trained on them every week with Joseph until his whole team could execute the flow.</p>
+        <h3 style="margin-top:28px;">The 20% You Need Us For</h3>
+        <p>You can read these 8 secrets. But presenting with presence, the body language, the timing, the silence, the confidence... that's practiced, not read. The masterclass is Joseph demonstrating a full in-home presentation on a real job. Then you practice it before your next call.</p>
+        <p>The difference between knowing the flow and executing the flow is coaching. Weekly. Consistent. With someone who's done thousands of these. That's what separates $50K months from $200K months.</p>
+        <p><strong>Download:</strong> [Presentation Checklist + Objection Handle Scripts]</p>
+        <p><strong>Go Deeper:</strong> [Presentations Masterclass, $97]</p>
+        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+        <p># DELIVER</p>
+        <h3 style="margin-top:28px;">Power to the Panel</h3>
+        <blockquote>
+        "You can't grind your way past the team bottleneck."
+        </blockquote>
+        <p>You have the rate, the leads, the options, and the presentation skills. Now you need two things: <strong>people to deliver the work</strong> and <strong>a reputation that feeds your next lead.</strong> This section builds both.</p>
+        <p>Your business either grows past you or it stays the size of you. That's the decision this section forces.</p>
+
+        <div class="ch-actions">
+          <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Presentation Checklist</button>
+          <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
+          <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== D - DELIVER ===== -->
+<div class="section" id="sec-deliver">
+  <div class="section-header" onclick="toggleSection('sec-deliver')">
+    <div class="section-icon section-icon-d">&#9881;</div>
+    <div class="section-info">
+      <div class="section-letter section-letter-d">D - Deliver</div>
+      <div class="section-name">Power to the Panel</div>
+      <div class="section-tagline">Build the team. Protect the reputation. Deliver excellence every time.</div>
+    </div>
+    <div class="section-chevron">&#9660;</div>
+  </div>
+  <div class="section-chapters">
+    
+    <div class="chapter" onclick="toggleChapter('ch6')">
+      <div class="chapter-dot"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 6: Recruiting</div>
+        <div class="chapter-meta">Find, attract, and keep electricians in a talent drought.</div>
+      </div>
+      <span class="chapter-presenter presenter-forrest">Forrest</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded" id="ch6">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">While You're Installing, No Growth Is Happening</h3>
+        <p>That's Nathan Miles, who figured out the hard truth in his first few months. Every hour you spend pulling wire is an hour you're not selling, not leading, not building. And if you don't change that, you'll hit a ceiling that no amount of pricing or options can break through.</p>
+        <p>The recruiting problem isn't a talent shortage. It's a positioning problem. You're competing for electricians the same way you used to compete for customers. On price. And just like with customers, that's a losing strategy.</p>
+        <p>You built a job, not a system. And now the system needs people.</p>
+        <p><strong>What to expect from this chapter:</strong> Hiring is scary. It's the first time your business costs go up without a guaranteed revenue increase. But the math is simple: if your CSR prevents 5 missed calls per week and each call is worth $1,500 in potential revenue, that's $7,500/week in pipeline you're currently losing. A CSR costs $3,000 to $4,000/month. The ROI is immediate. Nathan's revenue accelerated the month he hired his CSR. Not because he got more leads. Because he stopped losing the ones he already had.</p>
+        <p><strong>"I can't afford to hire right now."</strong> You can't afford not to. Every call you miss while you're on a job is revenue that goes to your competitor. Every lead you follow up on 4 hours late instead of 4 minutes late is a 78% lower close probability. Your Growth Rate from Chapter 1 already funds this hire. That's why it's in the formula.</p>
+        <h3 style="margin-top:28px;">Your First Hire Should Be a CSR</h3>
+        <p>Counter-intuitive, but the data is overwhelming. Your first hire isn't a tech. It's the person who answers the phone.</p>
+        <p>Nathan hired a CSR as his first employee: <em>"Having a CSR as the first hire makes so much sense and yet no one does it. Who better to understand your company and help you grow it?"</em></p>
+        <p>Why CSR first:</p>
+        <ul>
+        <li>Speed-to-lead improves immediately (the 5-minute rule from Chapter 2)</li>
+        <li>You stop missing calls while you're on a job</li>
+        <li>Someone else handles scheduling, follow-ups, and happy calls</li>
+        <li>You can focus on selling and leading instead of admin</li>
+        </ul>
+        <p>The moment Nathan hired his CSR, his revenue accelerated. Not because he got more leads. Because he stopped losing the ones he already had.</p>
+        <h3 style="margin-top:28px;">The APEX Recruiting Strategy</h3>
+        <h4>What Makes an A-Player?</h4>
+        <p>An A-player isn't just technically skilled. They're coachable and growth-oriented. Aligned with your values. Reliable and consistent. Capable of representing your brand in a customer's home. Someone who makes the team better by being on it.</p>
+        <p><strong>Character over credentials.</strong> You can teach skills. You can't teach integrity.</p>
+        <h4>The Recruiting Funnel</h4>
+        <p><strong>Attract.</strong> Build a recruiting brand. Your social presence, your culture, your reputation in the trade community. People apply to companies they already admire. Post about your team, your wins, your culture. Not just "now hiring."</p>
+        <p><strong>Screen.</strong> Don't just check resumes. Ask values-based questions. Look for the story behind the career. Why did they leave their last job? What do they want to build? What frustrates them about the trade?</p>
+        <p><strong>Onboard.</strong> First 90 days define everything. Structure, mentorship, expectations. Don't throw them in a van and hope. Build a clear plan with milestones.</p>
+        <p><strong>Retain.</strong> The best techs don't leave for money. They leave because they stopped growing. Build performance pay tied to measurable outcomes. Growth paths (tech to lead tech to manager). Leadership development. Recognition that celebrates wins publicly.</p>
+        <h4>Compensation That Retains</h4>
+        <ul>
+        <li>Base salary for stability</li>
+        <li>Performance bonuses tied to KPIs (close rate, avg ticket, CSat score, review count)</li>
+        <li>Growth incentives (hit milestones, unlock raises)</li>
+        <li>Benefits that matter (health insurance, retirement matching, paid training)</li>
+        </ul>
+        <p>Most electricians try to recruit with a job posting and a competitive wage. The companies that attract A-players do it with culture, growth paths, and a reputation that makes great people come to them. That takes time to build alone. Or you can accelerate it with a proven framework.</p>
+        <h3 style="margin-top:28px;">The Service Leadership Map</h3>
+        <p>Great leaders build great teams. The map has 7 areas:</p>
+        <ul>
+        <li><strong>Culture.</strong> Define and defend your values. Hire for them. Fire for them.</li>
+        <li><strong>Recruiting Find.</strong> Build the pipeline (see above).</li>
+        <li><strong>Recruiting Hire.</strong> Structured interviews, values alignment, trial periods.</li>
+        <li><strong>Coaching (ITRS + Kaizen).</strong> Inspect, Train, Recognize, Support. Continuous improvement.</li>
+        <li><strong>Performance.</strong> KPIs everyone can see. Performance pay that rewards the right behaviors.</li>
+        <li><strong>Training.</strong> 4 pillars: Technical, Sales, Customer Service, Leadership.</li>
+        <li><strong>Resolution.</strong> 3 conflict types: Performance, Behavior, Interpersonal. Handle each differently.</li>
+        </ul>
+        <h3 style="margin-top:28px;">Proof Points</h3>
+        <p><strong>Nathan Miles.</strong> Started solo. CSR first (June), then JM Jordan (August). By month 12: 3 full-time electricians, a CSR, 2 vans, and a shop. Jordan closed his first job solo. Nathan stopped installing and started leading. The quote that says it all: <em>"While I'm doing installs, no growth is happening to my company."</em> He understood the bottleneck. He hired his way out of it. And he did it faster than anyone expected because he had a roadmap.</p>
+        <p><strong>Dorian Hayes.</strong> One organic Facebook post for a part-time CSR: <strong>79 applicants in 48 hours.</strong> Zero Indeed, zero LinkedIn. Consistent community presence made his company a place people wanted to join before a position even opened. His wife Juliet answering the phone "made me smile," said one customer. That customer became a $66,700 project.</p>
+        <p>Your CSR isn't just an employee. They're your brand ambassador. Your speed-to-lead engine. Your reputation builder. And your first step out of the van.</p>
+        <h3 style="margin-top:28px;">The 20% You Need Us For</h3>
+        <p>The hiring post template is easy. But building a recruiting pipeline that runs like a lead funnel, with consistent applicant flow, structured interviews, a 90-day onboarding system, and performance pay that retains your best people? That's the masterclass.</p>
+        <p>Most electricians try to hire for 3 to 6 months before finding someone decent. Our partners fill positions in weeks. Because they're not posting and praying. They're running a system.</p>
+        <p><strong>Download:</strong> [Hiring Scorecard + 90-Day Onboarding Template]</p>
+        <p><strong>Go Deeper:</strong> [Recruiting Masterclass, $97]</p>
+        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+
+        <div class="ch-actions">
+          <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Hiring Scorecard</button>
+          <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
+          <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chapter" onclick="toggleChapter('ch7')">
+      <div class="chapter-dot"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 7: Reputation</div>
+        <div class="chapter-meta">Reviews, callbacks, CSat. The system that feeds your next lead.</div>
+      </div>
+      <span class="chapter-presenter presenter-clay">Clay</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded" id="ch7">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">The Job Isn't Done When the Wire Is Pulled</h3>
+        <p>It's done when the review is posted.</p>
+        <p>Reputation is where DELIVER feeds back into AMPLIFY. Every 5-star review is a lead you didn't pay for. Every callback is money you're paying twice. Every unhappy customer is a referral that will never come.</p>
+        <p>The companies that hold 4.9 stars with 1,000+ reviews don't have better techs. They have better systems. Consistency is engineered, not hoped for.</p>
+        <p>Your best month isn't repeatable and you know it. One slow week still shakes your whole business. Reputation systems are what turn spikes into consistency.</p>
+        <p><strong>What to expect from this chapter:</strong> You can set up an automated review request system in one afternoon. Within 30 days you'll have more reviews than the previous 6 months. Within 90 days, your organic lead volume will start climbing. The $4M partner we reference didn't get to 1,000+ reviews overnight. They got there by making it automatic. Every job. Every time. No exceptions. No "I forgot to ask."</p>
+        <p><strong>"My customers don't leave reviews."</strong> They don't leave reviews because you don't ask. Or you ask awkwardly, once, as you're walking out the door. When you automate a text message within 1 hour of job completion with a direct link to your Google profile, reviews start flowing. It's not about the customer. It's about the system.</p>
+        <h3 style="margin-top:28px;">The Service 5 Framework</h3>
+        <p>Reputation is built on 5 areas of mastery:</p>
+        <h4>1. Branding & Reputation</h4>
+        <p>Your brand is what people say about you when you're not in the room. Control it with consistency. Uniform, van, communication, follow-up. Every touchpoint either builds or erodes your brand.</p>
+        <h4>2. Customer Experience</h4>
+        <p>The homeowner often doesn't understand electrical systems or the risks involved. Your role is to educate, explain, and provide options that make them feel informed and secure. The Win-Win-Win:</p>
+        <ul>
+        <li><strong>Business win:</strong> Reduced risk, maintained professionalism, documented work.</li>
+        <li><strong>Electrician win:</strong> Confidence, prevented mistakes, proof of professionalism.</li>
+        <li><strong>Homeowner win:</strong> Safety, clarity, control over choices.</li>
+        </ul>
+        <h4>3. Quality Standards</h4>
+        <p>Speed matters, but quality wins. You serve <strong>two customers:</strong> the one paying today and the one who opens the wall in 10 years. Leave work you'd be proud to put your name on.</p>
+        <p><strong>The Final Walkthrough.</strong> Before you leave every job:</p>
+        <ul>
+        <li>Walk the homeowner through what was done</li>
+        <li>Show them the before and after</li>
+        <li>Explain what to expect going forward</li>
+        <li>Ask: "Did we miss anything?"</li>
+        <li><strong>Communicate, Demonstrate, Document</strong></li>
+        </ul>
+        <h4>4. Review Systems</h4>
+        <p>Automate your review requests within 1 hour of job completion. Not "if you liked our work." Always. Every job. Every time.</p>
+        <p><strong>Response Protocol:</strong></p>
+        <ul>
+        <li><strong>Positive reviews:</strong> Thank them specifically. Mention what was done.</li>
+        <li><strong>Negative reviews:</strong> Acknowledge, own it, fix it publicly. Speed matters.</li>
+        </ul>
+        <h4>5. Callback Prevention</h4>
+        <p>Track every callback. Look for patterns, not incidents. Common causes: rushed final inspections, poor communication about scope, material quality shortcuts, lack of documentation.</p>
+        <h3 style="margin-top:28px;">Leverage Your Warranty</h3>
+        <p>A completed job isn't the end of a customer relationship. It's the beginning.</p>
+        <p><strong>Follow-up script (6 to 12 months post-install):</strong></p>
+        <blockquote>
+        "Hey, I just wanted to check in and make sure everything with your new electrical system is running perfectly. As you know, your installation is covered for life, and part of that guarantee includes an annual inspection to make sure everything continues to perform as expected. When would be a good time to schedule your electrical safety inspection?"
+        </blockquote>
+        <h4>Follow-Up System Tiers:</h4>
+        <ul>
+        <li><strong>Basic.</strong> Call one year after installation for complimentary inspection.</li>
+        <li><strong>Advanced.</strong> Schedule follow-ups seasonally, especially during slow months (November through February).</li>
+        <li><strong>Expert.</strong> For generators: both pre-season and post-season inspections (doubles touchpoints).</li>
+        </ul>
+        <p>This is where slow seasons get defeated. Every warranty follow-up is a chance to sell a membership, identify new needs, and generate a review. The partners who run this system don't have slow seasons. They have maintenance seasons.</p>
+        <h3 style="margin-top:28px;">Proof Points</h3>
+        <p><strong>Anonymous $4M Partner.</strong> Under $2M to $4M to $4.5M trajectory. 30%+ net profit. <strong>1,000+ Google reviews at 4.9 stars.</strong> Materials reduced from 19% to 11% in 30 days. Marketing at 7 to 8%. Addition by subtraction: fired misaligned people, installed cost discipline, upgraded the installer process ($210K incremental, $500K annualized), and built a reputation engine that generates organic leads at zero cost.</p>
+        <p>1,000+ reviews at 4.9 stars didn't happen by accident. It happened because every single job ended with a system, not a hope.</p>
+        <h3 style="margin-top:28px;">The 20% You Need Us For</h3>
+        <p>The checklist is straightforward. But building the full reputation system, with automated review requests, callback tracking, CSat scoring, warranty follow-up sequences, and response templates? That's the masterclass.</p>
+        <p>The partners who run this system don't just have good reviews. They have review engines that compound. Every month their organic lead cost drops because their reputation does the selling for them. That's the flywheel. And once it's spinning, your marketing budget gets smaller while your revenue gets bigger.</p>
+        <p><strong>Download:</strong> [Review Request Templates + Callback Tracker]</p>
+        <p><strong>Go Deeper:</strong> [Reputation Masterclass, $97]</p>
+        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+        <p># CHARGE</p>
+        <h3 style="margin-top:28px;">Collect the Current</h3>
+        <blockquote>
+        "$83K/month doesn't come from working harder. It's built. It's designed."
+        </blockquote>
+        <p>You have the rate, the leads, the options, the sales skills, the team, and the reputation. Now you protect the profit and decide what you're building all of this for.</p>
+        <p>This is where electricians stop hustling and start operating.</p>
+
+        <div class="ch-actions">
+          <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Review Request Templates</button>
+          <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
+          <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C - CHARGE ===== -->
+<div class="section" id="sec-charge">
+  <div class="section-header" onclick="toggleSection('sec-charge')">
+    <div class="section-icon section-icon-c2">&#128267;</div>
+    <div class="section-info">
+      <div class="section-letter section-letter-c2">C - Charge</div>
+      <div class="section-name">Collect the Current</div>
+      <div class="section-tagline">Protect your margins. Scale the machine. Build something you can sell.</div>
+    </div>
+    <div class="section-chevron">&#9660;</div>
+  </div>
+  <div class="section-chapters">
+    
+    <div class="chapter" onclick="toggleChapter('ch8')">
+      <div class="chapter-dot"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 8: Profit & Scale</div>
+        <div class="chapter-meta">The Five Profit Levers. Reverse P&amp;L. The math of real growth.</div>
+      </div>
+      <span class="chapter-presenter presenter-clay">Clay</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded" id="ch8">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">Revenue Without Margin Is Just Expensive Exercise</h3>
+        <p>Chapter 1 built your rate. This chapter protects and multiplies the profit underneath it.</p>
+        <p>Most operators can tell you their revenue. Very few can tell you their profit per employee, per job, or per van. And that's the gap between a busy company and a wealthy one.</p>
+        <p>You're doing the work. You're capturing the value. But is the value staying? Or is it leaking out through undisciplined spending, material waste, and overhead that grows faster than revenue?</p>
+        <p><strong>What to expect from this chapter:</strong> This is the chapter that makes most electricians uncomfortable. Not because the math is hard. Because the truth is hard. When you run your first reverse P&L and see exactly how far your current structure is from $83K/month, it stings. But that sting is the most valuable feeling in this entire playbook. Because now you know the exact gap. And a known gap is a solvable gap.</p>
+        <p><strong>"I'm not a numbers person."</strong> You learned trigonometry in trade school. You can handle basic division. The reverse P&L is just your desired profit, divided backward through your cost structure. If you can price a panel job in your head, you can run this. And if you really struggle with it, that's literally what the masterclass is for. Clay walks through it with your numbers, live, until it clicks.</p>
+        <h3 style="margin-top:28px;">Profit First. The 4 Pillars of Service Finance.</h3>
+        <h4>1. Pricing (You've Done This)</h4>
+        <p>Your SSR from Chapter 1 is the foundation. But pricing isn't set-and-forget:</p>
+        <ul>
+        <li>Review twice a year for growing companies</li>
+        <li>Always review after annual budgeting</li>
+        <li>Track your <strong>efficiency rate:</strong> actual billable hours vs. available hours</li>
+        </ul>
+        <h4>2. Cashflow. The Weekly Rhythm.</h4>
+        <p>Cash is oxygen. Revenue on paper means nothing if you can't make payroll.</p>
+        <p><strong>The Cash Bucket System:</strong></p>
+        <ul>
+        <li><strong>Operating bucket.</strong> Covers weekly expenses (payroll, materials, fuel).</li>
+        <li><strong>Tax bucket.</strong> Set aside 25 to 30% of profit for taxes before you touch it.</li>
+        <li><strong>Profit bucket.</strong> Your personal reward. Take it monthly. Don't reinvest all of it.</li>
+        <li><strong>Growth bucket.</strong> Funded by your Growth Rate (Chapter 1). Used only for planned expansion.</li>
+        </ul>
+        <p><strong>Weekly Cashflow Rhythm:</strong></p>
+        <ul>
+        <li>Monday: Review last week's collected revenue</li>
+        <li>Allocate to buckets (operating, tax, profit, growth)</li>
+        <li>Review outstanding invoices and follow up</li>
+        <li>Check: Can I make payroll? Can I cover this week's materials?</li>
+        <li>If any bucket is low, that's a signal, not a crisis. Adjust before it becomes one.</li>
+        </ul>
+        <p><strong>Key Metrics:</strong></p>
+        <ul>
+        <li>Days Sales Outstanding (DSO): how fast you collect</li>
+        <li>Cash Conversion Cycle: how fast revenue becomes usable cash</li>
+        <li>Weekly collection rate: target 90%+ of invoiced work collected within 7 days</li>
+        </ul>
+        <p>Most electricians look at their bank balance and feel rich or panicked based on a single number. The bucket system turns that anxiety into clarity. You'll know exactly where you stand every Monday morning. And you'll make decisions from data, not fear.</p>
+        <h4>3. The Five Profit Levers</h4>
+        <p><strong>Lever 1: Revenue per Van.</strong> How much does each unit produce? Benchmark: 1,000 hours x your SSR.</p>
+        <p><strong>Lever 2: Material Cost %.</strong> Should be 10 to 15% of revenue. If you're above 15%, you're leaking. Track monthly.</p>
+        <p><strong>Lever 3: Labor Efficiency.</strong> Billable hours as % of total hours. Target: 50%+. Every 5% improvement recovers tens of thousands.</p>
+        <p><strong>Lever 4: Overhead Discipline.</strong> Fixed costs as % of revenue. As you grow, this % should shrink. If it doesn't, you're scaling your problems.</p>
+        <p><strong>Lever 5: Average Ticket.</strong> The compound effect. A 10% improvement in ticket, with the same call volume and close rate, is a 10% revenue boost with zero additional cost.</p>
+        <p>These five levers are what we review with every partner every single month. Not theory. Actual numbers. Your numbers. And we identify which lever produces the biggest return for your specific situation right now. Not someday. This quarter.</p>
+        <h4>4. The Reverse P&L</h4>
+        <p>Instead of looking at what's left after expenses, <strong>start with the profit you want</strong> and work backward:</p>
+        <ul>
+        <li>What net profit do I want this year?</li>
+        <li>What revenue is needed at my current margin?</li>
+        <li>What cost structure supports that?</li>
+        <li>What team size? What marketing spend?</li>
+        <li>How many billable hours? How many vans?</li>
+        </ul>
+        <p>This is how you build $83,333/month on purpose. Not by hoping for it, but by engineering the structure that produces it.</p>
+        <h3 style="margin-top:28px;">The $83,333 Threshold</h3>
+        <p>$1,000,000/year divided by 12 = <strong>$83,333/month.</strong></p>
+        <p>This number carries weight. It's not just math. It's identity.</p>
+        <p>What you actually see right now:</p>
+        <ul>
+        <li>Grinding $20K to $50K months</li>
+        <li>Some spikes... some droughts</li>
+        <li>"I'm busy... but not building something real yet"</li>
+        </ul>
+        <p>What $83,333/month represents:</p>
+        <ul>
+        <li><strong>Proof</strong> you've figured it out</li>
+        <li>The moment you're no longer "trying"</li>
+        <li><strong>Control.</strong> Consistent sales behavior, process working on demand.</li>
+        <li><strong>Escape velocity.</strong> Above it, you can hire, market, and breathe. The business starts carrying you.</li>
+        </ul>
+        <blockquote>
+        "Every electrician chasing $83K/month isn't chasing a number. They're chasing the moment they finally feel in control of their business."
+        </blockquote>
+        <p>The uncomfortable truth: You're not far off because you're lazy. You're not far off because you don't work hard enough.</p>
+        <p><strong>You're far off because your current way of operating will never produce that number consistently.</strong></p>
+        <p>$83K/month doesn't come from working longer hours or taking more small jobs. It comes from a repeatable way to create, present, and close high-value work. That's what chapters 1 through 7 built. This chapter makes sure you keep what you earn.</p>
+        <p>And the real question is this: <em>What would have to change in how you sell, price, and operate to make $83K inevitable?</em></p>
+        <p>Because once that clicks, you don't chase months anymore. You build them.</p>
+        <h3 style="margin-top:28px;">Proof Points</h3>
+        <p><strong>$4M Partner.</strong> Reduced materials from 19% to 11% in 30 days. $210K incremental, $500K annualized. 30%+ net profit at $4M+ revenue. 12-person team. Addition by subtraction. The levers work. The math is real.</p>
+        <p><strong>$350K Van vs. $780K Van.</strong> Same market, same services. <strong>100% revenue difference from about 10% fewer calls run.</strong> The difference wasn't more work. It was better tickets, better close rate, and better options on every call. Same van. Same tech. Completely different outcome.</p>
+        <h3 style="margin-top:28px;">The 20% You Need Us For</h3>
+        <p>You see the levers. But pulling them in the right order, at the right time, for your specific business? That's the masterclass. Clay walks through the reverse P&L live, with your numbers, and shows you exactly which lever produces the biggest return this quarter.</p>
+        <p>The partners who hit $83K consistently didn't get there by accident. They got there because someone was watching their numbers every month and saying "pull this lever next." That's what we do.</p>
+        <p><strong>Download:</strong> [Profit Calculator + Reverse P&L Template]</p>
+        <p><strong>Go Deeper:</strong> [Profit & Scale Masterclass, $97]</p>
+        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+
+        <div class="ch-actions">
+          <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Profit Calculator</button>
+          <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
+          <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chapter" onclick="toggleChapter('ch9')">
+      <div class="chapter-dot"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 9: Scale or Exit?</div>
+        <div class="chapter-meta">Mergers, acquisitions, valuation. Build something worth owning.</div>
+      </div>
+      <span class="chapter-presenter presenter-forrest">Forrest</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded" id="ch9">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">What Are You Building This For?</h3>
+        <p>There comes a moment in every electrical business where the question changes. It's no longer "How do I grow?" It's <strong>"What am I building this for?"</strong></p>
+        <p>Growth and scale are not the same thing.</p>
+        <p><strong>Growth</strong> means more revenue. Add vans, add techs, add output. It's linear. More input equals more output. You're still the engine.</p>
+        <p><strong>Scale</strong> means more revenue <em>without</em> proportionally more cost, time, or stress. Systems run without you. Revenue grows faster than headcount. You're the architect, not the electrician.</p>
+        <p><strong>Exit</strong> means building something someone else would pay to own. Valuation is based on profit, systems, and transferability. Not on you showing up every day.</p>
+        <h3 style="margin-top:28px;">The Scale Decision</h3>
+        <p>Before you scale, answer these honestly:</p>
+        <ul>
+        <li><strong>Can your business run for 2 weeks without you?</strong> If not, you don't have a business. You have a job with employees.</li>
+        <li><strong>Do your techs sell without you coaching every call?</strong> If not, you haven't built a sales system. You ARE the sales system.</li>
+        <li><strong>Is your profit consistent month over month?</strong> If not, you're riding a rollercoaster, not running a machine.</li>
+        <li><strong>Do you have documented SOPs for every major process?</strong> If not, your knowledge is trapped in your head and can't be transferred.</li>
+        </ul>
+        <p>If you answered "no" to any of these, go back to Chapters 1 through 8. Those are your scale prerequisites. And that's okay. Most electricians are one or two chapters away from being ready. The question is whether you keep circling the same problems alone or whether you fix them in 90 days with someone who's done it before.</p>
+        <p><strong>What to expect from this chapter:</strong> This chapter asks harder questions than the rest. Not math questions. Identity questions. What are you building? Who are you building it for? What does your life look like in 5 years if nothing changes? What does it look like if everything changes? These aren't rhetorical. Write down your answers. The electricians who scale fastest are the ones who know exactly why they're doing it.</p>
+        <p><strong>"It's too early to think about exit."</strong> It's never too early. Even if you never sell, building a business that COULD be sold means building a business that doesn't depend on you. That's freedom. That's the whole point. Dan T. built to $1M+ in year one not because he wanted to sell. Because he built systems that work without him in the van. That gave him options. Options are everything. (Sound familiar?)</p>
+        <h3 style="margin-top:28px;">M&A for Electrical Contractors</h3>
+        <p>Mergers and acquisitions aren't just for corporations. In the trades, buying a company can be faster and cheaper than building from scratch.</p>
+        <h4>When to Buy vs. Build</h4>
+        <p><strong>Buy when:</strong></p>
+        <ul>
+        <li>You want instant market presence in a new area</li>
+        <li>An existing company has a customer base, trained techs, and equipment</li>
+        <li>The acquisition cost is less than 2 to 3 years of organic growth investment</li>
+        <li>You can integrate their operations into your existing systems</li>
+        </ul>
+        <p><strong>Build when:</strong></p>
+        <ul>
+        <li>Your current market has untapped demand</li>
+        <li>You have a strong recruiting pipeline</li>
+        <li>You want complete control over culture from day one</li>
+        <li>Capital is limited but time is available</li>
+        </ul>
+        <h4>What Makes an Electrical Company Valuable?</h4>
+        <ul>
+        <li><strong>Recurring revenue.</strong> Maintenance agreements, membership programs.</li>
+        <li><strong>Documented SOPs.</strong> Processes that work without the owner.</li>
+        <li><strong>A team that operates independently.</strong> The business isn't one person.</li>
+        <li><strong>Clean financials.</strong> P&L, balance sheet, tax returns that tell a clear story.</li>
+        <li><strong>Transferable reputation.</strong> Reviews, brand recognition, community trust.</li>
+        </ul>
+        <p>Everything in Chapters 1 through 8 builds toward this. Your SSR creates consistent pricing. Your options create predictable revenue. Your team creates operational independence. Your reputation creates transferable brand value.</p>
+        <p>Whether you want to scale to $5M or sell for $2M, the playbook is the same. The only difference is which chapter you're currently working on.</p>
+        <h3 style="margin-top:28px;">Building Your 5-Year Vision</h3>
+        <p>The Reverse P&L from Chapter 8, projected forward:</p>
+        <p><strong>Year 1:</strong> Lock in your SSR, build your first options library, hire your CSR.</p>
+        <p><strong>Year 2:</strong> Add a van, build your reputation engine, systematize your sales process.</p>
+        <p><strong>Year 3:</strong> Add another van, implement performance pay, delegate sales training.</p>
+        <p><strong>Year 4:</strong> Evaluate: scale further, acquire a competitor, or begin building for exit.</p>
+        <p><strong>Year 5:</strong> Your business either runs without you daily (scale) or is ready to sell (exit).</p>
+        <blockquote>
+        "This is where your identity changes. You're not chasing income anymore. You're building equity. Something that works for you, whether you're there or not."
+        </blockquote>
+        <p>You don't hit this by accident. You design it.</p>
+        <p>And the electricians who design it fastest? They don't do it alone. Dan T. went from union electrician to $1M+ in year one without ads. Nathan hit $900K in his first 12 months. They had the playbook AND the partners.</p>
+        <h3 style="margin-top:28px;">Proof Points</h3>
+        <p><strong>Zach Bennett.</strong> Started at $38,900/month average. Implemented the full system: pricing, options, presentations, team, reputation. Nearly doubled to <strong>$76,300/month average.</strong> Set a monthly record of <strong>$121,249.</strong> Added an installer and CSR. Building toward a business that runs without him in the van every day.</p>
+        <p><strong>Dan T. (DT Electric).</strong> Went from union electrician to $1M+ in year 1 without ads. $130K December, about $180K January. Team grew from 1 to 6, with 4 service vans. Built entirely on the system in this playbook. The system works. The timeline depends on whether you run it alone or with us.</p>
+        <h3 style="margin-top:28px;">The 20% You Need Us For</h3>
+        <p>Scale strategy isn't one-size-fits-all. Your 5-year vision, your market, your team, your personal goals. They all shape whether you scale, acquire, or build to sell. The masterclass walks through real scenarios and builds your strategic roadmap.</p>
+        <p>But here's the thing. If you've read all 9 chapters and you're still sitting at your current number... the playbook isn't the problem. Execution is. And execution without accountability is just ambition.</p>
+        <p>Every partner we've worked with says the same thing: "I knew most of this. But I wasn't doing it. Having someone hold me to it changed everything."</p>
+        <p><strong>Download:</strong> [Scale Readiness Checklist + 5-Year Vision Template]</p>
+        <p><strong>Go Deeper:</strong> [Scale or Exit Masterclass, $97]</p>
+        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+        <p># What's Next?</p>
+        <p>You've read the playbook. You have the frameworks. You have the math. You have the scripts.</p>
+        <p>Now you have a choice.</p>
+        <p><strong>Do it alone.</strong> You have 80% of what you need in these pages. The tools, the templates, the formulas. Many electricians will take this playbook and make real progress on their own. That's by design. We want you to win whether you work with us or not.</p>
+        <p><strong>Do it with us.</strong> The other 20% is execution, accountability, and coaching. It's Joseph in your ear during your next presentation. It's Clay reviewing your P&L live. It's Forrest building your lead system with you. It's the weekly call where someone says "did you do the thing?" and you can't hide.</p>
+        <blockquote>
+        <em>(Trust x Desire) / (Risk x Cost) = Partnership</em>
+        </blockquote>
+        <ul>
+        <li><strong>Trust.</strong> You've spent 9 chapters with us. You've seen the math. You've seen the proof.</li>
+        <li><strong>Desire.</strong> You know what $83,333/month looks like now. You can feel it.</li>
+        <li><strong>Risk.</strong> $30K sales boost in 30 days. Guaranteed or your money back.</li>
+        <li><strong>Cost.</strong> One job priced right pays for this a hundred times over.</li>
+        </ul>
+        <p>Nathan did it in 150 days. Sherman in 60. Edwin in 10 weeks.</p>
+        <p><strong>How fast do you want to move?</strong></p>
+        <p>[Book Your Strategy Call]</p>
+        <p>For Electricians. By Electricians.</p>
+        <p><em>Clay Neumeier, Joseph Lucanie, and Forrest</em></p>
+        <p><em>Service Loop Electrical. The $1M+ Electric Service Academy.</em></p>
+
+        <div class="ch-actions">
+          <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Scale Readiness Checklist</button>
+          <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
+          <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /sections -->
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="cta-card">
+    <div>
+      <h3>Ready to Build This With Us?</h3>
+      <p>(Trust x Desire) / (Risk x Cost) = Partnership. $30K sales boost in 30 days, guaranteed. How fast do you want to move?</p>
+    </div>
+    <button class="ch-btn ch-btn-gold" onclick="alert('Book a call')">Book Your Call &rarr;</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="app-footer">
+  <p>&copy; 2026 Service Loop Electrical &bull; <a href="#">$1M+ Electric Service Academy</a> &bull; For Electricians. By Electricians.</p>
+</div>
+
+</div><!-- /app -->
+
+<script>
+function doLogin(){
+  document.getElementById('loginOverlay').classList.add('hidden');
+  document.getElementById('mainApp').classList.add('visible');
+  var email = document.getElementById('loginEmail').value;
+  if(email){
+    var initials = email.split('@')[0].substring(0,2).toUpperCase();
+    document.getElementById('userAvatar').textContent = initials;
+  }
+}
+
+function toggleSection(id){
+  var el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+function toggleChapter(id){
+  var el = document.getElementById(id);
+  if(el) el.classList.toggle('visible');
+}
+
+document.getElementById('loginCode').addEventListener('keypress', function(e){
+  if(e.key === 'Enter') doLogin();
+});
+</script>
+
+</body>
+</html>
