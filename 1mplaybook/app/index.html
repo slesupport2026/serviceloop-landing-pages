@@ -163,6 +163,45 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .ch-btn-green{background:linear-gradient(135deg,#2d7a2d,#3d9a3d);color:var(--white);}
 .ch-btn-green:hover{transform:translateY(-2px);}
 
+/* ========== VIDEO PLACEHOLDER ========== */
+.ch-video{background:linear-gradient(135deg,#0d1520,#1B2A45);border:1px solid rgba(201,164,90,0.15);border-radius:12px;overflow:hidden;margin:24px 0;cursor:default;}
+.ch-video-player{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;position:relative;}
+.ch-video-play{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bright));display:flex;align-items:center;justify-content:center;opacity:0.7;}
+.ch-video-play svg{margin-left:4px;}
+.ch-video-label{font-family:Montserrat;font-weight:700;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+.ch-video-sub{font-family:'Open Sans';font-size:0.78rem;color:var(--gray);}
+.ch-video-badge{position:absolute;top:12px;right:12px;font-family:Montserrat;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:rgba(201,164,90,0.15);color:var(--gold);border:1px solid rgba(201,164,90,0.25);}
+
+/* ========== PDF SLIDES LINK ========== */
+.ch-slides{display:flex;align-items:center;gap:14px;padding:14px 20px;background:rgba(201,164,90,0.04);border:1px solid rgba(201,164,90,0.15);border-radius:10px;margin:16px 0;cursor:pointer;transition:border-color 0.2s;}
+.ch-slides:hover{border-color:var(--gold);}
+.ch-slides-icon{font-size:1.4rem;flex-shrink:0;}
+.ch-slides-info{flex:1;}
+.ch-slides-title{font-family:Montserrat;font-size:0.78rem;font-weight:700;color:var(--white);}
+.ch-slides-sub{font-family:'Open Sans';font-size:0.7rem;color:var(--gray);}
+.ch-slides-dl{font-family:Montserrat;font-size:0.65rem;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;flex-shrink:0;}
+
+/* ========== QUIZ ========== */
+.ch-quiz{background:var(--card);border:1px solid rgba(201,164,90,0.15);border-radius:12px;padding:24px;margin:24px 0;}
+.ch-quiz-header{font-family:Montserrat;font-size:0.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.ch-quiz-q{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.04);}
+.ch-quiz-q:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.ch-quiz-question{font-family:Montserrat;font-size:0.88rem;font-weight:700;color:var(--white);margin-bottom:10px;}
+.ch-quiz-options{display:flex;flex-direction:column;gap:6px;}
+.ch-quiz-opt{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:all 0.2s;font-size:0.82rem;color:var(--light-gray);}
+.ch-quiz-opt:hover{border-color:rgba(201,164,90,0.3);background:rgba(201,164,90,0.04);}
+.ch-quiz-opt.correct{border-color:#2d7a2d;background:rgba(45,122,45,0.1);color:#6bff6b;}
+.ch-quiz-opt.incorrect{border-color:#CE302A;background:rgba(206,48,42,0.08);color:#ff6b6b;}
+.ch-quiz-opt.disabled{pointer-events:none;opacity:0.5;}
+.ch-quiz-opt.correct.disabled{opacity:1;}
+.ch-quiz-dot{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;}
+.ch-quiz-opt.correct .ch-quiz-dot{border-color:#2d7a2d;background:#2d7a2d;color:var(--black);}
+.ch-quiz-opt.incorrect .ch-quiz-dot{border-color:#CE302A;background:#CE302A;color:var(--white);}
+.ch-quiz-feedback{font-family:Montserrat;font-size:0.72rem;font-weight:600;margin-top:8px;padding:8px 12px;border-radius:6px;display:none;}
+.ch-quiz-feedback.show{display:block;}
+.ch-quiz-feedback.right{background:rgba(45,122,45,0.1);color:#6bff6b;}
+.ch-quiz-feedback.wrong{background:rgba(206,48,42,0.08);color:#ff6b6b;}
+
 /* ========== SPARK CARDS ========== */
 .spark-card{display:flex;align-items:center;gap:20px;padding:18px 28px 18px 44px;border-top:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s;}
 .spark-card:hover{background:rgba(255,255,255,0.03);}
@@ -623,6 +662,58 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         <p><strong>Go Deeper:</strong> [Pricing Services Masterclass, $97]</p>
         <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
 
+        <!-- VIDEO -->
+        <div class="ch-video">
+          <div class="ch-video-player">
+            <div class="ch-video-badge">Coming Soon</div>
+            <div class="ch-video-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <div class="ch-video-label">Chapter 1 Deep Dive</div>
+            <div class="ch-video-sub">Pricing Services with Clay Neumeier</div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="ch-slides" onclick="alert('PDF coming soon')">
+          <div class="ch-slides-icon">&#128196;</div>
+          <div class="ch-slides-info">
+            <div class="ch-slides-title">Chapter 1 Slides: Pricing Services</div>
+            <div class="ch-slides-sub">PDF download with SSR formula, examples, and scripts</div>
+          </div>
+          <div class="ch-slides-dl">&#8595; PDF</div>
+        </div>
+
+        <!-- QUIZ -->
+        <div class="ch-quiz">
+          <div class="ch-quiz-header">&#9889; Knowledge Check</div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">1. What is the SSR formula?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Labor + Materials + 10% Markup</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Burden Rate + Growth Rate + 30% Profit Markup + Material Rate</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Competitor's Rate minus 15%</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="The SSR builds your rate on YOUR real expenses, not anyone else's." data-wrong="The SSR is Burden + Growth + 30% Markup + Materials. Your rate is built on your numbers, not the market's."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">2. How many billable hours per van per year does the 50% rule give you?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>2,000 hours</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>1,000 hours</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>1,500 hours</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Drive time, callbacks, admin, training... half your clock isn't billable." data-wrong="2,000 hours minus 50% for drive time, admin, callbacks = 1,000 billable hours per van."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">3. When you feel price shock about your new rate, what's actually happening?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Your rate is too high for your market</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>You need to lower your growth rate</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>You haven't experienced transactions at this level yet</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Price shock fades with experience. The barrier is you, not the customer." data-wrong="Price shock comes from not knowing and not experiencing transactions at this level. It's new to you, not to your customers."></div>
+          </div>
+        </div>
+
         <div class="ch-actions">
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Pricing Tool</button>
           <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
@@ -718,6 +809,58 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         </blockquote>
         <p>You have the rate. You have the leads. Now the question is: what happens when the phone rings? Because getting them to call is half the battle. What happens when they do?</p>
         <p>The electricians who break through $83K/month don't work harder. They present differently. This section is where pricing meets psychology, and leads become partnerships.</p>
+
+        <!-- VIDEO -->
+        <div class="ch-video">
+          <div class="ch-video-player">
+            <div class="ch-video-badge">Coming Soon</div>
+            <div class="ch-video-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <div class="ch-video-label">Chapter 2 Deep Dive</div>
+            <div class="ch-video-sub">Marketing &amp; Lead Generation with Forrest</div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="ch-slides" onclick="alert('PDF coming soon')">
+          <div class="ch-slides-icon">&#128196;</div>
+          <div class="ch-slides-info">
+            <div class="ch-slides-title">Chapter 2 Slides: Marketing &amp; Lead Generation</div>
+            <div class="ch-slides-sub">PDF download with 3-Engine system, Speed-to-Lead, and Good Neighbor Program</div>
+          </div>
+          <div class="ch-slides-dl">&#8595; PDF</div>
+        </div>
+
+        <!-- QUIZ -->
+        <div class="ch-quiz">
+          <div class="ch-quiz-header">&#9889; Knowledge Check</div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">1. What are the 3 engines of a balanced lead system?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Google Ads, Facebook Ads, Yelp</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Paid, Organic, Referral</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>SEO, Email, Direct Mail</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Paid for speed, Organic to compound, Referral for quality. All three running means you're choosing work, not chasing it." data-wrong="The 3 engines are Paid, Organic, and Referral. When one slows, the others carry."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">2. The first company to respond to a lead wins what percentage of the time?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>50%</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>78%</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>90%</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Speed-to-lead beats price and experience. Every minute you wait, your close rate drops." data-wrong="78%. Not the cheapest, not the most experienced. The fastest."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">3. What's the difference between a $350K van and a $780K van?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>The $780K van runs twice as many calls</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>About 10% fewer calls, but run better</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>A bigger service area</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Better leads, better response time, better options. Not more calls. Better calls." data-wrong="About 10% fewer calls run, but better tickets, better close rate, better options."></div>
+          </div>
+        </div>
 
         <div class="ch-actions">
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Lead Gen Playbook</button>
@@ -865,6 +1008,58 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         <p><strong>Go Deeper:</strong> [Offer & Options Masterclass, $97]</p>
         <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
 
+        <!-- VIDEO -->
+        <div class="ch-video">
+          <div class="ch-video-player">
+            <div class="ch-video-badge">Coming Soon</div>
+            <div class="ch-video-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <div class="ch-video-label">Chapter 3 Deep Dive</div>
+            <div class="ch-video-sub">Offer &amp; Options with Joseph Lucanie</div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="ch-slides" onclick="alert('PDF coming soon')">
+          <div class="ch-slides-icon">&#128196;</div>
+          <div class="ch-slides-info">
+            <div class="ch-slides-title">Chapter 3 Slides: Offer &amp; Options</div>
+            <div class="ch-slides-sub">PDF download with 6-option framework, pricing spread, and verbal packaging</div>
+          </div>
+          <div class="ch-slides-dl">&#8595; PDF</div>
+        </div>
+
+        <!-- QUIZ -->
+        <div class="ch-quiz">
+          <div class="ch-quiz-header">&#9889; Knowledge Check</div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">1. How many options should you present on every call?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>3 (Good, Better, Best)</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>6 (Platinum through Basic)</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>As many as the customer wants</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Six options cover every buyer type without prejudging. Three is still an ultimatum dressed as choice." data-wrong="The 6-option model (Platinum, Gold, Silver, Bronze, Economy, Basic) covers every buyer type."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">2. What is Platinum's real purpose?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>To be your highest-revenue option</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>To anchor the conversation so everything below feels reasonable</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>To upsell premium materials</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Platinum isn't meant to be sold. It sets the bar and makes Gold and Silver feel like smart choices." data-wrong="Platinum anchors the conversation. It represents what's possible, making everything below it feel reasonable."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">3. When building options, you should build from ___ and price from ___.</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Top down, bottom up</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Bottom up, top down</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Middle out, both directions</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Start with Basic (the immediate need), build up. Then price from Platinum down, 15-30% drops between tiers." data-wrong="Build from the bottom (Basic = immediate need), price from the top (Platinum down, 15-30% consistent drops)."></div>
+          </div>
+        </div>
+
         <div class="ch-actions">
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Options Template</button>
           <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
@@ -951,6 +1146,58 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         <p><strong>Download:</strong> [Sales Process Checklist + 4 Whats Template]</p>
         <p><strong>Go Deeper:</strong> [Sales Process Masterclass, $97]</p>
         <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
+
+        <!-- VIDEO -->
+        <div class="ch-video">
+          <div class="ch-video-player">
+            <div class="ch-video-badge">Coming Soon</div>
+            <div class="ch-video-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <div class="ch-video-label">Chapter 4 Deep Dive</div>
+            <div class="ch-video-sub">The Sales Process with Joseph Lucanie</div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="ch-slides" onclick="alert('PDF coming soon')">
+          <div class="ch-slides-icon">&#128196;</div>
+          <div class="ch-slides-info">
+            <div class="ch-slides-title">Chapter 4 Slides: Sales Process</div>
+            <div class="ch-slides-sub">PDF download with 4 Whats framework, 4 Forces, and Deal Formula</div>
+          </div>
+          <div class="ch-slides-dl">&#8595; PDF</div>
+        </div>
+
+        <!-- QUIZ -->
+        <div class="ch-quiz">
+          <div class="ch-quiz-header">&#9889; Knowledge Check</div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">1. What is the correct order of the 4 Whats?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Good, More, Called For, Connected</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Called For, Connected, Good, More</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>More, Called For, Good, Connected</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Follow the order. Skip it and you lose trust before you ever present a price." data-wrong="Called For, Directly Connected, Good, More. The order builds trust step by step."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">2. What percentage of customers make decisions based on 'Away From' emotions (pains and fears)?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>50%</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>80%</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>95%</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Most people react to what's wrong, not what's possible. Speak to pains and fears first." data-wrong="80% react Away From (pains/fears). Only 20% move Towards (wants/wishes). Lead with their language."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">3. In the Deal Formula, what do you divide by?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Trust and Desire</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Risk and Cost</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Price and Competition</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="(Trust x Desire) / (Risk x Cost) = Partnership. Reduce risk with warranties and reviews, reframe cost with options." data-wrong="The formula is (Trust x Desire) / (Risk x Cost). You reduce the denominator with warranties, reviews, and financing."></div>
+          </div>
+        </div>
 
         <div class="ch-actions">
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Sales Process Checklist</button>
@@ -1081,6 +1328,58 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         <p>You have the rate, the leads, the options, and the presentation skills. Now you need two things: <strong>people to deliver the work</strong> and <strong>a reputation that feeds your next lead.</strong> This section builds both.</p>
         <p>Your business either grows past you or it stays the size of you. That's the decision this section forces.</p>
 
+        <!-- VIDEO -->
+        <div class="ch-video">
+          <div class="ch-video-player">
+            <div class="ch-video-badge">Coming Soon</div>
+            <div class="ch-video-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <div class="ch-video-label">Chapter 5 Deep Dive</div>
+            <div class="ch-video-sub">Presentations with Joseph Lucanie</div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="ch-slides" onclick="alert('PDF coming soon')">
+          <div class="ch-slides-icon">&#128196;</div>
+          <div class="ch-slides-info">
+            <div class="ch-slides-title">Chapter 5 Slides: Presentations</div>
+            <div class="ch-slides-sub">PDF download with 11-step flow, price conditioning script, and objection handles</div>
+          </div>
+          <div class="ch-slides-dl">&#8595; PDF</div>
+        </div>
+
+        <!-- QUIZ -->
+        <div class="ch-quiz">
+          <div class="ch-quiz-header">&#9889; Knowledge Check</div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">1. When presenting options, what should you do after describing the top option?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Read through every option in detail</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Hand over the tablet and let them review in silence</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Ask which option they can afford</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Customers love choices. They hate being lectured. Hand it over and let silence do the selling." data-wrong="Hand the tablet over. Six options with silence beats one option with a 20-minute pitch."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">2. Why do you present the premium option first?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Because it's the most profitable</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>To anchor the conversation so everything below feels reasonable</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Because most customers will choose it</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="You don't expect them to take it. You present it so Gold and Silver feel like smart, comfortable choices." data-wrong="Premium-first anchoring makes mid-range options feel reasonable. It's not about selling the top. It's about framing the middle."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">3. What is 'remorse removal' and when does it happen?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Following up a week later to check satisfaction</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>After they choose, confirming cheaper options were available so they feel confident</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Offering a discount if they hesitate</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="'Just so you're aware, there were cheaper options available.' This confirms their choice was deliberate, not pressured." data-wrong="After they choose, you confirm cheaper options existed. This removes buyer's remorse by validating their decision."></div>
+          </div>
+        </div>
+
         <div class="ch-actions">
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Presentation Checklist</button>
           <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
@@ -1171,6 +1470,58 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         <p><strong>Go Deeper:</strong> [Recruiting Masterclass, $97]</p>
         <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
 
+        <!-- VIDEO -->
+        <div class="ch-video">
+          <div class="ch-video-player">
+            <div class="ch-video-badge">Coming Soon</div>
+            <div class="ch-video-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <div class="ch-video-label">Chapter 6 Deep Dive</div>
+            <div class="ch-video-sub">Recruiting with Forrest</div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="ch-slides" onclick="alert('PDF coming soon')">
+          <div class="ch-slides-icon">&#128196;</div>
+          <div class="ch-slides-info">
+            <div class="ch-slides-title">Chapter 6 Slides: Recruiting</div>
+            <div class="ch-slides-sub">PDF download with APEX strategy, hiring scorecard, and 90-day onboarding</div>
+          </div>
+          <div class="ch-slides-dl">&#8595; PDF</div>
+        </div>
+
+        <!-- QUIZ -->
+        <div class="ch-quiz">
+          <div class="ch-quiz-header">&#9889; Knowledge Check</div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">1. What should your first hire be?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>A journeyman tech to run more calls</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>A CSR to answer the phone and book calls</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>An apprentice to help on installs</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Every call you miss while you're on a job goes to your competitor. A CSR fixes speed-to-lead instantly." data-wrong="CSR first. The 5-minute rule from Chapter 2 requires someone answering the phone while you're in the field."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">2. What does APEX stand for in recruiting?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Attract, Present, Execute, eXpand</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Attract, Screen, Onboard, Retain</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Advertise, Post, Evaluate, eXit</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Attract with culture, Screen on values, Onboard with a 90-day plan, Retain with performance pay and growth." data-wrong="APEX is Attract, Screen, Onboard, Retain. Most companies skip Onboard and wonder why new hires don't stick."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">3. Dorian got 79 CSR applicants in 48 hours from one Facebook post. Why?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>He offered the highest pay in his market</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>He posted 4-5 times/week showing culture, wins, and community</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>He used a recruiting agency</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Consistent organic presence made his company a place people wanted to join before a position opened." data-wrong="4-5 posts per week on personal profiles. Family, community, jobs, wins. His brand was already built when the opening dropped."></div>
+          </div>
+        </div>
+
         <div class="ch-actions">
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Hiring Scorecard</button>
           <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
@@ -1256,6 +1607,58 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         </blockquote>
         <p>You have the rate, the leads, the options, the sales skills, the team, and the reputation. Now you protect the profit and decide what you're building all of this for.</p>
         <p>This is where electricians stop hustling and start operating.</p>
+
+        <!-- VIDEO -->
+        <div class="ch-video">
+          <div class="ch-video-player">
+            <div class="ch-video-badge">Coming Soon</div>
+            <div class="ch-video-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <div class="ch-video-label">Chapter 7 Deep Dive</div>
+            <div class="ch-video-sub">Reputation with Clay Neumeier</div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="ch-slides" onclick="alert('PDF coming soon')">
+          <div class="ch-slides-icon">&#128196;</div>
+          <div class="ch-slides-info">
+            <div class="ch-slides-title">Chapter 7 Slides: Reputation</div>
+            <div class="ch-slides-sub">PDF download with Service 5 framework, review templates, and callback tracker</div>
+          </div>
+          <div class="ch-slides-dl">&#8595; PDF</div>
+        </div>
+
+        <!-- QUIZ -->
+        <div class="ch-quiz">
+          <div class="ch-quiz-header">&#9889; Knowledge Check</div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">1. When should you request a review after completing a job?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>The next day via email</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Within 1 hour, automated</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Only if the customer seems happy</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Automate it. Within 1 hour. Never make it conditional on whether they 'seem happy.'" data-wrong="Within 1 hour, automated. Not 'if you liked us' — always. Conditional requests kill your review volume."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">2. In the Service 5 framework, what does 'serve two customers' mean?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>The homeowner and the realtor who referred them</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>The one paying today and whoever opens that wall in 10 years</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>The husband and the wife</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Quality isn't just about today's customer. It's about the reputation you leave inside the wall." data-wrong="Two customers: the one paying now, and whoever opens that wall in 10 years. That's your quality standard."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">3. Every 5-star review is really what?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>A marketing expense you can write off</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>A lead you didn't pay for</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>A way to beat your competitors on Google</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Reviews compound. Every one is a free lead. Every callback is money you're paying twice." data-wrong="Every 5-star review is a lead you didn't pay for. Every callback is money you're paying twice."></div>
+          </div>
+        </div>
 
         <div class="ch-actions">
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Review Request Templates</button>
@@ -1380,6 +1783,58 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         <p><strong>Go Deeper:</strong> [Profit & Scale Masterclass, $97]</p>
         <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
 
+        <!-- VIDEO -->
+        <div class="ch-video">
+          <div class="ch-video-player">
+            <div class="ch-video-badge">Coming Soon</div>
+            <div class="ch-video-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <div class="ch-video-label">Chapter 8 Deep Dive</div>
+            <div class="ch-video-sub">Profit &amp; Scale with Clay Neumeier</div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="ch-slides" onclick="alert('PDF coming soon')">
+          <div class="ch-slides-icon">&#128196;</div>
+          <div class="ch-slides-info">
+            <div class="ch-slides-title">Chapter 8 Slides: Profit &amp; Scale</div>
+            <div class="ch-slides-sub">PDF download with Reverse P&amp;L, Cash Bucket system, and Five Profit Levers</div>
+          </div>
+          <div class="ch-slides-dl">&#8595; PDF</div>
+        </div>
+
+        <!-- QUIZ -->
+        <div class="ch-quiz">
+          <div class="ch-quiz-header">&#9889; Knowledge Check</div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">1. What are the 4 Cash Buckets in the weekly rhythm?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Revenue, Expenses, Tax, Savings</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Operating, Tax, Profit, Growth</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Payroll, Materials, Marketing, Emergency</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Every Monday: allocate into Operating, Tax, Profit, Growth. Profit isn't what's left over. It's what you set aside first." data-wrong="Operating, Tax, Profit, Growth. Profit is not a bonus — it's a requirement you fund weekly."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">2. Material costs should be what percentage of revenue?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>20-25%</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>10-15%</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>5-8%</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Anything over 15% is a leak. The $4M partner cut materials from 19% to 11% in 30 days. That's $500K annualized." data-wrong="10-15% of revenue. Above 15% means you're leaking profit on every job."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">3. What is a Reverse P&amp;L?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>A tax strategy that reduces your liability</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Start with desired profit, work backward to what revenue and costs must look like</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Reversing your worst month's expenses</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Most people start with revenue and hope for profit. The Reverse P&amp;L guarantees it by designing backward." data-wrong="Start with your desired profit, then work backward through costs to determine what revenue is required."></div>
+          </div>
+        </div>
+
         <div class="ch-actions">
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Profit Calculator</button>
           <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
@@ -1486,6 +1941,58 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         <p><em>Clay Neumeier, Joseph Lucanie, and Forrest</em></p>
         <p><em>Service Loop Electrical. The $1M+ Electric Service Academy.</em></p>
 
+        <!-- VIDEO -->
+        <div class="ch-video">
+          <div class="ch-video-player">
+            <div class="ch-video-badge">Coming Soon</div>
+            <div class="ch-video-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <div class="ch-video-label">Chapter 9 Deep Dive</div>
+            <div class="ch-video-sub">Scale or Exit with Forrest</div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="ch-slides" onclick="alert('PDF coming soon')">
+          <div class="ch-slides-icon">&#128196;</div>
+          <div class="ch-slides-info">
+            <div class="ch-slides-title">Chapter 9 Slides: Scale or Exit?</div>
+            <div class="ch-slides-sub">PDF download with Scale Readiness checklist, 5-Year Vision, and exit valuation factors</div>
+          </div>
+          <div class="ch-slides-dl">&#8595; PDF</div>
+        </div>
+
+        <!-- QUIZ -->
+        <div class="ch-quiz">
+          <div class="ch-quiz-header">&#9889; Knowledge Check</div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">1. What's the difference between growth and scale?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Growth is faster than scale</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Growth = more revenue with proportional cost; Scale = more revenue without proportional cost</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>They're the same thing</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Growth is linear — you're still the engine. Scale means systems run without you." data-wrong="Growth adds revenue AND cost proportionally. Scale adds revenue WITHOUT proportional cost, time, or stress."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">2. Can your business run 2 weeks without you? This question tests what?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Whether you need a vacation</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Whether you've built systems or just a job for yourself</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>Whether your team likes working alone</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="If the answer is no, you don't have a business. You have a job. Chapters 1-8 fix that." data-wrong="This tests whether you've built systems and a team, or just created a job that depends entirely on you."></div>
+          </div>
+          <div class="ch-quiz-q">
+            <div class="ch-quiz-question">3. What makes an electrical company valuable enough to sell?</div>
+            <div class="ch-quiz-options">
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>High revenue and a big truck fleet</div>
+              <div class="ch-quiz-opt" data-correct="1" onclick="pickAnswer(this,true)"><div class="ch-quiz-dot"></div>Profit + documented SOPs + a team that operates independently</div>
+              <div class="ch-quiz-opt" onclick="pickAnswer(this,false)"><div class="ch-quiz-dot"></div>A large social media following</div>
+            </div>
+            <div class="ch-quiz-feedback" data-right="Revenue impresses. Profit + systems + transferability sells. That's what a buyer writes a check for." data-wrong="Exit value = profit + documented SOPs + independent team + clean financials + transferable reputation."></div>
+          </div>
+        </div>
+
         <div class="ch-actions">
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Scale Readiness Checklist</button>
           <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
@@ -1568,6 +2075,25 @@ function scrollToChapter(num){
       headers[i].scrollIntoView({behavior:'smooth',block:'center'});
       break;
     }
+  }
+}
+
+function pickAnswer(btn,correct){
+  var q=btn.closest('.ch-quiz-q');
+  var opts=q.querySelectorAll('.ch-quiz-opt');
+  var fb=q.querySelector('.ch-quiz-feedback');
+  opts.forEach(function(o){o.classList.add('disabled');});
+  if(correct){
+    btn.classList.add('correct');
+    btn.querySelector('.ch-quiz-dot').textContent='\u2713';
+    fb.className='ch-quiz-feedback show right';
+    fb.textContent='\u2713 Correct! '+fb.dataset.right;
+  }else{
+    btn.classList.add('incorrect');
+    btn.querySelector('.ch-quiz-dot').textContent='\u2717';
+    fb.className='ch-quiz-feedback show wrong';
+    fb.textContent='\u2717 Not quite. '+fb.dataset.wrong;
+    opts.forEach(function(o){if(o.dataset.correct==='1'){o.classList.add('correct');o.classList.remove('disabled');o.querySelector('.ch-quiz-dot').textContent='\u2713';}});
   }
 }
 </script>
