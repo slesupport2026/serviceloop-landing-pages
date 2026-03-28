@@ -69,6 +69,7 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .gps-track{display:flex;align-items:flex-start;position:relative;min-width:700px;}
 .gps-phase{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;}
 .gps-phase-label{font-family:Montserrat;font-size:0.55rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;writing-mode:vertical-lr;text-orientation:mixed;transform:rotate(180deg);margin-bottom:10px;padding:6px 4px;border-radius:4px;white-space:nowrap;}
+.gps-phase-label.spk{color:#ff6b35;background:rgba(255,107,53,0.1);}
 .gps-phase-label.amp{color:var(--accent);background:rgba(253,195,62,0.1);}
 .gps-phase-label.con{color:#2d7a2d;background:rgba(45,122,45,0.1);}
 .gps-phase-label.del{color:#1a7a6e;background:rgba(26,122,110,0.1);}
@@ -95,6 +96,8 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .section-header{display:flex;align-items:center;gap:18px;padding:24px 28px;cursor:pointer;background:var(--card);transition:background 0.2s;user-select:none;}
 .section-header:hover{background:var(--card-hover);}
 .section-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+.section-icon-s{background:linear-gradient(135deg,rgba(255,107,53,0.15),rgba(255,107,53,0.05));border:1px solid rgba(255,107,53,0.25);}
+.section-letter-s{color:#ff6b35;}
 .section-icon-a{background:linear-gradient(135deg,rgba(253,195,62,0.15),rgba(253,195,62,0.05));border:1px solid rgba(253,195,62,0.25);}
 .section-icon-c1{background:linear-gradient(135deg,rgba(45,122,45,0.15),rgba(45,122,45,0.05));border:1px solid rgba(45,122,45,0.25);}
 .section-icon-d{background:linear-gradient(135deg,rgba(26,122,110,0.15),rgba(26,122,110,0.05));border:1px solid rgba(26,122,110,0.25);}
@@ -160,17 +163,16 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .ch-btn-green{background:linear-gradient(135deg,#2d7a2d,#3d9a3d);color:var(--white);}
 .ch-btn-green:hover{transform:translateY(-2px);}
 
-/* ========== SCALE MAP INTRO ========== */
-/* ========== START HERE CTA ========== */
-.start-here{max-width:880px;margin:0 auto 40px;padding:0 16px;display:flex;flex-direction:column;gap:12px;}
-.start-here-card{background:linear-gradient(135deg,rgba(253,195,62,0.08),rgba(253,195,62,0.02));border:1px solid rgba(253,195,62,0.25);border-radius:14px;padding:24px 28px;display:flex;align-items:center;gap:20px;cursor:pointer;transition:border-color 0.2s,transform 0.2s;}
-.start-here-card:hover{border-color:var(--gold);transform:translateY(-2px);}
-.start-here-icon{font-size:2.2rem;flex-shrink:0;}
-.start-here-info h4{font-family:Montserrat;font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:4px;}
-.start-here-info h4 span{color:var(--accent);}
-.start-here-info p{font-size:0.8rem;color:var(--gray);line-height:1.55;}
-.start-here-link{font-family:Montserrat;font-size:0.72rem;font-weight:700;color:var(--accent);text-decoration:none;display:inline-block;margin-top:8px;letter-spacing:0.5px;}
-.start-here-badge{flex-shrink:0;font-family:Montserrat;font-size:0.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--black);background:linear-gradient(135deg,var(--gold),var(--bright));padding:8px 16px;border-radius:8px;white-space:nowrap;}
+/* ========== SPARK CARDS ========== */
+.spark-card{display:flex;align-items:center;gap:20px;padding:18px 28px 18px 44px;border-top:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s;}
+.spark-card:hover{background:rgba(255,255,255,0.03);}
+.spark-card-icon{font-size:1.8rem;flex-shrink:0;}
+.spark-card-info{flex:1;}
+.spark-card-info h4{font-family:Montserrat;font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:4px;}
+.spark-card-info h4 span{color:#ff6b35;}
+.spark-card-info p{font-size:0.8rem;color:var(--gray);line-height:1.55;}
+.spark-card-link{font-family:Montserrat;font-size:0.7rem;font-weight:700;color:#ff6b35;text-decoration:none;display:inline-block;margin-top:6px;}
+.spark-card-badge{flex-shrink:0;font-family:Montserrat;font-size:0.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--black);background:linear-gradient(135deg,#ff6b35,#ff8f5e);padding:6px 14px;border-radius:8px;white-space:nowrap;}
 
 /* ========== FOOTER ========== */
 .app-footer{text-align:center;padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);}
@@ -246,6 +248,22 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 <!-- PROGRESS -->
 <div class="gps-wrap">
   <div class="gps-track">
+    <!-- SPARK -->
+    <div class="gps-phase">
+      <div class="gps-phase-label spk">Spark</div>
+      <div class="gps-stops">
+        <div class="gps-stop active" onclick="scrollToSpark()">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Survey</div>
+        </div>
+        <div class="gps-stop" onclick="scrollToSpark()">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Scale Map</div>
+        </div>
+      </div>
+    </div>
     <!-- AMPLIFY -->
     <div class="gps-phase">
       <div class="gps-phase-label amp">Amplify</div>
@@ -318,30 +336,41 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
   </div>
 </div>
 
-<!-- ==================== START HERE ==================== -->
-<div class="start-here">
-  <div class="start-here-card" onclick="window.open('https://form.jotform.com/260857748036063?locale=en','_blank')">
-    <div class="start-here-icon">&#128203;</div>
-    <div class="start-here-info">
-      <h4><span>Start Here:</span> Your $1M Service Survey</h4>
-      <p>You know something's off between the effort you're putting in and the number hitting your account. This survey helps you name it. Nine areas. Honest answers. No fluff. You'll walk away knowing exactly which part of your business is bleeding money &mdash; and which chapter to open first.</p>
-      <span class="start-here-link">Take the Survey &rarr;</span>
-    </div>
-    <div class="start-here-badge">Step 1</div>
-  </div>
-  <div class="start-here-card" onclick="window.open('https://go.serviceloopelectrical.com/scale','_blank')">
-    <div class="start-here-icon">&#128506;</div>
-    <div class="start-here-info">
-      <h4><span>Then:</span> Your Scale Map</h4>
-      <p>Owner-operator at $300K and solo in the van? Or running a crew of 6 and stuck at $800K? The Scale Map shows you the 10 stages from where you are now to $4M &mdash; what each level looks like, who you need to hire next, and what has to change in your operation to break through to the next one.</p>
-      <span class="start-here-link">See Where You Stand &rarr;</span>
-    </div>
-    <div class="start-here-badge">Step 2</div>
-  </div>
-</div>
-
 <!-- ==================== ACDC SECTIONS ==================== -->
 <div class="sections">
+
+<!-- ===== SPARK ===== -->
+<div class="section open" id="sec-spark">
+  <div class="section-header" onclick="toggleSection('sec-spark')">
+    <div class="section-icon section-icon-s">&#9889;</div>
+    <div class="section-info">
+      <div class="section-letter section-letter-s">Spark &mdash; Do Not Skip</div>
+      <div class="section-name">Ground Yourself First</div>
+      <div class="section-tagline">Before you touch a single chapter, know where you stand and where you're going.</div>
+    </div>
+    <div class="section-chevron">&#9660;</div>
+  </div>
+  <div class="section-chapters">
+    <div class="spark-card" onclick="window.open('https://form.jotform.com/260857748036063?locale=en','_blank')">
+      <div class="spark-card-icon">&#128203;</div>
+      <div class="spark-card-info">
+        <h4><span>Step 1:</span> Your $1M Service Survey</h4>
+        <p>You know something's off between the effort you're putting in and the number hitting your account. This survey helps you name it. Nine areas. Honest answers. No fluff. You'll walk away knowing exactly which part of your business is bleeding money &mdash; and which chapter to open first.</p>
+        <span class="spark-card-link">Take the Survey &rarr;</span>
+      </div>
+      <div class="spark-card-badge">Step 1</div>
+    </div>
+    <div class="spark-card" onclick="window.open('https://go.serviceloopelectrical.com/scale','_blank')">
+      <div class="spark-card-icon">&#128506;</div>
+      <div class="spark-card-info">
+        <h4><span>Step 2:</span> Your Scale Map</h4>
+        <p>Owner-operator at $300K and solo in the van? Or running a crew of 6 and stuck at $800K? The Scale Map shows you the 10 stages from where you are now to $4M &mdash; what each level looks like, who you need to hire next, and what has to change in your operation to break through to the next one.</p>
+        <span class="spark-card-link">See Where You Stand &rarr;</span>
+      </div>
+      <div class="spark-card-badge">Step 2</div>
+    </div>
+  </div>
+</div>
 
 <!-- ===== A - AMPLIFY ===== -->
 <div class="section open" id="sec-amplify">
@@ -1511,6 +1540,12 @@ function toggleChapter(id){
 document.getElementById('loginCode').addEventListener('keypress', function(e){
   if(e.key === 'Enter') doLogin();
 });
+
+function scrollToSpark(){
+  var sec = document.getElementById('sec-spark');
+  if(sec && !sec.classList.contains('open')) sec.querySelector('.section-header').click();
+  sec.scrollIntoView({behavior:'smooth',block:'center'});
+}
 
 function scrollToChapter(num){
   // Chapter sections use IDs like "ch1-content", "sec-amplify", etc.
