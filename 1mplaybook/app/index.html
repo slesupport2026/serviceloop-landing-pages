@@ -220,6 +220,13 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .ch-apply-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(231,76,60,0.3);}
 .ch-apply-note{font-family:'Open Sans';font-size:0.72rem;color:var(--gray);text-align:center;margin-top:12px;}
 
+/* ========== AI ASSIST LINK ========== */
+.ch-ai{display:flex;align-items:center;gap:12px;padding:12px 18px;background:rgba(0,180,200,0.06);border:1px solid rgba(0,180,200,0.2);border-radius:10px;margin-bottom:20px;cursor:pointer;transition:border-color 0.2s,transform 0.2s;text-decoration:none;}
+.ch-ai:hover{border-color:#00B4C8;transform:translateY(-1px);}
+.ch-ai-icon{font-size:1.2rem;flex-shrink:0;}
+.ch-ai-text{font-family:Montserrat;font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.7);}
+.ch-ai-btn{flex-shrink:0;font-family:Montserrat;font-size:0.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:6px;background:rgba(0,180,200,0.15);color:#00B4C8;border:1px solid rgba(0,180,200,0.3);white-space:nowrap;}
+
 /* ========== SPARK CARDS ========== */
 .spark-card{display:flex;align-items:center;gap:20px;padding:18px 28px 18px 44px;border-top:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s;}
 .spark-card:hover{background:rgba(255,255,255,0.03);}
@@ -463,7 +470,12 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
     </div>
     <div class="chapter-expanded visible" id="ch1">
       <div class="ch-body">
-        <h3 style="margin-top:28px;">The Biggest Mistake Electricians Make</h3>
+        <a href="https://chatgpt.com/g/g-69c84697eebc81918f7dcb962a60b00b-the-1m-service-rate-pal" target="_blank" rel="noopener" class="ch-ai" style="margin-top:28px;">
+          <div class="ch-ai-icon">&#129302;</div>
+          <div class="ch-ai-text">Rather just work through this section with our AI?</div>
+          <div class="ch-ai-btn">Try It</div>
+        </a>
+        <h3>The Biggest Mistake Electricians Make</h3>
         <p>Every electrician on this planet shares the same journey.</p>
         <p>You decided electrical was a great trade. You got a job and received technical training. You survived the field pressure to not make mistakes and to get quicker. You became licensed. You realized how much you don't know. You got confident in what you do know. And then you realized either an opportunity or a conflict to go on your own.</p>
         <p><strong>At no point in that journey did you receive business, marketing, or sales training.</strong></p>
@@ -687,10 +699,6 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         <p>But here's what we've seen hundreds of times. The electrician who builds his rate on paper, believes it in his head, and then flinches at the kitchen table. The gap between knowing your number and presenting it with total confidence is where the money lives.</p>
         <p>The pricing tool builds your number. The masterclass shows you how to <strong>present it without flinching.</strong> And the partners who do both? They stop guessing what to charge within a week. They stop losing jobs on price within a month. They stop worrying about money within a quarter.</p>
         <p>$83,333 a month isn't a fantasy. It's a rate, a formula, and a system. You just built the rate. The rest of this playbook builds the system.</p>
-        <p><strong>Download:</strong> [Pricing Tool (PDF + Google Sheet)]</p>
-        <p><strong>Go Deeper:</strong> [Pricing Services Masterclass, $97]</p>
-        <p><strong>Ready Now?</strong> [Book a Strategy Call]</p>
-
         <!-- VIDEO -->
         <div class="ch-video">
           <div class="ch-video-player">
@@ -774,10 +782,11 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
           <button class="ch-btn ch-btn-gold" onclick="alert('Download triggered')">&#11015; Download Pricing Tool</button>
           <button class="ch-btn ch-btn-outline" onclick="alert('Webinar link')">&#9654; Watch the Masterclass, $97</button>
           <button class="ch-btn ch-btn-green" onclick="alert('Book a call')">&#9742; Ready? Book a Strategy Call</button>
+          <button class="ch-btn ch-btn-outline" style="color:#00B4C8;border-color:rgba(0,180,200,0.3);" onclick="window.open('https://chatgpt.com/g/g-69c84697eebc81918f7dcb962a60b00b-the-1m-service-rate-pal','_blank')">&#129302; Work Through This With AI</button>
         </div>
       </div>
     </div>
-    
+
     <div class="chapter" onclick="toggleChapter('ch2')">
       <div class="chapter-dot"></div>
       <div class="chapter-content">
