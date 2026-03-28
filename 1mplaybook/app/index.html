@@ -161,13 +161,16 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .ch-btn-green:hover{transform:translateY(-2px);}
 
 /* ========== SCALE MAP INTRO ========== */
-.scale-intro{padding:18px 28px 18px 44px;border-top:1px solid rgba(255,255,255,0.04);}
-.scale-card{background:linear-gradient(135deg,rgba(253,195,62,0.06),rgba(253,195,62,0.02));border:1px dashed rgba(253,195,62,0.25);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px;cursor:pointer;transition:border-color 0.2s;}
-.scale-card:hover{border-color:var(--gold);}
-.scale-icon{font-size:2rem;flex-shrink:0;}
-.scale-info h4{font-family:Montserrat;font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:4px;}
-.scale-info p{font-size:0.78rem;color:var(--gray);line-height:1.5;}
-.scale-link{font-family:Montserrat;font-size:0.7rem;font-weight:700;color:var(--accent);text-decoration:none;display:inline-block;margin-top:6px;}
+/* ========== START HERE CTA ========== */
+.start-here{max-width:880px;margin:0 auto 40px;padding:0 16px;}
+.start-here-card{background:linear-gradient(135deg,rgba(253,195,62,0.08),rgba(253,195,62,0.02));border:1px solid rgba(253,195,62,0.25);border-radius:14px;padding:24px 28px;display:flex;align-items:center;gap:20px;cursor:pointer;transition:border-color 0.2s,transform 0.2s;}
+.start-here-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.start-here-icon{font-size:2.2rem;flex-shrink:0;}
+.start-here-info h4{font-family:Montserrat;font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:4px;}
+.start-here-info h4 span{color:var(--accent);}
+.start-here-info p{font-size:0.8rem;color:var(--gray);line-height:1.55;}
+.start-here-link{font-family:Montserrat;font-size:0.72rem;font-weight:700;color:var(--accent);text-decoration:none;display:inline-block;margin-top:8px;letter-spacing:0.5px;}
+.start-here-badge{flex-shrink:0;font-family:Montserrat;font-size:0.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--black);background:linear-gradient(135deg,var(--gold),var(--bright));padding:8px 16px;border-radius:8px;white-space:nowrap;}
 
 /* ========== FOOTER ========== */
 .app-footer{text-align:center;padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);}
@@ -315,6 +318,19 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
   </div>
 </div>
 
+<!-- ==================== START HERE ==================== -->
+<div class="start-here">
+  <div class="start-here-card" onclick="window.open('https://form.jotform.com/260857748036063?locale=en','_blank')">
+    <div class="start-here-icon">&#128506;</div>
+    <div class="start-here-info">
+      <h4><span>Start Here:</span> Your $1M Service Survey & Scale Map</h4>
+      <p>Before you read a single chapter, you need to know where you are. This survey covers all 9 areas of your business and shows exactly where the gaps are costing you money. Take 10 minutes. Be honest. Nobody sees this but you.</p>
+      <span class="start-here-link">Take the Survey &rarr;</span>
+    </div>
+    <div class="start-here-badge">Start Here</div>
+  </div>
+</div>
+
 <!-- ==================== ACDC SECTIONS ==================== -->
 <div class="sections">
 
@@ -330,18 +346,6 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
     <div class="section-chevron">&#9660;</div>
   </div>
   <div class="section-chapters">
-    <!-- Scale Map Intro -->
-    <div class="scale-intro">
-      <div class="scale-card" onclick="window.open('https://go.serviceloopelectrical.com/scale','_blank')">
-        <div class="scale-icon">&#128506;</div>
-        <div class="scale-info">
-          <h4>Start Here: Your Scale Map</h4>
-          <p>Before you read a single chapter, you need to know where you are. The Scale Map covers all 9 areas and shows exactly where the gaps are costing you money. Take 10 minutes. Be honest. Nobody sees this but you.</p>
-          <span class="scale-link">Open the Scale Map &rarr; go.serviceloopelectrical.com/scale</span>
-        </div>
-      </div>
-    </div>
-    
     <div class="chapter" onclick="toggleChapter('ch1')">
       <div class="chapter-dot active"></div>
       <div class="chapter-content">
