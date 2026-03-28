@@ -74,6 +74,7 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .gps-phase-label.con{color:#2d7a2d;background:rgba(45,122,45,0.1);}
 .gps-phase-label.del{color:#1a7a6e;background:rgba(26,122,110,0.1);}
 .gps-phase-label.chg{color:#9b59b6;background:rgba(155,89,182,0.1);}
+.gps-phase-label.srg{color:#e74c3c;background:rgba(231,76,60,0.1);}
 .gps-stops{display:flex;width:100%;}
 .gps-stop{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;cursor:pointer;}
 .gps-stop-line{position:absolute;top:38px;left:0;right:0;height:4px;background:rgba(255,255,255,0.06);}
@@ -102,12 +103,14 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .section-icon-c1{background:linear-gradient(135deg,rgba(45,122,45,0.15),rgba(45,122,45,0.05));border:1px solid rgba(45,122,45,0.25);}
 .section-icon-d{background:linear-gradient(135deg,rgba(26,122,110,0.15),rgba(26,122,110,0.05));border:1px solid rgba(26,122,110,0.25);}
 .section-icon-c2{background:linear-gradient(135deg,rgba(206,48,42,0.15),rgba(206,48,42,0.05));border:1px solid rgba(206,48,42,0.25);}
+.section-icon-srg{background:linear-gradient(135deg,rgba(231,76,60,0.15),rgba(231,76,60,0.05));border:1px solid rgba(231,76,60,0.25);}
 .section-info{flex:1;}
 .section-letter{font-family:Montserrat;font-size:0.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:2px;}
 .section-letter-a{color:var(--accent);}
 .section-letter-c1{color:#6bff6b;}
 .section-letter-d{color:#6bffee;}
 .section-letter-c2{color:#ff6b6b;}
+.section-letter-srg{color:#e74c3c;}
 .section-name{font-family:Montserrat;font-size:1.15rem;font-weight:800;color:var(--white);}
 .section-tagline{font-size:0.8rem;color:var(--gray);margin-top:2px;}
 .section-chevron{font-size:1.2rem;color:var(--gray);transition:transform 0.3s;flex-shrink:0;}
@@ -201,6 +204,21 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .ch-quiz-feedback.show{display:block;}
 .ch-quiz-feedback.right{background:rgba(45,122,45,0.1);color:#6bff6b;}
 .ch-quiz-feedback.wrong{background:rgba(206,48,42,0.08);color:#ff6b6b;}
+
+/* ========== APPLICATION FORM ========== */
+.ch-apply{background:linear-gradient(135deg,rgba(231,76,60,0.06),rgba(231,76,60,0.02));border:1px solid rgba(231,76,60,0.2);border-radius:12px;padding:28px;margin:24px 0;}
+.ch-apply-title{font-family:Montserrat;font-size:0.85rem;font-weight:800;color:var(--white);margin-bottom:16px;text-align:center;}
+.ch-apply-field{margin-bottom:14px;}
+.ch-apply-label{font-family:Montserrat;font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;display:block;}
+.ch-apply-input{width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--white);font-family:'Open Sans';font-size:0.88rem;outline:none;transition:border-color 0.2s;}
+.ch-apply-input:focus{border-color:var(--gold);}
+.ch-apply-input::placeholder{color:var(--gray);}
+.ch-apply-textarea{width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--white);font-family:'Open Sans';font-size:0.88rem;outline:none;transition:border-color 0.2s;resize:vertical;min-height:80px;}
+.ch-apply-textarea:focus{border-color:var(--gold);}
+.ch-apply-textarea::placeholder{color:var(--gray);}
+.ch-apply-btn{width:100%;padding:16px;border-radius:10px;border:none;background:linear-gradient(135deg,#e74c3c,#c0392b);color:var(--white);font-family:Montserrat;font-size:0.85rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;margin-top:8px;}
+.ch-apply-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(231,76,60,0.3);}
+.ch-apply-note{font-family:'Open Sans';font-size:0.72rem;color:var(--gray);text-align:center;margin-top:12px;}
 
 /* ========== SPARK CARDS ========== */
 .spark-card{display:flex;align-items:center;gap:20px;padding:18px 28px 18px 44px;border-top:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s;}
@@ -369,6 +387,17 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
           <div class="gps-stop-line"></div>
           <div class="gps-stop-dot"></div>
           <div class="gps-stop-name">Scale or Exit</div>
+        </div>
+      </div>
+    </div>
+    <!-- SURGE -->
+    <div class="gps-phase">
+      <div class="gps-phase-label srg">Surge</div>
+      <div class="gps-stops">
+        <div class="gps-stop" onclick="scrollToChapter(10)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Apply</div>
         </div>
       </div>
     </div>
@@ -2243,6 +2272,137 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ===== SURGE ===== -->
+<div class="section" id="sec-surge">
+  <div class="section-header" onclick="toggleSection('sec-surge')">
+    <div class="section-icon section-icon-srg">&#128640;</div>
+    <div class="section-info">
+      <div class="section-letter section-letter-srg">Surge</div>
+      <div class="section-name">Stop Wasting Time. Get Real Results Now.</div>
+      <div class="section-tagline">Putting it all together. The room, the coaches, the accountability.</div>
+    </div>
+    <div class="section-chevron">&#9660;</div>
+  </div>
+  <div class="section-chapters">
+
+    <div class="chapter" onclick="toggleChapter('ch10')">
+      <div class="chapter-dot"></div>
+      <div class="chapter-content">
+        <div class="chapter-title">Chapter 10: Putting It All Together</div>
+        <div class="chapter-meta">Service Surge. Become an SLE Pro. Join the room.</div>
+      </div>
+      <span class="chapter-presenter presenter-clay">Clay</span>
+      <span class="chapter-arrow">&rsaquo;</span>
+    </div>
+    <div class="chapter-expanded" id="ch10">
+      <div class="ch-body">
+        <h3 style="margin-top:28px;">You Have the Playbook. Now What?</h3>
+        <p>You've read 9 chapters. You have the SSR formula. The 3-Engine lead system. The 6-option framework. The 4 Whats. The Deal Formula. The APEX hiring strategy. The Service 5 reputation engine. The Reverse P&L. The Scale Readiness test.</p>
+        <p>You know what $83,333/month looks like on paper.</p>
+        <p>But here's the truth nobody wants to say out loud: <strong>knowing the system and running the system are two completely different things.</strong></p>
+        <p>The electricians in this playbook who hit $110K months, $300K months, $1.75M years... none of them did it alone. They did it inside a room with people who were doing it at the same time. With coaches who had already done it. With accountability that made skipping a week impossible.</p>
+        <p>That room is <strong>Service Surge.</strong></p>
+
+        <h3 style="margin-top:28px;">What Is Service Surge?</h3>
+        <p>Service Surge is the implementation program behind this playbook. It's where the $1M Service Playbook stops being a document and starts being your operating system.</p>
+        <p>We handle all of your paid marketing. Set you up with everything you need to crush organic. Give you a complete asset book for referral growth. And put you in a room with coaches and partners who are running the exact same plays, right now, today.</p>
+        <p>You become an <strong>SLE Pro.</strong> Part of a community of hundreds of electricians who are actively building, measuring, and growing together. Not watching from the sidelines. In the game.</p>
+
+        <h3 style="margin-top:28px;">What You Get</h3>
+
+        <div class="ch-framework">
+          <div class="ch-framework-title">1. The Full ACDC System, Implemented With You</div>
+          <p style="font-size:0.88rem;color:var(--light-gray);line-height:1.7;margin:0;">Not self-paced. Guided. Each chapter becomes a working session with Clay, Joseph, or Forrest walking you through YOUR numbers, YOUR market, YOUR team.</p>
+        </div>
+
+        <div class="ch-framework">
+          <div class="ch-framework-title">2. Unlimited Accountability Calls</div>
+          <p style="font-size:0.88rem;color:var(--light-gray);line-height:1.7;margin:0;">Show up as many times as you need. Report your numbers. Get coached in real time. The partners who show up every week grow 3-5x faster than those who don't. That's not a sales pitch. That's data from 1,000+ electricians.</p>
+        </div>
+
+        <div class="ch-framework">
+          <div class="ch-framework-title">3. The SLE Pro Community</div>
+          <p style="font-size:0.88rem;color:var(--light-gray);line-height:1.7;margin:0;">Hundreds of electricians sharing what's working TODAY to hit big sales. $30K weeks. $80K weeks. $150K weeks. Real numbers, real scripts, real option sets posted directly to your feed. This isn't a Facebook group. It's a working room where people post their wins and tell you exactly how they did it.</p>
+        </div>
+
+        <div class="ch-framework">
+          <div class="ch-framework-title">4. Direct Access to Clay, Joseph &amp; Forrest</div>
+          <p style="font-size:0.88rem;color:var(--light-gray);line-height:1.7;margin:0;">The three people who built this system. Not assistants. Not chatbots. Them.</p>
+        </div>
+
+        <div class="ch-framework">
+          <div class="ch-framework-title">5. The Unrestricted Tool Library</div>
+          <p style="font-size:0.88rem;color:var(--light-gray);line-height:1.7;margin:0;">Every pricing calculator, options template, sales checklist, hiring scorecard, review template, and P&L worksheet. The full versions. Not like the ones in this playbook. We have to save some of the best stuff for the paying partners, naturally.</p>
+        </div>
+
+        <div class="ch-framework">
+          <div class="ch-framework-title">6. SLE Pro App, Unlimited</div>
+          <p style="font-size:0.88rem;color:var(--light-gray);line-height:1.7;margin:0;">iOS + Android. Turn your van into a university. Your office into a well-oiled machine. Your business into a money-printer. Your playbook, your community, your progress, your tools. In your pocket. On the job site. In the van. Between calls.</p>
+        </div>
+
+        <div class="ch-framework">
+          <div class="ch-framework-title">7. All-Access to Every Event</div>
+          <p style="font-size:0.88rem;color:var(--light-gray);line-height:1.7;margin:0;">Daily classes. Weekly calls. Monthly webinars. Annual in-person events. Nothing locked. Nothing upsold. You're in the room for everything.</p>
+        </div>
+
+        <h3 style="margin-top:28px;">Who Is This For?</h3>
+        <p>You're doing $350K to $800K. You have 3 to 6 people. You chose residential service. You have demand but your systems are messy. Your tickets are inconsistent. You're the one who shows up early and stays late, but the bank account doesn't reflect the effort.</p>
+        <p>You took the survey. You saw the Scale Map. You know which chapters need work. Now you need the room, the coaches, and the accountability to actually do it.</p>
+
+        <h3 style="margin-top:28px;">Proof</h3>
+        <div class="ch-proof">
+          <div class="ch-proof-title">Results from Real SLE Pros</div>
+          <p style="font-size:0.88rem;color:var(--light-gray);line-height:1.8;margin:0;">
+          <strong>Nathan Miles.</strong> Crossed $1,007,000 in revenue in just 12 months and 3 weeks. His final push? Closing an economy option at $14,000. Started with the SSR, hired CSR first, never skipped a weekly call.<br><br>
+          <strong>Sherman Hatley.</strong> $100K/month to $300K/month in 60 days. Same leads. New presentation system.<br><br>
+          <strong>Christian Farella.</strong> Just hit his first $400K+ month. Started at $80K/month. 4 Whats + 4 Forces + options.<br><br>
+          <strong>Dorian Hayes.</strong> $40K/year moonlighter to $225K+ in 3.5 months. $24 Angi lead turned into $66,700.<br><br>
+          <strong>Edwin.</strong> $140 fixture swaps to $35K weeks. 3 wrapped vans in 6 months.<br><br>
+          <strong>Dan T.</strong> Union electrician to $1M+ in Year 1. No ads. Built entirely on this system.
+          </p>
+        </div>
+
+        <h3 style="margin-top:28px;">The Guarantee</h3>
+        <p>Here's what we guarantee: if you keep doing the same thing, you'll keep getting similar results. That's not a threat. That's math.</p>
+        <p>Greatness requires feedback. Feedback requires action. Action requires confidence. Confidence requires experience. And getting that experience sometimes requires urgency and a little push.</p>
+        <p>We were once nervous to try this stuff too. My first offer at nearly $400 SSR had my hands shaking like I had Parkinson's. Every single person on that proof list above felt the same thing before their first big presentation. The difference is they did it anyway.</p>
+        <p>If you aren't seeing the results you want independently, then borrow our experience. Borrow our belief. Borrow our confidence. Get a boost from our community. And get us to help you push.</p>
+        <br>
+        <p><strong>Plus: a 7-day love-it-or-leave-it policy.</strong> No questions asked. If it's not for you, you walk. No friction. No guilt. No hoops.</p>
+
+        <h3 style="margin-top:28px;">Why Apply Now?</h3>
+        <p>Look at that list above. Nathan. Sherman. Christian. Dorian. Edwin. Dan. Different markets. Different team sizes. Different starting points. But they all share one massive thing in common.</p>
+        <p><strong>They took action.</strong></p>
+        <p>Not when they were ready. Not when the timing was perfect. Not when they had all the answers. They moved. Present, not perfect. They heard the system, trusted the math, and started before they felt comfortable. That's what separated them from the electricians who are still reading about it a year from now.</p>
+        <p>Every week you wait is a week of calls run at your old rate. A week of single-option presentations. A week of leads going to the guy who picks up the phone faster. A week of revenue you'll never get back.</p>
+        <p>And here's the reality: <strong>we only accept 10 new members per calendar month.</strong> Not because we want to sound exclusive. Because the coaching, the accountability, and the direct access only work when the room stays tight. When the spots are gone, they're gone until next month.</p>
+        <p>The partners who move fastest don't wait until they're ready. They get ready by moving.</p>
+
+        <h3 style="margin-top:28px;">Apply for Service Surge</h3>
+        <div class="ch-apply">
+          <div class="ch-apply-title">Become an SLE Pro</div>
+          <div class="ch-apply-field">
+            <label class="ch-apply-label" for="apply-name">Your Name</label>
+            <input type="text" class="ch-apply-input" id="apply-name" placeholder="Full name">
+          </div>
+          <div class="ch-apply-field">
+            <label class="ch-apply-label" for="apply-phone">Phone Number</label>
+            <input type="tel" class="ch-apply-input" id="apply-phone" placeholder="(555) 123-4567">
+          </div>
+          <div class="ch-apply-field">
+            <label class="ch-apply-label" for="apply-why">In one sentence, why do you want to apply now?</label>
+            <textarea class="ch-apply-textarea" id="apply-why" placeholder="Tell us what's driving you to take action today..."></textarea>
+          </div>
+          <button class="ch-apply-btn" onclick="alert('Application submitted! Our team will be in touch within 24 hours.')">Apply Now</button>
+          <div class="ch-apply-note">Only 10 new members accepted per calendar month. We review every application personally.</div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </div>
 
