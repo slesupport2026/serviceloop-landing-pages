@@ -29,7 +29,8 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
   repeating-linear-gradient(120deg,transparent,transparent 80px,rgba(201,164,90,0.015) 80px,rgba(201,164,90,0.015) 81px),
   repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,164,90,0.01) 80px,rgba(201,164,90,0.01) 81px);}
 .login-card{position:relative;z-index:1;width:420px;max-width:90vw;padding:48px 40px;border-radius:var(--radius);background:var(--card);border:1px solid rgba(201,164,90,0.15);box-shadow:var(--glow);text-align:center;}
-.login-shield{width:80px;height:80px;margin:0 auto 24px;background:linear-gradient(135deg,var(--gold),var(--bright));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:var(--black);font-family:Montserrat;box-shadow:0 0 40px rgba(201,164,90,0.3);}
+.login-shield{width:100px;height:100px;margin:0 auto 24px;border-radius:50%;box-shadow:0 0 40px rgba(201,164,90,0.3);overflow:hidden;background:transparent;}
+.login-shield img{width:100%;height:100%;object-fit:contain;}
 .login-title{font-family:"Playfair Display",serif;font-style:italic;font-size:1.6rem;color:var(--white);margin-bottom:6px;}
 .login-sub{font-family:Montserrat;font-size:0.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;}
 .login-input{width:100%;padding:14px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--white);font-family:"Open Sans";font-size:0.9rem;margin-bottom:14px;outline:none;transition:border-color 0.2s;}
@@ -43,7 +44,8 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 /* ========== TOP BAR ========== */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid rgba(201,164,90,0.12);background:var(--dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
 .topbar-left{display:flex;align-items:center;gap:14px;}
-.topbar-logo{font-family:Montserrat;font-weight:900;font-size:1.1rem;color:var(--gold);letter-spacing:1px;}
+.topbar-logo{display:flex;align-items:center;}
+.topbar-logo img{height:36px;width:auto;}
 .topbar-divider{width:1px;height:20px;background:rgba(255,255,255,0.1);}
 .topbar-title{font-family:Montserrat;font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
 .topbar-user{display:flex;align-items:center;gap:10px;}
@@ -179,7 +181,7 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 <div class="login-overlay" id="loginOverlay">
   <div class="login-bg"></div>
   <div class="login-card">
-    <div class="login-shield">SLE</div>
+    <div class="login-shield"><img src="../assets/img/sle-logo-gold.png" alt="Service Loop Electrical"></div>
     <div class="login-title">$1M Service Playbook</div>
     <div class="login-sub">For Electricians. By Electricians.</div>
     <input type="email" class="login-input" id="loginEmail" placeholder="Your email address">
@@ -197,7 +199,7 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-left">
-    <div class="topbar-logo">SLE</div>
+    <div class="topbar-logo"><img src="../assets/img/sle-logo-gold.png" alt="SLE"></div>
     <div class="topbar-divider"></div>
     <div class="topbar-title">$1M Service Playbook</div>
   </div>
