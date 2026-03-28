@@ -64,11 +64,29 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 .hero-stat-num{font-family:Montserrat;font-size:1.8rem;font-weight:900;color:var(--bright);}
 .hero-stat-label{font-family:Montserrat;font-size:0.65rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-top:2px;}
 
-/* ========== PROGRESS BAR ========== */
-.progress-wrap{max-width:800px;margin:0 auto 48px;padding:0 32px;}
-.progress-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
-.progress-fill{height:100%;width:15%;background:linear-gradient(90deg,var(--gold),var(--bright));border-radius:3px;transition:width 0.5s;}
-.progress-label{display:flex;justify-content:space-between;margin-top:8px;font-family:Montserrat;font-size:0.7rem;color:var(--gray);}
+/* ========== GPS PROGRESS MAP ========== */
+.gps-wrap{max-width:880px;margin:0 auto 48px;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.gps-track{display:flex;align-items:flex-start;position:relative;min-width:700px;}
+.gps-phase{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;}
+.gps-phase-label{font-family:Montserrat;font-size:0.55rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;writing-mode:vertical-lr;text-orientation:mixed;transform:rotate(180deg);margin-bottom:10px;padding:6px 4px;border-radius:4px;white-space:nowrap;}
+.gps-phase-label.amp{color:var(--accent);background:rgba(253,195,62,0.1);}
+.gps-phase-label.con{color:#2d7a2d;background:rgba(45,122,45,0.1);}
+.gps-phase-label.del{color:#1a7a6e;background:rgba(26,122,110,0.1);}
+.gps-phase-label.chg{color:#9b59b6;background:rgba(155,89,182,0.1);}
+.gps-stops{display:flex;width:100%;}
+.gps-stop{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;cursor:pointer;}
+.gps-stop-line{position:absolute;top:38px;left:0;right:0;height:4px;background:rgba(255,255,255,0.06);}
+.gps-stop:first-child .gps-stop-line{left:50%;}
+.gps-stop:last-child .gps-stop-line{right:50%;}
+.gps-stop-dot{width:16px;height:16px;border-radius:50%;border:3px solid rgba(255,255,255,0.15);background:var(--black);position:relative;z-index:2;margin-top:30px;transition:all 0.3s;}
+.gps-stop.completed .gps-stop-dot{border-color:var(--gold);background:var(--gold);box-shadow:0 0 8px rgba(201,164,90,0.4);}
+.gps-stop.active .gps-stop-dot{border-color:var(--accent);background:var(--black);box-shadow:0 0 12px rgba(253,195,62,0.5);animation:gps-pulse 2s infinite;}
+.gps-stop.completed .gps-stop-line{background:linear-gradient(90deg,var(--gold),var(--bright));}
+.gps-stop-name{font-family:Montserrat;font-size:0.58rem;font-weight:600;color:var(--gray);margin-top:10px;text-align:center;line-height:1.3;max-width:72px;transition:color 0.3s;}
+.gps-stop.completed .gps-stop-name,.gps-stop.active .gps-stop-name{color:var(--white);}
+.gps-stop:hover .gps-stop-name{color:var(--bright);}
+.gps-stop:hover .gps-stop-dot{border-color:var(--bright);}
+@keyframes gps-pulse{0%,100%{box-shadow:0 0 6px rgba(253,195,62,0.4);}50%{box-shadow:0 0 16px rgba(253,195,62,0.7);}}
 
 /* ========== ACDC SECTIONS ========== */
 .sections{max-width:900px;margin:0 auto;padding:0 24px 80px;}
@@ -223,9 +241,78 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 </div>
 
 <!-- PROGRESS -->
-<div class="progress-wrap">
-  <div class="progress-bar"><div class="progress-fill"></div></div>
-  <div class="progress-label"><span>Your Progress</span><span>1 of 9 chapters</span></div>
+<div class="gps-wrap">
+  <div class="gps-track">
+    <!-- AMPLIFY -->
+    <div class="gps-phase">
+      <div class="gps-phase-label amp">Amplify</div>
+      <div class="gps-stops">
+        <div class="gps-stop completed" onclick="scrollToChapter(1)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Price</div>
+        </div>
+        <div class="gps-stop active" onclick="scrollToChapter(2)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Leads</div>
+        </div>
+      </div>
+    </div>
+    <!-- CONNECT -->
+    <div class="gps-phase">
+      <div class="gps-phase-label con">Connect</div>
+      <div class="gps-stops">
+        <div class="gps-stop" onclick="scrollToChapter(3)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Offer</div>
+        </div>
+        <div class="gps-stop" onclick="scrollToChapter(4)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Sales</div>
+        </div>
+        <div class="gps-stop" onclick="scrollToChapter(5)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Presi's</div>
+        </div>
+      </div>
+    </div>
+    <!-- DELIVER -->
+    <div class="gps-phase">
+      <div class="gps-phase-label del">Deliver</div>
+      <div class="gps-stops">
+        <div class="gps-stop" onclick="scrollToChapter(6)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Recruiting</div>
+        </div>
+        <div class="gps-stop" onclick="scrollToChapter(7)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Reputation</div>
+        </div>
+      </div>
+    </div>
+    <!-- CHARGE -->
+    <div class="gps-phase">
+      <div class="gps-phase-label chg">Charge</div>
+      <div class="gps-stops">
+        <div class="gps-stop" onclick="scrollToChapter(8)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Profit</div>
+        </div>
+        <div class="gps-stop" onclick="scrollToChapter(9)">
+          <div class="gps-stop-line"></div>
+          <div class="gps-stop-dot"></div>
+          <div class="gps-stop-name">Scale or Exit</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ==================== ACDC SECTIONS ==================== -->
@@ -1411,6 +1498,30 @@ function toggleChapter(id){
 document.getElementById('loginCode').addEventListener('keypress', function(e){
   if(e.key === 'Enter') doLogin();
 });
+
+function scrollToChapter(num){
+  // Chapter sections use IDs like "ch1-content", "sec-amplify", etc.
+  // Find the section header that contains Chapter {num}
+  var headers = document.querySelectorAll('.chapter-title');
+  for(var i=0;i<headers.length;i++){
+    if(headers[i].textContent.indexOf('Chapter '+num)>-1){
+      var section = headers[i].closest('.section');
+      if(section){
+        // Open the ACDC section if closed
+        var body = section.querySelector('.section-body');
+        if(body && !body.classList.contains('open')) section.querySelector('.section-header').click();
+        // Open the chapter if closed
+        var ch = headers[i].closest('.chapter');
+        if(ch){
+          var content = ch.querySelector('.chapter-content');
+          if(content && !content.classList.contains('visible')) headers[i].closest('.chapter-header').click();
+        }
+      }
+      headers[i].scrollIntoView({behavior:'smooth',block:'center'});
+      break;
+    }
+  }
+}
 </script>
 
 </body>
