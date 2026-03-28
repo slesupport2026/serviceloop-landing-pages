@@ -162,7 +162,7 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 
 /* ========== SCALE MAP INTRO ========== */
 /* ========== START HERE CTA ========== */
-.start-here{max-width:880px;margin:0 auto 40px;padding:0 16px;}
+.start-here{max-width:880px;margin:0 auto 40px;padding:0 16px;display:flex;flex-direction:column;gap:12px;}
 .start-here-card{background:linear-gradient(135deg,rgba(253,195,62,0.08),rgba(253,195,62,0.02));border:1px solid rgba(253,195,62,0.25);border-radius:14px;padding:24px 28px;display:flex;align-items:center;gap:20px;cursor:pointer;transition:border-color 0.2s,transform 0.2s;}
 .start-here-card:hover{border-color:var(--gold);transform:translateY(-2px);}
 .start-here-icon{font-size:2.2rem;flex-shrink:0;}
@@ -321,13 +321,22 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
 <!-- ==================== START HERE ==================== -->
 <div class="start-here">
   <div class="start-here-card" onclick="window.open('https://form.jotform.com/260857748036063?locale=en','_blank')">
-    <div class="start-here-icon">&#128506;</div>
+    <div class="start-here-icon">&#128203;</div>
     <div class="start-here-info">
-      <h4><span>Start Here:</span> Your $1M Service Survey & Scale Map</h4>
-      <p>Before you read a single chapter, you need to know where you are. This survey covers all 9 areas of your business and shows exactly where the gaps are costing you money. Take 10 minutes. Be honest. Nobody sees this but you.</p>
+      <h4><span>Start Here:</span> Your $1M Service Survey</h4>
+      <p>Take 10 minutes and tell us where your business stands today. Be honest. This powers your personalized playbook path.</p>
       <span class="start-here-link">Take the Survey &rarr;</span>
     </div>
-    <div class="start-here-badge">Start Here</div>
+    <div class="start-here-badge">Step 1</div>
+  </div>
+  <div class="start-here-card" onclick="window.open('https://go.serviceloopelectrical.com/scale','_blank')">
+    <div class="start-here-icon">&#128506;</div>
+    <div class="start-here-info">
+      <h4><span>Then:</span> Your Scale Map</h4>
+      <p>See exactly where the gaps are costing you money across all 9 areas. Your Scale Map shows which chapter to hit first.</p>
+      <span class="start-here-link">Open the Scale Map &rarr;</span>
+    </div>
+    <div class="start-here-badge">Step 2</div>
   </div>
 </div>
 
