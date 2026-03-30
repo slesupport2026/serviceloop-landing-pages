@@ -369,8 +369,8 @@
     <label>utm_content (Which creative? — optional)</label>
     <input type="text" id="cont" placeholder="e.g., video-edwin-testimonial">
 
-    <label style="margin-top:24px; color:#4CAF50;">Short Link Descriptor (e.g., jun26, ep52, clay-rant, d42)</label>
-    <input type="text" id="shortdesc" placeholder="e.g., jun26 — becomes /r/pt-meta-jun26">
+    <label style="margin-top:24px; color:#4CAF50;">Short Link Code (auto-generated — edit to override)</label>
+    <input type="text" id="shortdesc" placeholder="Auto-fills from campaign..." style="border-color:#4CAF50; color:#4CAF50;">
 
     <div class="result">
       <div class="result-label">Full Tagged URL</div>
@@ -663,29 +663,71 @@ function showTab(id) {
 }
 
 // ═══ Unified UTM + Short Link Builder ═══
-const fields = ['dest', 'src', 'med', 'camp', 'cont', 'shortdesc'];
+const fields = ['dest', 'src', 'med', 'camp', 'cont'];
 fields.forEach(f => {
   const el = document.getElementById(f);
   if (el) { el.addEventListener('input', buildUrl); el.addEventListener('change', buildUrl); }
 });
-
-// Medium auto-select map: when source changes, pick the most likely medium
-const mediumHints = {
-  'meta': 'paid-social', 'google': 'paid-search', 'youtube': 'organic-video',
-  'email': '', 'linkedin': 'organic-social', 'tiktok': 'organic-video',
-  'podcast': 'podcast', 'circle': 'community', 'direct': 'qr',
-  'vista-social': 'organic-social', 'referral': 'referral'
-};
-
-// Source → short code map (matches _redirects convention)
-const sourceShortCodes = {
-  'meta': 'meta', 'google': 'gads', 'youtube': 'yt', 'email': 'email',
-  'linkedin': 'linkedin', 'tiktok': 'tiktok', 'podcast': 'podcast',
-  'circle': 'circle', 'direct': 'direct', 'vista-social': 'vs', 'referral': 'ref'
-};
+// Short desc field — only rebuilds on manual edit, doesn't trigger auto-derive
+document.getElementById('shortdesc').addEventListener('input', function() {
+  this.dataset.manual = this.value ? '1' : '';
+  buildUrl();
+});
 
 // Medium → short code override (email needs medium to differentiate)
 const emailMediumCodes = { 'email-am': 'am', 'email-pm': 'pm' };
+
+// Page-related prefixes to strip when auto-deriving descriptor
+const pagePrefixes = {
+  'pt': ['pricing-tool-', 'pricetool-', 'ssr-'],
+  'ln': ['leads-now-', 'leadsnow-', 'lead-surge-'],
+  'pb': ['playbook-', '1m-playbook-'],
+  'wb': ['webinar-'],
+  'cl': ['strategy-call-', 'call-', 'booking-'],
+  'sv': ['survey-', 'assessment-']
+};
+
+// Auto-derive a short descriptor from the campaign (and optionally content)
+function deriveDescriptor(campaign, content, pageCode) {
+  if (!campaign) return '';
+  let d = campaign;
+
+  // Strip page-related prefix (e.g., "pricing-tool-may26" → "may26")
+  const prefixes = pagePrefixes[pageCode] || [];
+  for (const p of prefixes) {
+    if (d.startsWith(p)) { d = d.slice(p.length); break; }
+  }
+
+  // Common pattern rewrites
+  d = d.replace(/^morning-coffee-day/, 'd')        // morning-coffee-day42 → d42
+       .replace(/^morning-coffee-/, '')
+       .replace(/^mde-podcast-/, '')
+       .replace(/^mde-/, '')                        // mde-ep52-acdc-overview → ep52-acdc-overview
+       .replace(/^acdc-/, '')                        // acdc-ch3-day2 → ch3-day2
+       .replace(/-overview$/, '')                    // ep52-acdc-overview → ep52-acdc → ep52
+       .replace(/-day/, 'd')                         // ch3-day2 → ch3d2
+       .replace(/-evergreen$/, '');
+
+  // If still long (>12 chars), take first two segments
+  if (d.length > 12) {
+    const parts = d.split('-');
+    d = parts.slice(0, 2).join('-');
+  }
+
+  // If there's utm_content, append first meaningful word (for A/B variants)
+  if (content) {
+    const cParts = content.replace(/^video-|^image-|^carousel-|^text-|^reel-/, '').split('-');
+    const tag = cParts[0];
+    if (tag && !d.includes(tag)) {
+      d = d + '-' + tag;
+    }
+  }
+
+  // Final cleanup — max 15 chars
+  if (d.length > 15) d = d.slice(0, 15).replace(/-$/, '');
+
+  return d;
+}
 
 function buildUrl() {
   const destEl = document.getElementById('dest');
@@ -699,7 +741,15 @@ function buildUrl() {
   const med = document.getElementById('med').value;
   const camp = document.getElementById('camp').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
   const cont = document.getElementById('cont').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-  const shortdesc = document.getElementById('shortdesc').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+  const shortDescEl = document.getElementById('shortdesc');
+  const isManual = shortDescEl.dataset.manual === '1';
+
+  // Auto-derive descriptor unless manually edited
+  if (!isManual) {
+    shortDescEl.value = deriveDescriptor(camp, cont, pageCode);
+  }
+  const shortdesc = shortDescEl.value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
   // Build full UTM URL
   if (!src || !med || !camp) {
@@ -714,7 +764,7 @@ function buildUrl() {
 
   document.getElementById('result-url').textContent = dest + utmParams;
 
-  // Build short link (only if descriptor is filled)
+  // Build short link automatically
   if (shortdesc && srcShortCode) {
     // For email, use am/pm code from medium instead of generic "email"
     let linkSourceCode = emailMediumCodes[med] || srcShortCode;
