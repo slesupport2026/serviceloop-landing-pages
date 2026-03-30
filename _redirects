@@ -1,2 +1,45 @@
+# ═══════════════════════════════════════════════════════════════
+# SLE SHORT LINKS — go.serviceloopelectrical.com/r/[code]
+# ═══════════════════════════════════════════════════════════════
+#
+# Naming: /r/[page]-[source]-[descriptor]
+#
+# Pages:   pt=pricetool  ln=leadsnow  pb=playbook  wb=webinar  cl=call  sv=survey
+# Sources: meta  yt=youtube  am=email-am  pm=email-pm  vs=vista-social  qr  circle
+#
+# Add new links here, push to GitHub, Netlify deploys in ~30s.
+# Use 302 (temporary) so you can change destinations later.
+# ═══════════════════════════════════════════════════════════════
+
+# — Meta Paid Ads —
+/r/pt-meta-clay-rant    /sle-pricetool/?utm_source=meta&utm_medium=paid-social&utm_campaign=pricing-tool-may26&utm_content=video-clay-pricing-rant    302
+/r/pt-meta-edwin        /sle-pricetool/?utm_source=meta&utm_medium=paid-social&utm_campaign=pricing-tool-may26&utm_content=video-edwin-testimonial     302
+/r/ln-meta-jun26        /leadsnow/?utm_source=meta&utm_medium=paid-social&utm_campaign=leads-now-jun26                                                 302
+/r/cl-hammer-jun26      /call/?utm_source=meta&utm_medium=paid-social&utm_campaign=hammer-jun26&utm_content=video-social-proof-reel                    302
+
+# — YouTube Organic —
+/r/pb-yt-ep52           /playbook/?utm_source=youtube&utm_medium=organic-video&utm_campaign=mde-ep52-acdc-overview    302
+/r/pt-yt-ep47           /sle-pricetool/?utm_source=youtube&utm_medium=organic-video&utm_campaign=mde-ep47-pricing     302
+
+# — Email AM (Morning Coffee) —
+/r/pb-am-d42            /playbook/?utm_source=email&utm_medium=email-am&utm_campaign=morning-coffee-day42      302
+/r/pt-am-d12            /sle-pricetool/?utm_source=email&utm_medium=email-am&utm_campaign=morning-coffee-day12 302
+
+# — Email PM (ACDC Engine) —
+/r/wb-pm-ch3d2          /webinar/?utm_source=email&utm_medium=email-pm&utm_campaign=acdc-ch3-day2    302
+
+# — Vista Social Organic —
+/r/ln-vs-jun26          /leadsnow/?utm_source=vista-social&utm_medium=organic-social&utm_campaign=leads-now-jun26    302
+
+# — QR / Direct —
+/r/pt-qr-clay           /sle-pricetool/?utm_source=direct&utm_medium=qr&utm_campaign=business-card-clay    302
+
+# — Circle Community —
+/r/wb-circle-jul26      /webinar/?utm_source=circle&utm_medium=community&utm_campaign=webinar-jul26-joseph    302
+
+# ═══════════════════════════════════════════════════════════════
+# SPA FALLBACKS
+# ═══════════════════════════════════════════════════════════════
+
 # SPA fallback for 1mplaybook React app
 /1mplaybook/*  /1mplaybook/index.html  200

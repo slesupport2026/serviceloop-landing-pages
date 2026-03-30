@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLE UTM Convention Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0A0A0A; color: #FFFFFF; min-height: 100vh; line-height: 1.6; }
+
+  .header { background: linear-gradient(135deg, #0A0A0A 0%, #1B2A45 100%); border-bottom: 2px solid #E3C575; padding: 32px 40px; }
+  .header h1 { font-size: 28px; font-weight: 800; color: #E3C575; }
+  .header p { color: #999; font-size: 14px; margin-top: 4px; }
+
+  .tabs { display: flex; gap: 0; background: #111; border-bottom: 1px solid #222; padding: 0 40px; overflow-x: auto; }
+  .tab { padding: 14px 24px; font-size: 13px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; }
+  .tab:hover { color: #ccc; }
+  .tab.active { color: #E3C575; border-bottom-color: #E3C575; }
+
+  .content { padding: 32px 40px; max-width: 1200px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .card h3 { font-size: 16px; font-weight: 700; color: #E3C575; margin-bottom: 12px; }
+  .card h4 { font-size: 14px; font-weight: 600; color: #FDC33E; margin-bottom: 8px; margin-top: 16px; }
+  .card p, .card li { font-size: 14px; color: #ccc; }
+  .card ul, .card ol { padding-left: 20px; margin-top: 6px; }
+  .card li { margin-bottom: 6px; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th, td { text-align: left; padding: 10px 14px; font-size: 13px; border-bottom: 1px solid #222; }
+  th { color: #E3C575; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  td { color: #ccc; }
+  tr:hover td { background: #1a1a1a; }
+
+  code { background: #1a1a2e; color: #FDC33E; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-family: 'Courier New', monospace; }
+
+  .rule { background: linear-gradient(135deg, #1B2A45 0%, #141414 100%); border-left: 4px solid #E3C575; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+  .rule strong { color: #E3C575; }
+  .rule p { font-size: 13px; color: #ccc; margin-top: 4px; }
+
+  .highlight-box { background: linear-gradient(135deg, #2a1a00 0%, #141414 100%); border: 1px solid #E3C575; border-radius: 12px; padding: 24px; margin: 20px 0; }
+  .highlight-box h3 { color: #FDC33E; }
+
+  .section-title { font-size: 20px; font-weight: 800; color: #E3C575; margin-bottom: 16px; }
+
+  .link-card { background: #111; border: 1px solid #333; border-radius: 8px; padding: 16px; margin: 8px 0; display: flex; gap: 16px; align-items: flex-start; }
+  .link-num { background: #E3C575; color: #0A0A0A; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0; }
+  .link-info { flex: 1; }
+  .link-info .link-url { font-family: 'Courier New', monospace; color: #FDC33E; font-size: 13px; margin-bottom: 4px; }
+  .link-info .link-name { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+  .link-info .link-desc { font-size: 13px; color: #999; }
+  .link-info .link-cta { font-size: 12px; color: #E3C575; font-style: italic; margin-top: 4px; }
+
+  /* UTM Builder */
+  .builder { background: #111; border: 1px solid #333; border-radius: 12px; padding: 24px; margin: 20px 0; }
+  .builder label { display: block; font-size: 12px; font-weight: 600; color: #E3C575; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; margin-top: 16px; }
+  .builder label:first-child { margin-top: 0; }
+  .builder select, .builder input {
+    width: 100%; padding: 10px 14px; background: #0A0A0A; border: 1px solid #333; border-radius: 6px;
+    color: #fff; font-family: 'Inter', sans-serif; font-size: 14px; outline: none;
+  }
+  .builder select:focus, .builder input:focus { border-color: #E3C575; }
+  .builder .result { margin-top: 20px; padding: 16px; background: #0A0A0A; border: 1px solid #E3C575; border-radius: 8px; }
+  .builder .result-label { font-size: 11px; color: #E3C575; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .builder .result-url { font-family: 'Courier New', monospace; font-size: 13px; color: #FDC33E; word-break: break-all; line-height: 1.8; }
+  .builder .copy-btn {
+    margin-top: 12px; padding: 8px 20px; background: #E3C575; color: #0A0A0A; border: none;
+    border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; font-family: 'Inter', sans-serif;
+  }
+  .builder .copy-btn:hover { background: #FDC33E; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SLE UTM Convention Guide</h1>
+  <p>Service Loop Electrical — Link Stack, UTM Standards, and Tracking Reference</p>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('linkstack')">Link Stack</div>
+  <div class="tab" onclick="showTab('utmrules')">UTM Rules</div>
+  <div class="tab" onclick="showTab('values')">Approved Values</div>
+  <div class="tab" onclick="showTab('builder')">UTM Builder</div>
+  <div class="tab" onclick="showTab('where')">Where to Set UTMs</div>
+  <div class="tab" onclick="showTab('examples')">Real Examples</div>
+  <div class="tab" onclick="showTab('shortlinks')" style="color:#4CAF50">⚡ Short Links</div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════ LINK STACK ═══════════ -->
+<div class="panel active" id="linkstack">
+  <div class="section-title">The SLE Link Stack</div>
+  <p style="color:#999; margin-bottom:20px;">These are the only 6 URLs you ever share. Every piece of content, every email, every social post, every PDF, every ad creative points to one of these doors. No exceptions. No one-off pages.</p>
+
+  <div class="link-card">
+    <div class="link-num">1</div>
+    <div class="link-info">
+      <div class="link-url">/sle-pricetool/</div>
+      <div class="link-name">Pricing Tool (Lead Magnet)</div>
+      <div class="link-desc">SSR Calculator + Pricing Guide PDF. Gets their rate right. Entry point for pricing-pain prospects.</div>
+      <div class="link-cta">"Get Your Simple Service Rate — Free Tool Inside"</div>
+    </div>
+  </div>
+
+  <div class="link-card">
+    <div class="link-num">2</div>
+    <div class="link-info">
+      <div class="link-url">/leadsnow/</div>
+      <div class="link-name">Leads Now (Lead Magnet)</div>
+      <div class="link-desc">Lead generation strategy for electricians. Google, LSA, Reviews. Entry point for pipeline-pain prospects.</div>
+      <div class="link-cta">"Fill Your Pipeline — Free Strategy Guide Inside"</div>
+    </div>
+  </div>
+
+  <div class="link-card">
+    <div class="link-num">3</div>
+    <div class="link-info">
+      <div class="link-url">/playbook/</div>
+      <div class="link-name">$1M Service Playbook (Lead Magnet)</div>
+      <div class="link-desc">9-chapter ACDC framework. The full plan. For electricians ready to see the whole picture. <em>(Future build)</em></div>
+      <div class="link-cta">"The $1M Service Plan — Free Playbook for Electric Service Hustlers"</div>
+    </div>
+  </div>
+
+  <div class="link-card">
+    <div class="link-num">4</div>
+    <div class="link-info">
+      <div class="link-url">/webinar/</div>
+      <div class="link-name">Monthly Webinar ($97 Elevator Offer)</div>
+      <div class="link-desc">Persistent page showing next month's live session. Countdown timer. Registration form. Rotates presenter monthly (Clay / Joseph / Forrest). <em>(Future build)</em></div>
+      <div class="link-cta">"Join Us Live — $97 to Skip the Line"</div>
+    </div>
+  </div>
+
+  <div class="link-card">
+    <div class="link-num">5</div>
+    <div class="link-info">
+      <div class="link-url">/call/</div>
+      <div class="link-name">Strategy Call Booking (Direct Elevator)</div>
+      <div class="link-desc">Calendar booking page. For prospects who are ready NOW. Wraps GHL or Calendly booking widget. No paywall. <em>(Future build)</em></div>
+      <div class="link-cta">"Book a Strategy Call — Plan Your Journey to $1M"</div>
+    </div>
+  </div>
+
+  <div class="link-card">
+    <div class="link-num">6</div>
+    <div class="link-info">
+      <div class="link-url">/survey/</div>
+      <div class="link-name">Service Pro Survey (Self-Assessment)</div>
+      <div class="link-desc">How do you stack up against SLE Pros? Diagnostic tool that scores them and shows gaps. Feeds into playbook + call offers. <em>(Future build)</em></div>
+      <div class="link-cta">"See How You Stack Up — Free Service Business Assessment"</div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <strong>THE LINK STACK RULE:</strong>
+    <p>Every CTA in every email, social post, video description, ad, PDF, or resource points to one of these 6 URLs. If you're creating content and need a link, pick from this list. If none of them fit, the content probably doesn't need a link — or we need to discuss whether we're missing a door.</p>
+  </div>
+
+  <div class="card">
+    <h3>Content Assets vs. Link Stack</h3>
+    <p>YouTube videos, podcast episodes, social media posts, and the MDE show are <strong>content assets</strong> — they attract attention and build trust. They are NOT in the link stack. They POINT TO the link stack.</p>
+    <p style="margin-top:8px;">For example, the $1M Service Plan YouTube video would have a description that says:</p>
+    <p style="margin-top:8px; font-style:italic; color:#E3C575;">"Ready to build your plan? Grab the free playbook: serviceloopelectrical.com/playbook/"</p>
+    <p style="margin-top:8px;">The video is the content. The playbook page is the door.</p>
+  </div>
+</div>
+
+<!-- ═══════════ UTM RULES ═══════════ -->
+<div class="panel" id="utmrules">
+  <div class="section-title">UTM Standards</div>
+
+  <div class="highlight-box">
+    <h3>What UTMs Are (Simple Version)</h3>
+    <p style="color:#ccc; margin-top:8px;">UTM parameters are tags you add to the end of a URL so you can see WHERE your traffic came from in your analytics. When someone clicks a UTM-tagged link, GHL (and Google Analytics) records which source, medium, and campaign sent them. Without UTMs, all your traffic looks the same — "someone showed up." With UTMs, you know "this person came from Meta, clicked a paid ad, from our June webinar campaign."</p>
+  </div>
+
+  <div class="card">
+    <h3>The 5 UTM Parameters</h3>
+    <table>
+      <tr><th>Parameter</th><th>What It Answers</th><th>Required?</th><th>Example</th></tr>
+      <tr>
+        <td><code>utm_source</code></td>
+        <td>WHERE did they come from?</td>
+        <td><strong style="color:#4CAF50">Yes — Always</strong></td>
+        <td><code>meta</code>, <code>google</code>, <code>youtube</code></td>
+      </tr>
+      <tr>
+        <td><code>utm_medium</code></td>
+        <td>WHAT type of traffic?</td>
+        <td><strong style="color:#4CAF50">Yes — Always</strong></td>
+        <td><code>paid-social</code>, <code>organic</code>, <code>email</code></td>
+      </tr>
+      <tr>
+        <td><code>utm_campaign</code></td>
+        <td>WHICH campaign or initiative?</td>
+        <td><strong style="color:#4CAF50">Yes — Always</strong></td>
+        <td><code>pricing-tool-launch-may26</code></td>
+      </tr>
+      <tr>
+        <td><code>utm_content</code></td>
+        <td>WHICH specific ad or creative?</td>
+        <td><strong style="color:#FDC33E">Recommended for ads</strong></td>
+        <td><code>video-edwin-testimonial</code></td>
+      </tr>
+      <tr>
+        <td><code>utm_term</code></td>
+        <td>WHICH keyword? (Google Ads only)</td>
+        <td><strong style="color:#999">Optional</strong></td>
+        <td><code>electrician-pricing</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Formatting Rules (Non-Negotiable)</h3>
+    <table>
+      <tr><th>Rule</th><th>Right</th><th>Wrong</th></tr>
+      <tr><td>Always lowercase</td><td><code>meta</code></td><td><code>Meta</code>, <code>META</code>, <code>Facebook</code></td></tr>
+      <tr><td>Use hyphens, never spaces or underscores</td><td><code>paid-social</code></td><td><code>paid social</code>, <code>paid_social</code></td></tr>
+      <tr><td>No special characters</td><td><code>webinar-june26-clay</code></td><td><code>webinar_june'26_(clay)</code></td></tr>
+      <tr><td>Keep values short but clear</td><td><code>pricing-tool-may26</code></td><td><code>the-pricing-tool-campaign-for-may-2026</code></td></tr>
+      <tr><td>Include month+year in campaigns</td><td><code>webinar-jul26</code></td><td><code>webinar-summer</code></td></tr>
+      <tr><td>Platform = brand name, not product</td><td><code>meta</code></td><td><code>facebook</code>, <code>instagram</code>, <code>fb</code></td></tr>
+    </table>
+  </div>
+
+  <div class="rule">
+    <strong>WHY THIS MATTERS:</strong>
+    <p>If Forrest tags an ad with <code>utm_source=Facebook</code> and Luigi tags one with <code>utm_source=meta</code> and Clay tags a post with <code>utm_source=fb</code>, your GHL reports show three separate sources that are all the same thing. You can never combine them cleanly. Pick one convention. Use it forever. This is it.</p>
+  </div>
+</div>
+
+<!-- ═══════════ APPROVED VALUES ═══════════ -->
+<div class="panel" id="values">
+  <div class="section-title">Approved UTM Values</div>
+  <p style="color:#999; margin-bottom:20px;">Only use values from these lists. If you need a new one, add it here first so everyone stays in sync.</p>
+
+  <div class="split">
+    <div class="card">
+      <h3>utm_source (Where)</h3>
+      <table>
+        <tr><th>Value</th><th>Use For</th></tr>
+        <tr><td><code>meta</code></td><td>Facebook + Instagram ads and organic posts</td></tr>
+        <tr><td><code>google</code></td><td>Google Ads (search, display, YouTube ads)</td></tr>
+        <tr><td><code>youtube</code></td><td>YouTube organic (descriptions, pinned comments)</td></tr>
+        <tr><td><code>email</code></td><td>Any email (AM or PM sequences)</td></tr>
+        <tr><td><code>linkedin</code></td><td>LinkedIn posts or ads</td></tr>
+        <tr><td><code>tiktok</code></td><td>TikTok posts or ads</td></tr>
+        <tr><td><code>podcast</code></td><td>MDE podcast show notes / audio mentions</td></tr>
+        <tr><td><code>circle</code></td><td>Links shared in Circle community</td></tr>
+        <tr><td><code>direct</code></td><td>Shared verbally, business card, or QR code</td></tr>
+        <tr><td><code>vista-social</code></td><td>Scheduled via Vista Social (auto-tagged)</td></tr>
+        <tr><td><code>referral</code></td><td>Partner or affiliate links</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>utm_medium (Type)</h3>
+      <table>
+        <tr><th>Value</th><th>Use For</th></tr>
+        <tr><td><code>paid-social</code></td><td>Meta/TikTok/LinkedIn paid ads</td></tr>
+        <tr><td><code>paid-search</code></td><td>Google search ads</td></tr>
+        <tr><td><code>paid-display</code></td><td>Google display network</td></tr>
+        <tr><td><code>organic-social</code></td><td>Unpaid social posts</td></tr>
+        <tr><td><code>organic-video</code></td><td>YouTube organic, Reels, TikTok organic</td></tr>
+        <tr><td><code>email-am</code></td><td>Morning Coffee emails (Clay, cneumeyer@)</td></tr>
+        <tr><td><code>email-pm</code></td><td>PM Engine emails (levelup@)</td></tr>
+        <tr><td><code>community</code></td><td>Circle or group posts</td></tr>
+        <tr><td><code>podcast</code></td><td>Podcast show notes / audio</td></tr>
+        <tr><td><code>qr</code></td><td>QR code scans (print, events)</td></tr>
+        <tr><td><code>referral</code></td><td>Partner/affiliate traffic</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>utm_campaign (Which Initiative)</h3>
+    <p style="margin-bottom:12px;">Campaigns use this naming pattern: <code>[asset]-[month][year]</code> or <code>[asset]-[descriptor]-[month][year]</code></p>
+    <table>
+      <tr><th>Pattern</th><th>Example</th><th>Used For</th></tr>
+      <tr><td>Lead magnet promos</td><td><code>pricing-tool-may26</code></td><td>Any campaign pushing the pricing tool</td></tr>
+      <tr><td>Lead magnet promos</td><td><code>leads-now-jun26</code></td><td>Any campaign pushing leads now</td></tr>
+      <tr><td>Playbook promos</td><td><code>playbook-jul26</code></td><td>Campaigns pushing the playbook download</td></tr>
+      <tr><td>Webinar registration</td><td><code>webinar-jun26-clay</code></td><td>June webinar with Clay presenting</td></tr>
+      <tr><td>Webinar registration</td><td><code>webinar-jul26-joseph</code></td><td>July webinar with Joseph presenting</td></tr>
+      <tr><td>Hammer retargeting</td><td><code>hammer-jun26</code></td><td>Hammer Them retargeting ads</td></tr>
+      <tr><td>Evergreen content</td><td><code>mde-podcast-evergreen</code></td><td>Links in MDE podcast descriptions (no month)</td></tr>
+      <tr><td>Call booking</td><td><code>strategy-call-jun26</code></td><td>Direct-to-call campaigns</td></tr>
+      <tr><td>AM email links</td><td><code>morning-coffee-day42</code></td><td>Link inside AM email day 42</td></tr>
+      <tr><td>PM email links</td><td><code>acdc-ch3-day2</code></td><td>Link inside ACDC Chapter 3, Day 2 email</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>utm_content (Which Creative)</h3>
+    <p style="margin-bottom:12px;">Use for A/B testing ad creatives. Pattern: <code>[format]-[descriptor]</code></p>
+    <table>
+      <tr><th>Example</th><th>Describes</th></tr>
+      <tr><td><code>video-edwin-testimonial</code></td><td>Video ad featuring Edwin's story</td></tr>
+      <tr><td><code>video-clay-pricing-rant</code></td><td>Video ad with Clay talking about pricing fear</td></tr>
+      <tr><td><code>carousel-3-wins</code></td><td>Carousel ad showing 3 partner wins</td></tr>
+      <tr><td><code>image-rate-comparison</code></td><td>Static image comparing $45/hr vs $450/hr</td></tr>
+      <tr><td><code>text-long-copy-v1</code></td><td>Long-form text ad version 1</td></tr>
+      <tr><td><code>reel-forrest-leads-tip</code></td><td>Short-form reel with Forrest</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ UTM BUILDER ═══════════ -->
+<div class="panel" id="builder">
+  <div class="section-title">UTM Link Builder</div>
+  <p style="color:#999; margin-bottom:20px;">Select your values and copy the tagged URL. Use this instead of manually typing UTMs to avoid typos.</p>
+
+  <div class="builder">
+    <label>Destination Page</label>
+    <select id="dest">
+      <option value="https://serviceloop-landing-pages.netlify.app/sle-pricetool/">/sle-pricetool/ — Pricing Tool</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/leadsnow/">/leadsnow/ — Leads Now</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/playbook/">/playbook/ — $1M Playbook</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/webinar/">/webinar/ — Webinar Registration</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/call/">/call/ — Strategy Call</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/survey/">/survey/ — Service Pro Survey</option>
+    </select>
+
+    <label>utm_source (Where are they coming from?)</label>
+    <select id="src">
+      <option value="">-- Select --</option>
+      <option value="meta">meta (Facebook/Instagram)</option>
+      <option value="google">google (Google Ads)</option>
+      <option value="youtube">youtube (YouTube organic)</option>
+      <option value="email">email (Email sequences)</option>
+      <option value="linkedin">linkedin</option>
+      <option value="tiktok">tiktok</option>
+      <option value="podcast">podcast (MDE show notes)</option>
+      <option value="circle">circle (Community)</option>
+      <option value="direct">direct (Verbal/QR/Card)</option>
+      <option value="vista-social">vista-social (Scheduled posts)</option>
+      <option value="referral">referral (Partner links)</option>
+    </select>
+
+    <label>utm_medium (What type of traffic?)</label>
+    <select id="med">
+      <option value="">-- Select --</option>
+      <option value="paid-social">paid-social</option>
+      <option value="paid-search">paid-search</option>
+      <option value="paid-display">paid-display</option>
+      <option value="organic-social">organic-social</option>
+      <option value="organic-video">organic-video</option>
+      <option value="email-am">email-am (Morning Coffee)</option>
+      <option value="email-pm">email-pm (PM Engine)</option>
+      <option value="community">community</option>
+      <option value="podcast">podcast</option>
+      <option value="qr">qr</option>
+      <option value="referral">referral</option>
+    </select>
+
+    <label>utm_campaign (Which campaign?)</label>
+    <input type="text" id="camp" placeholder="e.g., pricing-tool-may26 or webinar-jun26-clay">
+
+    <label>utm_content (Which creative? — optional)</label>
+    <input type="text" id="cont" placeholder="e.g., video-edwin-testimonial">
+
+    <div class="result">
+      <div class="result-label">Your Tagged URL</div>
+      <div class="result-url" id="result-url">Select values above to generate your UTM link...</div>
+      <button class="copy-btn" onclick="copyUrl()">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ WHERE TO SET ═══════════ -->
+<div class="panel" id="where">
+  <div class="section-title">Where to Set UTMs (By Tool)</div>
+
+  <div class="card">
+    <h3>Meta Ads Manager (Forrest / Ads Team)</h3>
+    <h4>Where to enter UTMs:</h4>
+    <ol>
+      <li>Go to your ad set or ad level</li>
+      <li>Scroll to <strong>Tracking</strong> section</li>
+      <li>Click <strong>Build a URL parameter</strong></li>
+      <li>Enter each UTM value individually OR paste the full parameter string into "URL Parameters"</li>
+    </ol>
+    <h4>Parameter string format:</h4>
+    <p><code>utm_source=meta&utm_medium=paid-social&utm_campaign=pricing-tool-may26&utm_content=video-edwin-testimonial</code></p>
+    <p style="margin-top:8px; color:#999; font-size:12px;">Paste this into the "URL Parameters" field. Meta appends it to your destination URL automatically. You do NOT put it in the website URL field.</p>
+  </div>
+
+  <div class="card">
+    <h3>Vista Social (Scheduled Organic Posts)</h3>
+    <h4>Where to enter UTMs:</h4>
+    <ol>
+      <li>When composing a post, add your link</li>
+      <li>Click the <strong>link settings</strong> (gear icon near the URL)</li>
+      <li>Vista Social has a built-in UTM builder — fill in each field</li>
+      <li>You can also set <strong>default UTMs</strong> in Settings → UTM Tracking so every link auto-tags</li>
+    </ol>
+    <h4>Recommended defaults for Vista Social:</h4>
+    <p><code>utm_source=vista-social</code> / <code>utm_medium=organic-social</code> / campaign = per post</p>
+  </div>
+
+  <div class="card">
+    <h3>GHL Email Sequences (Luigi / Clay)</h3>
+    <h4>Where to enter UTMs:</h4>
+    <p>When adding a link inside an email in GHL, use the full tagged URL from the UTM Builder above. GHL does not auto-tag outbound links — you have to include the UTMs in the URL itself.</p>
+    <h4>Example for AM Morning Coffee Day 12:</h4>
+    <p><code>https://serviceloop-landing-pages.netlify.app/playbook/?utm_source=email&utm_medium=email-am&utm_campaign=morning-coffee-day12</code></p>
+    <h4>Example for PM ACDC Chapter 3 Day 2:</h4>
+    <p><code>https://serviceloop-landing-pages.netlify.app/webinar/?utm_source=email&utm_medium=email-pm&utm_campaign=acdc-ch3-day2</code></p>
+  </div>
+
+  <div class="card">
+    <h3>YouTube Descriptions (Content Team)</h3>
+    <h4>Where to enter UTMs:</h4>
+    <p>Paste the full tagged URL directly into video descriptions, pinned comments, or community posts.</p>
+    <h4>Example for MDE Episode:</h4>
+    <p><code>https://serviceloop-landing-pages.netlify.app/sle-pricetool/?utm_source=youtube&utm_medium=organic-video&utm_campaign=mde-ep47-pricing</code></p>
+  </div>
+
+  <div class="card">
+    <h3>Google Campaign URL Builder (Backup / Manual)</h3>
+    <h4>Free tool at:</h4>
+    <p><code>https://ga-dev-tools.google/campaign-url-builder/</code></p>
+    <p style="margin-top:8px;">This is Google's official UTM builder. Use it if you're not near the SLE builder above. Same rules apply — use the approved values from this guide.</p>
+  </div>
+
+  <div class="card">
+    <h3>GHL Receiving UTMs (Luigi)</h3>
+    <h4>How GHL captures incoming UTMs:</h4>
+    <p>When a prospect clicks a UTM-tagged link and lands on a landing page, the form JavaScript grabs the UTM values from the URL and sends them as hidden fields in the webhook payload. GHL stores them in custom fields on the contact record.</p>
+    <h4>Required GHL Custom Fields:</h4>
+    <p><code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_content</code>, <code>utm_term</code></p>
+    <p style="margin-top:8px; color:#999; font-size:12px;">These are already in the GHL Workflow Blueprint checklist. The landing page JavaScript reads URL params and passes them through the webhook. I can update the form code to do this once Luigi provides the webhook URLs.</p>
+  </div>
+</div>
+
+<!-- ═══════════ REAL EXAMPLES ═══════════ -->
+<div class="panel" id="examples">
+  <div class="section-title">Real-World UTM Examples</div>
+  <p style="color:#999; margin-bottom:20px;">Copy these patterns for common SLE scenarios.</p>
+
+  <div class="card">
+    <h3>Scenario: Meta Ad Pushing Pricing Tool (Paid)</h3>
+    <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
+      https://serviceloop-landing-pages.netlify.app/sle-pricetool/?utm_source=meta&utm_medium=paid-social&utm_campaign=pricing-tool-may26&utm_content=video-clay-pricing-rant
+    </p>
+    <p style="margin-top:8px; font-size:13px; color:#999;">Reads as: "This person came from Meta, via a paid social ad, from our May 2026 pricing tool campaign, specifically the video of Clay talking about pricing."</p>
+  </div>
+
+  <div class="card">
+    <h3>Scenario: YouTube MDE Episode Description (Organic)</h3>
+    <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
+      https://serviceloop-landing-pages.netlify.app/playbook/?utm_source=youtube&utm_medium=organic-video&utm_campaign=mde-ep52-acdc-overview
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Scenario: PM Email Day 14 (ACDC Chapter 3, Joseph's Options)</h3>
+    <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
+      https://serviceloop-landing-pages.netlify.app/webinar/?utm_source=email&utm_medium=email-pm&utm_campaign=acdc-ch3-day2
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Scenario: Vista Social Organic Instagram Post</h3>
+    <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
+      https://serviceloop-landing-pages.netlify.app/leadsnow/?utm_source=vista-social&utm_medium=organic-social&utm_campaign=leads-now-jun26
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Scenario: QR Code on Business Card</h3>
+    <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
+      https://serviceloop-landing-pages.netlify.app/sle-pricetool/?utm_source=direct&utm_medium=qr&utm_campaign=business-card-clay
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Scenario: Hammer Them Retargeting Ad (Meta)</h3>
+    <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
+      https://serviceloop-landing-pages.netlify.app/call/?utm_source=meta&utm_medium=paid-social&utm_campaign=hammer-jun26&utm_content=video-social-proof-reel
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Scenario: Circle Community Post</h3>
+    <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
+      https://serviceloop-landing-pages.netlify.app/webinar/?utm_source=circle&utm_medium=community&utm_campaign=webinar-jul26-joseph
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════ SHORT LINKS ═══════════ -->
+<div class="panel" id="shortlinks">
+  <div class="section-title">Short Links — Self-Hosted URL Shortener</div>
+  <p style="color:#999; margin-bottom:20px;">Hide tracking params behind clean, branded short URLs. No Bitly. Powered by Netlify <code>_redirects</code> — server-side, instant, zero JavaScript.</p>
+
+  <div class="highlight-box">
+    <h3>How It Works</h3>
+    <p style="color:#ccc; margin-top:8px;">Instead of sharing <code style="font-size:11px">go.serviceloopelectrical.com/sle-pricetool/?utm_source=meta&utm_medium=paid-social&utm_campaign=...</code></p>
+    <p style="color:#ccc; margin-top:4px;">You share <code style="font-size:13px; background:#1a3a1a; color:#4CAF50;">go.serviceloopelectrical.com/r/pt-meta-edwin</code></p>
+    <p style="color:#ccc; margin-top:8px;">Netlify intercepts <code>/r/pt-meta-edwin</code>, does a server-side 302 redirect to the full UTM URL. The visitor never sees the tracking parameters. ~70% shorter. Branded. Free.</p>
+  </div>
+
+  <div class="split">
+    <div class="card">
+      <h3>Page Codes</h3>
+      <table>
+        <tr><th>Code</th><th>Landing Page</th></tr>
+        <tr><td><code>pt</code></td><td>/sle-pricetool/</td></tr>
+        <tr><td><code>ln</code></td><td>/leadsnow/</td></tr>
+        <tr><td><code>pb</code></td><td>/playbook/</td></tr>
+        <tr><td><code>wb</code></td><td>/webinar/</td></tr>
+        <tr><td><code>cl</code></td><td>/call/</td></tr>
+        <tr><td><code>sv</code></td><td>/survey/</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Source Codes</h3>
+      <table>
+        <tr><th>Code</th><th>Source</th></tr>
+        <tr><td><code>meta</code></td><td>Meta paid ads</td></tr>
+        <tr><td><code>yt</code></td><td>YouTube organic</td></tr>
+        <tr><td><code>am</code></td><td>AM Morning Coffee email</td></tr>
+        <tr><td><code>pm</code></td><td>PM ACDC Engine email</td></tr>
+        <tr><td><code>vs</code></td><td>Vista Social organic</td></tr>
+        <tr><td><code>qr</code></td><td>QR code / direct</td></tr>
+        <tr><td><code>circle</code></td><td>Circle community</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="rule">
+    <strong>NAMING PATTERN:</strong>
+    <p><code>/r/[page]-[source]-[descriptor]</code> — Keep codes under 8 characters total when possible. Descriptor is the campaign differentiator: episode number, day number, creative name, month.</p>
+  </div>
+
+  <div class="card">
+    <h3>Live Short Links (from <code>_redirects</code>)</h3>
+    <table>
+      <tr><th>Short Link</th><th>Destination</th><th>Use Case</th></tr>
+      <tr><td><code>/r/pt-meta-clay-rant</code></td><td>/sle-pricetool/ + meta paid-social</td><td>Clay pricing rant video ad</td></tr>
+      <tr><td><code>/r/pt-meta-edwin</code></td><td>/sle-pricetool/ + meta paid-social</td><td>Edwin testimonial video ad</td></tr>
+      <tr><td><code>/r/ln-meta-jun26</code></td><td>/leadsnow/ + meta paid-social</td><td>Leads Now June campaign</td></tr>
+      <tr><td><code>/r/cl-hammer-jun26</code></td><td>/call/ + meta paid-social</td><td>Hammer retargeting → call</td></tr>
+      <tr><td><code>/r/pb-yt-ep52</code></td><td>/playbook/ + youtube organic</td><td>MDE Ep 52 description</td></tr>
+      <tr><td><code>/r/pt-yt-ep47</code></td><td>/sle-pricetool/ + youtube organic</td><td>MDE Ep 47 description</td></tr>
+      <tr><td><code>/r/pb-am-d42</code></td><td>/playbook/ + email-am</td><td>Morning Coffee day 42</td></tr>
+      <tr><td><code>/r/pt-am-d12</code></td><td>/sle-pricetool/ + email-am</td><td>Morning Coffee day 12</td></tr>
+      <tr><td><code>/r/wb-pm-ch3d2</code></td><td>/webinar/ + email-pm</td><td>ACDC Ch3 Day 2 email</td></tr>
+      <tr><td><code>/r/ln-vs-jun26</code></td><td>/leadsnow/ + vista-social organic</td><td>Vista Social June post</td></tr>
+      <tr><td><code>/r/pt-qr-clay</code></td><td>/sle-pricetool/ + qr direct</td><td>Clay's business card QR</td></tr>
+      <tr><td><code>/r/wb-circle-jul26</code></td><td>/webinar/ + circle community</td><td>Circle webinar promo July</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title" style="margin-top:32px;">Short Link Generator</div>
+  <p style="color:#999; margin-bottom:20px;">Build a short link code and get the <code>_redirects</code> line ready to paste into the repo.</p>
+
+  <div class="builder">
+    <label>Destination Page</label>
+    <select id="sl-page">
+      <option value="pt" data-path="/sle-pricetool/">pt — Pricing Tool</option>
+      <option value="ln" data-path="/leadsnow/">ln — Leads Now</option>
+      <option value="pb" data-path="/playbook/">pb — Playbook</option>
+      <option value="wb" data-path="/webinar/">wb — Webinar</option>
+      <option value="cl" data-path="/call/">cl — Strategy Call</option>
+      <option value="sv" data-path="/survey/">sv — Survey</option>
+    </select>
+
+    <label>Source</label>
+    <select id="sl-src">
+      <option value="">-- Select --</option>
+      <option value="meta" data-utm-source="meta" data-utm-medium="paid-social">meta — Meta Paid Ads</option>
+      <option value="meta-org" data-utm-source="meta" data-utm-medium="organic-social">meta-org — Meta Organic</option>
+      <option value="yt" data-utm-source="youtube" data-utm-medium="organic-video">yt — YouTube Organic</option>
+      <option value="am" data-utm-source="email" data-utm-medium="email-am">am — AM Morning Coffee</option>
+      <option value="pm" data-utm-source="email" data-utm-medium="email-pm">pm — PM ACDC Engine</option>
+      <option value="vs" data-utm-source="vista-social" data-utm-medium="organic-social">vs — Vista Social</option>
+      <option value="qr" data-utm-source="direct" data-utm-medium="qr">qr — QR Code / Direct</option>
+      <option value="circle" data-utm-source="circle" data-utm-medium="community">circle — Circle Community</option>
+      <option value="podcast" data-utm-source="podcast" data-utm-medium="podcast">podcast — MDE Podcast</option>
+      <option value="gads" data-utm-source="google" data-utm-medium="paid-search">gads — Google Ads</option>
+      <option value="linkedin" data-utm-source="linkedin" data-utm-medium="organic-social">linkedin — LinkedIn</option>
+      <option value="tiktok" data-utm-source="tiktok" data-utm-medium="organic-video">tiktok — TikTok</option>
+    </select>
+
+    <label>Descriptor (campaign/creative identifier)</label>
+    <input type="text" id="sl-desc" placeholder="e.g., jun26, ep52, clay-rant, d42, ch3d2">
+
+    <label>utm_campaign (full campaign name)</label>
+    <input type="text" id="sl-campaign" placeholder="e.g., pricing-tool-may26, mde-ep52-acdc-overview">
+
+    <label>utm_content (optional — creative variant)</label>
+    <input type="text" id="sl-content" placeholder="e.g., video-edwin-testimonial">
+
+    <div class="result" style="margin-top:24px;">
+      <div class="result-label">Your Short Link</div>
+      <div class="result-url" id="sl-short" style="font-size:16px; color:#4CAF50;">Fill in the fields above...</div>
+    </div>
+
+    <div class="result" style="margin-top:12px;">
+      <div class="result-label">Full URL (what the visitor actually lands on)</div>
+      <div class="result-url" id="sl-full">...</div>
+    </div>
+
+    <div class="result" style="margin-top:12px; border-color:#4CAF50;">
+      <div class="result-label" style="color:#4CAF50;">_redirects Line (copy → paste into repo)</div>
+      <div class="result-url" id="sl-redirect" style="color:#4CAF50;">...</div>
+      <button class="copy-btn" style="background:#4CAF50; margin-top:12px;" onclick="copyShortLink()">Copy _redirects Line</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>How to Add a New Short Link</h3>
+    <ol>
+      <li>Use the generator above to build your code and <code>_redirects</code> line</li>
+      <li>Open <code>_redirects</code> in the <code>serviceloop-landing-pages</code> repo</li>
+      <li>Paste the line under the appropriate section comment</li>
+      <li>Push to GitHub — Netlify auto-deploys in ~30 seconds</li>
+      <li>Your short link is live at <code>go.serviceloopelectrical.com/r/[code]</code></li>
+    </ol>
+  </div>
+
+  <div class="rule">
+    <strong>WHY NOT BITLY?</strong>
+    <p>You own the domain. You own the redirects. No monthly fee. No third-party analytics middleman. No risk of a service shutting down and breaking all your links. And your short URLs stay on-brand: <code>go.serviceloopelectrical.com/r/...</code> not <code>bit.ly/3xK9mQ</code>.</p>
+  </div>
+</div>
+
+</div><!-- end .content -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// UTM Builder
+const fields = ['dest', 'src', 'med', 'camp', 'cont'];
+fields.forEach(f => {
+  const el = document.getElementById(f);
+  if (el) el.addEventListener('input', buildUrl);
+  if (el) el.addEventListener('change', buildUrl);
+});
+
+function buildUrl() {
+  const dest = document.getElementById('dest').value;
+  const src = document.getElementById('src').value;
+  const med = document.getElementById('med').value;
+  const camp = document.getElementById('camp').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const cont = document.getElementById('cont').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+  if (!src || !med || !camp) {
+    document.getElementById('result-url').textContent = 'Fill in source, medium, and campaign to generate your URL...';
+    return;
+  }
+
+  let url = dest + '?utm_source=' + src + '&utm_medium=' + med + '&utm_campaign=' + camp;
+  if (cont) url += '&utm_content=' + cont;
+
+  document.getElementById('result-url').textContent = url;
+}
+
+function copyUrl() {
+  const url = document.getElementById('result-url').textContent;
+  if (url.includes('Fill in') || url.includes('Select')) return;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy to Clipboard', 2000);
+  });
+}
+
+// ═══ Short Link Generator ═══
+const slFields = ['sl-page', 'sl-src', 'sl-desc', 'sl-campaign', 'sl-content'];
+slFields.forEach(f => {
+  const el = document.getElementById(f);
+  if (el) { el.addEventListener('input', buildShortLink); el.addEventListener('change', buildShortLink); }
+});
+
+function buildShortLink() {
+  const pageEl = document.getElementById('sl-page');
+  const srcEl = document.getElementById('sl-src');
+  const desc = document.getElementById('sl-desc').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const campaign = document.getElementById('sl-campaign').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const content = document.getElementById('sl-content').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+  const page = pageEl.value;
+  const pagePath = pageEl.options[pageEl.selectedIndex].dataset.path;
+  const srcOpt = srcEl.options[srcEl.selectedIndex];
+  const srcCode = srcEl.value;
+  const utmSource = srcOpt.dataset.utmSource || '';
+  const utmMedium = srcOpt.dataset.utmMedium || '';
+
+  if (!srcCode || !desc || !campaign) {
+    document.getElementById('sl-short').textContent = 'Fill in source, descriptor, and campaign...';
+    document.getElementById('sl-full').textContent = '...';
+    document.getElementById('sl-redirect').textContent = '...';
+    return;
+  }
+
+  const code = page + '-' + srcCode + '-' + desc;
+  const shortUrl = 'go.serviceloopelectrical.com/r/' + code;
+
+  let fullPath = pagePath + '?utm_source=' + utmSource + '&utm_medium=' + utmMedium + '&utm_campaign=' + campaign;
+  if (content) fullPath += '&utm_content=' + content;
+
+  const redirectLine = '/r/' + code + '    ' + fullPath + '    302';
+
+  document.getElementById('sl-short').textContent = shortUrl;
+  document.getElementById('sl-full').textContent = 'go.serviceloopelectrical.com' + fullPath;
+  document.getElementById('sl-redirect').textContent = redirectLine;
+}
+
+function copyShortLink() {
+  const line = document.getElementById('sl-redirect').textContent;
+  if (line === '...') return;
+  navigator.clipboard.writeText(line).then(() => {
+    const btn = document.querySelectorAll('.copy-btn')[1];
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy _redirects Line', 2000);
+  });
+}
+</script>
+</body>
+</html>
