@@ -323,28 +323,28 @@
   <div class="builder">
     <label>Destination Page</label>
     <select id="dest">
-      <option value="https://serviceloop-landing-pages.netlify.app/sle-pricetool/">/sle-pricetool/ — Pricing Tool</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/leadsnow/">/leadsnow/ — Leads Now</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/playbook/">/playbook/ — $1M Playbook</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/webinar/">/webinar/ — Webinar Registration</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/call/">/call/ — Strategy Call</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/survey/">/survey/ — Service Pro Survey</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/sle-pricetool/" data-code="pt">/sle-pricetool/ — Pricing Tool</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/leadsnow/" data-code="ln">/leadsnow/ — Leads Now</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/playbook/" data-code="pb">/playbook/ — $1M Playbook</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/webinar/" data-code="wb">/webinar/ — Webinar Registration</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/call/" data-code="cl">/call/ — Strategy Call</option>
+      <option value="https://serviceloop-landing-pages.netlify.app/survey/" data-code="sv">/survey/ — Service Pro Survey</option>
     </select>
 
     <label>utm_source (Where are they coming from?)</label>
     <select id="src">
-      <option value="">-- Select --</option>
-      <option value="meta">meta (Facebook/Instagram)</option>
-      <option value="google">google (Google Ads)</option>
-      <option value="youtube">youtube (YouTube organic)</option>
-      <option value="email">email (Email sequences)</option>
-      <option value="linkedin">linkedin</option>
-      <option value="tiktok">tiktok</option>
-      <option value="podcast">podcast (MDE show notes)</option>
-      <option value="circle">circle (Community)</option>
-      <option value="direct">direct (Verbal/QR/Card)</option>
-      <option value="vista-social">vista-social (Scheduled posts)</option>
-      <option value="referral">referral (Partner links)</option>
+      <option value="" data-scode="">-- Select --</option>
+      <option value="meta" data-scode="meta">meta (Facebook/Instagram)</option>
+      <option value="google" data-scode="gads">google (Google Ads)</option>
+      <option value="youtube" data-scode="yt">youtube (YouTube organic)</option>
+      <option value="email" data-scode="email">email (Email sequences)</option>
+      <option value="linkedin" data-scode="linkedin">linkedin</option>
+      <option value="tiktok" data-scode="tiktok">tiktok</option>
+      <option value="podcast" data-scode="podcast">podcast (MDE show notes)</option>
+      <option value="circle" data-scode="circle">circle (Community)</option>
+      <option value="direct" data-scode="direct">direct (Verbal/QR/Card)</option>
+      <option value="vista-social" data-scode="vs">vista-social (Scheduled posts)</option>
+      <option value="referral" data-scode="ref">referral (Partner links)</option>
     </select>
 
     <label>utm_medium (What type of traffic?)</label>
@@ -369,10 +369,25 @@
     <label>utm_content (Which creative? — optional)</label>
     <input type="text" id="cont" placeholder="e.g., video-edwin-testimonial">
 
+    <label style="margin-top:24px; color:#4CAF50;">Short Link Descriptor (e.g., jun26, ep52, clay-rant, d42)</label>
+    <input type="text" id="shortdesc" placeholder="e.g., jun26 — becomes /r/pt-meta-jun26">
+
     <div class="result">
-      <div class="result-label">Your Tagged URL</div>
+      <div class="result-label">Full Tagged URL</div>
       <div class="result-url" id="result-url">Select values above to generate your UTM link...</div>
-      <button class="copy-btn" onclick="copyUrl()">Copy to Clipboard</button>
+      <button class="copy-btn" onclick="copyUrl()">Copy Full URL</button>
+    </div>
+
+    <div class="result" id="short-link-result" style="margin-top:12px; display:none;">
+      <div class="result-label" style="color:#4CAF50;">Short Link (share this)</div>
+      <div class="result-url" id="result-short" style="font-size:16px; color:#4CAF50;"></div>
+      <button class="copy-btn" style="background:#4CAF50;" onclick="copyShort()">Copy Short Link</button>
+    </div>
+
+    <div class="result" id="redirect-line-result" style="margin-top:12px; border-color:#4CAF50; display:none;">
+      <div class="result-label" style="color:#4CAF50;">_redirects Line (paste into repo)</div>
+      <div class="result-url" id="result-redirect" style="color:#4CAF50;"></div>
+      <button class="copy-btn" style="background:#4CAF50;" onclick="copyRedirect()">Copy _redirects Line</button>
     </div>
   </div>
 </div>
@@ -647,43 +662,90 @@ function showTab(id) {
   event.target.classList.add('active');
 }
 
-// UTM Builder
-const fields = ['dest', 'src', 'med', 'camp', 'cont'];
+// ═══ Unified UTM + Short Link Builder ═══
+const fields = ['dest', 'src', 'med', 'camp', 'cont', 'shortdesc'];
 fields.forEach(f => {
   const el = document.getElementById(f);
-  if (el) el.addEventListener('input', buildUrl);
-  if (el) el.addEventListener('change', buildUrl);
+  if (el) { el.addEventListener('input', buildUrl); el.addEventListener('change', buildUrl); }
 });
 
+// Medium auto-select map: when source changes, pick the most likely medium
+const mediumHints = {
+  'meta': 'paid-social', 'google': 'paid-search', 'youtube': 'organic-video',
+  'email': '', 'linkedin': 'organic-social', 'tiktok': 'organic-video',
+  'podcast': 'podcast', 'circle': 'community', 'direct': 'qr',
+  'vista-social': 'organic-social', 'referral': 'referral'
+};
+
+// Source → short code map (matches _redirects convention)
+const sourceShortCodes = {
+  'meta': 'meta', 'google': 'gads', 'youtube': 'yt', 'email': 'email',
+  'linkedin': 'linkedin', 'tiktok': 'tiktok', 'podcast': 'podcast',
+  'circle': 'circle', 'direct': 'direct', 'vista-social': 'vs', 'referral': 'ref'
+};
+
+// Medium → short code override (email needs medium to differentiate)
+const emailMediumCodes = { 'email-am': 'am', 'email-pm': 'pm' };
+
 function buildUrl() {
-  const dest = document.getElementById('dest').value;
-  const src = document.getElementById('src').value;
+  const destEl = document.getElementById('dest');
+  const dest = destEl.value;
+  const pageCode = destEl.options[destEl.selectedIndex].dataset.code;
+  const pagePath = dest.replace('https://serviceloop-landing-pages.netlify.app', '');
+
+  const srcEl = document.getElementById('src');
+  const src = srcEl.value;
+  const srcShortCode = srcEl.options[srcEl.selectedIndex].dataset.scode || '';
   const med = document.getElementById('med').value;
   const camp = document.getElementById('camp').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
   const cont = document.getElementById('cont').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const shortdesc = document.getElementById('shortdesc').value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
+  // Build full UTM URL
   if (!src || !med || !camp) {
     document.getElementById('result-url').textContent = 'Fill in source, medium, and campaign to generate your URL...';
+    document.getElementById('short-link-result').style.display = 'none';
+    document.getElementById('redirect-line-result').style.display = 'none';
     return;
   }
 
-  let url = dest + '?utm_source=' + src + '&utm_medium=' + med + '&utm_campaign=' + camp;
-  if (cont) url += '&utm_content=' + cont;
+  let utmParams = '?utm_source=' + src + '&utm_medium=' + med + '&utm_campaign=' + camp;
+  if (cont) utmParams += '&utm_content=' + cont;
 
-  document.getElementById('result-url').textContent = url;
+  document.getElementById('result-url').textContent = dest + utmParams;
+
+  // Build short link (only if descriptor is filled)
+  if (shortdesc && srcShortCode) {
+    // For email, use am/pm code from medium instead of generic "email"
+    let linkSourceCode = emailMediumCodes[med] || srcShortCode;
+    const code = pageCode + '-' + linkSourceCode + '-' + shortdesc;
+    const shortUrl = 'go.serviceloopelectrical.com/r/' + code;
+    const redirectLine = '/r/' + code + '    ' + pagePath + utmParams + '    302';
+
+    document.getElementById('result-short').textContent = shortUrl;
+    document.getElementById('result-redirect').textContent = redirectLine;
+    document.getElementById('short-link-result').style.display = 'block';
+    document.getElementById('redirect-line-result').style.display = 'block';
+  } else {
+    document.getElementById('short-link-result').style.display = 'none';
+    document.getElementById('redirect-line-result').style.display = 'none';
+  }
 }
 
-function copyUrl() {
-  const url = document.getElementById('result-url').textContent;
-  if (url.includes('Fill in') || url.includes('Select')) return;
-  navigator.clipboard.writeText(url).then(() => {
-    const btn = document.querySelector('.copy-btn');
+function copyEl(elId, btn, label) {
+  const text = document.getElementById(elId).textContent;
+  if (!text || text === '...') return;
+  navigator.clipboard.writeText(text).then(() => {
     btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy to Clipboard', 2000);
+    setTimeout(() => btn.textContent = label, 2000);
   });
 }
 
-// ═══ Short Link Generator ═══
+function copyUrl() { copyEl('result-url', event.target, 'Copy Full URL'); }
+function copyShort() { copyEl('result-short', event.target, 'Copy Short Link'); }
+function copyRedirect() { copyEl('result-redirect', event.target, 'Copy _redirects Line'); }
+
+// ═══ Short Links Tab — Standalone Generator ═══
 const slFields = ['sl-page', 'sl-src', 'sl-desc', 'sl-campaign', 'sl-content'];
 slFields.forEach(f => {
   const el = document.getElementById(f);
@@ -728,7 +790,7 @@ function copyShortLink() {
   const line = document.getElementById('sl-redirect').textContent;
   if (line === '...') return;
   navigator.clipboard.writeText(line).then(() => {
-    const btn = document.querySelectorAll('.copy-btn')[1];
+    const btn = event.target;
     btn.textContent = 'Copied!';
     setTimeout(() => btn.textContent = 'Copy _redirects Line', 2000);
   });
