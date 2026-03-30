@@ -323,12 +323,12 @@
   <div class="builder">
     <label>Destination Page</label>
     <select id="dest">
-      <option value="https://serviceloop-landing-pages.netlify.app/sle-pricetool/" data-code="pt">/sle-pricetool/ — Pricing Tool</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/leadsnow/" data-code="ln">/leadsnow/ — Leads Now</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/playbook/" data-code="pb">/playbook/ — $1M Playbook</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/webinar/" data-code="wb">/webinar/ — Webinar Registration</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/call/" data-code="cl">/call/ — Strategy Call</option>
-      <option value="https://serviceloop-landing-pages.netlify.app/survey/" data-code="sv">/survey/ — Service Pro Survey</option>
+      <option value="https://go.serviceloopelectrical.com/sle-pricetool/" data-code="pt">/sle-pricetool/ — Pricing Tool</option>
+      <option value="https://go.serviceloopelectrical.com/leadsnow/" data-code="ln">/leadsnow/ — Leads Now</option>
+      <option value="https://go.serviceloopelectrical.com/playbook/" data-code="pb">/playbook/ — $1M Playbook</option>
+      <option value="https://go.serviceloopelectrical.com/webinar/" data-code="wb">/webinar/ — Webinar Registration</option>
+      <option value="https://go.serviceloopelectrical.com/call/" data-code="cl">/call/ — Strategy Call</option>
+      <option value="https://go.serviceloopelectrical.com/survey/" data-code="sv">/survey/ — Service Pro Survey</option>
     </select>
 
     <label>utm_source (Where are they coming from?)</label>
@@ -426,11 +426,13 @@
   <div class="card">
     <h3>GHL Email Sequences (Luigi / Clay)</h3>
     <h4>Where to enter UTMs:</h4>
-    <p>When adding a link inside an email in GHL, use the full tagged URL from the UTM Builder above. GHL does not auto-tag outbound links — you have to include the UTMs in the URL itself.</p>
+    <p>When adding a link inside an email in GHL, use the full tagged URL from the UTM Builder above. GHL does not auto-tag outbound email links — you have to include the UTMs in the URL itself. Use a short link for cleaner emails.</p>
     <h4>Example for AM Morning Coffee Day 12:</h4>
-    <p><code>https://serviceloop-landing-pages.netlify.app/playbook/?utm_source=email&utm_medium=email-am&utm_campaign=morning-coffee-day12</code></p>
+    <p>Full: <code>https://go.serviceloopelectrical.com/sle-pricetool/?utm_source=email&utm_medium=email-am&utm_campaign=morning-coffee-day12</code></p>
+    <p>Short: <code>https://go.serviceloopelectrical.com/r/pt-am-d12</code></p>
     <h4>Example for PM ACDC Chapter 3 Day 2:</h4>
-    <p><code>https://serviceloop-landing-pages.netlify.app/webinar/?utm_source=email&utm_medium=email-pm&utm_campaign=acdc-ch3-day2</code></p>
+    <p>Full: <code>https://go.serviceloopelectrical.com/webinar/?utm_source=email&utm_medium=email-pm&utm_campaign=acdc-ch3-day2</code></p>
+    <p>Short: <code>https://go.serviceloopelectrical.com/r/wb-pm-ch3d2</code></p>
   </div>
 
   <div class="card">
@@ -438,7 +440,7 @@
     <h4>Where to enter UTMs:</h4>
     <p>Paste the full tagged URL directly into video descriptions, pinned comments, or community posts.</p>
     <h4>Example for MDE Episode:</h4>
-    <p><code>https://serviceloop-landing-pages.netlify.app/sle-pricetool/?utm_source=youtube&utm_medium=organic-video&utm_campaign=mde-ep47-pricing</code></p>
+    <p><code>https://go.serviceloopelectrical.com/sle-pricetool/?utm_source=youtube&utm_medium=organic-video&utm_campaign=mde-ep47-pricing</code></p>
   </div>
 
   <div class="card">
@@ -449,12 +451,14 @@
   </div>
 
   <div class="card">
-    <h3>GHL Receiving UTMs (Luigi)</h3>
+    <h3>GHL Pages — Automatic UTM Capture</h3>
     <h4>How GHL captures incoming UTMs:</h4>
-    <p>When a prospect clicks a UTM-tagged link and lands on a landing page, the form JavaScript grabs the UTM values from the URL and sends them as hidden fields in the webhook payload. GHL stores them in custom fields on the contact record.</p>
-    <h4>Required GHL Custom Fields:</h4>
+    <p>Since landing pages are built directly in GHL's page builder, UTM capture is <strong style="color:#4CAF50;">automatic</strong>. When a prospect clicks a UTM-tagged link and lands on a GHL-hosted page, GHL reads the URL parameters and attaches them to the contact record when they submit a form. No webhooks, no hidden fields, no custom JavaScript needed.</p>
+    <h4>What GHL captures automatically:</h4>
     <p><code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_content</code>, <code>utm_term</code></p>
-    <p style="margin-top:8px; color:#999; font-size:12px;">These are already in the GHL Workflow Blueprint checklist. The landing page JavaScript reads URL params and passes them through the webhook. I can update the form code to do this once Luigi provides the webhook URLs.</p>
+    <h4>Where to see it:</h4>
+    <p>Contact record → Attribution tab. UTM data flows directly into GHL reporting and can be used in workflow filters, smart lists, and pipeline reporting.</p>
+    <p style="margin-top:8px; color:#999; font-size:12px;">As long as the UTM parameters are in the URL when the prospect lands on the page, GHL handles the rest. This is why consistent UTM tagging (this guide) matters — GHL will store whatever values you send.</p>
   </div>
 </div>
 
@@ -466,7 +470,7 @@
   <div class="card">
     <h3>Scenario: Meta Ad Pushing Pricing Tool (Paid)</h3>
     <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
-      https://serviceloop-landing-pages.netlify.app/sle-pricetool/?utm_source=meta&utm_medium=paid-social&utm_campaign=pricing-tool-may26&utm_content=video-clay-pricing-rant
+      https://go.serviceloopelectrical.com/sle-pricetool/?utm_source=meta&utm_medium=paid-social&utm_campaign=pricing-tool-may26&utm_content=video-clay-pricing-rant
     </p>
     <p style="margin-top:8px; font-size:13px; color:#999;">Reads as: "This person came from Meta, via a paid social ad, from our May 2026 pricing tool campaign, specifically the video of Clay talking about pricing."</p>
   </div>
@@ -474,42 +478,42 @@
   <div class="card">
     <h3>Scenario: YouTube MDE Episode Description (Organic)</h3>
     <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
-      https://serviceloop-landing-pages.netlify.app/playbook/?utm_source=youtube&utm_medium=organic-video&utm_campaign=mde-ep52-acdc-overview
+      https://go.serviceloopelectrical.com/playbook/?utm_source=youtube&utm_medium=organic-video&utm_campaign=mde-ep52-acdc-overview
     </p>
   </div>
 
   <div class="card">
     <h3>Scenario: PM Email Day 14 (ACDC Chapter 3, Joseph's Options)</h3>
     <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
-      https://serviceloop-landing-pages.netlify.app/webinar/?utm_source=email&utm_medium=email-pm&utm_campaign=acdc-ch3-day2
+      https://go.serviceloopelectrical.com/webinar/?utm_source=email&utm_medium=email-pm&utm_campaign=acdc-ch3-day2
     </p>
   </div>
 
   <div class="card">
     <h3>Scenario: Vista Social Organic Instagram Post</h3>
     <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
-      https://serviceloop-landing-pages.netlify.app/leadsnow/?utm_source=vista-social&utm_medium=organic-social&utm_campaign=leads-now-jun26
+      https://go.serviceloopelectrical.com/leadsnow/?utm_source=vista-social&utm_medium=organic-social&utm_campaign=leads-now-jun26
     </p>
   </div>
 
   <div class="card">
     <h3>Scenario: QR Code on Business Card</h3>
     <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
-      https://serviceloop-landing-pages.netlify.app/sle-pricetool/?utm_source=direct&utm_medium=qr&utm_campaign=business-card-clay
+      https://go.serviceloopelectrical.com/sle-pricetool/?utm_source=direct&utm_medium=qr&utm_campaign=business-card-clay
     </p>
   </div>
 
   <div class="card">
     <h3>Scenario: Hammer Them Retargeting Ad (Meta)</h3>
     <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
-      https://serviceloop-landing-pages.netlify.app/call/?utm_source=meta&utm_medium=paid-social&utm_campaign=hammer-jun26&utm_content=video-social-proof-reel
+      https://go.serviceloopelectrical.com/call/?utm_source=meta&utm_medium=paid-social&utm_campaign=hammer-jun26&utm_content=video-social-proof-reel
     </p>
   </div>
 
   <div class="card">
     <h3>Scenario: Circle Community Post</h3>
     <p style="font-family:'Courier New',monospace; font-size:12px; color:#FDC33E; word-break:break-all; background:#0a0a0a; padding:12px; border-radius:6px; margin-top:8px;">
-      https://serviceloop-landing-pages.netlify.app/webinar/?utm_source=circle&utm_medium=community&utm_campaign=webinar-jul26-joseph
+      https://go.serviceloopelectrical.com/webinar/?utm_source=circle&utm_medium=community&utm_campaign=webinar-jul26-joseph
     </p>
   </div>
 </div>
@@ -544,12 +548,18 @@
       <table>
         <tr><th>Code</th><th>Source</th></tr>
         <tr><td><code>meta</code></td><td>Meta paid ads</td></tr>
+        <tr><td><code>meta-org</code></td><td>Meta organic posts</td></tr>
+        <tr><td><code>gads</code></td><td>Google Ads (search/display)</td></tr>
         <tr><td><code>yt</code></td><td>YouTube organic</td></tr>
         <tr><td><code>am</code></td><td>AM Morning Coffee email</td></tr>
         <tr><td><code>pm</code></td><td>PM ACDC Engine email</td></tr>
         <tr><td><code>vs</code></td><td>Vista Social organic</td></tr>
         <tr><td><code>qr</code></td><td>QR code / direct</td></tr>
         <tr><td><code>circle</code></td><td>Circle community</td></tr>
+        <tr><td><code>podcast</code></td><td>MDE podcast</td></tr>
+        <tr><td><code>linkedin</code></td><td>LinkedIn</td></tr>
+        <tr><td><code>tiktok</code></td><td>TikTok</td></tr>
+        <tr><td><code>ref</code></td><td>Referral / affiliate</td></tr>
       </table>
     </div>
   </div>
@@ -733,7 +743,7 @@ function buildUrl() {
   const destEl = document.getElementById('dest');
   const dest = destEl.value;
   const pageCode = destEl.options[destEl.selectedIndex].dataset.code;
-  const pagePath = dest.replace('https://serviceloop-landing-pages.netlify.app', '');
+  const pagePath = dest.replace('https://go.serviceloopelectrical.com', '');
 
   const srcEl = document.getElementById('src');
   const src = srcEl.value;

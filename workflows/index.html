@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLE GHL Workflow Blueprint</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0A0A0A;
+    color: #FFFFFF;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #0A0A0A 0%, #1B2A45 100%);
+    border-bottom: 2px solid #E3C575;
+    padding: 32px 40px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #E3C575;
+    letter-spacing: -0.5px;
+  }
+  .header p {
+    color: #999;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    background: #111;
+    border-bottom: 1px solid #222;
+    padding: 0 40px;
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 14px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: #ccc; }
+  .tab.active {
+    color: #E3C575;
+    border-bottom-color: #E3C575;
+  }
+
+  .content { padding: 32px 40px; max-width: 1400px; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Cards */
+  .card {
+    background: #141414;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #E3C575;
+    margin-bottom: 12px;
+  }
+  .card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #FDC33E;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+  .card p, .card li {
+    font-size: 14px;
+    color: #ccc;
+  }
+  .card ul { padding-left: 20px; margin-top: 6px; }
+  .card li { margin-bottom: 6px; }
+
+  /* Flow diagram */
+  .flow-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    position: relative;
+  }
+
+  .flow-line {
+    width: 3px;
+    background: #333;
+    margin-left: 18px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .flow-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -7px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #E3C575;
+    border: 3px solid #0A0A0A;
+  }
+  .flow-line.webhook::before { background: #FDC33E; }
+  .flow-line.workflow::before { background: #4CAF50; }
+  .flow-line.tag::before { background: #2196F3; }
+  .flow-line.email::before { background: #FF9800; }
+  .flow-line.pause::before { background: #f44336; }
+  .flow-line.decision::before {
+    background: #9C27B0;
+    border-radius: 3px;
+    transform: rotate(45deg);
+  }
+
+  .flow-content {
+    flex: 1;
+    padding: 12px 0 28px 0;
+  }
+  .flow-content .label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .flow-content .label.webhook { color: #FDC33E; }
+  .flow-content .label.workflow { color: #4CAF50; }
+  .flow-content .label.tag { color: #2196F3; }
+  .flow-content .label.email { color: #FF9800; }
+  .flow-content .label.pause { color: #f44336; }
+  .flow-content .label.decision { color: #9C27B0; }
+  .flow-content .title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .flow-content .desc {
+    font-size: 13px;
+    color: #999;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 13px;
+    border-bottom: 1px solid #222;
+  }
+  th {
+    color: #E3C575;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  td { color: #ccc; }
+  tr:hover td { background: #1a1a1a; }
+
+  /* Tag badges */
+  .tag-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+  }
+  .tag-badge.add { background: #1b3a1b; color: #4CAF50; border: 1px solid #2d5a2d; }
+  .tag-badge.remove { background: #3a1b1b; color: #f44336; border: 1px solid #5a2d2d; }
+  .tag-badge.check { background: #1b2a3a; color: #2196F3; border: 1px solid #2d3d5a; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #111;
+    border-radius: 8px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #999;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Rule callouts */
+  .rule {
+    background: linear-gradient(135deg, #1B2A45 0%, #141414 100%);
+    border-left: 4px solid #E3C575;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .rule strong { color: #E3C575; }
+  .rule p { font-size: 13px; color: #ccc; margin-top: 4px; }
+
+  /* Split layout */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+
+  /* Workflow boxes */
+  .wf-box {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px 0;
+  }
+  .wf-box .wf-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4CAF50;
+    margin-bottom: 6px;
+  }
+  .wf-box .wf-trigger {
+    font-size: 12px;
+    color: #FDC33E;
+    margin-bottom: 8px;
+  }
+  .wf-box ol {
+    padding-left: 20px;
+  }
+  .wf-box li {
+    font-size: 13px;
+    color: #ccc;
+    margin-bottom: 4px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #E3C575;
+    margin-bottom: 16px;
+    margin-top: 8px;
+  }
+
+  .sub-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin: 24px 0 12px 0;
+  }
+
+  code {
+    background: #1a1a2e;
+    color: #FDC33E;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .arrow-down {
+    text-align: center;
+    padding: 8px 0;
+    color: #444;
+    font-size: 20px;
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, #2a1a00 0%, #141414 100%);
+    border: 1px solid #E3C575;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+  }
+  .highlight-box h3 { color: #FDC33E; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GHL Workflow Blueprint</h1>
+  <p>Service Loop Electrical — Funnel Architecture Implementation Guide for GoHighLevel</p>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('overview')">Overview</div>
+  <div class="tab" onclick="showTab('webhooks')">Form Setup</div>
+  <div class="tab" onclick="showTab('workflows')">Workflows (All 9)</div>
+  <div class="tab" onclick="showTab('tags')">Tag Architecture</div>
+  <div class="tab" onclick="showTab('pause')">Pause / Resume Logic</div>
+  <div class="tab" onclick="showTab('pricing')">Flow: Pricing Tool</div>
+  <div class="tab" onclick="showTab('leads')">Flow: Leads Now</div>
+  <div class="tab" onclick="showTab('playbook')">Flow: Playbook</div>
+  <div class="tab" onclick="showTab('webinar')">Flow: Webinar</div>
+  <div class="tab" onclick="showTab('checklist')">GHL Build Checklist</div>
+</div>
+
+<!-- ═══════════════════════════ OVERVIEW ═══════════════════════════ -->
+<div class="content">
+<div class="panel active" id="overview">
+  <div class="section-title">How The Funnel Talks to GHL</div>
+
+  <div class="highlight-box">
+    <h3>The Big Picture</h3>
+    <p style="color:#ccc; margin-top:8px;">Three landing pages are built directly in GHL's page builder. Each has a form. When someone submits a form, GHL <strong style="color:#4CAF50">automatically creates the contact</strong> and captures UTM data from the URL. A <strong style="color:#4CAF50">workflow</strong> triggers on form submission, applies <strong style="color:#2196F3">tags</strong>, and enrolls them into the right <strong style="color:#FF9800">email sequence</strong>. The PM engine (levelup@) uses tags to pause and resume sequences so that only ONE PM sequence runs at a time.</p>
+  </div>
+
+  <div class="rule">
+    <strong>THE ONE RULE:</strong>
+    <p>Only ONE PM sequence (levelup@) runs at any time. The AM sequence (cneumeyer@) NEVER pauses, NEVER stops. It runs for 250 days regardless of what happens on the PM side.</p>
+  </div>
+
+  <div class="card">
+    <h3>Three Entry Points → Three GHL Forms</h3>
+    <table>
+      <tr><th>Landing Page</th><th>URL</th><th>Workflow Trigger</th><th>What Happens</th></tr>
+      <tr>
+        <td><strong style="color:#fff">Pricing Tool</strong></td>
+        <td><code>go.serviceloopelectrical.com/sle-pricetool/</code></td>
+        <td><code>Form: Pricing Tool Submitted</code></td>
+        <td>Create contact → Start PM Pricing On-Ramp (7 days) + AM Morning Coffee</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#fff">Leads Now</strong></td>
+        <td><code>go.serviceloopelectrical.com/leadsnow/</code></td>
+        <td><code>Form: Leads Now Submitted</code></td>
+        <td>Create contact → Start PM Leads Now On-Ramp (7 days) + AM Morning Coffee</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#fff">$1M Playbook</strong></td>
+        <td><code>go.serviceloopelectrical.com/playbook/</code> (future)</td>
+        <td><code>Form: Playbook Submitted</code></td>
+        <td>Create contact → Deliver playbook → Start PM ACDC Journey (45 days) + AM Morning Coffee</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Two Email Senders (Never Confused)</h3>
+    <div class="split">
+      <div class="wf-box">
+        <div class="wf-name" style="color:#E3C575;">AM: cneumeyer@serviceloopelectrical.com</div>
+        <div class="wf-trigger">Morning Coffee — Clay's Voice — 250 Days</div>
+        <ul>
+          <li>Starts on first opt-in, runs forever</li>
+          <li>Personal, story, identity, trust building</li>
+          <li>Rarely has a CTA</li>
+          <li><strong style="color:#FDC33E">NEVER pauses. NEVER stops. NEVER references PM content.</strong></li>
+        </ul>
+      </div>
+      <div class="wf-box">
+        <div class="wf-name" style="color:#FF9800;">PM: levelup@serviceloopelectrical.com</div>
+        <div class="wf-trigger">The Engine — 7:28 PM EST — Pause/Resume Logic</div>
+        <ul>
+          <li>On-Ramps → Playbook → ACDC Journey → Webinar → Hammer → Sold Out</li>
+          <li>Only ONE sequence active at a time</li>
+          <li>Most recent action = highest priority</li>
+          <li><strong style="color:#f44336">Tags control pause/resume</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The Full PM Sequence Chain</h3>
+    <div style="font-family: 'Courier New', monospace; font-size: 13px; color: #ccc; line-height: 2; padding: 16px; background: #0a0a0a; border-radius: 8px;">
+      <span style="color:#FDC33E">ENTRY:</span> Pricing Tool OR Leads Now opt-in<br>
+      &nbsp;&nbsp;→ <span style="color:#FF9800">On-Ramp</span> (7 days, tool-specific)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;→ Day 7: Deliver $1M Playbook<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;→ <span style="color:#FF9800">ACDC Journey</span> (45 days, 9 chapters × 5 days)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ <span style="color:#f44336">IF</span> they grab 2nd lead magnet: <span style="color:#f44336">PAUSE</span> → run 2nd On-Ramp (7 days) → <span style="color:#4CAF50">RESUME</span> ACDC<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ <span style="color:#f44336">IF</span> they buy $97 webinar: <span style="color:#f44336">PAUSE</span> → run Taki Deadline (7 days) → <span style="color:#4CAF50">RESUME</span> ACDC<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;→ Journey complete<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;→ <span style="color:#FF9800">Evening Fill / Sold Out / Webinar Promos</span><br>
+      <br>
+      <span style="color:#9C27B0">ANYTIME:</span> If they book a strategy call → <span style="color:#f44336">PAUSE all PM</span> → run Pre-Call Sequence → post-call: Hammer Them or Enrolled
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ WEBHOOKS ═══════════════════════════ -->
+<div class="panel" id="webhooks">
+  <div class="section-title">GHL Form Configuration</div>
+  <p style="color:#999; margin-bottom:20px;">Each landing page is built in GHL's page builder with a native form. GHL automatically creates the contact on submission and captures UTMs from the URL. Each form triggers a workflow.</p>
+
+  <div class="card">
+    <h3>Form #1: Pricing Tool Opt-In</h3>
+    <h4>GHL Page</h4>
+    <p><code>go.serviceloopelectrical.com/sle-pricetool/</code> — built in GHL page builder</p>
+    <h4>Form Fields</h4>
+    <table>
+      <tr><th>Form Field</th><th>GHL Contact Field</th><th>Required</th></tr>
+      <tr><td>First Name</td><td>contact.firstName</td><td>Yes</td></tr>
+      <tr><td>Last Name</td><td>contact.lastName</td><td>Yes</td></tr>
+      <tr><td>Email</td><td>contact.email</td><td>Yes</td></tr>
+      <tr><td>Phone</td><td>contact.phone</td><td>Yes</td></tr>
+      <tr><td>Company Name</td><td>contact.companyName</td><td>Yes</td></tr>
+      <tr><td>Years in Business</td><td>Custom: years_in_business</td><td>Yes</td></tr>
+      <tr><td>Team Size</td><td>Custom: team_size</td><td>Yes</td></tr>
+      <tr><td>Annual Revenue</td><td>Custom: annual_revenue</td><td>Yes</td></tr>
+    </table>
+    <h4>Automatic UTM Capture</h4>
+    <p style="color:#ccc;">GHL captures UTMs automatically from the page URL. No hidden fields needed. As long as the visitor arrives with UTM parameters in the URL (via tagged links or short links from the <a href="/utmguide/" style="color:#E3C575;">UTM Guide</a>), they are stored on the contact record.</p>
+    <h4>Workflow Trigger</h4>
+    <p>Form Submitted: "Pricing Tool" → fires <strong>WF-1</strong></p>
+    <p style="margin-top:4px; font-size:12px; color:#999;">Set <code>lead_source</code> = "pricing-tool" via workflow action (not a form field).</p>
+  </div>
+
+  <div class="card">
+    <h3>Form #2: Leads Now Opt-In</h3>
+    <h4>GHL Page</h4>
+    <p><code>go.serviceloopelectrical.com/leadsnow/</code></p>
+    <h4>Form Fields</h4>
+    <p>Same 8 fields as Pricing Tool (firstName, lastName, email, phone, companyName, years_in_business, team_size, annual_revenue).</p>
+    <h4>Difference</h4>
+    <p>Workflow sets <code>lead_source</code> = <strong>"leads-now"</strong></p>
+  </div>
+
+  <div class="card">
+    <h3>Form #3: $1M Playbook Download (Future)</h3>
+    <h4>GHL Page</h4>
+    <p><code>go.serviceloopelectrical.com/playbook/</code> (not yet built)</p>
+    <h4>Form Fields</h4>
+    <p>Same structure. Workflow sets <code>lead_source</code> = <strong>"playbook"</strong></p>
+    <h4>Key Difference</h4>
+    <p>This is a <strong>direct-to-playbook</strong> entry. Skips on-ramp, goes straight to ACDC journey. Contact may already exist (grabbed a tool first). GHL deduplicates by email automatically.</p>
+  </div>
+
+  <div class="rule">
+    <strong>FORM SETUP NOTE:</strong>
+    <p>In GHL page builder: create the form, map fields to contact properties, and set the form's "On Submit" action to trigger the corresponding workflow. GHL handles contact creation, deduplication, and UTM attribution natively — no external webhooks or custom JavaScript required.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ WORKFLOWS ═══════════════════════════ -->
+<div class="panel" id="workflows">
+  <div class="section-title">All 9 GHL Workflows</div>
+  <p style="color:#999; margin-bottom:20px;">Each workflow is a separate automation in GHL. They fire from webhooks, tags, or manual triggers.</p>
+
+  <div class="wf-box" style="border-color:#FDC33E;">
+    <div class="wf-name">WF-1: Pricing Tool Entry</div>
+    <div class="wf-trigger">Trigger: Form Submitted — Pricing Tool</div>
+    <ol>
+      <li>Create or update contact with form data + UTMs</li>
+      <li>Add tag: <span class="tag-badge add">source-pricing-tool</span></li>
+      <li>Add tag: <span class="tag-badge add">seq-pricing-active</span></li>
+      <li>Check: Does contact already have <span class="tag-badge check">seq-am-active</span>?</li>
+      <li style="padding-left:20px;">→ NO: Add tag <span class="tag-badge add">seq-am-active</span> + enroll in AM Morning Coffee sequence</li>
+      <li style="padding-left:20px;">→ YES: Do nothing (AM already running, never restart)</li>
+      <li>Check: Does contact have any other <code>seq-*-active</code> tags?</li>
+      <li style="padding-left:20px;">→ YES: Fire <strong>WF-8: Pause Current PM</strong> first, then enroll in Pricing On-Ramp</li>
+      <li style="padding-left:20px;">→ NO: Enroll in PM Pricing Tool On-Ramp sequence (7 emails, 7 days)</li>
+      <li>Add to Meta Custom Audience: "All SLE Leads"</li>
+      <li>Internal notification to sales team (Slack or GHL notification)</li>
+    </ol>
+  </div>
+
+  <div class="wf-box" style="border-color:#FDC33E;">
+    <div class="wf-name">WF-2: Leads Now Entry</div>
+    <div class="wf-trigger">Trigger: Form Submitted — Leads Now</div>
+    <ol>
+      <li>Create or update contact with form data + UTMs</li>
+      <li>Add tag: <span class="tag-badge add">source-leads-now</span></li>
+      <li>Add tag: <span class="tag-badge add">seq-leads-active</span></li>
+      <li>Check: Does contact already have <span class="tag-badge check">seq-am-active</span>?</li>
+      <li style="padding-left:20px;">→ NO: Add <span class="tag-badge add">seq-am-active</span> + enroll AM Morning Coffee</li>
+      <li style="padding-left:20px;">→ YES: Skip (AM never restarts)</li>
+      <li>Check: Any other <code>seq-*-active</code> PM tags?</li>
+      <li style="padding-left:20px;">→ YES: Fire <strong>WF-8: Pause Current PM</strong>, then enroll PM Leads Now On-Ramp</li>
+      <li style="padding-left:20px;">→ NO: Enroll in PM Leads Now On-Ramp sequence (7 emails, 7 days)</li>
+      <li>Add to Meta Custom Audience: "All SLE Leads"</li>
+    </ol>
+  </div>
+
+  <div class="wf-box" style="border-color:#4CAF50;">
+    <div class="wf-name">WF-3: On-Ramp Complete → Playbook + ACDC</div>
+    <div class="wf-trigger">Trigger: Tag added: <code>seq-pricing-complete</code> OR <code>seq-leads-complete</code></div>
+    <ol>
+      <li>Remove tag: <span class="tag-badge remove">seq-pricing-active</span> or <span class="tag-badge remove">seq-leads-active</span></li>
+      <li>Deliver $1M Playbook (email with download link)</li>
+      <li>Add tag: <span class="tag-badge add">playbook-delivered</span></li>
+      <li>Wait 1 day</li>
+      <li>Add tag: <span class="tag-badge add">seq-acdc-active</span></li>
+      <li>Enroll in PM ACDC Journey sequence (45 emails, 45 days)</li>
+      <li>Add to Meta Custom Audience: "Playbook Recipients"</li>
+    </ol>
+  </div>
+
+  <div class="wf-box" style="border-color:#4CAF50;">
+    <div class="wf-name">WF-4: Playbook Direct Entry</div>
+    <div class="wf-trigger">Trigger: Form Submitted — Playbook — FUTURE BUILD</div>
+    <ol>
+      <li>Create or update contact</li>
+      <li>Add tag: <span class="tag-badge add">source-playbook</span></li>
+      <li>Deliver playbook immediately</li>
+      <li>Add tag: <span class="tag-badge add">playbook-delivered</span></li>
+      <li>Check: AM running? → Same AM logic as WF-1/WF-2</li>
+      <li>Check: Any active PM sequence?</li>
+      <li style="padding-left:20px;">→ YES: Fire <strong>WF-8: Pause Current PM</strong></li>
+      <li>Wait 1 day → Add <span class="tag-badge add">seq-acdc-active</span> → Enroll ACDC Journey</li>
+    </ol>
+  </div>
+
+  <div class="wf-box" style="border-color:#9C27B0;">
+    <div class="wf-name">WF-5: Webinar Purchase ($97)</div>
+    <div class="wf-trigger">Trigger: Tag added: <code>purchased-webinar</code> (from payment processor / manual)</div>
+    <ol>
+      <li>Fire <strong>WF-8: Pause Current PM</strong> (pauses whatever is running)</li>
+      <li>Add tag: <span class="tag-badge add">seq-taki-active</span></li>
+      <li>Enroll in PM Taki 7-Day Deadline sequence (7 emails)</li>
+      <li>Store current ACDC position in custom field: <code>acdc_resume_day</code></li>
+      <li>Add to Meta Custom Audience: "Webinar Buyers"</li>
+    </ol>
+  </div>
+
+  <div class="wf-box" style="border-color:#9C27B0;">
+    <div class="wf-name">WF-6: Taki / Webinar Complete → Resume or Next</div>
+    <div class="wf-trigger">Trigger: Tag added: <code>seq-taki-complete</code></div>
+    <ol>
+      <li>Remove tag: <span class="tag-badge remove">seq-taki-active</span></li>
+      <li>Check: Does contact have <span class="tag-badge check">seq-acdc-paused</span>?</li>
+      <li style="padding-left:20px;">→ YES: Remove <span class="tag-badge remove">seq-acdc-paused</span> → Add <span class="tag-badge add">seq-acdc-active</span> → Resume ACDC at stored day</li>
+      <li style="padding-left:20px;">→ NO: Move to evening fill / sold out promos</li>
+    </ol>
+  </div>
+
+  <div class="wf-box" style="border-color:#f44336;">
+    <div class="wf-name">WF-7: Strategy Call Booked</div>
+    <div class="wf-trigger">Trigger: Tag added: <code>call-booked</code> (from calendar booking)</div>
+    <ol>
+      <li>Fire <strong>WF-8: Pause Current PM</strong></li>
+      <li>Add tag: <span class="tag-badge add">seq-precall-active</span></li>
+      <li>Enroll in PM Pre-Call Sequence (5 emails)</li>
+      <li>Add to Meta Custom Audience: "Call Booked"</li>
+      <li>Internal notification: Strategy call booked for [name] on [date]</li>
+    </ol>
+  </div>
+
+  <div class="wf-box" style="border-color:#f44336;">
+    <div class="wf-name">WF-8: Pause Current PM Sequence (UTILITY)</div>
+    <div class="wf-trigger">Trigger: Called by other workflows (not standalone)</div>
+    <ol>
+      <li>Check all PM active tags: <code>seq-pricing-active</code>, <code>seq-leads-active</code>, <code>seq-acdc-active</code>, <code>seq-taki-active</code>, <code>seq-precall-active</code>, <code>seq-hammer-active</code></li>
+      <li>For whichever is active:
+        <ul>
+          <li>Remove the <code>-active</code> tag</li>
+          <li>Add the corresponding <code>-paused</code> tag (e.g., <span class="tag-badge add">seq-acdc-paused</span>)</li>
+          <li>Store current day/position in custom field</li>
+          <li>Remove contact from that email sequence (unenroll)</li>
+        </ul>
+      </li>
+      <li>This workflow runs BEFORE the new sequence enrollment</li>
+    </ol>
+  </div>
+
+  <div class="wf-box" style="border-color:#FF9800;">
+    <div class="wf-name">WF-9: Post-Call Outcome</div>
+    <div class="wf-trigger">Trigger: Tag added: <code>call-completed</code> (manual by sales team)</div>
+    <ol>
+      <li>Check: Did they enroll?</li>
+      <li style="padding-left:20px;">→ YES (<span class="tag-badge check">enrolled-leadsurge</span> or <span class="tag-badge check">enrolled-servicesurge</span>): Remove ALL PM sequence tags. Add <span class="tag-badge add">partner-active</span>. Stop PM engine. AM continues.</li>
+      <li style="padding-left:20px;">→ NO (<span class="tag-badge check">call-no-sale</span>): Add <span class="tag-badge add">seq-hammer-active</span> → Enroll Hammer Them sequence (12 emails, 4 days, 3/day)</li>
+      <li>After Hammer complete: Add <span class="tag-badge add">seq-soldout-active</span> → Sold Out sequence (7 emails, monthly re-engagement)</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ TAGS ═══════════════════════════ -->
+<div class="panel" id="tags">
+  <div class="section-title">Complete Tag Architecture</div>
+  <p style="color:#999; margin-bottom:20px;">Tags are the nervous system. They control what sequence runs, what pauses, and what the sales team sees. Create ALL of these in GHL before building workflows.</p>
+
+  <div class="card">
+    <h3>Source Tags (Where They Came From)</h3>
+    <table>
+      <tr><th>Tag</th><th>Applied When</th><th>Removed</th></tr>
+      <tr><td><code>source-pricing-tool</code></td><td>Opted in via Pricing Tool page</td><td>Never</td></tr>
+      <tr><td><code>source-leads-now</code></td><td>Opted in via Leads Now page</td><td>Never</td></tr>
+      <tr><td><code>source-playbook</code></td><td>Opted in via Playbook page (future)</td><td>Never</td></tr>
+    </table>
+    <p style="margin-top:12px; font-size:12px; color:#666;">Note: A contact can have MULTIPLE source tags if they grab more than one lead magnet.</p>
+  </div>
+
+  <div class="card">
+    <h3>Sequence Status Tags (The Engine)</h3>
+    <table>
+      <tr><th>Active Tag</th><th>Paused Tag</th><th>Complete Tag</th><th>Sequence</th></tr>
+      <tr>
+        <td><span class="tag-badge add">seq-am-active</span></td>
+        <td>—</td>
+        <td><span class="tag-badge check">seq-am-complete</span></td>
+        <td>AM Morning Coffee (250 days)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge add">seq-pricing-active</span></td>
+        <td><span class="tag-badge remove">seq-pricing-paused</span></td>
+        <td><span class="tag-badge check">seq-pricing-complete</span></td>
+        <td>PM Pricing On-Ramp (7 days)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge add">seq-leads-active</span></td>
+        <td><span class="tag-badge remove">seq-leads-paused</span></td>
+        <td><span class="tag-badge check">seq-leads-complete</span></td>
+        <td>PM Leads Now On-Ramp (7 days)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge add">seq-acdc-active</span></td>
+        <td><span class="tag-badge remove">seq-acdc-paused</span></td>
+        <td><span class="tag-badge check">seq-acdc-complete</span></td>
+        <td>PM ACDC Journey (45 days)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge add">seq-taki-active</span></td>
+        <td><span class="tag-badge remove">seq-taki-paused</span></td>
+        <td><span class="tag-badge check">seq-taki-complete</span></td>
+        <td>PM Taki Deadline (7 days)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge add">seq-precall-active</span></td>
+        <td>—</td>
+        <td><span class="tag-badge check">seq-precall-complete</span></td>
+        <td>PM Pre-Call (5 emails)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge add">seq-hammer-active</span></td>
+        <td>—</td>
+        <td><span class="tag-badge check">seq-hammer-complete</span></td>
+        <td>PM Hammer Them (12 emails, 4 days)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-badge add">seq-soldout-active</span></td>
+        <td>—</td>
+        <td><span class="tag-badge check">seq-soldout-complete</span></td>
+        <td>PM Sold Out (7 emails, monthly)</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Milestone Tags</h3>
+    <table>
+      <tr><th>Tag</th><th>Applied When</th><th>Used By</th></tr>
+      <tr><td><code>playbook-delivered</code></td><td>$1M Playbook sent</td><td>WF-3, prevents double-delivery</td></tr>
+      <tr><td><code>purchased-webinar</code></td><td>Buys $97 webinar ticket</td><td>WF-5, triggers Taki deadline</td></tr>
+      <tr><td><code>call-booked</code></td><td>Books strategy call</td><td>WF-7, triggers pre-call sequence</td></tr>
+      <tr><td><code>call-completed</code></td><td>Strategy call happened</td><td>WF-9, triggers outcome routing</td></tr>
+      <tr><td><code>call-no-sale</code></td><td>Call but didn't enroll</td><td>WF-9, triggers Hammer Them</td></tr>
+      <tr><td><code>enrolled-leadsurge</code></td><td>Enrolled in Leadsurge</td><td>WF-9, stops PM engine</td></tr>
+      <tr><td><code>enrolled-servicesurge</code></td><td>Enrolled in Service Surge</td><td>WF-9, stops PM engine</td></tr>
+      <tr><td><code>partner-active</code></td><td>Actively in a program</td><td>Excludes from prospect sequences</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Custom Fields (Required in GHL)</h3>
+    <table>
+      <tr><th>Field Name</th><th>Type</th><th>Purpose</th></tr>
+      <tr><td><code>years_in_business</code></td><td>Dropdown</td><td>From form: 0-2, 3-5, 5-10, 10+</td></tr>
+      <tr><td><code>team_size</code></td><td>Dropdown</td><td>From form: Solo, 2-5, 6-10, 10+</td></tr>
+      <tr><td><code>annual_revenue</code></td><td>Dropdown</td><td>From form: Under $250K, $250K-$500K, $500K-$1M, $1M+</td></tr>
+      <tr><td><code>lead_source</code></td><td>Text</td><td>pricing-tool, leads-now, playbook</td></tr>
+      <tr><td><code>acdc_resume_day</code></td><td>Number</td><td>Stores which day to resume ACDC after a pause</td></tr>
+      <tr><td><code>utm_source</code></td><td>Text</td><td>Ad platform tracking</td></tr>
+      <tr><td><code>utm_medium</code></td><td>Text</td><td>Ad medium tracking</td></tr>
+      <tr><td><code>utm_campaign</code></td><td>Text</td><td>Campaign tracking</td></tr>
+      <tr><td><code>utm_content</code></td><td>Text</td><td>Ad creative tracking</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ PAUSE/RESUME ═══════════════════════════ -->
+<div class="panel" id="pause">
+  <div class="section-title">Pause / Resume Logic (The Hard Part)</div>
+
+  <div class="highlight-box">
+    <h3>Why This Matters</h3>
+    <p style="color:#ccc; margin-top:8px;">The #1 risk in this funnel is a contact getting two PM emails in one evening. That breaks trust. The pause/resume system prevents it. Every time a new PM action happens, the current PM sequence must stop, store its position, and hand off. When the interruption is done, the original sequence resumes where it left off.</p>
+  </div>
+
+  <div class="card">
+    <h3>Scenario 1: Contact grabs second lead magnet mid-ACDC</h3>
+    <div class="flow-container">
+      <div class="flow-step">
+        <div class="flow-line email"></div>
+        <div class="flow-content">
+          <div class="label email">Day 18 of ACDC</div>
+          <div class="title">Contact is receiving ACDC Chapter 4 emails</div>
+          <div class="desc">Tag active: <code>seq-acdc-active</code></div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line webhook"></div>
+        <div class="flow-content">
+          <div class="label webhook">Webhook fires</div>
+          <div class="title">Contact opts in for Leads Now (already had Pricing Tool)</div>
+          <div class="desc">WF-2 fires → detects <code>seq-acdc-active</code> → calls WF-8</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line pause"></div>
+        <div class="flow-content">
+          <div class="label pause">WF-8: Pause</div>
+          <div class="title">ACDC paused at Day 18</div>
+          <div class="desc">Remove <code>seq-acdc-active</code> → Add <code>seq-acdc-paused</code> → Store <code>acdc_resume_day = 18</code> → Unenroll from ACDC sequence</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line email"></div>
+        <div class="flow-content">
+          <div class="label email">New sequence starts</div>
+          <div class="title">Leads Now On-Ramp (7 days)</div>
+          <div class="desc">Tag: <code>seq-leads-active</code> — Contact gets Leads Now content for 7 days</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line tag"></div>
+        <div class="flow-content">
+          <div class="label tag">Day 7 complete</div>
+          <div class="title">On-Ramp finishes → WF-3 fires</div>
+          <div class="desc">Add <code>seq-leads-complete</code> → Remove <code>seq-leads-active</code> → Detect <code>seq-acdc-paused</code></div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line workflow"></div>
+        <div class="flow-content">
+          <div class="label workflow">Resume</div>
+          <div class="title">ACDC resumes at Day 18</div>
+          <div class="desc">Remove <code>seq-acdc-paused</code> → Add <code>seq-acdc-active</code> → Re-enroll in ACDC starting at email 18. Playbook NOT re-delivered (already has <code>playbook-delivered</code> tag).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Scenario 2: Contact buys webinar mid-ACDC</h3>
+    <div class="flow-container">
+      <div class="flow-step">
+        <div class="flow-line email"></div>
+        <div class="flow-content">
+          <div class="label email">Day 30 of ACDC</div>
+          <div class="title">Contact is in Chapter 7 (Reputation)</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line webhook"></div>
+        <div class="flow-content">
+          <div class="label webhook">Purchase event</div>
+          <div class="title">Buys $97 webinar ticket</div>
+          <div class="desc">Payment processor adds <code>purchased-webinar</code> tag → WF-5 fires</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line pause"></div>
+        <div class="flow-content">
+          <div class="label pause">Pause ACDC</div>
+          <div class="title">Store Day 30, unenroll from ACDC</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line email"></div>
+        <div class="flow-content">
+          <div class="label email">Taki Deadline</div>
+          <div class="title">7-day urgency sequence (webinar is coming)</div>
+          <div class="desc"><code>seq-taki-active</code> — countdown, what to expect, show up reminders</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line workflow"></div>
+        <div class="flow-content">
+          <div class="label workflow">Resume</div>
+          <div class="title">Taki complete → ACDC resumes at Day 30</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Scenario 3: Contact books a strategy call</h3>
+    <div class="flow-container">
+      <div class="flow-step">
+        <div class="flow-line webhook"></div>
+        <div class="flow-content">
+          <div class="label webhook">Calendar event</div>
+          <div class="title">Contact books strategy call (any point in funnel)</div>
+          <div class="desc"><code>call-booked</code> tag added → WF-7 fires → WF-8 pauses whatever is running</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line email"></div>
+        <div class="flow-content">
+          <div class="label email">Pre-Call Sequence</div>
+          <div class="title">5 emails: what to expect, prep materials, social proof</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line decision"></div>
+        <div class="flow-content">
+          <div class="label decision">Decision point</div>
+          <div class="title">Call happens — two outcomes</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line workflow"></div>
+        <div class="flow-content">
+          <div class="label workflow">Outcome A: Enrolled</div>
+          <div class="title">Tag: <code>enrolled-leadsurge</code> or <code>enrolled-servicesurge</code></div>
+          <div class="desc">All PM sequences stop permanently. <code>partner-active</code> applied. AM Morning Coffee continues (they're now a partner, but still get Clay's daily email).</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line pause"></div>
+        <div class="flow-content">
+          <div class="label pause">Outcome B: No Sale</div>
+          <div class="title">Tag: <code>call-no-sale</code> → Hammer Them (12 emails, 4 days)</div>
+          <div class="desc">After Hammer: → Sold Out sequence (monthly re-engagement). They re-enter the top of the PM chain at a lower frequency.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <strong>GHL IMPLEMENTATION TIP:</strong>
+    <p>The "resume at specific day" feature is the trickiest part. In GHL, you can use a custom field (<code>acdc_resume_day</code>) combined with an IF/ELSE branch at the start of the ACDC workflow, OR build 45 separate "resume at day X" entry points. The custom field approach is cleaner. Ask Luigi which method he prefers — both work.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ FLOW: PRICING TOOL ═══════════════════════════ -->
+<div class="panel" id="pricing">
+  <div class="section-title">Complete Flow: Pricing Tool Entry</div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#FDC33E"></div> Webhook / Trigger</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4CAF50"></div> Workflow Action</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2196F3"></div> Tag Change</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FF9800"></div> Email Sequence</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f44336"></div> Pause Event</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#9C27B0; border-radius:3px; transform:rotate(45deg)"></div> Decision</div>
+  </div>
+
+  <div class="card">
+    <div class="flow-container">
+      <div class="flow-step"><div class="flow-line webhook"></div><div class="flow-content"><div class="label webhook">Form Submit</div><div class="title">Prospect submits Pricing Tool form</div><div class="desc">8 fields captured. GHL auto-captures UTMs from URL.</div></div></div>
+      <div class="flow-step"><div class="flow-line workflow"></div><div class="flow-content"><div class="label workflow">WF-1 Fires</div><div class="title">Create/update contact in GHL</div><div class="desc">Map all fields. Check for existing contact by email.</div></div></div>
+      <div class="flow-step"><div class="flow-line tag"></div><div class="flow-content"><div class="label tag">Tags Applied</div><div class="title"><span class="tag-badge add">source-pricing-tool</span> <span class="tag-badge add">seq-pricing-active</span> <span class="tag-badge add">seq-am-active</span></div></div></div>
+      <div class="flow-step"><div class="flow-line email"></div><div class="flow-content"><div class="label email">Email: PM On-Ramp Day 1</div><div class="title">"Your pricing tool is here. Start with Tab 0."</div><div class="desc">Delivers SSR Spreadsheet + Pricing Guide PDF. Clay's voice.</div></div></div>
+      <div class="flow-step"><div class="flow-line email"></div><div class="flow-content"><div class="label email">Email: AM Day 1</div><div class="title">First Morning Coffee email</div><div class="desc">Clay's personal email. Runs in parallel. Different sender.</div></div></div>
+      <div class="flow-step"><div class="flow-line email"></div><div class="flow-content"><div class="label email">Days 2-7: PM On-Ramp continues</div><div class="title">7 emails total: delivery → insight → deep dive → community → proof → bridge → handoff</div><div class="desc">Each email at 7:28 PM EST from levelup@</div></div></div>
+      <div class="flow-step"><div class="flow-line tag"></div><div class="flow-content"><div class="label tag">Day 7 Complete</div><div class="title">Tag: <span class="tag-badge add">seq-pricing-complete</span> → Remove <span class="tag-badge remove">seq-pricing-active</span></div><div class="desc">WF-3 fires automatically</div></div></div>
+      <div class="flow-step"><div class="flow-line workflow"></div><div class="flow-content"><div class="label workflow">WF-3: Playbook Delivery</div><div class="title">$1M Playbook delivered via email</div><div class="desc">Tag: <span class="tag-badge add">playbook-delivered</span></div></div></div>
+      <div class="flow-step"><div class="flow-line email"></div><div class="flow-content"><div class="label email">Day 8+: ACDC Journey Begins</div><div class="title">45 days. 9 chapters × 5 emails each.</div><div class="desc">Tag: <span class="tag-badge add">seq-acdc-active</span>. Voice rotates by chapter owner (Clay → Forrest → Joseph → Joseph → Joseph → Forrest → Clay → Clay → Forrest).</div></div></div>
+      <div class="flow-step"><div class="flow-line tag"></div><div class="flow-content"><div class="label tag">Day 52: ACDC Complete</div><div class="title"><span class="tag-badge add">seq-acdc-complete</span></div><div class="desc">Contact moves to evening fill / webinar promos / sold out rotation</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ FLOW: LEADS NOW ═══════════════════════════ -->
+<div class="panel" id="leads">
+  <div class="section-title">Complete Flow: Leads Now Entry</div>
+  <div class="card">
+    <p style="margin-bottom:16px; color:#ccc;">Identical structure to Pricing Tool, with these differences:</p>
+    <table>
+      <tr><th>Element</th><th>Pricing Tool</th><th>Leads Now</th></tr>
+      <tr><td>Webhook</td><td>GHL Webhook #1</td><td>GHL Webhook #2</td></tr>
+      <tr><td>Source Tag</td><td><code>source-pricing-tool</code></td><td><code>source-leads-now</code></td></tr>
+      <tr><td>Active Tag</td><td><code>seq-pricing-active</code></td><td><code>seq-leads-active</code></td></tr>
+      <tr><td>Complete Tag</td><td><code>seq-pricing-complete</code></td><td><code>seq-leads-complete</code></td></tr>
+      <tr><td>On-Ramp Voice</td><td>Clay (Pricing/Chapter 1)</td><td>Forrest (Leads/Chapter 2)</td></tr>
+      <tr><td>On-Ramp Content</td><td>SSR tool walkthrough, pricing mindset</td><td>Lead gen strategy, Google/LSA/Reviews</td></tr>
+      <tr><td>lead_source field</td><td>"pricing-tool"</td><td>"leads-now"</td></tr>
+    </table>
+    <p style="margin-top:16px; color:#ccc;">After on-ramp completes, both paths merge into the same WF-3 → Playbook Delivery → ACDC Journey. The rest of the funnel is identical.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ FLOW: PLAYBOOK ═══════════════════════════ -->
+<div class="panel" id="playbook">
+  <div class="section-title">Complete Flow: $1M Playbook Direct Entry</div>
+  <div class="card">
+    <h3>Future Build — Not Live Yet</h3>
+    <p style="color:#ccc; margin-bottom:16px;">This page doesn't exist yet, but the GHL workflow should be pre-built so it's ready when the page launches.</p>
+
+    <div class="flow-container">
+      <div class="flow-step"><div class="flow-line webhook"></div><div class="flow-content"><div class="label webhook">Webhook</div><div class="title">Prospect submits Playbook page form</div><div class="desc">Same 8 fields. GHL auto-captures UTMs. Workflow sets <code>lead_source = "playbook"</code></div></div></div>
+      <div class="flow-step"><div class="flow-line decision"></div><div class="flow-content"><div class="label decision">Decision</div><div class="title">Does contact already exist?</div><div class="desc">Check by email. They may have already grabbed Pricing Tool or Leads Now.</div></div></div>
+      <div class="flow-step"><div class="flow-line workflow"></div><div class="flow-content"><div class="label workflow">New contact</div><div class="title">Create contact + apply <span class="tag-badge add">source-playbook</span> + start AM</div></div></div>
+      <div class="flow-step"><div class="flow-line workflow"></div><div class="flow-content"><div class="label workflow">Existing contact</div><div class="title">Add <span class="tag-badge add">source-playbook</span> + pause current PM (WF-8)</div><div class="desc">They already have AM running — don't restart it</div></div></div>
+      <div class="flow-step"><div class="flow-line tag"></div><div class="flow-content"><div class="label tag">Deliver Playbook</div><div class="title">Check for <code>playbook-delivered</code> tag first</div><div class="desc">If already delivered: skip. If not: deliver + add tag.</div></div></div>
+      <div class="flow-step"><div class="flow-line email"></div><div class="flow-content"><div class="label email">Skip On-Ramp</div><div class="title">Go straight to ACDC Journey</div><div class="desc">No 7-day on-ramp. They asked for the playbook directly. Start ACDC Day 1.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ FLOW: WEBINAR ═══════════════════════════ -->
+<div class="panel" id="webinar">
+  <div class="section-title">Complete Flow: Webinar Purchase</div>
+  <div class="card">
+    <h3>$97 Webinar — The "Elevator" Path</h3>
+    <p style="color:#ccc; margin-bottom:16px;">The webinar is the accelerator. People in the ACDC journey see offers for the monthly $97 webinar. If they buy, we pause ACDC, run a 7-day urgency sequence, then resume ACDC after.</p>
+
+    <div class="flow-container">
+      <div class="flow-step"><div class="flow-line webhook"></div><div class="flow-content"><div class="label webhook">Purchase Event</div><div class="title">$97 payment confirmed</div><div class="desc">Payment processor (Stripe/Circle) fires webhook or adds <code>purchased-webinar</code> tag manually</div></div></div>
+      <div class="flow-step"><div class="flow-line pause"></div><div class="flow-content"><div class="label pause">WF-8: Pause Current PM</div><div class="title">ACDC paused, day stored</div></div></div>
+      <div class="flow-step"><div class="flow-line email"></div><div class="flow-content"><div class="label email">Taki 7-Day Deadline</div><div class="title">7 urgency emails leading to webinar date</div><div class="desc">What to expect, prep homework, social proof, reminder, day-of reminder, last chance, post-webinar follow-up</div></div></div>
+      <div class="flow-step"><div class="flow-line decision"></div><div class="flow-content"><div class="label decision">Post-Webinar Decision</div><div class="title">Did they book a strategy call?</div></div></div>
+      <div class="flow-step"><div class="flow-line workflow"></div><div class="flow-content"><div class="label workflow">Booked Call</div><div class="title">→ WF-7: Pre-Call Sequence takes over</div><div class="desc">ACDC stays paused. Pre-call runs. Then post-call outcome (WF-9).</div></div></div>
+      <div class="flow-step"><div class="flow-line workflow"></div><div class="flow-content"><div class="label workflow">No Call Booked</div><div class="title">→ ACDC resumes at stored day</div><div class="desc">They saw the webinar, didn't convert yet. Back to nurture. They'll see more webinar offers in future ACDC emails.</div></div></div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <strong>WEBINAR ROTATION:</strong>
+    <p>SLE runs one webinar per month, rotating presenters: Clay → Joseph → Forrest → repeat. The $97 ticket is sold via email CTAs inside the ACDC journey and via dedicated webinar promo emails after ACDC completes. The "Offer Doc" (future build) will be the primary sales mechanism for the $97 ticket.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CHECKLIST ═══════════════════════════ -->
+<div class="panel" id="checklist">
+  <div class="section-title">GHL Build Checklist for Luigi</div>
+  <p style="color:#999; margin-bottom:20px;">Step-by-step items to build in GHL. Check them off as you go.</p>
+
+  <div class="card">
+    <h3>Phase 1: Foundation (Do First)</h3>
+    <div id="checklist-1"></div>
+  </div>
+
+  <div class="card">
+    <h3>Phase 2: Workflows (Build After Foundation)</h3>
+    <div id="checklist-2"></div>
+  </div>
+
+  <div class="card">
+    <h3>Phase 3: Email Sequences (Build After Workflows)</h3>
+    <div id="checklist-3"></div>
+  </div>
+
+  <div class="card">
+    <h3>Phase 4: Integration + Testing</h3>
+    <div id="checklist-4"></div>
+  </div>
+</div>
+
+</div><!-- end .content -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Checklist data
+const checklists = {
+  'checklist-1': [
+    'Create all Custom Fields: years_in_business, team_size, annual_revenue, lead_source, acdc_resume_day, utm_source, utm_medium, utm_campaign, utm_content',
+    'Create all Source Tags: source-pricing-tool, source-leads-now, source-playbook',
+    'Create all Sequence Status Tags (active/paused/complete for each): seq-am-active, seq-am-complete, seq-pricing-active, seq-pricing-paused, seq-pricing-complete, seq-leads-active, seq-leads-paused, seq-leads-complete, seq-acdc-active, seq-acdc-paused, seq-acdc-complete, seq-taki-active, seq-taki-paused, seq-taki-complete, seq-precall-active, seq-precall-complete, seq-hammer-active, seq-hammer-complete, seq-soldout-active, seq-soldout-complete',
+    'Create all Milestone Tags: playbook-delivered, purchased-webinar, call-booked, call-completed, call-no-sale, enrolled-leadsurge, enrolled-servicesurge, partner-active',
+    'Set up email sender: levelup@serviceloopelectrical.com (PM engine)',
+    'Verify email sender: cneumeyer@serviceloopelectrical.com (AM — may already exist)',
+    'A2P 10DLC registration for SMS (if using)',
+    'Build 3 landing pages in GHL page builder (Pricing Tool, Leads Now, Playbook)',
+    'Map form fields to GHL contact properties on each page',
+  ],
+  'checklist-2': [
+    'Build WF-8: Pause Current PM (utility workflow — other workflows call this)',
+    'Build WF-1: Pricing Tool Entry (form submit trigger → tags → enroll PM on-ramp + AM)',
+    'Build WF-2: Leads Now Entry (same structure as WF-1, different tags)',
+    'Build WF-3: On-Ramp Complete → Playbook + ACDC (tag trigger → deliver playbook → start ACDC)',
+    'Build WF-4: Playbook Direct Entry (form submit trigger — can be built now, activated later)',
+    'Build WF-5: Webinar Purchase (tag trigger → pause → Taki deadline)',
+    'Build WF-6: Taki Complete → Resume (tag trigger → resume ACDC)',
+    'Build WF-7: Strategy Call Booked (tag trigger → pause → pre-call sequence)',
+    'Build WF-9: Post-Call Outcome (tag trigger → enrolled or hammer them)',
+  ],
+  'checklist-3': [
+    'Load 7 Pricing Tool On-Ramp emails (from Email Sequences doc) — sender: levelup@, time: 7:28 PM EST',
+    'Load 7 Leads Now On-Ramp emails (from Email Sequences doc) — sender: levelup@, time: 7:28 PM EST',
+    'Create AM Morning Coffee sequence shell (250 emails — first 30 will be loaded later)',
+    'Create ACDC Journey sequence shell (45 emails — not written yet, placeholder)',
+    'Create Taki 7-Day Deadline sequence shell (7 emails — not written yet)',
+    'Create Pre-Call sequence shell (5 emails — not written yet)',
+    'Create Hammer Them sequence shell (12 emails — not written yet)',
+    'Create Sold Out sequence shell (7 emails — not written yet)',
+    'Set all PM sequences to send at 7:28 PM EST from levelup@',
+    'Set AM sequence to send in morning from cneumeyer@',
+  ],
+  'checklist-4': [
+    'Test Form #1: Submit test on Pricing Tool page → verify contact created in GHL with correct fields, tags, and UTMs',
+    'Test Form #2: Submit test on Leads Now page → verify contact created with correct fields, tags, and UTMs',
+    'Test pause/resume: Manually add seq-acdc-active to a test contact, then trigger WF-8 → verify it pauses correctly',
+    'Test duplicate handling: Submit same email through both forms → verify single contact with both source tags',
+    'Verify AM sequence does NOT stop when PM pauses',
+    'Test webinar purchase flow: Add purchased-webinar tag → verify ACDC pauses and Taki starts',
+    'Connect Meta Pixel custom audiences (All SLE Leads, Playbook Recipients, Webinar Buyers, Call Booked)',
+    'Set up internal notification channel (Slack or GHL) for new leads and call bookings',
+    'Load test: Run 5 test contacts through full flow to verify no double-sends',
+  ]
+};
+
+Object.entries(checklists).forEach(([containerId, items]) => {
+  const container = document.getElementById(containerId);
+  items.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.style.cssText = 'display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px solid #1a1a1a;';
+    div.innerHTML = `
+      <input type="checkbox" id="${containerId}-${i}" style="margin-top:3px; accent-color:#E3C575; width:18px; height:18px; flex-shrink:0; cursor:pointer;">
+      <label for="${containerId}-${i}" style="font-size:13px; color:#ccc; cursor:pointer; flex:1;">${item}</label>
+    `;
+    container.appendChild(div);
+  });
+});
+</script>
+
+</body>
+</html>
