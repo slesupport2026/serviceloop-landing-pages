@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Interview Pre-Work | Service Loop Electrical</title>
+  <meta name="description" content="Prepare for your 90-minute content interview. Complete this pre-work to get the most out of your session.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --navy: #1B2A45;
+      --charcoal: #333333;
+      --gold: #E3C575;
+      --bright-gold: #FDC33E;
+      --dark-gold: #A78227;
+      --white: #FFFFFF;
+      --cream: #FAF8F3;
+      --bg-dark: #0D0D0D;
+      --bg-card: #1A1A1A;
+      --bg-input: #222222;
+      --border-subtle: #333333;
+      --green: #2EAA5C;
+      --red: #D94452;
+      --blue: #4A90D9;
+      --teal: #00B4C8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--white);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(227,197,117,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(227,197,117,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HEADER */
+    .header {
+      text-align: center;
+      padding: 40px 0 30px;
+      border-bottom: 3px solid;
+      border-image: linear-gradient(90deg, transparent, var(--gold), transparent) 1;
+      margin-bottom: 30px;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--dark-gold), var(--gold));
+      color: var(--black);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 42px);
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .header h1 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .header p {
+      color: #aaa;
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* PROGRESS BAR */
+    .progress-container {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .progress-step {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .progress-step.active { color: var(--gold); }
+    .progress-step.complete { color: var(--green); }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--border-subtle);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--bright-gold));
+      border-radius: 2px;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    /* SECTIONS */
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-intro {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--gold);
+    }
+
+    .section-intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .section-intro p {
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    /* FORM STYLES */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .form-group .hint {
+      display: block;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 15px;
+      padding: 12px 14px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .color-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .color-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 2px solid var(--border-subtle);
+      cursor: pointer;
+    }
+
+    .color-hex {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    /* QUESTION CARDS */
+    .q-block {
+      margin-bottom: 32px;
+    }
+
+    .q-block-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border-subtle);
+    }
+
+    .q-block-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .q-block-header h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .q-block-header .q-time {
+      margin-left: auto;
+      font-size: 12px;
+      color: #888;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border-subtle);
+      transition: border-color 0.3s;
+    }
+
+    .q-card.answered { border-color: var(--green); }
+
+    .q-card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .q-number {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--gold);
+      background: rgba(227,197,117,0.1);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .q-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .q-layer {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .layer-questions { background: rgba(74,144,217,0.2); color: var(--blue); }
+    .layer-second { background: rgba(0,180,200,0.2); color: var(--teal); }
+    .layer-objections { background: rgba(217,68,82,0.2); color: var(--red); }
+    .layer-expectations { background: rgba(46,170,92,0.2); color: var(--green); }
+
+    .q-coach {
+      font-size: 12px;
+      color: #888;
+      font-style: italic;
+      margin-bottom: 10px;
+      padding-left: 40px;
+    }
+
+    .q-card textarea {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      padding: 10px 12px;
+      resize: vertical;
+      min-height: 60px;
+      transition: border-color 0.3s;
+    }
+
+    .q-card textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .q-card textarea::placeholder { color: #555; }
+
+    .q-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: #666;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .q-status.done { color: var(--green); }
+
+    /* PERSONALIZED ELEMENTS */
+    .personalized {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* BUTTONS */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--dark-gold), var(--gold));
+      color: var(--black);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--gold), var(--bright-gold));
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(227,197,117,0.1);
+    }
+
+    .btn-export {
+      background: linear-gradient(135deg, #1a5c2e, var(--green));
+      color: var(--white);
+    }
+
+    .btn-export:hover { transform: translateY(-1px); }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* STATS */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat {
+      background: var(--bg-card);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    /* REVIEW SECTION */
+    .review-card {
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .review-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .review-card .review-q {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ccc;
+      margin-bottom: 6px;
+    }
+
+    .review-card .review-a {
+      font-size: 14px;
+      color: var(--white);
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .review-card .review-empty {
+      font-size: 13px;
+      color: #555;
+      font-style: italic;
+    }
+
+    /* TIP BOX */
+    .tip-box {
+      background: rgba(227,197,117,0.05);
+      border: 1px solid rgba(227,197,117,0.2);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .tip-box strong {
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    /* BRAND PREVIEW */
+    .brand-preview {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 20px 0;
+      border: 1px solid var(--border-subtle);
+      text-align: center;
+    }
+
+    .brand-preview h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .brand-preview .brand-tagline {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 16px;
+    }
+
+    .brand-colors-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .brand-color-chip {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 30px 0 40px;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 40px;
+    }
+
+    .footer p {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr; }
+      .progress-steps { flex-wrap: wrap; gap: 8px; }
+      .btn-row { flex-direction: column; }
+      .btn { width: 100%; text-align: center; }
+      .q-layer { display: none; }
+    }
+
+    /* PRINT / EXPORT */
+    @media print {
+      body { background: white; color: black; }
+      body::before { display: none; }
+      .btn-row, .progress-container, .header-badge { display: none; }
+      .section { display: block !important; page-break-inside: avoid; }
+      .q-card { border: 1px solid #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">Content Interview System</div>
+    <h1>90-Minute <em>Content Engine</em> Pre-Work</h1>
+    <p>Complete this pre-work before your interview so your interviewer can pull the best possible content from your session.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-container">
+    <div class="progress-steps">
+      <span class="progress-step active" data-step="0">1. Your Info</span>
+      <span class="progress-step" data-step="1">2. Your Brand</span>
+      <span class="progress-step" data-step="2">3. Pre-Work</span>
+      <span class="progress-step" data-step="3">4. Review</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- ========== STEP 1: YOUR INFO ========== -->
+  <div class="section active" id="step0">
+    <div class="section-intro">
+      <h2>About You</h2>
+      <p>We'll use this to personalize your entire pre-work experience and content interview.</p>
+    </div>
+
+    <div class="form-group">
+      <label>Your Full Name *</label>
+      <input type="text" id="ownerName" placeholder="e.g. Austin Matthews" required>
+    </div>
+
+    <div class="form-group">
+      <label>Your Role / Title</label>
+      <input type="text" id="ownerTitle" placeholder="e.g. Owner, CEO, Founder">
+    </div>
+
+    <div class="form-group">
+      <label>Company Name *</label>
+      <input type="text" id="companyName" placeholder="e.g. Matthews Lighting & Electric">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>City / Town *</label>
+        <input type="text" id="cityName" placeholder="e.g. Rome, GA">
+      </div>
+      <div class="form-group">
+        <label>Years in Business</label>
+        <input type="text" id="yearsInBusiness" placeholder="e.g. 5">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Company Website</label>
+      <input type="url" id="website" placeholder="https://yourcompany.com">
+    </div>
+
+    <div class="form-group">
+      <label>Team Members' First Names</label>
+      <span class="hint">List your key team members so we can reference them in questions. Comma-separated.</span>
+      <input type="text" id="teamMembers" placeholder="e.g. Cameron, Wes, Melissa, Nathan">
+    </div>
+
+    <div class="form-group">
+      <label>What services does your company specialize in?</label>
+      <textarea id="services" placeholder="e.g. Residential electrical service, panel upgrades, generators, whole-home rewires, EV charger installation..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Anything you do NOT want to discuss on camera?</label>
+      <span class="hint">Family topics, competitors, specific incidents, etc. We'll respect these boundaries.</span>
+      <textarea id="offLimits" placeholder="Optional: topics or stories to avoid"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="goToStep(1)">Continue to Brand Info &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ========== STEP 2: YOUR BRAND ========== -->
+  <div class="section" id="step1">
+    <div class="section-intro">
+      <h2>Your Brand</h2>
+      <p>This helps us match your content to your visual identity. Your pre-work survey will update to reflect your brand.</p>
+    </div>
+
+    <div class="form-group">
+      <label>Logo URL</label>
+      <span class="hint">Paste a link to your logo (PNG or SVG preferred). Optional.</span>
+      <input type="url" id="logoUrl" placeholder="https://yoursite.com/logo.png">
+    </div>
+
+    <div class="form-group">
+      <label>Primary Brand Color</label>
+      <span class="hint">Your main brand color. Click the swatch to pick.</span>
+      <div class="color-preview">
+        <input type="color" id="brandColor1" value="#E3C575" class="color-swatch">
+        <span class="color-hex" id="brandColor1Hex">#E3C575</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Secondary Brand Color</label>
+      <div class="color-preview">
+        <input type="color" id="brandColor2" value="#1B2A45" class="color-swatch">
+        <span class="color-hex" id="brandColor2Hex">#1B2A45</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Accent / Highlight Color</label>
+      <div class="color-preview">
+        <input type="color" id="brandColor3" value="#FFFFFF" class="color-swatch">
+        <span class="color-hex" id="brandColor3Hex">#FFFFFF</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Your Tagline or Slogan</label>
+      <input type="text" id="tagline" placeholder="e.g. 'Trusted Electrical Service Since 2020'">
+    </div>
+
+    <!-- BRAND PREVIEW -->
+    <div class="brand-preview" id="brandPreview">
+      <h3 id="previewCompany">Your Company</h3>
+      <p class="brand-tagline" id="previewTagline">Your tagline here</p>
+      <div class="brand-colors-row">
+        <div class="brand-color-chip" id="chip1"></div>
+        <div class="brand-color-chip" id="chip2"></div>
+        <div class="brand-color-chip" id="chip3"></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goToStep(0)">&larr; Back</button>
+      <button class="btn btn-primary" onclick="goToStep(2)">Start Pre-Work Survey &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ========== STEP 3: PRE-WORK SURVEY ========== -->
+  <div class="section" id="step2">
+    <div class="section-intro">
+      <h2>Pre-Work Survey</h2>
+      <p>Work through these questions at your own pace. Draft some bullet points or full sentences &mdash; whatever feels natural. Your interviewer will use these as a guide to pull the best version out of you on camera.</p>
+    </div>
+
+    <div class="tip-box">
+      <strong>Pro Tip:</strong> You don't need perfect answers. Bullet points, rough notes, and stream-of-consciousness are great. The interview is where we polish. This pre-work just gets your brain warmed up so you're not thinking on the spot under lights.
+    </div>
+
+    <div class="stats-bar" id="surveyStats">
+      <div class="stat">
+        <div class="stat-number" id="statAnswered">0</div>
+        <div class="stat-label">Answered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="statRemaining">32</div>
+        <div class="stat-label">Remaining</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="statPercent">0%</div>
+        <div class="stat-label">Complete</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 1: CHARACTER -->
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-icon" style="background:rgba(74,144,217,0.15); color:var(--blue);">&#x1F464;</div>
+        <div>
+          <h3 style="color:var(--blue);">Character</h3>
+          <p style="font-size:12px; color:#888; margin:0;">Who you are under the tools and the uniform</p>
+        </div>
+        <span class="q-time">~20 min on camera</span>
+      </div>
+
+      <div class="q-card" data-q="1">
+        <div class="q-card-top">
+          <span class="q-number">1</span>
+          <span class="q-text">Tell me the real story of how you ended up in the electrical world. Not the resume version.</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <p class="q-coach">Think: the person, the moment, the accident, the push. What actually happened?</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="2">
+        <div class="q-card-top">
+          <span class="q-number">2</span>
+          <span class="q-text">Who's someone that shaped how you see the world?</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">A parent, grandparent, mentor, first boss. What did they teach you that stuck?</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="3">
+        <div class="q-card-top">
+          <span class="q-number">3</span>
+          <span class="q-text">What's a motto or phrase you live by that shows up in your work?</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <p class="q-coach">Something grandpa said, a sign in your shop, words you repeat to the team.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="4">
+        <div class="q-card-top">
+          <span class="q-number">4</span>
+          <span class="q-text">When you're not working, who are you?</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <p class="q-coach">Dad mode, hobby mode, weekend rituals. What would surprise people?</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="5">
+        <div class="q-card-top">
+          <span class="q-number">5</span>
+          <span class="q-text">What's something your team teases you about?</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <p class="q-coach">Running jokes, nicknames, habits they roast you for. Keep it light and fun.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="6">
+        <div class="q-card-top">
+          <span class="q-number">6</span>
+          <span class="q-text">What's your earliest "rookie moment" as an electrician you can laugh about now?</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <p class="q-coach">Blown motors, wrong wire, showed up to the wrong house. The funnier the better.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="7">
+        <div class="q-card-top">
+          <span class="q-number">7</span>
+          <span class="q-text">What's something people are surprised to learn about you?</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">Hidden hobbies, unexpected skills, the nerd side, collections, guilty pleasures.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="8">
+        <div class="q-card-top">
+          <span class="q-number">8</span>
+          <span class="q-text" id="q8text">Who's the unsung hero behind your company that most people don't see?</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">Spouse, office manager, first employee. The person who held it together when it was hard.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 2: TRUST + OBJECTION KILLERS -->
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-icon" style="background:rgba(217,68,82,0.15); color:var(--red);">&#x1F6E1;</div>
+        <div>
+          <h3 style="color:var(--red);">Trust &amp; Objection Killers</h3>
+          <p style="font-size:12px; color:#888; margin:0;">Build authority and preempt every concern a homeowner has</p>
+        </div>
+        <span class="q-time">~25 min on camera</span>
+      </div>
+
+      <div class="q-card" data-q="9">
+        <div class="q-card-top">
+          <span class="q-number">9</span>
+          <span class="q-text" id="q9text">Walk me through what happens from the moment someone calls your office to the moment the job is done.</span>
+          <span class="q-layer layer-expectations">Expectations</span>
+        </div>
+        <p class="q-coach">Name names. "First you get [name], then [name] shows up..." People connect with people, not processes.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="10">
+        <div class="q-card-top">
+          <span class="q-number">10</span>
+          <span class="q-text">Why do you price everything upfront before you start?</span>
+          <span class="q-layer layer-objections">Objections</span>
+        </div>
+        <p class="q-coach">What happened that made you switch? What was the moment you realized surprise invoices weren't okay?</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="11">
+        <div class="q-card-top">
+          <span class="q-number">11</span>
+          <span class="q-text">Why do you always offer multiple options instead of just one quote?</span>
+          <span class="q-layer layer-objections">Objections</span>
+        </div>
+        <p class="q-coach">Think about why the homeowner deserves choices, not a take-it-or-leave-it number.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="12">
+        <div class="q-card-top">
+          <span class="q-number">12</span>
+          <span class="q-text">What do you always check in every home that other companies skip?</span>
+          <span class="q-layer layer-objections">Objections</span>
+        </div>
+        <p class="q-coach">Panel covers, attic runs, crawl spaces, smoke detectors. The extra mile that proves you care.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="13">
+        <div class="q-card-top">
+          <span class="q-number">13</span>
+          <span class="q-text">What's something most homeowners don't realize about their home's electrical system?</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <p class="q-coach">Smoke detectors, hidden hazards, age of wiring, panel age. Educational, not scary.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="14">
+        <div class="q-card-top">
+          <span class="q-number">14</span>
+          <span class="q-text">If a homeowner said "I already got 3 estimates, why should I go with you?" &mdash; what would you say?</span>
+          <span class="q-layer layer-objections">Objections</span>
+        </div>
+        <p class="q-coach">Don't trash competitors. What do YOU do that they won't see elsewhere?</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="15">
+        <div class="q-card-top">
+          <span class="q-number">15</span>
+          <span class="q-text">What happens if something goes wrong after the job is done?</span>
+          <span class="q-layer layer-objections">Objections</span>
+        </div>
+        <p class="q-coach">Warranty, callbacks, follow-up process. How do you make it right?</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="16">
+        <div class="q-card-top">
+          <span class="q-number">16</span>
+          <span class="q-text">How do you hire? What do you look for in people who enter customers' homes?</span>
+          <span class="q-layer layer-expectations">Expectations</span>
+        </div>
+        <p class="q-coach">The shopping cart test, the gut check. What makes someone YOUR kind of person?</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="17">
+        <div class="q-card-top">
+          <span class="q-number">17</span>
+          <span class="q-text" id="q17text">What's something your company will never cut corners on?</span>
+          <span class="q-layer layer-objections">Objections</span>
+        </div>
+        <p class="q-coach">Your non-negotiable. The thing that costs you more but you do it anyway.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="18">
+        <div class="q-card-top">
+          <span class="q-number">18</span>
+          <span class="q-text">What's the biggest change you've made in how you run your business, and why?</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">Growth story. Something broke, you fixed it, now you're better because of it.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 3: EMOTIONAL STORIES -->
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-icon" style="background:rgba(0,180,200,0.15); color:var(--teal);">&#x2764;</div>
+        <div>
+          <h3 style="color:var(--teal);">Story Pullers</h3>
+          <p style="font-size:12px; color:#888; margin:0;">Emotional, memorable moments that create shareable content</p>
+        </div>
+        <span class="q-time">~25 min on camera</span>
+      </div>
+
+      <div class="q-card" data-q="19">
+        <div class="q-card-top">
+          <span class="q-number">19</span>
+          <span class="q-text">Tell me about a customer moment that still makes you smile when you think about it.</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">The thank you, the hug, the card, the referral that made your day.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="20">
+        <div class="q-card-top">
+          <span class="q-number">20</span>
+          <span class="q-text">Tell me about a time you went above and beyond &mdash; not because you had to, but because you wanted to.</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">Paid out of pocket, came back on a weekend, fixed something that wasn't yours to fix.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="21">
+        <div class="q-card-top">
+          <span class="q-number">21</span>
+          <span class="q-text">What's a moment with your team that you'll remember forever?</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">All hands on deck, big win, impossible deadline met, someone stepped up huge.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="22">
+        <div class="q-card-top">
+          <span class="q-number">22</span>
+          <span class="q-text">Tell me about a time you wanted to quit but didn't.</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">The dark moment. What kept you going? This is the clip that goes viral.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="23">
+        <div class="q-card-top">
+          <span class="q-number">23</span>
+          <span class="q-text">What's a failure that ended up becoming one of your biggest strengths?</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">Lost a big job, blew a budget, hired wrong. But now you're better because of it.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="24">
+        <div class="q-card-top">
+          <span class="q-number">24</span>
+          <span class="q-text" id="q24text">When did you realize your business was actually making an impact in your community?</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <p class="q-coach">Awards, repeat customers, word of mouth, someone stopped you at the grocery store.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="25">
+        <div class="q-card-top">
+          <span class="q-number">25</span>
+          <span class="q-text" id="q25text">What's something you wish you could say to every homeowner in your area?</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <p class="q-coach">Direct-to-camera manifesto. Look right at the lens for this one.</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="26">
+        <div class="q-card-top">
+          <span class="q-number">26</span>
+          <span class="q-text">What do you want your legacy to be?</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <p class="q-coach">What do you want people to say about you and your company in 20 years?</p>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 4: RAPID FIRE -->
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-icon" style="background:rgba(46,170,92,0.15); color:var(--green);">&#x26A1;</div>
+        <div>
+          <h3 style="color:var(--green);">Rapid Fire &mdash; Direct to Camera</h3>
+          <p style="font-size:12px; color:#888; margin:0;">Short, punchy, quotable. These become ads and reels.</p>
+        </div>
+        <span class="q-time">~10 min on camera</span>
+      </div>
+
+      <div class="q-card" data-q="27">
+        <div class="q-card-top">
+          <span class="q-number">27</span>
+          <span class="q-text" id="q27text">In one sentence: what does your company stand for?</span>
+          <span class="q-layer layer-expectations">Expectations</span>
+        </div>
+        <textarea placeholder="One sentence..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="28">
+        <div class="q-card-top">
+          <span class="q-number">28</span>
+          <span class="q-text">What's the one thing you'll never compromise on?</span>
+          <span class="q-layer layer-objections">Objections</span>
+        </div>
+        <textarea placeholder="One sentence..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="29">
+        <div class="q-card-top">
+          <span class="q-number">29</span>
+          <span class="q-text">Finish this sentence: "We're not just electricians, we're ___."</span>
+          <span class="q-layer layer-expectations">Expectations</span>
+        </div>
+        <textarea placeholder="Fill in the blank..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="30">
+        <div class="q-card-top">
+          <span class="q-number">30</span>
+          <span class="q-text">What would you tell someone who's nervous about calling an electrician?</span>
+          <span class="q-layer layer-objections">Objections</span>
+        </div>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="31">
+        <div class="q-card-top">
+          <span class="q-number">31</span>
+          <span class="q-text">What's one thing every homeowner should check in their home this week?</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="32">
+        <div class="q-card-top">
+          <span class="q-number">32</span>
+          <span class="q-text">Why do you love what you do?</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <textarea placeholder="Draft your thoughts here..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+    </div>
+
+    <!-- BONUS -->
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-icon" style="background:rgba(227,197,117,0.15); color:var(--gold);">&#x2B50;</div>
+        <div>
+          <h3 style="color:var(--gold);">Bonus &mdash; If Time Allows</h3>
+          <p style="font-size:12px; color:#888; margin:0;">Extra questions your interviewer may pull from</p>
+        </div>
+        <span class="q-time">~10 min buffer</span>
+      </div>
+
+      <div class="q-card" data-q="33">
+        <div class="q-card-top">
+          <span class="q-number">33</span>
+          <span class="q-text">What does craftsmanship mean to you?</span>
+          <span class="q-layer layer-questions">Questions</span>
+        </div>
+        <textarea placeholder="Optional..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="34">
+        <div class="q-card-top">
+          <span class="q-number">34</span>
+          <span class="q-text" id="q34text">What are you building your company to become?</span>
+          <span class="q-layer layer-expectations">Expectations</span>
+        </div>
+        <textarea placeholder="Optional..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+
+      <div class="q-card" data-q="35">
+        <div class="q-card-top">
+          <span class="q-number">35</span>
+          <span class="q-text">What do you want people to say about you when you're not in the room?</span>
+          <span class="q-layer layer-second">2nd Layer</span>
+        </div>
+        <textarea placeholder="Optional..." oninput="trackAnswer(this)"></textarea>
+        <div class="q-status"><span>&#9744;</span> Draft your notes</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goToStep(1)">&larr; Back</button>
+      <button class="btn btn-primary" onclick="goToStep(3)">Review &amp; Export &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ========== STEP 4: REVIEW & EXPORT ========== -->
+  <div class="section" id="step3">
+    <div class="section-intro">
+      <h2>Review &amp; Submit</h2>
+      <p>Here's everything you've prepared. Your interviewer will receive this before your session.</p>
+    </div>
+
+    <div class="stats-bar" id="reviewStats"></div>
+
+    <div id="reviewContent"></div>
+
+    <div class="tip-box" style="margin-top:24px;">
+      <strong>What Happens Next:</strong> Your interviewer will review this pre-work and use it to guide your 90-minute on-camera session. They'll help you refine answers, find the best hooks, and pull the authentic version of each story. You don't need to memorize anything &mdash; this is your cheat sheet, not a script.
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goToStep(2)">&larr; Back to Survey</button>
+      <button class="btn btn-export" onclick="exportJSON()">&#x1F4E5; Download Pre-Work (JSON)</button>
+      <button class="btn btn-primary" onclick="exportPrint()">&#x1F5A8; Print / Save PDF</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Content Interview System &mdash; <a href="https://serviceloopelectrical.com" target="_blank">Service Loop Electrical</a></p>
+    <p style="margin-top:4px;">Built on the 4-Layer Content Framework. 32 questions. 90 minutes. A year of content.</p>
+  </div>
+
+</div>
+
+<script>
+  // ===== STATE =====
+  const TOTAL_QUESTIONS = 35;
+  let currentStep = 0;
+
+  // ===== NAVIGATION =====
+  function goToStep(step) {
+    // Validate step 0 before advancing
+    if (currentStep === 0 && step > 0) {
+      const name = document.getElementById('ownerName').value.trim();
+      const company = document.getElementById('companyName').value.trim();
+      const city = document.getElementById('cityName').value.trim();
+      if (!name || !company || !city) {
+        alert('Please fill in your name, company name, and city before continuing.');
+        return;
+      }
+    }
+
+    // Apply personalization when leaving step 0 or 1
+    if (step >= 2 && (currentStep === 0 || currentStep === 1)) {
+      applyPersonalization();
+    }
+
+    // Build review when entering step 3
+    if (step === 3) buildReview();
+
+    // Update sections
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + step).classList.add('active');
+
+    // Update progress
+    document.querySelectorAll('.progress-step').forEach(s => {
+      const si = parseInt(s.dataset.step);
+      s.classList.remove('active', 'complete');
+      if (si === step) s.classList.add('active');
+      else if (si < step) s.classList.add('complete');
+    });
+
+    // Progress bar
+    const pct = Math.round((step / 3) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+
+    currentStep = step;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    saveToLocal();
+  }
+
+  // ===== PERSONALIZATION =====
+  function applyPersonalization() {
+    const name = document.getElementById('ownerName').value.trim();
+    const firstName = name.split(' ')[0];
+    const company = document.getElementById('companyName').value.trim();
+    const city = document.getElementById('cityName').value.trim();
+    const team = document.getElementById('teamMembers').value.trim();
+
+    // Update brand preview
+    document.getElementById('previewCompany').textContent = company || 'Your Company';
+    document.getElementById('previewTagline').textContent = document.getElementById('tagline').value.trim() || 'Your tagline here';
+
+    const c1 = document.getElementById('brandColor1').value;
+    const c2 = document.getElementById('brandColor2').value;
+    const c3 = document.getElementById('brandColor3').value;
+    document.getElementById('chip1').style.background = c1;
+    document.getElementById('chip2').style.background = c2;
+    document.getElementById('chip3').style.background = c3;
+
+    // Personalize questions that reference company/city
+    const q9 = document.getElementById('q9text');
+    if (q9) q9.textContent = `Walk me through what happens from the moment someone calls ${company || 'your office'} to the moment the job is done.`;
+
+    const q17 = document.getElementById('q17text');
+    if (q17) q17.textContent = `What's something ${company || 'your company'} will never cut corners on?`;
+
+    const q24 = document.getElementById('q24text');
+    if (q24) q24.textContent = `When did you realize ${company || 'your business'} was actually making an impact in ${city || 'your community'}?`;
+
+    const q25 = document.getElementById('q25text');
+    if (q25) q25.textContent = `What's something you wish you could say to every homeowner in ${city || 'your area'}?`;
+
+    const q27 = document.getElementById('q27text');
+    if (q27) q27.textContent = `In one sentence: what does ${company || 'your company'} stand for?`;
+
+    const q34 = document.getElementById('q34text');
+    if (q34) q34.textContent = `What are you building ${company || 'your company'} to become?`;
+
+    if (team) {
+      const q9coach = document.querySelector('[data-q="9"] .q-coach');
+      if (q9coach) q9coach.textContent = `Name names: ${team}. People connect with people, not processes.`;
+    }
+  }
+
+  // ===== COLOR PICKERS =====
+  document.querySelectorAll('.color-swatch').forEach(swatch => {
+    swatch.addEventListener('input', function() {
+      const hexSpan = this.parentElement.querySelector('.color-hex');
+      if (hexSpan) hexSpan.textContent = this.value.toUpperCase();
+      applyPersonalization();
+    });
+  });
+
+  // ===== ANSWER TRACKING =====
+  function trackAnswer(textarea) {
+    const card = textarea.closest('.q-card');
+    const status = card.querySelector('.q-status');
+    const hasContent = textarea.value.trim().length > 0;
+
+    if (hasContent) {
+      card.classList.add('answered');
+      status.classList.add('done');
+      status.innerHTML = '<span>&#9745;</span> Notes saved';
+    } else {
+      card.classList.remove('answered');
+      status.classList.remove('done');
+      status.innerHTML = '<span>&#9744;</span> Draft your notes';
+    }
+
+    updateStats();
+    saveToLocal();
+  }
+
+  function updateStats() {
+    const answered = document.querySelectorAll('.q-card.answered').length;
+    const remaining = TOTAL_QUESTIONS - answered;
+    const pct = Math.round((answered / TOTAL_QUESTIONS) * 100);
+
+    const sa = document.getElementById('statAnswered');
+    const sr = document.getElementById('statRemaining');
+    const sp = document.getElementById('statPercent');
+    if (sa) sa.textContent = answered;
+    if (sr) sr.textContent = remaining;
+    if (sp) sp.textContent = pct + '%';
+  }
+
+  // ===== REVIEW =====
+  function buildReview() {
+    const container = document.getElementById('reviewContent');
+    const name = document.getElementById('ownerName').value.trim();
+    const company = document.getElementById('companyName').value.trim();
+
+    let html = '';
+    let answeredCount = 0;
+    let totalCount = 0;
+
+    const blocks = [
+      { title: 'Character', color: 'var(--blue)' },
+      { title: 'Trust & Objection Killers', color: 'var(--red)' },
+      { title: 'Story Pullers', color: 'var(--teal)' },
+      { title: 'Rapid Fire', color: 'var(--green)' },
+      { title: 'Bonus', color: 'var(--gold)' }
+    ];
+
+    document.querySelectorAll('.q-block').forEach((block, bi) => {
+      const cards = block.querySelectorAll('.q-card');
+      html += `<h3 style="font-family:'Montserrat',sans-serif; color:${blocks[bi].color}; font-size:14px; text-transform:uppercase; letter-spacing:1px; margin:24px 0 12px; padding-bottom:8px; border-bottom:2px solid ${blocks[bi].color}33;">${blocks[bi].title}</h3>`;
+
+      cards.forEach(card => {
+        totalCount++;
+        const qText = card.querySelector('.q-text').textContent;
+        const answer = card.querySelector('textarea').value.trim();
+        const hasAnswer = answer.length > 0;
+        if (hasAnswer) answeredCount++;
+
+        html += `<div class="review-card" style="border-left:3px solid ${hasAnswer ? 'var(--green)' : 'var(--border-subtle)'}">
+          <div class="review-q">${qText}</div>
+          ${hasAnswer
+            ? `<div class="review-a">${escapeHtml(answer)}</div>`
+            : `<div class="review-empty">No notes yet &mdash; that's okay, your interviewer will guide you through this one live.</div>`
+          }
+        </div>`;
+      });
+    });
+
+    // Stats
+    const pct = Math.round((answeredCount / totalCount) * 100);
+    const statsHtml = `<div class="stats-bar">
+      <div class="stat"><div class="stat-number">${answeredCount}</div><div class="stat-label">Prepared</div></div>
+      <div class="stat"><div class="stat-number">${totalCount - answeredCount}</div><div class="stat-label">Interview-Only</div></div>
+      <div class="stat"><div class="stat-number">${pct}%</div><div class="stat-label">Pre-Work Done</div></div>
+    </div>`;
+
+    document.getElementById('reviewStats').innerHTML = statsHtml;
+    container.innerHTML = html;
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ===== EXPORT =====
+  function exportJSON() {
+    const data = gatherAllData();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const company = document.getElementById('companyName').value.trim().replace(/[^a-zA-Z0-9]/g, '-') || 'prework';
+    a.download = `content-interview-prework-${company}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function exportPrint() {
+    goToStep(3);
+    setTimeout(() => window.print(), 300);
+  }
+
+  function gatherAllData() {
+    const data = {
+      submitted: new Date().toISOString(),
+      profile: {
+        name: document.getElementById('ownerName').value.trim(),
+        title: document.getElementById('ownerTitle').value.trim(),
+        company: document.getElementById('companyName').value.trim(),
+        city: document.getElementById('cityName').value.trim(),
+        yearsInBusiness: document.getElementById('yearsInBusiness').value.trim(),
+        website: document.getElementById('website').value.trim(),
+        teamMembers: document.getElementById('teamMembers').value.trim(),
+        services: document.getElementById('services').value.trim(),
+        offLimits: document.getElementById('offLimits').value.trim(),
+      },
+      brand: {
+        logoUrl: document.getElementById('logoUrl').value.trim(),
+        primaryColor: document.getElementById('brandColor1').value,
+        secondaryColor: document.getElementById('brandColor2').value,
+        accentColor: document.getElementById('brandColor3').value,
+        tagline: document.getElementById('tagline').value.trim(),
+      },
+      questions: []
+    };
+
+    document.querySelectorAll('.q-card').forEach(card => {
+      const num = card.dataset.q;
+      const qText = card.querySelector('.q-text').textContent;
+      const answer = card.querySelector('textarea').value.trim();
+      const layer = card.querySelector('.q-layer') ? card.querySelector('.q-layer').textContent : '';
+      data.questions.push({ number: parseInt(num), question: qText, layer, answer });
+    });
+
+    return data;
+  }
+
+  // ===== LOCAL STORAGE =====
+  const STORAGE_KEY = 'sle_content_interview_prework';
+
+  function saveToLocal() {
+    try {
+      const data = gatherAllData();
+      data._step = currentStep;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch(e) {}
+  }
+
+  function loadFromLocal() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+
+      // Restore profile
+      if (data.profile) {
+        document.getElementById('ownerName').value = data.profile.name || '';
+        document.getElementById('ownerTitle').value = data.profile.title || '';
+        document.getElementById('companyName').value = data.profile.company || '';
+        document.getElementById('cityName').value = data.profile.city || '';
+        document.getElementById('yearsInBusiness').value = data.profile.yearsInBusiness || '';
+        document.getElementById('website').value = data.profile.website || '';
+        document.getElementById('teamMembers').value = data.profile.teamMembers || '';
+        document.getElementById('services').value = data.profile.services || '';
+        document.getElementById('offLimits').value = data.profile.offLimits || '';
+      }
+
+      // Restore brand
+      if (data.brand) {
+        document.getElementById('logoUrl').value = data.brand.logoUrl || '';
+        if (data.brand.primaryColor) {
+          document.getElementById('brandColor1').value = data.brand.primaryColor;
+          document.getElementById('brandColor1Hex').textContent = data.brand.primaryColor.toUpperCase();
+        }
+        if (data.brand.secondaryColor) {
+          document.getElementById('brandColor2').value = data.brand.secondaryColor;
+          document.getElementById('brandColor2Hex').textContent = data.brand.secondaryColor.toUpperCase();
+        }
+        if (data.brand.accentColor) {
+          document.getElementById('brandColor3').value = data.brand.accentColor;
+          document.getElementById('brandColor3Hex').textContent = data.brand.accentColor.toUpperCase();
+        }
+        document.getElementById('tagline').value = data.brand.tagline || '';
+      }
+
+      // Restore answers
+      if (data.questions) {
+        data.questions.forEach(q => {
+          const card = document.querySelector(`.q-card[data-q="${q.number}"]`);
+          if (card && q.answer) {
+            const ta = card.querySelector('textarea');
+            ta.value = q.answer;
+            trackAnswer(ta);
+          }
+        });
+      }
+
+      // Restore step
+      if (typeof data._step === 'number' && data._step > 0) {
+        applyPersonalization();
+        goToStep(data._step);
+      }
+    } catch(e) {}
+  }
+
+  // ===== INIT =====
+  document.addEventListener('DOMContentLoaded', () => {
+    loadFromLocal();
+    updateStats();
+
+    // Auto-save on all inputs
+    document.querySelectorAll('#step0 input, #step0 textarea, #step1 input').forEach(el => {
+      el.addEventListener('input', saveToLocal);
+    });
+  });
+</script>
+
+</body>
+</html>
