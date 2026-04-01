@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In! | The Pricing Workshop | Service Loop Electrical</title>
+<meta name="description" content="Your seat is reserved for The Pricing Workshop with Clay Neumeyer. Check your inbox for details.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+:root{
+  --bg:#0A0A0A;
+  --surface:#0d1520;
+  --card:rgba(27,42,69,0.55);
+  --navy:#1B2A45;
+  --gold:#FDC33E;
+  --gold-dark:#E3A800;
+  --gold-muted:#A78227;
+  --white:#FFFFFF;
+  --text:rgba(255,255,255,0.88);
+  --text-muted:rgba(255,255,255,0.6);
+  --text-dim:rgba(255,255,255,0.45);
+  --border-gold:rgba(227,197,117,0.15);
+  --glow-gold:rgba(253,195,62,0.07);
+  --radius:8px;
+  --radius-lg:12px;
+}
+
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Open Sans',sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(27,42,69,0.08) 59px,rgba(27,42,69,0.08) 60px),
+    repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(27,42,69,0.08) 59px,rgba(27,42,69,0.08) 60px);
+  pointer-events:none;
+  z-index:0;
+}
+
+.page{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:48px 24px;
+}
+
+.page::before{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  width:600px;height:600px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--glow-gold) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+.content{
+  position:relative;
+  z-index:1;
+  max-width:600px;
+}
+
+.sle-eyebrow{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.72rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:24px;
+}
+.sle-eyebrow::before,
+.sle-eyebrow::after{
+  content:'';
+  width:24px;
+  height:1px;
+  background:var(--gold-muted);
+}
+
+.check-icon{
+  font-size:4rem;
+  margin-bottom:20px;
+  display:block;
+}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:clamp(2rem,5vw,3rem);
+  color:var(--gold);
+  line-height:1.15;
+  margin-bottom:16px;
+}
+
+.subtitle{
+  font-size:1.1rem;
+  color:var(--text);
+  line-height:1.65;
+  margin-bottom:12px;
+}
+
+.body-text{
+  font-size:0.95rem;
+  color:var(--text-muted);
+  line-height:1.7;
+  margin-bottom:32px;
+}
+
+.checklist{
+  text-align:left;
+  max-width:440px;
+  margin:0 auto 40px;
+}
+
+.checklist-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border-gold);
+}
+
+.checklist-icon{
+  flex-shrink:0;
+  width:22px;
+  height:22px;
+  background:rgba(253,195,62,0.12);
+  border:1px solid rgba(253,195,62,0.3);
+  border-radius:3px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-size:0.75rem;
+  font-weight:900;
+  margin-top:2px;
+}
+
+.checklist-text{
+  font-size:0.92rem;
+  color:var(--text);
+  line-height:1.55;
+}
+
+.sle-btn-gold{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;
+  font-size:0.85rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:#000;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  border:none;
+  border-radius:4px;
+  padding:16px 36px;
+  cursor:pointer;
+  transition:all 0.25s ease;
+  text-decoration:none;
+}
+.sle-btn-gold:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 40px rgba(253,195,62,0.45);
+}
+
+.sle-btn-outline{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.8rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:var(--gold);
+  background:transparent;
+  border:2px solid var(--gold-muted);
+  border-radius:4px;
+  padding:14px 32px;
+  cursor:pointer;
+  transition:all 0.25s ease;
+  text-decoration:none;
+  margin-left:12px;
+}
+.sle-btn-outline:hover{
+  background:rgba(253,195,62,0.08);
+  border-color:var(--gold);
+}
+
+.btn-row{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.footer-text{
+  margin-top:48px;
+  font-size:0.72rem;
+  color:var(--text-dim);
+}
+.footer-text a{
+  color:var(--gold-muted);
+  text-decoration:none;
+}
+
+@media(max-width:480px){
+  .btn-row{flex-direction:column;align-items:center}
+  .sle-btn-outline{margin-left:0}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="content">
+    <div class="sle-eyebrow">Service Loop Electrical</div>
+    <span class="check-icon">&#9889;</span>
+    <h1>You're In!</h1>
+    <p class="subtitle">Your seat is reserved for The Pricing Workshop.</p>
+    <p class="body-text">Check your inbox for the workshop details and your free pricing workbook.</p>
+
+    <div class="checklist">
+      <div class="checklist-item">
+        <div class="checklist-icon">&#10003;</div>
+        <div class="checklist-text">Workshop confirmation and Zoom link sent to your email</div>
+      </div>
+      <div class="checklist-item">
+        <div class="checklist-icon">&#10003;</div>
+        <div class="checklist-text">Free SSR Pricing Workbook (Google Sheet) included</div>
+      </div>
+      <div class="checklist-item">
+        <div class="checklist-icon">&#10003;</div>
+        <div class="checklist-text">Replay will be available if you can't make it live</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <a href="../../1mplaybook/" class="sle-btn-gold">Get the Free Playbook</a>
+      <a href="../" class="sle-btn-outline">Back to Workshop</a>
+    </div>
+
+    <p class="footer-text">&copy; 2026 Service Loop Electrical Inc. &bull; <a href="https://serviceloopelectrical.com">serviceloopelectrical.com</a></p>
+  </div>
+</div>
+</body>
+</html>
