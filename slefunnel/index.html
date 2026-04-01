@@ -3,349 +3,1649 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SLE Funnel Architecture</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<title>The Pricing Workshop | Stop Guessing What to Charge | Service Loop Electrical</title>
+<meta name="description" content="The exact pricing formula that took electricians from $140 fixture swaps to $35K weeks. Free live workshop with Clay Neumeyer. Build your Simple Service Rate in 60 minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* ===== DESIGN TOKENS ===== */
 :root{
-  --bg:#0A0A0A;--surface:#111;--card:#151515;--card-hover:#1a1a1a;--border:rgba(255,255,255,0.06);
-  --gold:#C9A45A;--bright:#E8C97A;--accent:#FDC33E;
-  --white:#fff;--gray:#777;--light:#aaa;
-  --red:#CE302A;--green:#2d7a2d;--teal:#1a7a6e;--blue:#4466cc;--purple:#8855cc;
-  --radius:14px;
+  --bg:#0A0A0A;
+  --surface:#0d1520;
+  --card:rgba(27,42,69,0.55);
+  --card-hover:rgba(27,42,69,0.7);
+  --navy:#1B2A45;
+  --gold:#FDC33E;
+  --gold-dark:#E3A800;
+  --gold-muted:#A78227;
+  --gold-subtle:#E3C575;
+  --white:#FFFFFF;
+  --text:rgba(255,255,255,0.88);
+  --text-muted:rgba(255,255,255,0.6);
+  --text-dim:rgba(255,255,255,0.45);
+  --red:#CE302A;
+  --green:#2d7a2d;
+  --teal:#1a7a6e;
+  --border-gold:rgba(227,197,117,0.15);
+  --border-gold-bright:rgba(253,195,62,0.35);
+  --glow-gold:rgba(253,195,62,0.07);
+  --radius:8px;
+  --radius-lg:12px;
 }
-body{background:var(--bg);color:var(--white);font-family:"Open Sans",sans-serif;display:flex;height:100vh;overflow:hidden;}
 
-/* SIDEBAR */
-.sidebar{width:260px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;}
-.sidebar-header{padding:20px;border-bottom:1px solid var(--border);}
-.sidebar-logo{font-family:Montserrat;font-weight:900;font-size:1rem;color:var(--gold);}
-.sidebar-sub{font-size:0.6rem;color:var(--gray);margin-top:4px;letter-spacing:2px;text-transform:uppercase;font-family:Montserrat;font-weight:600;}
-.sidebar-nav{flex:1;overflow-y:auto;padding:8px 0;}
-.nav-section{padding:14px 16px 4px;font-family:Montserrat;font-size:0.55rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;}
-.nav-item{display:flex;align-items:center;gap:8px;padding:7px 16px;cursor:pointer;font-size:0.75rem;color:var(--light);transition:all 0.12s;border-left:3px solid transparent;}
-.nav-item:hover{background:rgba(255,255,255,0.03);color:var(--white);}
-.nav-item.active{background:rgba(201,164,90,0.06);color:var(--accent);border-left-color:var(--accent);}
-.nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.dot-empty{border:2px solid #444;background:transparent;}
-.dot-draft{border:2px solid var(--accent);background:rgba(253,195,62,0.3);}
-.dot-done{border:2px solid var(--green);background:var(--green);}
-.dot-flag{border:2px solid var(--red);background:var(--red);}
-.sidebar-footer{padding:14px 16px;border-top:1px solid var(--border);font-size:0.65rem;color:#555;}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Open Sans',sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
 
-/* MAIN */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0;}
-.topbar-crumb{font-family:Montserrat;font-size:0.72rem;color:var(--gray);}
-.topbar-crumb b{color:var(--white);}
-.topbar-btns{display:flex;gap:6px;}
-.btn{font-family:Montserrat;font-size:0.68rem;font-weight:700;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--bright));color:#000;}
-.btn-outline{background:transparent;color:var(--gold);border:1px solid rgba(201,164,90,0.3);}
-.content-area{flex:1;overflow-y:auto;padding:0;}
+/* ===== BLUEPRINT GRID TEXTURE ===== */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(27,42,69,0.08) 59px,rgba(27,42,69,0.08) 60px),
+    repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(27,42,69,0.08) 59px,rgba(27,42,69,0.08) 60px);
+  pointer-events:none;
+  z-index:0;
+}
 
-/* FLOW VIEW */
-.flow{max-width:960px;margin:0 auto;padding:32px 24px 80px;}
-.flow-title{font-family:Montserrat;font-size:1.4rem;font-weight:900;text-align:center;margin-bottom:4px;}
-.flow-sub{text-align:center;font-size:0.82rem;color:var(--gray);margin-bottom:32px;line-height:1.5;}
+/* ===== LAYOUT ===== */
+.page{position:relative;z-index:1}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+.wrap-wide{max-width:960px;margin:0 auto;padding:0 24px}
 
-.funnel-section{margin-bottom:4px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:border-color 0.2s;}
-.funnel-section:hover{border-color:rgba(201,164,90,0.15);}
-.funnel-header{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;background:var(--card);transition:background 0.15s;user-select:none;}
-.funnel-header:hover{background:var(--card-hover);}
-.funnel-badge{font-family:Montserrat;font-size:0.55rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:6px;flex-shrink:0;}
-.badge-tofu{background:rgba(206,48,42,0.12);color:#ff8888;border:1px solid rgba(206,48,42,0.25);}
-.badge-mofu{background:rgba(253,195,62,0.1);color:var(--accent);border:1px solid rgba(253,195,62,0.2);}
-.badge-bofu{background:rgba(26,122,110,0.1);color:#88ffee;border:1px solid rgba(26,122,110,0.25);}
-.funnel-info{flex:1;}
-.funnel-name{font-family:Montserrat;font-size:0.88rem;font-weight:800;color:var(--white);}
-.funnel-sells{font-size:0.72rem;color:var(--gray);margin-top:2px;}
-.funnel-sells b{color:var(--accent);}
-.funnel-chev{color:var(--gray);font-size:0.9rem;transition:transform 0.2s;flex-shrink:0;}
-.funnel-section.open .funnel-chev{transform:rotate(180deg);}
-.funnel-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease;background:rgba(0,0,0,0.25);}
-.funnel-section.open .funnel-body{max-height:5000px;}
-.funnel-inner{padding:20px 24px;}
+/* ===== STAT BAR ===== */
+.stat-bar{
+  background:linear-gradient(90deg,var(--navy),#162035,var(--navy));
+  border-bottom:1px solid var(--border-gold);
+  padding:14px 24px;
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.stat-bar-item{text-align:center}
+.stat-bar-num{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:1.15rem;
+  color:var(--gold);
+}
+.stat-bar-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.6rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-top:2px;
+}
 
-/* SECTION CONTENT */
-.sec-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
-@media(max-width:800px){.sec-grid{grid-template-columns:1fr;}.sidebar{width:220px;}}
-.sec-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;transition:border-color 0.15s;}
-.sec-card:hover{border-color:rgba(201,164,90,0.15);}
-.sec-card.full{grid-column:1/-1;}
-.sec-label{font-family:Montserrat;font-size:0.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
-.label-green{color:#6bff6b;}.label-red{color:#ff6b6b;}.label-gold{color:var(--accent);}.label-blue{color:#6b9fff;}.label-teal{color:#6bffee;}.label-purple{color:#bb88ff;}
-.sec-body{font-size:0.78rem;color:var(--light);line-height:1.55;}
-.sec-body b{color:var(--white);}
-.sec-body ul{margin:6px 0 0 14px;}
-.sec-body li{margin-bottom:3px;}
+/* ===== SLE EYEBROW ===== */
+.sle-eyebrow{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.72rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.sle-eyebrow::before,
+.sle-eyebrow::after{
+  content:'';
+  width:24px;
+  height:1px;
+  background:var(--gold-muted);
+}
 
-/* RULE CHECKS */
-.rule{display:flex;align-items:flex-start;gap:8px;padding:5px 0;font-size:0.75rem;color:var(--light);}
-.rbox{width:14px;height:14px;border-radius:3px;border:1px solid #444;flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.55rem;transition:all 0.1s;}
-.rbox.on{border-color:var(--green);background:rgba(45,122,45,0.25);color:var(--green);}
+/* ===== SECTION TITLE ===== */
+.sle-section-title{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  color:var(--white);
+  line-height:1.15;
+  font-size:clamp(1.6rem,4vw,2.6rem);
+}
+.sle-section-title span{color:var(--gold)}
 
-/* DOC UPLOAD */
-.upload{border:2px dashed rgba(201,164,90,0.15);border-radius:10px;padding:16px;text-align:center;cursor:pointer;font-size:0.75rem;color:var(--gray);transition:border-color 0.15s;}
-.upload:hover{border-color:var(--gold);}
-.doc{display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:8px;margin-top:6px;font-size:0.75rem;}
-.doc-name{flex:1;color:var(--white);font-weight:600;}
-.doc-st{font-family:Montserrat;font-size:0.55rem;font-weight:700;padding:2px 8px;border-radius:8px;letter-spacing:1px;text-transform:uppercase;}
-.st-pending{background:rgba(253,195,62,0.12);color:var(--accent);}
-.st-ok{background:rgba(45,122,45,0.12);color:#88ff88;}
-.st-flag{background:rgba(206,48,42,0.12);color:#ff8888;}
-.doc-btn{font-size:0.6rem;padding:3px 7px;border-radius:5px;border:none;cursor:pointer;font-family:Montserrat;font-weight:700;}
-.db-ok{background:rgba(45,122,45,0.15);color:#88ff88;}.db-no{background:rgba(206,48,42,0.15);color:#ff8888;}.db-mv{background:rgba(68,102,204,0.15);color:#88bbff;}
+/* ===== GOLD RULE ===== */
+.sle-gold-rule{
+  width:52px;
+  height:3px;
+  background:linear-gradient(90deg,var(--gold-muted),var(--gold));
+  border:none;
+  margin:1rem 0 1.75rem;
+}
 
-/* FLOW ARROW */
-.flow-arrow{text-align:center;padding:6px 0;color:var(--gold);font-size:1.1rem;}
+/* ===== BODY TEXT ===== */
+.sle-body{
+  font-size:1rem;
+  color:var(--text);
+  line-height:1.75;
+  max-width:680px;
+}
+.sle-body strong{color:var(--white)}
 
-::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:3px;}
+/* ===== CARDS ===== */
+.sle-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:1.75rem;
+  transition:transform 0.25s ease,border-color 0.25s ease;
+}
+.sle-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--border-gold-bright);
+}
+
+/* ===== BUTTONS ===== */
+.sle-btn-gold{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;
+  font-size:0.85rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:#000;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  border:none;
+  border-radius:4px;
+  padding:16px 36px;
+  cursor:pointer;
+  transition:all 0.25s ease;
+  text-decoration:none;
+}
+.sle-btn-gold:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 40px rgba(253,195,62,0.45);
+}
+
+.sle-btn-outline{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.8rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:var(--gold);
+  background:transparent;
+  border:2px solid var(--gold-muted);
+  border-radius:4px;
+  padding:14px 32px;
+  cursor:pointer;
+  transition:all 0.25s ease;
+  text-decoration:none;
+}
+.sle-btn-outline:hover{
+  background:rgba(253,195,62,0.08);
+  border-color:var(--gold);
+}
+
+/* ===== FORM INPUTS ===== */
+.sle-input{
+  width:100%;
+  font-family:'Open Sans',sans-serif;
+  font-size:0.95rem;
+  color:var(--white);
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(227,197,117,0.2);
+  border-radius:4px;
+  padding:14px 16px;
+  outline:none;
+  transition:border-color 0.2s;
+}
+.sle-input:focus{
+  border-color:var(--gold);
+}
+.sle-input::placeholder{
+  color:var(--text-dim);
+}
+.sle-select{
+  width:100%;
+  font-family:'Open Sans',sans-serif;
+  font-size:0.95rem;
+  color:var(--white);
+  background:rgba(15,25,45,0.6);
+  border:1px solid rgba(227,197,117,0.2);
+  border-radius:4px;
+  padding:14px 16px;
+  outline:none;
+  appearance:none;
+  cursor:pointer;
+  transition:border-color 0.2s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A78227' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+}
+.sle-select:focus{border-color:var(--gold)}
+.sle-select option{background:var(--navy);color:var(--white)}
+
+.form-label{
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.68rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:6px;
+  display:block;
+}
+
+/* ===== HERO ===== */
+.hero{
+  text-align:center;
+  padding:64px 24px 56px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:600px;
+  height:600px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--glow-gold) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.hero .sle-eyebrow{margin-bottom:24px}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:clamp(2rem,5vw,3.4rem);
+  color:var(--white);
+  line-height:1.12;
+  margin-bottom:20px;
+}
+.hero h1 span{color:var(--gold)}
+.hero-sub{
+  font-size:1.1rem;
+  color:var(--text-muted);
+  max-width:600px;
+  margin:0 auto 12px;
+  line-height:1.65;
+}
+.hero-sub strong{color:var(--white)}
+.hero-body{
+  font-size:0.95rem;
+  color:var(--text-dim);
+  max-width:560px;
+  margin:0 auto 32px;
+  line-height:1.6;
+}
+.hero-trust{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.7rem;
+  font-weight:600;
+  color:var(--text-dim);
+  letter-spacing:0.5px;
+  margin-top:16px;
+}
+.hero-quote{
+  margin-top:36px;
+  padding:20px 28px;
+  background:rgba(27,42,69,0.4);
+  border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;
+  display:inline-block;
+  text-align:left;
+  max-width:560px;
+}
+.hero-quote p{
+  font-style:italic;
+  color:var(--text);
+  font-size:0.95rem;
+  line-height:1.6;
+}
+.hero-quote cite{
+  display:block;
+  margin-top:8px;
+  font-style:normal;
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.72rem;
+  color:var(--gold-muted);
+  letter-spacing:0.5px;
+}
+
+/* ===== VIDEO EMBED ===== */
+.video-wrap{
+  max-width:720px;
+  margin:0 auto 48px;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  border:2px solid rgba(227,197,117,0.2);
+  position:relative;
+  background:#000;
+}
+.video-aspect{
+  position:relative;
+  padding-top:56.25%;
+}
+.video-aspect iframe{
+  position:absolute;
+  top:0;left:0;width:100%;height:100%;border:0;
+}
+
+/* ===== SECTIONS ===== */
+.section{padding:72px 0}
+.section-alt{background:var(--surface)}
+.section-dark{background:rgba(10,10,10,0.96)}
+.section-center{text-align:center}
+.section-center .sle-gold-rule{margin-left:auto;margin-right:auto}
+.section-center .sle-body{margin-left:auto;margin-right:auto}
+
+/* ===== IS THIS YOU? ===== */
+.pain-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:36px;
+}
+.pain-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:28px 24px;
+  transition:transform 0.25s ease,border-color 0.25s ease;
+}
+.pain-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--border-gold-bright);
+}
+.pain-num{
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;
+  font-size:0.7rem;
+  color:var(--gold);
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+.pain-title{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:1rem;
+  color:var(--white);
+  margin-bottom:8px;
+}
+.pain-body{
+  font-size:0.88rem;
+  color:var(--text-muted);
+  line-height:1.65;
+}
+
+/* ===== NOT FOR YOU ===== */
+.disqualify{margin-top:32px}
+.disqualify-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(206,48,42,0.1);
+}
+.disqualify-icon{
+  flex-shrink:0;
+  width:22px;
+  height:22px;
+  background:rgba(206,48,42,0.12);
+  border:1px solid rgba(206,48,42,0.3);
+  border-radius:3px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--red);
+  font-size:0.7rem;
+  font-weight:900;
+  margin-top:2px;
+}
+.disqualify-text{
+  font-size:0.92rem;
+  color:rgba(255,180,180,0.85);
+  line-height:1.55;
+}
+
+/* ===== STATS ROW ===== */
+.stats-row{
+  display:flex;
+  justify-content:center;
+  gap:32px;
+  flex-wrap:wrap;
+  margin:40px 0;
+}
+.stat-block{
+  text-align:center;
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:24px 32px;
+  min-width:160px;
+}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:2.2rem;
+  color:var(--gold);
+  line-height:1;
+}
+.stat-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.65rem;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-top:8px;
+}
+
+/* ===== CONCEPT CARDS ===== */
+.concept-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:36px;
+}
+.concept-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:28px 22px;
+  text-align:center;
+  transition:transform 0.25s ease,border-color 0.25s ease;
+}
+.concept-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--border-gold-bright);
+}
+.concept-icon{
+  font-size:2rem;
+  margin-bottom:14px;
+  display:block;
+}
+.concept-name{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.82rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:10px;
+}
+.concept-body{
+  font-size:0.85rem;
+  color:var(--text-muted);
+  line-height:1.6;
+}
+
+/* ===== FORMULA BAR ===== */
+.formula-bar{
+  background:linear-gradient(90deg,var(--navy),#162035,var(--navy));
+  border:1px solid rgba(227,197,117,0.25);
+  border-radius:6px;
+  padding:22px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin:36px 0;
+}
+.formula-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.6rem;
+  font-weight:800;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold-muted);
+}
+.formula-text{
+  font-family:'Courier New',monospace;
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--gold);
+  letter-spacing:1px;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonial-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:36px;
+}
+.testimonial-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:28px 24px;
+  transition:transform 0.25s ease,border-color 0.25s ease;
+}
+.testimonial-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--border-gold-bright);
+}
+.testimonial-quote{
+  font-style:italic;
+  font-size:0.92rem;
+  color:var(--text);
+  line-height:1.65;
+  margin-bottom:16px;
+  border-left:3px solid var(--gold-muted);
+  padding-left:16px;
+}
+.testimonial-name{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.82rem;
+  color:var(--white);
+}
+.testimonial-detail{
+  font-size:0.75rem;
+  color:var(--text-dim);
+  margin-top:2px;
+}
+.win-badge{
+  display:inline-block;
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.6rem;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:3px 10px;
+  border-radius:2px;
+  margin-top:10px;
+}
+.badge-gold{background:rgba(253,195,62,0.12);color:var(--gold);border:1px solid rgba(253,195,62,0.25)}
+.badge-platinum{background:rgba(192,192,192,0.12);color:#ccc;border:1px solid rgba(192,192,192,0.25)}
+.badge-ultimate{background:rgba(136,85,255,0.12);color:#bb88ff;border:1px solid rgba(136,85,255,0.25)}
+
+/* ===== FOUNDERS ===== */
+.founders-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:36px;
+}
+.founder-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:28px 22px;
+  text-align:center;
+}
+.founder-name{
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;
+  font-size:1rem;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.founder-role{
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.6rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.founder-body{
+  font-size:0.85rem;
+  color:var(--text-muted);
+  line-height:1.6;
+}
+
+/* ===== FORM SECTION ===== */
+.form-section{
+  background:linear-gradient(135deg,rgba(27,42,69,0.9),var(--surface));
+  border:2px solid rgba(227,197,117,0.2);
+  border-radius:var(--radius-lg);
+  padding:48px 40px;
+  max-width:560px;
+  margin:0 auto;
+}
+.form-section h3{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:1.6rem;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.form-section .form-sub{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:28px;
+}
+.form-row{margin-bottom:16px}
+.form-row-half{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:16px;
+}
+.form-submit{width:100%;margin-top:8px}
+.form-trust{
+  text-align:center;
+  font-family:'Montserrat',sans-serif;
+  font-size:0.65rem;
+  font-weight:600;
+  color:var(--text-dim);
+  margin-top:14px;
+  letter-spacing:0.5px;
+}
+
+/* ===== ORDER BUMP ===== */
+.order-bump{
+  background:linear-gradient(135deg,rgba(27,42,69,0.9),rgba(13,21,32,0.95));
+  border:2px solid rgba(253,195,62,0.3);
+  border-radius:10px;
+  padding:28px 24px;
+  margin-top:28px;
+  overflow:hidden;
+}
+.bump-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+.bump-check{
+  width:20px;
+  height:20px;
+  border-radius:3px;
+  border:2px solid var(--gold);
+  cursor:pointer;
+  accent-color:var(--gold);
+}
+.bump-title{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:0.82rem;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.bump-body{
+  font-size:0.88rem;
+  color:var(--text-muted);
+  line-height:1.65;
+  margin-bottom:12px;
+}
+.bump-price{
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+}
+.bump-price .crossed{
+  text-decoration:line-through;
+  color:var(--text-dim);
+  font-size:0.85rem;
+}
+.bump-price .free{
+  color:var(--gold);
+  font-weight:900;
+  font-size:1.05rem;
+  margin-left:8px;
+}
+
+/* ===== SUCCESS STATE ===== */
+.success-state{
+  display:none;
+  text-align:center;
+  padding:48px 24px;
+}
+.success-state.active{display:block}
+.success-icon{font-size:3rem;margin-bottom:16px}
+.success-title{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:2rem;
+  color:var(--gold);
+  margin-bottom:8px;
+}
+.success-body{
+  font-size:1rem;
+  color:var(--text-muted);
+  max-width:480px;
+  margin:0 auto;
+}
+
+/* ===== FAQ ===== */
+.faq-list{margin-top:36px}
+.faq-item{
+  border-bottom:1px solid var(--border-gold);
+}
+.faq-btn{
+  width:100%;
+  background:none;
+  border:none;
+  color:var(--white);
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  font-size:0.92rem;
+  text-align:left;
+  padding:20px 0;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  transition:color 0.2s;
+}
+.faq-btn:hover{color:var(--gold)}
+.faq-icon{
+  flex-shrink:0;
+  font-size:1.2rem;
+  color:var(--gold-muted);
+  transition:transform 0.3s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+.faq-body-inner{
+  padding:0 0 20px;
+  font-size:0.9rem;
+  color:var(--text-muted);
+  line-height:1.7;
+}
+
+/* ===== FINAL CTA ===== */
+.final-cta{
+  text-align:center;
+  padding:80px 24px;
+  position:relative;
+}
+.final-cta::before{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  width:500px;height:500px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--glow-gold) 0%,transparent 65%);
+  pointer-events:none;
+}
+.final-cta>*{position:relative;z-index:1}
+
+/* ===== FOOTER ===== */
+.footer{
+  text-align:center;
+  padding:40px 24px;
+  border-top:1px solid var(--border-gold);
+}
+.footer p{
+  font-size:0.72rem;
+  color:var(--text-dim);
+  line-height:1.8;
+  max-width:680px;
+  margin:0 auto;
+}
+.footer a{color:var(--gold-muted);text-decoration:none}
+
+/* ===== FADE ANIMATION ===== */
+.fade-up{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity 0.65s ease,transform 0.65s ease;
+}
+.fade-up.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== INTERACTIVE CALCULATOR ===== */
+.calc-sliders{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+  margin-top:36px;
+}
+.calc-slider-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:22px 18px 18px;
+  text-align:center;
+}
+.calc-slider-value{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:1.6rem;
+  color:var(--gold);
+  line-height:1;
+  margin-bottom:6px;
+}
+.calc-slider-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.58rem;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-bottom:14px;
+}
+.calc-range{
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+  height:6px;
+  border-radius:3px;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--gold) var(--fill,50%),rgba(255,255,255,0.12) var(--fill,50%),rgba(255,255,255,0.12) 100%);
+  outline:none;
+  cursor:pointer;
+}
+.calc-range::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--gold);
+  border:3px solid var(--bg);
+  box-shadow:0 0 8px rgba(253,195,62,0.5);
+  cursor:pointer;
+  transition:box-shadow 0.2s;
+}
+.calc-range::-webkit-slider-thumb:hover{
+  box-shadow:0 0 16px rgba(253,195,62,0.7);
+}
+.calc-range::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--gold);
+  border:3px solid var(--bg);
+  box-shadow:0 0 8px rgba(253,195,62,0.5);
+  cursor:pointer;
+}
+.calc-range::-moz-range-track{
+  height:6px;border-radius:3px;
+  background:rgba(255,255,255,0.12);
+}
+.calc-range::-moz-range-progress{
+  height:6px;border-radius:3px;
+  background:var(--gold);
+}
+
+.calc-outputs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:24px;
+}
+.calc-out-card{
+  background:var(--card);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:20px 14px;
+  text-align:center;
+  transition:border-color 0.25s;
+}
+.calc-out-card.highlight{
+  border-color:var(--gold);
+  background:rgba(253,195,62,0.06);
+}
+.calc-out-card.highlight-green{
+  border-color:rgba(45,122,45,0.5);
+  background:rgba(45,122,45,0.08);
+}
+.calc-out-num{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:800;
+  font-size:1.5rem;
+  color:var(--gold);
+  line-height:1;
+  margin-bottom:6px;
+}
+.calc-out-card.highlight-green .calc-out-num{
+  color:#88ff88;
+}
+.calc-out-label{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.55rem;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .stat-bar{gap:20px;padding:12px 16px}
+  .stat-bar-num{font-size:0.95rem}
+  .hero{padding:48px 16px 40px}
+  .pain-grid{grid-template-columns:1fr}
+  .concept-grid{grid-template-columns:1fr}
+  .testimonial-grid{grid-template-columns:1fr}
+  .founders-grid{grid-template-columns:1fr}
+  .form-section{padding:32px 20px}
+  .form-row-half{grid-template-columns:1fr}
+  .section{padding:48px 0}
+  .calc-sliders{grid-template-columns:repeat(2,1fr)}
+  .calc-sliders .calc-slider-card:last-child{grid-column:1/-1}
+  .calc-outputs{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  .stat-bar{flex-direction:column;gap:8px}
+  .stats-row{flex-direction:column;align-items:center}
+  .calc-sliders{grid-template-columns:1fr}
+  .calc-outputs{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
+<div class="page">
 
-<div class="sidebar">
-  <div class="sidebar-header">
-    <div class="sidebar-logo">SLE Funnel System</div>
-    <div class="sidebar-sub">Architecture + Review</div>
+<!-- ===== STAT BAR ===== -->
+<div class="stat-bar">
+  <div class="stat-bar-item">
+    <div class="stat-bar-num">$474/hr</div>
+    <div class="stat-bar-label">Average SSR</div>
   </div>
-  <div class="sidebar-nav" id="sideNav"></div>
-  <div class="sidebar-footer">For Electricians. By Electricians.<br>&copy; 2026 Service Loop Electrical</div>
+  <div class="stat-bar-item">
+    <div class="stat-bar-num">$35K</div>
+    <div class="stat-bar-label">Weeks Not Months</div>
+  </div>
+  <div class="stat-bar-item">
+    <div class="stat-bar-num">1,000+</div>
+    <div class="stat-bar-label">Electricians Trained</div>
+  </div>
+  <div class="stat-bar-item">
+    <div class="stat-bar-num">60 min</div>
+    <div class="stat-bar-label">To Build Your Rate</div>
+  </div>
 </div>
 
-<div class="main">
-  <div class="topbar">
-    <div class="topbar-crumb" id="crumb"><b>System Overview</b></div>
-    <div class="topbar-btns">
-      <button class="btn btn-outline" onclick="viewOverview()">Overview</button>
-      <button class="btn btn-gold" onclick="exportReport()">Export Report</button>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="sle-eyebrow">Service Loop Electrical</div>
+    <h1>For Electricians Who Are Tired of <span>Guessing What to Charge</span></h1>
+    <p class="hero-sub">The exact <strong>Simple Service Rate</strong> formula that's helped 1,000+ electricians stop undercharging and start building real profit.</p>
+    <p class="hero-body">In this free 60-minute workshop, Clay Neumeyer walks you through the SSR formula step by step. You'll calculate your real Burden Rate, Growth Rate, and Profitable Rate live. By the end, you'll have a number you can use tomorrow morning on your next call.</p>
+    <a href="#signup-form" class="sle-btn-gold">Reserve My Free Seat</a>
+    <p class="hero-trust">Free. Live. Limited seats.</p>
+    <div class="hero-quote">
+      <p>"My first offer at nearly $400 SSR had my hands shaking. Ten weeks later I was doing $35K months."</p>
+      <cite>Clay Neumeyer, Co-Founder SLE</cite>
     </div>
   </div>
-  <div class="content-area" id="contentArea"></div>
+</section>
+
+<!-- ===== VIDEO ===== -->
+<div class="wrap fade-up">
+  <div class="video-wrap">
+    <div class="video-aspect">
+      <div id="wistia-video"></div>
+    </div>
+  </div>
 </div>
+
+<!-- ===== IS THIS YOU? ===== -->
+<section class="section section-alt fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">Pre-Qualify Yourself</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Is This <span>You?</span></h2>
+    <hr class="sle-gold-rule">
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-num">01</div>
+        <div class="pain-title">The Competitor Call</div>
+        <div class="pain-body">You called around pretending to be a customer to figure out what to charge. You built your rate on what someone else charges, not on what your business actually costs to run.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">02</div>
+        <div class="pain-title">The Race to the Bottom</div>
+        <div class="pain-body">You're charging "a little less" than the other guy and hoping to make it up on volume. But volume without margin is just more work for the same stress.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">03</div>
+        <div class="pain-title">The Fear of Raising Prices</div>
+        <div class="pain-body">You know you're undercharging but you're afraid raising prices will kill your phone. So you keep grinding at rates that don't cover your real costs.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">04</div>
+        <div class="pain-title">The "Seasonality" Excuse</div>
+        <div class="pain-body">Your best months are followed by droughts and you call it "seasonality." But the real issue is that your pricing can't sustain you through the dips.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">05</div>
+        <div class="pain-title">The Hidden Number</div>
+        <div class="pain-body">You've never seen your real cost-per-billable-hour and the number would probably scare you. Most electricians haven't. That's why most electricians are broke.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">06</div>
+        <div class="pain-title">The Effort-Income Gap</div>
+        <div class="pain-body">The gap between your effort and your income is getting harder to ignore. You're working harder than ever but the bank account tells a different story.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NOT FOR YOU ===== -->
+<section class="section fade-up">
+  <div class="wrap">
+    <h2 class="sle-section-title">This Is <span>Not</span> For You If...</h2>
+    <hr class="sle-gold-rule">
+    <div class="disqualify">
+      <div class="disqualify-item">
+        <div class="disqualify-icon">X</div>
+        <div class="disqualify-text">You're already running a documented SSR reviewed twice a year. You've done the math. You know your numbers. This workshop would be a refresher, not a revelation.</div>
+      </div>
+      <div class="disqualify-item">
+        <div class="disqualify-icon">X</div>
+        <div class="disqualify-text">You're consistently above $83K/month and your pricing model is dialed. Your rate is built on data, not guesswork. You're past this stage.</div>
+      </div>
+      <div class="disqualify-item">
+        <div class="disqualify-icon">X</div>
+        <div class="disqualify-text">You're looking for a magic trick that doesn't require math or honesty with yourself. The SSR formula works, but it starts with facing your real numbers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULTS ===== -->
+<section class="section section-alt section-center fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">The Numbers Don't Lie</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Results From the <span>SSR Formula</span></h2>
+    <hr class="sle-gold-rule">
+    <div class="stats-row">
+      <div class="stat-block">
+        <div class="stat-num">$140</div>
+        <div class="stat-label">Fixture Swaps to $35K Weeks</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">$900K+</div>
+        <div class="stat-label">First 12 Months (Nathan)</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">9x</div>
+        <div class="stat-label">Revenue Increase in 3 Calls</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">$300K</div>
+        <div class="stat-label">/Month in 60 Days (Sherman)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE PRICING PROBLEM ===== -->
+<section class="section fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">The Real Problem</div>
+    <h2 class="sle-section-title" style="margin-top:12px">The Pricing Problem Nobody <span>Taught You</span> to Solve</h2>
+    <hr class="sle-gold-rule">
+    <p class="sle-body">At no point in your journey to becoming a licensed electrician did anyone teach you how to price your work. Not in trade school. Not in your apprenticeship. Not when you got your journeyman ticket. Not when you pulled your master's license.</p>
+    <p class="sle-body" style="margin-top:16px">So you did what everyone does. You called competitors pretending to be a customer. Or you charged a little less than the other guy, hoping to make it up on volume. Both paths lead to the same place: <strong>burnout with nothing to show for it.</strong></p>
+    <p class="sle-body" style="margin-top:16px">The problem was never your skill. It was never your work ethic. It was never your market. <strong>The problem is that nobody gave you the formula.</strong> You've been guessing at the most important number in your business.</p>
+
+    <div class="formula-bar" style="margin-top:32px">
+      <span class="formula-label">The SSR Formula</span>
+      <span class="formula-text">Burden + Growth + 30% Profit + Materials = Your Rate</span>
+    </div>
+
+    <p class="sle-body" style="margin-top:24px">Once you have this number, the conversation shifts from <em>"What should I charge?"</em> to <strong>"Here's what it costs. Here are your options."</strong> That's the shift from guessing to presenting with confidence.</p>
+  </div>
+</section>
+
+<!-- ===== WHAT YOU'LL LEARN ===== -->
+<section class="section section-alt section-center fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">What You'll Learn</div>
+    <h2 class="sle-section-title" style="margin-top:12px">3 Numbers That Change <span>Everything</span></h2>
+    <hr class="sle-gold-rule">
+    <p class="sle-body" style="margin-left:auto;margin-right:auto">Master these three and every pricing decision becomes math instead of anxiety. Skip them and every call you run is a guess.</p>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="concept-icon">&#9874;</span>
+        <div class="concept-name">Your Burden Rate</div>
+        <div class="concept-body">What it actually costs you to keep the doors open for one billable hour. Most electricians have never calculated this. When they do, they realize they've been working for free.</div>
+      </div>
+      <div class="concept-card">
+        <span class="concept-icon">&#9650;</span>
+        <div class="concept-name">Your Growth Rate</div>
+        <div class="concept-body">The money you need built into every hour to fund vans, wraps, hires, and training. Without it, you're funding growth from personal sacrifice.</div>
+      </div>
+      <div class="concept-card">
+        <span class="concept-icon">&#9889;</span>
+        <div class="concept-name">Your Simple Service Rate</div>
+        <div class="concept-body">Burden + Growth + 30% Profit + Materials = one number you can use on every call. No pricebook. No fumbling. No guessing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOUNDER STORY ===== -->
+<section class="section fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">Why This Exists</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Built by a Guy Whose <span>Hands Were Shaking</span></h2>
+    <hr class="sle-gold-rule">
+    <div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
+      <div style="flex:1;min-width:280px">
+        <p class="sle-body">Clay Neumeyer has trained 1,000+ electricians on the SSR formula. His first offer at nearly $400/hr had his hands shaking.</p>
+        <p class="sle-body" style="margin-top:16px">Now that same formula has helped partners hit $35K weeks, $110K months, and $1M+ years. He didn't invent premium pricing. He built a formula that makes it feel like math instead of guesswork.</p>
+        <p class="sle-body" style="margin-top:16px">The Simple Service Rate removes the emotion. It replaces the anxiety of "is this too much?" with the confidence of "this is what my business requires." Your expenses determine your rate. Not your competitor. Not your fear. Not your market.</p>
+        <p class="sle-body" style="margin-top:16px"><strong>In this workshop, Clay walks you through the entire formula live.</strong> You'll calculate your own rate in real time. No theory. No fluff. Just the math that changes everything.</p>
+      </div>
+      <div style="flex:0 0 260px;background:var(--card);border:1px solid var(--border-gold);border-radius:var(--radius);padding:24px;text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-style:italic;font-weight:800;font-size:2.4rem;color:var(--gold);line-height:1">1,000+</div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-top:6px">Electricians Trained</div>
+        <div style="width:40px;height:2px;background:var(--gold-muted);margin:16px auto"></div>
+        <div style="font-family:'Playfair Display',serif;font-style:italic;font-weight:800;font-size:2.4rem;color:var(--gold);line-height:1">$474</div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-top:6px">Average SSR / Hour</div>
+        <div style="width:40px;height:2px;background:var(--gold-muted);margin:16px auto"></div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.85rem;color:var(--white);margin-top:4px">Clay Neumeyer</div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.68rem;color:var(--gold-muted);margin-top:2px">CEO, Service Loop Electrical</div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.68rem;color:var(--text-dim)">Workshop Host</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== $1M INTERACTIVE CALCULATOR ===== -->
+<section class="section section-alt fade-up" id="calculator-section">
+  <div class="wrap-wide section-center">
+    <div class="sle-eyebrow">It's a Math Problem</div>
+    <h2 class="sle-section-title" style="margin-top:12px">The <span>$1M</span> Pricing Math</h2>
+    <hr class="sle-gold-rule">
+    <p class="sle-body" style="margin-left:auto;margin-right:auto">Adjust the sliders below. The calculator auto-solves for <strong>$83,334/month</strong>, the line of safety.</p>
+
+    <!-- SLIDERS -->
+    <div class="calc-sliders">
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-cpl">$50</div>
+        <div class="calc-slider-label">Cost Per Lead</div>
+        <input type="range" class="calc-range" id="slider-cpl" min="20" max="80" value="50" step="1">
+      </div>
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-ticket">$2,000</div>
+        <div class="calc-slider-label">Average Ticket</div>
+        <input type="range" class="calc-range" id="slider-ticket" min="500" max="5000" value="2000" step="50">
+      </div>
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-close">50%</div>
+        <div class="calc-slider-label">Close Rate</div>
+        <input type="range" class="calc-range" id="slider-close" min="30" max="80" value="50" step="1">
+      </div>
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-book">40%</div>
+        <div class="calc-slider-label">Booking Rate</div>
+        <input type="range" class="calc-range" id="slider-book" min="25" max="90" value="40" step="1">
+      </div>
+      <div class="calc-slider-card">
+        <div class="calc-slider-value" id="val-budget">10%</div>
+        <div class="calc-slider-label">Marketing Budget (% of Rev)</div>
+        <input type="range" class="calc-range" id="slider-budget" min="1" max="15" value="10" step="0.5">
+      </div>
+    </div>
+
+    <!-- OUTPUT CARDS -->
+    <div class="calc-outputs">
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-leads">216</div>
+        <div class="calc-out-label">Total Leads / Month</div>
+      </div>
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-booked">86</div>
+        <div class="calc-out-label">Booked Calls</div>
+      </div>
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-closed">43</div>
+        <div class="calc-out-label">Closed Jobs</div>
+      </div>
+      <div class="calc-out-card highlight">
+        <div class="calc-out-num" id="out-paid">167</div>
+        <div class="calc-out-label">Paid Leads</div>
+      </div>
+      <div class="calc-out-card highlight-green">
+        <div class="calc-out-num" id="out-organic">49</div>
+        <div class="calc-out-label">Organic Leads Req'd</div>
+      </div>
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-spend">$8,333</div>
+        <div class="calc-out-label">Marketing Spend / Mo</div>
+      </div>
+      <div class="calc-out-card">
+        <div class="calc-out-num" id="out-roas">10.0x</div>
+        <div class="calc-out-label">Return on Ad Spend</div>
+      </div>
+    </div>
+
+    <!-- FORMULA RESULT BAR -->
+    <div class="formula-bar" style="margin-top:28px;flex-direction:column;gap:6px;padding:24px 32px">
+      <span class="formula-text" id="calc-formula" style="font-size:1rem"></span>
+      <span style="font-size:0.85rem;color:var(--text-dim)">That's <strong style="color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem">$1,000,000</strong> in annual revenue. The line of safety.</span>
+    </div>
+    <p class="sle-body" style="margin:24px auto 0;text-align:center;font-style:italic;color:var(--text-dim)">Your SSR determines your average ticket. Your average ticket determines your $1M math.</p>
+  </div>
+</section>
+
+<!-- ===== CASE STUDIES ===== -->
+<section class="section fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">Real Results. Real Electricians.</div>
+    <h2 class="sle-section-title" style="margin-top:12px">What Happens When the <span>Formula</span> Meets Follow-Through</h2>
+    <hr class="sle-gold-rule">
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"$140 fixture swaps to $35K weeks. 3 wrapped vans in 6 months. The SSR formula changed everything about how I run calls."</div>
+        <div class="testimonial-name">Edwin</div>
+        <div class="testimonial-detail">SLE Partner - 3 Vans in 6 Months</div>
+        <span class="win-badge badge-gold">Gold Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"$0 to $900K+ in 12 months. Started with the SSR formula. Knowing my number gave me the confidence to present options I never would have before."</div>
+        <div class="testimonial-name">Nathan Miles</div>
+        <div class="testimonial-detail">SLE Partner - $900K+ First Year</div>
+        <span class="win-badge badge-platinum">Platinum Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"First 3 presentations: $6,011 vs $675 under old pricing. A 9x increase. Same customer. Same house. Different formula."</div>
+        <div class="testimonial-name">Bronze Partner</div>
+        <div class="testimonial-detail">SLE Partner - 9x Revenue Increase</div>
+        <span class="win-badge badge-gold">Gold Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"$100K/mo to $300K/mo in 60 days. Same leads, new presentation system. The rate gave me the math. The system gave me the delivery."</div>
+        <div class="testimonial-name">Sherman Hatley</div>
+        <div class="testimonial-detail">SLE Partner - 60-Day Transformation</div>
+        <span class="win-badge badge-ultimate">Ultimate Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"$80K to $400K+ months. The 4 Whats framework plus tiered options turned every call into a real opportunity. It started with knowing my SSR."</div>
+        <div class="testimonial-name">Christian Farella</div>
+        <div class="testimonial-detail">SLE Partner - 4 Whats + Options</div>
+        <span class="win-badge badge-platinum">Platinum Award</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"$24 Angi lead turned into $66,700. Went from moonlighting to $225K+. The SSR formula was the foundation for all of it."</div>
+        <div class="testimonial-name">Dorian Hayes</div>
+        <div class="testimonial-detail">SLE Partner - Moonlighter to $225K+</div>
+        <span class="win-badge badge-ultimate">Ultimate Award</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOUNDERS ===== -->
+<section class="section section-alt fade-up">
+  <div class="wrap section-center">
+    <div class="sle-eyebrow">Built By Electricians Who Did It</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Not Coaches. <span>Operators.</span></h2>
+    <hr class="sle-gold-rule">
+    <div class="founders-grid">
+      <div class="founder-card">
+        <div class="founder-name">Clay Neumeyer</div>
+        <div class="founder-role">CEO &bull; Workshop Host &bull; 16+ Years</div>
+        <div class="founder-body">Built the $1M+ Electric Service Academy from the field up. Trained 1,000+ electricians on the SSR formula. Runs the numbers, builds the systems, and hosts this workshop live.</div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-name">Joseph Lucanie</div>
+        <div class="founder-role">CCO &bull; $1.3M in Sales</div>
+        <div class="founder-body">Created the 6-option pricing system and the sales methodology that turned average tickets from $850 into $2,000+. Will cover options presentation in a future workshop.</div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-name">Forrest Schwartz</div>
+        <div class="founder-role">CMO &bull; 400+ Leads/Month</div>
+        <div class="founder-body">Took Keil Electric from $0 to $143K/month in 6 months. Built the marketing roadmap that fills the calendar. Will cover leads generation in a future workshop.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORM ===== -->
+<section class="section section-dark section-center fade-up" id="signup-form">
+  <div class="wrap">
+    <div class="sle-eyebrow">Free Live Workshop</div>
+    <h2 class="sle-section-title" style="margin-top:12px">The Pricing <span>Workshop</span></h2>
+    <p style="color:var(--text-muted);margin-top:8px;margin-bottom:4px;font-size:0.95rem">Build Your Simple Service Rate in 60 Minutes</p>
+    <hr class="sle-gold-rule">
+
+    <div class="form-section" id="form-container">
+      <h3>Reserve Your Free <span style="color:var(--gold)">Seat</span></h3>
+      <p class="form-sub">Live Workshop &bull; Limited Seats &bull; Replay Available</p>
+
+      <form id="workshop-form" onsubmit="return handleSubmit(event)">
+        <div class="form-row-half">
+          <div>
+            <label class="form-label" for="firstName">First Name</label>
+            <input class="sle-input" type="text" id="firstName" name="firstName" placeholder="First Name" required>
+          </div>
+          <div>
+            <label class="form-label" for="lastName">Last Name</label>
+            <input class="sle-input" type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="businessName">Business Name</label>
+          <input class="sle-input" type="text" id="businessName" name="businessName" placeholder="Your Electrical Company">
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="email">Email Address</label>
+          <input class="sle-input" type="email" id="email" name="email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="phone">Phone Number</label>
+          <input class="sle-input" type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="yearsInBusiness">How Long in Business?</label>
+          <select class="sle-select" id="yearsInBusiness" name="yearsInBusiness">
+            <option value="" disabled selected>Select...</option>
+            <option value="less-than-1">Less than 1 year</option>
+            <option value="1-3">1-3 years</option>
+            <option value="3-5">3-5 years</option>
+            <option value="5+">5+ years</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="teamSize">Service Techs (incl. Owner)</label>
+          <select class="sle-select" id="teamSize" name="teamSize">
+            <option value="" disabled selected>Select...</option>
+            <option value="1">Just me</option>
+            <option value="2-4">2-4</option>
+            <option value="5-9">5-9</option>
+            <option value="10+">10+</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="monthlyRevenue">Approximate Monthly Revenue</label>
+          <select class="sle-select" id="monthlyRevenue" name="monthlyRevenue">
+            <option value="" disabled selected>Select...</option>
+            <option value="under-30k">Under $30K</option>
+            <option value="31-80k">$31K - $80K</option>
+            <option value="80-100k">$80K - $100K</option>
+            <option value="100k+">$100K+</option>
+          </select>
+        </div>
+
+        <button type="submit" class="sle-btn-gold form-submit">Reserve My Seat</button>
+        <p class="form-trust">Free. Live. Limited seats.</p>
+      </form>
+
+      <!-- ORDER BUMP: Pricing Workbook -->
+      <div class="order-bump">
+        <div class="bump-header">
+          <input type="checkbox" class="bump-check" id="workbookBump" name="workbookBump">
+          <label class="bump-title" for="workbookBump">Add-On: Free Pricing Workbook</label>
+        </div>
+        <p class="bump-body"><strong style="color:var(--white)">The SSR Calculator Google Sheet</strong>. Plug in your real expenses and get your Burden Rate, Growth Rate, and Simple Service Rate calculated automatically. Sent to your inbox after registration.</p>
+        <p class="bump-price"><span class="free">FREE</span></p>
+      </div>
+
+      <!-- DAILY SPARKS BUMP -->
+      <div style="margin-top:16px;display:flex;align-items:flex-start;gap:10px;padding:12px 16px;background:rgba(253,195,62,0.04);border:1px solid rgba(253,195,62,0.12);border-radius:6px">
+        <input type="checkbox" class="bump-check" id="sparksBump" name="sparksBump" checked>
+        <label for="sparksBump" style="font-size:0.82rem;color:var(--text-muted);cursor:pointer;line-height:1.5"><strong style="color:var(--white)">Daily Sparks</strong>. Free morning insights from Clay Neumeyer. One short email every day to sharpen your service business thinking.</label>
+      </div>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-state" id="success-state">
+      <div class="success-icon">&#9889;</div>
+      <div class="success-title">You're In!</div>
+      <p class="success-body">Your seat is reserved. Check your inbox for the workshop details and your free pricing workbook.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">Common Questions Answered</div>
+    <h2 class="sle-section-title" style="margin-top:12px">Frequently <span>Asked</span></h2>
+    <hr class="sle-gold-rule">
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>What is the Simple Service Rate?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">A flat rate formula built on your real business expenses. Burden Rate + Growth Rate + 30% Profit Markup + Material Rate. It replaces guesswork, competitor-copying, and time-and-material pricing.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>Will this work in my market?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">We have electricians from coast to coast, internationally, selling at SSR rates between $350-$550/hr. Your rate is built on YOUR expenses, not your competitor's. Market doesn't determine your rate. Your costs do.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>What if my customers won't pay premium rates?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">They will. Price shock fades with experience. Edwin thought the same thing. His first $35K month came 10 weeks after tripling his rate. The barrier is never the customer. It's you.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>Do I need my P&L to attend?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Helpful but not required. Your best guess works. You'll refine it after. The important thing is getting the formula and seeing your number for the first time.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>Is this just a sales pitch for your program?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">The workshop teaches you the complete SSR formula. Nothing is held back. If you want coaching on presenting it with confidence, that's what our program is for. But you'll leave with a usable rate either way.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta fade-up">
+  <div class="wrap">
+    <div class="sle-eyebrow">Now It's Your Move</div>
+    <h2 class="sle-section-title" style="margin-top:12px;margin-bottom:16px">Stop Guessing. Start <span>Charging.</span></h2>
+    <p class="sle-body" style="margin:0 auto 32px;text-align:center">Your rate should be built on math, not fear. The formula, the calculator, and the confidence are all inside this free workshop.</p>
+    <a href="#signup-form" class="sle-btn-gold">Reserve My Free Seat</a>
+    <p class="hero-trust" style="margin-top:16px">Free. Live. Limited seats.</p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p><strong style="color:var(--gold-muted)">SERVICE LOOP ELECTRICAL INC.</strong></p>
+  <p style="margin-top:8px">The results shared on this page are real but represent exceptional outcomes. Individual results will vary based on market, effort, and implementation. This workshop provides educational frameworks and strategies. Your execution determines your results. This is not financial advice.</p>
+  <p style="margin-top:12px"><a href="https://serviceloopelectrical.com">serviceloopelectrical.com</a> &bull; <a href="mailto:info@serviceloopelectrical.com">info@serviceloopelectrical.com</a></p>
+  <p style="margin-top:8px">&copy; 2026 Service Loop Electrical Inc. All rights reserved.</p>
+</footer>
+
+</div><!-- /.page -->
 
 <script>
-const S = [
-{id:'attract',stage:'TOFU',badge:'badge-tofu',name:'Attraction Marketing',
- sells:'Sells the <b>CLICK</b>. Gets an electrician to stop scrolling and watch.',
- desc:'MDE podcast episodes, YouTube Shorts, Instagram Reels, TikTok, organic social, SEO, podcast guest recruitment ads. Pure awareness. The only job here is to make electricians notice that SLE exists and that the content is worth watching. Testimonials and partner wins live heavily here as proof that something real is happening.',
- doesNot:['Does NOT sell coaching, programs, or tools','Does NOT capture contact info','Does NOT mention SLE program pricing','Does NOT filter for business owners yet. An employed electrician watching is fine at this stage.','Does NOT solve problems. Creates curiosity.'],
- rules:['All content orbits the current monthly ACDC chapter','MDE podcast: 2-3 episodes/week on the monthly chapter topic from different angles','Reels/Shorts/TikTok: 5-7/week. Clips pulled from podcast + Friday deep dives.','Podcast guest recruitment ads run here (two buckets: great stories or great struggles)','Partner win clips and testimonials run frequently. Real names, real numbers, real timelines.','Friday YouTube long-form: Clay deep dive on the monthly chapter. "Open your playbook to Chapter X."','Monday YouTube/social: Joseph touches the chapter from the sales/options angle','Use Hustler Heaven hooks library for all captions and openers','Content opener template: "Today we are diving into Chapter X. By the end of this you will know [specific outcome]."','Grade 5 reading level. Zero em-dashes. No jargon.','Outdoors, kinetic, alive locations when possible (not sterile desk)'],
- docs:[]},
+// ===== FADE-UP ANIMATION =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-{id:'filter-biz',stage:'TOFU',badge:'badge-tofu',name:'Business Owner Filter (Pain Engage)',
- sells:'Sells the <b>RESONANCE</b>. "That is me. That is my exact problem."',
- desc:'Pain-engage content that separates employed electricians from business owners, and hobbyists from Hustlers. Names the pain so clearly that the right person thinks "how do they know my life?" Testimonials from partners who WERE in that exact pain are the strongest content here.',
- doesNot:['Does NOT pitch coaching or programs','Does NOT capture contact info yet','Does NOT solve the problem. Just names it with total accuracy.','Does NOT target Noobs or All-Stars. Speaks to $350K-$800K Hustler pain specifically.','Does NOT use the word "upsell." Ever. The word is "serve."'],
- rules:['Speak to daily Hustler reality: inconsistent tickets, hiring headaches, revenue rollercoaster, owner burnout, 60-70 hour weeks','Use all 4 Big Questions from Hustler Heaven V2. BQ1 (bottleneck/leadership) is priority at 57% frequency.','Two Big Goals thread through: $83,333/month + Get Off The Tools','Lead with freedom and family, not revenue. Saturday morning with no phone is the destination.','Identity hooks: "You built a job, not a business." "You started this to be your own boss. Now you hired yourself as an employee."','Use real verbatim quotes from market intelligence: "Running around like a chicken with its head cut off" / "I cannot step away for two days without everything falling apart"','Partner testimonials matched to pain: Nathan for "too small," Sherman for "already doing well but stuck," Edwin for "price shock"','Haynes Layer distribution: Questions + Objections heavy (these stop the scroll)','Every piece must make them feel SEEN, not sold. The filter is self-selection through recognition.','Grade 5. Zero em-dashes. For Electricians, By Electricians is the filter.'],
- docs:[]},
-
-{id:'value-offer',stage:'MOFU',badge:'badge-mofu',name:'Value Marketing: Pricing Tool or Leads Now',
- sells:'Sells the <b>OPT-IN</b>. "Give me your email, get this tool that solves your problem right now."',
- desc:'Landing pages for Pricing Tool and/or Leads Now lead magnets. Free value in exchange for contact info. $97 webinar order bump on every page. They see BOTH tools. They grab whichever pain resonates. Either one leads to the same place.',
- doesNot:['Does NOT sell SLE programs','Does NOT mention program pricing','Does NOT require commitment beyond email','Delivers real, usable value. Not a teaser.'],
- rules:['Form: first name + email + phone (3 fields max). No other fields.','$97 webinar order bump checkbox. Includes current month webinar + past replay library access.','Both tools (Pricing Tool AND Leads Now) visible on the page. They grab whichever pain resonates.','Webhook fires to GHL on submit. Syncs to Close.io for sales team.','Pixel fires Lead event on submit. CompleteRegistration on delivery page.','UTM params captured in hidden fields on every form.','Delivery page: interactive HTML version of tool + PDF emailed. Keep them on your property (pixel fires, time tracked).','Landing page must include proof points. Nathan, Edwin, or Dorian matched to the tool topic.','Headline speaks to BQ2 (undercutting/effort) for Pricing Tool or BQ1 (bottleneck/leads) for Leads Now.','No SLE program pricing anywhere on these pages. The tool is the offer. Not coaching.','Grade 5 copy. Zero em-dashes. CTA button: gold, high contrast.'],
- docs:[]},
-
-{id:'email-onramp',stage:'MOFU',badge:'badge-mofu',name:'Email On-Ramp: Pricing Tool or Leads Now',
- sells:'Sells the <b>PLAYBOOK</b>. Day 14: "You fixed your rate. Here is the full system."',
- desc:'14-day PM evening sequence (7:28 PM EST). Teaches the tool they downloaded. Builds trust through depth. Bridges to the $1M Playbook at Day 14. AM morning coffee emails run independently in parallel.',
- doesNot:['Does NOT sell coaching or programs','Does NOT push calls','Does NOT mention SLE program pricing','Just teaches. Just bridges. Trust first.'],
- rules:['Sender: SLE address (clay@ or team@). Time: 7:28 PM EST.','Grade 5 reading level. Zero em-dashes. Short sentences. Simple words.','No specific SLE program pricing. No program names. No coaching pitch.','Day 14 is the bridge email: "You fixed your [rate/leads]. Here is the full system." Links to Playbook.','Pauses newsletter_day counter while active. Resumes at exact position when complete.','Tags: seq-pricing-active / seq-pricing-complete OR seq-leads-active / seq-leads-complete','Each email must answer a relevant Big Question (BQ2/BQ3 for pricing, BQ1/BQ2 for leads)','Include 2-3 case studies across the 14 days, matched to the tool topic','Day 7-10: include a "go deeper" soft CTA for the $97 webinar (not a hard sell)','AM morning coffee runs completely independently. Never pauses. Never references sequences.','Clay reads and replies to every email. Sign off with phone: 778 653 4769.'],
- docs:[]},
-
-{id:'playbook-delivery',stage:'MOFU',badge:'badge-mofu',name:'$1M Playbook Delivery + Replay Library',
- sells:'Sells the <b>JOURNEY</b>. Gets them into the 45-day ACDC chain and past 7+ hours of content.',
- desc:'The $1M Playbook (ACDC framework) is delivered free. Interactive HTML app with login. Includes order bump for $97 webinar which also unlocks past webinar replay library. This is the HUB. Everything feeds here. Two SUB-STAGES happen during this phase: the Scale Map diagnostic and the Service Pro Survey.',
- doesNot:['Does NOT sell a program directly','Does NOT gate the playbook behind payment (it is free)','The $97 is for the WEBINAR + REPLAY LIBRARY, not the playbook','Gives them 80% of the system. For free. By design.'],
- rules:['Playbook delivered as interactive HTML app (login required, feels like SLE Pro access) + PDF emailed','$97 order bump: current month webinar + FULL past replay library. This is the "textbook + all past lectures" bundle.','This is the HUB. All on-ramp sequences bridge here at Day 14. Everything feeds in. Nothing bypasses this.','The 45-day ACDC journey starts from this delivery. They are now in the main engine.','Goal: 7+ hours of content consumed within 3-7 days (playbook reading + 1-2 replay watches + daily content + emails)','SUB-STAGE: Scale Map (go.serviceloopelectrical.com/scale) embedded on this page. "Start here before you read a single chapter." Visual diagnostic of where they are across the 5 pillars. Also used as a sales tool on strategy calls.','SUB-STAGE: Service Pro Survey linked from playbook and ACDC emails. Personalized 5-Pillar diagnostic. Results inform which webinar to recommend and give the sales team pre-call intel. Survey answers stored in GHL for call prep.','Proof points throughout the playbook matched to chapters. Nathan for pricing. Dorian for leads. Sherman for presentations.','The playbook is the TEXTBOOK. The webinar is the CLASS. They must have the textbook before the class.','No SLE program pricing in the playbook. The 80% solution is free. The 20% is coaching. Make that distinction clear.','Grade 5. Zero em-dashes. "For Electricians, By Electricians."','Webinar opener references the playbook: "Into the playbook we go! Who has already covered this chapter?" If they do not have it, link drops in chat.'],
- docs:[]},
-
-{id:'acdc-journey',stage:'MOFU',badge:'badge-mofu',name:'ACDC Playbook Email Chain (45 Days)',
- sells:'Sells the <b>WEBINAR</b> ($97). Each chapter ends with "want to go deeper? Here is the masterclass."',
- desc:'THE MAIN EVENT. 9 chapters x 5 days. Walks through AMPLIFY, CONNECT, DELIVER, CHARGE. Each 5-day block: intro, framework, case study, tool drop, "go deeper" + webinar CTA. All content that month (podcast, YouTube, Reels) orbits the same chapter.',
- doesNot:['Does NOT sell coaching directly','Does NOT mention SLE program pricing','Does NOT rush. One chapter per 5-day block.','Teaches and bridges to the $97. The content sells the webinar, not the email.'],
- rules:['5-day chapter block template repeats 9x. Same rhythm every chapter.','Day 1: Chapter intro. "Open your playbook to Chapter X. This week we are in [ACDC Phase]."','Day 2: The framework with depth. The math. The method. Teach it for real.','Day 3: Case study. Real partner, real name, real numbers, real timeline. Speed is the persuasion layer.','Day 4: Tool drop. Deliver a specific asset for this chapter (worksheet, template, script, checklist).','Day 5: "Go deeper" + $97 webinar CTA for the matching chapter + bridge to next chapter.','The current monthly webinar is promoted throughout. The chapter the ACDC is on may differ from the monthly webinar topic. That is OK. The webinar CTA always points to the current/next webinar regardless.','Pauses for $97 webinar purchase (Taki 7-day deadline sequence takes over). Resumes at exact position after.','ALL monthly content (podcast, Friday YT, Monday Joseph, Reels) orbits the same chapter as the webinar, creating a surround-sound effect.','Each email must address at least one Big Question. Match BQ to chapter.','Grade 5. Zero em-dashes. No SLE program pricing. No coaching pitch. Just teach and bridge.','Content opener on all supporting media: "Today we are diving into Chapter X. By the end you will know [outcome]. If you make the webinar, [presenter] builds it with you live. If you do not, take this and go win with it right now."'],
- docs:[]},
-
-{id:'webinar-offer',stage:'MOFU',badge:'badge-mofu',name:'Webinar Offer: Elevator or Stairs',
- sells:'Sells the <b>DECISION</b>. Elevator: skip to call. Stairs: attend the class.',
- desc:'The fork. Thank You page after $97 purchase offers a 15-minute Game Plan call immediately (elevator people). Or they attend the webinar with their playbook open (stairs people). 66% of booked calls come from people who never attend the webinar.',
- doesNot:['Does NOT pressure one path over the other','Does NOT hide the call option behind the webinar','Lets them self-select their speed'],
- rules:['Thank You page (after $97 purchase): "Want to skip ahead? Book a 15-min Game Plan call now." This catches elevator people.','Taki data: 66% of booked calls come from people who never attend the webinar. The Thank You shortcut is critical.','Game Plan call: "Skittles not snakes." Transparent, benefit-rich, 3-step action plan, 90-day possibilities. Not a pitch.','Stairs people attend the webinar with their playbook open. They should already have it.','Webinar opener: "Into the playbook we go! Who has already covered this chapter?"','Webinar = the class. Playbook = the textbook. Everyone in the room should have the textbook.','Best days: Tue/Wed/Thu. Best time: 8:30 PM EST. Length: 1.5-2 hrs for webinar-to-call.','Pre-webinar sequence: 12-14 emails + 5-8 text reminders. Target show rate: 20-40%.','Present Leadsurge or Service Surge at end of webinar. $97 credits toward enrollment.','Proof points in the webinar matched to the chapter. Use the partner who best represents that chapter win.','Offer Doc available at Thank You page: sells the $97 webinar in a self-checkout binary format (yes or not yet). NOT a program enrollment doc.'],
- docs:[]},
-
-{id:'bofu-convert',stage:'BOFU',badge:'badge-bofu',name:'Elevator (Call) or Stairs (Webinar)',
- sells:'Sells the <b>PARTNERSHIP</b>. Two program directions: Leadsurge (marketing) or Service Surge (marketing + service training).',
- desc:'Elevator goes straight to strategy call. Stairs watches the webinar, gets the offer at the end. Both paths lead to the same place. Two program directions: Leadsurge for marketing focus, or Service Surge for marketing + service training. Call or webinar presents the right fit based on conversation.',
- doesNot:['Does NOT force one path','Does NOT teach on the call (Hammer + content did that)','The call confirms what the content already sold','Does NOT use old program names (Kickspark, Inner Loop, Open Circuit). Programs are Leadsurge or Service Surge.'],
- rules:['Webinar: present Leadsurge or Service Surge at end. "You just built [deliverable]. That is one chapter. There are eight more."','Two program directions: Leadsurge (marketing focus) OR Service Surge (marketing + service training). Right-fit based on conversation.','Sales is a cashier. The call CONFIRMS what the content already sold. It does not teach. If the closer is teaching, the funnel failed above.','Pre-call sequence: immediate SMS confirmation, email with "what to expect" + prep questions, 24hr reminder, 1hr reminder, FAQ page link','By the time they call, you know: survey answers, Scale Map gaps, engagement history, value pieces consumed, UTM source','FAQ page (26 FAQs) linked from pre-call email. Kills objections before the call.','Win pattern from market intelligence: prospect in active pain, tried to solve it alone, has real timeline, received personalized roadmap, flexible payment removed cash blocker, coach showed more belief than prospect had in themselves','Loss pattern to avoid: no follow-up structure, objections acknowledged but not resolved, spouse not involved, "think about it" ended without next step','$97 credits toward enrollment. Frame as deposit, not cost.'],
- docs:[]},
-
-{id:'hammer',stage:'BOFU',badge:'badge-bofu',name:'Hammer Them Campaign',
- sells:'Sells <b>TRUST</b> and kills <b>OBJECTIONS</b>. Does NOT make a new offer.',
- desc:'Jeremy Haynes system. 15-20+ touchpoints in 72 hours for anyone approaching a call or post-opt-in. 12 emails over 4 days (3/day) + Meta retargeting with 30-50 ad sets. Runs in PARALLEL with everything else.',
- doesNot:['Does NOT introduce new information or new offers','Does NOT replace the PM engine (runs alongside it)','Does NOT use specific pricing or program names','Repeats, reinforces, and resolves doubt. That is all.'],
- rules:['12 emails, 3/day for 4 days','Pillar distribution: Questions 17% / 2nd Layer 17% / Objections 50% / Expectations 17%','Every email: standalone hook + backward thread + forward tease','Meta: 30-50 ad sets, 1 video per ad set, 3-sec view exclusion','CBO $100-200/day','No specific pricing. No program names. Sells SLE and The Loop Method.','At 40% open rate, any lead sees 3-5 of 12 and hits 2-3 pillars minimum'],
- docs:[]},
-
-{id:'sold-out',stage:'BOFU',badge:'badge-bofu',name:'Sold Out Sequence (Monthly)',
- sells:'Sells <b>URGENCY</b>. "15 spots this month. Here is the doc. Yes or not yet."',
- desc:'Taki Moore scarcity system. Monthly cohort cap. Week 3: open enrollment, sell for 5-7 days. Weeks 1, 2, 4: pure value, no selling. Trains the market that your word is absolute.',
- doesNot:['Does NOT run year-round (Week 3 only)','Does NOT negotiate or extend deadlines','Does NOT discount. The cap is the cap.','Weeks 1, 2, 4 are pure value content. Zero selling.'],
- rules:['Cap at 80% of actual capacity initially','Week 3: open enrollment for 5-7 days','Day 0: Announcement ("X spots this month")','Day 3: Social proof push','Day 5: Scarcity reminder','Day 7: Close ("Enrollment closed. Next month.")','Honor the close date. No exceptions.','Offer Doc available for self-checkout during open week','Broadcast to full list during open week'],
- docs:[]},
-
-{id:'enrollment',stage:'BOFU',badge:'badge-bofu',name:'Enrollment: Sales Call',
- sells:'Sells the <b>COMMITMENT</b>. Leadsurge (marketing) or Service Surge (marketing + service training).',
- desc:'Strategy call handles enrollment. Sales is a cashier: the call confirms what the content already sold. Two program directions: Leadsurge for operators who need marketing support, or Service Surge for operators who need both marketing and service/sales training. The call determines right fit.',
- doesNot:['Does NOT cold-pitch','Does NOT teach (the content did that)','Sales is a cashier, confirming what the content already sold','Does NOT use old program names (Kickspark, Inner Loop, Open Circuit)'],
- rules:['Strategy Call: Deal Formula applied. Sales is a cashier, confirming what the content already sold.','Two directions: Leadsurge (marketing focus) OR Service Surge (marketing + service training). Right-fit based on conversation.','7-day try-it-and-see policy. "Never had a refund." No specific guarantee dollar amounts in the call script.','$97 credits toward enrollment. Frame as deposit, not cost.','Taki deadline sequence (7 days post-webinar) drives to this moment. Day +5 is scarcity. Day +6 is final call. Day +7 is soft close.','Monthly Sold Out cadence: enrollment only open Week 3. Cap at 80% of capacity initially. Honor the close date. No exceptions.','Hustler conversion triggers (from market intelligence): feel understood not sold, social proof from a peer at their level, specific 90-day roadmap they can picture, payment structure that removes risk, explicit permission to stop being the technician','Never cold-pitch. If someone reaches this stage without consuming content, route them back to playbook delivery first.','Spouse/partner consideration: both decision-makers should be in the conversation when possible. Send spouse PDF asset if needed.','Follow up unsold calls up to 10x. Next monthly Sold Out cycle catches them again. They are never "lost." They are "waiting."'],
- docs:[]},
-
-{id:'sle-pro-note',stage:'BOFU',badge:'badge-bofu',name:'SLE Pro App *',
- sells:'<b>* IMPORTANT NOTE:</b> SLE Pro App is NOT part of this prospect funnel. It is a post-call special consideration offer only.',
- desc:'The SLE Pro App (Circle community + Open Circuit) does NOT belong in the prospect conversion funnel. It cannibalizes the funnel by giving away community access before conversion. Future use: invite-only access offered as a "special consideration" after a strategy call that did not convert. "We do not usually give this out, but I feel like it would be really beneficial for you to attend our community calls and learn more about us." This adds value and keeps the relationship warm without undermining the paid funnel.',
- doesNot:['Does NOT appear anywhere in the prospect funnel','Does NOT get referenced in ads, emails, landing pages, or webinars','Does NOT serve as a lead magnet or value piece','Is NOT "Open Circuit free tier." It is an invite-only relationship tool.'],
- rules:['Post-call, no-purchase prospects only. Offered by the sales rep as a personal invitation.','Frame as exclusive: "We do not give this out to everyone."','Purpose: keep relationship warm, expose them to community wins, let them see partners succeeding firsthand.','Next Sold Out cycle catches them. The app keeps them in orbit without giving away the paid experience.','Do not link from any public funnel page, email, or ad.'],
- docs:[]},
-];
-
-// Build sidebar
-function buildSidebar(){
-  let html='';
-  let lastStage='';
-  S.forEach((s,i)=>{
-    if(s.stage!==lastStage){
-      const colors={TOFU:'#ff6b6b',MOFU:'var(--accent)',BOFU:'#6bffee'};
-      html+=`<div class="nav-section" style="color:${colors[s.stage]}">${s.stage}</div>`;
-      lastStage=s.stage;
-    }
-    const docs=JSON.parse(localStorage.getItem('docs-'+s.id)||'[]');
-    const dotCls=docs.length===0?'dot-empty':docs.some(d=>d.st==='flag')?'dot-flag':docs.every(d=>d.st==='ok')?'dot-done':'dot-draft';
-    html+=`<div class="nav-item${i===0?' active':''}" id="nav-${s.id}" onclick="scrollToSection('${s.id}')">`+
-      `<div class="nav-dot ${dotCls}"></div>${s.name}</div>`;
+// ===== FAQ ACCORDION =====
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const body = item.querySelector('.faq-body');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-body').style.maxHeight = '0';
   });
-  document.getElementById('sideNav').innerHTML=html;
-}
-
-// Build flow view
-function buildFlow(){
-  let html=`<div class="flow">
-    <div class="flow-title">SLE 2026 Funnel Architecture</div>
-    <div class="flow-sub">Coach them every day until they're ready. Be there the moment they are.<br>Click any section to expand. Attach docs. Review compliance. Track progress.</div>`;
-
-  S.forEach((s,i)=>{
-    if(i>0) html+=`<div class="flow-arrow">&darr;</div>`;
-    html+=buildSection(s,i===0);
-  });
-
-  html+=`</div>`;
-  document.getElementById('contentArea').innerHTML=html;
-}
-
-function buildSection(s,startOpen){
-  const docs=JSON.parse(localStorage.getItem('docs-'+s.id)||'[]');
-  let h=`<div class="funnel-section${startOpen?' open':''}" id="sec-${s.id}">
-    <div class="funnel-header" onclick="toggleSec('sec-${s.id}')">
-      <span class="funnel-badge ${s.badge}">${s.stage}</span>
-      <div class="funnel-info">
-        <div class="funnel-name">${s.name}</div>
-        <div class="funnel-sells">${s.sells}</div>
-      </div>
-      <span class="funnel-chev">&#9660;</span>
-    </div>
-    <div class="funnel-body"><div class="funnel-inner">
-      <div class="sec-grid">`;
-
-  // What it does
-  h+=`<div class="sec-card"><div class="sec-label label-green">What It Does</div>
-    <div class="sec-body">${s.desc}</div></div>`;
-
-  // What it does NOT do
-  h+=`<div class="sec-card"><div class="sec-label label-red">What It Does NOT Do</div>
-    <div class="sec-body"><ul>${(s.doesNot||[]).map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;
-
-  // What it sells next
-  h+=`<div class="sec-card"><div class="sec-label label-gold">Sells Next Step</div>
-    <div class="sec-body">${s.sells}</div></div>`;
-
-  // Rules
-  h+=`<div class="sec-card full"><div class="sec-label label-blue">Rules and Requirements</div>`;
-  (s.rules||[]).forEach((r,ri)=>{
-    const ck=localStorage.getItem(s.id+'-r-'+ri)==='1';
-    h+=`<div class="rule"><div class="rbox${ck?' on':''}" onclick="togRule('${s.id}',${ri},this)">${ck?'&#10003;':''}</div><span>${r}</span></div>`;
-  });
-  h+=`</div>`;
-
-  // Documents
-  h+=`<div class="sec-card full"><div class="sec-label label-purple">Attached Documents</div>
-    <div class="upload" onclick="addDoc('${s.id}')">Click to <b>attach a document</b> to this section</div>`;
-  docs.forEach((d,di)=>{
-    h+=`<div class="doc"><span style="color:var(--accent)">&#128196;</span>
-      <span class="doc-name">${d.n}</span>
-      <span class="doc-st st-${d.st==='ok'?'ok':d.st==='flag'?'flag':'pending'}">${d.st==='ok'?'Approved':d.st==='flag'?'Flagged':'Pending'}</span>
-      <button class="doc-btn db-ok" onclick="setDoc('${s.id}',${di},'ok')">Approve</button>
-      <button class="doc-btn db-no" onclick="setDoc('${s.id}',${di},'flag')">Flag</button>
-      <button class="doc-btn db-mv" onclick="rmDoc('${s.id}',${di})">Remove</button>
-    </div>`;
-  });
-  h+=`</div>`;
-
-  h+=`</div></div></div></div>`;
-  return h;
-}
-
-function toggleSec(id){document.getElementById(id).classList.toggle('open');}
-function togRule(sid,ri,el){
-  const on=el.classList.toggle('on');
-  el.innerHTML=on?'&#10003;':'';
-  localStorage.setItem(sid+'-r-'+ri,on?'1':'0');
-}
-function addDoc(sid){
-  const n=prompt('Document name:');
-  if(!n)return;
-  const docs=JSON.parse(localStorage.getItem('docs-'+sid)||'[]');
-  docs.push({n:n,st:'pending'});
-  localStorage.setItem('docs-'+sid,JSON.stringify(docs));
-  buildFlow();buildSidebar();
-}
-function setDoc(sid,i,st){
-  const docs=JSON.parse(localStorage.getItem('docs-'+sid)||'[]');
-  if(docs[i]){docs[i].st=st;localStorage.setItem('docs-'+sid,JSON.stringify(docs));buildFlow();buildSidebar();}
-}
-function rmDoc(sid,i){
-  if(!confirm('Remove?'))return;
-  const docs=JSON.parse(localStorage.getItem('docs-'+sid)||'[]');
-  docs.splice(i,1);localStorage.setItem('docs-'+sid,JSON.stringify(docs));buildFlow();buildSidebar();
-}
-function scrollToSection(id){
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('nav-'+id).classList.add('active');
-  const el=document.getElementById('sec-'+id);
-  if(el){
-    if(!el.classList.contains('open'))el.classList.add('open');
-    el.scrollIntoView({behavior:'smooth',block:'start'});
+  if (!isOpen) {
+    item.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
   }
 }
-function viewOverview(){
-  document.querySelectorAll('.funnel-section').forEach(s=>s.classList.remove('open'));
-  document.getElementById('contentArea').scrollTo({top:0,behavior:'smooth'});
-}
-function exportReport(){
-  let r='SLE FUNNEL REVIEW REPORT\n'+new Date().toLocaleDateString()+'\n\n';
-  S.forEach(s=>{
-    const docs=JSON.parse(localStorage.getItem('docs-'+s.id)||'[]');
-    let rc=0;(s.rules||[]).forEach((x,i)=>{if(localStorage.getItem(s.id+'-r-'+i)==='1')rc++;});
-    r+=`[${s.stage}] ${s.name}\n  Rules: ${rc}/${(s.rules||[]).length} | Docs: ${docs.length} (${docs.filter(d=>d.st==='ok').length} approved)\n\n`;
-  });
-  const b=new Blob([r],{type:'text/plain'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='sle-funnel-report.txt';a.click();
+
+// ===== FORM SUBMISSION =====
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'RESERVING...';
+
+  const data = {
+    firstName: form.firstName.value,
+    lastName: form.lastName.value,
+    businessName: form.businessName.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    yearsInBusiness: form.yearsInBusiness.value,
+    teamSize: form.teamSize.value,
+    monthlyRevenue: form.monthlyRevenue.value,
+    pricingWorkbook: document.getElementById('workbookBump').checked,
+    dailySparks: document.getElementById('sparksBump').checked,
+    source: 'pricing-workshop',
+    tags: ['pricing-workshop', 'webinar-registration']
+  };
+
+  try {
+    await fetch('https://services.leadconnectorhq.com/hooks/PLACEHOLDER/webhook-trigger/pricing-workshop', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    // Webhook may not echo back -- still show success
+  }
+
+  document.getElementById('form-container').style.display = 'none';
+  document.getElementById('success-state').classList.add('active');
+
+  // Redirect to thank-you page after brief delay
+  setTimeout(function() {
+    window.location.href = 'thank-you/';
+  }, 2000);
 }
 
-buildSidebar();
-buildFlow();
+// ===== $1M INTERACTIVE CALCULATOR =====
+(function(){
+  const ANNUAL_TARGET = 1000000;
+  const MONTHLY_TARGET = ANNUAL_TARGET / 12; // 83333.33
+
+  const slCpl    = document.getElementById('slider-cpl');
+  const slTicket = document.getElementById('slider-ticket');
+  const slClose  = document.getElementById('slider-close');
+  const slBook   = document.getElementById('slider-book');
+  const slBudget = document.getElementById('slider-budget');
+
+  const vCpl    = document.getElementById('val-cpl');
+  const vTicket = document.getElementById('val-ticket');
+  const vClose  = document.getElementById('val-close');
+  const vBook   = document.getElementById('val-book');
+  const vBudget = document.getElementById('val-budget');
+
+  const oLeads   = document.getElementById('out-leads');
+  const oBooked  = document.getElementById('out-booked');
+  const oClosed  = document.getElementById('out-closed');
+  const oPaid    = document.getElementById('out-paid');
+  const oOrganic = document.getElementById('out-organic');
+  const oSpend   = document.getElementById('out-spend');
+  const oRoas    = document.getElementById('out-roas');
+  const oFormula = document.getElementById('calc-formula');
+
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function fmtD(n){ return '$' + fmt(n); }
+
+  function fillTrack(el){
+    const min = parseFloat(el.min), max = parseFloat(el.max), val = parseFloat(el.value);
+    const pct = ((val - min) / (max - min)) * 100;
+    el.style.setProperty('--fill', pct + '%');
+  }
+
+  function calc(){
+    const cpl      = parseFloat(slCpl.value);
+    const ticket   = parseFloat(slTicket.value);
+    const close    = parseFloat(slClose.value) / 100;
+    const book     = parseFloat(slBook.value) / 100;
+    const budgetPc = parseFloat(slBudget.value) / 100;
+
+    const totalLeads = MONTHLY_TARGET / (book * close * ticket);
+    const booked     = totalLeads * book;
+    const closed     = booked * close;
+
+    const monthlySpend = budgetPc * MONTHLY_TARGET;
+    const paidLeads = monthlySpend / cpl;
+    const organicLeads = Math.max(0, totalLeads - paidLeads);
+
+    const paidRevenue = paidLeads * book * close * ticket;
+    const roas = monthlySpend > 0 ? paidRevenue / monthlySpend : 0;
+
+    vCpl.textContent    = fmtD(cpl);
+    vTicket.textContent = fmtD(ticket);
+    vClose.textContent  = Math.round(close * 100) + '%';
+    vBook.textContent   = Math.round(book * 100) + '%';
+    vBudget.textContent = parseFloat(slBudget.value) + '%';
+
+    oLeads.textContent   = fmt(Math.ceil(totalLeads));
+    oBooked.textContent  = fmt(Math.round(booked));
+    oClosed.textContent  = fmt(Math.round(closed));
+    oPaid.textContent    = fmt(Math.round(paidLeads));
+    oOrganic.textContent = fmt(Math.ceil(organicLeads));
+    oSpend.textContent   = fmtD(Math.round(monthlySpend));
+    oRoas.textContent    = roas >= 100 ? fmt(Math.round(roas)) + 'x' : roas.toFixed(1) + 'x';
+
+    oFormula.innerHTML =
+      fmt(Math.ceil(totalLeads)) + ' leads &times; ' +
+      Math.round(book * 100) + '% booked &times; ' +
+      Math.round(close * 100) + '% close &times; ' +
+      fmtD(ticket) + ' = <strong style="color:var(--gold);font-family:Playfair Display,serif;font-style:italic;font-size:1.3rem">' +
+      fmtD(Math.round(closed * ticket)) + '/month</strong>';
+
+    [slCpl, slTicket, slClose, slBook, slBudget].forEach(fillTrack);
+  }
+
+  [slCpl, slTicket, slClose, slBook, slBudget].forEach(el => {
+    el.addEventListener('input', calc);
+  });
+
+  calc();
+})();
 </script>
+
 </body>
 </html>
