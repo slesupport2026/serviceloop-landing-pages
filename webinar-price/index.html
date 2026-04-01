@@ -1176,78 +1176,66 @@ body::before{
 <!-- ===== $1M INTERACTIVE CALCULATOR ===== -->
 <section class="section section-alt fade-up" id="calculator-section">
   <div class="wrap-wide section-center">
-    <div class="sle-eyebrow">It's a Math Problem</div>
-    <h2 class="sle-section-title" style="margin-top:12px">The <span>$1M</span> Pricing Math</h2>
+    <div class="sle-eyebrow">Build Your Rate</div>
+    <h2 class="sle-section-title" style="margin-top:12px">The <span>SSR</span> Calculator</h2>
     <hr class="sle-gold-rule">
-    <p class="sle-body" style="margin-left:auto;margin-right:auto">Adjust the sliders below. The calculator auto-solves for <strong>$83,334/month</strong>, the line of safety.</p>
+    <p class="sle-body" style="margin-left:auto;margin-right:auto">Adjust the sliders below. Watch your Simple Service Rate, profit margin, and $1M path update in real time.</p>
 
     <!-- SLIDERS -->
     <div class="calc-sliders">
       <div class="calc-slider-card">
-        <div class="calc-slider-value" id="val-cpl">$50</div>
-        <div class="calc-slider-label">Cost Per Lead</div>
-        <input type="range" class="calc-range" id="slider-cpl" min="20" max="80" value="50" step="1">
+        <div class="calc-slider-value" id="val-vans">1</div>
+        <div class="calc-slider-label">Service Vans</div>
+        <input type="range" class="calc-range" id="slider-vans" min="1" max="10" value="1" step="1">
       </div>
       <div class="calc-slider-card">
-        <div class="calc-slider-value" id="val-ticket">$2,000</div>
-        <div class="calc-slider-label">Average Ticket</div>
-        <input type="range" class="calc-range" id="slider-ticket" min="500" max="5000" value="2000" step="50">
+        <div class="calc-slider-value" id="val-burden">$236,000</div>
+        <div class="calc-slider-label">Total Burden (Annual)</div>
+        <input type="range" class="calc-range" id="slider-burden" min="100000" max="1000000" value="236000" step="5000">
       </div>
       <div class="calc-slider-card">
-        <div class="calc-slider-value" id="val-close">50%</div>
-        <div class="calc-slider-label">Close Rate</div>
-        <input type="range" class="calc-range" id="slider-close" min="30" max="80" value="50" step="1">
+        <div class="calc-slider-value" id="val-growth">$90,000</div>
+        <div class="calc-slider-label">Growth Budget (Annual)</div>
+        <input type="range" class="calc-range" id="slider-growth" min="25000" max="250000" value="90000" step="5000">
       </div>
       <div class="calc-slider-card">
-        <div class="calc-slider-value" id="val-book">40%</div>
-        <div class="calc-slider-label">Booking Rate</div>
-        <input type="range" class="calc-range" id="slider-book" min="25" max="90" value="40" step="1">
+        <div class="calc-slider-value" id="val-materials">$50/hr</div>
+        <div class="calc-slider-label">Material Rate</div>
+        <input type="range" class="calc-range" id="slider-materials" min="50" max="100" value="50" step="5">
       </div>
       <div class="calc-slider-card">
-        <div class="calc-slider-value" id="val-budget">10%</div>
-        <div class="calc-slider-label">Marketing Budget (% of Rev)</div>
-        <input type="range" class="calc-range" id="slider-budget" min="1" max="15" value="10" step="0.5">
+        <div class="calc-slider-value" id="val-markup">30%</div>
+        <div class="calc-slider-label">Profit Markup</div>
+        <input type="range" class="calc-range" id="slider-markup" min="10" max="50" value="30" step="1">
       </div>
     </div>
 
     <!-- OUTPUT CARDS -->
     <div class="calc-outputs">
-      <div class="calc-out-card">
-        <div class="calc-out-num" id="out-leads">216</div>
-        <div class="calc-out-label">Total Leads / Month</div>
-      </div>
-      <div class="calc-out-card">
-        <div class="calc-out-num" id="out-booked">86</div>
-        <div class="calc-out-label">Booked Calls</div>
-      </div>
-      <div class="calc-out-card">
-        <div class="calc-out-num" id="out-closed">43</div>
-        <div class="calc-out-label">Closed Jobs</div>
-      </div>
       <div class="calc-out-card highlight">
-        <div class="calc-out-num" id="out-paid">167</div>
-        <div class="calc-out-label">Paid Leads</div>
+        <div class="calc-out-num" id="out-ssr">$474</div>
+        <div class="calc-out-label">Your SSR (per hour)</div>
       </div>
       <div class="calc-out-card highlight-green">
-        <div class="calc-out-num" id="out-organic">49</div>
-        <div class="calc-out-label">Organic Leads Req'd</div>
+        <div class="calc-out-num" id="out-npm">23%</div>
+        <div class="calc-out-label">Projected Net Profit Margin</div>
       </div>
       <div class="calc-out-card">
-        <div class="calc-out-num" id="out-spend">$8,333</div>
-        <div class="calc-out-label">Marketing Spend / Mo</div>
+        <div class="calc-out-num" id="out-hours">177</div>
+        <div class="calc-out-label">Billable Hrs / Mo for $84K</div>
       </div>
       <div class="calc-out-card">
-        <div class="calc-out-num" id="out-roas">10.0x</div>
-        <div class="calc-out-label">Return on Ad Spend</div>
+        <div class="calc-out-num" id="out-ticket">$2,370</div>
+        <div class="calc-out-label">Avg Ticket (5 hrs x SSR)</div>
       </div>
     </div>
 
     <!-- FORMULA RESULT BAR -->
     <div class="formula-bar" style="margin-top:28px;flex-direction:column;gap:6px;padding:24px 32px">
       <span class="formula-text" id="calc-formula" style="font-size:1rem"></span>
-      <span style="font-size:0.85rem;color:var(--text-dim)">That's <strong style="color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem">$1,000,000</strong> in annual revenue. The line of safety.</span>
+      <span style="font-size:0.85rem;color:var(--text-dim)">Your rate. Your math. Your <strong style="color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem">$1M</strong> path.</span>
     </div>
-    <p class="sle-body" style="margin:24px auto 0;text-align:center;font-style:italic;color:var(--text-dim)">Your SSR determines your average ticket. Your average ticket determines your $1M math.</p>
+    <p class="sle-body" style="margin:24px auto 0;text-align:center;font-style:italic;color:var(--text-dim)">This is exactly what we build together in the workshop. Your real numbers. Your real rate. 60 minutes.</p>
   </div>
 </section>
 
@@ -1562,30 +1550,26 @@ async function handleSubmit(e) {
   }, 2000);
 }
 
-// ===== $1M INTERACTIVE CALCULATOR =====
+// ===== SSR INTERACTIVE CALCULATOR =====
 (function(){
-  const ANNUAL_TARGET = 1000000;
-  const MONTHLY_TARGET = ANNUAL_TARGET / 12; // 83333.33
+  const MONTHLY_TARGET = 84000;
 
-  const slCpl    = document.getElementById('slider-cpl');
-  const slTicket = document.getElementById('slider-ticket');
-  const slClose  = document.getElementById('slider-close');
-  const slBook   = document.getElementById('slider-book');
-  const slBudget = document.getElementById('slider-budget');
+  const slVans      = document.getElementById('slider-vans');
+  const slBurden    = document.getElementById('slider-burden');
+  const slGrowth    = document.getElementById('slider-growth');
+  const slMaterials = document.getElementById('slider-materials');
+  const slMarkup    = document.getElementById('slider-markup');
 
-  const vCpl    = document.getElementById('val-cpl');
-  const vTicket = document.getElementById('val-ticket');
-  const vClose  = document.getElementById('val-close');
-  const vBook   = document.getElementById('val-book');
-  const vBudget = document.getElementById('val-budget');
+  const vVans      = document.getElementById('val-vans');
+  const vBurden    = document.getElementById('val-burden');
+  const vGrowth    = document.getElementById('val-growth');
+  const vMaterials = document.getElementById('val-materials');
+  const vMarkup    = document.getElementById('val-markup');
 
-  const oLeads   = document.getElementById('out-leads');
-  const oBooked  = document.getElementById('out-booked');
-  const oClosed  = document.getElementById('out-closed');
-  const oPaid    = document.getElementById('out-paid');
-  const oOrganic = document.getElementById('out-organic');
-  const oSpend   = document.getElementById('out-spend');
-  const oRoas    = document.getElementById('out-roas');
+  const oSsr     = document.getElementById('out-ssr');
+  const oNpm     = document.getElementById('out-npm');
+  const oHours   = document.getElementById('out-hours');
+  const oTicket  = document.getElementById('out-ticket');
   const oFormula = document.getElementById('calc-formula');
 
   function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
@@ -1598,48 +1582,69 @@ async function handleSubmit(e) {
   }
 
   function calc(){
-    const cpl      = parseFloat(slCpl.value);
-    const ticket   = parseFloat(slTicket.value);
-    const close    = parseFloat(slClose.value) / 100;
-    const book     = parseFloat(slBook.value) / 100;
-    const budgetPc = parseFloat(slBudget.value) / 100;
+    const vans      = parseInt(slVans.value);
+    const burden    = parseFloat(slBurden.value);
+    const growth    = parseFloat(slGrowth.value);
+    const materials = parseFloat(slMaterials.value);
+    const markupPc  = parseFloat(slMarkup.value) / 100;
 
-    const totalLeads = MONTHLY_TARGET / (book * close * ticket);
-    const booked     = totalLeads * book;
-    const closed     = booked * close;
+    // 1,000 billable hours per van per year (50% rule)
+    const totalBillableHours = vans * 1000;
 
-    const monthlySpend = budgetPc * MONTHLY_TARGET;
-    const paidLeads = monthlySpend / cpl;
-    const organicLeads = Math.max(0, totalLeads - paidLeads);
+    // Burden rate per hour
+    const burdenRate = burden / totalBillableHours;
 
-    const paidRevenue = paidLeads * book * close * ticket;
-    const roas = monthlySpend > 0 ? paidRevenue / monthlySpend : 0;
+    // Growth rate per hour
+    const growthRate = growth / totalBillableHours;
 
-    vCpl.textContent    = fmtD(cpl);
-    vTicket.textContent = fmtD(ticket);
-    vClose.textContent  = Math.round(close * 100) + '%';
-    vBook.textContent   = Math.round(book * 100) + '%';
-    vBudget.textContent = parseFloat(slBudget.value) + '%';
+    // Base rate before markup
+    const baseRate = burdenRate + growthRate;
 
-    oLeads.textContent   = fmt(Math.ceil(totalLeads));
-    oBooked.textContent  = fmt(Math.round(booked));
-    oClosed.textContent  = fmt(Math.round(closed));
-    oPaid.textContent    = fmt(Math.round(paidLeads));
-    oOrganic.textContent = fmt(Math.ceil(organicLeads));
-    oSpend.textContent   = fmtD(Math.round(monthlySpend));
-    oRoas.textContent    = roas >= 100 ? fmt(Math.round(roas)) + 'x' : roas.toFixed(1) + 'x';
+    // Markup amount
+    const markupAmount = baseRate * markupPc;
 
+    // Profitable rate (before materials)
+    const profitableRate = baseRate + markupAmount;
+
+    // SSR = profitable rate + materials
+    const ssr = profitableRate + materials;
+
+    // Net profit margin approximation
+    // Markup 30% on cost = ~23% NPM. Scale proportionally.
+    // NPM = markup / (1 + markup) = markupPc / (1 + markupPc)
+    const npm = (markupPc / (1 + markupPc)) * 100;
+
+    // Hours per month to hit $84K
+    const hoursForTarget = MONTHLY_TARGET / ssr;
+
+    // Average ticket = 5 hours x SSR
+    const avgTicket = 5 * ssr;
+
+    // Update slider displays
+    vVans.textContent      = vans;
+    vBurden.textContent    = fmtD(burden);
+    vGrowth.textContent    = fmtD(growth);
+    vMaterials.textContent = fmtD(materials) + '/hr';
+    vMarkup.textContent    = Math.round(markupPc * 100) + '%';
+
+    // Update outputs
+    oSsr.textContent    = fmtD(Math.round(ssr));
+    oNpm.textContent    = npm.toFixed(1) + '%';
+    oHours.textContent  = fmt(Math.ceil(hoursForTarget));
+    oTicket.textContent = fmtD(Math.round(avgTicket));
+
+    // Formula bar
     oFormula.innerHTML =
-      fmt(Math.ceil(totalLeads)) + ' leads &times; ' +
-      Math.round(book * 100) + '% booked &times; ' +
-      Math.round(close * 100) + '% close &times; ' +
-      fmtD(ticket) + ' = <strong style="color:var(--gold);font-family:Playfair Display,serif;font-style:italic;font-size:1.3rem">' +
-      fmtD(Math.round(closed * ticket)) + '/month</strong>';
+      fmtD(Math.round(burdenRate)) + '/hr burden + ' +
+      fmtD(Math.round(growthRate)) + '/hr growth + ' +
+      Math.round(markupPc * 100) + '% markup + ' +
+      fmtD(materials) + ' materials = <strong style="color:var(--gold);font-family:Playfair Display,serif;font-style:italic;font-size:1.3rem">' +
+      fmtD(Math.round(ssr)) + '/hr SSR</strong>';
 
-    [slCpl, slTicket, slClose, slBook, slBudget].forEach(fillTrack);
+    [slVans, slBurden, slGrowth, slMaterials, slMarkup].forEach(fillTrack);
   }
 
-  [slCpl, slTicket, slClose, slBook, slBudget].forEach(el => {
+  [slVans, slBurden, slGrowth, slMaterials, slMarkup].forEach(el => {
     el.addEventListener('input', calc);
   });
 
