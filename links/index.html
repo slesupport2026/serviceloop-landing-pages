@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLE Landing Pages Index</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0D0D0D;
+      color: #E0E0E0;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #C9A45A;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.25rem;
+    }
+
+    h1 span { color: #C9A45A; }
+
+    .subtitle {
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .subtitle a {
+      color: #C9A45A;
+      text-decoration: none;
+    }
+
+    .meta-bar {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .meta-bar code {
+      background: #1A1A1A;
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      color: #C9A45A;
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-bar input {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.5rem 0.75rem;
+      background: #1A1A1A;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #FFF;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .filter-bar input:focus { border-color: #C9A45A; }
+
+    .filter-bar input::placeholder { color: #666; }
+
+    .badge-filter {
+      padding: 0.35rem 0.7rem;
+      border-radius: 20px;
+      border: 1px solid #333;
+      background: transparent;
+      color: #999;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .badge-filter:hover, .badge-filter.active {
+      border-color: #C9A45A;
+      color: #C9A45A;
+      background: rgba(201, 164, 90, 0.1);
+    }
+
+    /* Section headings */
+    h2 {
+      font-size: 1.1rem;
+      color: #C9A45A;
+      margin: 2rem 0 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #222;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      color: #999;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid #333;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #1A1A1A;
+      transition: background 0.1s;
+    }
+
+    tbody tr:hover { background: #141414; }
+
+    tbody td {
+      padding: 0.5rem 0.75rem;
+      vertical-align: top;
+    }
+
+    .page-name {
+      color: #FFF;
+      font-weight: 600;
+    }
+
+    a {
+      color: #E8C97A;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #FFF;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.15em 0.5em;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-spa {
+      background: rgba(0, 180, 200, 0.15);
+      color: #00B4C8;
+      border: 1px solid rgba(0, 180, 200, 0.3);
+    }
+
+    .badge-html {
+      background: rgba(201, 164, 90, 0.15);
+      color: #C9A45A;
+      border: 1px solid rgba(201, 164, 90, 0.3);
+    }
+
+    .badge-tool {
+      background: rgba(46, 204, 113, 0.15);
+      color: #2ecc71;
+      border: 1px solid rgba(46, 204, 113, 0.3);
+    }
+
+    .badge-archive {
+      background: rgba(255, 255, 255, 0.05);
+      color: #666;
+      border: 1px solid #333;
+    }
+
+    .notes { color: #888; font-size: 0.8rem; }
+
+    /* Short links section */
+    .short-code {
+      font-family: 'Courier New', monospace;
+      background: #1A1A1A;
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      color: #E8C97A;
+      font-size: 0.8rem;
+    }
+
+    .channel-tag {
+      display: inline-block;
+      padding: 0.1em 0.45em;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .ch-meta { background: rgba(52, 152, 219, 0.15); color: #3498db; }
+    .ch-youtube { background: rgba(231, 76, 60, 0.15); color: #e74c3c; }
+    .ch-email { background: rgba(155, 89, 182, 0.15); color: #9b59b6; }
+    .ch-social { background: rgba(46, 204, 113, 0.15); color: #2ecc71; }
+    .ch-qr { background: rgba(241, 196, 15, 0.15); color: #f1c40f; }
+    .ch-circle { background: rgba(0, 180, 200, 0.15); color: #00B4C8; }
+
+    /* Convention box */
+    .convention-box {
+      background: #1A1A1A;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    .convention-box strong { color: #C9A45A; }
+
+    .convention-box code {
+      background: #0D0D0D;
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+      color: #E8C97A;
+      font-size: 0.8rem;
+    }
+
+    .convention-row {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .convention-row div { min-width: 200px; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid #222;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #555;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 700px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      tbody tr {
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #1A1A1A;
+        border-radius: 6px;
+      }
+      tbody td {
+        padding: 0.2rem 0;
+        text-align: left;
+      }
+      tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #999;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SLE <span>Landing Pages</span> Index</h1>
+      <p class="subtitle">
+        Team reference for
+        <a href="https://go.serviceloopelectrical.com" target="_blank">go.serviceloopelectrical.com</a>
+      </p>
+      <div class="meta-bar">
+        <span>Repo: <code>slesupport2026/serviceloop-landing-pages</code></span>
+        <span>Host: <code>Netlify</code> (auto-deploy from main)</span>
+      </div>
+    </header>
+
+    <div class="filter-bar">
+      <input type="text" id="search" placeholder="Search pages, URLs, notes..." autocomplete="off">
+      <button class="badge-filter" data-filter="all">All</button>
+      <button class="badge-filter" data-filter="spa">SPA</button>
+      <button class="badge-filter" data-filter="html">HTML</button>
+      <button class="badge-filter" data-filter="tool">Tool</button>
+    </div>
+
+    <h2>Live Pages</h2>
+    <table id="pages-table">
+      <thead>
+        <tr>
+          <th>Page</th>
+          <th>Live URL</th>
+          <th>Type</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Main Index</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com" target="_blank">go.serviceloopelectrical.com</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Root site landing page</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">SSR Landing Page</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/SSR-LP.html" target="_blank">.../SSR-LP.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Service Surge Results LP</span></td>
+        </tr>
+        <tr data-type="spa">
+          <td data-label="Page"><span class="page-name">$1M Playbook</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/1mplaybook/" target="_blank">.../1mplaybook/</a></td>
+          <td data-label="Type"><span class="badge badge-spa">React SPA</span></td>
+          <td data-label="Notes"><span class="notes">ACDC playbook &mdash; 9 chapters, quizzes, video placeholders</span></td>
+        </tr>
+        <tr data-type="spa">
+          <td data-label="Page"><span class="page-name">Price Tool</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/sle-pricetool/" target="_blank">.../sle-pricetool/</a></td>
+          <td data-label="Type"><span class="badge badge-spa">React SPA</span></td>
+          <td data-label="Notes"><span class="notes">Pricing tool + PDF download, has /thank-you</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Leads Now</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/leadsnow/" target="_blank">.../leadsnow/</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Lead gen LP, has /thank-you</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">SLE Funnel</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/slefunnel/" target="_blank">.../slefunnel/</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Funnel architecture page</span></td>
+        </tr>
+        <tr data-type="tool">
+          <td data-label="Page"><span class="page-name">UTM Guide</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/utmguide/" target="_blank">.../utmguide/</a></td>
+          <td data-label="Type"><span class="badge badge-tool">Tool</span></td>
+          <td data-label="Notes"><span class="notes">Internal UTM convention reference</span></td>
+        </tr>
+        <tr data-type="tool">
+          <td data-label="Page"><span class="page-name">GHL Workflows</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/workflows/" target="_blank">.../workflows/</a></td>
+          <td data-label="Type"><span class="badge badge-tool">Tool</span></td>
+          <td data-label="Notes"><span class="notes">GHL workflow blueprint</span></td>
+        </tr>
+        <tr data-type="tool">
+          <td data-label="Page"><span class="page-name">Content Interview</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/content-interview/" target="_blank">.../content-interview/</a></td>
+          <td data-label="Type"><span class="badge badge-tool">Tool</span></td>
+          <td data-label="Notes"><span class="notes">Content interview pre-work tool</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">MDE Draw</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/MDE-draw.html" target="_blank">.../MDE-draw.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">MDE giveaway drawing page</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Field Guide</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/field-guide.html" target="_blank">.../field-guide.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Field guide LP</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">LeadSurge LP</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/sle-leadsurge.html" target="_blank">.../sle-leadsurge.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">LeadSurge landing page</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">SLE CC</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/slecc.html" target="_blank">.../slecc.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">SLE coaching/consulting LP</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">SLE CSM</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/slecsm.html" target="_blank">.../slecsm.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">SLE CSM page</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">CSM (Alternate)</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/CSM.html" target="_blank">.../CSM.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">CSM alternate version</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Service One</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/service-one.html" target="_blank">.../service-one.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Service One LP</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Esti</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/esti.html" target="_blank">.../esti.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Estimating tool page</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Scale</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/scale.html" target="_blank">.../scale.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Scale program LP</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Summit</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/summit.html" target="_blank">.../summit.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Summit event page</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Daily Quiz</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/SLE_Daily_Quiz.html" target="_blank">.../SLE_Daily_Quiz.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Daily quiz page</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">MDS - Auditorium/Sales</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/mds-as.html" target="_blank">.../mds-as.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">MDS variant</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">MDS - Hero</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/mds-h.html" target="_blank">.../mds-h.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">MDS variant</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">MDS - Neutral</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/mds-n.html" target="_blank">.../mds-n.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">MDS variant</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Test</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/test.html" target="_blank">.../test.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Test / staging page</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Archive</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Page</th>
+          <th>Path</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="page-name">Index v7</span></td>
+          <td><span class="short-code">/index_v7.html</span></td>
+          <td><span class="notes">Previous root index (5.6 MB)</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Short Links <span style="font-weight:400;font-size:0.85rem;color:#888">&mdash; go.serviceloopelectrical.com/r/...</span></h2>
+    <table id="shortlinks-table">
+      <thead>
+        <tr>
+          <th>Short Code</th>
+          <th>Destination</th>
+          <th>Channel</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/pt-meta-clay-rant</span></td>
+          <td data-label="Dest"><a href="https://go.serviceloopelectrical.com/sle-pricetool/" target="_blank">/sle-pricetool/</a></td>
+          <td data-label="Channel"><span class="channel-tag ch-meta">Meta Paid</span></td>
+          <td data-label="Desc"><span class="notes">Clay pricing rant video</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/pt-meta-edwin</span></td>
+          <td data-label="Dest"><a href="https://go.serviceloopelectrical.com/sle-pricetool/" target="_blank">/sle-pricetool/</a></td>
+          <td data-label="Channel"><span class="channel-tag ch-meta">Meta Paid</span></td>
+          <td data-label="Desc"><span class="notes">Edwin testimonial video</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/ln-meta-jun26</span></td>
+          <td data-label="Dest"><a href="https://go.serviceloopelectrical.com/leadsnow/" target="_blank">/leadsnow/</a></td>
+          <td data-label="Channel"><span class="channel-tag ch-meta">Meta Paid</span></td>
+          <td data-label="Desc"><span class="notes">Leads Now Jun 26 campaign</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/cl-hammer-jun26</span></td>
+          <td data-label="Dest"><span class="notes">/call/</span></td>
+          <td data-label="Channel"><span class="channel-tag ch-meta">Meta Paid</span></td>
+          <td data-label="Desc"><span class="notes">Hammer Jun 26 social proof reel</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/pb-yt-ep52</span></td>
+          <td data-label="Dest"><span class="notes">/playbook/</span></td>
+          <td data-label="Channel"><span class="channel-tag ch-youtube">YouTube</span></td>
+          <td data-label="Desc"><span class="notes">MDE ep52 ACDC overview</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/pt-yt-ep47</span></td>
+          <td data-label="Dest"><a href="https://go.serviceloopelectrical.com/sle-pricetool/" target="_blank">/sle-pricetool/</a></td>
+          <td data-label="Channel"><span class="channel-tag ch-youtube">YouTube</span></td>
+          <td data-label="Desc"><span class="notes">MDE ep47 pricing</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/pb-am-d42</span></td>
+          <td data-label="Dest"><span class="notes">/playbook/</span></td>
+          <td data-label="Channel"><span class="channel-tag ch-email">Email AM</span></td>
+          <td data-label="Desc"><span class="notes">Morning Coffee day 42</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/pt-am-d12</span></td>
+          <td data-label="Dest"><a href="https://go.serviceloopelectrical.com/sle-pricetool/" target="_blank">/sle-pricetool/</a></td>
+          <td data-label="Channel"><span class="channel-tag ch-email">Email AM</span></td>
+          <td data-label="Desc"><span class="notes">Morning Coffee day 12</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/wb-pm-ch3d2</span></td>
+          <td data-label="Dest"><span class="notes">/webinar/</span></td>
+          <td data-label="Channel"><span class="channel-tag ch-email">Email PM</span></td>
+          <td data-label="Desc"><span class="notes">ACDC ch3 day 2</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/ln-vs-jun26</span></td>
+          <td data-label="Dest"><a href="https://go.serviceloopelectrical.com/leadsnow/" target="_blank">/leadsnow/</a></td>
+          <td data-label="Channel"><span class="channel-tag ch-social">Vista Social</span></td>
+          <td data-label="Desc"><span class="notes">Organic social Jun 26</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/pt-qr-clay</span></td>
+          <td data-label="Dest"><a href="https://go.serviceloopelectrical.com/sle-pricetool/" target="_blank">/sle-pricetool/</a></td>
+          <td data-label="Channel"><span class="channel-tag ch-qr">QR</span></td>
+          <td data-label="Desc"><span class="notes">Clay's business card</span></td>
+        </tr>
+        <tr>
+          <td data-label="Code"><span class="short-code">/r/wb-circle-jul26</span></td>
+          <td data-label="Dest"><span class="notes">/webinar/</span></td>
+          <td data-label="Channel"><span class="channel-tag ch-circle">Circle</span></td>
+          <td data-label="Desc"><span class="notes">Jul 26 webinar (Joseph)</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="convention-box">
+      <strong>Short link convention:</strong> <code>/r/[page]-[source]-[descriptor]</code>
+      <div class="convention-row">
+        <div>
+          <strong>Pages:</strong>
+          <code>pt</code>=pricetool,
+          <code>ln</code>=leadsnow,
+          <code>pb</code>=playbook,
+          <code>wb</code>=webinar,
+          <code>cl</code>=call,
+          <code>sv</code>=survey
+        </div>
+        <div>
+          <strong>Sources:</strong>
+          <code>meta</code>,
+          <code>yt</code>=youtube,
+          <code>am</code>=email-am,
+          <code>pm</code>=email-pm,
+          <code>vs</code>=vista-social,
+          <code>qr</code>,
+          <code>circle</code>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      SLE Team Reference &middot; Auto-deploys from <code>slesupport2026/serviceloop-landing-pages</code> &middot; Last updated 2026-03-31
+    </footer>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('search');
+    const filterBtns = document.querySelectorAll('.badge-filter');
+    const pageRows = document.querySelectorAll('#pages-table tbody tr');
+    const shortRows = document.querySelectorAll('#shortlinks-table tbody tr');
+    let activeType = 'all';
+
+    function applyFilters() {
+      const q = searchInput.value.toLowerCase();
+      pageRows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const type = row.dataset.type;
+        const matchSearch = !q || text.includes(q);
+        const matchType = activeType === 'all' || type === activeType;
+        row.classList.toggle('hidden', !(matchSearch && matchType));
+      });
+      shortRows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const matchSearch = !q || text.includes(q);
+        row.classList.toggle('hidden', !matchSearch);
+      });
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeType = btn.dataset.filter;
+        applyFilters();
+      });
+    });
+  </script>
+</body>
+</html>
