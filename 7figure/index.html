@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7-Figure Case Study Group | Service Loop Electrical</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital@1&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --dark2: #111111;
+    --gold: #C9A45A;
+    --gold-bright: #E8C97A;
+    --gold-dim: #8B7340;
+    --white: #FFFFFF;
+    --gray: #999999;
+    --light-gray: #CCCCCC;
+    --red: #C0392B;
+    --teal: #00B4C8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* === GEOMETRIC BACKGROUND === */
+  .geo-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background:
+      linear-gradient(30deg, transparent 40%, rgba(201,164,90,0.15) 41%, rgba(201,164,90,0.15) 41.5%, transparent 42%),
+      linear-gradient(150deg, transparent 40%, rgba(201,164,90,0.12) 41%, rgba(201,164,90,0.12) 41.5%, transparent 42%),
+      linear-gradient(70deg, transparent 60%, rgba(201,164,90,0.1) 61%, rgba(201,164,90,0.1) 61.5%, transparent 62%),
+      linear-gradient(210deg, transparent 55%, rgba(201,164,90,0.08) 56%, rgba(201,164,90,0.08) 56.5%, transparent 57%),
+      linear-gradient(110deg, transparent 70%, rgba(201,164,90,0.1) 71%, rgba(201,164,90,0.1) 71.5%, transparent 72%),
+      linear-gradient(330deg, transparent 65%, rgba(201,164,90,0.06) 66%, rgba(201,164,90,0.06) 66.5%, transparent 67%);
+  }
+
+  .page-wrap { position: relative; z-index: 1; }
+
+  /* === SECTIONS === */
+  section {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+
+  .section-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 40px;
+  }
+
+  /* === HERO === */
+  .hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    max-width: 900px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    margin-bottom: 32px;
+    background: rgba(201,164,90,0.06);
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 60px rgba(201,164,90,0.15);
+  }
+
+  .hero h1 .gold { color: var(--gold-bright); }
+  .hero h1 .italic-gold {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--light-gray);
+    max-width: 640px;
+    margin: 20px auto 0;
+    line-height: 1.8;
+  }
+
+  .hero-sub strong { color: var(--white); }
+
+  .spots-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding: 14px 28px;
+    background: rgba(201,164,90,0.08);
+    border: 1px solid rgba(201,164,90,0.25);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gold-bright);
+    letter-spacing: 1px;
+  }
+
+  .spots-counter .dot {
+    width: 8px; height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* === COUNTDOWN === */
+  .cd-unit { text-align: center; }
+
+  .cd-num {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--gold-bright);
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+
+  .cd-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--gray);
+  }
+
+  /* === PROMISE === */
+  .promise-box {
+    background: linear-gradient(135deg, rgba(201,164,90,0.08), rgba(201,164,90,0.02));
+    border: 1px solid rgba(201,164,90,0.2);
+    padding: 40px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+
+  .promise-box h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: var(--gold-bright);
+    margin-bottom: 16px;
+  }
+
+  .promise-box p {
+    font-size: 1.05rem;
+    color: var(--light-gray);
+    line-height: 1.8;
+  }
+
+  .promise-box p strong { color: var(--white); }
+
+  /* === HEADINGS === */
+  h2.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 16px;
+    text-shadow: 0 0 40px rgba(201,164,90,0.1);
+  }
+
+  h2.section-title .gold { color: var(--gold-bright); }
+  h2.section-title .italic-gold {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--gray);
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+
+  /* === CONTRAST GRID === */
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 40px 0;
+    border: 1px solid rgba(201,164,90,0.15);
+    overflow: hidden;
+  }
+
+  .contrast-header {
+    padding: 16px 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+
+  .contrast-header.old {
+    background: rgba(192,57,43,0.15);
+    color: var(--red);
+    border-bottom: 2px solid rgba(192,57,43,0.3);
+  }
+
+  .contrast-header.new {
+    background: rgba(201,164,90,0.1);
+    color: var(--gold-bright);
+    border-bottom: 2px solid rgba(201,164,90,0.3);
+    border-left: 1px solid rgba(201,164,90,0.15);
+  }
+
+  .contrast-row {
+    display: contents;
+  }
+
+  .contrast-cell {
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .contrast-cell.old { color: var(--gray); background: rgba(192,57,43,0.03); }
+  .contrast-cell.new {
+    color: var(--light-gray);
+    background: rgba(201,164,90,0.03);
+    border-left: 1px solid rgba(201,164,90,0.15);
+  }
+
+  .contrast-cell strong { color: var(--white); }
+
+  /* === WHO FOR / NOT FOR === */
+  .who-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 40px 0;
+  }
+
+  .who-card {
+    padding: 32px;
+    border: 1px solid rgba(201,164,90,0.15);
+  }
+
+  .who-card.for-you { background: rgba(201,164,90,0.05); }
+  .who-card.not-for { background: rgba(192,57,43,0.04); border-color: rgba(192,57,43,0.15); }
+
+  .who-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .who-card.for-you h3 { color: var(--gold-bright); }
+  .who-card.not-for h3 { color: var(--red); }
+
+  .who-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .who-card ul li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--light-gray);
+    line-height: 1.6;
+  }
+
+  .who-card.for-you ul li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .who-card.not-for ul li::before {
+    content: "\2717";
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  /* === PHASES (First / Next / Then) === */
+  .phases {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 40px 0;
+  }
+
+  .phase {
+    padding: 36px 32px;
+    border: 1px solid rgba(201,164,90,0.12);
+    border-bottom: none;
+    position: relative;
+  }
+
+  .phase:last-child { border-bottom: 1px solid rgba(201,164,90,0.12); }
+
+  .phase-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .phase h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .phase p {
+    font-size: 0.95rem;
+    color: var(--light-gray);
+    line-height: 1.8;
+  }
+
+  .phase ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 12px;
+  }
+
+  .phase ul li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--light-gray);
+  }
+
+  .phase ul li::before {
+    content: "\25B8";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* === PROOF STACK === */
+  .proof-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 40px 0;
+  }
+
+  .proof-card {
+    background: rgba(201,164,90,0.04);
+    border: 1px solid rgba(201,164,90,0.12);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .proof-card .name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: var(--gold-bright);
+    margin-bottom: 12px;
+  }
+
+  .proof-card .numbers {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  .proof-card .numbers .result {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    display: block;
+    margin: 8px 0 4px;
+  }
+
+  .proof-card .numbers .timeline {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* === CURRICULUM === */
+  .curriculum-list {
+    margin: 40px 0;
+  }
+
+  .curriculum-item {
+    display: flex;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    align-items: flex-start;
+  }
+
+  .curriculum-item:last-child { border-bottom: none; }
+
+  .curr-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 40px;
+    opacity: 0.6;
+  }
+
+  .curr-content h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .curr-content p {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* === LOGISTICS === */
+  .logistics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 40px 0;
+  }
+
+  .logistic-item {
+    padding: 24px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .logistic-item .label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .logistic-item .value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .logistic-item.full-width {
+    grid-column: 1 / -1;
+  }
+
+  /* === BONUS === */
+  .bonus-box {
+    background: linear-gradient(135deg, rgba(201,164,90,0.1), rgba(201,164,90,0.03));
+    border: 2px solid rgba(201,164,90,0.25);
+    padding: 40px;
+    text-align: center;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bonus-box::before {
+    content: "BONUS";
+    position: absolute;
+    top: -8px; right: -8px;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    padding: 6px 20px;
+    transform: rotate(3deg);
+  }
+
+  .bonus-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .bonus-box .bonus-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold-bright);
+    margin: 12px 0 8px;
+  }
+
+  .bonus-box p {
+    font-size: 0.95rem;
+    color: var(--light-gray);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* === APPLICATION FORM === */
+  .form-section {
+    background: var(--dark2);
+    border: 1px solid rgba(201,164,90,0.15);
+    padding: 48px 40px;
+    margin: 40px 0;
+  }
+
+  .form-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .form-section .form-sub {
+    text-align: center;
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-bottom: 36px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-group label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white);
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-group select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A45A' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+  }
+
+  .form-group select option { background: var(--dark); color: var(--white); }
+
+  .form-divider {
+    grid-column: 1 / -1;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    margin: 12px 0;
+  }
+
+  .form-divider-label {
+    grid-column: 1 / -1;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: var(--gold-dim);
+    margin-top: 8px;
+  }
+
+  /* === DEPOSIT CTA === */
+  .deposit-box {
+    grid-column: 1 / -1;
+    background: rgba(201,164,90,0.06);
+    border: 1px solid rgba(201,164,90,0.2);
+    padding: 28px;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .deposit-box h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .deposit-box p {
+    font-size: 0.88rem;
+    color: var(--gray);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto 4px;
+  }
+
+  .deposit-box .deposit-amount {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold-bright);
+    margin: 12px 0;
+  }
+
+  .submit-btn {
+    grid-column: 1 / -1;
+    margin-top: 12px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    color: var(--black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    padding: 18px 40px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,164,90,0.3);
+  }
+
+  .form-footer {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--gray);
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+
+  /* === QUOTE === */
+  .quote-block {
+    text-align: center;
+    padding: 48px 24px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .quote-block blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--gold-bright);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .quote-block cite {
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+
+  /* === ZERO PRESSURE === */
+  .zero-pressure {
+    text-align: center;
+    padding: 32px 24px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .zero-pressure p {
+    font-size: 1rem;
+    color: var(--gray);
+    line-height: 1.8;
+  }
+
+  .zero-pressure p strong { color: var(--white); }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.78rem;
+    color: var(--gray);
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  footer .tagline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  /* === FAQ TOGGLES === */
+  .faq-list { margin: 40px 0; }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .faq-question h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    padding-right: 16px;
+    line-height: 1.5;
+  }
+
+  .faq-question .faq-icon {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    min-width: 24px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 800px;
+    padding-bottom: 24px;
+  }
+
+  .faq-answer p {
+    font-size: 0.92rem;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .faq-answer p:last-child { margin-bottom: 0; }
+  .faq-answer p strong { color: var(--light-gray); }
+
+  /* === INLINE CTA === */
+  .inline-cta {
+    text-align: center;
+    margin: 32px 0 0;
+  }
+
+  .inline-cta a {
+    display: inline-block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    border: 1px solid rgba(201,164,90,0.35);
+    padding: 14px 36px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .inline-cta a:hover {
+    background: rgba(201,164,90,0.1);
+    border-color: var(--gold);
+  }
+
+  /* === SITE HEADER === */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 24px 0;
+  }
+
+  .site-header img {
+    height: 48px;
+    width: auto;
+  }
+
+  .site-header .key-phrase {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 640px) {
+    section { padding: 40px 16px; }
+
+    .contrast-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contrast-header.new,
+    .contrast-cell.new {
+      border-left: none;
+    }
+
+    .who-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .logistics-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group.full { grid-column: 1; }
+    .form-divider, .form-divider-label, .deposit-box, .submit-btn, .form-footer { grid-column: 1; }
+
+    .form-section { padding: 32px 20px; }
+
+    .proof-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="geo-bg"></div>
+<div class="page-wrap">
+
+<!-- ====== HEADER ====== -->
+<header class="site-header">
+  <img src="sle-logo-gold.png" alt="Service Loop Electrical">
+  <span class="key-phrase">For Electricians Done Playing Small</span>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="hero-badge">First Case Study Group | By Application Only</div>
+  <h1>
+    THE <span class="italic-gold">7-Figure</span><br>
+    <span class="gold">CASE STUDY GROUP</span>
+  </h1>
+  <p class="hero-sub">
+    We're hand-selecting <strong>10 electricians</strong> to push past 7 figures this year.<br>
+    Weekly calls. The most potent lessons we've ever distilled &mdash; delivered faster than ever with tools built for your wins.<br>
+    One team. One mission. <strong>No one gets added once we start.</strong>
+  </p>
+  <div class="spots-counter">
+    <span class="dot"></span>
+    10 SPOTS &mdash; APRIL 28 KICKOFF
+  </div>
+
+  <!-- Countdown Timer -->
+  <div id="countdown" style="display: flex; justify-content: center; gap: 24px; margin-top: 32px;">
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-days">00</span>
+      <span class="cd-label">DAYS</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-hours">00</span>
+      <span class="cd-label">HOURS</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-mins">00</span>
+      <span class="cd-label">MIN</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-secs">00</span>
+      <span class="cd-label">SEC</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROMISE ====== -->
+<section>
+  <div class="section-divider"></div>
+  <div class="promise-box">
+    <h2>THE PROMISE</h2>
+    <p>
+      Get wins fast enough to <strong>pay for this entire program in 60 days or less.</strong>
+      We've taken the most proven systems from our <strong>$1M+ Playbook</strong> &mdash; the ones responsible for the biggest
+      revenue jumps our partners have ever seen &mdash; and compressed them into the most potent, actionable
+      curriculum we've ever built. Tools that speed up implementation. Coaching that keeps you accountable. This isn't theory. <strong>This is the fast track.</strong>
+    </p>
+    <p style="margin-top: 16px; font-size: 0.9rem; color: var(--gold);">
+      <strong>Love it or leave it.</strong> If it's not what you hoped, we part as friends. No silly stuff.
+    </p>
+  </div>
+</section>
+
+<!-- ====== CONTRAST: OLD WAY vs NEW WAY ====== -->
+<section>
+  <h2 class="section-title">THE <span class="italic-gold">Old</span> WAY VS. THE <span class="gold">NEW WAY</span></h2>
+  <p class="section-subtitle">Be honest with yourself. Which column are you living in right now?</p>
+
+  <div class="contrast-grid">
+    <div class="contrast-header old">WHERE YOU ARE</div>
+    <div class="contrast-header new">WHERE THIS TAKES YOU</div>
+
+    <div class="contrast-cell old">You did $600K last year and took home less than your lead tech. The revenue is there but the profit isn't &mdash; and you can't figure out where it's going.</div>
+    <div class="contrast-cell new"><strong>You know your numbers cold.</strong> Every dollar tracked. Profit margins locked. You pay yourself first because the system earns it.</div>
+
+    <div class="contrast-cell old">You're the first one on the job site and the last one to leave. Weekends don't exist. Your family gets whatever's left &mdash; which isn't much.</div>
+    <div class="contrast-cell new"><strong>You run the business. It doesn't run you.</strong> Structured weeks. Protected time. Your family gets the best of you, not the scraps.</div>
+
+    <div class="contrast-cell old">You're scared to raise prices because you think you'll lose every customer. So you race to the bottom and wonder why $500K in revenue feels like $50K in the bank.</div>
+    <div class="contrast-cell new"><strong>You price with confidence.</strong> No defending. No discounting. Clients choose from 6 options and thank you for the experience.</div>
+
+    <div class="contrast-cell old">Feast or famine. One great month, then two months of panic. You can't plan because you never know what's coming.</div>
+    <div class="contrast-cell new"><strong>Predictable pipeline.</strong> You know where next month's revenue is coming from before this month ends. No more guessing. No more panic.</div>
+
+    <div class="contrast-cell old">You've got "guys" &mdash; not a team. You can't take a day off without 15 texts. If you disappeared for a week the business would stop.</div>
+    <div class="contrast-cell new"><strong>A team that runs without you in the room.</strong> Trained, accountable, producing. You're the architect &mdash; not the babysitter.</div>
+
+    <div class="contrast-cell old">You built a job, not a business. You can't sell it. You can't step away. You're trapped in something you created and you're too deep to start over.</div>
+    <div class="contrast-cell new"><strong>You built an asset.</strong> A business that serves your life, compounds every month, and puts you on a clear path to 7 figures.</div>
+  </div>
+  <div class="inline-cta"><a href="#apply">APPLY NOW</a></div>
+</section>
+
+<!-- ====== WHO IT'S FOR / NOT FOR ====== -->
+<section>
+  <h2 class="section-title">IS THIS <span class="italic-gold">Obviously</span> <span class="gold">FOR YOU?</span></h2>
+  <p class="section-subtitle">Have a read. It'll be obviously for you &mdash; or it won't. No pressure either way.</p>
+
+  <div class="who-grid">
+    <div class="who-card for-you">
+      <h3>This Is For You If:</h3>
+      <ul>
+        <li>You're doing $350K&ndash;$850K+ but you know there's another gear</li>
+        <li>You've got 1&ndash;5 vans and a team that could perform better with the right system</li>
+        <li>You're tired of feast-or-famine months and running by gut feel</li>
+        <li>You're willing to do the work &mdash; this isn't passive</li>
+        <li>You believe your business should serve your life, not consume it</li>
+        <li>You want a team around you pushing toward the same number</li>
+        <li>You're ready to install systems, not just learn ideas</li>
+      </ul>
+    </div>
+    <div class="who-card not-for">
+      <h3>This Is Not For You If:</h3>
+      <ul>
+        <li>You want a "course" you can watch on the couch</li>
+        <li>You think you already know everything and just need leads</li>
+        <li>You're not willing to improve how you price, serve, or run your team</li>
+        <li>You want someone else to do it for you</li>
+        <li>You can't commit to weekly calls and real implementation</li>
+        <li>You're looking for a magic button, not a system</li>
+      </ul>
+    </div>
+  </div>
+  <div class="inline-cta"><a href="#apply">APPLY NOW</a></div>
+</section>
+
+<!-- ====== FIRST / NEXT / THEN ====== -->
+<section>
+  <h2 class="section-title">THE <span class="gold">PLAN</span></h2>
+  <p class="section-subtitle">Three phases. Built to get you wins fast and compound from there.</p>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-number">FIRST &mdash; WEEK 1</div>
+      <h3>Group Onboarding &amp; 1st Steps</h3>
+      <p>Day one we install the foundation that makes everything else work. Your pricing, your deposits, your options menu &mdash; locked in before your next call.</p>
+      <ul>
+        <li>Price system installed &mdash; multiplier + risk methodology</li>
+        <li>Deposits activated &mdash; 50% collected before work begins</li>
+        <li>Financing set up &mdash; so price is never the objection</li>
+        <li>Options menu &mdash; 6-tier presentations on every job, built with tools that do the heavy lifting</li>
+        <li>Warranty &amp; guarantees framework in place</li>
+        <li>Memberships &mdash; start stacking recurring revenue immediately</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-number">NEXT &mdash; WEEKS 2&ndash;4</div>
+      <h3>Service Process &amp; First Wins</h3>
+      <p>Weekly group calls. You're running the system live on real jobs. We're tracking, adjusting, and stacking wins together.</p>
+      <ul>
+        <li>Full service process deployed &mdash; Equity, Understand, Offer, Survey</li>
+        <li>App + transcript tools for real-time feedback</li>
+        <li>Lead Surge quick wins alongside your service improvements</li>
+        <li>Weekly group accountability &mdash; tracking leads, appts, sales, installs, revenue, reviews</li>
+        <li>First win goal: cover your first month's investment before it's up</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-number">THEN &mdash; DAY 60 OR 1ST BIG WIN</div>
+      <h3>Earn Your Inner Loop Access</h3>
+      <p>Hit your first big win or reach day 60 &mdash; whichever comes first &mdash; and we upgrade your membership to the Inner Loop. This is where the real compounding begins.</p>
+      <ul>
+        <li>200+ additional courses unlocked across every chapter of the $1M+ Playbook</li>
+        <li>Full class schedule opened &mdash; 5 days a week across mentors and topics</li>
+        <li>Complete community unlock &mdash; full access to every partner, every win, every resource</li>
+        <li>Weekly group calls continue &mdash; 10 pros pushing each other to 7 figures</li>
+        <li>Clear path forward: compound, scale, and build the business that serves your life</li>
+      </ul>
+    </div>
+  </div>
+  <div class="inline-cta"><a href="#apply">APPLY NOW</a></div>
+</section>
+
+<!-- ====== PROOF STACK ====== -->
+<section>
+  <h2 class="section-title">THE <span class="italic-gold">Proof</span> <span class="gold">WALL</span></h2>
+  <p class="section-subtitle">Real names. Real numbers. Real electricians. This is what the system produces.</p>
+
+  <div class="proof-cards">
+    <div class="proof-card">
+      <div class="name">Nathan</div>
+      <div class="numbers">
+        Started at $0/month
+        <span class="result">$110K/mo</span>
+        <span class="timeline">In 150 days</span>
+      </div>
+    </div>
+
+    <div class="proof-card">
+      <div class="name">Sherman</div>
+      <div class="numbers">
+        Was at ~$100K/month
+        <span class="result">$300K/mo</span>
+        <span class="timeline">In 60 days</span>
+      </div>
+    </div>
+
+    <div class="proof-card">
+      <div class="name">Christian</div>
+      <div class="numbers">
+        Was at ~$70K/month
+        <span class="result">Avg $200K/mo</span>
+        <span class="timeline">In 6 months</span>
+      </div>
+    </div>
+
+    <div class="proof-card">
+      <div class="name">Mike</div>
+      <div class="numbers">
+        Was at $80K/month
+        <span class="result">$160K/mo</span>
+        <span class="timeline">In 90 days</span>
+      </div>
+    </div>
+
+    <div class="proof-card">
+      <div class="name">Dan T.</div>
+      <div class="numbers">
+        Started at $0/month
+        <span class="result">$300K/mo</span>
+        <span class="timeline">Over 25 months</span>
+      </div>
+    </div>
+
+    <div class="proof-card">
+      <div class="name">Nick V. &amp; Others</div>
+      <div class="numbers">
+        Dozens of partners
+        <span class="result">Winning weekly</span>
+        <span class="timeline">And counting</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 40px 0 0;">
+    <div style="position: relative; padding-top: 56.25%;"><iframe src="https://fast.wistia.net/embed/iframe/8jilmg7dgr?seo=false&videoFoam=false" title="Proof Video 1" allow="autoplay; fullscreen" frameborder="0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+    <div style="position: relative; padding-top: 56.25%;"><iframe src="https://fast.wistia.net/embed/iframe/hx8z6cpnpt?seo=false&videoFoam=false" title="Proof Video 2" allow="autoplay; fullscreen" frameborder="0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+    <div style="position: relative; padding-top: 56.25%;"><iframe src="https://fast.wistia.net/embed/iframe/fss3376kk1?seo=false&videoFoam=false" title="Proof Video 3" allow="autoplay; fullscreen" frameborder="0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+    <div style="position: relative; padding-top: 56.25%;"><iframe src="https://fast.wistia.net/embed/iframe/52wy41axjt?seo=false&videoFoam=false" title="Proof Video 4" allow="autoplay; fullscreen" frameborder="0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+  </div>
+
+  <div class="inline-cta"><a href="#apply">APPLY NOW</a></div>
+</section>
+
+<!-- ====== CURRICULUM ====== -->
+<section>
+  <h2 class="section-title">WHAT GETS <span class="gold">INSTALLED</span></h2>
+  <p class="section-subtitle">This isn't a curriculum you watch. These are systems we install in your business &mdash; week one.</p>
+
+  <div class="curriculum-list">
+    <div class="curriculum-item">
+      <div class="curr-num">01</div>
+      <div class="curr-content">
+        <h4>Pricing System</h4>
+        <p>Your multiplier, your risk model, your Service Standard Rate. You'll know your number, present it with confidence, and stop leaving money on every job.</p>
+      </div>
+    </div>
+
+    <div class="curriculum-item">
+      <div class="curr-num">02</div>
+      <div class="curr-content">
+        <h4>Deposits &amp; Financing</h4>
+        <p>50% collected before a tool leaves the van. Financing options set up so "I can't afford it" stops killing your deals. Cash flow transformed from day one.</p>
+      </div>
+    </div>
+
+    <div class="curriculum-item">
+      <div class="curr-num">03</div>
+      <div class="curr-content">
+        <h4>Options Menu</h4>
+        <p>6-tier presentations on every job &mdash; built with tools that do the heavy lifting so you can focus on the client. They choose the budget. You control the profit. No pricebook required.</p>
+      </div>
+    </div>
+
+    <div class="curriculum-item">
+      <div class="curr-num">04</div>
+      <div class="curr-content">
+        <h4>Warranty &amp; Guarantees</h4>
+        <p>The framework that eliminates buyer hesitation. Structured guarantees that build trust, raise perceived value, and close the gap between "thinking about it" and "let's do it."</p>
+      </div>
+    </div>
+
+    <div class="curriculum-item">
+      <div class="curr-num">05</div>
+      <div class="curr-content">
+        <h4>Memberships</h4>
+        <p>Start stacking recurring revenue immediately. The membership model that smooths out feast-or-famine months and builds a base that grows every single week.</p>
+      </div>
+    </div>
+
+    <div class="curriculum-item">
+      <div class="curr-num">06</div>
+      <div class="curr-content">
+        <h4>Service Process</h4>
+        <p>Equity, Understand, Offer, Survey. The complete in-home framework that turns every call into a premium experience &mdash; backed by app tools and real-time transcript feedback.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== LOGISTICS ====== -->
+<section>
+  <h2 class="section-title"><span class="gold">LOGISTICS</span></h2>
+
+  <div class="logistics-grid">
+    <div class="logistic-item">
+      <div class="label">Kickoff</div>
+      <div class="value">Tuesday, April 28th<br>7:00 AM PST</div>
+    </div>
+
+    <div class="logistic-item">
+      <div class="label">Format</div>
+      <div class="value">Weekly live group calls<br>+ async support</div>
+    </div>
+
+    <div class="logistic-item">
+      <div class="label">Investment</div>
+      <div class="value">$1,997 / month</div>
+    </div>
+
+    <div class="logistic-item">
+      <div class="label">Group Size</div>
+      <div class="value">10 spots. Period.<br>No late adds.</div>
+    </div>
+
+    <div class="logistic-item full-width">
+      <div class="label">How It Works</div>
+      <div class="value" style="font-size: 0.95rem; font-weight: 400; color: var(--light-gray); line-height: 1.8;">
+        Apply below. We review every application within 48 hours. If you're approved, <strong style="color: var(--white);">you'll be invited to a program info session with Clay &amp; the team</strong> to answer all your questions and lock in your membership.
+        A <strong style="color: var(--white);">$1,000 deposit paid within 24 hours of tonight's webinar</strong> &mdash; combined with an approved application &mdash; unlocks the full bonus package below.
+        If you're not the right fit, we refund your deposit immediately. No hard feelings. We're building a winning team, not filling seats.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== BONUS ====== -->
+<section>
+  <div class="bonus-box">
+    <h3>24-HOUR DEPOSIT BONUS PACKAGE</h3>
+    <div style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: 1px; color: var(--white); margin-bottom: 8px;">Pay your $1,000 deposit tonight and unlock over <span style="color: var(--gold-bright);">$3,000</span> worth of additional bonuses.</div>
+    <p style="margin-bottom: 24px; font-size: 0.88rem;">With an approved application, all five are yours:</p>
+
+    <div style="text-align: left; max-width: 560px; margin: 0 auto;">
+      <div style="padding: 16px 0; border-bottom: 1px solid rgba(201,164,90,0.15);">
+        <strong style="color: var(--gold-bright); font-size: 1.1rem;">1. Lifetime Open Circuit Access</strong>
+        <span style="float: right; color: var(--gold); font-weight: 700;">$1,497 value</span>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
+          Permanent access to the community where our partners and paid members live. Hundreds of electricians sharing wins, holding each other accountable, and pushing each other forward every single week. Yours for life.
+        </p>
+      </div>
+
+      <div style="padding: 16px 0; border-bottom: 1px solid rgba(201,164,90,0.15);">
+        <strong style="color: var(--gold-bright); font-size: 1.1rem;">2. $500 Lead Surge Marketing Credit</strong>
+        <span style="float: right; color: var(--gold); font-weight: 700;">$500 value</span>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
+          Applied directly to your Lead Surge account. Real ad spend, real leads, real pipeline &mdash; on us. Start filling your calendar while we install the systems to close them.
+        </p>
+      </div>
+
+      <div style="padding: 16px 0; border-bottom: 1px solid rgba(201,164,90,0.15);">
+        <strong style="color: var(--gold-bright); font-size: 1.1rem;">3. The Loop Method &mdash; Complete PDF Playbook</strong>
+        <span style="float: right; color: var(--gold); font-weight: 700;">Never released</span>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
+          The entire Loop Method process in one document. Every chapter. Every framework. This has never been given away before &mdash; and may never be again. It's yours to keep.
+        </p>
+      </div>
+
+      <div style="padding: 16px 0; border-bottom: 1px solid rgba(201,164,90,0.15);">
+        <strong style="color: var(--gold-bright); font-size: 1.1rem;">4. Bonus Session with Our $1M+ Partners</strong>
+        <span style="float: right; color: var(--gold); font-weight: 700;">Exclusive</span>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
+          A private session with our top-tier partners who are already well past $1M in revenue. Hear exactly what they did, how they think, and what they'd do differently. You won't find this anywhere else.
+        </p>
+      </div>
+
+      <div style="padding: 16px 0;">
+        <strong style="color: var(--gold-bright); font-size: 1.1rem;">5. Our Most Advanced AI Tools + The Field Guide</strong>
+        <span style="float: right; color: var(--gold); font-weight: 700;">Game-changer</span>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
+          Full access to our most advanced AI-powered tools &mdash; plus The Field Guide, the ultimate electronic reference tool for your techs in the field. Options building, client language, and presentation quick guide &mdash; everything they need to sell with confidence, right on their phone, right at the kitchen table.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ROADMAP ====== -->
+<section style="text-align: center;">
+  <h2 class="section-title">THE <span class="gold">ROADMAP</span></h2>
+  <p class="section-subtitle">This is the system we're installing together. Here's where we're headed.</p>
+  <img src="playbook-roadmap.png" alt="The $1M Service Playbook Roadmap" style="width: 100%; max-width: 820px; margin: 0 auto; border: 1px solid rgba(201,164,90,0.15);">
+</section>
+
+<!-- ====== APPLICATION FORM ====== -->
+<section id="apply">
+  <div class="form-section">
+    <h2>APPLY FOR THE <span style="color: var(--gold-bright);">7-FIGURE CASE STUDY GROUP</span></h2>
+    <p class="form-sub">10 spots. 48-hour review. Approved applicants will be invited to a program info session with Clay &amp; team.</p>
+
+    <form class="form-grid" action="#" method="POST" id="cohortApplication">
+
+      <div class="form-divider-label">YOUR INFO</div>
+
+      <div class="form-group">
+        <label for="firstName">First Name *</label>
+        <input type="text" id="firstName" name="firstName" required placeholder="First name">
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name *</label>
+        <input type="text" id="lastName" name="lastName" required placeholder="Last name">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required placeholder="you@email.com">
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone *</label>
+        <input type="tel" id="phone" name="phone" required placeholder="(555) 555-5555">
+      </div>
+
+      <div class="form-group full">
+        <label for="businessName">Business Name *</label>
+        <input type="text" id="businessName" name="businessName" required placeholder="Your electrical business name">
+      </div>
+
+      <div class="form-group full">
+        <label for="location">City / State *</label>
+        <input type="text" id="location" name="location" required placeholder="e.g. Phoenix, AZ">
+      </div>
+
+      <div class="form-divider"></div>
+      <div class="form-divider-label">YOUR BUSINESS</div>
+
+      <div class="form-group">
+        <label for="yearsInService">Years in Electrical Service *</label>
+        <select id="yearsInService" name="yearsInService" required>
+          <option value="" disabled selected>Select</option>
+          <option>Less than 1 year</option>
+          <option>1-2 years</option>
+          <option>3-5 years</option>
+          <option>6-10 years</option>
+          <option>10+ years</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="teamSize">Total Staff (incl. you) *</label>
+        <select id="teamSize" name="teamSize" required>
+          <option value="" disabled selected>Select</option>
+          <option>Just me</option>
+          <option>2-3</option>
+          <option>4-6</option>
+          <option>7-10</option>
+          <option>11-20</option>
+          <option>20+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="vans">Number of Vans *</label>
+        <select id="vans" name="vans" required>
+          <option value="" disabled selected>Select</option>
+          <option>1</option>
+          <option>2-3</option>
+          <option>4-5</option>
+          <option>6+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="avgMonthlyRevenue">Avg Monthly Revenue *</label>
+        <select id="avgMonthlyRevenue" name="avgMonthlyRevenue" required>
+          <option value="" disabled selected>Select</option>
+          <option>Under $20K</option>
+          <option>$20K - $50K</option>
+          <option>$50K - $80K</option>
+          <option>$80K - $120K</option>
+          <option>$120K - $200K</option>
+          <option>$200K+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="revenue">Annual Revenue (approx) *</label>
+        <select id="revenue" name="revenue" required>
+          <option value="" disabled selected>Select</option>
+          <option>Under $250K</option>
+          <option>$250K - $500K</option>
+          <option>$500K - $750K</option>
+          <option>$750K - $1M</option>
+          <option>$1M - $1.5M</option>
+          <option>$1.5M+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="profit">Estimated Net Profit Margin *</label>
+        <select id="profit" name="profit" required>
+          <option value="" disabled selected>Select</option>
+          <option>Negative / breaking even</option>
+          <option>1% - 10%</option>
+          <option>10% - 20%</option>
+          <option>20% - 30%</option>
+          <option>30%+</option>
+          <option>Not sure</option>
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <label for="revenueGoal">What's your 12-month revenue goal? *</label>
+        <input type="text" id="revenueGoal" name="revenueGoal" required placeholder="e.g. $1.2M, $83K/month, etc.">
+      </div>
+
+      <div class="form-divider"></div>
+      <div class="form-divider-label">THE REAL QUESTION</div>
+
+      <div class="form-group full">
+        <label for="whyMillion">Why do you believe you can hit $1M+ with the right team around you? *</label>
+        <textarea id="whyMillion" name="whyMillion" required placeholder="Tell us what makes you believe you're ready for this. What's working? What's holding you back? Why now?"></textarea>
+      </div>
+
+      <div class="form-group full">
+        <label for="biggestChallenge">What's the single biggest challenge in your business right now?</label>
+        <textarea id="biggestChallenge" name="biggestChallenge" placeholder="Be honest. We're looking for fit, not perfection."></textarea>
+      </div>
+
+      <div class="deposit-box">
+        <h4>SECURE YOUR SPOT + UNLOCK THE BONUSES</h4>
+        <div class="deposit-amount">$1,000 Deposit</div>
+        <p>
+          Pay within 24 hours of tonight's webinar to lock in all four bonuses above. If you're approved, we'll call you to confirm your seat. If you're not the right fit, we refund your deposit immediately. No hard feelings.
+        </p>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Application &amp; Pay Deposit</button>
+
+      <p class="form-footer">
+        Applications reviewed within 48 hours. If approved, we'll reach out to lock in your seat.<br>
+        We're choosing 10 partners to build this with. Not 11. Not 15. Ten.
+      </p>
+
+    </form>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section>
+  <h2 class="section-title">QUESTIONS <span class="gold">YOU'RE THINKING</span></h2>
+  <p class="section-subtitle">We've heard them all. Here are the honest answers.</p>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"I don't have time for this. I'm already slammed."</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>We know. You're answering calls on the job. Writing quotes at 10pm. Running dispatch because nobody else knows the schedule. Wearing every hat in the building.</p>
+        <p>Here's the honest answer: about <strong>1.5 hours a week of learning</strong> — one group call. The rest is implementing on the jobs you're already running. You're not adding work. You're changing how you work on the calls you already have.</p>
+        <p>And here's what nobody says out loud: <strong>the reason you don't have time is the exact problem we fix.</strong> You're busy because every process lives in your head. Because nobody else can do what you do. Because you never built the playbook that lets them.</p>
+        <p>Nathan joined while running every single call himself. By month 3, he had a system his team could follow. By month 5, he hit $105,000. And he wasn't on every job anymore.</p>
+        <p>The time thing isn't a reason to wait. It's the reason to start.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"Is this just teaching my guys to upsell?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>Upsell is a dirty word here. That word tends to silence the whole room &mdash; because the next thing that happens is Clay or Joseph calls a time out.</p>
+        <p><strong>You cannot sell if you have not served.</strong> There's no room for upselling in this culture. We don't count the number of surge protectors sold this week. We leave those sketchy tactics at the door.</p>
+        <p>We actually try to talk people OUT of buying. When someone picks an option, we ask: "Are you sure? There's a cheaper option below this one." That's how we know they really want it.</p>
+        <p>If your team has ever been burned by pushy sales training, this is the opposite. Premium service first. Revenue follows.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"I've tried coaching before and it didn't work."</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>Fair. A lot of our partners said the same thing before they joined. Some had tried other programs &mdash; general business coaching that wasn't built for trades at all.</p>
+        <p>Here's what they told us: "I got content. But nobody showed me how to actually do it." "The scripts were built for HVAC. They just swapped in the word 'electrician.'" "I sat in a room full of plumbers and felt like the odd one out."</p>
+        <p><strong>Service Loop Electrical is built by electricians, for electricians.</strong> Joseph sold $1.3 million from his own service van, three years in a row. That's not a talking point. That's the foundation everything is built on.</p>
+        <p>We don't hand you a binder and say good luck. We install systems with you. Side by side. On real jobs, with real numbers, in your real market.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"I feel like I AM the bottleneck. Can you actually help with that?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>This might be the most important question on this page.</p>
+        <p>You started this company because you were great with your hands. You could wire anything, troubleshoot anything, outwork anyone. And that got you here. But now you're the one answering every call. Running every job. Checking every install. Doing payroll at midnight.</p>
+        <p><strong>You built a company where YOU are the system.</strong> And that means the company only works when you do.</p>
+        <p>One of our prospects put it perfectly: "I started this company to be my own boss. Now I just hired myself as an employee."</p>
+        <p>The Loop Method isn't just a sales system. It's a full operating system for your company. Pricing so your team charges with confidence. Options so they present without you in the room. Systems so new hires know the play from Day 1.</p>
+        <p>Nathan built his system in 90 days. By month 5, his team was running calls and he was running the business. $105K month. Sherman stopped being the only closer. His team learned the process. $300K month. He wasn't even in the country.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"What if I can figure this out on my own?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>You probably can. Honestly.</p>
+        <p>You already proved you can figure things out. You learned the trade. Got the license. Started a company. Found customers. You're tough, smart, and you don't quit.</p>
+        <p>But let me ask you one thing: <strong>how long have you been trying?</strong></p>
+        <p>Two years? Five? Longer? And where are you right now? Still answering every call. Still the only closer. Still guessing on pricing. Still working 60 hours.</p>
+        <p>You're not short on talent. You're short on a system that someone already built.</p>
+        <p>Joseph spent years learning how to sell $1.3 million from a van. We spent years turning that into a step-by-step process. You can spend those same years learning it yourself &mdash; or you can install it in 90 days. That's not about pride. That's just math.</p>
+        <p>The smartest electricians we work with aren't the ones who figured it out alone. They're the ones who finally said: <strong>"I've proven I can build. Now let me build it right."</strong></p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"Will this work in my area?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>We don't serve communities. We serve people. And people everywhere want the same thing: to feel safe, to feel taken care of, and to trust the person in their home.</p>
+        <p>We've seen it work in small towns ($300K to $612K), in major cities ($305K months in NYC), and everywhere in between.</p>
+        <p>Here's a quick test: search "Electricians Near Me" right now. Count how many have 1,000+ reviews and a 4.7+ rating. If you don't see 3 &mdash; <strong>your market is wide open.</strong></p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"Do I need more leads or more from my leads?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>A bit of both &mdash; but order matters.</p>
+        <p>If you're out there under-servicing every lead, under-pricing every job, and under-presenting every option &mdash; that's what we call <strong>burning leads.</strong> You're spending money or time to get them in the door, then leaving money on the table every single time.</p>
+        <p>Fix the service first. Stop the burn. Then crank up the dial like a rheostat &mdash; lower the resistance, get more lead flow, more sales, more profitability, and more reviews and referrals. That's the sequence.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"How do I get my team on board with this?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>Three reasons your techs resist change: they think it's unethical, they think it's pushy, or they don't see any personal benefit.</p>
+        <p><strong>Ethics:</strong> We believe in on or above everything. Joseph will hold your team accountable to premium service &mdash; not because it makes more sales, but because it serves the client better. More revenue is a side effect of great work.</p>
+        <p><strong>Pushy:</strong> Our process pulls instead of pushes. Your guys will feel the difference immediately.</p>
+        <p><strong>Personal benefit:</strong> Less callbacks. Less warranty work. Greater reward for every project completed. And when you understand your numbers, you'll be able to offer bonuses and commission. We'll help you set that up too.</p>
+        <p>The real question is: why wouldn't your team want to adopt this?</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"What about the guarantee?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>Here's what we'll say about that: <strong>if you keep doing the same thing but expect a different outcome, that's not fair to the laws of the world.</strong></p>
+        <p>But if you're willing to change &mdash; genuinely change how you price, how you present, how you serve &mdash; everything will change for you. We've watched it happen hundreds of times.</p>
+        <p>For some people, that change is easiest with a friend. Someone confident. Someone who believes in you. Someone who'll even push a little when you need it.</p>
+        <p>That's what this group is. And if it's not what you hoped? We already told you &mdash; <strong>love it or leave it. We part as friends. No silly stuff.</strong></p>
+        <p>Out of hundreds of partners, we've had 3 refunded programs and zero chargebacks. Not because we hide behind fine print &mdash; because we practice what we teach. We're intentional service providers who work hard to see you win. And when you 10x your investment? We won't ask for more. We'll raise a glass to your success and keep building.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====== ZERO PRESSURE CLOSE ====== -->
+<div class="zero-pressure">
+  <p>
+    Have a read. It's obviously for you &mdash; or it's not.<br><br>
+    <strong>We're not here to convince anyone.</strong> We're here to find 10 electricians who already know they're ready and just need the right system and the right team beside them.<br><br>
+    If that's you, apply above. If it's not, no hard feelings. We'll still be here when the time is right.
+  </p>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="tagline">FOR ELECTRICIANS DONE PLAYING SMALL.</div>
+  <p>Service Loop Electrical &mdash; $1M+ Electric Service Academy<br>
+  &copy; 2026 Service Loop Electrical Inc. All rights reserved.</p>
+</footer>
+
+</div><!-- /page-wrap -->
+
+<script>
+  // Simple form validation feedback
+  document.getElementById('cohortApplication').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Collect form data
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value; });
+
+    // For now, show confirmation (replace with actual form action / GHL webhook)
+    const btn = this.querySelector('.submit-btn');
+    btn.textContent = 'APPLICATION SUBMITTED';
+    btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+    btn.disabled = true;
+
+    // Scroll to top with thank you
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    console.log('Application data:', data);
+    // TODO: Wire to GHL form/webhook endpoint
+  });
+
+  // Countdown to April 28, 2026 7:00 AM PST (UTC-7)
+  function updateCountdown() {
+    const kickoff = new Date('2026-04-28T14:00:00Z'); // 7am PST = 2pm UTC
+    const now = new Date();
+    const diff = kickoff - now;
+
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML = '<span style="font-family: Bebas Neue, sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--red);">APPLICATIONS CLOSED</span>';
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // FAQ toggles
+  document.querySelectorAll('.faq-question').forEach(function(q) {
+    q.addEventListener('click', function() {
+      this.parentElement.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
