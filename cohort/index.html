@@ -1598,11 +1598,15 @@
       body: JSON.stringify(payload)
     }).catch(function() {});
 
-    // Show confirmation
+    // Show confirmation then redirect to checkout
     const btn = this.querySelector('.submit-btn');
-    btn.textContent = 'APPLICATION SUBMITTED';
+    btn.textContent = 'REDIRECTING TO CHECKOUT...';
     btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
     btn.disabled = true;
+
+    setTimeout(function() {
+      window.location.href = 'https://www.electricserviceapp.com/checkout/7-figure-case-study-group-deposit';
+    }, 1500);
   });
 
   // Countdown to April 28, 2026 7:00 AM PST (UTC-7)
