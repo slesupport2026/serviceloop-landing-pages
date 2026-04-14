@@ -1571,17 +1571,38 @@
     const data = {};
     formData.forEach((value, key) => { data[key] = value; });
 
-    // For now, show confirmation (replace with actual form action / GHL webhook)
+    // Send to GHL webhook
+    const payload = {
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      business_name: data.businessName,
+      location: data.location,
+      years_in_service: data.yearsInService,
+      team_size: data.teamSize,
+      vans: data.vans,
+      avg_monthly_revenue: data.avgMonthlyRevenue,
+      annual_revenue: data.revenue,
+      profit_margin: data.profit,
+      revenue_goal: data.revenueGoal,
+      why_million: data.whyMillion,
+      biggest_challenge: data.biggestChallenge,
+      source: 'SLE Cohort Application',
+      timestamp: new Date().toISOString()
+    };
+
+    fetch('https://services.leadconnectorhq.com/hooks/mJnVWDiUtQrpHnyom1qR/webhook-trigger/084e43f3-bd5c-45f4-bf8a-1b4adce42fb9', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function() {});
+
+    // Show confirmation
     const btn = this.querySelector('.submit-btn');
     btn.textContent = 'APPLICATION SUBMITTED';
     btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
     btn.disabled = true;
-
-    // Scroll to top with thank you
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    console.log('Application data:', data);
-    // TODO: Wire to GHL form/webhook endpoint
   });
 
   // Countdown to April 28, 2026 7:00 AM PST (UTC-7)
