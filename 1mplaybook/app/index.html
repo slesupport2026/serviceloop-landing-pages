@@ -2405,7 +2405,7 @@ body{background:var(--black);color:var(--white);font-family:"Open Sans",sans-ser
             <label class="ch-apply-label" for="apply-why">In one sentence, why do you want to apply now?</label>
             <textarea class="ch-apply-textarea" id="apply-why" placeholder="Tell us what's driving you to take action today..."></textarea>
           </div>
-          <button class="ch-apply-btn" onclick="alert('Application submitted! Our team will be in touch within 24 hours.')">Apply Now</button>
+          <button class="ch-apply-btn" onclick="submitSLEProApplication(this)">Apply Now</button>
           <div class="ch-apply-note">Only 10 new members accepted per calendar month. We review every application personally.</div>
         </div>
 
@@ -2479,6 +2479,41 @@ function scrollToChapter(num){
       break;
     }
   }
+}
+
+function submitSLEProApplication(btn) {
+  var name = document.getElementById('apply-name').value.trim();
+  var phone = document.getElementById('apply-phone').value.trim();
+  var why = document.getElementById('apply-why').value.trim();
+
+  if (!name || !phone) {
+    alert('Please fill in your name and phone number.');
+    return;
+  }
+
+  var nameParts = name.split(' ');
+  var firstName = nameParts[0] || '';
+  var lastName = nameParts.slice(1).join(' ') || '';
+
+  var payload = {
+    first_name: firstName,
+    last_name: lastName,
+    full_name: name,
+    phone: phone,
+    why_apply: why,
+    source: 'SLE Pro Application (1M Playbook)',
+    timestamp: new Date().toISOString()
+  };
+
+  fetch('https://services.leadconnectorhq.com/hooks/mJnVWDiUtQrpHnyom1qR/webhook-trigger/e616ec7a-8565-42d6-9e4b-5c9d5999a2ea', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function() {});
+
+  btn.textContent = 'APPLICATION SUBMITTED';
+  btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+  btn.disabled = true;
 }
 
 function pickAnswer(btn,correct){
