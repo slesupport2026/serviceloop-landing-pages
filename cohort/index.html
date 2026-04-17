@@ -1426,6 +1426,19 @@
         </p>
       </div>
 
+      <!-- Hidden UTM fields (last touch) -->
+      <input type="hidden" name="utm_source" id="utm_source">
+      <input type="hidden" name="utm_medium" id="utm_medium">
+      <input type="hidden" name="utm_campaign" id="utm_campaign">
+      <input type="hidden" name="utm_content" id="utm_content">
+      <input type="hidden" name="utm_term" id="utm_term">
+      <!-- Hidden UTM fields (first touch) -->
+      <input type="hidden" name="utm_source_first" id="utm_source_first">
+      <input type="hidden" name="utm_medium_first" id="utm_medium_first">
+      <input type="hidden" name="utm_campaign_first" id="utm_campaign_first">
+      <input type="hidden" name="utm_content_first" id="utm_content_first">
+      <input type="hidden" name="utm_term_first" id="utm_term_first">
+
       <button type="submit" class="submit-btn">Submit Application &amp; Pay Deposit</button>
 
       <p class="form-footer">
@@ -1562,6 +1575,50 @@
 </div><!-- /page-wrap -->
 
 <script>
+  // ── UTM Tracking ──────────────────────────────────────────────────────────
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+
+    // Map ?ref= to utm_content
+    if (params.get('ref') && !params.get('utm_content')) {
+      params.set('utm_content', params.get('ref'));
+    }
+
+    // Last touch — always update sessionStorage
+    var lastTouch = {};
+    UTM_KEYS.forEach(function(k) {
+      lastTouch[k] = params.get(k) || '';
+    });
+    sessionStorage.setItem('utm_last', JSON.stringify(lastTouch));
+
+    // First touch — only save if nothing stored yet
+    var hasFirstTouch = false;
+    try { hasFirstTouch = !!localStorage.getItem('utm_first'); } catch(e) {}
+    if (!hasFirstTouch) {
+      var firstTouch = {};
+      UTM_KEYS.forEach(function(k) { firstTouch[k] = params.get(k) || ''; });
+      try { localStorage.setItem('utm_first', JSON.stringify(firstTouch)); } catch(e) {}
+    }
+
+    // Populate hidden fields
+    function setField(id, val) {
+      var el = document.getElementById(id);
+      if (el) el.value = val || '';
+    }
+
+    var last = {};
+    try { last = JSON.parse(sessionStorage.getItem('utm_last')) || {}; } catch(e) {}
+    var first = {};
+    try { first = JSON.parse(localStorage.getItem('utm_first')) || {}; } catch(e) {}
+
+    UTM_KEYS.forEach(function(k) {
+      setField(k, last[k]);
+      setField(k + '_first', first[k]);
+    });
+  })();
+  // ── End UTM Tracking ──────────────────────────────────────────────────────
+
   // Simple form validation feedback
   document.getElementById('cohortApplication').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -1588,6 +1645,16 @@
       revenue_goal: data.revenueGoal,
       why_million: data.whyMillion,
       biggest_challenge: data.biggestChallenge,
+      utm_source: data.utm_source || '',
+      utm_medium: data.utm_medium || '',
+      utm_campaign: data.utm_campaign || '',
+      utm_content: data.utm_content || '',
+      utm_term: data.utm_term || '',
+      utm_source_first: data.utm_source_first || '',
+      utm_medium_first: data.utm_medium_first || '',
+      utm_campaign_first: data.utm_campaign_first || '',
+      utm_content_first: data.utm_content_first || '',
+      utm_term_first: data.utm_term_first || '',
       source: 'SLE Cohort Application',
       timestamp: new Date().toISOString()
     };
