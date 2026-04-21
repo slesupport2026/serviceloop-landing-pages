@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>7-Figure Case Study Group | Service Loop Electrical</title>
+<title>The Loop Method Launch Cohort | Service Loop Electrical</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital@1&display=swap');
 
@@ -206,6 +206,204 @@
     font-size: 1rem;
     max-width: 600px;
     margin: 0 auto 40px;
+  }
+
+  /* === IDENTITY LADDER === */
+  .ladder {
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .ladder-tier {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 24px 28px;
+    border: 1px solid rgba(201,164,90,0.12);
+    background: rgba(255,255,255,0.015);
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .ladder-tier + .ladder-tier { border-top: none; }
+
+  .ladder-tier.you-are-here {
+    background: linear-gradient(90deg, rgba(201,164,90,0.18), rgba(201,164,90,0.06));
+    border-color: var(--gold);
+    box-shadow: 0 0 40px rgba(201,164,90,0.15), inset 0 0 0 1px rgba(232,201,122,0.2);
+  }
+
+  .ladder-bolt {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--gold);
+    text-align: center;
+    opacity: 0.4;
+    line-height: 1;
+  }
+
+  .ladder-tier.you-are-here .ladder-bolt {
+    opacity: 1;
+    color: var(--gold-bright);
+    text-shadow: 0 0 20px rgba(232,201,122,0.6);
+  }
+
+  .ladder-body h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .ladder-tier.you-are-here .ladder-body h4 {
+    color: var(--gold-bright);
+  }
+
+  .ladder-body .ladder-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--light-gray);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+
+  .ladder-stats {
+    text-align: right;
+    font-size: 0.82rem;
+    color: var(--gray);
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .ladder-stats strong {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .you-are-here-badge {
+    position: absolute;
+    top: -12px;
+    left: 80px;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    font-weight: 700;
+  }
+
+  @media (max-width: 640px) {
+    .ladder-tier {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 8px;
+      padding: 20px;
+    }
+    .ladder-stats { text-align: center; }
+    .you-are-here-badge { left: 50%; transform: translateX(-50%); }
+  }
+
+  /* === OUTCOMES === */
+  .outcomes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 40px 0;
+  }
+
+  .outcome {
+    padding: 28px 24px;
+    border: 1px solid rgba(201,164,90,0.15);
+    background: rgba(255,255,255,0.02);
+    position: relative;
+  }
+
+  .outcome .outcome-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.5;
+    margin-bottom: 12px;
+  }
+
+  .outcome h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .outcome p {
+    font-size: 0.88rem;
+    color: var(--light-gray);
+    line-height: 1.7;
+  }
+
+  .outcome.highlight {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(201,164,90,0.1), rgba(201,164,90,0.02));
+  }
+
+  .outcome.highlight h4 { color: var(--gold-bright); }
+
+  .outcome .sting {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(201,164,90,0.15);
+    font-size: 0.82rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  @media (max-width: 800px) {
+    .outcomes { grid-template-columns: 1fr; }
+  }
+
+  /* === PROOF HEADLINE === */
+  .proof-headline {
+    text-align: center;
+    padding: 32px;
+    margin: 0 auto 32px;
+    max-width: 720px;
+    border: 1px solid rgba(201,164,90,0.25);
+    background: linear-gradient(135deg, rgba(201,164,90,0.1), rgba(201,164,90,0.02));
+  }
+
+  .proof-headline .before {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--red);
+    letter-spacing: 2px;
+  }
+
+  .proof-headline .arrow {
+    color: var(--gold);
+    font-size: 1.6rem;
+    margin: 0 12px;
+  }
+
+  .proof-headline .after {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--gold-bright);
+    letter-spacing: 2px;
+  }
+
+  .proof-headline .caption {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--light-gray);
+    letter-spacing: 0.5px;
   }
 
   /* === CONTRAST GRID === */
@@ -896,19 +1094,19 @@
 
 <!-- ====== HERO ====== -->
 <section class="hero">
-  <div class="hero-badge">First Case Study Group | By Application Only</div>
+  <div class="hero-badge">The Loop Method Launch Cohort &mdash; First Ever</div>
   <h1>
-    THE <span class="italic-gold">7-Figure</span><br>
-    <span class="gold">CASE STUDY GROUP</span>
+    10 ELECTRICIANS. <span class="italic-gold">4 weeks.</span><br>
+    <span class="gold">ONE GOAL.</span>
   </h1>
   <p class="hero-sub">
-    We're hand-selecting <strong>10 electricians</strong> to push past 7 figures this year.<br>
-    Weekly calls. The most potent lessons we've ever distilled &mdash; delivered faster than ever with tools built for your wins.<br>
-    One team. One mission. <strong>No one gets added once we start.</strong>
+    Turn the calls you <strong>already have</strong> into the money they should have produced all along.<br>
+    You're not lead-starved. You're <strong>ticket-starved</strong>. Same calls, half the revenue.<br>
+    Every week you stay at $225 on a call that should be $2,500 is money that's never coming back.
   </p>
   <div class="spots-counter">
     <span class="dot"></span>
-    10 SPOTS &mdash; APRIL 28 KICKOFF
+    10 SPOTS &mdash; KICKOFF TUESDAY APRIL 28, 4:00 PM PT
   </div>
 
   <!-- Countdown Timer -->
@@ -938,15 +1136,61 @@
   <div class="promise-box">
     <h2>THE PROMISE</h2>
     <p>
-      Get wins fast enough to <strong>pay for this entire program in 60 days or less.</strong>
-      We've taken the most proven systems from our <strong>$1M+ Playbook</strong> &mdash; the ones responsible for the biggest
-      revenue jumps our partners have ever seen &mdash; and compressed them into the most potent, actionable
-      curriculum we've ever built. Tools that speed up implementation. Coaching that keeps you accountable. This isn't theory. <strong>This is the fast track.</strong>
+      Our goal is to <strong>10x your investment in 4 weeks</strong>. We've taken the pricing, flat-rate and options system from inside our <strong>$1M+ Academy</strong> &mdash; the exact system behind every result below &mdash; and compressed it into a 4-week, hands-on case study. No fire hose. No fluff. Only what produces wins <strong>this month</strong>.
     </p>
-    <p style="margin-top: 16px; font-size: 0.9rem; color: var(--gold);">
-      <strong>Love it or leave it.</strong> If it's not what you hoped, we part as friends. No silly stuff.
+    <p style="margin-top: 16px; font-size: 1rem; color: var(--gold-bright); font-weight: 600;">
+      Love it or leave it. If it's not what you hoped, we part as friends and you get your money back.
     </p>
   </div>
+</section>
+
+<!-- ====== IDENTITY LADDER ====== -->
+<section>
+  <h2 class="section-title">WHERE ARE YOU <span class="gold">ON THE PATH?</span></h2>
+  <p class="section-subtitle">Every electric service business climbs the same ladder. This cohort is designed to move you from where you are today to the next rung &mdash; faster than you thought possible.</p>
+
+  <div class="ladder">
+    <div class="ladder-tier">
+      <div class="ladder-bolt">&#9889;</div>
+      <div class="ladder-body">
+        <h4>Service Elite</h4>
+        <p class="ladder-quote">"A well-oiled machine that runs with or without you."</p>
+      </div>
+      <div class="ladder-stats"><strong>$2M+</strong><br>20%+ profit<br>Manager &amp; 10+</div>
+    </div>
+
+    <div class="ladder-tier">
+      <div class="ladder-bolt">&#9889;</div>
+      <div class="ladder-body">
+        <h4>Service Master</h4>
+        <p class="ladder-quote">"Off the tools &mdash; but still in the business."</p>
+      </div>
+      <div class="ladder-stats"><strong>$1M+</strong><br>15%+ NP<br>Me &amp; 5+</div>
+    </div>
+
+    <div class="ladder-tier">
+      <div class="ladder-bolt">&#9889;</div>
+      <div class="ladder-body">
+        <h4>Service Pro</h4>
+        <p class="ladder-quote">"I know how to serve. We can find, get, and keep clients."</p>
+      </div>
+      <div class="ladder-stats"><strong>$400K+</strong><br>10%+ profit<br>Me &amp; 2+</div>
+    </div>
+
+    <div class="ladder-tier you-are-here">
+      <span class="you-are-here-badge">You Are Here</span>
+      <div class="ladder-bolt">&#9889;</div>
+      <div class="ladder-body">
+        <h4>Service Spark</h4>
+        <p class="ladder-quote">"This is a lot to juggle &mdash; something's gotta give."</p>
+      </div>
+      <div class="ladder-stats"><strong>$0&mdash;$400K</strong><br>Profit?<br>Me...</div>
+    </div>
+  </div>
+
+  <p style="text-align: center; color: var(--light-gray); font-size: 0.95rem; max-width: 640px; margin: 24px auto 0; line-height: 1.7;">
+    Most electricians stay at the Spark level for <strong style="color: var(--white);">years</strong>. Not because they're not talented &mdash; because they never install the system that lets them climb. <strong style="color: var(--gold-bright);">This cohort is that system.</strong>
+  </p>
 </section>
 
 <!-- ====== CONTRAST: OLD WAY vs NEW WAY ====== -->
@@ -956,25 +1200,22 @@
 
   <div class="contrast-grid">
     <div class="contrast-header old">WHERE YOU ARE</div>
-    <div class="contrast-header new">WHERE THIS TAKES YOU</div>
+    <div class="contrast-header new">WHERE 4 WEEKS TAKES YOU</div>
 
-    <div class="contrast-cell old">You did $600K last year and took home less than your lead tech. The revenue is there but the profit isn't &mdash; and you can't figure out where it's going.</div>
-    <div class="contrast-cell new"><strong>You know your numbers cold.</strong> Every dollar tracked. Profit margins locked. You pay yourself first because the system earns it.</div>
+    <div class="contrast-cell old">$225 average tickets on calls that should be $2,500. Same customers. Same jobs. A fraction of what they should produce.</div>
+    <div class="contrast-cell new"><strong>$2,500+ average tickets on the same calls.</strong> One partner went from $225 avg to $6,011 across his first 3 presentations with this method.</div>
 
-    <div class="contrast-cell old">You're the first one on the job site and the last one to leave. Weekends don't exist. Your family gets whatever's left &mdash; which isn't much.</div>
-    <div class="contrast-cell new"><strong>You run the business. It doesn't run you.</strong> Structured weeks. Protected time. Your family gets the best of you, not the scraps.</div>
+    <div class="contrast-cell old">Pricing on the back of a napkin. Guessing. Undercharging. Stuck under $30K months even when the calls keep coming &mdash; because every ticket leaks money.</div>
+    <div class="contrast-cell new"><strong>A real Simple Service Rate that actually pays you.</strong> Built in the first session. You use it before the weekend.</div>
 
-    <div class="contrast-cell old">You're scared to raise prices because you think you'll lose every customer. So you race to the bottom and wonder why $500K in revenue feels like $50K in the bank.</div>
-    <div class="contrast-cell new"><strong>You price with confidence.</strong> No defending. No discounting. Clients choose from 6 options and thank you for the experience.</div>
+    <div class="contrast-cell old">Time &amp; materials quotes. Defending every dollar. "I'll think about it" every other call.</div>
+    <div class="contrast-cell new"><strong>Flat-rate pricing that focuses on value.</strong> No defending. No discounting. Deposits collected before you touch a tool.</div>
 
-    <div class="contrast-cell old">Feast or famine. One great month, then two months of panic. You can't plan because you never know what's coming.</div>
-    <div class="contrast-cell new"><strong>Predictable pipeline.</strong> You know where next month's revenue is coming from before this month ends. No more guessing. No more panic.</div>
+    <div class="contrast-cell old">One price, one option. Take it or leave it. And they usually leave it &mdash; or beat you down to the bone.</div>
+    <div class="contrast-cell new"><strong>Options on every call.</strong> Customers pick Silver or Gold and thank you for the experience. You control the profit.</div>
 
-    <div class="contrast-cell old">You've got "guys" &mdash; not a team. You can't take a day off without 15 texts. If you disappeared for a week the business would stop.</div>
-    <div class="contrast-cell new"><strong>A team that runs without you in the room.</strong> Trained, accountable, producing. You're the architect &mdash; not the babysitter.</div>
-
-    <div class="contrast-cell old">You built a job, not a business. You can't sell it. You can't step away. You're trapped in something you created and you're too deep to start over.</div>
-    <div class="contrast-cell new"><strong>You built an asset.</strong> A business that serves your life, compounds every month, and puts you on a clear path to 7 figures.</div>
+    <div class="contrast-cell old">You've been trying to figure this out alone for months. Maybe years. Still stuck on the same floor.</div>
+    <div class="contrast-cell new"><strong>10 electricians, weekly calls, wins posted daily.</strong> Pros from our community showing you exactly how they did it.</div>
   </div>
   <div class="inline-cta"><a href="#apply">APPLY NOW</a></div>
 </section>
@@ -988,23 +1229,22 @@
     <div class="who-card for-you">
       <h3>This Is For You If:</h3>
       <ul>
-        <li>You're doing $350K&ndash;$850K+ but you know there's another gear</li>
-        <li>You've got 1&ndash;5 vans and a team that could perform better with the right system</li>
-        <li>You're tired of feast-or-famine months and running by gut feel</li>
-        <li>You're willing to do the work &mdash; this isn't passive</li>
-        <li>You believe your business should serve your life, not consume it</li>
-        <li>You want a team around you pushing toward the same number</li>
-        <li>You're ready to install systems, not just learn ideas</li>
+        <li>You're doing $20K+/month with real opportunities on your calendar this week</li>
+        <li>You're ticket-starved, not lead-starved &mdash; the calls come in but the revenue doesn't</li>
+        <li>You know you're undercharging and ready to fix it fast</li>
+        <li>You're willing to present options on a real call before the end of Week 1</li>
+        <li>You want to install a system, not watch another course</li>
+        <li>You want 9 other electricians pushing you every day</li>
       </ul>
     </div>
     <div class="who-card not-for">
       <h3>This Is Not For You If:</h3>
       <ul>
-        <li>You want a "course" you can watch on the couch</li>
-        <li>You think you already know everything and just need leads</li>
-        <li>You're not willing to improve how you price, serve, or run your team</li>
-        <li>You want someone else to do it for you</li>
-        <li>You can't commit to weekly calls and real implementation</li>
+        <li>You're lead-starved &mdash; this isn't the fix, we'll point you to the right one</li>
+        <li>You want a course you can watch on the couch</li>
+        <li>You already know everything and just need leads</li>
+        <li>You won't change how you price, serve, or present</li>
+        <li>You can't commit 90 minutes per session for 4 weeks</li>
         <li>You're looking for a magic button, not a system</li>
       </ul>
     </div>
@@ -1012,49 +1252,58 @@
   <div class="inline-cta"><a href="#apply">APPLY NOW</a></div>
 </section>
 
-<!-- ====== FIRST / NEXT / THEN ====== -->
+<!-- ====== 4-WEEK PLAN ====== -->
 <section>
-  <h2 class="section-title">THE <span class="gold">PLAN</span></h2>
-  <p class="section-subtitle">Three phases. Built to get you wins fast and compound from there.</p>
+  <h2 class="section-title">YOUR <span class="gold">4 WEEKS</span></h2>
+  <p class="section-subtitle">Two sessions. Two sessions. One session. One session. Ninety minutes each. Designed so you can win even if you miss a meeting.</p>
 
   <div class="phases">
     <div class="phase">
-      <div class="phase-number">FIRST &mdash; WEEK 1</div>
-      <h3>Group Onboarding &amp; 1st Steps</h3>
-      <p>Day one we install the foundation that makes everything else work. Your pricing, your deposits, your options menu &mdash; locked in before your next call.</p>
+      <div class="phase-number">WEEK 1 &mdash; FOUNDATION (2 SESSIONS)</div>
+      <h3>New Rate. First Real Price. First Yes.</h3>
+      <p>We install the Simple Service Rate and your first flat-rate price. By the end of Week 1 you're presenting on real calls from your own calendar.</p>
       <ul>
-        <li>Price system installed &mdash; multiplier + risk methodology</li>
-        <li>Deposits activated &mdash; 50% collected before work begins</li>
-        <li>Financing set up &mdash; so price is never the objection</li>
-        <li>Options menu &mdash; 6-tier presentations on every job, built with tools that do the heavy lifting</li>
-        <li>Warranty &amp; guarantees framework in place</li>
-        <li>Memberships &mdash; start stacking recurring revenue immediately</li>
+        <li>Kickoff + housekeeping + KPI tracker live</li>
+        <li>Simple Service Rate (SSR) installed &mdash; leveled to the group so everyone wins</li>
+        <li>Flat-rate pricing built live with AI tools &mdash; no more T&amp;M guessing</li>
+        <li>Deposits + Wisetack financing so price stops being the objection</li>
+        <li><strong style="color: var(--white);">Week 1 Win:</strong> Present a flat-rate price on a real call before the weekend</li>
       </ul>
     </div>
 
     <div class="phase">
-      <div class="phase-number">NEXT &mdash; WEEKS 2&ndash;4</div>
-      <h3>Service Process &amp; First Wins</h3>
-      <p>Weekly group calls. You're running the system live on real jobs. We're tracking, adjusting, and stacking wins together.</p>
+      <div class="phase-number">WEEK 2 &mdash; OPTIONS (2 SESSIONS)</div>
+      <h3>Stop Doing One Price. Start Doing Three.</h3>
+      <p>We expand to options. You build 3+ tier presentations using our Options Bot. We break into groups of 2&ndash;3 and price real jobs together, live.</p>
       <ul>
-        <li>Full service process deployed &mdash; Equity, Understand, Offer, Survey</li>
-        <li>App + transcript tools for real-time feedback</li>
-        <li>Lead Surge quick wins alongside your service improvements</li>
-        <li>Weekly group accountability &mdash; tracking leads, appts, sales, installs, revenue, reviews</li>
-        <li>First win goal: cover your first month's investment before it's up</li>
+        <li>Options framework installed &mdash; Silver, Gold, Platinum on every call</li>
+        <li>Live breakouts: we price 3 different jobs together, guided</li>
+        <li>Review sold and lost tickets as a group &mdash; learn from each other's calls</li>
+        <li><strong style="color: var(--white);">Week 2 Win:</strong> Post your first multi-option presentation in the group</li>
       </ul>
     </div>
 
     <div class="phase">
-      <div class="phase-number">THEN &mdash; DAY 60 OR 1ST BIG WIN</div>
-      <h3>Earn Your Inner Loop Access</h3>
-      <p>Hit your first big win or reach day 60 &mdash; whichever comes first &mdash; and we upgrade your membership to the Inner Loop. This is where the real compounding begins.</p>
+      <div class="phase-number">WEEK 3 &mdash; TRUE SSR (1 SESSION)</div>
+      <h3>Tune Your Rate to Your Actual Numbers.</h3>
+      <p>Now we go deep. Your real P&amp;L, your actual COGS, your true Service Standard Rate. This is the number that funds the life you want &mdash; not the one you've been guessing at.</p>
       <ul>
-        <li>200+ additional courses unlocked across every chapter of the $1M+ Playbook</li>
-        <li>Full class schedule opened &mdash; 5 days a week across mentors and topics</li>
-        <li>Complete community unlock &mdash; full access to every partner, every win, every resource</li>
-        <li>Weekly group calls continue &mdash; 10 pros pushing each other to 7 figures</li>
-        <li>Clear path forward: compound, scale, and build the business that serves your life</li>
+        <li>True SSR calculated from your actual business numbers</li>
+        <li>Burden rate, CSR cost, growth budget all factored in</li>
+        <li>Options rebuilt on your real rate</li>
+        <li><strong style="color: var(--white);">Week 3 Win:</strong> You know your number cold. You price with zero hesitation.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-number">WEEK 4 &mdash; REVEAL + ROADMAP (1 SESSION)</div>
+      <h3>Leaderboard Reveal. 1:1 Roadmap. Your Next Rung.</h3>
+      <p>The final week. Group leaderboard reveal, winner spotlights, and a 1:1 roadmap session with Clay and the team to map exactly where you go from here.</p>
+      <ul>
+        <li>Full cohort leaderboard reveal &mdash; who won what</li>
+        <li>Winner spotlights &mdash; the stories behind the numbers</li>
+        <li>Private 1:1 roadmap session with the SLE team</li>
+        <li><strong style="color: var(--white);">Week 4 Win:</strong> Clear path to Service Pro and beyond</li>
       </ul>
     </div>
   </div>
@@ -1064,63 +1313,92 @@
 <!-- ====== PROOF STACK ====== -->
 <section>
   <h2 class="section-title">THE <span class="italic-gold">Proof</span> <span class="gold">WALL</span></h2>
-  <p class="section-subtitle">Real names. Real numbers. Real electricians. This is what the system produces.</p>
+  <p class="section-subtitle">Real names. Real numbers. Real first-time wins with this system.</p>
+
+  <div class="proof-headline">
+    <span class="before">$225 avg</span>
+    <span class="arrow">&rarr;</span>
+    <span class="after">$6,011</span>
+    <p class="caption">One partner. Same calls. Same customers. Across his first 3 presentations with this method.</p>
+  </div>
 
   <div class="proof-cards">
     <div class="proof-card">
-      <div class="name">Nathan</div>
+      <div class="name">Brayden Metcalf</div>
       <div class="numbers">
-        Started at $0/month
-        <span class="result">$110K/mo</span>
-        <span class="timeline">In 150 days</span>
+        Joined on a Tuesday
+        <span class="result">$2,350 Platinum</span>
+        <span class="timeline">Ceiling fan call &mdash; 1st presentation</span>
       </div>
     </div>
 
     <div class="proof-card">
-      <div class="name">Sherman</div>
+      <div class="name">Kevin Locklear</div>
       <div class="numbers">
-        Was at ~$100K/month
+        First weekend in SLE
+        <span class="result">$6,800 Platinum</span>
+        <span class="timeline">First time giving options</span>
+      </div>
+    </div>
+
+    <div class="proof-card">
+      <div class="name">Peter Reed</div>
+      <div class="numbers">
+        Midway through training
+        <span class="result">$26,592 Platinum</span>
+        <span class="timeline">First attempt</span>
+      </div>
+    </div>
+
+    <div class="proof-card">
+      <div class="name">Terrick Williams</div>
+      <div class="numbers">
+        Was charging $4&ndash;6K before
+        <span class="result">$14,658 Silver</span>
+        <span class="timeline">First options presentation</span>
+      </div>
+    </div>
+
+    <div class="proof-card">
+      <div class="name">Nathan Miles</div>
+      <div class="numbers">
+        $0, brand new, 14 yrs employee
+        <span class="result">$1M+</span>
+        <span class="timeline">In 12 months</span>
+      </div>
+    </div>
+
+    <div class="proof-card">
+      <div class="name">Sherman Hatley</div>
+      <div class="numbers">
+        ~$100K/mo but stuck
         <span class="result">$300K/mo</span>
         <span class="timeline">In 60 days</span>
       </div>
     </div>
 
     <div class="proof-card">
-      <div class="name">Christian</div>
+      <div class="name">Billy Harper</div>
       <div class="numbers">
-        Was at ~$70K/month
-        <span class="result">Avg $200K/mo</span>
-        <span class="timeline">In 6 months</span>
+        $0, launched Jan 1
+        <span class="result">$1.04M</span>
+        <span class="timeline">First year</span>
       </div>
     </div>
 
     <div class="proof-card">
-      <div class="name">Mike</div>
+      <div class="name">130+ Partners</div>
       <div class="numbers">
-        Was at $80K/month
-        <span class="result">$160K/mo</span>
-        <span class="timeline">In 90 days</span>
-      </div>
-    </div>
-
-    <div class="proof-card">
-      <div class="name">Dan T.</div>
-      <div class="numbers">
-        Started at $0/month
-        <span class="result">$300K/mo</span>
-        <span class="timeline">Over 25 months</span>
-      </div>
-    </div>
-
-    <div class="proof-card">
-      <div class="name">Nick V. &amp; Others</div>
-      <div class="numbers">
-        Dozens of partners
-        <span class="result">Winning weekly</span>
-        <span class="timeline">And counting</span>
+        And counting
+        <span class="result">First-time Wins</span>
+        <span class="timeline">Documented in community</span>
       </div>
     </div>
   </div>
+
+  <p style="text-align: center; color: var(--light-gray); font-size: 0.95rem; max-width: 640px; margin: 24px auto 0; line-height: 1.7;">
+    These are real people. They're in our community. <strong style="color: var(--gold-bright);">Some of them will be on your cohort calls.</strong>
+  </p>
 
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 40px 0 0;">
     <div style="position: relative; padding-top: 56.25%;"><iframe src="https://fast.wistia.net/embed/iframe/8jilmg7dgr?seo=false&videoFoam=false" title="Proof Video 1" allow="autoplay; fullscreen" frameborder="0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
@@ -1135,54 +1413,54 @@
 <!-- ====== CURRICULUM ====== -->
 <section>
   <h2 class="section-title">WHAT GETS <span class="gold">INSTALLED</span></h2>
-  <p class="section-subtitle">This isn't a curriculum you watch. These are systems we install in your business &mdash; week one.</p>
+  <p class="section-subtitle">Not a curriculum you watch. Systems we install in your business &mdash; starting Week 1.</p>
 
   <div class="curriculum-list">
     <div class="curriculum-item">
       <div class="curr-num">01</div>
       <div class="curr-content">
-        <h4>Pricing System</h4>
-        <p>Your multiplier, your risk model, your Service Standard Rate. You'll know your number, present it with confidence, and stop leaving money on every job.</p>
+        <h4>Simple Service Rate (SSR)</h4>
+        <p>A real hourly rate that actually pays you. Built in 5 minutes with the calculator. Everyone in the group leveled to the same floor so you win fast &mdash; tuned to your real numbers in Week 3.</p>
       </div>
     </div>
 
     <div class="curriculum-item">
       <div class="curr-num">02</div>
       <div class="curr-content">
-        <h4>Deposits &amp; Financing</h4>
-        <p>50% collected before a tool leaves the van. Financing options set up so "I can't afford it" stops killing your deals. Cash flow transformed from day one.</p>
+        <h4>Flat-Rate Pricing</h4>
+        <p>The shift away from time-and-materials. Focus on value, not hours. You build 3 real flat-rate prices in Week 1, live with the group, using AI tools that do the heavy lifting.</p>
       </div>
     </div>
 
     <div class="curriculum-item">
       <div class="curr-num">03</div>
       <div class="curr-content">
-        <h4>Options Menu</h4>
-        <p>6-tier presentations on every job &mdash; built with tools that do the heavy lifting so you can focus on the client. They choose the budget. You control the profit. No pricebook required.</p>
+        <h4>Deposits &amp; Financing</h4>
+        <p>50% deposits collected before a tool leaves the van. Wisetack financing so "I can't afford it" stops killing your deals. Cash flow transformed from Day 1.</p>
       </div>
     </div>
 
     <div class="curriculum-item">
       <div class="curr-num">04</div>
       <div class="curr-content">
-        <h4>Warranty &amp; Guarantees</h4>
-        <p>The framework that eliminates buyer hesitation. Structured guarantees that build trust, raise perceived value, and close the gap between "thinking about it" and "let's do it."</p>
+        <h4>The Options Framework</h4>
+        <p>Silver, Gold, Platinum on every call. Built with our Options Bot so you can focus on the customer. They choose the budget. You control the profit. Week 2 we do it together in breakouts.</p>
       </div>
     </div>
 
     <div class="curriculum-item">
       <div class="curr-num">05</div>
       <div class="curr-content">
-        <h4>Memberships</h4>
-        <p>Start stacking recurring revenue immediately. The membership model that smooths out feast-or-famine months and builds a base that grows every single week.</p>
+        <h4>True SSR &mdash; Your Actual Rate</h4>
+        <p>Week 3 we go deep into your P&amp;L, your COGS, your burden rate. The true Service Standard Rate that funds the life you want &mdash; and sets you up for the next rung on the ladder.</p>
       </div>
     </div>
 
     <div class="curriculum-item">
       <div class="curr-num">06</div>
       <div class="curr-content">
-        <h4>Service Process</h4>
-        <p>Equity, Understand, Offer, Survey. The complete in-home framework that turns every call into a premium experience &mdash; backed by app tools and real-time transcript feedback.</p>
+        <h4>AI Tools + Field Guide</h4>
+        <p>Our Pricing GPT and Options Bot &mdash; doing the math so you can focus on the customer. The Field Guide &mdash; presentation quick-reference, right on your phone at the kitchen table.</p>
       </div>
     </div>
   </div>
@@ -1195,82 +1473,65 @@
   <div class="logistics-grid">
     <div class="logistic-item">
       <div class="label">Kickoff</div>
-      <div class="value">Tuesday, April 28th<br>7:00 AM PST</div>
+      <div class="value">Tuesday, April 28<br>4:00 PM Pacific</div>
     </div>
 
     <div class="logistic-item">
-      <div class="label">Format</div>
-      <div class="value">Weekly live group calls<br>+ async support</div>
+      <div class="label">Cadence</div>
+      <div class="value">2-2-1-1 over 4 weeks<br>90 minutes per session</div>
     </div>
 
     <div class="logistic-item">
       <div class="label">Investment</div>
-      <div class="value">$1,997 / month</div>
+      <div class="value">$1,500 &mdash; one payment<br>Love it or leave it</div>
     </div>
 
     <div class="logistic-item">
       <div class="label">Group Size</div>
-      <div class="value">10 spots. Period.<br>No late adds.</div>
+      <div class="value">10 partners. Period.<br>No late adds.</div>
     </div>
 
     <div class="logistic-item full-width">
-      <div class="label">How It Works</div>
+      <div class="label">Pre-Qualifier</div>
       <div class="value" style="font-size: 0.95rem; font-weight: 400; color: var(--light-gray); line-height: 1.8;">
-        Apply below. We review every application within 48 hours. If you're approved, <strong style="color: var(--white);">you'll be invited to a program info session with Clay &amp; the team</strong> to answer all your questions and lock in your membership.
-        A <strong style="color: var(--white);">$1,000 deposit paid within 24 hours of tonight's webinar</strong> &mdash; combined with an approved application &mdash; unlocks the full bonus package below.
-        If you're not the right fit, we refund your deposit immediately. No hard feelings. We're building a winning team, not filling seats.
+        You need to be doing <strong style="color: var(--white);">$20K+/month</strong> with real opportunities on your calendar this week. If you're lead-starved, this isn't the fix &mdash; we'll point you to the right one. No hard feelings.
+      </div>
+    </div>
+
+    <div class="logistic-item full-width">
+      <div class="label">After You Say Yes</div>
+      <div class="value" style="font-size: 0.95rem; font-weight: 400; color: var(--light-gray); line-height: 1.8;">
+        <strong style="color: var(--white);">Within 1 hour:</strong> payment link in your inbox. <strong style="color: var(--white);">Within 3 hours of payment:</strong> personal welcome voice note from Clay. <strong style="color: var(--white);">Within 24 hours:</strong> intake form. <strong style="color: var(--white);">Within 48 hours:</strong> you're in the app and the cohort space is live.
       </div>
     </div>
   </div>
 </section>
 
-<!-- ====== BONUS ====== -->
+<!-- ====== 3 OUTCOMES ====== -->
 <section>
-  <div class="bonus-box">
-    <h3>24-HOUR DEPOSIT BONUS PACKAGE</h3>
-    <div style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: 1px; color: var(--white); margin-bottom: 8px;">Pay your $1,000 deposit tonight and unlock over <span style="color: var(--gold-bright);">$3,000</span> worth of additional bonuses.</div>
-    <p style="margin-bottom: 24px; font-size: 0.88rem;">With an approved application, all five are yours:</p>
+  <h2 class="section-title">THREE <span class="gold">OUTCOMES.</span> THAT'S IT.</h2>
+  <p class="section-subtitle">At the end of 4 weeks, one of three things will happen. No ambiguity. No fine print.</p>
 
-    <div style="text-align: left; max-width: 560px; margin: 0 auto;">
-      <div style="padding: 16px 0; border-bottom: 1px solid rgba(201,164,90,0.15);">
-        <strong style="color: var(--gold-bright); font-size: 1.1rem;">1. Lifetime Open Circuit Access</strong>
-        <span style="float: right; color: var(--gold); font-weight: 700;">$1,497 value</span>
-        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
-          Permanent access to the community where our partners and paid members live. Hundreds of electricians sharing wins, holding each other accountable, and pushing each other forward every single week. Yours for life.
-        </p>
-      </div>
+  <div class="outcomes">
+    <div class="outcome highlight">
+      <div class="outcome-num">01</div>
+      <h4>You Love It &mdash; You're Ready</h4>
+      <p>We offer you a seat in our <strong style="color: var(--white);">Inner Loop</strong> program. 12 months of direct mentorship to take you from Spark to Master. Your $1,500 rolls toward it.</p>
+      <div class="sting">Upgrade within 7 days of Week 4 and we add a $1,000 marketing credit to your first month.</div>
+    </div>
 
-      <div style="padding: 16px 0; border-bottom: 1px solid rgba(201,164,90,0.15);">
-        <strong style="color: var(--gold-bright); font-size: 1.1rem;">2. $500 Lead Surge Marketing Credit</strong>
-        <span style="float: right; color: var(--gold); font-weight: 700;">$500 value</span>
-        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
-          Applied directly to your Lead Surge account. Real ad spend, real leads, real pipeline &mdash; on us. Start filling your calendar while we install the systems to close them.
-        </p>
-      </div>
+    <div class="outcome">
+      <div class="outcome-num">02</div>
+      <h4>You Love It &mdash; Not Yet Time</h4>
+      <p>Keep everything you learned. Keep the playbook. Keep <strong style="color: var(--white);">1 year of Open Circuit</strong> access to stay in the conversation. Come back when you're ready.</p>
+      <div class="sting">Inner Loop seats fill fast. Come back later and you're on the waitlist.</div>
+    </div>
 
-      <div style="padding: 16px 0; border-bottom: 1px solid rgba(201,164,90,0.15);">
-        <strong style="color: var(--gold-bright); font-size: 1.1rem;">3. The Loop Method &mdash; Complete PDF Playbook</strong>
-        <span style="float: right; color: var(--gold); font-weight: 700;">Never released</span>
-        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
-          The entire Loop Method process in one document. Every chapter. Every framework. This has never been given away before &mdash; and may never be again. It's yours to keep.
-        </p>
-      </div>
-
-      <div style="padding: 16px 0; border-bottom: 1px solid rgba(201,164,90,0.15);">
-        <strong style="color: var(--gold-bright); font-size: 1.1rem;">4. Bonus Session with Our $1M+ Partners</strong>
-        <span style="float: right; color: var(--gold); font-weight: 700;">Exclusive</span>
-        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
-          A private session with our top-tier partners who are already well past $1M in revenue. Hear exactly what they did, how they think, and what they'd do differently. You won't find this anywhere else.
-        </p>
-      </div>
-
-      <div style="padding: 16px 0;">
-        <strong style="color: var(--gold-bright); font-size: 1.1rem;">5. Our Most Advanced AI Tools + The Field Guide</strong>
-        <span style="float: right; color: var(--gold); font-weight: 700;">Game-changer</span>
-        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--gray); line-height: 1.7;">
-          Full access to our most advanced AI-powered tools &mdash; plus The Field Guide, the ultimate electronic reference tool for your techs in the field. Options building, client language, and presentation quick guide &mdash; everything they need to sell with confidence, right on their phone, right at the kitchen table.
-        </p>
-      </div>
+    <div class="outcome">
+      <div class="outcome-num">03</div>
+      <h4>You Did The Work &mdash; Not For You</h4>
+      <p>You gave it an honest shot and it wasn't the fit. <strong style="color: var(--white);">We refund you.</strong> That simple. No hard feelings. No hoops.</p>
+      <div class="sting">We part as friends. Out of hundreds of partners, we've had 3 refunds &mdash; zero regrets.</div>
     </div>
   </div>
 </section>
@@ -1420,7 +1681,7 @@
 
       <div class="deposit-box">
         <h4>SECURE YOUR SPOT + UNLOCK THE BONUSES</h4>
-        <div class="deposit-amount">$1,000 Deposit</div>
+        <div class="deposit-amount">$1,500</div>
         <p>
           Pay within 24 hours of tonight's webinar to lock in all four bonuses above. If you're approved, we'll call you to confirm your seat. If you're not the right fit, we refund your deposit immediately. No hard feelings.
         </p>
@@ -1453,103 +1714,72 @@
 <!-- ====== FAQ ====== -->
 <section>
   <h2 class="section-title">QUESTIONS <span class="gold">YOU'RE THINKING</span></h2>
-  <p class="section-subtitle">We've heard them all. Here are the honest answers.</p>
+  <p class="section-subtitle">Short answers. The whole point of this cohort is to stop overthinking and start winning.</p>
 
   <div class="faq-list">
 
     <div class="faq-item">
-      <div class="faq-question"><h4>"I don't have time for this. I'm already slammed."</h4><span class="faq-icon">+</span></div>
+      <div class="faq-question"><h4>"4 weeks is fast. Can I really win in that time?"</h4><span class="faq-icon">+</span></div>
       <div class="faq-answer">
-        <p>We know. You're answering calls on the job. Writing quotes at 10pm. Running dispatch because nobody else knows the schedule. Wearing every hat in the building.</p>
-        <p>Here's the honest answer: about <strong>1.5 hours a week of learning</strong> — one group call. The rest is implementing on the jobs you're already running. You're not adding work. You're changing how you work on the calls you already have.</p>
-        <p>And here's what nobody says out loud: <strong>the reason you don't have time is the exact problem we fix.</strong> You're busy because every process lives in your head. Because nobody else can do what you do. Because you never built the playbook that lets them.</p>
-        <p>Nathan joined while running every single call himself. By month 3, he had a system his team could follow. By month 5, he hit $105,000. And he wasn't on every job anymore.</p>
-        <p>The time thing isn't a reason to wait. It's the reason to start.</p>
+        <p>That's the whole point. Brayden joined on a Tuesday and by his first presentation a ceiling fan call became a $2,350 main breaker and water bond job. Kevin closed $6,800 his first weekend. Peter sold a $26,592 platinum on his first attempt.</p>
+        <p><strong>The goal is 10x your $1,500 investment in 4 weeks.</strong> One sold ticket at your new rate gets you there.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"Do I have to attend every session to win?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>No. We designed the cohort so you can win even if you miss a meeting. Each week has three layers: <strong>a live call, a replay you can watch anytime,</strong> and <strong>a tool or lesson you use in the field</strong> to see the result for yourself.</p>
+        <p>That said &mdash; the partners who show up for the live calls always win bigger. The breakouts and real-time feedback are where the money gets made.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"I'm doing time &amp; materials. Is this still for me?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>Especially for you. The first thing we install is how to move from time &amp; materials to flat-rate pricing &mdash; without losing the customers you've built trust with. Week 1 we build 3 real flat-rate prices on jobs from your calendar. By the weekend you're presenting them.</p>
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question"><h4>"Is this just teaching my guys to upsell?"</h4><span class="faq-icon">+</span></div>
       <div class="faq-answer">
-        <p>Upsell is a dirty word here. That word tends to silence the whole room &mdash; because the next thing that happens is Clay or Joseph calls a time out.</p>
-        <p><strong>You cannot sell if you have not served.</strong> There's no room for upselling in this culture. We don't count the number of surge protectors sold this week. We leave those sketchy tactics at the door.</p>
-        <p>We actually try to talk people OUT of buying. When someone picks an option, we ask: "Are you sure? There's a cheaper option below this one." That's how we know they really want it.</p>
+        <p>Upsell is a dirty word here. <strong>You cannot sell if you have not served.</strong> We actually try to talk people out of buying &mdash; when someone picks an option, we ask: "Are you sure? There's a cheaper option below this one." That's how we know they really want it.</p>
         <p>If your team has ever been burned by pushy sales training, this is the opposite. Premium service first. Revenue follows.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question"><h4>"I've tried coaching before and it didn't work."</h4><span class="faq-icon">+</span></div>
-      <div class="faq-answer">
-        <p>Fair. A lot of our partners said the same thing before they joined. Some had tried other programs &mdash; general business coaching that wasn't built for trades at all.</p>
-        <p>Here's what they told us: "I got content. But nobody showed me how to actually do it." "The scripts were built for HVAC. They just swapped in the word 'electrician.'" "I sat in a room full of plumbers and felt like the odd one out."</p>
-        <p><strong>Service Loop Electrical is built by electricians, for electricians.</strong> Joseph sold $1.3 million from his own service van, three years in a row. That's not a talking point. That's the foundation everything is built on.</p>
-        <p>We don't hand you a binder and say good luck. We install systems with you. Side by side. On real jobs, with real numbers, in your real market.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question"><h4>"I feel like I AM the bottleneck. Can you actually help with that?"</h4><span class="faq-icon">+</span></div>
-      <div class="faq-answer">
-        <p>This might be the most important question on this page.</p>
-        <p>You started this company because you were great with your hands. You could wire anything, troubleshoot anything, outwork anyone. And that got you here. But now you're the one answering every call. Running every job. Checking every install. Doing payroll at midnight.</p>
-        <p><strong>You built a company where YOU are the system.</strong> And that means the company only works when you do.</p>
-        <p>One of our prospects put it perfectly: "I started this company to be my own boss. Now I just hired myself as an employee."</p>
-        <p>The Loop Method isn't just a sales system. It's a full operating system for your company. Pricing so your team charges with confidence. Options so they present without you in the room. Systems so new hires know the play from Day 1.</p>
-        <p>Nathan built his system in 90 days. By month 5, his team was running calls and he was running the business. $105K month. Sherman stopped being the only closer. His team learned the process. $300K month. He wasn't even in the country.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question"><h4>"What if I can figure this out on my own?"</h4><span class="faq-icon">+</span></div>
-      <div class="faq-answer">
-        <p>You probably can. Honestly.</p>
-        <p>You already proved you can figure things out. You learned the trade. Got the license. Started a company. Found customers. You're tough, smart, and you don't quit.</p>
-        <p>But let me ask you one thing: <strong>how long have you been trying?</strong></p>
-        <p>Two years? Five? Longer? And where are you right now? Still answering every call. Still the only closer. Still guessing on pricing. Still working 60 hours.</p>
-        <p>You're not short on talent. You're short on a system that someone already built.</p>
-        <p>Joseph spent years learning how to sell $1.3 million from a van. We spent years turning that into a step-by-step process. You can spend those same years learning it yourself &mdash; or you can install it in 90 days. That's not about pride. That's just math.</p>
-        <p>The smartest electricians we work with aren't the ones who figured it out alone. They're the ones who finally said: <strong>"I've proven I can build. Now let me build it right."</strong></p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question"><h4>"Will this work in my area?"</h4><span class="faq-icon">+</span></div>
-      <div class="faq-answer">
-        <p>We don't serve communities. We serve people. And people everywhere want the same thing: to feel safe, to feel taken care of, and to trust the person in their home.</p>
-        <p>We've seen it work in small towns ($300K to $612K), in major cities ($305K months in NYC), and everywhere in between.</p>
-        <p>Here's a quick test: search "Electricians Near Me" right now. Count how many have 1,000+ reviews and a 4.7+ rating. If you don't see 3 &mdash; <strong>your market is wide open.</strong></p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question"><h4>"Do I need more leads or more from my leads?"</h4><span class="faq-icon">+</span></div>
-      <div class="faq-answer">
-        <p>A bit of both &mdash; but order matters.</p>
-        <p>If you're out there under-servicing every lead, under-pricing every job, and under-presenting every option &mdash; that's what we call <strong>burning leads.</strong> You're spending money or time to get them in the door, then leaving money on the table every single time.</p>
-        <p>Fix the service first. Stop the burn. Then crank up the dial like a rheostat &mdash; lower the resistance, get more lead flow, more sales, more profitability, and more reviews and referrals. That's the sequence.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question"><h4>"How do I get my team on board with this?"</h4><span class="faq-icon">+</span></div>
-      <div class="faq-answer">
-        <p>Three reasons your techs resist change: they think it's unethical, they think it's pushy, or they don't see any personal benefit.</p>
-        <p><strong>Ethics:</strong> We believe in on or above everything. Joseph will hold your team accountable to premium service &mdash; not because it makes more sales, but because it serves the client better. More revenue is a side effect of great work.</p>
-        <p><strong>Pushy:</strong> Our process pulls instead of pushes. Your guys will feel the difference immediately.</p>
-        <p><strong>Personal benefit:</strong> Less callbacks. Less warranty work. Greater reward for every project completed. And when you understand your numbers, you'll be able to offer bonuses and commission. We'll help you set that up too.</p>
-        <p>The real question is: why wouldn't your team want to adopt this?</p>
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question"><h4>"What about the guarantee?"</h4><span class="faq-icon">+</span></div>
       <div class="faq-answer">
-        <p>Here's what we'll say about that: <strong>if you keep doing the same thing but expect a different outcome, that's not fair to the laws of the world.</strong></p>
-        <p>But if you're willing to change &mdash; genuinely change how you price, how you present, how you serve &mdash; everything will change for you. We've watched it happen hundreds of times.</p>
-        <p>For some people, that change is easiest with a friend. Someone confident. Someone who believes in you. Someone who'll even push a little when you need it.</p>
-        <p>That's what this group is. And if it's not what you hoped? We already told you &mdash; <strong>love it or leave it. We part as friends. No silly stuff.</strong></p>
-        <p>Out of hundreds of partners, we've had 3 refunded programs and zero chargebacks. Not because we hide behind fine print &mdash; because we practice what we teach. We're intentional service providers who work hard to see you win. And when you 10x your investment? We won't ask for more. We'll raise a glass to your success and keep building.</p>
+        <p>Love it or leave it. If you did the work and it wasn't for you &mdash; we refund you. That simple.</p>
+        <p>Out of hundreds of partners, we've had 3 refunded programs and zero chargebacks. Not because we hide behind fine print &mdash; because we practice what we teach. We're intentional service providers who work hard to see you win.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"What happens after the 4 weeks?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>Three outcomes, and that's it:</p>
+        <p><strong>1. You loved it and you're ready.</strong> We offer you a seat in Inner Loop &mdash; 12 months of direct mentorship. Your $1,500 rolls toward it. Upgrade within 7 days and we add a $1,000 marketing credit.</p>
+        <p><strong>2. You loved it but now isn't the time.</strong> Keep everything. Keep 1 year of Open Circuit. Come back when you're ready &mdash; but Inner Loop seats fill fast.</p>
+        <p><strong>3. You did the work and it wasn't for you.</strong> Full refund. We part as friends.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"Will this work in my area?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>We don't serve communities. We serve people. People everywhere want the same thing: to feel safe, taken care of, and to trust the person in their home.</p>
+        <p>We've seen this system work in small towns, major cities, and everywhere in between. Quick test: search "Electricians Near Me" right now. Count how many have 1,000+ reviews and a 4.7+ rating. If you don't see 3 &mdash; your market is wide open.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><h4>"Do I need more leads or more from my leads?"</h4><span class="faq-icon">+</span></div>
+      <div class="faq-answer">
+        <p>A bit of both &mdash; but order matters. If you're under-servicing every lead, under-pricing every job, and under-presenting every option, that's <strong>burning leads</strong>. Fix the service first. Stop the burn. Then turn up the lead flow.</p>
+        <p>This cohort is for Step 1. If you're genuinely lead-starved (under $20K/mo with no calendar), we'll point you to Lead Surge instead &mdash; no hard feelings.</p>
       </div>
     </div>
 
@@ -1678,7 +1908,7 @@
 
   // Countdown to April 28, 2026 7:00 AM PST (UTC-7)
   function updateCountdown() {
-    const kickoff = new Date('2026-04-28T14:00:00Z'); // 7am PST = 2pm UTC
+    const kickoff = new Date('2026-04-28T23:00:00Z'); // 4pm PDT = 23:00 UTC
     const now = new Date();
     const diff = kickoff - now;
 
