@@ -235,5 +235,60 @@
       },300);
     })();
     </script>
+  <script>
+  // ── UTM Tracking (1mplaybook) ─────────────────────────────────────────────
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+
+    // Map ?ref= to utm_content
+    if (params.get('ref') && !params.get('utm_content')) {
+      params.set('utm_content', params.get('ref'));
+    }
+
+    // Last touch — always update sessionStorage
+    var lastTouch = {};
+    UTM_KEYS.forEach(function(k) { lastTouch[k] = params.get(k) || ''; });
+    sessionStorage.setItem('utm_last_1mp', JSON.stringify(lastTouch));
+
+    // First touch — only save if nothing stored yet
+    var hasFirstTouch = false;
+    try { hasFirstTouch = !!localStorage.getItem('utm_first_1mp'); } catch(e) {}
+    if (!hasFirstTouch) {
+      var firstTouch = {};
+      UTM_KEYS.forEach(function(k) { firstTouch[k] = params.get(k) || ''; });
+      try { localStorage.setItem('utm_first_1mp', JSON.stringify(firstTouch)); } catch(e) {}
+    }
+
+    // Inject hidden fields into the form once it renders
+    var attempts = 0;
+    var iv = setInterval(function() {
+      attempts++;
+      if (attempts > 200) { clearInterval(iv); return; }
+      var form = null;
+      var forms = document.querySelectorAll('form');
+      for (var i = 0; i < forms.length; i++) {
+        if (forms[i].querySelector('input[type="tel"]')) { form = forms[i]; break; }
+      }
+      if (!form || document.getElementById('utm_source_1mp')) return;
+      clearInterval(iv);
+
+      var last = {};
+      try { last = JSON.parse(sessionStorage.getItem('utm_last_1mp')) || {}; } catch(e) {}
+      var first = {};
+      try { first = JSON.parse(localStorage.getItem('utm_first_1mp')) || {}; } catch(e) {}
+
+      UTM_KEYS.forEach(function(k) {
+        var el = document.createElement('input');
+        el.type = 'hidden'; el.id = k + '_1mp'; el.name = k + '_1mp'; el.value = last[k] || '';
+        form.appendChild(el);
+        var elF = document.createElement('input');
+        elF.type = 'hidden'; elF.id = k + '_first_1mp'; elF.name = k + '_first_1mp'; elF.value = first[k] || '';
+        form.appendChild(elF);
+      });
+    }, 200);
+  })();
+  // ── End UTM Tracking ─────────────────────────────────────────────────────
+  </script>
   </body>
 </html>
