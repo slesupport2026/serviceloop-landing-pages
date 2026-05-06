@@ -873,7 +873,7 @@
     <div class="rail-heading">On this page</div>
     <a href="#about" class="rail-link" data-anchor="about">The Cohort</a>
     <a href="#week-1" class="rail-link active" data-anchor="week-1">Week 1 · Pricing</a>
-    <a href="#week-2" class="rail-link locked" data-anchor="week-2">Week 2 · Options 🔒</a>
+    <a href="#week-2" class="rail-link" data-anchor="week-2">Week 2 · Options</a>
     <a href="#week-3" class="rail-link locked" data-anchor="week-3">Week 3 · Sales Flow 🔒</a>
     <a href="#week-4" class="rail-link locked" data-anchor="week-4">Week 4 · Roadmap 🔒</a>
     <div class="rail-divider"></div>
@@ -1090,15 +1090,222 @@
 
     <!-- WEEK 2 -->
     <section class="section" id="week-2">
-      <div class="section-eyebrow locked">WEEK 2 · LOCKED</div>
+      <div class="section-eyebrow">WEEK 2 · LIVE</div>
       <h2>Options Stack <span class="accent">Builder</span></h2>
       <div class="section-rule"></div>
-      <div class="locked-panel">
-        <svg class="locked-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-        <div class="locked-eyebrow">UNLOCKS TUESDAY · WEEK 2</div>
-        <h3>The Options Stack Builder</h3>
-        <p>Plug in any job. Watch Joseph's framework build out Platinum / Gold / Silver / Bronze on the fly. See exactly how the dignity of choice changes your blended ticket — and which tier most customers actually pick.</p>
-        <div class="locked-meta">SHIP DATE · TUESDAY WEEK 2 · 4PM PT</div>
+      <p>Week 2 is here. We move from one price to six. Same callout. Same customer. Different floor — and a much bigger ceiling.</p>
+      <p><strong>The mantra: Six options every call. Top option 3x the callout.</strong> One price makes you a quote. Three options makes you an advisor. Six options gives the customer dignity — and a 75–80% mid-range close rate.</p>
+
+      <p style="margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--surface); border-left: 3px solid var(--gold); border-radius: 4px;"><strong style="color: var(--cream);">Full framework reference:</strong> <a href="https://sle6options.manus.space/" target="_blank" rel="noopener" style="color: var(--teal); text-decoration: underline;">sle6options.manus.space</a> — the complete SLE 6 Options framework, including the 4 What's, observation-building, and pre-objection articulation. Read it before Tuesday's call.</p>
+
+      <!-- THE SIX TIERS -->
+      <div style="margin-top: 3rem;">
+        <div class="section-eyebrow">THE FRAMEWORK</div>
+        <h2 style="font-size: clamp(28px, 3.5vw, 38px);">Six <span class="accent">tiers, one floor</span></h2>
+        <div class="section-rule"></div>
+        <p>Every job becomes six versions of itself. The customer picks. You don't sell — you serve. The shift is from "should I hire you?" to "which option should I go with?"</p>
+        <div class="topstripe-cards cols-2" style="margin-top: 2rem;">
+          <div class="ts-card">
+            <div class="ts-card-pill">PLATINUM · ~5x · 10–15% pick</div>
+            <h3>The right way</h3>
+            <p>Everything fixed, everything upgraded, everything done. The customer chose this when they let you in the door.</p>
+          </div>
+          <div class="ts-card">
+            <div class="ts-card-pill">GOLD · ~3.5x · 10–15% pick</div>
+            <h3>The premium way</h3>
+            <p>Most of what's right, with the highest-impact upgrades included.</p>
+          </div>
+          <div class="ts-card">
+            <div class="ts-card-pill">SILVER · ~2.5x · 25–35% pick</div>
+            <h3>The smart way</h3>
+            <p>The fix plus the obvious must-haves. Where most value-conscious buyers land.</p>
+          </div>
+          <div class="ts-card">
+            <div class="ts-card-pill">BRONZE · ~1.7x · 25–35% pick</div>
+            <h3>The practical way</h3>
+            <p>The core fix done well, with the biggest safety items handled. Mid-range close happens here too.</p>
+          </div>
+          <div class="ts-card">
+            <div class="ts-card-pill">ECONOMY · ~1.3x · 5–10% pick</div>
+            <h3>The careful way</h3>
+            <p>The minimum to make it work safely. For genuinely budget-bound households.</p>
+          </div>
+          <div class="ts-card">
+            <div class="ts-card-pill">BASIC · 1x · 5–10% pick</div>
+            <h3>The band-aid</h3>
+            <p>What they called for. Nothing more. Intentionally bare so the upgrades feel obvious.</p>
+          </div>
+        </div>
+        <p style="margin-top: 1.5rem; color: var(--text-muted); font-size: 14px;">Mid-range (Silver + Bronze) closes 50–70% of the time when you present six. That's the dignity-of-choice effect.</p>
+      </div>
+
+      <!-- OPTIONS STACK CALCULATOR -->
+      <div id="options-stack" style="margin-top: 4rem;">
+        <div class="section-eyebrow">INTERACTIVE TOOL</div>
+        <h2 style="font-size: clamp(28px, 3.5vw, 38px);">The <span class="accent">Options Stack</span> Builder</h2>
+        <div class="section-rule"></div>
+        <p>Plug in your callout. Set your tier multipliers. Drop in the realistic customer mix. See the blended ticket the right options stack gives you.</p>
+
+        <div class="input-card">
+          <div class="input-group-label">YOUR JOB</div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label">Callout / base price</span>
+              <span class="slider-value" id="opt-callout-out">$400</span>
+            </div>
+            <input type="range" id="opt-callout" min="100" max="2000" step="25" value="400" />
+          </div>
+        </div>
+
+        <div class="input-card">
+          <div class="input-group-label">TIER MULTIPLIERS (vs Basic / callout)</div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label">Platinum</span>
+              <span class="slider-value live" id="plat-mult-out">5.0x</span>
+            </div>
+            <input type="range" id="plat-mult" min="30" max="80" step="5" value="50" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label">Gold</span>
+              <span class="slider-value live" id="gold-mult-out">3.5x</span>
+            </div>
+            <input type="range" id="gold-mult" min="20" max="60" step="5" value="35" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label">Silver</span>
+              <span class="slider-value live" id="silver-mult-out">2.5x</span>
+            </div>
+            <input type="range" id="silver-mult" min="15" max="40" step="5" value="25" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label">Bronze</span>
+              <span class="slider-value live" id="bronze-mult-out">1.7x</span>
+            </div>
+            <input type="range" id="bronze-mult" min="13" max="25" step="1" value="17" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label">Economy</span>
+              <span class="slider-value live" id="econ-mult-out">1.3x</span>
+            </div>
+            <input type="range" id="econ-mult" min="11" max="18" step="1" value="13" />
+          </div>
+          <div class="slider-hint">Basic stays at 1.0x — the callout floor. Default spread reflects ~20% steps between tiers, with bigger jumps up top.</div>
+        </div>
+
+        <div class="input-card">
+          <div class="input-group-label">CUSTOMER MIX (% picking each tier)</div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label bold">Platinum pickers</span>
+              <span class="slider-value live" id="plat-pct-out">12%</span>
+            </div>
+            <input type="range" id="plat-pct" min="0" max="30" step="1" value="12" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label bold">Gold pickers</span>
+              <span class="slider-value live" id="gold-pct-out">12%</span>
+            </div>
+            <input type="range" id="gold-pct" min="0" max="30" step="1" value="12" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label bold">Silver pickers</span>
+              <span class="slider-value live" id="silver-pct-out">30%</span>
+            </div>
+            <input type="range" id="silver-pct" min="0" max="50" step="1" value="30" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label bold">Bronze pickers</span>
+              <span class="slider-value live" id="bronze-pct-out">30%</span>
+            </div>
+            <input type="range" id="bronze-pct" min="0" max="50" step="1" value="30" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-head">
+              <span class="slider-label bold">Economy pickers</span>
+              <span class="slider-value live" id="econ-pct-out">8%</span>
+            </div>
+            <input type="range" id="econ-pct" min="0" max="20" step="1" value="8" />
+          </div>
+          <div class="slider-hint">Basic takes the remainder. SLE benchmark mix: 12 / 12 / 30 / 30 / 8 / 8. Mid-range closes 75–80% of the time.</div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-label">PLATINUM</div>
+            <div class="stat-value live" id="plat-price">$2,000</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">GOLD</div>
+            <div class="stat-value live" id="gold-price">$1,400</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">SILVER</div>
+            <div class="stat-value live" id="silver-price">$1,000</div>
+          </div>
+        </div>
+        <div class="stats-grid" style="margin-top: 1rem;">
+          <div class="stat">
+            <div class="stat-label">BRONZE</div>
+            <div class="stat-value live" id="bronze-price">$680</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">ECONOMY</div>
+            <div class="stat-value live" id="econ-price">$520</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">BASIC</div>
+            <div class="stat-value" id="basic-price">$400</div>
+          </div>
+        </div>
+
+        <div class="reveal-card">
+          <div class="reveal-eyebrow">THE BLENDED TICKET</div>
+          <div class="reveal-text" id="opt-reveal">
+            With this mix, your average ticket on this callout becomes <span class="reveal-big" id="blended-out">$1,038</span> — a <span class="reveal-strong" id="lift-out">160%</span> lift over Basic-only.
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="action-btn" onclick="resetOptionsStack()">Reset to SLE defaults</button>
+        </div>
+      </div>
+
+      <!-- WEEK 2 FIELD ASSIGNMENT -->
+      <div id="assignment-2" style="margin-top: 4rem;">
+        <div class="section-eyebrow">FIELD ASSIGNMENT</div>
+        <h2 style="font-size: clamp(28px, 3.5vw, 38px);">Your <span class="accent">Week 2 sprint</span></h2>
+        <div class="section-rule"></div>
+        <p>By Thursday's check-in, every cohort member should have:</p>
+        <div class="topstripe-cards cols-2" style="margin-top: 2rem;">
+          <div class="ts-card teal">
+            <div class="ts-card-pill">REP 1</div>
+            <h3>Read the framework</h3>
+            <p>Open <a href="https://sle6options.manus.space/" target="_blank" rel="noopener" style="color: var(--teal); text-decoration: underline;">sle6options.manus.space</a> and read it cover to cover. Note the 4 What's and the observation method.</p>
+          </div>
+          <div class="ts-card teal">
+            <div class="ts-card-pill">REP 2</div>
+            <h3>Build 6 tiers on a real job</h3>
+            <p>Pick one quote you ran last week. Build all 6 tiers using the multipliers above. Bring it Thursday.</p>
+          </div>
+          <div class="ts-card teal">
+            <div class="ts-card-pill">REP 3</div>
+            <h3>Present top-down</h3>
+            <p>Walk into one kitchen. Open with Platinum. Don't apologize. Watch which tier the customer self-selects.</p>
+          </div>
+          <div class="ts-card teal">
+            <div class="ts-card-pill">REP 4</div>
+            <h3>Bring the receipts</h3>
+            <p>Wins, walks, surprises. The cohort that wins is the cohort that brings the most field reps.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1413,6 +1620,90 @@
 
   window.addEventListener('scroll', updateActiveRail, { passive: true });
   updateActiveRail();
+
+  // ===== WEEK 2 — OPTIONS STACK BUILDER (6 tiers) =====
+  const optsStackDefaults = {
+    'opt-callout': 400,
+    'plat-mult': 50, 'gold-mult': 35, 'silver-mult': 25, 'bronze-mult': 17, 'econ-mult': 13,
+    'plat-pct': 12, 'gold-pct': 12, 'silver-pct': 30, 'bronze-pct': 30, 'econ-pct': 8
+  };
+  const optsStackIds = Object.keys(optsStackDefaults);
+  const fmtOpt = n => '$' + Math.round(n).toLocaleString();
+
+  function updateOptionsStack() {
+    const $ = id => document.getElementById(id);
+    if (!$('opt-callout')) return;
+    const callout = +$('opt-callout').value;
+    const mults = {
+      plat: +$('plat-mult').value / 10,
+      gold: +$('gold-mult').value / 10,
+      silver: +$('silver-mult').value / 10,
+      bronze: +$('bronze-mult').value / 10,
+      econ: +$('econ-mult').value / 10
+    };
+    let pcts = {
+      plat: +$('plat-pct').value,
+      gold: +$('gold-pct').value,
+      silver: +$('silver-pct').value,
+      bronze: +$('bronze-pct').value,
+      econ: +$('econ-pct').value
+    };
+    let basicPct = 100 - (pcts.plat + pcts.gold + pcts.silver + pcts.bronze + pcts.econ);
+    if (basicPct < 0) basicPct = 0;
+
+    $('opt-callout-out').textContent = fmtOpt(callout);
+    $('plat-mult-out').textContent = mults.plat.toFixed(1) + 'x';
+    $('gold-mult-out').textContent = mults.gold.toFixed(1) + 'x';
+    $('silver-mult-out').textContent = mults.silver.toFixed(1) + 'x';
+    $('bronze-mult-out').textContent = mults.bronze.toFixed(1) + 'x';
+    $('econ-mult-out').textContent = mults.econ.toFixed(1) + 'x';
+    $('plat-pct-out').textContent = pcts.plat + '%';
+    $('gold-pct-out').textContent = pcts.gold + '%';
+    $('silver-pct-out').textContent = pcts.silver + '%';
+    $('bronze-pct-out').textContent = pcts.bronze + '%';
+    $('econ-pct-out').textContent = pcts.econ + '%';
+
+    const prices = {
+      plat: callout * mults.plat,
+      gold: callout * mults.gold,
+      silver: callout * mults.silver,
+      bronze: callout * mults.bronze,
+      econ: callout * mults.econ,
+      basic: callout
+    };
+    $('plat-price').textContent = fmtOpt(prices.plat);
+    $('gold-price').textContent = fmtOpt(prices.gold);
+    $('silver-price').textContent = fmtOpt(prices.silver);
+    $('bronze-price').textContent = fmtOpt(prices.bronze);
+    $('econ-price').textContent = fmtOpt(prices.econ);
+    $('basic-price').textContent = fmtOpt(prices.basic);
+
+    const blended = (
+      prices.plat * pcts.plat +
+      prices.gold * pcts.gold +
+      prices.silver * pcts.silver +
+      prices.bronze * pcts.bronze +
+      prices.econ * pcts.econ +
+      prices.basic * basicPct
+    ) / 100;
+    const lift = ((blended / prices.basic) - 1) * 100;
+    $('blended-out').textContent = fmtOpt(blended);
+    $('lift-out').textContent = Math.round(lift) + '%';
+  }
+
+  function resetOptionsStack() {
+    Object.entries(optsStackDefaults).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el) el.value = val;
+    });
+    updateOptionsStack();
+  }
+
+  optsStackIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', updateOptionsStack);
+  });
+  updateOptionsStack();
 </script>
 
 </body>
