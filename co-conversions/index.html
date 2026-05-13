@@ -444,9 +444,9 @@
   .legend-swatch {
     width: 16px; height: 16px; border-radius: 3px;
   }
-  .swatch-cohort-a { background: #E8917F; }
-  .swatch-cohort-b { background: #F5B58A; }
-  .swatch-cohort-c { background: #FDC33E; }
+  .swatch-cohort-alpha { background: #E8917F; }
+  .swatch-cohort-bravo { background: #F5B58A; }
+  .swatch-cohort-charlie { background: #FDC33E; }
   .swatch-webinar { background: #8B7DD8; }
   .swatch-accountability { background: var(--green); }
 
@@ -622,6 +622,120 @@
     .tabs, .footer { display: none; }
     .tab-pane { display: block !important; page-break-after: always; }
   }
+  /* ============================
+     VISUAL CALENDAR (3-month)
+     ============================ */
+  .cal-section { margin-top: 36px; }
+  .cal-month {
+    margin-bottom: 32px;
+    background: rgba(27, 42, 69, 0.2);
+    border: 1px solid rgba(227, 197, 117, 0.12);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cal-month-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 20px;
+    background: var(--navy);
+    border-bottom: 2px solid var(--gold);
+  }
+  .cal-month-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: var(--white);
+  }
+  .cal-month-year {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px; color: var(--slate); font-weight: 600;
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: none;
+  }
+  .cal-day-header {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold);
+    padding: 10px 8px;
+    text-align: center;
+    background: rgba(27, 42, 69, 0.4);
+    border-bottom: 1px solid rgba(227, 197, 117, 0.1);
+  }
+  .cal-day {
+    min-height: 90px;
+    padding: 6px 8px 8px;
+    border-right: 1px solid rgba(227, 197, 117, 0.06);
+    border-bottom: 1px solid rgba(227, 197, 117, 0.06);
+    position: relative;
+    font-size: 11px;
+  }
+  .cal-day:nth-child(5n) { border-right: none; }
+  .cal-day.cal-day-other { opacity: 0.35; }
+  .cal-day-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; font-size: 13px;
+    color: var(--slate);
+    margin-bottom: 4px;
+  }
+  .cal-day.cal-day-today .cal-day-num {
+    background: var(--gold); color: var(--black);
+    border-radius: 50%; width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* Event bars */
+  .cal-event {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px; font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+  .cal-event.ev-alpha {
+    background: #E8917F; color: #1a0a08;
+  }
+  .cal-event.ev-bravo {
+    background: #F5B58A; color: #1a0a08;
+  }
+  .cal-event.ev-open {
+    background: #8B7DD8; color: #fff;
+  }
+  .cal-event.ev-webinar {
+    background: #FDC33E; color: #1a0a08;
+  }
+  .cal-event.ev-delivery {
+    background: rgba(74, 222, 128, 0.15);
+    color: var(--green);
+    border-left: 2px solid var(--green);
+    font-weight: 600;
+  }
+  .cal-event.ev-accountability {
+    background: rgba(74, 222, 128, 0.1);
+    color: #6ee7a0;
+    font-weight: 600;
+  }
+  .cal-event.ev-conversion {
+    background: #CE302A; color: #fff;
+  }
+  .cal-legend-row {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    padding: 12px 20px;
+    background: rgba(27, 42, 69, 0.3);
+    border-bottom: 1px solid rgba(227, 197, 117, 0.08);
+    font-size: 11px;
+  }
+  .cal-legend-item {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .cal-legend-dot {
+    width: 12px; height: 12px; border-radius: 2px;
+  }
+
 </style>
 </head>
 <body>
@@ -958,12 +1072,259 @@
 
   <!-- Legend -->
   <div class="cycle-legend">
-    <div class="legend-item"><div class="legend-swatch swatch-cohort-a"></div> Cohort A (in delivery)</div>
-    <div class="legend-item"><div class="legend-swatch swatch-cohort-b"></div> Cohort B (in delivery)</div>
-    <div class="legend-item"><div class="legend-swatch swatch-cohort-c"></div> Cohort C (next up)</div>
+    <div class="legend-item"><div class="legend-swatch swatch-cohort-alpha"></div> Cohort Alpha (in delivery)</div>
+    <div class="legend-item"><div class="legend-swatch swatch-cohort-bravo"></div> Cohort Bravo (in delivery)</div>
+    <div class="legend-item"><div class="legend-swatch swatch-cohort-charlie"></div> Cohort Charlie (next up)</div>
     <div class="legend-item"><div class="legend-swatch swatch-webinar"></div> Open CCT &amp; Webinar / Conversion Calls</div>
     <div class="legend-item"><div class="legend-swatch swatch-accountability"></div> Accountability Calls (Thursdays 7am)</div>
   </div>
+
+  <!-- ============================
+       3-MONTH VISUAL CALENDAR
+       ============================ -->
+  <div class="cal-section">
+    <h2 class="section-heading" style="margin-top:36px;">3-Month Calendar Overview</h2>
+    <div class="section-sub">How Cohort Alpha and Cohort Bravo interleave — delivery, conversion events, and sales windows at a glance</div>
+
+    <!-- Legend -->
+    <div class="cal-legend-row" style="margin-top:16px; border-radius:8px 8px 0 0;">
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#E8917F;"></div> Alpha Conversion Calls (selling next cohort)</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#F5B58A;"></div> Bravo Conversion Calls (selling next cohort)</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#8B7DD8;"></div> Open CCT &amp; Webinar Conversion Calls</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#FDC33E;"></div> Monthly Conversion Event (Workshop)</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--green);"></div> Cohort Delivery &amp; Accountability</div>
+    </div>
+
+    <!-- =========== APRIL 2026 =========== -->
+    <div class="cal-month">
+      <div class="cal-month-header">
+        <div class="cal-month-title">April</div>
+        <div class="cal-month-year">2026</div>
+        <div style="margin-left:auto;font-size:11px;color:var(--slate);">Alpha sales window opens mid-month &middot; Alpha W1 starts end of month</div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-day-header">Mon</div>
+        <div class="cal-day-header">Tue</div>
+        <div class="cal-day-header">Wed</div>
+        <div class="cal-day-header">Thu</div>
+        <div class="cal-day-header">Fri</div>
+
+        <!-- Wk 1: Mar 30 - Apr 3 -->
+        <div class="cal-day cal-day-other"><div class="cal-day-num">30</div></div>
+        <div class="cal-day cal-day-other"><div class="cal-day-num">31</div></div>
+        <div class="cal-day"><div class="cal-day-num">1</div></div>
+        <div class="cal-day"><div class="cal-day-num">2</div></div>
+        <div class="cal-day"><div class="cal-day-num">3</div></div>
+
+        <!-- Wk 2: Apr 6-10 -->
+        <div class="cal-day"><div class="cal-day-num">6</div></div>
+        <div class="cal-day"><div class="cal-day-num">7</div></div>
+        <div class="cal-day"><div class="cal-day-num">8</div></div>
+        <div class="cal-day"><div class="cal-day-num">9</div></div>
+        <div class="cal-day"><div class="cal-day-num">10</div></div>
+
+        <!-- Wk 3: Apr 13-17 - Conversion Event Wed -->
+        <div class="cal-day"><div class="cal-day-num">13</div></div>
+        <div class="cal-day"><div class="cal-day-num">14</div></div>
+        <div class="cal-day"><div class="cal-day-num">15</div>
+          <span class="cal-event ev-alpha">Alpha Conversion Calls</span>
+          <span class="cal-event ev-webinar">5pm Conversion Event - Workshop - Clay Pricing</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">16</div></div>
+        <div class="cal-day"><div class="cal-day-num">17</div></div>
+
+        <!-- Wk 4: Apr 20-24 - Alpha sales window -->
+        <div class="cal-day"><div class="cal-day-num">20</div>
+          <span class="cal-event ev-alpha">Alpha Conversion Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">21</div></div>
+        <div class="cal-day"><div class="cal-day-num">22</div></div>
+        <div class="cal-day"><div class="cal-day-num">23</div></div>
+        <div class="cal-day"><div class="cal-day-num">24</div></div>
+
+        <!-- Wk 5: Apr 27 - May 1 - Alpha cutoff + W1 -->
+        <div class="cal-day"><div class="cal-day-num">27</div>
+          <span class="cal-event ev-alpha">Alpha Conversion Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">28</div>
+          <span class="cal-event ev-open">Open CCT &amp; Webinar Calls</span>
+          <span class="cal-event ev-delivery">12pm Alpha Cutoff</span>
+          <span class="cal-event ev-delivery">4pm Alpha W1 - Welcome - Clay</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">29</div></div>
+        <div class="cal-day"><div class="cal-day-num">30</div>
+          <span class="cal-event ev-accountability">7am Alpha W1 - Accountability</span>
+        </div>
+        <div class="cal-day cal-day-other"><div class="cal-day-num">1</div></div>
+      </div>
+    </div>
+
+    <!-- =========== MAY 2026 =========== -->
+    <div class="cal-month">
+      <div class="cal-month-header">
+        <div class="cal-month-title">May</div>
+        <div class="cal-month-year">2026</div>
+        <div style="margin-left:auto;font-size:11px;color:var(--slate);">Alpha in delivery (W1-W5) &middot; Bravo sales window mid-month &middot; Bravo W1 end of month</div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-day-header">Mon</div>
+        <div class="cal-day-header">Tue</div>
+        <div class="cal-day-header">Wed</div>
+        <div class="cal-day-header">Thu</div>
+        <div class="cal-day-header">Fri</div>
+
+        <!-- Wk 1: Apr 27 - May 1 (partial) -->
+        <div class="cal-day cal-day-other"><div class="cal-day-num">27</div></div>
+        <div class="cal-day cal-day-other"><div class="cal-day-num">28</div></div>
+        <div class="cal-day cal-day-other"><div class="cal-day-num">29</div></div>
+        <div class="cal-day cal-day-other"><div class="cal-day-num">30</div></div>
+        <div class="cal-day"><div class="cal-day-num">1</div></div>
+
+        <!-- Wk 2: May 4-8 - Alpha W2 -->
+        <div class="cal-day"><div class="cal-day-num">4</div>
+          <span class="cal-event ev-open">Open CCT &amp; Webinar Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">5</div>
+          <span class="cal-event ev-delivery">4pm Alpha W2 - Lead Gen - Clay</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">6</div></div>
+        <div class="cal-day"><div class="cal-day-num">7</div>
+          <span class="cal-event ev-accountability">7am Alpha W2 - Accountability</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">8</div></div>
+
+        <!-- Wk 3: May 11-15 - Alpha W3 + Conversion Event + Bravo sales open -->
+        <div class="cal-day"><div class="cal-day-num">11</div>
+          <span class="cal-event ev-open">Open CCT &amp; Webinar Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">12</div>
+          <span class="cal-event ev-delivery">4pm Alpha W3 - Pricing Your Services - Clay</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">13</div>
+          <span class="cal-event ev-bravo">Bravo Conversion Calls</span>
+          <span class="cal-event ev-webinar">5pm Monthly Conversion Event (Workshop)</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">14</div>
+          <span class="cal-event ev-accountability">7am Alpha W3 - Accountability</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">15</div></div>
+
+        <!-- Wk 4: May 18-22 - Alpha W4 + Bravo selling -->
+        <div class="cal-day"><div class="cal-day-num">18</div>
+          <span class="cal-event ev-bravo">Bravo Conversion Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">19</div>
+          <span class="cal-event ev-delivery">4pm Alpha W4 - Yes Loop - Clay</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">20</div></div>
+        <div class="cal-day"><div class="cal-day-num">21</div>
+          <span class="cal-event ev-accountability">7am Alpha W4 - Accountability</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">22</div></div>
+
+        <!-- Wk 5: May 25-29 - Bravo cutoff + W1, Alpha W5 -->
+        <div class="cal-day"><div class="cal-day-num">25</div>
+          <span class="cal-event ev-bravo">Bravo Conversion Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">26</div>
+          <span class="cal-event ev-delivery">9am Bravo Cutoff</span>
+          <span class="cal-event ev-delivery">3pm Bravo W1 - Welcome! - Clay</span>
+          <span class="cal-event ev-delivery">4pm Alpha W5 - Sales Flow - Joseph</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">27</div>
+          <span class="cal-event ev-open">Open CCT &amp; Webinar Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">28</div>
+          <span class="cal-event ev-accountability">7am Alpha &amp; Bravo W5 - Accountability</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">29</div></div>
+      </div>
+    </div>
+
+    <!-- =========== JUNE 2026 =========== -->
+    <div class="cal-month">
+      <div class="cal-month-header">
+        <div class="cal-month-title">June</div>
+        <div class="cal-month-year">2026</div>
+        <div style="margin-left:auto;font-size:11px;color:var(--slate);">Bravo in delivery (W2-W6) &middot; Alpha W6 wraps &middot; Next Alpha sales mid-month</div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-day-header">Mon</div>
+        <div class="cal-day-header">Tue</div>
+        <div class="cal-day-header">Wed</div>
+        <div class="cal-day-header">Thu</div>
+        <div class="cal-day-header">Fri</div>
+
+        <!-- Wk 1: Jun 1-5 - Bravo W2, Alpha W6/Roadmap -->
+        <div class="cal-day"><div class="cal-day-num">1</div>
+          <span class="cal-event ev-open">Open CCT &amp; Webinar Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">2</div>
+          <span class="cal-event ev-delivery">3pm Bravo W2 - Leads Now! - Clay</span>
+          <span class="cal-event ev-delivery">4pm Alpha W6 - Roadmap - Clay</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">3</div></div>
+        <div class="cal-day"><div class="cal-day-num">4</div>
+          <span class="cal-event ev-accountability">7am Alpha &amp; Bravo W6 - Accountability</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">5</div></div>
+
+        <!-- Wk 2: Jun 8-12 - Bravo W3 + Conversion Event + Alpha sales open -->
+        <div class="cal-day"><div class="cal-day-num">8</div>
+          <span class="cal-event ev-open">Open CCT &amp; Webinar Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">9</div>
+          <span class="cal-event ev-delivery">3pm Bravo W3 - Pricing For Profits - Clay</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">10</div>
+          <span class="cal-event ev-alpha">Alpha Conversion Calls</span>
+          <span class="cal-event ev-webinar">5pm Monthly Conversion Event (Workshop)</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">11</div>
+          <span class="cal-event ev-accountability">7am Bravo W3 - Accountability</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">12</div></div>
+
+        <!-- Wk 3: Jun 15-19 - Bravo W4, Alpha selling -->
+        <div class="cal-day"><div class="cal-day-num">15</div>
+          <span class="cal-event ev-alpha">Alpha Conversion Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">16</div>
+          <span class="cal-event ev-delivery">3pm Bravo W4 - Yes Loop - Clay</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">17</div></div>
+        <div class="cal-day"><div class="cal-day-num">18</div>
+          <span class="cal-event ev-accountability">7am Bravo W4 - Accountability</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">19</div></div>
+
+        <!-- Wk 4: Jun 22-26 - Bravo W5, Alpha selling -->
+        <div class="cal-day"><div class="cal-day-num">22</div>
+          <span class="cal-event ev-alpha">Alpha Conversion Calls</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">23</div>
+          <span class="cal-event ev-delivery">3pm Bravo W5 - Sales Flow - Joseph</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">24</div></div>
+        <div class="cal-day"><div class="cal-day-num">25</div>
+          <span class="cal-event ev-accountability">7am Bravo W5 - Accountability</span>
+        </div>
+        <div class="cal-day"><div class="cal-day-num">26</div></div>
+
+        <!-- Wk 5: Jun 29 - Jul 3 - Bravo W6 -->
+        <div class="cal-day"><div class="cal-day-num">29</div></div>
+        <div class="cal-day"><div class="cal-day-num">30</div>
+          <span class="cal-event ev-delivery">3pm Bravo W6 - Roadmap - Daniel</span>
+        </div>
+        <div class="cal-day cal-day-other"><div class="cal-day-num">1</div></div>
+        <div class="cal-day cal-day-other"><div class="cal-day-num">2</div>
+          <span class="cal-event ev-accountability">7am Bravo W6 - Accountability</span>
+        </div>
+        <div class="cal-day cal-day-other"><div class="cal-day-num">3</div></div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Monthly cadence table -->
   <table class="cycle-table">
@@ -978,26 +1339,26 @@
     <tbody>
       <tr>
         <td><div class="week-label">W1</div></td>
-        <td>Push for next cohort continues · Cohort A wins go live as testimonials</td>
-        <td>Cohort A in <strong>Week 5</strong> (Joe's Sales call) — his energy spills into webinar week</td>
-        <td><span class="pill pill-orange">Cohort A W5</span></td>
+        <td>Push for next cohort continues · Cohort Alpha wins go live as testimonials</td>
+        <td>Cohort Alpha in <strong>Week 5</strong> (Joe's Sales call) — his energy spills into webinar week</td>
+        <td><span class="pill pill-orange">Cohort Alpha W5</span></td>
       </tr>
       <tr class="bigday">
         <td><div class="week-label">W2</div></td>
-        <td><strong style="color:var(--bright-gold);">★ WEBINAR — 2nd Wed of the month</strong><br>Push for Cohort B starts immediately. 2-week sales window opens.</td>
-        <td>Cohort A in <strong>Week 6</strong> — group roadmap session + 1:1 Roadmap calls. Tier prescription happens here.</td>
+        <td><strong style="color:var(--bright-gold);">★ WEBINAR — 2nd Wed of the month</strong><br>Push for Cohort Bravo starts immediately. 2-week sales window opens.</td>
+        <td>Cohort Alpha in <strong>Week 6</strong> — group roadmap session + 1:1 Roadmap calls. Tier prescription happens here.</td>
         <td><span class="pill pill-gold">★ WEBINAR</span></td>
       </tr>
       <tr>
         <td><div class="week-label">W3</div></td>
-        <td>Sales push continues for Cohort B — triage calls only</td>
-        <td><strong>Cohort B STARTS</strong> (Week 1 — Container Building). Cohort A 1:1 roadmaps wrap.</td>
-        <td><span class="pill pill-green">Cohort B W1</span></td>
+        <td>Sales push continues for Cohort Bravo — triage calls only</td>
+        <td><strong>Cohort Bravo STARTS</strong> (Week 1 — Container Building). Cohort Alpha 1:1 roadmaps wrap.</td>
+        <td><span class="pill pill-green">Cohort Bravo W1</span></td>
       </tr>
       <tr>
         <td><div class="week-label">W4</div></td>
-        <td>Sales calls for next Cohort A push begin</td>
-        <td>Cohort B in <strong>Week 2</strong> (Lead Generation)</td>
+        <td>Sales calls for next Cohort Alpha push begin</td>
+        <td>Cohort Bravo in <strong>Week 2</strong> (Lead Generation)</td>
         <td><span class="pill pill-navy">Cycle resets</span></td>
       </tr>
     </tbody>
@@ -1009,7 +1370,7 @@
       <h3 class="section-heading" style="font-size:20px;">Why This Stack Works</h3>
       <ul style="list-style:none;margin-top:12px;">
         <li style="padding:8px 0;border-bottom:1px solid rgba(227,197,117,0.08);"><span style="color:var(--gold);font-weight:700;">→</span> Joe's Week 5 sales energy lands the week before each webinar fires</li>
-        <li style="padding:8px 0;border-bottom:1px solid rgba(227,197,117,0.08);"><span style="color:var(--gold);font-weight:700;">→</span> Cohort A's wins are still hot when we go live — real momentum, live testimonials</li>
+        <li style="padding:8px 0;border-bottom:1px solid rgba(227,197,117,0.08);"><span style="color:var(--gold);font-weight:700;">→</span> Cohort Alpha's wins are still hot when we go live — real momentum, live testimonials</li>
         <li style="padding:8px 0;border-bottom:1px solid rgba(227,197,117,0.08);"><span style="color:var(--gold);font-weight:700;">→</span> The Week 6 1:1 is both synthesis AND the tier close — no separate upgrade push</li>
         <li style="padding:8px 0;border-bottom:1px solid rgba(227,197,117,0.08);"><span style="color:var(--gold);font-weight:700;">→</span> Phil and Daniel run group roadmap → Clay scales without bottlenecking</li>
         <li style="padding:8px 0;"><span style="color:var(--gold);font-weight:700;">→</span> One offer, one webinar, one funnel — discipline beats clever every time</li>
@@ -1037,8 +1398,8 @@
   <!-- Overlap rule callout -->
   <div class="rule-callout">
     <div class="rule-label">⚠ Non-Negotiable Operating Rule</div>
-    <h4>Cohorts A &amp; B may overlap. Cohorts A &amp; C never overlap.</h4>
-    <p>The cycle launches a new cohort every 4 weeks, but each runs 6 weeks. That means two cohorts are always in flight together. <strong style="color:var(--white);">Three cohorts overlapping is a delivery failure</strong> — it breaks the workload model and pulls Clay into bottlenecks he can't recover from. If you see Cohort C calendaring while A is still in delivery, escalate immediately.</p>
+    <h4>Cohorts Alpha &amp; Bravo may overlap. Cohorts Alpha &amp; Charlie never overlap.</h4>
+    <p>The cycle launches a new cohort every 4 weeks, but each runs 6 weeks. That means two cohorts are always in flight together. <strong style="color:var(--white);">Three cohorts overlapping is a delivery failure</strong> — it breaks the workload model and pulls Clay into bottlenecks he can't recover from. If you see Cohort Charlie calendaring while Alpha is still in delivery, escalate immediately.</p>
   </div>
 
   <!-- Annual math -->
