@@ -194,6 +194,7 @@
       background: rgba(255, 255, 255, 0.05);
       color: #666;
       border: 1px solid #333;
+      font-style: italic;
     }
 
     .notes { color: #888; font-size: 0.8rem; }
@@ -304,10 +305,11 @@
 
     <div class="filter-bar">
       <input type="text" id="search" placeholder="Search pages, URLs, notes..." autocomplete="off">
-      <button class="badge-filter" data-filter="all">All</button>
+      <button class="badge-filter active" data-filter="all">All</button>
       <button class="badge-filter" data-filter="spa">SPA</button>
       <button class="badge-filter" data-filter="html">HTML</button>
       <button class="badge-filter" data-filter="tool">Tool</button>
+      <button class="badge-filter" data-filter="archive">Staging</button>
     </div>
 
     <h2>Live Pages</h2>
@@ -321,41 +323,123 @@
         </tr>
       </thead>
       <tbody>
+        <!-- ——— Core Funnel Pages ——— -->
         <tr data-type="html">
           <td data-label="Page"><span class="page-name">Main Index</span></td>
           <td data-label="URL"><a href="https://go.serviceloopelectrical.com" target="_blank">go.serviceloopelectrical.com</a></td>
           <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Root site landing page</span></td>
-        </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">SSR Landing Page</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/SSR-LP.html" target="_blank">.../SSR-LP.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Service Surge Results LP</span></td>
-        </tr>
-        <tr data-type="spa">
-          <td data-label="Page"><span class="page-name">$1M Playbook</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/1mplaybook/" target="_blank">.../1mplaybook/</a></td>
-          <td data-label="Type"><span class="badge badge-spa">React SPA</span></td>
-          <td data-label="Notes"><span class="notes">ACDC playbook &mdash; 9 chapters, quizzes, video placeholders</span></td>
+          <td data-label="Notes"><span class="notes">Root site &mdash; Scaling Your Electrical Business</span></td>
         </tr>
         <tr data-type="spa">
           <td data-label="Page"><span class="page-name">Price Tool</span></td>
           <td data-label="URL"><a href="https://go.serviceloopelectrical.com/sle-pricetool/" target="_blank">.../sle-pricetool/</a></td>
           <td data-label="Type"><span class="badge badge-spa">React SPA</span></td>
-          <td data-label="Notes"><span class="notes">Pricing tool + PDF download, has /thank-you</span></td>
+          <td data-label="Notes"><span class="notes">Build Your $400/hr Rate in Minutes &mdash; PDF download, has /thank-you</span></td>
         </tr>
         <tr data-type="html">
           <td data-label="Page"><span class="page-name">Leads Now</span></td>
           <td data-label="URL"><a href="https://go.serviceloopelectrical.com/leadsnow/" target="_blank">.../leadsnow/</a></td>
           <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Lead gen LP, has /thank-you</span></td>
+          <td data-label="Notes"><span class="notes">Million Dollar Leads Roadmap LP, has /thank-you</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Pricing Workshop</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/webinar-price/" target="_blank">.../webinar-price/</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Stop Guessing What to Charge &mdash; webinar LP, has /thank-you</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">SSR Landing Page</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/SSR-LP.html" target="_blank">.../SSR-LP.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Free Electrician Price Tool &mdash; Service Surge Results variant</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">LeadSurge</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/sle-leadsurge.html" target="_blank">.../sle-leadsurge.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Pick Your Speed &mdash; LeadSurge LP</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Scale</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/scale.html" target="_blank">.../scale.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Scaling Your Electrical Business LP</span></td>
         </tr>
         <tr data-type="html">
           <td data-label="Page"><span class="page-name">SLE Funnel</span></td>
           <td data-label="URL"><a href="https://go.serviceloopelectrical.com/slefunnel/" target="_blank">.../slefunnel/</a></td>
           <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Funnel architecture page</span></td>
+          <td data-label="Notes"><span class="notes">Funnel architecture overview</span></td>
+        </tr>
+        <!-- ——— Program &amp; Cohort Pages ——— -->
+        <tr data-type="spa">
+          <td data-label="Page"><span class="page-name">$1M Playbook</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/1mplaybook/" target="_blank">.../1mplaybook/</a></td>
+          <td data-label="Type"><span class="badge badge-spa">React SPA</span></td>
+          <td data-label="Notes"><span class="notes">For Electricians Done Playing Small &mdash; 9 chapters, quizzes, video</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Loop Method Cohort</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/cohort/" target="_blank">.../cohort/</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Loop Method Launch Cohort LP</span></td>
+        </tr>
+        <tr data-type="spa">
+          <td data-label="Page"><span class="page-name">Cohort Hub</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/cohort-hub/" target="_blank">.../cohort-hub/</a></td>
+          <td data-label="Type"><span class="badge badge-spa">React SPA</span></td>
+          <td data-label="Notes"><span class="notes">From Service Spark to Service Pro &mdash; cohort member hub</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Service One&trade;</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/service-one.html" target="_blank">.../service-one.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Service One Certification LP</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Whistler Summit 2026</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/summit.html" target="_blank">.../summit.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">Whistler Service Summit event page</span></td>
+        </tr>
+        <!-- ——— Content &amp; Community ——— -->
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Content Wrapper</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/wrapper/" target="_blank">.../wrapper/</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">SLE Monthly Content Wrapper</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">MDE Draw</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/MDE-draw.html" target="_blank">.../MDE-draw.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">MDE Podcast Scholarship Draw</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Co-Conversions</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/co-conversions/" target="_blank">.../co-conversions/</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">The Monthly Conversion Machine &mdash; Conversion Calendar</span></td>
+        </tr>
+        <!-- ——— Internal Tools ——— -->
+        <tr data-type="tool">
+          <td data-label="Page"><span class="page-name">Comms Calculator</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/comms-calc/" target="_blank">.../comms-calc/</a></td>
+          <td data-label="Type"><span class="badge badge-tool">Tool</span></td>
+          <td data-label="Notes"><span class="notes">Tech Compensation Calculator</span></td>
+        </tr>
+        <tr data-type="tool">
+          <td data-label="Page"><span class="page-name">ESTI</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/esti.html" target="_blank">.../esti.html</a></td>
+          <td data-label="Type"><span class="badge badge-tool">Tool</span></td>
+          <td data-label="Notes"><span class="notes">Electric Service Takeover Intelligence</span></td>
+        </tr>
+        <tr data-type="tool">
+          <td data-label="Page"><span class="page-name">Field Guide</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/field-guide.html" target="_blank">.../field-guide.html</a></td>
+          <td data-label="Type"><span class="badge badge-tool">Tool</span></td>
+          <td data-label="Notes"><span class="notes">Language &amp; Inspection Reference for techs</span></td>
         </tr>
         <tr data-type="tool">
           <td data-label="Page"><span class="page-name">UTM Guide</span></td>
@@ -375,94 +459,61 @@
           <td data-label="Type"><span class="badge badge-tool">Tool</span></td>
           <td data-label="Notes"><span class="notes">Content interview pre-work tool</span></td>
         </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">MDE Draw</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/MDE-draw.html" target="_blank">.../MDE-draw.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">MDE giveaway drawing page</span></td>
+        <tr data-type="tool">
+          <td data-label="Page"><span class="page-name">Site Stats</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/sitestats/" target="_blank">.../sitestats/</a></td>
+          <td data-label="Type"><span class="badge badge-tool">Tool</span></td>
+          <td data-label="Notes"><span class="notes">SLE Rankings Report &mdash; New Websites, Real Results</span></td>
         </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">Field Guide</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/field-guide.html" target="_blank">.../field-guide.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Field guide LP</span></td>
-        </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">LeadSurge LP</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/sle-leadsurge.html" target="_blank">.../sle-leadsurge.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">LeadSurge landing page</span></td>
-        </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">SLE CC</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/slecc.html" target="_blank">.../slecc.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">SLE coaching/consulting LP</span></td>
-        </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">SLE CSM</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/slecsm.html" target="_blank">.../slecsm.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">SLE CSM page</span></td>
-        </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">CSM (Alternate)</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/CSM.html" target="_blank">.../CSM.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">CSM alternate version</span></td>
-        </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">Service One</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/service-one.html" target="_blank">.../service-one.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Service One LP</span></td>
-        </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">Esti</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/esti.html" target="_blank">.../esti.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Estimating tool page</span></td>
-        </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">Scale</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/scale.html" target="_blank">.../scale.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Scale program LP</span></td>
-        </tr>
-        <tr data-type="html">
-          <td data-label="Page"><span class="page-name">Summit</span></td>
-          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/summit.html" target="_blank">.../summit.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Summit event page</span></td>
-        </tr>
-        <tr data-type="html">
+        <tr data-type="tool">
           <td data-label="Page"><span class="page-name">Daily Quiz</span></td>
           <td data-label="URL"><a href="https://go.serviceloopelectrical.com/SLE_Daily_Quiz.html" target="_blank">.../SLE_Daily_Quiz.html</a></td>
+          <td data-label="Type"><span class="badge badge-tool">Tool</span></td>
+          <td data-label="Notes"><span class="notes">CSM Training daily quiz</span></td>
+        </tr>
+        <!-- ——— Hiring ——— -->
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">Content Coordinator</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/slecc.html" target="_blank">.../slecc.html</a></td>
           <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">Daily quiz page</span></td>
+          <td data-label="Notes"><span class="notes">Content Coordinator role page</span></td>
         </tr>
         <tr data-type="html">
-          <td data-label="Page"><span class="page-name">MDS - Auditorium/Sales</span></td>
+          <td data-label="Page"><span class="page-name">Client Success Manager</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/slecsm.html" target="_blank">.../slecsm.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">CSM role page</span></td>
+        </tr>
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">CSM Quiz</span></td>
+          <td data-label="URL"><a href="https://go.serviceloopelectrical.com/CSM.html" target="_blank">.../CSM.html</a></td>
+          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Notes"><span class="notes">CSM Training quiz variant</span></td>
+        </tr>
+        <!-- ——— MDS Variants ——— -->
+        <tr data-type="html">
+          <td data-label="Page"><span class="page-name">MDS &mdash; Scale &amp; Optimize</span></td>
           <td data-label="URL"><a href="https://go.serviceloopelectrical.com/mds-as.html" target="_blank">.../mds-as.html</a></td>
           <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">MDS variant</span></td>
+          <td data-label="Notes"><span class="notes">Scale &amp; Optimize Your Electrical Operation</span></td>
         </tr>
         <tr data-type="html">
-          <td data-label="Page"><span class="page-name">MDS - Hero</span></td>
+          <td data-label="Page"><span class="page-name">MDS &mdash; Scale Past $100K</span></td>
           <td data-label="URL"><a href="https://go.serviceloopelectrical.com/mds-h.html" target="_blank">.../mds-h.html</a></td>
           <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">MDS variant</span></td>
+          <td data-label="Notes"><span class="notes">Scale Past $100K/Month</span></td>
         </tr>
         <tr data-type="html">
-          <td data-label="Page"><span class="page-name">MDS - Neutral</span></td>
+          <td data-label="Page"><span class="page-name">MDS &mdash; $1M Van Accelerator</span></td>
           <td data-label="URL"><a href="https://go.serviceloopelectrical.com/mds-n.html" target="_blank">.../mds-n.html</a></td>
           <td data-label="Type"><span class="badge badge-html">HTML</span></td>
-          <td data-label="Notes"><span class="notes">MDS variant</span></td>
+          <td data-label="Notes"><span class="notes">The $1M Service Van Accelerator</span></td>
         </tr>
+        <!-- ——— Dev / Staging ——— -->
         <tr data-type="html">
           <td data-label="Page"><span class="page-name">Test</span></td>
           <td data-label="URL"><a href="https://go.serviceloopelectrical.com/test.html" target="_blank">.../test.html</a></td>
-          <td data-label="Type"><span class="badge badge-html">HTML</span></td>
+          <td data-label="Type"><span class="badge badge-archive">Staging</span></td>
           <td data-label="Notes"><span class="notes">Test / staging page</span></td>
         </tr>
       </tbody>
@@ -598,7 +649,7 @@
     </div>
 
     <footer>
-      SLE Team Reference &middot; Auto-deploys from <code>slesupport2026/serviceloop-landing-pages</code> &middot; Last updated 2026-03-31
+      SLE Team Reference &middot; Auto-deploys from <code>slesupport2026/serviceloop-landing-pages</code> &middot; 33 pages &middot; Last updated 2026-05-15
     </footer>
   </div>
 
