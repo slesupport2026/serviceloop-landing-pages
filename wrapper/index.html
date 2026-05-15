@@ -1,0 +1,2812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SLE Monthly Content Wrapper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --navy: #1B2A45;
+    --gold: #E3C575;
+    --bright-gold: #FDC33E;
+    --dark-gold: #A78227;
+    --white: #FFFFFF;
+    --muted: #B8B8B8;
+    --card: #14141A;
+    --border: #2A2A33;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--black); color: var(--white); font-family: 'Open Sans', sans-serif; min-height: 100vh; }
+  body {
+    background:
+      radial-gradient(ellipse at top left, rgba(227,197,117,0.06), transparent 40%),
+      radial-gradient(ellipse at bottom right, rgba(253,195,62,0.04), transparent 40%),
+      var(--black);
+    padding: 32px 16px 80px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-left .eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.05;
+    color: var(--white);
+  }
+  .header-left h1 .accent { color: var(--gold); }
+  .header-left .underline {
+    width: 80px; height: 3px; background: var(--bright-gold);
+    margin-top: 12px;
+  }
+  .header-right { text-align: right; font-family: 'Montserrat', sans-serif; font-size: 12px; color: var(--muted); }
+  .header-right strong { color: var(--gold); display: block; font-size: 14px; margin-bottom: 4px; }
+  .header-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .btn-header-load, .btn-header-drive {
+    display: inline-block;
+    padding: 7px 14px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .btn-header-load:hover, .btn-header-drive:hover {
+    background: rgba(227,197,117,0.08);
+    border-color: var(--bright-gold);
+    color: var(--bright-gold);
+    transform: translateY(-1px);
+  }
+
+  /* META BAR */
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .meta-field {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .meta-field label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .meta-field input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    outline: none;
+  }
+  .meta-field input::placeholder { color: #555; }
+
+  /* SECTIONS */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .section-number {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--bright-gold);
+    line-height: 1;
+    min-width: 38px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--white);
+  }
+  .section-title .gold-line {
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin-top: 6px;
+  }
+  .section-purpose {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: 52px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .section-body { padding-left: 52px; }
+
+  /* FIELDS */
+  .field-row { margin-bottom: 16px; }
+  .field-row.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .field-row.three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .field label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .field label .hint { font-weight: 500; color: var(--muted); text-transform: none; letter-spacing: 0.5px; }
+  .field input, .field textarea {
+    width: 100%;
+    background: #0E0E14;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    resize: vertical;
+  }
+  .field textarea { min-height: 60px; line-height: 1.5; }
+  .field input:focus, .field textarea:focus { border-color: var(--gold); }
+  .field input::placeholder, .field textarea::placeholder { color: #4A4A52; font-style: italic; }
+
+  /* SELECT DROPDOWN */
+  .field select {
+    width: 100%;
+    background: #0E0E14;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23E3C575' d='M6 8L0 0h12z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  .field select:focus { border-color: var(--gold); }
+  .field select optgroup {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--bright-gold);
+    background: var(--black);
+  }
+  .field select option {
+    background: var(--black);
+    color: var(--white);
+    font-style: normal;
+    font-family: 'Open Sans', sans-serif;
+    padding: 6px;
+  }
+
+  /* CHAPTER PANEL */
+  .chapter-panel {
+    margin-top: 12px;
+    background: linear-gradient(135deg, rgba(227,197,117,0.06) 0%, rgba(253,195,62,0.03) 100%);
+    border-left: 3px solid var(--bright-gold);
+    border-radius: 6px;
+    padding: 16px 20px;
+    animation: fadeIn 0.25s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .chapter-phase {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--bright-gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .chapter-title-line {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .chapter-tagline {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .chapter-desc {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* HERO ARC — Section 04 Proof */
+  .hero-arc {
+    background: rgba(253,195,62,0.03);
+    border: 1px solid rgba(227,197,117,0.2);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .hero-arc-header {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--bright-gold);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(227,197,117,0.2);
+  }
+  .arc-steps {
+    margin: 14px 0;
+    position: relative;
+  }
+  .arc-step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 14px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .arc-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 38px;
+    bottom: -10px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold) 0%, rgba(227,197,117,0.2) 100%);
+  }
+  .arc-step-num {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 18px;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+  .arc-step-conflict .arc-step-num { border-color: #E96760; color: #E96760; background: rgba(206,48,42,0.08); }
+  .arc-step-bridge .arc-step-num { border-color: var(--bright-gold); color: var(--black); background: var(--bright-gold); }
+  .arc-step-win .arc-step-num { border-color: #A8E063; color: #A8E063; background: rgba(132,204,22,0.08); }
+  .arc-step-body {
+    background: #0E0E14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .arc-step-conflict .arc-step-body { border-color: rgba(206,48,42,0.25); background: rgba(206,48,42,0.04); }
+  .arc-step-bridge .arc-step-body { border-color: rgba(253,195,62,0.35); background: rgba(253,195,62,0.05); }
+  .arc-step-win .arc-step-body { border-color: rgba(132,204,22,0.25); background: rgba(132,204,22,0.04); }
+  .arc-step-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .arc-step-conflict .arc-step-label { color: #E96760; }
+  .arc-step-bridge .arc-step-label { color: var(--bright-gold); }
+  .arc-step-win .arc-step-label { color: #A8E063; }
+  .arc-step-hint {
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: none;
+    letter-spacing: 0.5px;
+  }
+  .arc-step-body textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    resize: vertical;
+    min-height: 60px;
+    line-height: 1.5;
+  }
+  .arc-step-body textarea::placeholder { color: #4A4A52; font-style: italic; }
+  .arc-bridge-callout {
+    margin-top: 10px;
+    padding: 6px 10px;
+    background: rgba(253,195,62,0.1);
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--bright-gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  /* SUPPORTING PROOF */
+  .supporting-proof {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .supporting-proof-header {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* OLD vs NEW */
+  .shift-row {
+    display: grid;
+    grid-template-columns: 28px 1fr 1fr 28px;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: stretch;
+  }
+  .shift-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--bright-gold);
+    font-size: 22px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
+  }
+  .shift-remove {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.15s;
+    align-self: stretch;
+  }
+  .shift-remove:hover {
+    border-color: #CE302A;
+    color: #E96760;
+    background: rgba(206,48,42,0.08);
+  }
+  .btn-add {
+    background: transparent;
+    border: 1px dashed var(--gold);
+    color: var(--gold);
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-add:hover {
+    background: rgba(227,197,117,0.08);
+    border-style: solid;
+  }
+  .old-new {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .old-col, .new-col {
+    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid;
+  }
+  .old-col { background: rgba(206,48,42,0.08); border-color: rgba(206,48,42,0.3); }
+  .new-col { background: rgba(132,204,22,0.06); border-color: rgba(132,204,22,0.25); }
+  .old-col .col-label { color: #E96760; }
+  .new-col .col-label { color: #A8E063; }
+  .col-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .old-col textarea, .new-col textarea {
+    background: rgba(0,0,0,0.3);
+    border-color: transparent;
+  }
+
+  /* STRETCH GAP THREE Rs */
+  .three-r {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .r-box {
+    background: #0E0E14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .r-box .r-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--bright-gold);
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .r-box .r-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .r-box textarea { background: transparent; border: none; padding: 0; min-height: 70px; font-size: 13px; }
+
+  /* MMM BLOCKS — Metrics, Models, Metaphors, Questions */
+  .mmm-block {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .mmm-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .mmm-icon {
+    font-size: 22px;
+    line-height: 1;
+    padding-top: 2px;
+  }
+  .mmm-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--gold);
+    line-height: 1.1;
+  }
+  .mmm-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+  .mmm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .mmm-field {
+    background: #0E0E14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .mmm-field label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .mmm-field textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    resize: vertical;
+    min-height: 60px;
+    line-height: 1.4;
+  }
+  .mmm-field textarea::placeholder { color: #4A4A52; font-style: italic; }
+
+  /* QUESTION LIST */
+  .question-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .question-row {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 10px;
+    align-items: center;
+  }
+  .q-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--bright-gold);
+    font-size: 18px;
+    text-align: center;
+    line-height: 1;
+  }
+  .question-row:first-child .q-num {
+    color: var(--bright-gold);
+    font-size: 22px;
+  }
+  .question-row input {
+    width: 100%;
+    background: #0E0E14;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .question-row input:focus { border-color: var(--gold); }
+  .question-row input::placeholder { color: #4A4A52; font-style: italic; }
+  .question-row:first-child input {
+    border-color: rgba(253,195,62,0.4);
+    background: rgba(253,195,62,0.04);
+  }
+
+  /* FUNNEL LADDER (legacy — unused but kept for safety) */
+  .funnel {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .funnel-step {
+    background: linear-gradient(180deg, #14141A 0%, #0C0C12 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    position: relative;
+  }
+  .funnel-step .step-badge {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+  }
+  .step-cold .step-badge { background: rgba(0,198,247,0.15); color: #00C6F7; }
+  .step-warm .step-badge { background: rgba(253,195,62,0.15); color: var(--bright-gold); }
+  .step-hot .step-badge  { background: rgba(206,48,42,0.15); color: #E96760; }
+  .funnel-step .step-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .funnel-step .step-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .funnel-step textarea { background: rgba(0,0,0,0.3); border: 1px solid var(--border); min-height: 60px; font-size: 13px; }
+
+  /* NEW FUNNEL TIERS — Section 07 */
+  .funnel-tier {
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+  }
+  .funnel-cold {
+    background: linear-gradient(135deg, rgba(0,198,247,0.05) 0%, rgba(0,178,222,0.02) 100%);
+    border-color: rgba(0,198,247,0.25);
+  }
+  .funnel-warm {
+    background: linear-gradient(135deg, rgba(253,195,62,0.05) 0%, rgba(227,197,117,0.02) 100%);
+    border-color: rgba(253,195,62,0.25);
+  }
+  .funnel-hot {
+    background: linear-gradient(135deg, rgba(206,48,42,0.05) 0%, rgba(206,48,42,0.02) 100%);
+    border-color: rgba(206,48,42,0.25);
+  }
+  .funnel-static {
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, transparent 100%);
+  }
+
+  .funnel-tier-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .tier-badge {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: 5px 11px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .tier-cold-badge { background: rgba(0,198,247,0.15); color: #00C6F7; }
+  .tier-warm-badge { background: rgba(253,195,62,0.15); color: var(--bright-gold); }
+  .tier-hot-badge  { background: rgba(206,48,42,0.15); color: #E96760; }
+  .tier-desc {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+    flex: 1;
+    min-width: 200px;
+  }
+  .tier-desc strong {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* COLD GRID */
+  .cold-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .cold-slot {
+    background: #0E0E14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .cold-slot-full { grid-column: 1 / -1; }
+  .cold-slot-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #00C6F7;
+    margin-bottom: 8px;
+  }
+  .cold-slot-hint {
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: none;
+    letter-spacing: 0.5px;
+    font-size: 10px;
+  }
+  .cold-slot textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    resize: vertical;
+    min-height: 60px;
+    line-height: 1.4;
+  }
+  .cold-slot textarea::placeholder { color: #4A4A52; font-style: italic; }
+
+  .series-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .series-field {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px;
+  }
+  .series-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .series-host {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .series-field textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    resize: vertical;
+    min-height: 50px;
+    line-height: 1.4;
+  }
+  .series-field textarea::placeholder { color: #4A4A52; font-style: italic; }
+
+  /* ARROWS BETWEEN TIERS */
+  .funnel-arrow {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin: 4px 0;
+    padding: 4px 0;
+  }
+
+  /* STATIC ARCHITECTURE BLOCKS — Warm / Hot */
+  .static-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .static-step {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .static-step-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(227,197,117,0.08);
+    border: 1px solid rgba(227,197,117,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .static-step-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 15px;
+    margin-bottom: 3px;
+  }
+  .static-step-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* CONTENT MATRIX */
+  .matrix {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    gap: 0;
+    margin-top: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .matrix-head {
+    background: var(--navy);
+    padding: 10px 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border);
+  }
+  .matrix-cell {
+    background: #0E0E14;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+  .matrix-cell:last-child { border-right: none; }
+  .matrix-cell:nth-child(3n) { border-right: none; }
+  .matrix-row-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    background: #16161C;
+  }
+  .matrix-row-label .sub {
+    display: block;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 2px;
+  }
+  .matrix-cell input, .matrix-cell textarea {
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: 100%;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    resize: none;
+  }
+  .matrix-cell textarea { min-height: 32px; }
+
+  /* KEY DEPLOYMENT DATES BOARD — Section 08 */
+  .dates-board {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0E0E14;
+  }
+  .dates-board-header {
+    display: grid;
+    grid-template-columns: 2fr 130px 140px 1.5fr;
+    gap: 0;
+    background: var(--navy);
+    padding: 12px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border);
+  }
+  .dates-row {
+    display: grid;
+    grid-template-columns: 2fr 130px 140px 1.5fr;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    transition: background-color 0.15s;
+  }
+  .dates-row:last-child { border-bottom: none; }
+  .dates-row:hover { background: rgba(227,197,117,0.02); }
+  .dates-milestone {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.3;
+  }
+  .dates-hint {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+  .date-input {
+    background: #14141A;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s;
+    color-scheme: dark;
+  }
+  .date-input:focus { border-color: var(--gold); }
+  .person-select {
+    background: #14141A;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23E3C575' d='M5 6L0 0h10z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 26px;
+    transition: border-color 0.15s;
+  }
+  .person-select:focus { border-color: var(--gold); }
+  .person-select option {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+  }
+  .dates-row input[type="text"] {
+    background: #14141A;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .dates-row input[type="text"]:focus { border-color: var(--gold); }
+  .dates-row input[type="text"]::placeholder { color: #4A4A52; font-style: italic; }
+
+  /* COMMITMENTS (legacy — kept for safety) */
+  .commitments {
+    background: linear-gradient(135deg, rgba(227,197,117,0.08) 0%, rgba(253,195,62,0.04) 100%);
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 24px;
+  }
+  .commitments h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .commit-row {
+    display: grid;
+    grid-template-columns: 60px 2fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  .commit-row.header-row {
+    border-bottom: 1px solid rgba(227,197,117,0.3);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+  }
+  .commit-row.header-row > div {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .commit-row input {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(227,197,117,0.2);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+  }
+  .commit-row input:focus { border-color: var(--gold); }
+
+  /* ACTIONS */
+  .actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.15s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--bright-gold) 0%, var(--dark-gold) 100%);
+    color: var(--black);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(253,195,62,0.2); }
+  .btn-clear { color: var(--muted); border-color: var(--border); }
+
+  /* GOOGLE DRIVE SHORTCUT */
+  .drive-shortcut {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+  }
+  .drive-shortcut a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 22px;
+    background: linear-gradient(135deg, rgba(227,197,117,0.06) 0%, rgba(253,195,62,0.03) 100%);
+    border: 1px solid rgba(227,197,117,0.25);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--white);
+    transition: all 0.2s;
+    max-width: 600px;
+    width: 100%;
+  }
+  .drive-shortcut a:hover {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(227,197,117,0.1) 0%, rgba(253,195,62,0.05) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(253,195,62,0.15);
+  }
+  .drive-icon {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .drive-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .drive-text strong {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+  }
+  .drive-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .drive-arrow {
+    font-size: 18px;
+    color: var(--bright-gold);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .drive-shortcut a:hover .drive-arrow {
+    transform: translate(2px, -2px);
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+  }
+  .footer strong { color: var(--gold); }
+
+  /* USEFUL / FUN / SEXY QUALITY GATE */
+  .ufs-gate {
+    background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
+    border: 1px dashed var(--gold);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-top: 32px;
+  }
+  .ufs-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .ufs-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .ufs-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .ufs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    padding: 16px 8px 24px;
+  }
+  .ufs-card {
+    border-radius: 4px;
+    padding: 18px 16px 16px;
+    position: relative;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+  }
+  .ufs-card:hover {
+    transform: translateY(-3px) rotate(0deg) !important;
+  }
+  .ufs-useful {
+    background: linear-gradient(180deg, #FFB6D5 0%, #FFA0C5 100%);
+    transform: rotate(-2deg);
+  }
+  .ufs-fun {
+    background: linear-gradient(180deg, #7FE8F5 0%, #5DD8E8 100%);
+    transform: rotate(1deg);
+  }
+  .ufs-sexy {
+    background: linear-gradient(180deg, #FF6B5C 0%, #FF4F3E 100%);
+    transform: rotate(-1deg);
+  }
+  .ufs-label {
+    font-family: 'Caveat', 'Playfair Display', cursive;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 28px;
+    color: #1a1a1a;
+    text-align: left;
+    margin-bottom: 8px;
+    border-bottom: 3px solid rgba(0,0,0,0.6);
+    padding-bottom: 4px;
+    display: inline-block;
+    line-height: 1;
+  }
+  .ufs-card textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #1a1a1a;
+    font-family: 'Caveat', 'Open Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    outline: none;
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.4;
+    margin-top: 6px;
+  }
+  .ufs-card textarea::placeholder {
+    color: rgba(0,0,0,0.55);
+    font-style: italic;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+  }
+  .copy-toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--card);
+    border: 1px solid var(--gold);
+    color: var(--white);
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(253,195,62,0.2);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    max-width: 90%;
+  }
+  .copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .copy-toast.toast-success {
+    border-color: var(--gold);
+  }
+  .copy-toast.toast-error {
+    border-color: #E96760;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(206,48,42,0.2);
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white !important; color: black !important; padding: 0; }
+    .actions, .footer { display: none; }
+    .section, .meta-field, .commitments, .chapter-panel { background: white !important; border-color: #ccc !important; color: black !important; page-break-inside: avoid; }
+    input, textarea, select { color: black !important; background: white !important; border-color: #ccc !important; }
+    .header-left h1, .section-title, .section-number, .commitments h2, .chapter-title-line { color: black !important; }
+    .header-left h1 .accent, .section-number, .commitments h2, .chapter-phase { color: #A78227 !important; }
+    .chapter-panel { border-left: 3px solid #A78227 !important; }
+  }
+
+  @media (max-width: 768px) {
+    .meta { grid-template-columns: 1fr 1fr; }
+    .field-row.two-col, .field-row.three-col, .old-new, .three-r, .funnel, .mmm-grid, .cold-grid, .series-grid, .ufs-grid { grid-template-columns: 1fr; }
+    .shift-row { grid-template-columns: 28px 1fr 28px; }
+    .shift-row .old-col, .shift-row .new-col { grid-column: 2 / 3; }
+    .arc-step { grid-template-columns: 32px 1fr; gap: 10px; }
+    .arc-step-num { width: 30px; height: 30px; font-size: 15px; }
+    .arc-step:not(:last-child)::after { left: 15px; top: 30px; }
+    .matrix { grid-template-columns: 1fr; }
+    .dates-board-header { display: none; }
+    .dates-row { grid-template-columns: 1fr; gap: 6px; padding: 12px 14px; }
+    .section-body { padding-left: 0; }
+    .section-purpose { margin-left: 0; }
+    .commit-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">Service Loop Electrical · Partner Meeting Tool</div>
+      <h1>The Monthly <span class="accent">Content Wrapper</span></h1>
+      <div class="underline"></div>
+    </div>
+    <div class="header-right">
+      <strong>One Meeting. One Page. One Month of Content.</strong>
+      Fill this out together. Ship it everywhere.
+      <div class="header-actions">
+        <a href="https://drive.google.com/drive/folders/1RZ5lOQ6uB2PeJh5l7mBwKwHygDumd_Iy?usp=drive_link" target="_blank" rel="noopener" class="btn-header-drive">📁 Drive Folder ↗</a>
+        <button class="btn-header-load" onclick="document.getElementById('load-md-input').click()">📂 Load Saved Wrapper</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- META -->
+  <div class="meta">
+    <div class="meta-field">
+      <label>Month</label>
+      <input type="text" placeholder="e.g. June 2026" />
+    </div>
+    <div class="meta-field">
+      <label>Wrapper Codename</label>
+      <input type="text" placeholder='e.g. "The Pricing Reset"' />
+    </div>
+    <div class="meta-field">
+      <label>Partners In The Room</label>
+      <input type="text" placeholder="Clay, Joe, …" />
+    </div>
+    <div class="meta-field">
+      <label>Ship Date</label>
+      <input type="text" placeholder="Wrapper goes live…" />
+    </div>
+  </div>
+
+  <!-- SECTION 1: THE BIG IDEA -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">01</div>
+      <div class="section-title">The Big Idea<span class="gold-line"></span></div>
+    </div>
+    <div class="section-purpose">One sentence that drives every piece of content this month. If it can't fit on a hat, it's not ready.</div>
+    <div class="section-body">
+
+      <!-- AC/DC Chapter Anchor -->
+      <div class="field-row">
+        <div class="field">
+          <label>AC/DC Chapter Anchor <span class="hint">— which area of the playbook is this month focused on?</span></label>
+          <select id="acdc-select" onchange="updateChapterPanel()">
+            <option value="">— Select a chapter —</option>
+            <optgroup label="AMPLIFY · Turn up the signal">
+              <option value="1">Ch. 1 · Pricing Services</option>
+              <option value="2">Ch. 2 · Marketing &amp; Lead Generation</option>
+            </optgroup>
+            <optgroup label="CONNECT · Complete the circuit">
+              <option value="3">Ch. 3 · Offer &amp; Options</option>
+              <option value="4">Ch. 4 · Sales Process</option>
+              <option value="5">Ch. 5 · Presentations</option>
+            </optgroup>
+            <optgroup label="DELIVER · Power to the panel">
+              <option value="6">Ch. 6 · Recruiting</option>
+              <option value="7">Ch. 7 · Reputation</option>
+            </optgroup>
+            <optgroup label="CHARGE · Collect the current">
+              <option value="8">Ch. 8 · Profit &amp; Scale</option>
+              <option value="9">Ch. 9 · Scale or Exit?</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <div id="chapter-panel" class="chapter-panel" style="display:none;">
+        <div class="chapter-phase" id="chapter-phase"></div>
+        <div class="chapter-title-line" id="chapter-title-line"></div>
+        <div class="chapter-tagline" id="chapter-tagline"></div>
+        <div class="chapter-desc" id="chapter-desc"></div>
+      </div>
+
+      <div class="field-row" style="margin-top: 18px;">
+        <div class="field">
+          <label>This Month's Promise <span class="hint">— the one belief we're installing</span></label>
+          <textarea placeholder='e.g. "You can charge 2x more by giving customers fewer choices, not more."'></textarea>
+        </div>
+      </div>
+      <div class="field-row two-col">
+        <div class="field">
+          <label>Who This Is For <span class="hint">(Spark / Pro / Master / Elite)</span></label>
+          <input type="text" placeholder="Lead service level this month — usually Pro or Master" />
+        </div>
+        <div class="field">
+          <label>Why This Matters To Them</label>
+          <input type="text" placeholder="The deep why — what does landing this belief unlock for them?" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Why Now <span class="hint">— what makes THIS month the moment</span></label>
+          <input type="text" placeholder="Season, market timing, cohort window, industry shift, recent event — the urgency catalyst" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: LINE IN THE SAND -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">02</div>
+      <div class="section-title">Lines In The Sand<span class="gold-line"></span></div>
+    </div>
+    <div class="section-purpose">The stack of shifts that ladder up to the Big Idea. Every shift is a belief to install — across attracting, selling, delivering, leading, scaling. Start with 3–5. Add or kill rows as needed.</div>
+    <div class="section-body">
+      <div id="shifts-container">
+        <!-- Shift rows get injected here by JS -->
+      </div>
+      <div style="margin-top: 14px; display: flex; gap: 10px; align-items: center;">
+        <button type="button" class="btn-add" onclick="addShift()">+ Add Another Shift</button>
+        <span style="font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--muted); letter-spacing: 1px;">Tip: each shift should stand alone as its own teachable moment in content.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: STRETCH THE GAP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">03</div>
+      <div class="section-title">Stretch The Gap<span class="gold-line"></span></div>
+    </div>
+    <div class="section-purpose">Make the pain real, the dream vivid, and the roadblock obvious. These three Rs power every cold open. Then arm the team with metrics, models, metaphors, and gap-stretch questions to keep stretching across every channel.</div>
+    <div class="section-body">
+      <div class="three-r">
+        <div class="r-box">
+          <div class="r-label">Reality</div>
+          <div class="r-sub">Where they are now</div>
+          <textarea placeholder="The painful current state. Real numbers, real frustrations, real symptoms."></textarea>
+        </div>
+        <div class="r-box">
+          <div class="r-label">Results</div>
+          <div class="r-sub">Where they want to be</div>
+          <textarea placeholder="The promised land. Specific outcomes — revenue, freedom, team size, identity."></textarea>
+        </div>
+        <div class="r-box">
+          <div class="r-label">Roadblocks</div>
+          <div class="r-sub">What's in the way</div>
+          <textarea placeholder="The 1-3 things keeping them stuck. Beliefs, skills, systems."></textarea>
+        </div>
+      </div>
+
+      <!-- METRICS -->
+      <div class="mmm-block">
+        <div class="mmm-header">
+          <div class="mmm-icon">📊</div>
+          <div>
+            <div class="mmm-title">Metrics</div>
+            <div class="mmm-sub">Numbers that calibrate. Score-yourself moments. Traffic-light or 4-point scales.</div>
+          </div>
+        </div>
+        <div class="mmm-grid">
+          <div class="mmm-field">
+            <label>Metric #1</label>
+            <textarea placeholder='e.g. "What % of your quotes close? Under 30% = bleeding."'></textarea>
+          </div>
+          <div class="mmm-field">
+            <label>Metric #2</label>
+            <textarea placeholder='e.g. "How many $5K+ tickets last 90 days? 0–5 / 6–15 / 16–30 / 30+"'></textarea>
+          </div>
+          <div class="mmm-field">
+            <label>Metric #3</label>
+            <textarea placeholder='e.g. "Average ticket size — Spark / Pro / Master / Elite benchmark"'></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODELS -->
+      <div class="mmm-block">
+        <div class="mmm-header">
+          <div class="mmm-icon">📐</div>
+          <div>
+            <div class="mmm-title">Models</div>
+            <div class="mmm-sub">Visual frameworks. Triangles, circles, squares. One picture that makes the gap obvious.</div>
+          </div>
+        </div>
+        <div class="mmm-grid">
+          <div class="mmm-field">
+            <label>Model #1</label>
+            <textarea placeholder='e.g. The 4 Pipe States — rusted / trickle / flow / flood'></textarea>
+          </div>
+          <div class="mmm-field">
+            <label>Model #2</label>
+            <textarea placeholder='e.g. The Option Ladder — bronze / silver / gold / platinum'></textarea>
+          </div>
+          <div class="mmm-field">
+            <label>Model #3</label>
+            <textarea placeholder='e.g. The 3 Keys triangle — Service / Relationship / ROI'></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- METAPHORS -->
+      <div class="mmm-block">
+        <div class="mmm-header">
+          <div class="mmm-icon">💡</div>
+          <div>
+            <div class="mmm-title">Metaphors</div>
+            <div class="mmm-sub">Gut-punch comparisons. Old-way vs new-way analogies that land instantly.</div>
+          </div>
+        </div>
+        <div class="mmm-grid">
+          <div class="mmm-field">
+            <label>Metaphor #1</label>
+            <textarea placeholder='e.g. "7-Eleven vs in-demand Japanese chef" — taking everyone vs choosing'></textarea>
+          </div>
+          <div class="mmm-field">
+            <label>Metaphor #2</label>
+            <textarea placeholder='e.g. "Day-old gas station coffee vs $9 pour-over" — price isn&apos;t the problem'></textarea>
+          </div>
+          <div class="mmm-field">
+            <label>Metaphor #3</label>
+            <textarea placeholder='e.g. "The journeyman who keeps doing apprentice work" — stuck identity'></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAP-STRETCH QUESTIONS -->
+      <div class="mmm-block">
+        <div class="mmm-header">
+          <div class="mmm-icon">❓</div>
+          <div>
+            <div class="mmm-title">Gap-Stretch Questions</div>
+            <div class="mmm-sub">Questions the team asks across every touchpoint — workshop, podcast, email, sales call. Star the central one.</div>
+          </div>
+        </div>
+        <div class="question-list">
+          <div class="question-row">
+            <div class="q-num">★</div>
+            <input type="text" placeholder="THE central question — repeated everywhere. e.g. How many $10K jobs walked out the door this year because you only gave one price?" />
+          </div>
+          <div class="question-row">
+            <div class="q-num">2</div>
+            <input type="text" placeholder="Supporting question — pain-focused" />
+          </div>
+          <div class="question-row">
+            <div class="q-num">3</div>
+            <input type="text" placeholder="Supporting question — dream-focused" />
+          </div>
+          <div class="question-row">
+            <div class="q-num">4</div>
+            <input type="text" placeholder="Supporting question — roadblock-focused" />
+          </div>
+          <div class="question-row">
+            <div class="q-num">5</div>
+            <input type="text" placeholder="Supporting question — identity-focused" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: PROOF -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">04</div>
+      <div class="section-title">Proof<span class="gold-line"></span></div>
+    </div>
+    <div class="section-purpose">This is a hero's journey, not a highlight reel. The prospect sees themselves in the struggle, not the win. Show the conflict, the bridge, and the breakthrough — so when we feature the tool in Section 06, they've already imagined themselves using it.</div>
+    <div class="section-body">
+
+      <!-- HERO STORY ARC -->
+      <div class="hero-arc">
+        <div class="hero-arc-header">⚡ Hero Client · The Featured Story</div>
+
+        <div class="field-row two-col">
+          <div class="field">
+            <label>Hero Name + Business</label>
+            <input type="text" placeholder='e.g. "Billy Harper · Harper Electric, Lake Charles LA"' />
+          </div>
+          <div class="field">
+            <label>Service Level Journey <span class="hint">(e.g. Pro → Master)</span></label>
+            <input type="text" placeholder="Where they started, where they are now" />
+          </div>
+        </div>
+
+        <div class="arc-steps">
+          <!-- 1. ORDINARY WORLD -->
+          <div class="arc-step">
+            <div class="arc-step-num">1</div>
+            <div class="arc-step-body">
+              <div class="arc-step-label">The Ordinary World <span class="arc-step-hint">— where they were before</span></div>
+              <textarea placeholder='Real numbers, real frustrations, real identity. e.g. "1-truck operator stuck at $380K. Quoting one price and praying. Lost a $40K rewire to a guy with a cheaper hourly rate. Sunday-night dread."'></textarea>
+            </div>
+          </div>
+
+          <!-- 2. THE CONFLICT -->
+          <div class="arc-step arc-step-conflict">
+            <div class="arc-step-num">2</div>
+            <div class="arc-step-body">
+              <div class="arc-step-label">The Conflict <span class="arc-step-hint">— what they were fighting (external + internal)</span></div>
+              <textarea placeholder='The real struggle. Skill, identity, belief, market. e.g. "Knew his prices were too low but terrified he&apos;d scare customers off. Thought premium pricing only worked in big metros. His own crew was the loudest objection."'></textarea>
+            </div>
+          </div>
+
+          <!-- 3. THE BRIDGE -->
+          <div class="arc-step arc-step-bridge">
+            <div class="arc-step-num">3</div>
+            <div class="arc-step-body">
+              <div class="arc-step-label">The Bridge ⭐ <span class="arc-step-hint">— the specific SLE tool/training/system they used to cross</span></div>
+              <textarea placeholder='THIS IS THE PRODUCT PLACEMENT MOMENT. e.g. "Built his Simple Service Rate in week 1. Ran the 6-Options on his first call after — sold the premium tier. Used Joe&apos;s objection script when his crew pushed back."'></textarea>
+              <div class="arc-bridge-callout">↓ This same tool gets featured in Section 06 — Product Placement</div>
+            </div>
+          </div>
+
+          <!-- 4. THE BREAKTHROUGH -->
+          <div class="arc-step arc-step-win">
+            <div class="arc-step-num">4</div>
+            <div class="arc-step-body">
+              <div class="arc-step-label">The Breakthrough <span class="arc-step-hint">— the numbers + the identity shift</span></div>
+              <textarea placeholder='Specific receipts AND who they became. e.g. "$380K → $1.2M in 14 months. Average ticket from $850 to $2,400. But the real win: he hasn&apos;t answered the phone from a crawlspace in 8 months."'></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>The Objection This Proof Crushes <span class="hint">— what specific doubt does this hero's arc answer?</span></label>
+            <input type="text" placeholder='e.g. "I&apos;m too small / too rural / too new for premium pricing" → Billy was a 1-truck guy in a $90K market town' />
+          </div>
+        </div>
+      </div>
+
+      <!-- SUPPORTING PROOF -->
+      <div class="supporting-proof">
+        <div class="supporting-proof-header">📌 Supporting Proof · Quick-Hit Names</div>
+        <div class="field-row two-col">
+          <div class="field">
+            <label>Supporting Story #2 <span class="hint">— one sentence: struggle → bridge → result</span></label>
+            <textarea placeholder='e.g. "Nathan Miles: was about to quit and take a union job — joined SLE day 1, ran the Loop Method, hit $110K/mo in 150 days."'></textarea>
+          </div>
+          <div class="field">
+            <label>Supporting Story #3 <span class="hint">— one sentence: struggle → bridge → result</span></label>
+            <textarea placeholder='e.g. "Sherman Hatley: stuck at $100K/mo with a team he couldn&apos;t scale — built premium-first options, hit $300K/mo in 60 days."'></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 5: THE OFFER WRAPPER -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">05</div>
+      <div class="section-title">The Offer Wrapper<span class="gold-line"></span></div>
+    </div>
+    <div class="section-purpose">Same product. New paper. What makes THIS month's invitation feel urgent, fresh, and built just for them?</div>
+    <div class="section-body">
+      <div class="field-row two-col">
+        <div class="field">
+          <label>Core Offer This Month</label>
+          <input type="text" placeholder='e.g. "$1M+ Sales Cohort — June kickoff"' />
+        </div>
+        <div class="field">
+          <label>Reason To Act NOW</label>
+          <input type="text" placeholder="Deadline, bonus, cohort cap, price change, season" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>The Wrapping <span class="hint">— what's new/different about this month's pitch</span></label>
+          <textarea placeholder='e.g. "First 12 service pros get the Options Toolkit + a 1:1 with Joe. June cohort caps at 25 and closes the 22nd."'></textarea>
+        </div>
+      </div>
+      <div class="field-row three-col">
+        <div class="field">
+          <label>Bonus / Stack Add</label>
+          <input type="text" placeholder="Bonus #1" />
+        </div>
+        <div class="field">
+          <label>Bonus / Stack Add</label>
+          <input type="text" placeholder="Bonus #2" />
+        </div>
+        <div class="field">
+          <label>Bonus / Stack Add</label>
+          <input type="text" placeholder="Bonus #3" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: PRODUCT PLACEMENT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">06</div>
+      <div class="section-title">Product Placement<span class="gold-line"></span></div>
+    </div>
+    <div class="section-purpose">Show, don't sell. Lead with the bridge tool from the hero's story (Section 04) — the prospect already imagined someone using it to escape their stuck place. Now show them what using it actually looks like.</div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field">
+          <label>The Bridge Tool To Feature ⭐ <span class="hint">— pull this straight from the hero's Step 3 bridge</span></label>
+          <input type="text" placeholder='e.g. "The 6-Options Toolkit — same one Billy used in week 1 to sell his first $12K premium ticket"' />
+        </div>
+      </div>
+      <div class="field-row two-col">
+        <div class="field">
+          <label>Supporting Tools / Assets</label>
+          <input type="text" placeholder="SSR calculator, objection scripts, work-order template, etc." />
+        </div>
+        <div class="field">
+          <label>Behind-The-Scenes Look</label>
+          <input type="text" placeholder="What inside SLE do we show them?" />
+        </div>
+      </div>
+      <div class="field-row two-col">
+        <div class="field">
+          <label>Moment To Drop The Offer Doc / Apply Link</label>
+          <input type="text" placeholder='e.g. "Right after demoing the Options Toolkit — natural tie-in to the cohort doc"' />
+        </div>
+        <div class="field">
+          <label>Imagined-Action Plant <span class="hint">— what do we want them to picture themselves doing?</span></label>
+          <input type="text" placeholder='e.g. "Picture yourself opening the Toolkit Monday morning, building your first 6 options before your first quote"' />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: EASY-YES FUNNEL -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">07</div>
+      <div class="section-title">The Easy-Yes Funnel<span class="gold-line"></span></div>
+    </div>
+    <div class="section-purpose">The permanent customer journey. Cold→Warm is where this month's content lives — fill these in fresh every meeting. Warm→Hot is static architecture — same path every month.</div>
+    <div class="section-body">
+
+      <!-- COLD — Editable, the monthly content build -->
+      <div class="funnel-tier funnel-cold">
+        <div class="funnel-tier-header">
+          <span class="tier-badge tier-cold-badge">COLD · Skeptical</span>
+          <span class="tier-desc">Strangers in the wild. This is where we hook them and earn the click toward warm. <strong>Fresh content every month.</strong></span>
+        </div>
+
+        <div class="cold-grid">
+          <!-- Short-form -->
+          <div class="cold-slot">
+            <div class="cold-slot-label">📱 Short-Form Content <span class="cold-slot-hint">Reels · Shorts · TikTok</span></div>
+            <textarea placeholder="Hook angles for this month — list 4-6 reel concepts that tease the new way and point to warm. Use the Big Idea + the Lines In The Sand."></textarea>
+          </div>
+
+          <!-- Micro magnet -->
+          <div class="cold-slot">
+            <div class="cold-slot-label">⚡ Micro Magnet <span class="cold-slot-hint">tiny one-page yes</span></div>
+            <textarea placeholder='Quick-yes opt-in. Single tool, cheatsheet, one-pager. e.g. "The 6-Options Cheatcard — 3 prices that close."'></textarea>
+          </div>
+
+          <!-- Lead magnet -->
+          <div class="cold-slot">
+            <div class="cold-slot-label">📘 Lead Magnet <span class="cold-slot-hint">bigger download · real yes</span></div>
+            <textarea placeholder='Bigger asset. Playbook, full toolkit, multi-page guide. e.g. "The Premium Pricing Playbook — 32-page system + SSR calculator."'></textarea>
+          </div>
+
+          <!-- Long-form series -->
+          <div class="cold-slot cold-slot-full">
+            <div class="cold-slot-label">🎬 Long-Form Series <span class="cold-slot-hint">binge starters · the retention magnets</span></div>
+            <div class="series-grid">
+              <div class="series-field">
+                <div class="series-label">RTFM <span class="series-host">— Clay</span></div>
+                <textarea placeholder="This month's episode topic, tailored to the Wrapper"></textarea>
+              </div>
+              <div class="series-field">
+                <div class="series-label">More to Give <span class="series-host">— Joe</span></div>
+                <textarea placeholder="Episode topic — options / new tech angle that ladders to MDP"></textarea>
+              </div>
+              <div class="series-field">
+                <div class="series-label">MDE Podcast <span class="series-host">— Clay</span></div>
+                <textarea placeholder="Guest + theme tied to the Wrapper"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARROW DIVIDER -->
+      <div class="funnel-arrow">↓ Everything above points to ↓</div>
+
+      <!-- WARM — Static reference -->
+      <div class="funnel-tier funnel-warm funnel-static">
+        <div class="funnel-tier-header">
+          <span class="tier-badge tier-warm-badge">WARM · Curious</span>
+          <span class="tier-desc">They've raised their hand. They want to go deeper. <strong>Static architecture — same destination every month.</strong></span>
+        </div>
+        <div class="static-block">
+          <div class="static-step">
+            <div class="static-step-icon">🎯</div>
+            <div class="static-step-body">
+              <div class="static-step-title">Million Dollar Electrician Plan (MDEP) · YouTube</div>
+              <div class="static-step-sub">The explainer everyone gets pointed to. The "microwave" — turns warm into hot. Every cold piece this month should drive here.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARROW DIVIDER -->
+      <div class="funnel-arrow">↓ Which leads to ↓</div>
+
+      <!-- HOT — Static reference -->
+      <div class="funnel-tier funnel-hot funnel-static">
+        <div class="funnel-tier-header">
+          <span class="tier-badge tier-hot-badge">HOT · Primed</span>
+          <span class="tier-desc">Wallet open, hand raised, ready to act. <strong>Static architecture — the standing offer path.</strong></span>
+        </div>
+        <div class="static-block">
+          <div class="static-step">
+            <div class="static-step-icon">💳</div>
+            <div class="static-step-body">
+              <div class="static-step-title">Paid Workshop / Webinar</div>
+              <div class="static-step-sub">The moment they pay, they're hot. This month's workshop topic lives in the Deploy Matrix below.</div>
+            </div>
+          </div>
+          <div class="static-step">
+            <div class="static-step-icon">📄</div>
+            <div class="static-step-body">
+              <div class="static-step-title">Offer Doc</div>
+              <div class="static-step-sub">The 2-page program explainer. Same doc every month — wrapper paragraph swaps monthly (see Section 05).</div>
+            </div>
+          </div>
+          <div class="static-step">
+            <div class="static-step-icon">📞</div>
+            <div class="static-step-body">
+              <div class="static-step-title">Triage Call → Scale Call</div>
+              <div class="static-step-sub">Phil runs the triage / setter call. Daniel runs the strategy / scale call.</div>
+            </div>
+          </div>
+          <div class="static-step">
+            <div class="static-step-icon">✍️</div>
+            <div class="static-step-body">
+              <div class="static-step-title">Cohort Application</div>
+              <div class="static-step-sub">Deposit + apply. Caps and close dates set in Section 05.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: KEY DEPLOYMENT DATES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">08</div>
+      <div class="section-title">Key Deployment Dates<span class="gold-line"></span></div>
+    </div>
+    <div class="section-purpose">Just the dates that live here and nowhere else. Standing content cadence (reels, podcast, AM emails) is managed in the content calendar — this board tracks Wrapper-specific milestones and the unique events of the month.</div>
+    <div class="section-body">
+      <div class="dates-board">
+        <div class="dates-board-header">
+          <div>Milestone</div>
+          <div>Date</div>
+          <div>Owner</div>
+          <div>Notes</div>
+        </div>
+
+        <div class="dates-row">
+          <div class="dates-milestone">📋 Wrapper Finalized</div>
+          <input type="date" class="date-input" />
+          <select class="person-select"><option value="">— Owner —</option><option>Clay</option><option>Joseph</option><option>Rayna</option><option>Daniel</option><option>Austin</option><option>Phil</option><option>Tony</option><option>Team</option></select>
+          <input type="text" placeholder="Notes" />
+        </div>
+
+        <div class="dates-row">
+          <div class="dates-milestone">🎬 Long-Form Scripts/Prep Done <span class="dates-hint">RTFM · More to Give · MDE</span></div>
+          <input type="date" class="date-input" />
+          <select class="person-select"><option value="">— Owner —</option><option>Clay</option><option>Joseph</option><option>Rayna</option><option>Daniel</option><option>Austin</option><option>Phil</option><option>Tony</option><option>Team</option></select>
+          <input type="text" placeholder="Notes" />
+        </div>
+
+        <div class="dates-row">
+          <div class="dates-milestone">✉️ AM Email Arc Drafted</div>
+          <input type="date" class="date-input" />
+          <select class="person-select"><option value="">— Owner —</option><option>Clay</option><option>Joseph</option><option>Rayna</option><option>Daniel</option><option>Austin</option><option>Phil</option><option>Tony</option><option>Team</option></select>
+          <input type="text" placeholder="Notes" />
+        </div>
+
+        <div class="dates-row">
+          <div class="dates-milestone">🎤 Workshop Date</div>
+          <input type="date" class="date-input" />
+          <select class="person-select"><option value="">— Owner —</option><option>Clay</option><option>Joseph</option><option>Rayna</option><option>Daniel</option><option>Austin</option><option>Phil</option><option>Tony</option><option>Team</option></select>
+          <input type="text" placeholder="Time, link, registration platform" />
+        </div>
+
+        <div class="dates-row">
+          <div class="dates-milestone">🚀 Cohort Apply Opens</div>
+          <input type="date" class="date-input" />
+          <select class="person-select"><option value="">— Owner —</option><option>Clay</option><option>Joseph</option><option>Rayna</option><option>Daniel</option><option>Austin</option><option>Phil</option><option>Tony</option><option>Team</option></select>
+          <input type="text" placeholder="Notes" />
+        </div>
+
+        <div class="dates-row">
+          <div class="dates-milestone">🔒 Cohort Apply Closes</div>
+          <input type="date" class="date-input" />
+          <select class="person-select"><option value="">— Owner —</option><option>Clay</option><option>Joseph</option><option>Rayna</option><option>Daniel</option><option>Austin</option><option>Phil</option><option>Tony</option><option>Team</option></select>
+          <input type="text" placeholder="Cap, urgency mechanic, etc." />
+        </div>
+
+        <div class="dates-row">
+          <div class="dates-milestone">📣 Ads Created &amp; Deployed</div>
+          <input type="date" class="date-input" />
+          <select class="person-select"><option value="">— Owner —</option><option>Clay</option><option>Joseph</option><option>Rayna</option><option>Daniel</option><option>Austin</option><option>Phil</option><option>Tony</option><option>Team</option></select>
+          <input type="text" placeholder="Creative briefs, ad set targeting, budget, launch notes" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USEFUL / FUN / SEXY QUALITY GATE -->
+  <div class="ufs-gate">
+    <div class="ufs-header">
+      <div class="ufs-title">The Final Check</div>
+      <div class="ufs-subtitle">Before this Wrapper ships — does it earn all three Post-its?</div>
+    </div>
+    <div class="ufs-grid">
+      <div class="ufs-card ufs-useful">
+        <div class="ufs-label">Useful</div>
+        <textarea placeholder="What about this Wrapper is genuinely useful to the audience? Be specific. If you can't answer this, the content won't get watched."></textarea>
+      </div>
+      <div class="ufs-card ufs-fun">
+        <div class="ufs-label">Fun</div>
+        <textarea placeholder="What's actually fun about this? Interaction, humor, surprise, stories, characters. Boring useful content still loses."></textarea>
+      </div>
+      <div class="ufs-card ufs-sexy">
+        <div class="ufs-label">Sexy</div>
+        <textarea placeholder="What makes this sell? What installs belief, stretches the gap, makes them WANT what we have? If it's not sexy, the offer falls flat."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button class="btn btn-primary" onclick="copyBriefToClipboard()">✨ Copy to Clipboard</button>
+    <button class="btn btn-primary" onclick="downloadMarkdown()">💾 Save as Markdown</button>
+    <button class="btn btn-secondary btn-clear" onclick="clearAll()">🗑 Clear All</button>
+    <input type="file" id="load-md-input" accept=".md,.json,text/markdown,application/json" style="display:none;" onchange="loadMarkdownFile(event)" />
+  </div>
+
+  <!-- DRIVE FOLDER SHORTCUT -->
+  <div class="drive-shortcut">
+    <a href="https://drive.google.com/drive/folders/1RZ5lOQ6uB2PeJh5l7mBwKwHygDumd_Iy?usp=drive_link" target="_blank" rel="noopener">
+      <span class="drive-icon">📁</span>
+      <span class="drive-text">
+        <strong>SLE Content Wrappers · Google Drive</strong>
+        <span class="drive-sub">Save every Wrapper here. Filenames are auto-formatted to match folder conventions.</span>
+      </span>
+      <span class="drive-arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Property of <strong>Service Loop Electrical Inc</strong> · ServiceLoopElectrical.com · LevelUp@serviceloopelectrical.com
+  </div>
+</div>
+
+<script>
+  // ---- AC/DC CHAPTER PANEL ----
+  const CHAPTERS = {
+    "1": { phase: "AMPLIFY · Turn up the signal",  title: "Chapter 1 · Pricing Services",            tagline: "The Biggest Mistake Electricians Make",                                presenter: "Clay",   desc: "Build your Simple Service Rate on real math. Know the floor, defend the price, stop subsidizing customers with your family's income." },
+    "2": { phase: "AMPLIFY · Turn up the signal",  title: "Chapter 2 · Marketing & Lead Generation", tagline: "Your Calendar Is Full. Your Tickets Aren't.",                          presenter: "Open",   desc: "Build a lead system that pre-sells before the truck rolls. Reviews, GBP, LSAs, paid traffic — the right mix for your stage." },
+    "3": { phase: "CONNECT · Complete the circuit", title: "Chapter 3 · Offer & Options",            tagline: "No Options = Price War. Every Time.",                                  presenter: "Joe",    desc: "Stop quoting. Start offering. The 6-Options Design — two premium, two midrange, two economy. Sell at every level instead of getting compared." },
+    "4": { phase: "CONNECT · Complete the circuit", title: "Chapter 4 · Sales Process",              tagline: "You're Not Losing Jobs on Price. You're Losing Them on Presentation.", presenter: "Joe",    desc: "Demand calls vs Opportunity calls. The 2-Call Close. Sales SatisfAction — serving so well clients review, refer, and repeat." },
+    "5": { phase: "CONNECT · Complete the circuit", title: "Chapter 5 · Presentations",              tagline: "The 8 Secrets of a $1M Presentation",                                  presenter: "Joe",    desc: "The Four Whats. Right place, right people, right time. Build value, ask for the sale, know how to collect. Muscle memory, not motivation." },
+    "6": { phase: "DELIVER · Power to the panel",   title: "Chapter 6 · Recruiting",                 tagline: "While You're Installing, No Growth Is Happening",                      presenter: "Open",   desc: "Hire the office FIRST. Build the org chart that gets you off the tools. CSR, installer, service tech, sales tech — promote from within." },
+    "7": { phase: "DELIVER · Power to the panel",   title: "Chapter 7 · Reputation",                 tagline: "The Job Isn't Done When the Wire Is Pulled",                           presenter: "Clay",   desc: "Lifetime Craftsmanship Guarantee, Happy Calls, review engine, work-order handoffs. Build a reputation that feeds itself." },
+    "8": { phase: "CHARGE · Collect the current",   title: "Chapter 8 · Profit & Scale",             tagline: "Revenue Without Margin Is Just Expensive Exercise",                    presenter: "Clay",   desc: "Reverse P&L. Cash buckets. KPIs that actually move the needle. Protect profit so the business works for you." },
+    "9": { phase: "CHARGE · Collect the current",   title: "Chapter 9 · Scale or Exit?",             tagline: "What Are You Building This For?",                                      presenter: "Open",   desc: "5-year vision. M&A. Build to sell vs build to scale. The identity questions every owner has to answer." }
+  };
+
+  function updateChapterPanel() {
+    const select = document.getElementById('acdc-select');
+    const panel = document.getElementById('chapter-panel');
+    const val = select.value;
+    if (!val) {
+      panel.style.display = 'none';
+      return;
+    }
+    const ch = CHAPTERS[val];
+    document.getElementById('chapter-phase').textContent = ch.phase;
+    document.getElementById('chapter-title-line').textContent = ch.title;
+    document.getElementById('chapter-tagline').textContent = '"' + ch.tagline + '"';
+    document.getElementById('chapter-desc').textContent = ch.desc;
+    panel.style.display = 'block';
+  }
+
+  // ---- DYNAMIC SHIFT ROWS (Section 02) ----
+  let shiftCounter = 0;
+
+  function buildShiftRow(num, oldVal = '', newVal = '', shiftLabel = '') {
+    const id = ++shiftCounter;
+    const placeholderPairs = [
+      {label: 'e.g. Pricing', oldP: 'Quoting one price and praying.', newP: 'Present 3 options, lead with the platinum.'},
+      {label: 'e.g. Sales conversation', oldP: 'Talking features and specs.', newP: 'Selling outcomes and peace of mind.'},
+      {label: 'e.g. Lead flow', oldP: 'Begging for referrals.', newP: 'Magnetic content that fills the schedule.'},
+      {label: 'e.g. Team', oldP: 'Doing it all yourself.', newP: 'Hiring an apprentice who runs the small jobs.'},
+      {label: 'e.g. Ops', oldP: 'Chasing payment after the work.', newP: 'Deposit + financing presented up front.'},
+    ];
+    const p = placeholderPairs[(num - 1) % placeholderPairs.length];
+
+    const div = document.createElement('div');
+    div.className = 'shift-row';
+    div.dataset.shiftId = id;
+    div.innerHTML = `
+      <div class="shift-num">${num}</div>
+      <div class="old-col" style="border-radius:8px; padding:12px; border:1px solid rgba(206,48,42,0.3); background:rgba(206,48,42,0.08);">
+        <div class="col-label" style="color:#E96760;">⛔ Old Way · <span style="font-weight:500; letter-spacing:0.5px; text-transform:none; color:var(--muted);">${p.label}</span></div>
+        <textarea class="shift-old" placeholder="${p.oldP}" style="background:rgba(0,0,0,0.3); border:none; min-height:60px;">${escapeHtml(oldVal)}</textarea>
+      </div>
+      <div class="new-col" style="border-radius:8px; padding:12px; border:1px solid rgba(132,204,22,0.25); background:rgba(132,204,22,0.06);">
+        <div class="col-label" style="color:#A8E063;">✅ SLE Way</div>
+        <textarea class="shift-new" placeholder="${p.newP}" style="background:rgba(0,0,0,0.3); border:none; min-height:60px;">${escapeHtml(newVal)}</textarea>
+      </div>
+      <button type="button" class="shift-remove" onclick="removeShift(this)" title="Remove this shift">×</button>
+    `;
+    return div;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function renumberShifts() {
+    document.querySelectorAll('#shifts-container .shift-row').forEach((row, i) => {
+      row.querySelector('.shift-num').textContent = i + 1;
+    });
+  }
+
+  function addShift(oldVal = '', newVal = '') {
+    const container = document.getElementById('shifts-container');
+    const num = container.children.length + 1;
+    container.appendChild(buildShiftRow(num, oldVal, newVal));
+  }
+
+  function removeShift(btn) {
+    const container = document.getElementById('shifts-container');
+    if (container.children.length <= 1) {
+      alert('Keep at least one shift. Use Clear All if you want a fresh start.');
+      return;
+    }
+    btn.closest('.shift-row').remove();
+    renumberShifts();
+  }
+
+  // Seed with 3 rows on load
+  document.addEventListener('DOMContentLoaded', () => {
+    addShift();
+    addShift();
+    addShift();
+  });
+
+  // ---- LABELED STATE SNAPSHOT / RESTORE ----
+  // Single source of truth. snapshotState() returns a labeled object;
+  // restoreState() reads it back. Both Save-as-Markdown and Load-Markdown
+  // use this — no positional DOM dependencies.
+
+  const STATE_VERSION = 1;
+
+  function snapshotState() {
+    const sections = document.querySelectorAll('.section');
+
+    // META
+    const metaFields = document.querySelectorAll('.meta .meta-field input');
+    const meta = {
+      month:     metaFields[0]?.value || '',
+      codename:  metaFields[1]?.value || '',
+      partners:  metaFields[2]?.value || '',
+      ship_date: metaFields[3]?.value || ''
+    };
+
+    // 01 — BIG IDEA
+    const bigIdeaSection = sections[0];
+    const bigIdeaInputs = bigIdeaSection.querySelectorAll('input[type="text"]');
+    const section_01 = {
+      chapter:      document.getElementById('acdc-select')?.value || '',
+      promise:      bigIdeaSection.querySelector('textarea')?.value || '',
+      who_for:      bigIdeaInputs[0]?.value || '',
+      why_matters:  bigIdeaInputs[1]?.value || '',
+      why_now:      bigIdeaInputs[2]?.value || ''
+    };
+
+    // 02 — SHIFTS
+    const section_02_shifts = Array.from(document.querySelectorAll('#shifts-container .shift-row')).map(row => ({
+      old: row.querySelector('.shift-old')?.value || '',
+      new: row.querySelector('.shift-new')?.value || ''
+    }));
+
+    // 03 — STRETCH THE GAP
+    const gapSection = sections[2];
+    const rBoxes = gapSection.querySelectorAll('.r-box textarea');
+    const mmmBlocks = gapSection.querySelectorAll('.mmm-block');
+    const section_03 = {
+      reality:    rBoxes[0]?.value || '',
+      results:    rBoxes[1]?.value || '',
+      roadblocks: rBoxes[2]?.value || '',
+      metrics:    Array.from(mmmBlocks[0].querySelectorAll('textarea')).map(t => t.value || ''),
+      models:     Array.from(mmmBlocks[1].querySelectorAll('textarea')).map(t => t.value || ''),
+      metaphors:  Array.from(mmmBlocks[2].querySelectorAll('textarea')).map(t => t.value || ''),
+      questions:  Array.from(mmmBlocks[3].querySelectorAll('input[type="text"]')).map(i => i.value || '')
+    };
+
+    // 04 — PROOF
+    const proofSection = sections[3];
+    const proofInputs = proofSection.querySelectorAll('.hero-arc input[type="text"]');
+    const arcTextareas = proofSection.querySelectorAll('.arc-step textarea');
+    const supportingTextareas = proofSection.querySelectorAll('.supporting-proof textarea');
+    const section_04 = {
+      hero_name:           proofInputs[0]?.value || '',
+      service_journey:     proofInputs[1]?.value || '',
+      objection_crushed:   proofInputs[2]?.value || '',
+      ordinary_world:      arcTextareas[0]?.value || '',
+      conflict:            arcTextareas[1]?.value || '',
+      bridge:              arcTextareas[2]?.value || '',
+      breakthrough:        arcTextareas[3]?.value || '',
+      supporting_2:        supportingTextareas[0]?.value || '',
+      supporting_3:        supportingTextareas[1]?.value || ''
+    };
+
+    // 05 — OFFER WRAPPER
+    const offerSection = sections[4];
+    const offerInputs = offerSection.querySelectorAll('input[type="text"]');
+    const section_05 = {
+      core_offer:  offerInputs[0]?.value || '',
+      reason_now:  offerInputs[1]?.value || '',
+      wrapping:    offerSection.querySelector('textarea')?.value || '',
+      bonus_1:     offerInputs[2]?.value || '',
+      bonus_2:     offerInputs[3]?.value || '',
+      bonus_3:     offerInputs[4]?.value || ''
+    };
+
+    // 06 — PRODUCT PLACEMENT
+    const ppSection = sections[5];
+    const ppInputs = ppSection.querySelectorAll('input[type="text"]');
+    const section_06 = {
+      bridge_tool:        ppInputs[0]?.value || '',
+      supporting_tools:   ppInputs[1]?.value || '',
+      bts_look:           ppInputs[2]?.value || '',
+      offer_doc_moment:   ppInputs[3]?.value || '',
+      imagined_action:    ppInputs[4]?.value || ''
+    };
+
+    // 07 — EASY-YES FUNNEL (cold tier editable)
+    const funnelSection = sections[6];
+    const coldSlots = funnelSection.querySelectorAll('.cold-slot:not(.cold-slot-full) textarea');
+    const seriesFields = funnelSection.querySelectorAll('.series-field textarea');
+    const section_07 = {
+      short_form:    coldSlots[0]?.value || '',
+      micro_magnet:  coldSlots[1]?.value || '',
+      lead_magnet:   coldSlots[2]?.value || '',
+      rtfm:          seriesFields[0]?.value || '',
+      more_to_give:  seriesFields[1]?.value || '',
+      mde_podcast:   seriesFields[2]?.value || ''
+    };
+
+    // 08 — KEY DATES
+    const section_08 = Array.from(document.querySelectorAll('.dates-row')).map(row => ({
+      milestone: row.querySelector('.dates-milestone')?.textContent.trim().replace(/\s+/g, ' ') || '',
+      date:      row.querySelector('input[type="date"]')?.value || '',
+      owner:     row.querySelector('select')?.value || '',
+      notes:     row.querySelector('input[type="text"]')?.value || ''
+    }));
+
+    // USEFUL / FUN / SEXY
+    const ufsTextareas = document.querySelectorAll('.ufs-card textarea');
+    const ufs = {
+      useful: ufsTextareas[0]?.value || '',
+      fun:    ufsTextareas[1]?.value || '',
+      sexy:   ufsTextareas[2]?.value || ''
+    };
+
+    return {
+      version: STATE_VERSION,
+      saved_at: new Date().toISOString(),
+      meta,
+      section_01,
+      section_02_shifts,
+      section_03,
+      section_04,
+      section_05,
+      section_06,
+      section_07,
+      section_08,
+      ufs
+    };
+  }
+
+  function restoreState(state) {
+    if (!state || typeof state !== 'object') return false;
+
+    try {
+      const sections = document.querySelectorAll('.section');
+
+      // META
+      const metaFields = document.querySelectorAll('.meta .meta-field input');
+      if (state.meta) {
+        metaFields[0].value = state.meta.month     || '';
+        metaFields[1].value = state.meta.codename  || '';
+        metaFields[2].value = state.meta.partners  || '';
+        metaFields[3].value = state.meta.ship_date || '';
+      }
+
+      // 01 — BIG IDEA
+      if (state.section_01) {
+        const s = state.section_01;
+        const select = document.getElementById('acdc-select');
+        if (select) select.value = s.chapter || '';
+        const bigIdeaSection = sections[0];
+        const ta = bigIdeaSection.querySelector('textarea');
+        if (ta) ta.value = s.promise || '';
+        const inputs = bigIdeaSection.querySelectorAll('input[type="text"]');
+        if (inputs[0]) inputs[0].value = s.who_for     || '';
+        if (inputs[1]) inputs[1].value = s.why_matters || '';
+        if (inputs[2]) inputs[2].value = s.why_now     || '';
+        updateChapterPanel();
+      }
+
+      // 02 — SHIFTS
+      if (state.section_02_shifts && Array.isArray(state.section_02_shifts)) {
+        const container = document.getElementById('shifts-container');
+        container.innerHTML = '';
+        if (state.section_02_shifts.length === 0) {
+          addShift(); addShift(); addShift();
+        } else {
+          state.section_02_shifts.forEach(s => addShift(s.old || '', s.new || ''));
+        }
+      }
+
+      // 03 — STRETCH THE GAP
+      if (state.section_03) {
+        const s = state.section_03;
+        const gapSection = sections[2];
+        const rBoxes = gapSection.querySelectorAll('.r-box textarea');
+        if (rBoxes[0]) rBoxes[0].value = s.reality    || '';
+        if (rBoxes[1]) rBoxes[1].value = s.results    || '';
+        if (rBoxes[2]) rBoxes[2].value = s.roadblocks || '';
+        const mmmBlocks = gapSection.querySelectorAll('.mmm-block');
+        ['metrics','models','metaphors'].forEach((key, idx) => {
+          const tas = mmmBlocks[idx].querySelectorAll('textarea');
+          const vals = s[key] || [];
+          tas.forEach((t, i) => { t.value = vals[i] || ''; });
+        });
+        const qInputs = mmmBlocks[3].querySelectorAll('input[type="text"]');
+        const qVals = s.questions || [];
+        qInputs.forEach((q, i) => { q.value = qVals[i] || ''; });
+      }
+
+      // 04 — PROOF
+      if (state.section_04) {
+        const s = state.section_04;
+        const proofSection = sections[3];
+        const proofInputs = proofSection.querySelectorAll('.hero-arc input[type="text"]');
+        if (proofInputs[0]) proofInputs[0].value = s.hero_name         || '';
+        if (proofInputs[1]) proofInputs[1].value = s.service_journey   || '';
+        if (proofInputs[2]) proofInputs[2].value = s.objection_crushed || '';
+        const arcTextareas = proofSection.querySelectorAll('.arc-step textarea');
+        if (arcTextareas[0]) arcTextareas[0].value = s.ordinary_world || '';
+        if (arcTextareas[1]) arcTextareas[1].value = s.conflict       || '';
+        if (arcTextareas[2]) arcTextareas[2].value = s.bridge         || '';
+        if (arcTextareas[3]) arcTextareas[3].value = s.breakthrough   || '';
+        const supportingTextareas = proofSection.querySelectorAll('.supporting-proof textarea');
+        if (supportingTextareas[0]) supportingTextareas[0].value = s.supporting_2 || '';
+        if (supportingTextareas[1]) supportingTextareas[1].value = s.supporting_3 || '';
+      }
+
+      // 05 — OFFER WRAPPER
+      if (state.section_05) {
+        const s = state.section_05;
+        const offerSection = sections[4];
+        const offerInputs = offerSection.querySelectorAll('input[type="text"]');
+        if (offerInputs[0]) offerInputs[0].value = s.core_offer || '';
+        if (offerInputs[1]) offerInputs[1].value = s.reason_now || '';
+        if (offerInputs[2]) offerInputs[2].value = s.bonus_1    || '';
+        if (offerInputs[3]) offerInputs[3].value = s.bonus_2    || '';
+        if (offerInputs[4]) offerInputs[4].value = s.bonus_3    || '';
+        const wrappingTa = offerSection.querySelector('textarea');
+        if (wrappingTa) wrappingTa.value = s.wrapping || '';
+      }
+
+      // 06 — PRODUCT PLACEMENT
+      if (state.section_06) {
+        const s = state.section_06;
+        const ppSection = sections[5];
+        const ppInputs = ppSection.querySelectorAll('input[type="text"]');
+        if (ppInputs[0]) ppInputs[0].value = s.bridge_tool      || '';
+        if (ppInputs[1]) ppInputs[1].value = s.supporting_tools || '';
+        if (ppInputs[2]) ppInputs[2].value = s.bts_look         || '';
+        if (ppInputs[3]) ppInputs[3].value = s.offer_doc_moment || '';
+        if (ppInputs[4]) ppInputs[4].value = s.imagined_action  || '';
+      }
+
+      // 07 — EASY-YES FUNNEL
+      if (state.section_07) {
+        const s = state.section_07;
+        const funnelSection = sections[6];
+        const coldSlots = funnelSection.querySelectorAll('.cold-slot:not(.cold-slot-full) textarea');
+        if (coldSlots[0]) coldSlots[0].value = s.short_form   || '';
+        if (coldSlots[1]) coldSlots[1].value = s.micro_magnet || '';
+        if (coldSlots[2]) coldSlots[2].value = s.lead_magnet  || '';
+        const seriesFields = funnelSection.querySelectorAll('.series-field textarea');
+        if (seriesFields[0]) seriesFields[0].value = s.rtfm         || '';
+        if (seriesFields[1]) seriesFields[1].value = s.more_to_give || '';
+        if (seriesFields[2]) seriesFields[2].value = s.mde_podcast  || '';
+      }
+
+      // 08 — KEY DATES
+      if (state.section_08 && Array.isArray(state.section_08)) {
+        const rows = document.querySelectorAll('.dates-row');
+        state.section_08.forEach((d, i) => {
+          if (!rows[i]) return;
+          const dateInput = rows[i].querySelector('input[type="date"]');
+          const ownerSelect = rows[i].querySelector('select');
+          const notesInput = rows[i].querySelector('input[type="text"]');
+          if (dateInput)   dateInput.value   = d.date  || '';
+          if (ownerSelect) ownerSelect.value = d.owner || '';
+          if (notesInput)  notesInput.value  = d.notes || '';
+        });
+      }
+
+      // UFS
+      if (state.ufs) {
+        const ufsTextareas = document.querySelectorAll('.ufs-card textarea');
+        if (ufsTextareas[0]) ufsTextareas[0].value = state.ufs.useful || '';
+        if (ufsTextareas[1]) ufsTextareas[1].value = state.ufs.fun    || '';
+        if (ufsTextareas[2]) ufsTextareas[2].value = state.ufs.sexy   || '';
+      }
+
+      return true;
+    } catch (err) {
+      console.error('restoreState failed:', err);
+      return false;
+    }
+  }
+
+  function clearAll() {
+    if (!confirm('Clear all fields? This cannot be undone.')) return;
+    // Clear every input/textarea/select
+    document.querySelectorAll('input[type="text"], input[type="date"], textarea, select').forEach(f => f.value = '');
+    // Rebuild default shifts
+    const container = document.getElementById('shifts-container');
+    container.innerHTML = '';
+    addShift(); addShift(); addShift();
+    updateChapterPanel();
+  }
+
+  // ---- COPY BRIEF TO CLIPBOARD ----
+  // Walks the entire Wrapper, assembles a structured brief Claude can use to
+  // generate hooks, invitations, emails, ad copy — anything keyed off this month.
+  function val(selector) {
+    const el = document.querySelector(selector);
+    if (!el) return '';
+    return (el.value || '').trim();
+  }
+
+  function showToast(msg, isError = false) {
+    let toast = document.getElementById('copy-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-toast';
+      toast.className = 'copy-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.className = 'copy-toast' + (isError ? ' toast-error' : ' toast-success');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+
+  function buildBrief() {
+    // ----- META -----
+    const metaFields = document.querySelectorAll('.meta .meta-field input');
+    const month       = metaFields[0]?.value.trim() || '[Month not set]';
+    const codename    = metaFields[1]?.value.trim() || '';
+    const partners    = metaFields[2]?.value.trim() || '';
+    const shipDate    = metaFields[3]?.value.trim() || '';
+
+    // ----- CHAPTER -----
+    const chapterSelect = document.getElementById('acdc-select');
+    const chapterVal = chapterSelect?.value || '';
+    const chapter = chapterVal ? CHAPTERS[chapterVal] : null;
+
+    // ----- SECTION 01 — BIG IDEA -----
+    // Order on page: chapter dropdown, then promise textarea, then who/why/whyNow
+    const sec01Textareas = document.querySelectorAll('#shifts-container');
+    // Grab the section by walking the DOM directly — safer than nth-of-type
+    const sections = document.querySelectorAll('.section');
+    const bigIdeaSection = sections[0];
+    const bigIdeaPromise = bigIdeaSection.querySelector('textarea')?.value.trim() || '';
+    const bigIdeaInputs = bigIdeaSection.querySelectorAll('input[type="text"]');
+    const whoFor      = bigIdeaInputs[0]?.value.trim() || '';
+    const whyMatters  = bigIdeaInputs[1]?.value.trim() || '';
+    const whyNow      = bigIdeaInputs[2]?.value.trim() || '';
+
+    // ----- SECTION 02 — SHIFTS -----
+    const shifts = Array.from(document.querySelectorAll('#shifts-container .shift-row')).map((row, i) => {
+      const old = row.querySelector('.shift-old')?.value.trim() || '';
+      const nw  = row.querySelector('.shift-new')?.value.trim() || '';
+      return (old || nw) ? `  ${i + 1}. OLD: ${old || '(blank)'}\n     NEW: ${nw || '(blank)'}` : null;
+    }).filter(Boolean).join('\n');
+
+    // ----- SECTION 03 — STRETCH GAP -----
+    const gapSection = sections[2];
+    const rBoxes = gapSection.querySelectorAll('.r-box textarea');
+    const reality   = rBoxes[0]?.value.trim() || '';
+    const results   = rBoxes[1]?.value.trim() || '';
+    const roadblocks = rBoxes[2]?.value.trim() || '';
+
+    const mmmBlocks = gapSection.querySelectorAll('.mmm-block');
+    // mmmBlocks[0] = Metrics, [1] = Models, [2] = Metaphors, [3] = Questions
+    const metrics   = Array.from(mmmBlocks[0].querySelectorAll('textarea')).map(t => t.value.trim()).filter(Boolean);
+    const models    = Array.from(mmmBlocks[1].querySelectorAll('textarea')).map(t => t.value.trim()).filter(Boolean);
+    const metaphors = Array.from(mmmBlocks[2].querySelectorAll('textarea')).map(t => t.value.trim()).filter(Boolean);
+    const questions = Array.from(mmmBlocks[3].querySelectorAll('input[type="text"]')).map(i => i.value.trim()).filter(Boolean);
+
+    // ----- SECTION 04 — PROOF -----
+    const proofSection = sections[3];
+    const proofInputs = proofSection.querySelectorAll('.hero-arc input[type="text"]');
+    const heroName    = proofInputs[0]?.value.trim() || '';
+    const heroJourney = proofInputs[1]?.value.trim() || '';
+    const objectionCrushed = proofInputs[2]?.value.trim() || '';
+
+    const arcTextareas = proofSection.querySelectorAll('.arc-step textarea');
+    const ordinary  = arcTextareas[0]?.value.trim() || '';
+    const conflict  = arcTextareas[1]?.value.trim() || '';
+    const bridge    = arcTextareas[2]?.value.trim() || '';
+    const breakthrough = arcTextareas[3]?.value.trim() || '';
+
+    const supportingTextareas = proofSection.querySelectorAll('.supporting-proof textarea');
+    const supporting2 = supportingTextareas[0]?.value.trim() || '';
+    const supporting3 = supportingTextareas[1]?.value.trim() || '';
+
+    // ----- SECTION 05 — OFFER WRAPPER -----
+    const offerSection = sections[4];
+    const offerInputs = offerSection.querySelectorAll('input[type="text"]');
+    const coreOffer  = offerInputs[0]?.value.trim() || '';
+    const reasonNow  = offerInputs[1]?.value.trim() || '';
+    const bonus1     = offerInputs[2]?.value.trim() || '';
+    const bonus2     = offerInputs[3]?.value.trim() || '';
+    const bonus3     = offerInputs[4]?.value.trim() || '';
+    const wrapping   = offerSection.querySelector('textarea')?.value.trim() || '';
+
+    // ----- SECTION 06 — PRODUCT PLACEMENT -----
+    const ppSection = sections[5];
+    const ppInputs = ppSection.querySelectorAll('input[type="text"]');
+    const bridgeTool      = ppInputs[0]?.value.trim() || '';
+    const supportingTools = ppInputs[1]?.value.trim() || '';
+    const btsLook         = ppInputs[2]?.value.trim() || '';
+    const offerDocMoment  = ppInputs[3]?.value.trim() || '';
+    const imaginedAction  = ppInputs[4]?.value.trim() || '';
+
+    // ----- SECTION 07 — EASY-YES FUNNEL (COLD ONLY, EDITABLE) -----
+    const funnelSection = sections[6];
+    const coldSlots = funnelSection.querySelectorAll('.cold-slot:not(.cold-slot-full) textarea');
+    const shortForm   = coldSlots[0]?.value.trim() || '';
+    const microMagnet = coldSlots[1]?.value.trim() || '';
+    const leadMagnet  = coldSlots[2]?.value.trim() || '';
+
+    const seriesFields = funnelSection.querySelectorAll('.series-field textarea');
+    const rtfm    = seriesFields[0]?.value.trim() || '';
+    const moreToGive = seriesFields[1]?.value.trim() || '';
+    const mdePod  = seriesFields[2]?.value.trim() || '';
+
+    // ----- SECTION 08 — KEY DATES -----
+    const datesRows = document.querySelectorAll('.dates-row');
+    const dateRows = Array.from(datesRows).map(row => {
+      const milestone = row.querySelector('.dates-milestone')?.textContent.trim().replace(/\s+/g, ' ') || '';
+      const date = row.querySelector('input[type="date"]')?.value.trim() || '';
+      const owner = row.querySelector('select')?.value.trim() || '';
+      const notes = row.querySelector('input[type="text"]')?.value.trim() || '';
+      if (!date && !owner && !notes) return null;
+      return `  • ${milestone}${date ? ` — ${date}` : ''}${owner ? ` · ${owner}` : ''}${notes ? ` · ${notes}` : ''}`;
+    }).filter(Boolean).join('\n');
+
+    // ----- USEFUL / FUN / SEXY GATE -----
+    const ufsTextareas = document.querySelectorAll('.ufs-card textarea');
+    const useful = ufsTextareas[0]?.value.trim() || '';
+    const fun    = ufsTextareas[1]?.value.trim() || '';
+    const sexy   = ufsTextareas[2]?.value.trim() || '';
+
+    // ----- ASSEMBLE THE BRIEF -----
+    const sect = (label) => `\n\n## ${label}\n`;
+    const bullet = (label, value) => value ? `\n**${label}:** ${value}` : '';
+
+    let brief = `# SLE MONTHLY CONTENT WRAPPER · BRIEF FOR AI\n`;
+    brief += `\n---\n## ⚠️ INSTRUCTIONS FOR THE AI — READ FIRST\n`;
+    brief += `\nYou have been handed the SLE Monthly Content Wrapper for ${month}. This is a strategic brief, NOT a request to do anything yet.\n`;
+    brief += `\n**DO NOT START GENERATING CONTENT.** Your first response must be to ask the user what they want to produce from this brief. Offer them concrete options like the ones below, then wait for their selection before doing anything.\n`;
+    brief += `\n**Suggested options to offer:**\n`;
+    brief += `  • **5 Hooks** — scroll-stoppers for short-form, ads, email subject lines (uses Hook Machine skill)\n`;
+    brief += `  • **4 Invitations / CTAs** — one per cold tier (micro magnet, lead magnet, long-form, workshop)\n`;
+    brief += `  • **AM Email Arc** — Clay's morning coffee emails building to the workshop or cohort\n`;
+    brief += `  • **Workshop Outline / Script** — Joe's 90-min workshop deck (or Clay's if applicable)\n`;
+    brief += `  • **Reels Scripts** — 4-6 short-form video scripts, each landing one Line In The Sand\n`;
+    brief += `  • **Podcast Episode Outline** — MDE Pod / RTFM / More to Give built on the hero's arc\n`;
+    brief += `  • **Meta Ad Creative Briefs** — angles per cold tier with hooks and CTAs\n`;
+    brief += `  • **Lead Magnet / Micro Magnet Copy** — sales page, opt-in page, PDF content\n`;
+    brief += `  • **Project Plan / Production Schedule** — actionable doc with owners, deadlines, dependencies for the month\n`;
+    brief += `  • **Sales Page / Cohort Apply Doc** — wrapper-paragraph swap for the standing offer doc\n`;
+    brief += `  • **Something Else** — ask the user what they need; you have the full brief below to work from\n`;
+    brief += `\n**When the user picks one:** pull from the SLE brand book, the relevant voice skill (Clay / Joseph), the Hook Machine (for any hook work), and the Story Bank (for proof and case studies). Always check the AC/DC chapter focus at the top of the brief and produce work in that territory.\n`;
+    brief += `\n---\n`;
+    brief += `\n*Use this brief to generate hooks, invitations, AM emails, ad creative, podcast outlines, workshop scripts — anything keyed off this month's wrapper. Always pull from SLE's brand book, the relevant voice skill (Clay / Joseph), and the Hook Machine when applicable.*\n`;
+
+    // META
+    brief += sect('Month At A Glance');
+    brief += `\n**Month:** ${month}`;
+    brief += bullet('Codename', codename);
+    brief += bullet('Partners in the room', partners);
+    brief += bullet('Wrapper ship date', shipDate);
+
+    if (chapter) {
+      brief += bullet('AC/DC Phase', chapter.phase);
+      brief += bullet('Chapter Anchor', chapter.title);
+      brief += bullet('Chapter Tagline', `"${chapter.tagline}"`);
+      brief += bullet('Chapter Focus', chapter.desc);
+    }
+
+    // SECTION 01
+    brief += sect('01 · The Big Idea');
+    brief += bullet('This Month\'s Promise', bigIdeaPromise);
+    brief += bullet('Who This Is For (Spark / Pro / Master / Elite)', whoFor);
+    brief += bullet('Why This Matters To Them', whyMatters);
+    brief += bullet('Why Now', whyNow);
+
+    // SECTION 02
+    if (shifts) {
+      brief += sect('02 · Lines In The Sand');
+      brief += `\n${shifts}`;
+    }
+
+    // SECTION 03
+    brief += sect('03 · Stretch The Gap');
+    brief += bullet('Reality (where they are)', reality);
+    brief += bullet('Results (where they want to be)', results);
+    brief += bullet('Roadblocks (what\'s in the way)', roadblocks);
+    if (metrics.length)   brief += `\n\n**Metrics:**\n${metrics.map(m => `  • ${m}`).join('\n')}`;
+    if (models.length)    brief += `\n\n**Models:**\n${models.map(m => `  • ${m}`).join('\n')}`;
+    if (metaphors.length) brief += `\n\n**Metaphors:**\n${metaphors.map(m => `  • ${m}`).join('\n')}`;
+    if (questions.length) {
+      brief += `\n\n**Gap-Stretch Questions:**`;
+      brief += `\n  ★ CENTRAL: ${questions[0]}`;
+      questions.slice(1).forEach((q, i) => brief += `\n  ${i + 2}. ${q}`);
+    }
+
+    // SECTION 04
+    brief += sect('04 · Proof · Hero\'s Journey');
+    brief += bullet('Hero', heroName);
+    brief += bullet('Service Level Journey', heroJourney);
+    brief += bullet('1. Ordinary World', ordinary);
+    brief += bullet('2. The Conflict', conflict);
+    brief += bullet('3. ⭐ The Bridge (the SLE tool that got them across)', bridge);
+    brief += bullet('4. The Breakthrough', breakthrough);
+    brief += bullet('Objection This Proof Crushes', objectionCrushed);
+    if (supporting2 || supporting3) {
+      brief += `\n\n**Supporting Proof:**`;
+      if (supporting2) brief += `\n  • ${supporting2}`;
+      if (supporting3) brief += `\n  • ${supporting3}`;
+    }
+
+    // SECTION 05
+    brief += sect('05 · The Offer Wrapper');
+    brief += bullet('Core Offer This Month', coreOffer);
+    brief += bullet('Reason To Act Now', reasonNow);
+    brief += bullet('The Wrapping (what\'s fresh this month)', wrapping);
+    const bonuses = [bonus1, bonus2, bonus3].filter(Boolean);
+    if (bonuses.length) brief += `\n\n**Bonus Stack:**\n${bonuses.map(b => `  • ${b}`).join('\n')}`;
+
+    // SECTION 06
+    brief += sect('06 · Product Placement');
+    brief += bullet('⭐ Bridge Tool To Feature (pulled from hero\'s arc)', bridgeTool);
+    brief += bullet('Supporting Tools / Assets', supportingTools);
+    brief += bullet('Behind-The-Scenes Look', btsLook);
+    brief += bullet('Moment To Drop The Offer Doc / Apply Link', offerDocMoment);
+    brief += bullet('Imagined-Action Plant', imaginedAction);
+
+    // SECTION 07
+    brief += sect('07 · Easy-Yes Funnel · Cold Tier (this month\'s content)');
+    brief += bullet('📱 Short-Form Content (Reels/Shorts/TikTok)', shortForm);
+    brief += bullet('⚡ Micro Magnet', microMagnet);
+    brief += bullet('📘 Lead Magnet', leadMagnet);
+    if (rtfm || moreToGive || mdePod) {
+      brief += `\n\n**🎬 Long-Form Series This Month:**`;
+      if (rtfm)       brief += `\n  • RTFM (Clay): ${rtfm}`;
+      if (moreToGive) brief += `\n  • More to Give (Joe): ${moreToGive}`;
+      if (mdePod)     brief += `\n  • MDE Podcast (Clay): ${mdePod}`;
+    }
+    brief += `\n\n**Warm step (static):** Million Dollar Electrician Plan (MDEP) on YouTube — every cold piece points here.`;
+    brief += `\n**Hot path (static):** Paid Workshop → Offer Doc → Scale Call → Cohort Application.`;
+
+    // SECTION 08
+    if (dateRows) {
+      brief += sect('08 · Key Deployment Dates');
+      brief += `\n${dateRows}`;
+    }
+
+    // USEFUL / FUN / SEXY
+    if (useful || fun || sexy) {
+      brief += sect('The Final Check · Useful / Fun / Sexy');
+      brief += bullet('🎀 Useful (what makes this genuinely valuable)', useful);
+      brief += bullet('💎 Fun (what makes this enjoyable to consume)', fun);
+      brief += bullet('🔥 Sexy (what makes this sell — installs belief, stretches the gap)', sexy);
+      brief += `\n\n*Every piece of content you generate must hit all three.*`;
+    }
+
+    // FINAL REMINDER
+    brief += sect('Reminder Before You Generate Anything');
+    brief += `
+**Stop. Re-read the instructions at the top of this brief.**
+
+Your job is to first ASK the user what they want produced from this brief, then wait. Do NOT generate hooks, emails, scripts, or anything else until they've told you what to make.
+
+When you do produce work:
+- HOOKS → pull from the Big Idea, Lines In The Sand, gap-stretch questions, and metrics/models/metaphors. Use the Hook Machine skill.
+- INVITATIONS / CTAs → one per Easy-Yes cold tier. Clay's voice for emails / AM content. Joe's voice for sales / workshop pitches.
+- CONTENT (reels, emails, podcasts, scripts) → pull the bridge tool from §06 and the hero's journey from §04. Every piece echoes the hero's struggle and features the SLE tool they used.
+- Always check the brand book before producing customer-facing deliverables. Match the AC/DC chapter focus.
+- Stretch the gap. Don't just teach — install belief. Invite at the end. Never pitch.
+- **Every output must be USEFUL, FUN, and SEXY.** Check the Final Check section above. If your draft doesn't hit all three, rewrite it.
+
+---
+*Generated from the SLE Monthly Content Wrapper. Property of Service Loop Electrical Inc.*
+`;
+
+    return brief.trim();
+  }
+
+  async function copyBriefToClipboard() {
+    try {
+      const brief = buildBrief();
+      await navigator.clipboard.writeText(brief);
+      showToast('✓ Brief copied. Paste into your AI of choice — it will ask what you want to produce.');
+    } catch (err) {
+      // Fallback for older browsers / non-HTTPS contexts
+      try {
+        const brief = buildBrief();
+        const textarea = document.createElement('textarea');
+        textarea.value = brief;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast('✓ Brief copied. Paste into your AI of choice — it will ask what you want to produce.');
+      } catch (err2) {
+        showToast('Copy failed. Try the Print button to save as PDF instead.', true);
+      }
+    }
+  }
+
+  function downloadMarkdown() {
+    try {
+      const state = snapshotState();
+
+      // Pull values for filename
+      const month    = (state.meta.month    || '').trim();
+      const codename = (state.meta.codename || '').trim();
+
+      // Chapter title for naming — use just the chapter name, not the full title
+      const chapterKey = state.section_01?.chapter || '';
+      const chapter = chapterKey && typeof CHAPTERS !== 'undefined' ? CHAPTERS[chapterKey] : null;
+      // chapter.title is like "Chapter 1 · Pricing Services" — strip prefix
+      let chapterName = '';
+      if (chapter && chapter.title) {
+        const parts = chapter.title.split('·');
+        chapterName = parts.length > 1 ? parts[1].trim() : chapter.title.trim();
+      }
+
+      // Filename format per Drive folder convention:
+      // YYYY-MM-DD - Month Name - Wrapper Chapter - Subject
+      const d = new Date();
+      const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      const parts = [dateStr];
+      parts.push(month    || 'Month Name');
+      parts.push(chapterName || 'Wrapper Chapter');
+      parts.push(codename || 'Subject');
+      const filename = parts.join(' - ') + '.md';
+
+      // Build the file content. JSON-only — the file is data, not a human document.
+      // Includes a one-line header comment for human glanceability when opened in an editor.
+      const header = `<!-- SLE Monthly Content Wrapper · Saved ${state.saved_at} · Open with the Wrapper tool to edit -->`;
+      const content = header + '\n\n```sle-wrapper-data\n' + JSON.stringify(state, null, 2) + '\n```\n';
+
+      const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+      const url  = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      showToast(`✓ Saved "${filename}" — drop it in the Drive folder`);
+    } catch (err) {
+      console.error(err);
+      showToast('Save failed. Try Copy Brief for AI instead.', true);
+    }
+  }
+
+  function loadMarkdownFile(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const text = e.target.result || '';
+
+        // Extract the JSON from the sle-wrapper-data code block
+        let json = null;
+        const codeBlockMatch = text.match(/```sle-wrapper-data\s*([\s\S]*?)```/);
+        if (codeBlockMatch) {
+          json = codeBlockMatch[1].trim();
+        } else {
+          // Fallback: try parsing the whole file as JSON (in case someone saved it differently)
+          json = text.trim();
+        }
+
+        const state = JSON.parse(json);
+
+        if (!state || !state.version) {
+          throw new Error('Not a valid Wrapper file');
+        }
+
+        const ok = restoreState(state);
+        if (ok) {
+          showToast(`✓ Loaded "${file.name}"`);
+        } else {
+          showToast('File loaded with some errors — check fields', true);
+        }
+      } catch (err) {
+        console.error('Load failed:', err);
+        showToast(`Couldn't read "${file.name}" — make sure it's a saved Wrapper file`, true);
+      }
+
+      // Reset the input so the same file can be loaded again later
+      event.target.value = '';
+    };
+    reader.onerror = () => {
+      showToast('Could not read file', true);
+      event.target.value = '';
+    };
+    reader.readAsText(file);
+  }
+</script>
+</body>
+</html>
