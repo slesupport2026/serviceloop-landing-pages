@@ -38,6 +38,14 @@
 /r/wb-circle-jul26      /webinar/?utm_source=circle&utm_medium=community&utm_campaign=webinar-jul26-joseph    302
 
 # ═══════════════════════════════════════════════════════════════
+# COHORT HUB — renamed cohort-hub → cohort-a-hub (Apr 2026)
+# ═══════════════════════════════════════════════════════════════
+
+# Preserve existing Cohort A member links after the rename
+/cohort-hub/*  /cohort-a-hub/:splat  301
+/cohort-hub    /cohort-a-hub/        301
+
+# ═══════════════════════════════════════════════════════════════
 # SPA FALLBACKS
 # ═══════════════════════════════════════════════════════════════
 
