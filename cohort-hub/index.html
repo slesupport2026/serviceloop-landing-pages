@@ -1696,113 +1696,58 @@
         <p style="margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--surface); border-left: 3px solid var(--gold); border-radius: 4px; font-size: 14px;"><strong style="color: var(--cream);">Bonus play — Paid Boost.</strong> Once your organic content is working, pour fuel on the posts that already have engagement. The easiest ad spend on Meta — you're not creating ads, you're amplifying what already earned attention. Unlocks after the 5 plays are running.</p>
       </div>
 
-      <!-- LEAD STACK CALCULATOR -->
-      <div id="lead-stack" style="margin-top: 4rem;">
+      <!-- LEADS-REQUIRED CALCULATOR -->
+      <div id="leads-required" style="margin-top: 4rem;">
         <div class="section-eyebrow">INTERACTIVE TOOL</div>
-        <h2 style="font-size: clamp(28px, 3.5vw, 38px);">The <span class="accent">Lead Stack</span> Multiplier</h2>
+        <h2 style="font-size: clamp(28px, 3.5vw, 38px);">How many <span class="accent">leads</span> do you need?</h2>
         <div class="section-rule"></div>
-        <p>Plug in what you do today. See what the WOM machine + organics push produces on top — and what it's worth vs. paid lead spend.</p>
+        <p>Three sliders. One answer. The number of monthly leads it takes to hit your revenue goal at your current ticket and close rate.</p>
 
         <div class="input-card">
-          <div class="input-group-label">YOUR BASELINE</div>
+          <div class="input-group-label">YOUR NUMBERS</div>
           <div class="slider-row">
             <div class="slider-head">
-              <span class="slider-label">Customers served per month</span>
-              <span class="slider-value" id="ls-customers-out">40</span>
+              <span class="slider-label">Monthly revenue goal</span>
+              <span class="slider-value" id="lr-goal-out">$50,000</span>
             </div>
-            <input type="range" id="ls-customers" min="5" max="200" step="1" value="40" />
+            <input type="range" id="lr-goal" min="10000" max="500000" step="2500" value="50000" />
           </div>
           <div class="slider-row">
             <div class="slider-head">
-              <span class="slider-label">What you currently pay per paid lead</span>
-              <span class="slider-value" id="ls-cpl-out">$80</span>
+              <span class="slider-label">Average closed ticket</span>
+              <span class="slider-value" id="lr-ticket-out">$1,500</span>
             </div>
-            <input type="range" id="ls-cpl" min="20" max="300" step="5" value="80" />
-          </div>
-        </div>
-
-        <div class="input-card">
-          <div class="input-group-label">THE 5 PLAYS — TURN EACH ONE UP</div>
-          <div class="slider-row">
-            <div class="slider-head">
-              <span class="slider-label bold">3 Rs activation rate</span>
-              <span class="slider-value live" id="ls-3r-out">30%</span>
-            </div>
-            <input type="range" id="ls-3r" min="0" max="100" step="5" value="30" />
-            <div class="slider-hint">% of served customers who Refer, Repeat, or leave a Review</div>
+            <input type="range" id="lr-ticket" min="200" max="10000" step="50" value="1500" />
           </div>
           <div class="slider-row">
             <div class="slider-head">
-              <span class="slider-label bold">Active Strategic Alliances</span>
-              <span class="slider-value live" id="ls-sa-out">2</span>
+              <span class="slider-label">Lead → sale close rate</span>
+              <span class="slider-value" id="lr-close-out">50%</span>
             </div>
-            <input type="range" id="ls-sa" min="0" max="15" step="1" value="2" />
-            <div class="slider-hint">Big SAs + Little SAs + Gang trades feeding work</div>
-          </div>
-          <div class="slider-row">
-            <div class="slider-head">
-              <span class="slider-label bold">Hyper Local Hero touches / month</span>
-              <span class="slider-value live" id="ls-hlh-out">10</span>
-            </div>
-            <input type="range" id="ls-hlh" min="0" max="100" step="5" value="10" />
-            <div class="slider-hint">Door knocks, neighborhood events, COI mentions</div>
-          </div>
-          <div class="slider-row">
-            <div class="slider-head">
-              <span class="slider-label bold">Social posts / week (Bear cadence)</span>
-              <span class="slider-value live" id="ls-social-out">3</span>
-            </div>
-            <input type="range" id="ls-social" min="0" max="14" step="1" value="3" />
-            <div class="slider-hint">Real stories, reality-TV-style behind-the-scenes content</div>
-          </div>
-          <div class="slider-row">
-            <div class="slider-head">
-              <span class="slider-label bold">24/7 availability</span>
-              <span class="slider-value live" id="ls-247-out">0%</span>
-            </div>
-            <input type="range" id="ls-247" min="0" max="100" step="10" value="0" />
-            <div class="slider-hint">% of after-hours calls actually answered</div>
+            <input type="range" id="lr-close" min="10" max="90" step="5" value="50" />
           </div>
         </div>
 
         <div class="stats-grid">
           <div class="stat">
-            <div class="stat-label">3 Rs LEADS / MO</div>
-            <div class="stat-value live" id="ls-3r-leads">12</div>
+            <div class="stat-label">SALES / MO</div>
+            <div class="stat-value live" id="lr-sales">34</div>
           </div>
           <div class="stat">
-            <div class="stat-label">SA LEADS / MO</div>
-            <div class="stat-value live" id="ls-sa-leads">3</div>
+            <div class="stat-label">LEADS / MO</div>
+            <div class="stat-value warm" id="lr-leads">68</div>
           </div>
           <div class="stat">
-            <div class="stat-label">HLH LEADS / MO</div>
-            <div class="stat-value live" id="ls-hlh-leads">1</div>
-          </div>
-        </div>
-        <div class="stats-grid" style="margin-top: 1rem;">
-          <div class="stat">
-            <div class="stat-label">SOCIAL LEADS / MO</div>
-            <div class="stat-value live" id="ls-social-leads">2</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">24/7 LEADS / MO</div>
-            <div class="stat-value live" id="ls-247-leads">0</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">TOTAL ORGANIC / MO</div>
-            <div class="stat-value warm" id="ls-total-leads">18</div>
+            <div class="stat-label">LEADS / BUSINESS DAY</div>
+            <div class="stat-value live" id="lr-daily">4</div>
           </div>
         </div>
 
         <div class="reveal-card">
-          <div class="reveal-eyebrow">WHAT YOU JUST BUILT</div>
-          <div class="reveal-text" id="ls-reveal">
-            Your WOM machine + organics push produces <span class="reveal-big" id="ls-reveal-leads">18</span> leads per month — equivalent to <span class="reveal-strong" id="ls-reveal-savings">$1,440</span> in saved ad spend, compounding every month you keep running it.
+          <div class="reveal-eyebrow">THE NUMBER</div>
+          <div class="reveal-text" id="lr-reveal">
+            To hit <span class="reveal-strong" id="lr-r-goal">$50,000/mo</span> at a <span class="reveal-strong" id="lr-r-ticket">$1,500</span> ticket and <span class="reveal-strong" id="lr-r-close">50%</span> close rate, you need <span class="reveal-big" id="lr-r-leads">68</span> leads per month — about <span class="reveal-strong" id="lr-r-daily">4</span> per business day.
           </div>
-        </div>
-
-        <div class="actions">
-          <button class="action-btn" onclick="resetLeadStack()">Reset to defaults</button>
         </div>
       </div>
 
@@ -2306,75 +2251,41 @@
     });
   }
 
-  // ===== WEEK 4 — LEAD STACK MULTIPLIER =====
-  const leadStackDefaults = {
-    'ls-customers': 40,
-    'ls-cpl': 80,
-    'ls-3r': 30,
-    'ls-sa': 2,
-    'ls-hlh': 10,
-    'ls-social': 3,
-    'ls-247': 0
-  };
-  const leadStackIds = Object.keys(leadStackDefaults);
-  const fmtLS = n => '$' + Math.round(n).toLocaleString();
+  // ===== WEEK 4 — LEADS REQUIRED =====
+  const fmtLR = n => '$' + Math.round(n).toLocaleString();
 
-  function updateLeadStack() {
+  function updateLeadsRequired() {
     const $ = id => document.getElementById(id);
-    if (!$('ls-customers')) return;
-    const customers = +$('ls-customers').value;
-    const cpl = +$('ls-cpl').value;
-    const r3 = +$('ls-3r').value;
-    const sa = +$('ls-sa').value;
-    const hlh = +$('ls-hlh').value;
-    const social = +$('ls-social').value;
-    const off247 = +$('ls-247').value;
+    if (!$('lr-goal')) return;
+    const goal = +$('lr-goal').value;
+    const ticket = +$('lr-ticket').value;
+    const closePct = +$('lr-close').value;
+    const closeRate = closePct / 100;
 
-    $('ls-customers-out').textContent = customers;
-    $('ls-cpl-out').textContent = fmtLS(cpl);
-    $('ls-3r-out').textContent = r3 + '%';
-    $('ls-sa-out').textContent = sa;
-    $('ls-hlh-out').textContent = hlh;
-    $('ls-social-out').textContent = social;
-    $('ls-247-out').textContent = off247 + '%';
+    $('lr-goal-out').textContent = fmtLR(goal);
+    $('lr-ticket-out').textContent = fmtLR(ticket);
+    $('lr-close-out').textContent = closePct + '%';
 
-    // Lead math (conservative, compounding monthly)
-    // 3 Rs: each activated customer yields ~1 future lead within 3 months (avg ~1/3 per month). Use customers x activation% x 1.0 for monthly contribution.
-    const r3Leads = Math.round(customers * (r3 / 100) * 1.0);
-    // SAs: each active alliance averages 1.5 leads/mo
-    const saLeads = Math.round(sa * 1.5);
-    // Hyper Local Hero: ~5% conversion on touches over the month
-    const hlhLeads = Math.round(hlh * 0.05);
-    // Social: posts × 4 weeks × 0.2 leads/post (Real Social Bear cadence is high engagement)
-    const socialLeads = Math.round(social * 4 * 0.2);
-    // 24/7: customers × 0.3 (assume 30% would-be off-hours callers) × answer rate
-    const off247Leads = Math.round(customers * 0.3 * (off247 / 100));
-    const total = r3Leads + saLeads + hlhLeads + socialLeads + off247Leads;
-    const savings = total * cpl;
+    const sales = Math.ceil(goal / ticket);
+    const leads = Math.ceil(sales / closeRate);
+    const daily = Math.ceil(leads / 22); // ~22 business days/month
 
-    $('ls-3r-leads').textContent = r3Leads;
-    $('ls-sa-leads').textContent = saLeads;
-    $('ls-hlh-leads').textContent = hlhLeads;
-    $('ls-social-leads').textContent = socialLeads;
-    $('ls-247-leads').textContent = off247Leads;
-    $('ls-total-leads').textContent = total;
-    $('ls-reveal-leads').textContent = total;
-    $('ls-reveal-savings').textContent = fmtLS(savings);
+    $('lr-sales').textContent = sales;
+    $('lr-leads').textContent = leads;
+    $('lr-daily').textContent = daily;
+
+    $('lr-r-goal').textContent = fmtLR(goal) + '/mo';
+    $('lr-r-ticket').textContent = fmtLR(ticket);
+    $('lr-r-close').textContent = closePct + '%';
+    $('lr-r-leads').textContent = leads;
+    $('lr-r-daily').textContent = daily;
   }
 
-  function resetLeadStack() {
-    Object.entries(leadStackDefaults).forEach(([id, val]) => {
-      const el = document.getElementById(id);
-      if (el) el.value = val;
-    });
-    updateLeadStack();
-  }
-
-  leadStackIds.forEach(id => {
+  ['lr-goal', 'lr-ticket', 'lr-close'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener('input', updateLeadStack);
+    if (el) el.addEventListener('input', updateLeadsRequired);
   });
-  updateLeadStack();
+  updateLeadsRequired();
 </script>
 
 </body>
