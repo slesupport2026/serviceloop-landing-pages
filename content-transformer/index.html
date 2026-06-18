@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save-Worthy Content Transformer | SLE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --navy: #1B2A45;
+      --charcoal: #1A1A1A;
+      --gold: #E3C575;
+      --bright-gold: #FDC33E;
+      --dark-gold: #A78227;
+      --white: #FFFFFF;
+      --bg-dark: #0D0D0D;
+      --bg-card: #161616;
+      --bg-input: #1E1E1E;
+      --border: #2A2A2A;
+      --border-gold: rgba(227,197,117,0.3);
+      --green: #2EAA5C;
+      --red: #D94452;
+      --text-muted: #888;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--white);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(227,197,117,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(227,197,117,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #0A0A0A 0%, #111820 100%);
+      border-bottom: 2px solid var(--gold);
+      padding: 28px 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-badge {
+      background: linear-gradient(135deg, var(--dark-gold), var(--gold));
+      color: var(--black);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .header-text h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+    .header-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* MAIN */
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 36px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* API KEY SECTION */
+    .api-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .api-section label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .api-section input {
+      flex: 1;
+      min-width: 200px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--white);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 13px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .api-section input:focus { border-color: var(--gold); }
+    .api-section .api-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      width: 100%;
+    }
+
+    /* CONTENT TYPE SELECTOR */
+    .content-type-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .type-btn {
+      flex: 1;
+      min-width: 140px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .type-btn:hover { border-color: var(--border-gold); color: var(--white); }
+    .type-btn.active {
+      background: linear-gradient(135deg, rgba(227,197,117,0.12), rgba(227,197,117,0.06));
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .type-btn .type-icon { font-size: 20px; display: block; margin-bottom: 6px; }
+
+    /* INPUT SECTION */
+    .input-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .input-card h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .input-card .subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+    textarea {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      padding: 16px;
+      resize: vertical;
+      min-height: 220px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    textarea:focus { border-color: var(--gold); }
+    textarea::placeholder { color: #444; }
+
+    /* CONTEXT FIELDS */
+    .context-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (max-width: 600px) { .context-row { grid-template-columns: 1fr; } }
+    .context-field label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .context-field input, .context-field select {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--white);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 13px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .context-field input:focus, .context-field select:focus { border-color: var(--gold); }
+    .context-field select option { background: var(--bg-card); }
+
+    /* GENERATE BUTTON */
+    .generate-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--dark-gold), var(--bright-gold));
+      border: none;
+      border-radius: 10px;
+      color: var(--black);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .generate-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(227,197,117,0.3); }
+    .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .generate-btn .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: #000;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* OUTPUT SECTION */
+    .output-section { display: none; }
+    .output-section.visible { display: block; }
+
+    .output-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .output-header h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--white);
+    }
+    .score-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .score-pill {
+      background: var(--green);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .score-pill.warn { background: #E3A020; }
+    .score-pill.fail { background: var(--red); }
+
+    /* BRIEF CARDS */
+    .brief-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .brief-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 24px;
+      position: relative;
+    }
+    .brief-card.highlight {
+      border-color: var(--border-gold);
+      background: linear-gradient(135deg, rgba(227,197,117,0.06), rgba(227,197,117,0.02));
+    }
+    .brief-card .card-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .brief-card .card-content {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #ddd;
+      white-space: pre-wrap;
+    }
+    .brief-card .copy-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .brief-card .copy-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .brief-card .copy-btn.copied { border-color: var(--green); color: var(--green); }
+
+    /* SAVE TEST SCORECARD */
+    .scorecard {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+    .scorecard h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .score-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .score-item:last-child { border-bottom: none; }
+    .score-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      margin-top: 1px;
+    }
+    .score-check.pass { background: var(--green); color: #fff; }
+    .score-check.fail { background: #2A1A1A; border: 1.5px solid var(--red); color: var(--red); }
+    .score-item-text { font-size: 13px; color: #ccc; line-height: 1.5; }
+    .score-item-text strong { color: var(--white); display: block; margin-bottom: 2px; }
+
+    /* CONTRAST TABLE */
+    .contrast-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    .contrast-table th {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .contrast-table th:first-child { color: var(--red); background: rgba(217,68,82,0.08); border-radius: 6px 0 0 0; }
+    .contrast-table th:last-child { color: var(--green); background: rgba(46,170,92,0.08); border-radius: 0 6px 0 0; }
+    .contrast-table td {
+      padding: 9px 14px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .contrast-table td:first-child { color: #aaa; background: rgba(217,68,82,0.03); }
+    .contrast-table td:last-child { color: #e8e8e8; background: rgba(46,170,92,0.04); font-weight: 600; }
+    .contrast-table tr:last-child td { border-bottom: none; }
+
+    /* REGENERATE */
+    .regen-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .regen-btn {
+      flex: 1;
+      min-width: 160px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-gold);
+      border-radius: 8px;
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .regen-btn:hover { background: rgba(227,197,117,0.1); }
+
+    /* ERROR */
+    .error-msg {
+      background: rgba(217,68,82,0.1);
+      border: 1px solid rgba(217,68,82,0.3);
+      border-radius: 8px;
+      color: #ff8a8a;
+      font-size: 13px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .error-msg.visible { display: block; }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 32px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .footer span { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">SLE Content Lab</div>
+    <div class="header-text">
+      <h1>Save-Worthy Content Transformer</h1>
+      <p>Paste a lesson, class transcript, or idea — get a ready-to-film MoFu content brief</p>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- API KEY -->
+  <div class="api-section">
+    <label>Anthropic API Key</label>
+    <input type="password" id="apiKey" placeholder="sk-ant-..." autocomplete="off" />
+    <p class="api-note">Your key is never stored or sent anywhere except directly to Anthropic's API. Paste once per session.</p>
+  </div>
+
+  <!-- CONTENT TYPE -->
+  <div class="content-type-row">
+    <button class="type-btn active" data-type="lesson" onclick="selectType(this)">
+      <span class="type-icon">📋</span>Lesson / Class Transcript
+    </button>
+    <button class="type-btn" data-type="idea" onclick="selectType(this)">
+      <span class="type-icon">💡</span>Raw Idea / Talking Points
+    </button>
+    <button class="type-btn" data-type="podcast" onclick="selectType(this)">
+      <span class="type-icon">🎙️</span>Podcast / Interview Clip
+    </button>
+    <button class="type-btn" data-type="framework" onclick="selectType(this)">
+      <span class="type-icon">⚡</span>Framework / System
+    </button>
+  </div>
+
+  <!-- INPUT -->
+  <div class="input-card">
+    <h2>Paste Your Content</h2>
+    <p class="subtitle" id="inputSubtitle">Paste a Night School lesson, class notes, or transcript. The tool will extract the most save-worthy insight and build a complete content brief around it.</p>
+    <textarea id="transcript" placeholder="Paste your lesson transcript, class notes, talking points, or raw idea here...
+
+Example: &quot;Tonight we covered the Golden Handcuffs concept — the idea that everything your apprenticeship taught you to be a great employee is the exact opposite of what you need to run a profitable service business. Work fast vs. serve slow. Charge hourly vs. build packages. Fear sales vs. helpful sales...&quot;"></textarea>
+    <div class="context-row">
+      <div class="context-field">
+        <label>Target Audience Specificity</label>
+        <select id="audience">
+          <option value="owner">Electrical Business Owners</option>
+          <option value="aspiring">Aspiring Owners / Senior Techs</option>
+          <option value="broad">All Electricians (ToFu blend)</option>
+        </select>
+      </div>
+      <div class="context-field">
+        <label>Funnel Goal</label>
+        <select id="funnelGoal">
+          <option value="save">Maximize Saves (Pure Nurture)</option>
+          <option value="workshop">Drive Workshop Registration</option>
+          <option value="nightschool">Night School Hands-Up</option>
+          <option value="follow">Grow Followers (ToFu blend)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERATE -->
+  <button class="generate-btn" id="generateBtn" onclick="generate()">
+    ⚡ Transform to Save-Worthy Content Brief
+  </button>
+
+  <!-- ERROR -->
+  <div class="error-msg" id="errorMsg"></div>
+
+  <!-- OUTPUT -->
+  <div class="output-section" id="outputSection">
+
+    <div class="output-header">
+      <h2>Your Content Brief</h2>
+      <div class="score-badge">
+        <div class="score-pill" id="scorePill">Scoring...</div>
+      </div>
+    </div>
+
+    <!-- SAVE TEST SCORECARD -->
+    <div class="scorecard">
+      <h3>Save-Worthy Test Results</h3>
+      <div id="scorecardItems"></div>
+    </div>
+
+    <!-- HOOK -->
+    <div class="brief-grid">
+      <div class="brief-card highlight">
+        <div class="card-label">🎣 Opening Hook (First 5 Seconds)</div>
+        <button class="copy-btn" onclick="copyCard(this)">Copy</button>
+        <div class="card-content" id="hookContent"></div>
+      </div>
+
+      <!-- CONTRAST TABLE -->
+      <div class="brief-card">
+        <div class="card-label">⚡ The Contrast Framework (Golden Handcuffs Format)</div>
+        <button class="copy-btn" onclick="copyCard(this)">Copy</button>
+        <div id="contrastTableContainer"></div>
+      </div>
+
+      <!-- SCRIPT -->
+      <div class="brief-card">
+        <div class="card-label">🎬 Full Reel Script (60–90 sec)</div>
+        <button class="copy-btn" onclick="copyCard(this)">Copy</button>
+        <div class="card-content" id="scriptContent"></div>
+      </div>
+
+      <!-- CAPTION -->
+      <div class="brief-card highlight">
+        <div class="card-label">📝 Caption (4-Step Structure)</div>
+        <button class="copy-btn" onclick="copyCard(this)">Copy</button>
+        <div class="card-content" id="captionContent"></div>
+      </div>
+
+      <!-- PRODUCTION NOTES -->
+      <div class="brief-card">
+        <div class="card-label">🎥 Production Notes</div>
+        <div class="card-content" id="productionContent"></div>
+      </div>
+    </div>
+
+    <!-- REGENERATE -->
+    <div class="regen-row">
+      <button class="regen-btn" onclick="regenerateSection('hook')">↺ New Hook</button>
+      <button class="regen-btn" onclick="regenerateSection('caption')">↺ New Caption</button>
+      <button class="regen-btn" onclick="generate()">↺ Full Regenerate</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <span>Service Loop Electrical</span> · Save-Worthy Content Lab · Middle of Funnel Tool
+</div>
+
+<script>
+let currentType = 'lesson';
+let lastTranscript = '';
+let lastOutput = null;
+
+function selectType(btn) {
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentType = btn.dataset.type;
+  const subtitles = {
+    lesson: 'Paste a Night School lesson, class notes, or transcript. The tool will extract the most save-worthy insight and build a complete content brief around it.',
+    idea: 'Describe your raw idea or talking points in plain language. The tool will shape it into a structured, save-worthy piece.',
+    podcast: 'Paste a clip or summary from a podcast or interview. The tool will find the most resonant moment and build a reel brief around it.',
+    framework: 'Describe a system, process, or framework you teach. The tool will turn it into a contrast-format content brief.'
+  };
+  document.getElementById('inputSubtitle').textContent = subtitles[currentType];
+}
+
+function buildPrompt(transcript, type, audience, funnelGoal) {
+  const audienceMap = {
+    owner: 'electrical service business owners who are trying to scale beyond the truck — they have 1–10 employees, are struggling with pricing, hiring, or getting off the tools',
+    aspiring: 'senior electricians or journeymen who are thinking about starting their own business but haven\'t taken the leap yet',
+    broad: 'all electricians — employees and owners alike — with a slight lean toward those who want more from their career'
+  };
+  const goalMap = {
+    save: 'maximize saves — this is pure middle-of-funnel nurture content. The goal is to give the viewer a tool or framework they will save and come back to.',
+    workshop: 'drive workshop registrations — end with a hands-up CTA asking people to comment if they want the workshop invite',
+    nightschool: 'generate Night School interest — end with a hands-up CTA asking people to comment ⚡ if they want details on Night School',
+    follow: 'grow followers and build brand awareness while still delivering real value — blend hook energy with nurture substance'
+  };
+
+  return `You are a content strategist for Service Loop Electrical (SLE) and the Million Dollar Electrician brand. Your job is to transform raw lesson content into save-worthy Instagram/Facebook Reel briefs for electrical business owners.
+
+THE BRAND VOICE:
+- Direct, no-fluff, trade-authentic. Speaks like a contractor, not a coach.
+- Never uses "coachy" language like "unlock your potential" or "level up your mindset"
+- The emotional truth: electricians are great at the craft but were never taught how to run a business. That gap is the wound. SLE is the answer.
+- The transformation: Tradesman → Trusted Professional
+
+THE SAVE-WORTHY FRAMEWORK:
+Content earns a save when it hits 3+ of these 5 criteria:
+1. Contains a specific, repeatable framework or number (reference value)
+2. Names a pain owners feel but rarely hear articulated (identity resonance)
+3. Could be sent to a business partner or key employee right now (private share trigger)
+4. Relevant to a decision they're likely facing in the next 6 months (future-use value)
+5. Makes them feel smarter or more capable after watching (competence signal)
+
+THE GOLDEN HANDCUFFS FORMAT (proven template — 60 saves, 81 follows on one post):
+- Hook: Name the trap
+- Left column (The Broke Way): What trade school / apprenticeship taught them
+- Right column (The Professional Way): What business actually requires
+- CTA: Explicit save instruction + optional hands-up trigger
+
+INPUT CONTENT TYPE: ${type}
+TARGET AUDIENCE: ${audienceMap[audience]}
+FUNNEL GOAL: ${goalMap[funnelGoal]}
+
+CONTENT TO TRANSFORM:
+---
+${transcript}
+---
+
+OUTPUT FORMAT (respond in valid JSON only, no markdown, no explanation outside the JSON):
+{
+  "saveTest": {
+    "score": <number 1-5>,
+    "criteria": [
+      {"label": "Specific framework or number", "pass": <true/false>, "note": "<brief explanation>"},
+      {"label": "Names an unspoken owner pain", "pass": <true/false>, "note": "<brief explanation>"},
+      {"label": "Private share trigger", "pass": <true/false>, "note": "<brief explanation>"},
+      {"label": "Future-use value", "pass": <true/false>, "note": "<brief explanation>"},
+      {"label": "Competence signal", "pass": <true/false>, "note": "<brief explanation>"}
+    ]
+  },
+  "title": "<punchy content title, 4-7 words>",
+  "hook": "<opening line for first 5 seconds — direct, punchy, names the trap or the pain. No fluff.>",
+  "contrast": {
+    "leftHeader": "<The Broke Way label>",
+    "rightHeader": "<The Professional Way label>",
+    "rows": [
+      {"left": "<broke way item>", "right": "<professional way item>"},
+      {"left": "<broke way item>", "right": "<professional way item>"},
+      {"left": "<broke way item>", "right": "<professional way item>"},
+      {"left": "<broke way item>", "right": "<professional way item>"},
+      {"left": "<broke way item>", "right": "<professional way item>"},
+      {"left": "<broke way item>", "right": "<professional way item>"}
+    ],
+    "bottomLine": "<The transformation statement at the bottom, e.g. Tradesman → Trusted Professional>"
+  },
+  "script": "<Full 60-90 second reel script with [CAMERA: face] and [CAMERA: notepad] stage directions. Conversational, trade-authentic voice. No fluff. Ends with explicit save instruction.>",
+  "caption": "<Full Instagram caption using the 4-step structure: 1) Empathy Punch, 2) Contrast statement, 3) Explicit save instruction, 4) Hands-up trigger if applicable. 150-250 words.>",
+  "productionNotes": "<3-5 bullet points on how to film this: setting, props, camera angles, pacing, any specific visual moments to capture>"
+}`;
+}
+
+async function generate() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  const transcript = document.getElementById('transcript').value.trim();
+  const audience = document.getElementById('audience').value;
+  const funnelGoal = document.getElementById('funnelGoal').value;
+
+  if (!apiKey) { showError('Please enter your Anthropic API key above.'); return; }
+  if (transcript.length < 50) { showError('Please paste more content — at least a few sentences to work with.'); return; }
+
+  lastTranscript = transcript;
+  hideError();
+  setLoading(true);
+  document.getElementById('outputSection').classList.remove('visible');
+
+  const prompt = buildPrompt(transcript, currentType, audience, funnelGoal);
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-opus-4-5',
+        max_tokens: 3000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.error?.message || `API error ${response.status}`);
+    }
+
+    const data = await response.json();
+    const rawText = data.content[0].text.trim();
+
+    // Parse JSON — strip any markdown fences if present
+    let jsonStr = rawText;
+    if (jsonStr.startsWith('```')) {
+      jsonStr = jsonStr.replace(/^```[a-z]*\n?/, '').replace(/\n?```$/, '');
+    }
+    const result = JSON.parse(jsonStr);
+    lastOutput = result;
+    renderOutput(result);
+
+  } catch (err) {
+    showError('Error: ' + err.message + '. Check your API key and try again.');
+  } finally {
+    setLoading(false);
+  }
+}
+
+function renderOutput(result) {
+  // Score pill
+  const score = result.saveTest.score;
+  const pill = document.getElementById('scorePill');
+  pill.textContent = `Save Score: ${score}/5`;
+  pill.className = 'score-pill' + (score >= 4 ? '' : score === 3 ? ' warn' : ' fail');
+
+  // Scorecard
+  const items = result.saveTest.criteria.map(c => `
+    <div class="score-item">
+      <div class="score-check ${c.pass ? 'pass' : 'fail'}">${c.pass ? '✓' : '✗'}</div>
+      <div class="score-item-text">
+        <strong>${c.label}</strong>
+        ${c.note}
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('scorecardItems').innerHTML = items;
+
+  // Hook
+  document.getElementById('hookContent').textContent = result.hook;
+
+  // Contrast table
+  const rows = result.contrast.rows.map(r =>
+    `<tr><td>${r.left}</td><td>${r.right}</td></tr>`
+  ).join('');
+  document.getElementById('contrastTableContainer').innerHTML = `
+    <table class="contrast-table">
+      <thead><tr>
+        <th>${result.contrast.leftHeader}</th>
+        <th>${result.contrast.rightHeader}</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div style="text-align:center; margin-top:12px; font-family:'Montserrat',sans-serif; font-weight:800; font-size:13px; color:var(--gold);">${result.contrast.bottomLine}</div>
+  `;
+
+  // Script
+  document.getElementById('scriptContent').textContent = result.script;
+
+  // Caption
+  document.getElementById('captionContent').textContent = result.caption;
+
+  // Production notes
+  document.getElementById('productionContent').textContent = result.productionNotes;
+
+  // Show output
+  document.getElementById('outputSection').classList.add('visible');
+  document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function regenerateSection(section) {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  if (!apiKey || !lastTranscript) return;
+  if (!lastOutput) { generate(); return; }
+
+  const sectionPrompts = {
+    hook: `Based on this content, write 3 alternative opening hooks (first 5 seconds) for an Instagram Reel targeting electrical business owners. Each should be punchy, direct, and name a specific pain or trap. No fluff. Format as a numbered list.\n\nContent: ${lastTranscript}`,
+    caption: `Write 2 alternative Instagram captions for this content brief. Use the 4-step structure: 1) Empathy Punch, 2) Contrast statement, 3) Explicit save instruction, 4) Hands-up trigger. Trade-authentic voice, no coaching language. 150-200 words each.\n\nOriginal hook: ${lastOutput.hook}\nContent: ${lastTranscript}`
+  };
+
+  setLoading(true);
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-opus-4-5',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: sectionPrompts[section] }]
+      })
+    });
+    const data = await response.json();
+    const text = data.content[0].text;
+
+    if (section === 'hook') {
+      document.getElementById('hookContent').textContent = text;
+    } else if (section === 'caption') {
+      document.getElementById('captionContent').textContent = text;
+    }
+  } catch (err) {
+    showError('Regeneration failed: ' + err.message);
+  } finally {
+    setLoading(false);
+  }
+}
+
+function copyCard(btn) {
+  const content = btn.nextElementSibling;
+  const text = content.innerText || content.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function setLoading(loading) {
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = loading;
+  btn.innerHTML = loading
+    ? '<span class="spinner"></span>Transforming Content...'
+    : '⚡ Transform to Save-Worthy Content Brief';
+}
+
+function showError(msg) {
+  const el = document.getElementById('errorMsg');
+  el.textContent = msg;
+  el.classList.add('visible');
+}
+function hideError() {
+  document.getElementById('errorMsg').classList.remove('visible');
+}
+</script>
+</body>
+</html>
