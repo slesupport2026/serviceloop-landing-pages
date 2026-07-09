@@ -395,6 +395,11 @@
     .rates,.rates.three,.rates.trio{grid-template-columns:1fr;}
     .rung{flex-wrap:wrap;}
   }
+  /* ---------- SUB-CHAPTER NAV ---------- */
+  .toc{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:0 0 12px;padding:0;}
+  .toc a{font-family:var(--font-fun);font-weight:600;font-size:12px;color:#8a7a5e;background:var(--paper);border:1.5px solid #ECE0C2;border-radius:999px;padding:4px 11px;text-decoration:none;white-space:nowrap;transition:background .1s,color .1s;}
+  .toc a:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+
   /* ---------- TABS ---------- */
   .tabbar{
     position:sticky;top:0;z-index:20;
@@ -5183,12 +5188,49 @@
   el('resetBtn').addEventListener('click',()=>{ state={...DEFAULTS}; state.status=freshStatus(); state.mdp=freshMdp(); state.tracker=[]; render(true); renderTracker(); renderLsa(); renderOfferCalc(); });
 
   /* ============ TABS ============ */
+  function buildToc(tabEl){
+    // remove any existing toc in this tab
+    var old = tabEl.querySelector('.toc');
+    if(old) old.remove();
+    var sections = tabEl.querySelectorAll('.sectitle');
+    if(sections.length < 2) return; // no point for 1 section
+    var toc = document.createElement('div');
+    toc.className = 'toc';
+    sections.forEach(function(s, i){
+      // ensure section has an id for anchor
+      if(!s.id) s.id = 'sec-' + tabEl.id + '-' + i;
+      var a = document.createElement('a');
+      a.href = '#' + s.id;
+      // extract just the text (skip info bubbles)
+      var numEl = s.querySelector('.num');
+      var num = numEl ? numEl.textContent : '';
+      var text = s.textContent.replace(/\s+/g,' ').trim();
+      // clean up — remove the bubble text if any leaked in
+      if(text.length > 60) text = text.substring(0, 60) + '…';
+      a.textContent = num ? num + '. ' + text.replace(num,'').trim().split('  ')[0] : text.split('  ')[0];
+      // keep it short
+      if(a.textContent.length > 35) a.textContent = a.textContent.substring(0, 35) + '…';
+      toc.appendChild(a);
+    });
+    // insert after subhead or at top of tab
+    var subhead = tabEl.querySelector('.subhead');
+    var jumpBtn = tabEl.querySelector('.toc + div, [href*="Jump"]');
+    if(subhead && subhead.nextElementSibling){
+      subhead.parentNode.insertBefore(toc, subhead.nextElementSibling);
+    } else {
+      tabEl.insertBefore(toc, tabEl.firstChild);
+    }
+  }
+
   function switchTab(name){
     document.querySelectorAll('.tabpanel').forEach(p => p.hidden = (p.id !== 'tab-'+name));
     document.querySelectorAll('.tabbtn').forEach(b => b.classList.toggle('active', b.dataset.tab===name));
     if(name === 'goal') refreshGoal();
     if(name === 'offer'){ renderOfferCalc(); if(!state.styoSsr){ state.styoSsr = Math.round(computed.ssr || 281); } renderStyo(); }
     if(name === 'plan'){ renderMdpDots(); updateAbScore(); }
+    // build sub-chapter navigation
+    var tabEl = document.getElementById('tab-'+name);
+    if(tabEl) buildToc(tabEl);
     window.scrollTo({ top:0, behavior:'smooth' });
   }
   document.querySelectorAll('.tabbtn').forEach(b => b.addEventListener('click', ()=>switchTab(b.dataset.tab)));
