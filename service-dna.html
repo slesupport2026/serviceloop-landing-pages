@@ -1160,13 +1160,8 @@
           </select>
         </div>
 
-        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-          <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:220px;">My biggest sale/ticket to date</label>
-          <span style="font-weight:700;color:var(--gold-deep);">$</span>
-          <input class="styo-text" id="blBigTicket" placeholder="0" inputmode="numeric" style="width:140px;" />
-        </div>
       </div>
-      <div style="margin-top:14px;"><button class="reset" onclick="['blRevenue','blNetProfit','blHourlyRate','blBigTicket'].forEach(id=>document.getElementById(id).value='');document.getElementById('blRevPeriod').value='monthly';document.getElementById('blCharging').value='';">Reset Baseline</button></div>
+      <div style="margin-top:14px;"><button class="reset" onclick="['blRevenue','blNetProfit','blHourlyRate'].forEach(id=>document.getElementById(id).value='');document.getElementById('blRevPeriod').value='monthly';document.getElementById('blCharging').value='';">Reset Baseline</button></div>
     </div>
 
     <!-- ===== SECTION 3: BRANDSTAND BASELINE ===== -->
@@ -1199,13 +1194,35 @@
 
         <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
           <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:260px;">Who answers the phones?</label>
-          <select class="styo-text" id="blPhones" style="width:100%;max-width:320px;">
+          <select class="styo-text" id="blPhones" style="width:100%;max-width:420px;">
             <option value="">— Select —</option>
-            <option value="me">Me</option>
-            <option value="csr">A CSR</option>
-            <option value="both">Me sometimes, them sometimes</option>
-            <option value="tech">My technician</option>
+            <option>Me, following a consistent process and script</option>
+            <option>Me, no consistent process</option>
+            <option>A CSR, following a consistent process and script</option>
+            <option>A CSR, no consistent process</option>
+            <option>My partner, following a consistent process and script</option>
+            <option>My partner, no consistent process</option>
+            <option>An answering service</option>
+            <option>An AI answering service</option>
           </select>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label style="font-family:var(--font-fun);font-weight:600;font-size:14px;color:var(--ink);">What percentage of calls get answered on the first attempt?</label>
+          <div style="font-size:11px;font-weight:600;color:#8a7a5e;margin:2px 0 6px;">Be honest — when they call, how often do we actually pick up?</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <input type="range" min="0" max="100" step="5" value="100" style="flex:1;" oninput="this.nextElementSibling.textContent=this.value+'%'">
+            <span style="font-family:var(--font-fun);font-weight:600;font-size:18px;color:var(--ink);min-width:50px;">100%</span>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label style="font-family:var(--font-fun);font-weight:600;font-size:14px;color:var(--ink);">Call booking rate</label>
+          <div style="font-size:11px;font-weight:600;color:#8a7a5e;margin:2px 0 6px;">Out of all calls answered, how many actually lead to booked appointments?</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <input type="range" min="0" max="100" step="5" value="35" style="flex:1;" oninput="this.nextElementSibling.textContent=this.value+'%'">
+            <span style="font-family:var(--font-fun);font-weight:600;font-size:18px;color:var(--ink);min-width:50px;">35%</span>
+          </div>
         </div>
       </div>
       <div style="margin-top:14px;"><button class="reset" onclick="['blLeadsWeek','blLeadSources','blMktBudget','blMktHours'].forEach(id=>document.getElementById(id).value='');document.getElementById('blPhones').value='';">Reset Baseline</button></div>
@@ -1218,39 +1235,47 @@
 
         <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
           <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:260px;">Do I have financing?</label>
-          <select class="styo-text" id="blFinancing" style="width:120px;" onchange="document.getElementById('blFinProviderWrap').style.display=this.value==='yes'?'flex':'none';">
+          <select class="styo-text" id="blFinancing" style="width:100%;max-width:360px;">
             <option value="">— Select —</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option>Yes, and we use it often</option>
+            <option>Yes, but we don't use it much or at all</option>
+            <option>No</option>
           </select>
-          <span id="blFinProviderWrap" style="display:none;align-items:center;gap:6px;">
-            <span style="font-weight:600;font-size:13px;color:#8a7a5e;">Provider:</span>
-            <input class="styo-text" id="blFinProvider" placeholder="e.g. GreenSky, Wisetack" style="width:180px;" />
-          </span>
         </div>
 
         <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
           <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:260px;">Do we collect deposits?</label>
-          <select class="styo-text" id="blDeposits" style="width:120px;" onchange="document.getElementById('blDepPctWrap').style.display=this.value==='yes'?'flex':'none';">
+          <select class="styo-text" id="blDeposits" style="width:100%;max-width:360px;">
             <option value="">— Select —</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option>Yes, up to a third up front</option>
+            <option>Yes, 50% or more up front</option>
+            <option>No</option>
           </select>
-          <span id="blDepPctWrap" style="display:none;align-items:center;gap:6px;">
-            <input class="styo-text" id="blDepPct" placeholder="%" inputmode="numeric" style="width:70px;" />
-            <span style="font-weight:600;font-size:13px;color:#8a7a5e;">%</span>
-          </span>
         </div>
 
-        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-          <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:260px;">Do we charge for calls?</label>
-          <select class="styo-text" id="blCallCharge" style="width:100%;max-width:360px;">
-            <option value="">— Select —</option>
-            <option value="all">Yes, all call types</option>
-            <option value="diag">Only diagnostic/troubleshooting</option>
-            <option value="callout">Call-out fee on troubleshooting</option>
-            <option value="free">Free estimates</option>
-          </select>
+        <div style="margin-top:12px;">
+          <label style="font-family:var(--font-fun);font-weight:600;font-size:14px;color:var(--ink);">Do we charge for call-outs? (to send an electrician to the home)</label>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;">
+              <input type="checkbox" style="width:18px;height:18px;accent-color:var(--gold);"> On-demand / troubleshooting calls
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;">
+              <input type="checkbox" style="width:18px;height:18px;accent-color:var(--gold);"> Estimates / quotes for larger service opportunities
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;">
+              <input type="checkbox" style="width:18px;height:18px;accent-color:var(--gold);"> Free estimates and free troubleshooting (no fees)
+            </label>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;">
+            <div>
+              <label style="font-size:11px;font-weight:700;color:#8a7a5e;">Demand call fee ($)</label>
+              <input class="styo-text" id="blDemandFee" placeholder="$0" style="width:80px;margin-top:2px;" inputmode="numeric">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:700;color:#8a7a5e;">Opportunity call fee ($)</label>
+              <input class="styo-text" id="blOpptyFee" placeholder="$0" style="width:80px;margin-top:2px;" inputmode="numeric">
+            </div>
+          </div>
         </div>
 
         <div>
@@ -1282,7 +1307,7 @@
           </select>
         </div>
       </div>
-      <div style="margin-top:14px;"><button class="reset" onclick="['blFinancing','blDeposits','blCallCharge','blMembership'].forEach(id=>document.getElementById(id).value='');document.getElementById('blFinProvider').value='';document.getElementById('blDepPct').value='';document.getElementById('blFinProviderWrap').style.display='none';document.getElementById('blDepPctWrap').style.display='none';document.querySelectorAll('.bl-guar').forEach(c=>c.checked=false);document.getElementById('blOptions').value=3;document.getElementById('blOptionsVal').textContent='3';">Reset Baseline</button></div>
+      <div style="margin-top:14px;"><button class="reset" onclick="['blFinancing','blDeposits','blMembership'].forEach(id=>document.getElementById(id).value='');['blDemandFee','blOpptyFee'].forEach(id=>document.getElementById(id).value='');document.querySelectorAll('.bl-guar').forEach(c=>c.checked=false);document.getElementById('blOptions').value=3;document.getElementById('blOptionsVal').textContent='3';">Reset Baseline</button></div>
     </div>
 
     <!-- ===== SECTION 5: CLOSE LOOP BASELINE ===== -->
@@ -1294,19 +1319,19 @@
           <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:260px;">Sales style</label>
           <select class="styo-text" id="blSalesStyle" style="width:100%;max-width:420px;">
             <option value="">— Select —</option>
-            <option value="fixit">Mr. Fix It (fix what's asked)</option>
-            <option value="service">Mr. Service (educate, give choice, no pressure)</option>
-            <option value="salesy">Mr. Salesy (push hard)</option>
+            <option>Mr. Service — I educate and give choice, no pressure</option>
+            <option>Mr. Salesy — I push hard for things I want to sell</option>
+            <option>Mr. Fix It — I fix only what they called for and get out quick</option>
           </select>
         </div>
 
         <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-          <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:260px;">Consistent sales process?</label>
-          <select class="styo-text" id="blSalesProcess" style="width:100%;max-width:360px;">
+          <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:260px;">Do you have a sales process?</label>
+          <select class="styo-text" id="blSalesProcess" style="width:100%;max-width:420px;">
             <option value="">— Select —</option>
-            <option value="no">No</option>
-            <option value="sometimes">Yes but not consistently</option>
-            <option value="yes">Yes and I rock it every time</option>
+            <option>No</option>
+            <option>Yes</option>
+            <option>Yes, a consistent sales process I follow every time</option>
           </select>
         </div>
 
@@ -1356,17 +1381,70 @@
     <!-- ===== SECTION 6: VISION ===== -->
     <div class="sectitle"><span class="num">6</span> Vision</div>
     <div class="panel">
-      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-        <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:260px;">Where do you want this to go?</label>
-        <select class="styo-text" id="blVision" style="width:100%;max-width:320px;">
-          <option value="">— Select —</option>
-          <option value="legacy">Legacy</option>
-          <option value="exit">Sale / exit</option>
-          <option value="forever">Keep it forever</option>
-          <option value="unsure">Not sure yet</option>
-        </select>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+
+        <div class="capline" style="text-align:left;margin:0 0 10px;border-style:solid;">
+          You wake up. It's five years later, on your best day — maybe your birthday. You decide what this day looks like. Do you have to go to the shop? Is there a shop? Do you need to manage, dispatch, sell, install, ride along, get materials? What is it that you do?
+          <span class="info" tabindex="0">i<span class="bubble">This isn't about being "realistic." It's about being honest with yourself on where you actually want to end up — so we can build backward from there.</span></span>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+          <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);min-width:260px;">Where do you want this to go?</label>
+          <select class="styo-text" id="blVision" style="width:100%;max-width:320px;">
+            <option value="">— Select —</option>
+            <option value="legacy">Legacy</option>
+            <option value="exit">Sale / exit</option>
+            <option value="forever">Keep it forever</option>
+            <option value="unsure">Not sure yet</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="font-family:var(--font-fun);font-weight:600;font-size:15px;color:var(--ink);display:block;margin-bottom:8px;">What's your responsibility in the business at this point?</label>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <label style="font-weight:600;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" class="bl-vision-role" value="leads"> Leads / Marketing</label>
+            <label style="font-weight:600;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" class="bl-vision-role" value="sales"> Sales</label>
+            <label style="font-weight:600;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" class="bl-vision-role" value="installs"> Installs</label>
+            <label style="font-weight:600;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" class="bl-vision-role" value="office"> Office management</label>
+            <label style="font-weight:600;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" class="bl-vision-role" value="dispatch"> Dispatch</label>
+            <label style="font-weight:600;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" class="bl-vision-role" value="materials"> Materials</label>
+            <label style="font-weight:600;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" class="bl-vision-role" value="projects"> Projects</label>
+            <label style="font-weight:600;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" class="bl-vision-role" value="networking"> Networking</label>
+            <label style="font-weight:600;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" class="bl-vision-role" value="training"> Training</label>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:14px;">
+          <div>
+            <label style="font-family:var(--font-fun);font-weight:600;font-size:13px;color:#8a7a5e;">Desired annual revenue ($)</label>
+            <div style="display:flex;align-items:center;gap:4px;margin-top:4px;">
+              <span style="font-weight:700;color:var(--gold-deep);">$</span>
+              <input class="styo-text" id="blVisionRev" placeholder="0" inputmode="numeric" style="width:140px;" />
+            </div>
+          </div>
+          <div>
+            <label style="font-family:var(--font-fun);font-weight:600;font-size:13px;color:#8a7a5e;">Desired net profit (%)</label>
+            <div style="display:flex;align-items:center;gap:4px;margin-top:4px;">
+              <input class="styo-text" id="blVisionProfit" placeholder="20" inputmode="numeric" style="width:80px;" />
+              <span style="font-weight:700;color:var(--gold-deep);">%</span>
+            </div>
+          </div>
+          <div>
+            <label style="font-family:var(--font-fun);font-weight:600;font-size:13px;color:#8a7a5e;">Desired number of vans</label>
+            <div style="margin-top:4px;">
+              <input class="styo-text" id="blVisionVans" placeholder="0" inputmode="numeric" style="width:80px;" />
+            </div>
+          </div>
+          <div>
+            <label style="font-family:var(--font-fun);font-weight:600;font-size:13px;color:#8a7a5e;">Desired team size</label>
+            <div style="margin-top:4px;">
+              <input class="styo-text" id="blVisionTeam" placeholder="0" inputmode="numeric" style="width:80px;" />
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div style="margin-top:14px;"><button class="reset" onclick="document.getElementById('blVision').value='';">Reset Baseline</button></div>
+      <div style="margin-top:14px;"><button class="reset" onclick="document.getElementById('blVision').value='';['blVisionRev','blVisionProfit','blVisionVans','blVisionTeam'].forEach(id=>document.getElementById(id).value='');document.querySelectorAll('.bl-vision-role').forEach(c=>c.checked=false);">Reset Baseline</button></div>
     </div>
 
     <!-- Bottom CTA -->
