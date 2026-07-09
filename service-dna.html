@@ -1442,8 +1442,11 @@
   </div>
 
   <div class="tabpanel" id="tab-pricing" hidden>
-    <div class="subhead">Slide your vans, hours &amp; efficiency to find the rate you must charge — then watch it flow all the way down to what you keep.</div>
-    <div style="text-align:center;margin:-4px 0 8px;"><a class="actbtn" href="#gp-tracker" style="font-size:13px;padding:7px 14px;">📊 Jump to GP Tracker ↓</a></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0;">
+      <a class="actbtn" href="#gp-tracker" style="font-size:13px;padding:7px 14px;">📊 Jump to GP Tracker ↓</a>
+    </div>
+
+    <div class="subhead" style="margin-top:0;">Slide your vans, hours &amp; efficiency to find the rate you must charge — then watch it flow all the way down to what you keep.</div>
 
     <div class="legend">
       <span class="chip"><span class="dot blue"></span> Blue = you type it</span>
@@ -1916,8 +1919,10 @@
   </div><!-- /tab-pricing -->
 
   <div class="tabpanel" id="tab-leads" hidden>
-    <div class="subhead">Work backward from the revenue you want — to the leads you need, and what you'll spend to get them.</div>
-    <div style="text-align:center;margin:-4px 0 8px;"><a class="actbtn" href="#lead-tracker" style="font-size:13px;padding:7px 14px;">📈 Jump to Lead Tracker ↓</a></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0;">
+      <a class="actbtn" href="#lead-tracker" style="font-size:13px;padding:7px 14px;">📈 Jump to Lead Tracker ↓</a>
+    </div>
+    <div class="subhead" style="margin-top:0;">Work backward from the revenue you want — to the leads you need, and what you'll spend to get them.</div>
 
     <div class="sectitle"><span class="num">1</span> Why marketing?</div>
     <div class="panel">
@@ -2390,8 +2395,10 @@
   </div>
 
   <div class="tabpanel" id="tab-offer" hidden>
-    <div class="subhead">Same customer. Bigger sale. Multiply revenue without adding a single lead.</div>
-    <div style="text-align:center;margin:-4px 0 8px;"><a class="actbtn" href="#styo-section" style="font-size:13px;padding:7px 14px;">🔒 Jump to My Offer (STYO) ↓</a></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0;">
+      <a class="actbtn" href="#styo-section" style="font-size:13px;padding:7px 14px;">🔒 Jump to My Offer (STYO) ↓</a>
+    </div>
+    <div class="subhead" style="margin-top:0;">Same customer. Bigger sale. Multiply revenue without adding a single lead.</div>
 
     <div class="sectitle"><span class="num">1</span> The Service Loop</div>
     <div class="panel">
@@ -2781,8 +2788,10 @@
   </div>
 
   <div class="tabpanel" id="tab-close" hidden>
-    <div class="subhead">You've got the price. You've got the options. Now install the Sales Flow that runs every call — start to finish, square by square.</div>
-    <div style="text-align:center;margin:-4px 0 8px;"><a class="actbtn" href="#sales-tracker" style="font-size:13px;padding:7px 14px;">📊 Jump to Sales Tracker ↓</a></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0;">
+      <a class="actbtn" href="#sales-tracker" style="font-size:13px;padding:7px 14px;">📊 Jump to Sales Tracker ↓</a>
+    </div>
+    <div class="subhead" style="margin-top:0;">You've got the price. You've got the options. Now install the Sales Flow that runs every call — start to finish, square by square.</div>
 
     <div class="sectitle"><span class="num">1</span> The 4 Square Process</div>
     <div class="panel">
@@ -3320,8 +3329,10 @@
   </div>
 
   <div class="tabpanel" id="tab-plan" hidden>
-    <div class="subhead">Where you are. Where you're going. And what's trying to pull you off the road.</div>
-    <div style="text-align:center;margin:-4px 0 8px;"><a class="actbtn" href="#game-plan-section" style="font-size:13px;padding:7px 14px;">🎯 Your Game Plan ↓</a></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0;">
+      <a class="actbtn" href="#game-plan-section" style="font-size:13px;padding:7px 14px;">🎯 Your Game Plan ↓</a>
+    </div>
+    <div class="subhead" style="margin-top:0;">Where you are. Where you're going. And what's trying to pull you off the road.</div>
 
     <div class="sectitle"><span class="num">1</span> Point A → Point B</div>
     <div class="panel">
@@ -5205,8 +5216,8 @@
       if(sel.value){ document.getElementById(sel.value).scrollIntoView({behavior:'smooth',block:'start'}); sel.selectedIndex=0; }
     });
     wrap.appendChild(sel);
-    var firstSection = tabEl.querySelector('.sectitle');
-    if(firstSection) firstSection.parentNode.insertBefore(wrap, firstSection);
+    // insert at the very top of the tab, before everything
+    tabEl.insertBefore(wrap, tabEl.firstChild);
   }
 
   function switchTab(name){
