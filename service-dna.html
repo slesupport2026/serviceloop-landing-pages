@@ -1052,64 +1052,48 @@
     <!-- ===== SECTION 1: THE SERVICE BOLT ===== -->
     <div class="sectitle"><span class="num">1</span> The Service Bolt</div>
     <div class="panel">
-      <!-- Service Bolt — proper lightning bolt shape -->
-      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:stretch;justify-content:center;">
-        <div style="background:linear-gradient(135deg,#0A0A0A,#1B2A45);border-radius:18px;padding:24px 20px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;">
-          <svg viewBox="0 0 320 500" width="280" style="display:block;" aria-label="Service Bolt">
-            <defs>
-              <linearGradient id="boltGradDNA" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#FDC33E" stop-opacity="0.4"/>
-                <stop offset="25%" stop-color="#0F8A4D" stop-opacity="0.3"/>
-                <stop offset="60%" stop-color="#1B2A45" stop-opacity="0.3"/>
-                <stop offset="100%" stop-color="#C9531B" stop-opacity="0.35"/>
-              </linearGradient>
-            </defs>
-            <!-- The actual lightning bolt path — zigzag shape -->
-            <path d="M 80 50 L 240 50 L 200 200 L 260 200 L 130 470 L 170 280 L 100 280 Z"
-                  fill="url(#boltGradDNA)" stroke="#E3C575" stroke-width="2.5" stroke-linejoin="round"/>
+      <!-- Service Bolt — dark solid bolt, horizontal tier lines extending right, labels at end -->
+      <div style="background:var(--paper);border:2px solid #ECE0C2;border-radius:18px;padding:20px 14px;margin-bottom:14px;">
+        <svg viewBox="0 0 700 520" style="width:100%;height:auto;display:block;" aria-label="Service Bolt">
+          <!-- The bolt — solid dark navy -->
+          <path d="M 120 30 L 280 30 L 230 190 L 310 190 L 150 500 L 200 300 L 130 300 Z"
+                fill="#1B2A45" stroke="none"/>
 
-            <!-- Tier divider lines (dashed, extending to labels) -->
-            <line x1="105" y1="120" x2="300" y2="120" stroke="#FDC33E" stroke-width="1.5" stroke-dasharray="4,3"/>
-            <line x1="115" y1="195" x2="300" y2="195" stroke="#0F8A4D" stroke-width="1.5" stroke-dasharray="4,3"/>
-            <line x1="140" y1="280" x2="300" y2="280" stroke="#1B2A45" stroke-width="1.5" stroke-dasharray="4,3" opacity=".6"/>
-            <line x1="150" y1="380" x2="300" y2="380" stroke="#C9531B" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <!-- Tier lines — horizontal, extending past the bolt to the right -->
+          <line x1="260" y1="100" x2="620" y2="100" stroke="#E53935" stroke-width="2.5"/>
+          <line x1="240" y1="210" x2="620" y2="210" stroke="#00BCD4" stroke-width="2.5"/>
+          <line x1="180" y1="320" x2="620" y2="320" stroke="#1565C0" stroke-width="2.5"/>
+          <line x1="170" y1="440" x2="620" y2="440" stroke="#7B1FA2" stroke-width="2.5"/>
 
-            <!-- Tier labels to the right -->
-            <text x="12" y="38" font-family="Fredoka,sans-serif" font-weight="700" font-size="13" fill="#E3C575" letter-spacing="2">SERVICE</text>
+          <!-- Tier labels — right side -->
+          <text x="630" y="96" font-family="Fredoka,sans-serif" font-weight="700" font-size="26" fill="#E53935" font-style="italic">Elite</text>
+          <text x="630" y="206" font-family="Fredoka,sans-serif" font-weight="700" font-size="26" fill="#00BCD4" font-style="italic">Master</text>
+          <text x="630" y="316" font-family="Fredoka,sans-serif" font-weight="700" font-size="26" fill="#1565C0" font-style="italic">Pro</text>
+          <text x="630" y="436" font-family="Fredoka,sans-serif" font-weight="700" font-size="26" fill="#7B1FA2" font-style="italic">Sparky</text>
+        </svg>
+      </div>
 
-            <text x="305" y="116" font-family="Fredoka,sans-serif" font-weight="700" font-size="16" fill="#FDC33E">Elite</text>
-            <text x="305" y="132" font-family="Nunito,sans-serif" font-weight="600" font-size="9" fill="#cdd8ec">Off the management</text>
-
-            <text x="305" y="191" font-family="Fredoka,sans-serif" font-weight="700" font-size="16" fill="#0F8A4D">Master</text>
-            <text x="305" y="207" font-family="Nunito,sans-serif" font-weight="600" font-size="9" fill="#cdd8ec">Off the sales · the bench</text>
-
-            <text x="305" y="276" font-family="Fredoka,sans-serif" font-weight="700" font-size="16" fill="#9CC2FB">Pro</text>
-            <text x="305" y="292" font-family="Nunito,sans-serif" font-weight="600" font-size="9" fill="#cdd8ec">Off the tools</text>
-
-            <text x="305" y="376" font-family="Fredoka,sans-serif" font-weight="700" font-size="16" fill="#C9531B">Spark</text>
-            <text x="305" y="392" font-family="Nunito,sans-serif" font-weight="600" font-size="9" fill="#cdd8ec">Off the phones</text>
-          </svg>
+      <!-- Tier Cards — bottom up, matching the bolt -->
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#F3E5F5;border-left:5px solid #7B1FA2;border-radius:0 14px 14px 0;padding:14px 18px;">
+          <div style="font-family:var(--font-fun);font-weight:700;font-size:18px;color:#7B1FA2;">⚡ Sparky — Off the phones</div>
+          <div style="font-weight:700;font-size:13px;color:#5a4e3a;">$0–$30K/mo · Solo · Something's gotta give. Wearing too many hats.</div>
+          <div style="font-size:12px;font-weight:600;color:#7B1FA2;margin-top:4px;">Delegation expanding: hire a CSR, get off the phones.</div>
         </div>
-
-        <!-- Tier Cards -->
-        <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:10px;">
-          <div style="background:#FFF8E1;border-left:5px solid #FDC33E;border-radius:0 14px 14px 0;padding:12px 16px;">
-            <div style="font-family:var(--font-fun);font-weight:600;font-size:17px;color:#c9a020;">⚡ Elite — Off the management</div>
-            <div style="font-weight:700;font-size:13px;color:#5a4e3a;">$2M+ · 10+ team · Going vertical again, bigger than ever.</div>
-          </div>
-          <div style="background:#E9F8EF;border-left:5px solid #0F8A4D;border-radius:0 14px 14px 0;padding:12px 16px;">
-            <div style="font-family:var(--font-fun);font-weight:600;font-size:17px;color:#0F8A4D;">⚡ Master — Off the sales</div>
-            <div style="font-weight:700;font-size:13px;color:#5a4e3a;">$1M+ · 5+ team · The bench. Let go, systemize, train people to take over.</div>
-            <div style="font-size:11px;font-weight:600;color:#0F8A4D;font-style:italic;margin-top:4px;">You are the broccoli and your business is the milk. You can't hide broccoli in a cup of milk — you're just too involved.</div>
-          </div>
-          <div style="background:#E8EDF5;border-left:5px solid #1B2A45;border-radius:0 14px 14px 0;padding:12px 16px;">
-            <div style="font-family:var(--font-fun);font-weight:600;font-size:17px;color:#1B2A45;">⚡ Pro — Off the tools</div>
-            <div style="font-weight:700;font-size:13px;color:#5a4e3a;">$30K-$80K/mo · 3-5 team · Hire techs, step into the business.</div>
-          </div>
-          <div style="background:#FFF3E0;border-left:5px solid #C9531B;border-radius:0 14px 14px 0;padding:12px 16px;">
-            <div style="font-family:var(--font-fun);font-weight:600;font-size:17px;color:#C9531B;">⚡ Spark — Off the phones</div>
-            <div style="font-weight:700;font-size:13px;color:#5a4e3a;">$0-$30K/mo · Solo · Hire a CSR. Stop answering the phone yourself.</div>
-          </div>
+        <div style="background:#E3F2FD;border-left:5px solid #1565C0;border-radius:0 14px 14px 0;padding:14px 18px;">
+          <div style="font-family:var(--font-fun);font-weight:700;font-size:18px;color:#1565C0;">⚡ Pro — Off the tools</div>
+          <div style="font-weight:700;font-size:13px;color:#5a4e3a;">$30K–$80K/mo · 3–5 team · Installs locked in. Sales expanding.</div>
+          <div style="font-size:12px;font-weight:600;color:#1565C0;margin-top:4px;">Delegation expanding: hire techs, step into the business full-time.</div>
+        </div>
+        <div style="background:#E0F7FA;border-left:5px solid #00BCD4;border-radius:0 14px 14px 0;padding:14px 18px;">
+          <div style="font-family:var(--font-fun);font-weight:700;font-size:18px;color:#00897B;">⚡ Master — Off the sales</div>
+          <div style="font-weight:700;font-size:13px;color:#5a4e3a;">$1M+ · 5+ team · Installs and sales locked in. Delegation expanding.</div>
+          <div style="font-size:12px;font-weight:600;color:#00897B;margin-top:4px;">The bench. You are the broccoli and your business is the milk — let go, systemize, train people to take over.</div>
+        </div>
+        <div style="background:#FFEBEE;border-left:5px solid #E53935;border-radius:0 14px 14px 0;padding:14px 18px;">
+          <div style="font-family:var(--font-fun);font-weight:700;font-size:18px;color:#E53935;">⚡ Elite — Off the management</div>
+          <div style="font-weight:700;font-size:13px;color:#5a4e3a;">$2M+ · 10+ team · Office, installs, sales, marketing locked in. Management delegation expanding.</div>
+          <div style="font-size:12px;font-weight:600;color:#E53935;margin-top:4px;">Going vertical again — bigger than ever. Hire a GM.</div>
         </div>
       </div>
 
