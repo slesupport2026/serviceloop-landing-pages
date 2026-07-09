@@ -395,10 +395,9 @@
     .rates,.rates.three,.rates.trio{grid-template-columns:1fr;}
     .rung{flex-wrap:wrap;}
   }
-  /* ---------- SUB-CHAPTER NAV ---------- */
-  .toc{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:0 0 12px;padding:0;}
-  .toc a{font-family:var(--font-fun);font-weight:600;font-size:12px;color:#8a7a5e;background:var(--paper);border:1.5px solid #ECE0C2;border-radius:999px;padding:4px 11px;text-decoration:none;white-space:nowrap;transition:background .1s,color .1s;}
-  .toc a:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+  /* ---------- SUB-CHAPTER NAV (dropdown) ---------- */
+  .toc-wrap{margin:0 0 8px;text-align:right;}
+  .toc-select{font-family:var(--font-fun);font-weight:600;font-size:13px;color:var(--ink);background:var(--paper);border:2px solid #ECE0C2;border-radius:10px;padding:5px 10px;cursor:pointer;max-width:260px;}
 
   /* ---------- TABS ---------- */
   .tabbar{
@@ -5173,36 +5172,41 @@
 
   /* ============ TABS ============ */
   function buildToc(tabEl){
-    // remove any existing toc in this tab
-    var old = tabEl.querySelector('.toc');
+    var old = tabEl.querySelector('.toc-wrap');
     if(old) old.remove();
     var sections = tabEl.querySelectorAll('.sectitle');
-    if(sections.length < 2) return; // no point for 1 section
-    var toc = document.createElement('div');
-    toc.className = 'toc';
-    sections.forEach(function(s, i){
-      // ensure section has an id for anchor
-      if(!s.id) s.id = 'sec-' + tabEl.id + '-' + i;
-      var a = document.createElement('a');
-      a.href = '#' + s.id;
-      // extract just the text (skip info bubbles)
+    if(sections.length < 3) return;
+    sections.forEach(function(s, i){ if(!s.id) s.id = 'sec-' + tabEl.id + '-' + i; });
+    var wrap = document.createElement('div');
+    wrap.className = 'toc-wrap';
+    var sel = document.createElement('select');
+    sel.className = 'toc-select';
+    var def = document.createElement('option');
+    def.textContent = 'Skip to section…';
+    def.value = '';
+    sel.appendChild(def);
+    sections.forEach(function(s){
+      var opt = document.createElement('option');
+      opt.value = s.id;
       var numEl = s.querySelector('.num');
-      var num = numEl ? numEl.textContent : '';
-      var text = s.textContent.replace(/\s+/g,' ').trim();
-      // clean up — remove the bubble text if any leaked in
-      if(text.length > 60) text = text.substring(0, 60) + '…';
-      a.textContent = num ? num + '. ' + text.replace(num,'').trim().split('  ')[0] : text.split('  ')[0];
-      // keep it short
-      if(a.textContent.length > 35) a.textContent = a.textContent.substring(0, 35) + '…';
-      toc.appendChild(a);
+      var num = numEl ? numEl.textContent + '. ' : '';
+      var raw = s.childNodes;
+      var text = '';
+      for(var n=0;n<raw.length;n++){
+        if(raw[n].nodeType===3) text += raw[n].textContent;
+        else if(!raw[n].classList || !raw[n].classList.contains('info')) text += raw[n].textContent;
+      }
+      text = text.replace(/\s+/g,' ').trim();
+      if(text.length > 40) text = text.substring(0,40) + '…';
+      opt.textContent = text;
+      sel.appendChild(opt);
     });
-    // insert right before the first sectitle
+    sel.addEventListener('change', function(){
+      if(sel.value){ document.getElementById(sel.value).scrollIntoView({behavior:'smooth',block:'start'}); sel.selectedIndex=0; }
+    });
+    wrap.appendChild(sel);
     var firstSection = tabEl.querySelector('.sectitle');
-    if(firstSection){
-      firstSection.parentNode.insertBefore(toc, firstSection);
-    } else {
-      tabEl.appendChild(toc);
-    }
+    if(firstSection) firstSection.parentNode.insertBefore(wrap, firstSection);
   }
 
   function switchTab(name){
