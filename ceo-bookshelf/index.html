@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The CEO Bookshelf — Service Loop Electrical</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600;1,700&family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --gold: #E3C575;
+    --bright-gold: #FDC33E;
+    --dark-gold: #A78227;
+    --navy: #1B2A45;
+    --white: #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 22px; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 60px 0 50px;
+    background:
+      linear-gradient(160deg, rgba(227,197,117,0.06) 0%, rgba(10,10,10,0) 40%),
+      var(--black);
+    border-bottom: 1px solid var(--navy);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(115deg, transparent 48%, rgba(227,197,117,0.05) 49%, rgba(227,197,117,0.05) 50%, transparent 51%),
+      linear-gradient(65deg, transparent 68%, rgba(227,197,117,0.04) 69%, rgba(227,197,117,0.04) 70%, transparent 71%);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; text-align: center; }
+  .hero img.logo { height: 96px; margin-bottom: 22px; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(38px, 6vw, 58px);
+    line-height: 1.08;
+  }
+  .hero h1 .gold { color: var(--gold); }
+  .hero .rule {
+    height: 3px; width: 170px;
+    background: linear-gradient(90deg, var(--bright-gold), var(--dark-gold));
+    margin: 18px auto;
+    border-radius: 2px;
+  }
+  .hero .sub {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .hero .count {
+    margin-top: 26px;
+    display: inline-block;
+    background: var(--navy);
+    border: 1px solid var(--dark-gold);
+    border-radius: 30px;
+    padding: 8px 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--white);
+  }
+  .hero .count b { color: var(--bright-gold); font-size: 16px; }
+
+  /* Intro letter */
+  .intro {
+    padding: 46px 0 10px;
+  }
+  .intro .card {
+    background: var(--navy);
+    border-radius: 14px;
+    border-left: 4px solid var(--gold);
+    padding: 30px 32px;
+    font-size: 16px;
+  }
+  .intro .card p { margin-bottom: 14px; }
+  .intro .card p:last-of-type { margin-bottom: 0; }
+  .intro .sig {
+    margin-top: 18px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--gold);
+  }
+  .intro .sig span { display:block; font-family:'Open Sans',sans-serif; font-style:normal; font-size:12.5px; color:#ffffff99; margin-top:2px; }
+
+  /* How to use */
+  .howto {
+    padding: 34px 0 6px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .howto .step {
+    background: #111;
+    border: 1px solid var(--navy);
+    border-radius: 12px;
+    padding: 18px 18px 16px;
+  }
+  .howto .step .n {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--bright-gold);
+  }
+  .howto .step h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13.5px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin: 4px 0 6px;
+  }
+  .howto .step p { font-size: 13.5px; color: #ffffffbb; }
+  @media (max-width: 640px) { .howto { grid-template-columns: 1fr; } }
+
+  /* Shelf sections */
+  .shelf { padding: 40px 0 6px; }
+  .shelf-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(26px, 4vw, 34px);
+    color: var(--gold);
+  }
+  .shelf-head .rule {
+    height: 2px; width: 84px;
+    background: var(--dark-gold);
+    margin: 8px 0 8px;
+    border-radius: 1px;
+  }
+  .shelf-head .tag { font-size: 14.5px; color: #ffffffaa; margin-bottom: 20px; max-width: 640px; }
+
+  /* Book cards */
+  .book {
+    background: var(--navy);
+    border-radius: 14px;
+    padding: 26px 28px 22px;
+    margin-bottom: 16px;
+    border: 1px solid transparent;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .book:hover { border-color: var(--dark-gold); transform: translateY(-2px); }
+  .book .top { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .book h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18.5px;
+    color: var(--white);
+  }
+  .book .author {
+    font-size: 13.5px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .badge {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--bright-gold), var(--gold));
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 10.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 12px;
+    padding: 3px 11px;
+  }
+  .book .buy {
+    margin-left: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11.5px;
+    letter-spacing: .5px;
+    color: var(--bright-gold);
+    text-decoration: none;
+    border: 1px solid var(--dark-gold);
+    border-radius: 14px;
+    padding: 4px 12px;
+    white-space: nowrap;
+    transition: all .15s ease;
+  }
+  .book .buy:hover { background: var(--bright-gold); color: var(--black); }
+  @media (max-width: 560px) { .book .buy { margin-left: 0; } }
+  .book .summary { margin-top: 12px; font-size: 14.5px; color: #ffffffdd; }
+  .book .forward {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #ffffffcc;
+  }
+  .book .forward b {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--bright-gold);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .take {
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: rgba(10,10,10,0.45);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+  }
+  .take .label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .take p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #ffffffee;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 60px;
+    border-top: 1px solid var(--navy);
+    padding: 34px 0 44px;
+    text-align: center;
+  }
+  footer img { height: 56px; margin-bottom: 14px; opacity: .95; }
+  footer .cta {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 21px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  footer .cta .gold { color: var(--gold); }
+  footer .contact { font-size: 13px; color: #ffffffaa; margin-bottom: 16px; }
+  footer .prop { font-size: 11.5px; color: var(--dark-gold); }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <img class="logo" src="data:image/png;base64,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" alt="Service Loop Electrical">
+    <div class="sub">For Electricians, By Electricians</div>
+    <h1>The <span class="gold">CEO Bookshelf</span></h1>
+    <div class="rule"></div>
+    <p style="font-size:16px; color:#ffffffcc; max-width:560px; margin:0 auto;">The books behind the businesses. Hand-picked from our own shelves for Service Pros building something bigger than a job.</p>
+    <div class="count"><b>39</b> BOOKS &nbsp;·&nbsp; <b>10</b> SHELVES &nbsp;·&nbsp; <b>1</b> MISSION</div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap">
+    <div class="card">
+      <p>Guys. Real talk for a second.</p>
+      <p>Nobody handed me a playbook when I started. My first business ended with me pulling my last few thousand bucks out of the account with tears rolling down my cheek. What turned it around wasn't talent. It was learning from people who'd already made the mistakes I was busy making.</p>
+      <p>Every book on this list earned its spot. These aren't theory books for MBA types. They're the ones that changed how we price, how we serve, how we lead, and how we think. Read them slow. Take notes. Then take action — because a highlighted book that changed nothing is just a decorated shelf. Right?</p>
+      <p class="sig">— Clay Neumeyer<span>CEO &amp; Co-Founder, Service Loop Electrical</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="howto">
+    <div class="step">
+      <div class="n">01</div>
+      <h3>Don't read in order</h3>
+      <p>Go to the shelf that matches your biggest fire right now. Pricing problem? Strategy shelf. Team problem? Leadership shelf.</p>
+    </div>
+    <div class="step">
+      <div class="n">02</div>
+      <h3>Start with the badges</h3>
+      <p>Books marked <span class="badge" style="font-size:9.5px;">Read First</span> are the fastest wins — start there if you're new to the reading game.</p>
+    </div>
+    <div class="step">
+      <div class="n">03</div>
+      <h3>One idea, one action</h3>
+      <p>After every book, pick ONE idea and run the play in your business within 7 days. That's the whole system.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SALES & CLOSING ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>Sales &amp; Closing</h2>
+      <div class="rule"></div>
+      <p class="tag">Selling means serving. These three will change what happens at the kitchen table.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Never Split the Difference</h3><span class="author">Chris Voss</span><span class="badge">Read First</span><a class="buy" href="https://www.amazon.com/s?k=Never+Split+the+Difference+Chris+Voss+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">A former FBI hostage negotiator breaks down how real negotiation works — and it's not about splitting anything down the middle. Voss teaches tactical empathy: label what the other person feels, ask calibrated questions, and let them talk their way to yes.</p>
+      <p class="forward"><b>Look forward to</b>The "mirroring" technique — repeat the last three words someone says and watch them open up. You'll use it on your very next service call.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>"That's right" beats "you're right" every single time. When a homeowner says "that's right," they've sold themselves. Our job is just to get them there. K?</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>The Challenger Sale</h3><span class="author">Matthew Dixon</span><a class="buy" href="https://www.amazon.com/s?k=The+Challenger+Sale+Matthew+Dixon+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Based on a massive study of top sales performers, this book found the best sellers aren't relationship-builders — they're challengers who teach the customer something new, tailor the message, and take control of the conversation.</p>
+      <p class="forward"><b>Look forward to</b>Why "the customer is always right" is costing you money, and how leading with an insight beats leading with a discount.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Homeowners don't need another order-taker in their kitchen. They need a pro who shows them what they didn't know about their own home. Teach first. The ticket follows.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Door-to-Door Millionaire</h3><span class="author">Lenny Gray</span><a class="buy" href="https://www.amazon.com/s?k=Door-to-Door+Millionaire+Lenny+Gray+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Straight from the trenches of door-to-door sales — the hardest selling environment there is. Gray covers first impressions, handling brush-offs, and the discipline of doing the reps when nobody's watching.</p>
+      <p class="forward"><b>Look forward to</b>Objection-handling lines you can use word-for-word. If it works on a cold doorstep, it works everywhere.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>More swings at bat, more grand slams. This book is proof that sales is a numbers game played with skill. No shortcuts. Just reps.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MARKETING & LEADS ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>Marketing &amp; Leads</h2>
+      <div class="rule"></div>
+      <p class="tag">A full board beats a full toolbox. Here's how the phone starts ringing.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>$100M Offers</h3><span class="author">Alex Hormozi</span><span class="badge">Read First</span><a class="buy" href="https://www.amazon.com/s?k=%24100M+Offers+Alex+Hormozi+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Hormozi's formula for building offers so good people feel stupid saying no. It's about stacking value, killing risk, and pricing with confidence — not competing on being the cheapest guy with a van.</p>
+      <p class="forward"><b>Look forward to</b>The value equation. Four levers that let you raise prices while making the deal BETTER for the customer.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>If you're the cheapest electrician in town, this book will make you uncomfortable. Good. I'm begging you not to fear the increase — build an offer worth paying for instead.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>$100M Leads</h3><span class="author">Alex Hormozi</span><a class="buy" href="https://www.amazon.com/s?k=%24100M+Leads+Alex+Hormozi+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">The follow-up to Offers, covering the four ways strangers find out you exist: warm outreach, content, cold outreach, and paid ads. Simple frameworks, real math, zero fluff.</p>
+      <p class="forward"><b>Look forward to</b>The "give away the secrets, sell the implementation" play — the exact reason we run free workshops.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Leads aren't luck. They're a system. Pick ONE of the four channels, get good at it, then add the next. Complexity is the enemy of execution.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Building a StoryBrand 2.0</h3><span class="author">Donald Miller</span><a class="buy" href="https://www.amazon.com/s?k=Building+a+StoryBrand+2.0+Donald+Miller+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Miller's framework makes your customer the hero and your company the guide. If your website talks about you instead of the homeowner's problem, this book explains why nobody's calling.</p>
+      <p class="forward"><b>Look forward to</b>The 7-part story framework you can apply to your website in one afternoon and watch the difference.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Here's the thing — the homeowner is Luke Skywalker. We're Yoda. The moment your marketing figures that out, everything gets easier.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>No B.S. Trust Based Marketing</h3><span class="author">Dan S. Kennedy</span><a class="buy" href="https://www.amazon.com/s?k=No+B.S.+Trust+Based+Marketing+Dan+S.+Kennedy+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Kennedy's guide to marketing in a world where nobody trusts anybody. Position yourself as the trusted authority in your area, and price resistance starts to disappear.</p>
+      <p class="forward"><b>Look forward to</b>Why being the "hyperlocal hero" beats being everywhere — and how trust lets you charge what you're worth.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Trust is the whole ballgame in the trades. People let us into their homes, near their kids, around their pets. Market like you understand what that means.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Launch</h3><span class="author">Jeff Walker</span><a class="buy" href="https://www.amazon.com/s?k=Launch+Jeff+Walker+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Walker's Product Launch Formula — building anticipation before you sell anything. Sequences, pre-launch content, and turning an announcement into an event people wait for.</p>
+      <p class="forward"><b>Look forward to</b>The "sideways sales letter" concept: sell through a sequence of value instead of one desperate pitch.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Launching a service agreement program? A new install offer? Don't just quietly add it to the truck. Build it up. Make it an event. Watch what happens.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ INFLUENCE & COMMUNICATION ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>Influence &amp; Communication</h2>
+      <div class="rule"></div>
+      <p class="tag">Before we sell, we see. Before we tell, we're told. This shelf is the how.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Influence: The Psychology of Persuasion</h3><span class="author">Robert Cialdini</span><a class="buy" href="https://www.amazon.com/s?k=Influence%3A+The+Psychology+of+Persuasion+Robert+Cialdini+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">The godfather of persuasion science. Cialdini's principles — reciprocity, scarcity, authority, consistency, liking, social proof — explain why people say yes, backed by decades of research.</p>
+      <p class="forward"><b>Look forward to</b>Spotting these principles everywhere once you know them — in every ad, every pitch, every review request.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>This isn't manipulation, guys. It's understanding people. Use it to serve at a higher level and the profits pile up on their own.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>How to Win Friends and Influence People</h3><span class="author">Dale Carnegie</span><a class="buy" href="https://www.amazon.com/s?k=How+to+Win+Friends+and+Influence+People+Dale+Carnegie+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Nearly a century old and still undefeated. Remember names, listen more than you talk, make people feel important — the fundamentals of being someone people want to work with.</p>
+      <p class="forward"><b>Look forward to</b>How the simplest habits — a name remembered, a genuine compliment — compound into a reputation.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Old book. Timeless plays. If every tech on your team ran even half of this, your review count would double. I promise you.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Cues</h3><span class="author">Vanessa Van Edwards</span><a class="buy" href="https://www.amazon.com/s?k=Cues+Vanessa+Van+Edwards+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">The science of charisma — body language, vocal tone, and the small signals that decide whether people read you as warm, competent, both, or neither. Practical and immediately usable.</p>
+      <p class="forward"><b>Look forward to</b>The warmth-and-competence matrix. You'll rewatch your own sales videos differently after this one.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Your customer decides a lot about you before you say a word at the door. This book shows you what they're reading. Does that make sense? It will.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Endless Referrals</h3><span class="author">Bob Burg</span><a class="buy" href="https://www.amazon.com/s?k=Endless+Referrals+Bob+Burg+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Burg's system for turning every contact into a referral source — not through gimmicks, but by becoming genuinely valuable to your network first. Give first, and the pipeline builds itself.</p>
+      <p class="forward"><b>Look forward to</b>Feel-good questions that get anyone talking about their business — and remembering yours.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Referrals are the cheapest leads you'll ever get and the best customers you'll ever have. This is the system for earning them on purpose instead of by accident.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ LEADERSHIP & TEAM ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>Leadership &amp; Team</h2>
+      <div class="rule"></div>
+      <p class="tag">You can't scale past yourself until you can lead past yourself.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Extreme Ownership</h3><span class="author">Jocko Willink</span><a class="buy" href="https://www.amazon.com/s?k=Extreme+Ownership+Jocko+Willink+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Two Navy SEALs translate combat leadership into business. The core: everything in your world is your responsibility. No blaming the market, the techs, or the customer. Own it all.</p>
+      <p class="forward"><b>Look forward to</b>"There are no bad teams, only bad leaders" — a chapter that will sting and then set you free.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>The day you stop blaming the helper, the supplier, and the economy is the day your company starts growing. Own it all. Every bit of it.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Multipliers</h3><span class="author">Liz Wiseman</span><a class="buy" href="https://www.amazon.com/s?k=Multipliers+Liz+Wiseman+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Some leaders drain intelligence from their teams; others multiply it. Wiseman shows how "diminishers" accidentally shrink their people — and how multipliers get 2x from the same crew.</p>
+      <p class="forward"><b>Look forward to</b>The "accidental diminisher" checklist. Warning: you will see yourself in it.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>If you're the smartest person in every conversation at your shop, you built it that way. This book is how you fix it — and finally take a real vacation.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Start with Why</h3><span class="author">Simon Sinek</span><a class="buy" href="https://www.amazon.com/s?k=Start+with+Why+Simon+Sinek+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">People don't buy what you do — they buy why you do it. Sinek's Golden Circle explains why some companies inspire loyalty from customers and employees while others just transact.</p>
+      <p class="forward"><b>Look forward to</b>Figuring out your own why — the thing that gets techs to stay and customers to refer.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Guys, "we do electrical work" isn't a why. Ours is service to others. When your team knows the why, the how gets a whole lot easier to lead.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Daring Greatly</h3><span class="author">Brené Brown</span><a class="buy" href="https://www.amazon.com/s?k=Daring+Greatly+Bren%C3%A9+Brown+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Brown's research on vulnerability and courage. Real leadership means showing up when you can't control the outcome — admitting mistakes, having hard conversations, and building trust through honesty.</p>
+      <p class="forward"><b>Look forward to</b>Why the leader who says "I don't know, let's figure it out" builds a stronger crew than the one who fakes it.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>We're just a bunch of electricians with honesty. That's not a weakness — it's the best way we're gonna break through. This book explains why that works.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MINDSET & PERFORMANCE ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>Mindset &amp; Performance</h2>
+      <div class="rule"></div>
+      <p class="tag">The business grows at the speed of the operator. Sharpen the operator.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Relentless</h3><span class="author">Tim Grover</span><a class="buy" href="https://www.amazon.com/s?k=Relentless+Tim+Grover+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Michael Jordan and Kobe's trainer on what separates the good from the unstoppable. Grover's "Cleaner" mentality is uncomfortable, demanding, and exactly what a plateaued operator needs to hear.</p>
+      <p class="forward"><b>Look forward to</b>The Cooler / Closer / Cleaner framework — and the honest question of which one you actually are.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>This one's a gut check. Read it when you're comfortable — because comfortable is exactly when regression to the mean comes for you.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Winning</h3><span class="author">Tim Grover</span><a class="buy" href="https://www.amazon.com/s?k=Winning+Tim+Grover+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Grover's follow-up: winning is a full-price purchase, paid in advance, no discounts. Thirteen hard truths about what it actually costs to be the best at anything.</p>
+      <p class="forward"><b>Look forward to</b>"Winning is not a marathon, it's a sprint with no finish line" — and twelve more truths like it.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Nobody's coming to hand you a million-dollar shop. Winning charges full price, every day. Decide if you're paying, or just window shopping.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Think and Grow Rich</h3><span class="author">Napoleon Hill</span><a class="buy" href="https://www.amazon.com/s?k=Think+and+Grow+Rich+Napoleon+Hill+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">The 1937 classic built from studying hundreds of the era's most successful people. Definite purpose, burning desire, a mastermind circle — the original blueprint most modern business books rewrote.</p>
+      <p class="forward"><b>Look forward to</b>The mastermind principle. It's the reason communities like ours exist.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Almost a hundred years old and it still hits. The mastermind chapter alone is worth it — nobody builds a 7-figure shop alone. Nobody.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Hidden Potential</h3><span class="author">Adam Grant</span><a class="buy" href="https://www.amazon.com/s?k=Hidden+Potential+Adam+Grant+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Grant's research on how far people can go from unremarkable starting points. Character skills beat raw talent, discomfort is a growth signal, and great systems create great performers.</p>
+      <p class="forward"><b>Look forward to</b>Why "the best students rarely become the best performers" — and what that means for who you hire.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Grade 10 math, maybe a dropout — if you're like me, this book is proof that where you started means nothing. It's about distance traveled, guys.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>10x Is Easier Than 2x</h3><span class="author">Dan Sullivan &amp; Benjamin Hardy</span><a class="buy" href="https://www.amazon.com/s?k=10x+Is+Easier+Than+2x+Dan+Sullivan+%26+Benjamin+Hardy+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Counterintuitive and true: 2x goals keep you grinding harder at what you already do. 10x goals force you to drop 80% of it and focus only on what actually moves the needle.</p>
+      <p class="forward"><b>Look forward to</b>The 80/20 identity shift — letting go of the work that built you to make room for the work that scales you.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Doubling down on more calls and longer days is 2x thinking. 10x means asking what you'd have to STOP doing. That question changed how I run everything.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Feel the Fear and Do It Anyway</h3><span class="author">Susan Jeffers</span><a class="buy" href="https://www.amazon.com/s?k=Feel+the+Fear+and+Do+It+Anyway+Susan+Jeffers+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Fear never fully goes away — and that's fine. Jeffers reframes fear as a signal you're growing, and gives simple tools for acting while scared instead of waiting for confidence that never comes.</p>
+      <p class="forward"><b>Look forward to</b>"The fear will never go away as long as I continue to grow" — the sentence that makes the price increase possible.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Scared to raise your rates? Scared to hire? Good. That's the feeling of leveling up. Feel it, then run the play anyway.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ STRATEGY & SCALE ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>Strategy &amp; Scale</h2>
+      <div class="rule"></div>
+      <p class="tag">From sparkie to operator. The 5-year path forward starts on this shelf.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Buy Back Your Time</h3><span class="author">Dan Martell</span><span class="badge">Read First</span><a class="buy" href="https://www.amazon.com/s?k=Buy+Back+Your+Time+Dan+Martell+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Martell's rule: don't hire to grow the business, hire to buy back your time — then use that time on what only you can do. Includes the exact playbook for your first real hires.</p>
+      <p class="forward"><b>Look forward to</b>The "buyback rate" calculation that tells you exactly which tasks you should never be doing again.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>If you're still doing your own invoicing at $500K a year, this book is an intervention. Your hourly rate in the truck is not your hourly rate as a CEO.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>The Science of Scaling</h3><span class="author">Benjamin Hardy</span><a class="buy" href="https://www.amazon.com/s?k=The+Science+of+Scaling+Benjamin+Hardy+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Hardy applies psychology research to growth: your business scales when your identity, standards, and environment scale first. The bottleneck is almost never tactics — it's the operator's frame.</p>
+      <p class="forward"><b>Look forward to</b>Why raising your floor (your minimum standard) beats chasing a higher ceiling.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>We don't rise to our training. We fall to our standards. This book is the science behind why setting a higher floor changes everything above it.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Your Next Five Moves</h3><span class="author">Patrick Bet-David</span><a class="buy" href="https://www.amazon.com/s?k=Your+Next+Five+Moves+Patrick+Bet-David+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Business as chess. Bet-David walks through knowing who you want to be, reasoning through moves in advance, and building the team and systems to execute — always thinking five moves out.</p>
+      <p class="forward"><b>Look forward to</b>The "solve for X" method for isolating the real problem instead of the loud one.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Most of us run our shops one move at a time — react, react, react. Five moves out is where the calm comes from. That's the whole 5-year path idea.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>The Road Less Stupid</h3><span class="author">Keith J. Cunningham</span><a class="buy" href="https://www.amazon.com/s?k=The+Road+Less+Stupid+Keith+J.+Cunningham+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Cunningham's argument: you don't need more genius, you need fewer dumb mistakes. His "thinking time" practice — sitting with hard questions on a schedule — is worth more than any tactic.</p>
+      <p class="forward"><b>Look forward to</b>The question sets. Some of the best business questions ever put on paper.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Operating costs money. Thinking is free. Thirty scheduled minutes with a legal pad has saved me from more expensive mistakes than any course I've bought.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>The Diary of a CEO: 33 Laws</h3><span class="author">Steven Bartlett</span><a class="buy" href="https://www.amazon.com/s?k=The+Diary+of+a+CEO%3A+33+Laws+Steven+Bartlett+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Bartlett distills hundreds of interviews with world-class performers into 33 laws of business and life. Short chapters, big ideas — from "master the useless first" to "you must out-fail the competition."</p>
+      <p class="forward"><b>Look forward to</b>Law-sized chapters you can read one per morning with your coffee. Perfect for busy operators.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Easy to read, hard to ignore. Keep it in the truck. One law a day beats one binge a year — small percents adding up, guys.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Buy Then Build</h3><span class="author">Walker Deibel</span><a class="buy" href="https://www.amazon.com/s?k=Buy+Then+Build+Walker+Deibel+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Why start from zero when you can buy an existing business with cash flow, customers, and crew from day one? Deibel maps acquisition entrepreneurship for operators ready for their next chapter.</p>
+      <p class="forward"><b>Look forward to</b>A completely different door to growth — buying a retiring competitor's book of business instead of grinding for every new customer.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Somewhere near you is an electrician five years from retirement with no exit plan. This book is how that becomes your expansion play. Think about it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ OPERATIONS & SYSTEMS ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>Operations &amp; Systems</h2>
+      <div class="rule"></div>
+      <p class="tag">A business that runs with or without you. Less shitshow, more smooth flow.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Traction</h3><span class="author">Gino Wickman</span><span class="badge">Read First</span><a class="buy" href="https://www.amazon.com/s?k=Traction+Gino+Wickman+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">The EOS operating system: vision, people, data, issues, process, traction. Wickman gives you the actual meeting rhythms, scorecards, and accountability charts that turn chaos into a machine.</p>
+      <p class="forward"><b>Look forward to</b>The Accountability Chart — the moment you realize your org chart is three people wearing nine hats, and how to fix it.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>If your business lives in your head, you don't own a business — it owns you. This is the book that gets it out of your head and onto paper. Game changing.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>The Remedy</h3><span class="author">Pascal Dennis</span><a class="buy" href="https://www.amazon.com/s?k=The+Remedy+Pascal+Dennis+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Lean thinking beyond the factory floor, told as a story. Dennis shows how waste hides in every process — waiting, rework, motion — and how continuous small improvements compound.</p>
+      <p class="forward"><b>Look forward to</b>Seeing your warehouse, your truck stock, and your dispatch board through lean eyes. You can't unsee the waste.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Every trip back to the supply house is waste. Every callback is waste. Lean isn't factory stuff — it's found money sitting in your daily routes.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>P4P: Why Hourly is a Failing Formula</h3><span class="author">Mike Andes</span><a class="buy" href="https://www.amazon.com/s?k=P4P%3A+Why+Hourly+is+a+Failing+Formula+Mike+Andes+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Andes makes the case for pay-for-performance over hourly wages: align pay with output and both the company and the best workers win. Includes real implementation details, not just theory.</p>
+      <p class="forward"><b>Look forward to</b>How P4P turns your best tech into a partner in efficiency instead of a clock-watcher.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Unhappy employed electricians are everywhere — and hourly pay that ignores performance is part of why. Pay your A-players like A-players. Watch what happens to your callbacks.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICE & CLIENT SUCCESS ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>Service &amp; Client Success</h2>
+      <div class="rule"></div>
+      <p class="tag">Service to others is the highest form of distinction. This is the home shelf.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Unreasonable Hospitality</h3><span class="author">Will Guidara</span><span class="badge">Read First</span><a class="buy" href="https://www.amazon.com/s?k=Unreasonable+Hospitality+Will+Guidara+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">How a restaurant became the best in the world by making hospitality — not food — the product. Guidara's stories of over-the-top care for guests will rewire how you think about every customer touchpoint.</p>
+      <p class="forward"><b>Look forward to</b>The hot dog story. That's all we'll say. It'll change how you think about "little bit extra" forever.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>This is the SLE philosophy in book form. That little bit extra for future service-ability isn't a cost — it's the whole strategy. Required reading, guys. Required.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Elevate: Build a Business Where Everybody Wins</h3><span class="author">Tommy Mello</span><a class="buy" href="https://www.amazon.com/s?k=Elevate%3A+Build+a+Business+Where+Everybody+Wins+Tommy+Mello+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">From a home-service operator who scaled a garage door company past $200M. Mello covers hiring, marketing, and culture in our world — trucks, techs, and tickets — from someone who's lived it.</p>
+      <p class="forward"><b>Look forward to</b>Real home-service numbers and playbooks from a guy who built it in a trade, not a boardroom.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Proof at scale that home service can be a great business for the owner, the techs, AND the customer. Everybody wins isn't a slogan — it's a design choice.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Customer Success Manifesto</h3><span class="author">Jay Goncalves</span><a class="buy" href="https://www.amazon.com/s?k=Customer+Success+Manifesto+Jay+Goncalves+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">How to get clients to stay longer, feel happier, and get better results — on purpose. Retention as a designed system: onboarding, milestones, and celebrated wins instead of hoping people stick around.</p>
+      <p class="forward"><b>Look forward to</b>Why the sale is the starting line, and how the first 30 days decide the next 5 years of that relationship.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Your service agreement members are your business. Treat renewal like it's earned every single month — because it is. Right?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ WEALTH & FINANCE ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>Wealth &amp; Finance</h2>
+      <div class="rule"></div>
+      <p class="tag">The business builds the wealth. The mindset decides if you keep it.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Profit First</h3><span class="author">Mike Michalowicz</span><span class="badge">Read First</span><a class="buy" href="https://www.amazon.com/s?k=Profit+First+Mike+Michalowicz+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Michalowicz flips the old formula. Instead of Sales &minus; Expenses = Profit, it becomes Sales &minus; Profit = Expenses. Take your profit first, in a separate account, and force the business to run on what's left. Built on human behavior, not accounting theory &mdash; which is exactly why it works.</p>
+      <p class="forward"><b>Look forward to</b>The bank account system &mdash; five accounts, two transfer days a month, and the "smaller plates" trick that makes overspending nearly impossible.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Profit isn't what's left over at the end of the year, guys. It's the first bill you pay. Set up the accounts this week &mdash; small percents adding up is the whole game. This one's non-negotiable on my list.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>The Science of Getting Rich</h3><span class="author">Wallace D. Wattles</span><a class="buy" href="https://www.amazon.com/s?k=The+Science+of+Getting+Rich+Wallace+D.+Wattles+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">A 1910 classic on wealth as a creative act, not a competitive one. Wattles argues for creating value rather than fighting over scraps — with a mental discipline that's aged surprisingly well.</p>
+      <p class="forward"><b>Look forward to</b>The creation-versus-competition mindset — the difference between undercutting the guy down the street and building something he can't copy.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Over a century old. Still true: there's no shortage of work, only a shortage of value created. Stop competing on price. Start creating.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>The Illusion of Money</h3><span class="author">Kyle Cease</span><a class="buy" href="https://www.amazon.com/s?k=The+Illusion+of+Money+Kyle+Cease+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">A challenge to the belief that money will fix how you feel. Cease argues that chasing the number from a place of fear costs you the exact creativity and presence that create real wealth.</p>
+      <p class="forward"><b>Look forward to</b>An uncomfortable question: what would you build if you weren't scared about money? Probably the thing you should be building.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Revenue goals matter. But if you hit a million and you're still anxious, still grinding, still missing dinner — did you win? This one's about the wealth behind the wealth.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ WILDCARD SHELF ═══════════════ -->
+<section class="shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <h2>The Wildcard Shelf</h2>
+      <div class="rule"></div>
+      <p class="tag">Not business books. Better-human books. The operator is a person first.</p>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>The Book of Ho'oponopono</h3><span class="author">Luc Bodin</span><a class="buy" href="https://www.amazon.com/s?k=The+Book+of+Ho%27oponopono+Luc+Bodin+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">The Hawaiian practice of forgiveness and cleaning — four phrases for releasing resentment and taking responsibility for your inner state. Simple, ancient, and surprisingly practical for a stressed operator.</p>
+      <p class="forward"><b>Look forward to</b>A 30-second practice you can run in the truck between a brutal call and your next customer's front door.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Carrying yesterday's bad customer into today's kitchen table costs you money and peace. This is how you set it down. Sounds soft. Works hard.</p></div>
+    </div>
+
+    <div class="book">
+      <div class="top"><h3>Sacred Journey of the Peaceful Warrior</h3><span class="author">Dan Millman</span><a class="buy" href="https://www.amazon.com/s?k=Sacred+Journey+of+the+Peaceful+Warrior+Dan+Millman+book" target="_blank" rel="noopener">Get it on Amazon &rarr;</a></div>
+      <p class="summary">Millman's story-driven philosophy on courage, presence, and the inner work behind any outer achievement. A book for the operator who's winning on paper and still searching for something.</p>
+      <p class="forward"><b>Look forward to</b>A story that reads like a novel and lands like a mirror. Best read slow, away from the phone.</p>
+      <div class="take"><div class="label">Clay's Take</div><p>Every once in a while, put the business books down. The person running the business needs building too. This one's for that.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="data:image/png;base64,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" alt="SLE">
+    <p class="cta">Read one. Run the play. <span class="gold">Then tell us what changed.</span></p>
+    <p class="contact">ServiceLoopElectrical.com &nbsp;·&nbsp; LevelUp@serviceloopelectrical.com</p>
+    <p class="prop">Property of Service Loop Electrical Inc</p>
+  </div>
+</footer>
+
+</body>
+</html>
