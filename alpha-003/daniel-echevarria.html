@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Daniel Echevarria · Keep Building · Camp Alpha 003</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500;1,600&family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0A0A0A;--surface:#161616;--surface-2:#1C1C1C;--border:#2A2A2A;--gold:#E3C575;--amber:#FDC33E;--dark-gold:#A78227;--navy:#1B2A45;--white:#FFFFFF;--text:#D8D6CF;--text-muted:#8A8780;--green-pill:#2D6A4F;--green-pill-hover:#1B4332;--blue-pill:#1B2A45;--blue-pill-hover:#0D1B2E;--serif:'Playfair Display',Georgia,serif;--sans:'Montserrat',system-ui,sans-serif;--body:'Open Sans',system-ui,sans-serif;}
+  *{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}body{font-family:var(--body);background:var(--black);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;}
+  nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+  .nav-brand{display:flex;align-items:center;gap:12px;}.nav-brand img{height:38px;}.nav-brand-text{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+  .nav-tag{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);border:1px solid var(--border);padding:5px 12px;border-radius:4px;}
+  .hero{position:relative;overflow:hidden;padding:5rem 2rem 4rem;text-align:center;background:linear-gradient(180deg,#0A0A0A 0%,#0f0f0f 100%);border-bottom:1px solid var(--border);}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(227,197,117,0.07) 0%,transparent 70%);pointer-events:none;}
+  .tier-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(227,197,117,0.1);border:1px solid rgba(227,197,117,0.3);color:var(--gold);font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:6px 16px;border-radius:4px;margin-bottom:2rem;}
+  .hero h1{font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);font-style:italic;color:var(--white);line-height:1.1;margin-bottom:1rem;}.hero h1 span{color:var(--gold);}
+  .hero-sub{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.5rem;}
+  .hero-record{max-width:680px;margin:0 auto 2.5rem;font-size:1.05rem;color:var(--text);line-height:1.8;}.hero-record strong{color:var(--amber);}
+  .gold-line{width:60px;height:2px;background:var(--gold);margin:0 auto 2rem;}
+  .cta-section{padding:3.5rem 2rem;max-width:860px;margin:0 auto;text-align:center;}
+  .cta-eyebrow{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;}
+  .cta-headline{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem);font-style:italic;color:var(--white);margin-bottom:0.75rem;}
+  .cta-sub{font-size:0.95rem;color:var(--text-muted);margin-bottom:2.5rem;}
+  .doors{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+  @media(max-width:600px){.doors{grid-template-columns:1fr;}}
+  .door{border-radius:10px;padding:2rem 1.5rem;text-align:center;text-decoration:none;display:block;transition:transform 0.2s,box-shadow 0.2s;}.door:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+  .door-label{font-family:var(--sans);font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:0.75rem;}
+  .door h3{font-family:var(--sans);font-size:1.1rem;font-weight:800;margin-bottom:0.5rem;}.door p{font-size:0.85rem;line-height:1.6;opacity:0.85;}
+  .door-green{background:var(--green-pill);border:1px solid rgba(45,106,79,0.6);color:#fff;}.door-green:hover{background:var(--green-pill-hover);}.door-green .door-label{color:#6FCF97;}
+  .door-blue{background:var(--blue-pill);border:1px solid rgba(27,42,69,0.8);color:#fff;}.door-blue:hover{background:var(--blue-pill-hover);}.door-blue .door-label{color:#90B4E6;}
+  .inner-loop{padding:4rem 2rem;background:var(--surface);border-top:1px solid var(--border);}.inner-loop-inner{max-width:860px;margin:0 auto;}
+  .section-eyebrow{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;}
+  .section-title{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.5rem);font-style:italic;color:var(--white);margin-bottom:1rem;line-height:1.2;}.section-title span{color:var(--gold);}
+  .section-body{font-size:0.95rem;color:var(--text);max-width:640px;margin-bottom:2.5rem;line-height:1.8;}
+  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-bottom:2.5rem;}
+  .feature{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:1.5rem;}.feature-icon{font-size:1.5rem;margin-bottom:0.75rem;}
+  .feature h4{font-family:var(--sans);font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;}.feature p{font-size:0.82rem;color:var(--text-muted);line-height:1.6;}
+  .founding-rate{background:linear-gradient(135deg,var(--navy) 0%,#0D1B2E 100%);border:1px solid rgba(227,197,117,0.25);border-radius:12px;padding:2rem;text-align:center;margin-bottom:2rem;}
+  .founding-rate h4{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;}
+  .founding-rate p{font-size:0.9rem;color:var(--text);line-height:1.7;}.founding-rate strong{color:var(--amber);}
+  .awards-section{padding:4rem 2rem;border-top:1px solid var(--border);}.awards-inner{max-width:860px;margin:0 auto;}
+  .awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2rem;}
+  .award-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;}.award-card img{width:100%;display:block;}
+  .note-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;max-width:680px;margin:0 auto 2rem;text-align:center;font-size:0.88rem;color:var(--text-muted);line-height:1.7;}
+  footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center;}
+  footer p{font-size:0.78rem;color:var(--text-muted);line-height:1.8;}footer a{color:var(--gold);text-decoration:none;}
+
+  .open-circuit{background:var(--surface);border:1px solid var(--border);border-radius:12px;max-width:680px;margin:0 auto 3rem;padding:2rem;text-align:center;}
+  .open-circuit h3{font-family:var(--serif);font-size:1.4rem;font-style:italic;color:var(--white);margin-bottom:0.5rem;}
+  .open-circuit p{font-size:0.9rem;color:var(--text-muted);margin-bottom:1.25rem;}
+  .oc-btn{display:inline-block;background:var(--gold);color:var(--black);font-family:var(--sans);font-size:0.85rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:0.75rem 2rem;border-radius:6px;text-decoration:none;transition:opacity 0.2s;}.oc-btn:hover{opacity:0.85;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand"><img src="assets/sle-logo-gold.png" alt="SLE"><div class="nav-brand-text">Service Loop Electrical</div></div>
+  <div class="nav-tag">From All of Us at SLE · Bronze</div>
+</nav>
+<section class="hero">
+  <div class="tier-badge">Keep Building</div>
+  <p class="hero-sub">Camp Alpha · Cohort 003 · July 2026</p>
+  <h1>Thank you,<br><span>Daniel.</span></h1>
+  <div class="gold-line"></div>
+  <p class="hero-record">You were with us at the start — three sessions in a row — and then the season pulled you away. <strong>No judgment. That is the reality of running a shop.</strong> The tools do not expire and neither does the door. You showed up, you did the work in front of you, and you added something to your cohort that wouldn't have been there without you. That's not a small thing. Most people never even start.</p>
+</section>
+<section class="cta-section">
+  <p class="cta-eyebrow">Two ways to keep building with us.</p>
+  <h2 class="cta-headline">The door's always open.</h2>
+  <p class="cta-sub">No pressure. No pitch. Just keep the momentum going.</p>
+  <div class="doors">
+    <a class="door door-green" href="https://www.electricserviceapp.com/checkout/open-circuit-service-loop" target="_blank" rel="noopener">
+      <div class="door-label">The Open Circuit</div>
+      <h3>Come spend time with us.</h3>
+      <p>Weekly group calls inside the SLE Pro app. $150/month. The reps you need, the room to do them in.</p>
+    </a>
+    <a class="door door-blue" href="https://app.serviceloopelectrical.com/call" target="_blank" rel="noopener">
+      <div class="door-label">15 Minutes with Daniel</div>
+      <h3>Let's talk it through.</h3>
+      <p>A strategy call to turn what you already learned into real traction.</p>
+    </a>
+  </div>
+  <div class="note-box">
+    Or stay right where you are: your group, the Night School areas, the podcast, the YouTube. That door's always open and it costs nothing. Questions any time: <a href="mailto:LevelUp@serviceloopelectrical.com" style="color:var(--gold);">LevelUp@serviceloopelectrical.com</a>
+  </div>
+</section>
+<section class="inner-loop">
+  <div class="inner-loop-inner">
+    <p class="section-eyebrow">The Foundation</p>
+    <h2 class="section-title">The basics, drilled to<br><span>muscle memory.</span></h2>
+    <p class="section-body">You've got the Service DNA™, the frameworks, the option sheets, the process. What turns all of that into results now isn't more information. It's action. Time. Reps. Joseph — who built a good part of what you just learned — attended the foundational program his own coaches ran for seven years straight. Because it's the basics, drilled to muscle memory, that create exceptional results.</p>
+    <div class="features">
+      <div class="feature"><div class="feature-icon">🔁</div><h4>Weekly Group Calls</h4><p>The Open Circuit keeps you in the rhythm — reps on the plays you already know, with people running the same ones.</p></div>
+      <div class="feature"><div class="feature-icon">🎙</div><h4>The Podcast & YouTube</h4><p>Free, always on, and packed with the same frameworks you started learning. Keep the feed going.</p></div>
+      <div class="feature"><div class="feature-icon">📱</div><h4>SLE Pro App</h4><p>Your Night School areas are still live. The tools don't expire. Come back when the timing is right.</p></div>
+      <div class="feature"><div class="feature-icon">🚪</div><h4>The Door Stays Open</h4><p>When you're ready to run a full camp, we'll be here. We'd rather see you run it right than rush it.</p></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <p>Property of Service Loop Electrical Inc · <a href="https://serviceloopelectrical.com">ServiceLoopElectrical.com</a> · <a href="mailto:LevelUp@serviceloopelectrical.com">LevelUp@serviceloopelectrical.com</a></p>
+  <p style="margin-top:0.5rem;">For Electricians, By Electricians · Camp Alpha · Cohort 003 · July 2026</p>
+</footer>
+</body>
+</html>

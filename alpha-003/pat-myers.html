@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pat Myers · Ambassador Invitation · Camp Alpha 003</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500;1,600&family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --surface: #161616;
+    --surface-2: #1C1C1C;
+    --border: #2A2A2A;
+    --gold: #E3C575;
+    --amber: #FDC33E;
+    --dark-gold: #A78227;
+    --navy: #1B2A45;
+    --white: #FFFFFF;
+    --text: #D8D6CF;
+    --text-muted: #8A8780;
+    --red: #CE302A;
+    --green-pill: #2D6A4F;
+    --green-pill-hover: #1B4332;
+    --blue-pill: #1B2A45;
+    --blue-pill-hover: #0D1B2E;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Montserrat', system-ui, sans-serif;
+    --body: 'Open Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--body); background: var(--black); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; }
+  .nav-brand img { height: 38px; }
+  .nav-brand-text { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .nav-tag { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--border); padding: 5px 12px; border-radius: 4px; }
+
+  /* HERO */
+  .hero { position: relative; overflow: hidden; padding: 5rem 2rem 4rem; text-align: center; background: linear-gradient(180deg, #0A0A0A 0%, #0f0f0f 100%); border-bottom: 1px solid var(--border); }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(227,197,117,0.07) 0%, transparent 70%); pointer-events: none; }
+  .tier-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(227,197,117,0.1); border: 1px solid rgba(227,197,117,0.3); color: var(--gold); font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px; border-radius: 4px; margin-bottom: 2rem; }
+  .tier-badge::before { content: '★'; font-size: 12px; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 4.5rem); font-style: italic; color: var(--white); line-height: 1.1; margin-bottom: 1rem; }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .hero-record { max-width: 680px; margin: 0 auto 2.5rem; font-size: 1.05rem; color: var(--text); line-height: 1.8; }
+  .hero-record strong { color: var(--amber); }
+
+  /* GOLD DIVIDER */
+  .gold-line { width: 60px; height: 2px; background: var(--gold); margin: 0 auto 2rem; }
+
+  /* CTA SECTION */
+  .cta-section { padding: 3.5rem 2rem; max-width: 860px; margin: 0 auto; text-align: center; }
+  .cta-eyebrow { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+  .cta-headline { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.2rem); font-style: italic; color: var(--white); margin-bottom: 0.75rem; }
+  .cta-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2.5rem; }
+  .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+  @media (max-width: 600px) { .doors { grid-template-columns: 1fr; } }
+  .door { border-radius: 10px; padding: 2rem 1.5rem; text-align: center; text-decoration: none; display: block; transition: transform 0.2s, box-shadow 0.2s; }
+  .door:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .door-label { font-family: var(--sans); font-size: 9px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .door h3 { font-family: var(--sans); font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .door p { font-size: 0.85rem; line-height: 1.6; opacity: 0.85; }
+  .door-green { background: var(--green-pill); border: 1px solid rgba(45,106,79,0.6); color: #fff; }
+  .door-green:hover { background: var(--green-pill-hover); }
+  .door-green .door-label { color: #6FCF97; }
+  .door-blue { background: var(--blue-pill); border: 1px solid rgba(27,42,69,0.8); color: #fff; }
+  .door-blue:hover { background: var(--blue-pill-hover); }
+  .door-blue .door-label { color: #90B4E6; }
+
+  /* PODCAST SECTION (Platinum only) */
+  .podcast-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; max-width: 680px; margin: 0 auto 3rem; padding: 2rem; text-align: center; }
+  .podcast-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(253,195,62,0.1); border: 1px solid rgba(253,195,62,0.3); color: var(--amber); font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 5px 14px; border-radius: 4px; margin-bottom: 1rem; }
+  .podcast-section h3 { font-family: var(--serif); font-size: 1.4rem; font-style: italic; color: var(--white); margin-bottom: 0.5rem; }
+  .podcast-section p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+  .podcast-btn { display: inline-block; background: var(--amber); color: var(--black); font-family: var(--sans); font-size: 0.85rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; transition: opacity 0.2s; }
+  .podcast-btn:hover { opacity: 0.85; }
+
+  /* INNER LOOP SALES */
+  .inner-loop { padding: 4rem 2rem; background: var(--surface); border-top: 1px solid var(--border); }
+  .inner-loop-inner { max-width: 860px; margin: 0 auto; }
+  .section-eyebrow { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .section-title { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-style: italic; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
+  .section-title span { color: var(--gold); }
+  .section-body { font-size: 0.95rem; color: var(--text); max-width: 640px; margin-bottom: 2.5rem; line-height: 1.8; }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+  .feature { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; }
+  .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .feature h4 { font-family: var(--sans); font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+  .feature p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+  .founding-rate { background: linear-gradient(135deg, var(--navy) 0%, #0D1B2E 100%); border: 1px solid rgba(227,197,117,0.25); border-radius: 12px; padding: 2rem; text-align: center; margin-bottom: 2rem; }
+  .founding-rate h4 { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .founding-rate p { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+  .founding-rate strong { color: var(--amber); }
+
+  /* AWARDS */
+  .awards-section { padding: 4rem 2rem; border-top: 1px solid var(--border); }
+  .awards-inner { max-width: 860px; margin: 0 auto; }
+  .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .award-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .award-card img { width: 100%; display: block; }
+
+  /* FOOTER */
+  footer { padding: 2.5rem 2rem; border-top: 1px solid var(--border); text-align: center; }
+  footer p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.8; }
+  footer a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <img src="assets/sle-logo-gold.png" alt="SLE">
+    <div class="nav-brand-text">Service Loop Electrical</div>
+  </div>
+  <div class="nav-tag">By Invitation Only · Platinum</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="tier-badge">Platinum · Ambassador Invitation</div>
+  <p class="hero-sub">Camp Alpha · Cohort 003 · July 2026</p>
+  <h1>Welcome back,<br><span>Pat.</span></h1>
+  <div class="gold-line"></div>
+  <p class="hero-record">
+    A <strong>$3,100 panel change became a $40,000 project</strong> in Week 1. Prices up 10% overnight behind a lifetime warranty — zero resistance. Memberships selling. And the one we tell other camps about: your newest salesman asked the permission question, presented six options, and closed his first platinum at <strong>$12,500 on a $1,000 call.</strong> The system didn't just work for you. It transferred through you.
+  </p>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="cta-eyebrow">So here's the ask. Two doors.</p>
+  <h2 class="cta-headline">Pick the one that's true today.</h2>
+  <p class="cta-sub">The green door locks your founding rate. The blue door gets you 15 minutes with Daniel.</p>
+  <div class="doors">
+    <a class="door door-green" href="https://www.electricserviceapp.com/checkout/spark-inner-loop-night-school-letter" target="_blank" rel="noopener">
+      <div class="door-label">The Green Door</div>
+      <h3>I'm in. Let's get it done.</h3>
+      <p>Lock your founding rate and start your Inner Loop onboarding today.</p>
+    </a>
+    <a class="door door-blue" href="https://app.serviceloopelectrical.com/call" target="_blank" rel="noopener">
+      <div class="door-label">The Blue Door</div>
+      <h3>Let's talk it through first.</h3>
+      <p>Book 15 minutes with Daniel to walk through the offer and ask anything.</p>
+    </a>
+  </div>
+
+  <!-- PODCAST (Platinum only) -->
+  <div class="podcast-section">
+    <div class="podcast-badge">🎙 Platinum Exclusive</div>
+    <h3>Your Chair on the Million Dollar Electrician™ Podcast</h3>
+    <p>Come tell the wins the next electrician needs to hear to believe it's possible. Your story — the salesman, the $12,500 close — is exactly what the next Pat Myers needs to hear.</p>
+    <a class="podcast-btn" href="#podcast-tbd" target="_blank" rel="noopener">Book Your Podcast Episode →</a>
+    <p style="margin-top:0.75rem; font-size:0.78rem; color:var(--text-muted);">Link coming soon — our team will reach out to schedule.</p>
+  </div>
+</section>
+
+<!-- INNER LOOP SALES -->
+<section class="inner-loop">
+  <div class="inner-loop-inner">
+    <p class="section-eyebrow">The Inner Loop</p>
+    <h2 class="section-title">Night School was the beginning.<br><span>This is where it compounds.</span></h2>
+    <p class="section-body">Not another course. The next year of building — shoulder to shoulder — with a team that only works with its best, and with high seven- and eight-figure operators passing their playbook straight to you. The pricing, the systems, the exit. We know the way there.</p>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🏗</div>
+        <h4>Monthly Live Build Sessions</h4>
+        <p>Nine more cohort-style sessions this year. Run the plays again — this time as someone who already speaks the language.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🤝</div>
+        <h4>The Room</h4>
+        <p>High seven- and eight-figure operators sharing what actually worked. No theory. Playbooks, not podcasts.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎙</div>
+        <h4>Podcast & Teach-Down (Platinum)</h4>
+        <p>A chair on the Million Dollar Electrician™ podcast and a spot at a future Night School. The people who changed our lives reached back.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📈</div>
+        <h4>Direct Access to Clay & Joseph</h4>
+        <p>The same operators who built the system, available to your specific situation — not a ticket queue.</p>
+      </div>
+    </div>
+    <div class="founding-rate">
+      <h4>Your Founding Rate</h4>
+      <p>Your seat holds at <strong>what you paid for Night School, every month, for as long as you stay</strong> — while the room itself runs $2,000 a month and up. One condition: you keep that number to yourself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards-section">
+  <div class="awards-inner">
+    <p class="section-eyebrow">Your Camp Alpha 003 Recognition</p>
+    <h2 class="section-title">What you earned.</h2>
+    <div class="awards-grid">
+      <div class="award-card">
+        <img src="assets/Patrick_Myers_MVE.png" alt="Patrick Myers - Most Valuable Electrician">
+      </div>
+      <div class="award-card">
+        <img src="assets/Patrick_Myers_IronMan.png" alt="Patrick Myers - Iron Man Award">
+      </div>
+      <div class="award-card">
+        <img src="assets/ALPHA-003-001_Patrick_Myers.png" alt="Patrick Myers - Certificate of Completion">
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Property of Service Loop Electrical Inc · <a href="https://serviceloopelectrical.com">ServiceLoopElectrical.com</a> · <a href="mailto:LevelUp@serviceloopelectrical.com">LevelUp@serviceloopelectrical.com</a></p>
+  <p style="margin-top:0.5rem;">For Electricians, By Electricians · Camp Alpha · Cohort 003 · July 2026</p>
+</footer>
+
+</body>
+</html>
