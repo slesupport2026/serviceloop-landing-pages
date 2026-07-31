@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Ambassador Invitation — Platinum | Off The Tools Night School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0A0A0A;
+      color: #FFFFFF;
+      font-family: 'Open Sans', sans-serif;
+      min-height: 100vh;
+    }
+    /* ── Geometric background texture ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        linear-gradient(135deg, rgba(227,197,117,0.04) 0%, transparent 50%),
+        linear-gradient(225deg, rgba(227,197,117,0.03) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding: 48px 0 32px;
+      border-bottom: 1px solid rgba(227,197,117,0.2);
+    }
+    header img.logo { width: 80px; margin-bottom: 20px; }
+    .tier-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #E3C575, #A78227);
+      color: #0A0A0A;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(28px, 6vw, 42px);
+      color: #E3C575;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    header p.sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ── Sections ── */
+    section { margin-top: 48px; }
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E3C575;
+      border-bottom: 1px solid rgba(227,197,117,0.3);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(22px, 4vw, 30px);
+      color: #FFFFFF;
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+    p { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.82); margin-bottom: 14px; }
+    p strong { color: #FFFFFF; }
+
+    /* ── What's Inside card ── */
+    .features { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+    .feature {
+      background: #1B2A45;
+      border-left: 3px solid #E3C575;
+      border-radius: 4px;
+      padding: 16px 20px;
+    }
+    .feature .f-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #E3C575;
+      margin-bottom: 4px;
+    }
+    .feature p { font-size: 14px; margin: 0; }
+
+    /* ── Coupon block ── */
+    .coupon-block {
+      background: rgba(227,197,117,0.08);
+      border: 1.5px solid rgba(227,197,117,0.35);
+      border-radius: 6px;
+      padding: 20px 24px;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .coupon-block .coupon-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 10px;
+    }
+    .coupon-code {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #E3C575;
+      letter-spacing: 4px;
+    }
+    .coupon-block .coupon-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+
+    /* ── CTA Buttons ── */
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      border-radius: 4px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn-green {
+      background: linear-gradient(135deg, #E3C575, #A78227);
+      color: #0A0A0A;
+    }
+    .btn-blue {
+      background: transparent;
+      border: 2px solid #E3C575;
+      color: #E3C575;
+    }
+    .btn-podcast {
+      background: #1B2A45;
+      border: 1px solid rgba(227,197,117,0.3);
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
+    }
+    .btn .btn-sub {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      opacity: 0.75;
+      margin-top: 3px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(227,197,117,0.15);
+      margin: 48px 0;
+    }
+
+    /* ── Inner Loop sales section ── */
+    .il-section { background: #111111; border-radius: 8px; padding: 32px 28px; margin-top: 48px; }
+    .il-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 24px;
+      color: #E3C575;
+      margin-bottom: 12px;
+    }
+    .il-pillars { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+    .il-pillar {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: rgba(255,255,255,0.8);
+    }
+    .il-pillar .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #E3C575; flex-shrink: 0; margin-top: 6px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(227,197,117,0.1);
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.8;
+    }
+    footer a { color: rgba(227,197,117,0.5); text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <header>
+    <img class="logo" src="assets/sle-logo-gold.png" alt="SLE Logo" />
+    <div class="tier-badge">Platinum — Ambassador</div>
+    <h1>The Ambassador Invitation</h1>
+    <p class="sub">Off The Tools Night School &nbsp;·&nbsp; Camp Alpha &nbsp;·&nbsp; Spring 2026</p>
+  </header>
+
+  <!-- What this page is -->
+  <section>
+    <div class="section-label">Your Next Step</div>
+    <h2>You earned this seat. Here's how to lock it in.</h2>
+    <p>This page has everything you need to take action on your Ambassador Invitation. Two doors below — pick the one that's true today. If you're ready to lock in your Inner Loop seat at your founding rate, use the green button. If you want to talk it through first, the blue button books 15 minutes with Daniel.</p>
+  </section>
+
+  <!-- Coupon -->
+  <div class="coupon-block">
+    <div class="coupon-label">Your Exclusive Discount Code</div>
+    <div class="coupon-code">OTT500</div>
+    <p class="coupon-desc">$500 off your Inner Loop membership — apply at checkout.<br/>This code is yours. Keep it to yourself.</p>
+  </div>
+
+  <!-- CTAs -->
+  <div class="cta-group">
+    <a href="https://www.electricserviceapp.com/checkout/spark-inner-loop-night-school-letter" class="btn btn-green">
+      Lock In My Inner Loop Seat
+      <span class="btn-sub">Use code OTT500 at checkout · Founding rate locked</span>
+    </a>
+    <a href="https://app.serviceloopelectrical.com/call" class="btn btn-blue">
+      Book 15 Min With Daniel
+      <span class="btn-sub">Talk it through before you decide</span>
+    </a>
+    <a href="https://noteforms.com/forms/podcast-form-mwxibt" class="btn btn-podcast">
+      🎙 Book Your Million Dollar Electrician Podcast Episode
+      <span class="btn-sub">Platinum members only — come tell your story</span>
+    </a>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Inner Loop Sales Section -->
+  <div class="il-section">
+    <div class="section-label">What Is The Inner Loop</div>
+    <h3>Where Night School graduates go to compound.</h3>
+    <p>Night School gave you the framework. The Inner Loop is where you build the business around it — shoulder to shoulder with high seven- and eight-figure operators, every single week.</p>
+    <div class="il-pillars">
+      <div class="il-pillar"><div class="dot"></div><span><strong>Weekly live sessions</strong> with Clay, Joseph, and the Inner Loop cohort — real-time diagnostics on your actual business.</span></div>
+      <div class="il-pillar"><div class="dot"></div><span><strong>The full playbook</strong> — pricing, sales, ops, hiring, marketing. Every system, every script, every tool.</span></div>
+      <div class="il-pillar"><div class="dot"></div><span><strong>A seat at the table</strong> — not a course, not a community. A room where the standard is already high and everyone is pulling each other up.</span></div>
+      <div class="il-pillar"><div class="dot"></div><span><strong>Podcast access</strong> — Platinum members get a chair on the Million Dollar Electrician podcast to tell their story and build their brand.</span></div>
+    </div>
+    <p style="font-size:13px; color:rgba(255,255,255,0.45); margin-top:16px;">The room runs at $2,000/month. Your founding rate holds at what you paid for Night School, every month, for as long as you stay.</p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Off The Tools™ Night School for Electricians</p>
+    <p>A Service Loop Electrical Program &nbsp;·&nbsp; For Electricians, By Electricians</p>
+    <p><a href="https://serviceloopelectrical.com">serviceloopelectrical.com</a> &nbsp;·&nbsp; <a href="mailto:levelup@serviceloopelectrical.com">levelup@serviceloopelectrical.com</a></p>
+    <p style="margin-top:12px;">Property of Service Loop Electrical Inc</p>
+  </footer>
+
+</div>
+</body>
+</html>
