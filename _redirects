@@ -46,12 +46,16 @@
 /cohort-hub    /cohort-a-hub/        301
 
 # ═══════════════════════════════════════════════════════════════
-# INNER LOOP — renamed interloop → innerloop (Jul 2026)
+# INNER LOOP — tier pages (Jul 2026)
+#   /innerloop-plat  Platinum · Ambassador Invitation
+#   /innerloop-gold  Gold · Inner Loop Invitation
 # ═══════════════════════════════════════════════════════════════
 
-# Catch the misspelling; anything already shared keeps working
-/interloop/*  /innerloop/:splat  301
-/interloop    /innerloop/        301
+# Earlier paths land on Platinum so nothing already shared breaks
+/innerloop/*  /innerloop-plat/:splat  301
+/innerloop    /innerloop-plat/        301
+/interloop/*  /innerloop-plat/:splat  301
+/interloop    /innerloop-plat/        301
 
 # ═══════════════════════════════════════════════════════════════
 # SERVICE DNA — Night School app
