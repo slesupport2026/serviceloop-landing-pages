@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Homeowner Feed — SLE Field Guide No. 03</title>
+<meta name="description" content="What to post when your customer is a homeowner, not another electrician. Fear, envy, suspicion — the three things that make a homeowner stop scrolling, and 30 posts built on them.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="icon" href="../favicon.png" type="image/png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Service Loop Electrical">
+<meta property="og:title" content="The Homeowner Feed — SLE Field Guide No. 03">
+<meta property="og:description" content="What to post when your customer is a homeowner, not another electrician.">
+<meta property="og:image" content="https://go.serviceloopelectrical.com/venus-flytrap/og-card.png">
+<meta property="og:url" content="https://go.serviceloopelectrical.com/venus-flytrap/homeowner/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0D0D; --bg2:#141414; --surface:#1A1A1A; --card:#1E1E1E;
+    --gold:#FDC33E; --gold-soft:#E3C575; --gold-dim:#8A6A22; --gold-wash:rgba(253,195,62,.075);
+    --ink:#F2F0EC; --ink-soft:#B5B2AB; --ink-faint:#86837C;
+    --rule:#2B2A28; --rule-soft:#1F1E1D;
+    --hot:#E8734A; --hot-wash:rgba(232,115,74,.09);
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    --display:'Playfair Display',Georgia,serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Consolas,'Liberation Mono',monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+       font-size:17.5px; line-height:1.68; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:800px; margin:0 auto; padding:0 24px 100px}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+
+  .mast{padding:52px 0 42px; border-bottom:1px solid var(--rule); text-align:center}
+  .logo{width:112px; height:auto; display:block; margin:0 auto 24px}
+  .brandbar{display:flex; flex-wrap:wrap; gap:9px; align-items:baseline; justify-content:center;
+            font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase;
+            color:var(--ink-faint); margin-bottom:24px}
+  .brandbar .mark{color:var(--gold); font-weight:700}
+  .brandbar .sep{color:var(--gold-dim)}
+  h1{font-weight:900; font-size:clamp(40px,8.4vw,68px); line-height:.97; letter-spacing:-.035em;
+     margin:0 0 20px; text-wrap:balance}
+  .deck{font-size:clamp(18px,2.5vw,22px); line-height:1.45; color:var(--ink-soft);
+        margin:0 auto 28px; max-width:36ch; text-wrap:balance}
+  .issue{display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+         text-transform:uppercase; color:var(--ink-faint); border:1px solid var(--rule); padding:8px 16px}
+  .issue b{color:var(--gold); font-weight:600}
+  .companion{margin-top:20px; font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; color:var(--ink-faint)}
+  .companion a{color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold-dim)}
+
+  section{padding-top:58px}
+  .eyebrow{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase;
+           color:var(--gold); margin:0 0 13px; font-weight:600}
+  h2{font-weight:800; font-size:clamp(28px,4.6vw,38px); line-height:1.08; letter-spacing:-.025em;
+     margin:0 0 20px; text-wrap:balance}
+  h3{font-weight:700; font-size:18.5px; line-height:1.35; letter-spacing:-.012em; margin:34px 0 10px}
+  p{margin:0 0 18px; max-width:66ch}
+  strong{font-weight:650; color:#fff}
+  a{color:var(--gold)}
+  .lead{font-size:19.5px; line-height:1.58}
+
+  ul{margin:0 0 18px; padding:0; list-style:none; max-width:66ch}
+  ul li{position:relative; padding-left:24px; margin-bottom:10px}
+  ul li::before{content:""; position:absolute; left:2px; top:.68em; width:7px; height:7px;
+                background:var(--gold); transform:rotate(45deg)}
+
+  blockquote{margin:34px 0; padding:26px 28px; background:var(--surface); border-left:3px solid var(--gold)}
+  blockquote p{font-family:var(--display); font-style:italic; font-weight:600; font-size:21px;
+               line-height:1.48; margin:0; color:#fff; max-width:none}
+
+  /* three drivers */
+  .drivers{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px;
+           background:var(--rule); border:1px solid var(--rule); margin:28px 0}
+  .driver{background:var(--card); padding:22px 20px}
+  .driver .dn{font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+              color:var(--gold); font-weight:700; margin-bottom:10px}
+  .driver .dq{font-size:17px; font-weight:700; color:#fff; line-height:1.35; margin-bottom:9px}
+  .driver p{margin:0; font-size:14.5px; line-height:1.55; color:var(--ink-soft); max-width:none}
+
+  /* translation table */
+  .tablebox{overflow-x:auto; margin:24px 0}
+  table{border-collapse:collapse; width:100%; min-width:520px; background:var(--card)}
+  th,td{text-align:left; padding:13px 15px; border-bottom:1px solid var(--rule-soft); vertical-align:top}
+  th{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+     color:var(--ink-faint); border-bottom:1px solid var(--rule); font-weight:600}
+  td{font-size:14.5px; line-height:1.55}
+  td.you{color:var(--ink-soft)}
+  td.them{color:#fff; font-weight:600}
+  td.fix{color:var(--gold-soft)}
+
+  .warn{margin:28px 0; padding:22px 24px; background:var(--hot-wash); border:1px solid var(--hot)}
+  .warn .tag{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.16em;
+             text-transform:uppercase; color:var(--hot); margin-bottom:10px; font-weight:700}
+  .warn p{margin:0 0 14px; max-width:none; font-size:16px; line-height:1.6}
+  .warn p:last-child{margin-bottom:0}
+
+  .note{margin:26px 0; padding:19px 21px; background:var(--gold-wash); border:1px solid var(--gold-dim)}
+  .note p{margin:0 0 12px; max-width:none; font-size:15px; line-height:1.6}
+  .note p:last-child{margin-bottom:0}
+  .note .tag{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.16em;
+             text-transform:uppercase; color:var(--gold); margin-bottom:9px; font-weight:600}
+
+  .bank{display:grid; gap:1px; background:var(--rule); border:1px solid var(--rule); margin:24px 0}
+  .post{background:var(--card); padding:19px 21px}
+  .post-top{display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; margin-bottom:8px}
+  .post-n{font-family:var(--mono); font-size:11px; font-weight:700; color:var(--gold);
+          border:1px solid var(--gold-dim); padding:2px 7px; white-space:nowrap}
+  .post-t{font-weight:700; font-size:16.5px; letter-spacing:-.01em; color:#fff}
+  .post p{margin:0 0 10px; font-size:15px; line-height:1.58; max-width:none; color:var(--ink-soft)}
+  .post p:last-child{margin-bottom:0}
+  .post .shot{display:block; font-family:var(--mono); font-size:11.5px; color:var(--gold-soft);
+              letter-spacing:.03em; margin-top:10px; line-height:1.55}
+  .post .shot b{color:var(--gold); font-weight:600}
+
+  .stagehead{display:flex; gap:14px; align-items:center; margin:44px 0 6px; flex-wrap:wrap}
+  .stagepill{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+             color:var(--bg); background:var(--gold); padding:5px 11px; font-weight:700}
+  .stagehead h3{margin:0; font-size:20px}
+
+  ol.breaks{counter-reset:b; list-style:none; padding:0; margin:24px 0; max-width:66ch}
+  ol.breaks li{counter-increment:b; position:relative; padding-left:46px; margin-bottom:19px}
+  ol.breaks li::before{content:counter(b); position:absolute; left:0; top:1px; font-family:var(--mono);
+    font-size:12px; font-weight:700; color:var(--gold); border:1px solid var(--gold-dim);
+    width:28px; height:28px; display:flex; align-items:center; justify-content:center}
+  ol.breaks b{font-size:16px; display:block; margin-bottom:3px; color:#fff}
+
+  .formula{border:1px solid var(--rule); background:var(--card); margin:24px 0; max-width:66ch}
+  .frow{display:flex; gap:16px; padding:14px 18px; border-bottom:1px solid var(--rule-soft)}
+  .frow:last-child{border-bottom:0}
+  .fk{flex:0 0 104px; font-family:var(--mono); font-size:10.5px; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--gold); padding-top:4px; font-weight:600}
+  .fv{font-size:15px; line-height:1.55}
+
+  footer{margin-top:76px; padding-top:30px; border-top:1px solid var(--rule); text-align:center}
+  .foot-logo{width:76px; height:auto; opacity:.85; margin:0 auto 16px; display:block}
+  .foot-tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-faint)}
+  .foot-tag b{color:var(--gold); font-weight:700}
+
+  @media print{ body{background:#fff; color:#000; font-size:11.5pt} .post,.bank,.drivers{break-inside:avoid} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <img class="logo" src="../sle-logo-gold.png" alt="Service Loop Electrical — For Electricians. By Electricians." width="112" height="94">
+    <div class="brandbar">
+      <span class="mark">Service Loop Electrical</span>
+      <span class="sep">/</span><span>Field Guide No. 03</span>
+      <span class="sep">/</span><span>Facebook</span>
+    </div>
+    <h1>The Homeowner Feed</h1>
+    <p class="deck">What to post when your customer is a homeowner — not another electrician.</p>
+    <span class="issue">Issued <b>September 2026</b> · Rev. 1</span>
+    <p class="companion">Part of the series: <a href="../">No. 01 The Venus Flytrap</a> · <a href="../post-bank/">No. 02 The Post Bank</a></p>
+  </header>
+
+  <section>
+    <p class="eyebrow">The hard part</p>
+    <h2>Nobody wants to follow an electrician</h2>
+    <p class="lead">Start here, because everything else depends on accepting it: homeowners do not care about electrical work. They think about it roughly twice a decade, both times because something went wrong.</p>
+    <p>They don't follow trades on Facebook. They don't want to learn about your craft. They will never be impressed by a perfectly dressed panel, because they can't read it — to them it's a grey box with wires in it.</p>
+    <p>This is the single biggest mistake electricians make on social media. You post the work you're proud of, and you're proud of it for reasons a homeowner has no way of seeing.</p>
+    <blockquote>
+      <p>Every post you make is competing with their kid's soccer photos. It has to earn the spot.</p>
+    </blockquote>
+    <p>So stop posting about electrical. Start posting about <strong>their house</strong>.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">The model</p>
+    <h2>Fear, envy, suspicion</h2>
+    <p>A homeowner stops scrolling on your post for one of three reasons. Every good post you will ever make runs on at least one of them. If a post doesn't hit one, don't post it.</p>
+
+    <div class="drivers">
+      <div class="driver">
+        <div class="dn">Driver 01 — Fear</div>
+        <div class="dq">"Is that in my house?"</div>
+        <p>Something is hiding behind their walls and they have no way to know. This is the strongest driver and the easiest one to abuse.</p>
+      </div>
+      <div class="driver">
+        <div class="dn">Driver 02 — Envy</div>
+        <div class="dq">"I want my house to look like that."</div>
+        <p>Pure aspiration. Lighting, fixtures, outdoor. The only driver that makes people save your post instead of just reading it.</p>
+      </div>
+      <div class="driver">
+        <div class="dn">Driver 03 — Suspicion</div>
+        <div class="dq">"Am I getting ripped off?"</div>
+        <p>Every homeowner is quietly afraid of being taken by a trade. Answer that honestly and you win before you quote.</p>
+      </div>
+    </div>
+
+    <p>There's a fourth thing, but it's not a driver — it's a trigger. <strong>Timing.</strong> Storm season, a heat wave, the December breaker trip, the day they get the keys. The same post lands ten times harder the week it's relevant.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">What's actually running</p>
+    <h2>The angles your competitors are paying for right now</h2>
+    <p>We pulled the live Facebook ad library for US electrical contractors running homeowner campaigns this month. Fifty-seven active ads. They cluster into five angles, and the clustering tells you where the money already believes the demand is.</p>
+
+    <div class="formula">
+      <div class="frow"><div class="fk">Panel age</div><div class="fv">"Is Your Electrical Panel Outdated?" — self-diagnosis. Makes them go look at their own panel. <span style="color:var(--ink-faint)">— Panel Swap Electric</span></div></div>
+      <div class="frow"><div class="fk">Fire</div><div class="fv">"Thousands of House Fires Start Like This" — pure fear hook. Widely used, easy to overcook. <span style="color:var(--ink-faint)">— Classic Electric Co</span></div></div>
+      <div class="frow"><div class="fk">Free / rebate</div><div class="fv">"See If You Qualify for a Free Upgrade" · "Free Electrical Panel Inspection" — the most-copied angle in the whole set.</div></div>
+      <div class="frow"><div class="fk">Instant price</div><div class="fv">"Instant EV Charger Install Estimate" — kills the "how much will this cost" anxiety up front. <span style="color:var(--ink-faint)">— Kurkov Electric</span></div></div>
+      <div class="frow"><div class="fk">Anti-sell</div><div class="fv">"Before you spend thousands on a panel upgrade, make sure you actually need one." — the smartest one in the set. <span style="color:var(--ink-faint)">— Arc Angel Services</span></div></div>
+    </div>
+
+    <p>That last one is worth stealing outright. It leads with <em>suspicion</em> — it takes the homeowner's side against the industry, including against itself. You can't buy trust faster than by telling someone they might not need to buy anything.</p>
+
+    <div class="warn">
+      <span class="tag">One tactic in there you should not copy</span>
+      <p>Several of those ads run from pages called things like "Colorado Homeowner News" and "Utah Homeowner News" — lead-gen operations dressed up as local news outlets, funnelling to "Free Electrical Panel Inspection."</p>
+      <p>It works, and it is exactly the thing that makes homeowners distrust every electrician who comes after. You're building a local business with your actual name on it. Don't borrow credibility you didn't earn — you'll spend the next five years paying it back.</p>
+    </div>
+
+    <div class="note">
+      <span class="tag">What this evidence is and isn't</span>
+      <p>The Ad Library shows what advertisers are <strong>running</strong>, not what's <strong>winning</strong> — there's no performance data attached. Repetition across many advertisers is a real signal that something works, but it's also partly everyone copying everyone. Treat it as a strong hint, not proof.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The fix nobody tells you</p>
+    <h2>You're photographing for the wrong eyes</h2>
+    <p>You take photos like an electrician. Your customer isn't one. Here's the translation.</p>
+
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>What you shot</th><th>What they see</th><th>Shoot this instead</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="you">A beautifully dressed panel</td>
+            <td class="them">A grey box</td>
+            <td class="fix">The same panel next to the one you pulled out. The contrast is the story, not the craft.</td>
+          </tr>
+          <tr>
+            <td class="you">Close-up of a scorched breaker</td>
+            <td class="them">An unidentifiable burnt thing</td>
+            <td class="fix">Pull back until the panel and the wall are in frame, so they can locate it in a real house.</td>
+          </tr>
+          <tr>
+            <td class="you">A clean termination</td>
+            <td class="them">Nothing at all</td>
+            <td class="fix">Skip it. This one is for your peers, not your market.</td>
+          </tr>
+          <tr>
+            <td class="you">New fixture, straight on</td>
+            <td class="them">A light</td>
+            <td class="fix">The whole room, lights off then on, camera locked in one position.</td>
+          </tr>
+          <tr>
+            <td class="you">Conduit run, perfectly level</td>
+            <td class="them">Pipes</td>
+            <td class="fix">Your hand or a tool in frame for scale, and the finished space behind it.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>One rule covers most of it: <strong>get the room in the shot.</strong> A homeowner needs to recognise the space as a house like theirs before anything in it means something.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">The bank · Driver 01</p>
+    <h2>Fear — "is that in my house?"</h2>
+    <p>Highest reach, highest share rate, easiest to get wrong. Every one of these must end by telling them something they can go and check themselves.</p>
+    <div class="bank">
+      <div class="post">
+        <div class="post-top"><span class="post-n">01</span><span class="post-t">"Go read the name on your panel door"</span></div>
+        <p>Zinsco, Federal Pacific, Challenger. Show what the label looks like, say what it means, tell them to go look. Specific beats scary.</p>
+        <span class="shot"><b>Why it travels:</b> it gives them a 30-second task. People comment with what they found, and every comment is a warm lead.</span>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">02</span><span class="post-t">The previous-owner special</span></div>
+        <p>Extension cord buried in a wall. Lamp cord feeding a garage. A splice with no box. Homeowners are all quietly worried about what the last guy did.</p>
+        <span class="shot"><b>Tone:</b> "this passed inspection in 1974" beats "this could kill your family."</span>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">03</span><span class="post-t">The five warning signs post</span></div>
+        <p>Flickering when the AC kicks on. Warm switch plates. Buzzing. Burning smell. Breakers that trip and trip. Plain list, no images needed.</p>
+        <span class="shot"><b>Format:</b> this is the single most saveable post in the whole guide. Make it a graphic they can screenshot.</span>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">04</span><span class="post-t">The space heater / power strip season post</span></div>
+        <p>Timed to first cold snap. What people daisy-chain every winter and what happens when they do.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">05</span><span class="post-t">"This is what we found behind a nursery wall"</span></div>
+        <p>Kids' rooms raise the stakes honestly, without you having to say anything dramatic. Use sparingly and never as a gimmick.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">06</span><span class="post-t">The smoke alarm age check</span></div>
+        <p>Almost nobody knows alarms expire. Show the date stamp on the back and tell them to flip theirs over.</p>
+        <span class="shot"><b>Bonus:</b> costs them nothing, helps them immediately, and half of them will find an expired one.</span>
+      </div>
+    </div>
+
+    <div class="warn">
+      <span class="tag">The line</span>
+      <p>Education and fearmongering look identical from ten feet. The difference is whether you tell them what to <em>do</em>. Ends with "check the label on your panel door" — education. Ends with "your family is at risk, call now" — fear, and they can smell it.</p>
+      <p>Get the facts straight. Electrical fires are a top-three cause of house fires, not number one. One commenter with Google will dismantle you in public.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The bank · Driver 02</p>
+    <h2>Envy — "I want my house to look like that"</h2>
+    <p>The only driver that gets you saved and sent to a spouse. Lower reach than fear, much higher intent. This is where under-cabinet lighting lives.</p>
+    <div class="bank">
+      <div class="post">
+        <div class="post-top"><span class="post-n">07</span><span class="post-t">Under-cabinet lighting, off → on</span></div>
+        <p>Locked-off camera, one frame dark, one lit. No talking, no explanation. The reveal is the entire post.</p>
+        <span class="shot"><b>Shot:</b> set the phone on the counter so both frames line up exactly. Alignment is what makes it satisfying.</span>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">08</span><span class="post-t">Builder-grade fixture → modern fixture</span></div>
+        <p>The boob light to a flush LED. Cheap job, huge visual delta, and the most relatable upgrade there is — almost every house has one.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">09</span><span class="post-t">Exterior lighting at dusk</span></div>
+        <p>Soffit lighting, path lights, uplit trees. Shoot both frames at the same hour. This is the best-looking thing you will ever post.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">10</span><span class="post-t">The dark room problem, solved</span></div>
+        <p>The gloomy hallway, the basement nobody uses, the kitchen with one ceiling light. Show the before honestly — ugly befores make better afters.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">11</span><span class="post-t">The garage glow-up</span></div>
+        <p>Two bare bulbs to proper LED bays, plus outlets where they're actually needed. Enormously popular and usually a same-day job.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">12</span><span class="post-t">Bathroom / vanity lighting</span></div>
+        <p>Bad lighting is the thing people hate most about their bathroom and can never name. Show them why.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">13</span><span class="post-t">The "we hid it" post</span></div>
+        <p>TV mounted with no visible cord. EV charger run cleanly. Homeowners assume mess is unavoidable — proving it isn't sells the job.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">14</span><span class="post-t">The outlet in the right place</span></div>
+        <p>Floor outlet under the couch. Outlet inside the vanity drawer. USB in the nightstand wall. Small, cheap, and people genuinely don't know they can ask for it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The bank · Driver 03</p>
+    <h2>Suspicion — "am I getting ripped off?"</h2>
+    <p>Lowest reach of the three. Highest conversion by a distance, because it disarms the exact objection that stops someone calling.</p>
+    <div class="bank">
+      <div class="post">
+        <div class="post-top"><span class="post-n">15</span><span class="post-t">"Here's what this actually cost"</span></div>
+        <p>A real job, a real number, and the breakdown. Nobody does this. The first electrician in your market who does owns the conversation.</p>
+        <span class="shot"><b>Nerve:</b> yes, competitors will see it. They already know your prices. Homeowners don't, and that's the gap costing you calls.</span>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">16</span><span class="post-t">"You probably don't need a panel upgrade"</span></div>
+        <p>When a panel is fine, say so publicly. Explain when it genuinely isn't. Takes their side against your own industry and buys enormous trust.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">17</span><span class="post-t">"Three questions to ask any electrician before you hire them"</span></div>
+        <p>License, insurance, who's actually doing the work. You'll pass all three. Most of the cheap guy won't.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">18</span><span class="post-t">Why the cheap quote was cheap</span></div>
+        <p>What gets left out — permits, materials, making good, warranty. Explain the mechanism, never name a competitor.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">19</span><span class="post-t">"What a permit actually does for you"</span></div>
+        <p>Most homeowners think a permit is a tax. Explain that it's an independent inspection they get for free, and cheap unpermitted work stops looking cheap.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">20</span><span class="post-t">The honest DIY post</span></div>
+        <p>Something they genuinely can do themselves — swapping a fixture, resetting a GFCI — and the clear line where it stops. Giving away the easy one proves you're not grabbing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The bank · Trigger</p>
+    <h2>Timing — the same post, ten times harder</h2>
+    <div class="bank">
+      <div class="post">
+        <div class="post-top"><span class="post-n">21</span><span class="post-t">The storm-week post</span></div>
+        <p>Written and ready before the forecast. Generator interlocks, what not to backfeed, what to do when it comes back on. Post it the day it's news.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">22</span><span class="post-t">First heat wave / AC load</span></div>
+        <p>Why the lights dim when the AC starts, and when that's normal versus when it isn't.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">23</span><span class="post-t">Holiday lighting, early</span></div>
+        <p>Posted in October, not December. Outdoor outlets, timers, why the breaker trips every year.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">24</span><span class="post-t">"Just bought a house?"</span></div>
+        <p>The five electrical things to check in the first month. New owners are the highest-intent audience in your entire market and they're actively looking.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">25</span><span class="post-t">The rebate deadline</span></div>
+        <p>A real program with a real expiry. Urgency you didn't have to manufacture.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The multiplier</p>
+    <h2>Local beats clever, every time</h2>
+    <p>You are not trying to go viral. You are trying to be known by a few thousand people who live within 30 minutes of your van. A post that reaches 400 of the right households beats one that reaches 400,000 of the wrong ones.</p>
+    <div class="bank">
+      <div class="post">
+        <div class="post-top"><span class="post-n">26</span><span class="post-t">Name the neighbourhood</span></div>
+        <p>"We were in [subdivision] this week." People who live there will find it, and it quietly tells everyone else you work in good areas.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">27</span><span class="post-t">The housing-stock post</span></div>
+        <p>"If your house was built between 1965 and 1975 around here, this is what's in your walls." Hyper-local, instantly relevant, impossible for a national page to copy.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">28</span><span class="post-t">The local utility explainer</span></div>
+        <p>Your actual power company, their actual programs, their actual process for a service upgrade. Nobody else is writing this.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">29</span><span class="post-t">Sponsorships and community</span></div>
+        <p>The team, the fundraiser, the food drive. Local credibility compounds in a way advertising can't buy.</p>
+      </div>
+      <div class="post">
+        <div class="post-top"><span class="post-n">30</span><span class="post-t">Answer the neighbourhood group question</span></div>
+        <p>When someone asks for an electrician recommendation in a local group, answer helpfully without pitching. Then post the same answer on your page.</p>
+        <span class="shot"><b>Note:</b> your page content and your presence in local groups feed each other. The group builds the reputation; the page holds it.</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">How to write it</p>
+    <h2>Caption rules for people who aren't electricians</h2>
+    <div class="formula">
+      <div class="frow"><div class="fk">No jargon</div><div class="fv">Not "double-tapped breaker." Say "two wires crammed under one screw that's only built for one."</div></div>
+      <div class="frow"><div class="fk">First line</div><div class="fv">Has to work alone — it's all most people see before "see more."</div></div>
+      <div class="frow"><div class="fk">Their house</div><div class="fv">Second person, always. "Your panel," not "this panel." "If your house was built before…"</div></div>
+      <div class="frow"><div class="fk">One takeaway</div><div class="fv">Something they can check, do, or look at today. Every post earns its spot by being useful once.</div></div>
+      <div class="frow"><div class="fk">No links</div><div class="fv">Outbound links get buried. If you need one, put it in the first comment.</div></div>
+      <div class="frow"><div class="fk">Close</div><div class="fv">A question, or "send this to someone who just bought a house." People share to look helpful.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Failure modes</p>
+    <h2>Five ways homeowner posts die</h2>
+    <ol class="breaks">
+      <li><b>Posting for other electricians.</b> If the only people who'd appreciate it own a set of Kleins, it's the wrong post for this page. Put it on your personal profile instead.</li>
+      <li><b>Hazard photos with no takeaway.</b> Without "here's what to check," it reads as fear. With it, it's the most useful thing in their feed that day.</li>
+      <li><b>Jargon.</b> The moment they have to look something up, they're gone.</li>
+      <li><b>Selling in every post.</b> Stage 1 and 2 don't ask for anything. If every post has a phone number, nobody follows the page.</li>
+      <li><b>Only posting finished work.</b> Nice photos of completed jobs are the lowest-performing content in this entire guide. The before is what makes the after mean anything.</li>
+    </ol>
+  </section>
+
+  <section>
+    <p class="eyebrow">Honest limits</p>
+    <h2>Prove this on your own page in 30 days</h2>
+    <div class="note">
+      <span class="tag">Where this comes from</span>
+      <p>The five live ad angles are real — pulled from Facebook's public ad library, US electrical contractors, active this month. What they show is where the money is going, not which ads are winning.</p>
+      <p>The 30 posts are built from that plus homeowner buying behaviour and the funnel logic in Guide No. 01. <strong>They are not measured</strong> — we don't run a residential service page, so nobody should hand you this as proven. It's a strong starting list, not a scoreboard.</p>
+    </div>
+    <p>Which is fine, because you can settle it yourself faster than anyone could settle it for you:</p>
+    <ul>
+      <li>Pick one post from each driver — one fear, one envy, one suspicion. Post one a week, unboosted.</li>
+      <li>Judge on <strong>shares and saves</strong>, not likes. Likes are politeness; shares are belief.</li>
+      <li>Whichever driver wins on your page, that's your market's temperament. Make three more of those.</li>
+      <li>Then put the $10/day behind the single best one and run the Venus Flytrap.</li>
+    </ul>
+    <p>Inside a month you'll know more about what your neighbourhood shares than any guide could tell you — and this list becomes a backup you've outgrown.</p>
+  </section>
+
+  <footer>
+    <img class="foot-logo" src="../sle-logo-gold.png" alt="" width="76" height="64">
+    <p class="foot-tag"><b>Service Loop Electrical</b> — For Electricians. By Electricians.</p>
+  </footer>
+
+</div>
+</body>
+</html>
