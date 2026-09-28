@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Venus Flytrap — SLE Field Guide</title>
+<meta name="description" content="How to build a Facebook audience that buys — without running a single ad campaign. A three-stage boosted-post funnel for residential electrical service businesses.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Service Loop Electrical">
+<meta property="og:title" content="The Venus Flytrap — SLE Field Guide">
+<meta property="og:description" content="How to build a Facebook audience that buys — without running a single ad campaign.">
+<meta property="og:image" content="https://go.serviceloopelectrical.com/venus-flytrap/og-card.png">
+<meta property="og:url" content="https://go.serviceloopelectrical.com/venus-flytrap/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0D0D;
+    --bg2:#141414;
+    --surface:#1A1A1A;
+    --card:#1E1E1E;
+    --gold:#FDC33E;
+    --gold-soft:#E3C575;
+    --gold-dim:#8A6A22;
+    --gold-wash:rgba(253,195,62,.075);
+    --ink:#F2F0EC;
+    --ink-soft:#B5B2AB;
+    --ink-faint:#86837C;
+    --rule:#2B2A28;
+    --rule-soft:#1F1E1D;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    --display:'Playfair Display',Georgia,serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Consolas,'Liberation Mono',monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-size:17.5px; line-height:1.68;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:800px; margin:0 auto; padding:0 24px 100px}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+
+  /* ---------- masthead ---------- */
+  .mast{padding:52px 0 42px; border-bottom:1px solid var(--rule); text-align:center}
+  .logo{width:132px; height:auto; display:block; margin:0 auto 26px}
+  .brandbar{
+    display:flex; flex-wrap:wrap; gap:9px; align-items:baseline; justify-content:center;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--ink-faint); margin-bottom:26px;
+  }
+  .brandbar .mark{color:var(--gold); font-weight:700}
+  .brandbar .sep{color:var(--gold-dim)}
+  h1{
+    font-family:var(--sans); font-weight:900; font-size:clamp(42px,9vw,74px);
+    line-height:.96; letter-spacing:-.035em; margin:0 0 20px; text-wrap:balance;
+  }
+  .deck{
+    font-size:clamp(18px,2.5vw,22px); line-height:1.45; color:var(--ink-soft);
+    margin:0 auto 30px; max-width:34ch; font-weight:400; text-wrap:balance;
+  }
+  .issue{
+    display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink-faint);
+    border:1px solid var(--rule); padding:8px 16px;
+  }
+  .issue b{color:var(--gold); font-weight:600}
+
+  /* ---------- sections ---------- */
+  section{padding-top:58px}
+  .eyebrow{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--gold); margin:0 0 13px; font-weight:600;
+  }
+  h2{
+    font-weight:800; font-size:clamp(28px,4.6vw,38px);
+    line-height:1.08; letter-spacing:-.025em; margin:0 0 20px; text-wrap:balance;
+  }
+  h3{
+    font-weight:700; font-size:18.5px; line-height:1.35;
+    letter-spacing:-.012em; margin:34px 0 10px;
+  }
+  p{margin:0 0 18px; max-width:66ch}
+  strong{font-weight:650; color:#fff}
+  em{font-style:italic}
+  a{color:var(--gold)}
+  .lead{font-size:19.5px; line-height:1.58; color:var(--ink)}
+
+  ul{margin:0 0 18px; padding:0; list-style:none; max-width:66ch}
+  ul li{position:relative; padding-left:24px; margin-bottom:10px}
+  ul li::before{
+    content:""; position:absolute; left:2px; top:.68em; width:7px; height:7px;
+    background:var(--gold); transform:rotate(45deg);
+  }
+
+  /* ---------- pull quote ---------- */
+  blockquote{
+    margin:34px 0; padding:26px 28px; background:var(--surface);
+    border-left:3px solid var(--gold);
+  }
+  blockquote p{
+    font-family:var(--display); font-style:italic; font-weight:600;
+    font-size:21px; line-height:1.48; margin:0 0 12px; color:#fff; max-width:none;
+  }
+  blockquote cite{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-faint); font-style:normal;
+  }
+
+  /* ---------- proof ---------- */
+  .proof{background:var(--surface); border:1px solid var(--rule); padding:30px 26px; margin:28px 0}
+  .proof-head{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:6px}
+  .proof-title{font-weight:700; font-size:15.5px; letter-spacing:-.01em}
+  .proof-src{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint)}
+  .chartbox{overflow-x:auto; margin:22px 0 4px}
+  .chartbox svg{display:block; width:100%; min-width:470px; height:auto}
+  .axis{font-family:var(--mono); font-size:11px; fill:var(--ink-faint)}
+  .callout{font-family:var(--sans); font-size:13px; font-weight:700; fill:var(--gold)}
+  .callout-sub{font-family:var(--mono); font-size:10.5px; fill:var(--ink-soft)}
+
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(152px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin:26px 0 0}
+  .stat{background:var(--card); padding:17px 18px}
+  .stat .n{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:26px; font-weight:600; color:var(--gold); line-height:1.1}
+  .stat .l{font-size:12.5px; line-height:1.45; color:var(--ink-soft); margin-top:8px}
+
+  .disclose{margin:24px 0 0; padding:19px 21px; background:var(--gold-wash); border:1px solid var(--gold-dim)}
+  .disclose p{font-size:15px; line-height:1.6; margin:0; max-width:none; color:var(--ink)}
+  .disclose .tag{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:9px; font-weight:600}
+
+  /* ---------- clips ---------- */
+  figure.clip{margin:30px 0; border:1px solid var(--rule); background:var(--surface); padding:0}
+  figure.clip video{display:block; width:100%; height:auto; aspect-ratio:16/9; background:#000}
+  figcaption{border-top:1px solid var(--rule); padding:13px 18px; display:flex; gap:14px; align-items:baseline; flex-wrap:wrap}
+  .tc{font-family:var(--mono); font-size:11.5px; font-weight:600; color:var(--gold); letter-spacing:.04em; white-space:nowrap}
+  figcaption .cap{font-size:13.5px; color:var(--ink-soft); line-height:1.5}
+
+  /* ---------- stage rail ---------- */
+  .stage{position:relative; padding-top:48px}
+  .stage-head{display:flex; gap:18px; align-items:flex-start; margin-bottom:8px}
+  .node{
+    flex:0 0 auto; width:48px; height:48px; border-radius:50%;
+    border:2px solid var(--gold); background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:17px; font-weight:700; color:var(--gold);
+    position:relative; z-index:2;
+  }
+  .stage-titles{padding-top:3px}
+  .stage-kicker{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 6px}
+  .stage-titles h2{margin:0; font-size:clamp(26px,4.2vw,33px)}
+  .stage-body{padding-left:66px}
+  .stage::before{content:""; position:absolute; left:23px; top:74px; bottom:-48px; width:2px; background:linear-gradient(var(--gold-dim),transparent); z-index:1}
+  .stage.last::before{display:none}
+  .goal{font-size:15.5px; font-weight:600; color:#fff; background:var(--gold-wash); border-left:3px solid var(--gold); padding:12px 16px; margin:0 0 22px; max-width:66ch}
+  @media (max-width:620px){ .stage-body{padding-left:0} .stage::before{display:none} }
+
+  /* ---------- spec ---------- */
+  .spec{border:1px solid var(--rule); background:var(--card); margin:22px 0; max-width:66ch}
+  .spec-row{display:flex; gap:16px; padding:12px 18px; border-bottom:1px solid var(--rule-soft)}
+  .spec-row:last-child{border-bottom:0}
+  .spec-k{flex:0 0 118px; font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint); padding-top:4px}
+  .spec-v{font-size:15px; line-height:1.55}
+  .spec-v b{font-weight:700; color:var(--gold)}
+
+  /* ---------- table ---------- */
+  .tablebox{overflow-x:auto; margin:24px 0}
+  table{border-collapse:collapse; width:100%; min-width:440px; background:var(--card)}
+  th,td{text-align:left; padding:13px 16px; border-bottom:1px solid var(--rule-soft)}
+  th{font-family:var(--mono); font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-faint); border-bottom:1px solid var(--rule); font-weight:600}
+  td{font-size:15px}
+  td.num{font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap}
+  tr.total td{border-bottom:0; border-top:2px solid var(--gold-dim); font-weight:700; padding-top:15px}
+  tr.total td.num{color:var(--gold)}
+
+  /* ---------- breaks ---------- */
+  ol.breaks{counter-reset:b; list-style:none; padding:0; margin:24px 0; max-width:66ch}
+  ol.breaks li{counter-increment:b; position:relative; padding-left:46px; margin-bottom:19px}
+  ol.breaks li::before{
+    content:counter(b); position:absolute; left:0; top:1px;
+    font-family:var(--mono); font-size:12px; font-weight:700; color:var(--gold);
+    border:1px solid var(--gold-dim); width:28px; height:28px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  ol.breaks b{font-size:16px; display:block; margin-bottom:3px; color:#fff}
+
+  /* ---------- weeks ---------- */
+  .weeks{border-top:2px solid var(--gold-dim); margin:26px 0 0; max-width:66ch}
+  .week{display:flex; gap:20px; padding:17px 0; border-bottom:1px solid var(--rule-soft)}
+  .week-k{flex:0 0 78px; font-family:var(--mono); font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); padding-top:3px}
+  .week-v{font-size:16px; line-height:1.55}
+
+  /* ---------- footer ---------- */
+  footer{margin-top:76px; padding-top:30px; border-top:1px solid var(--rule); text-align:center}
+  .foot-logo{width:76px; height:auto; opacity:.85; margin:0 auto 16px; display:block}
+  .foot-tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-faint)}
+  .foot-tag b{color:var(--gold); font-weight:700}
+
+  @media print{
+    body{background:#fff; color:#000; font-size:11.5pt}
+    .stage,figure.clip{break-inside:avoid}
+    figure.clip video{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <img class="logo" src="sle-logo-gold.png" alt="Service Loop Electrical — For Electricians. By Electricians." width="132" height="111">
+    <div class="brandbar">
+      <span class="mark">Service Loop Electrical</span>
+      <span class="sep">/</span><span>Field Guide No. 01</span>
+      <span class="sep">/</span><span>Facebook</span>
+    </div>
+    <h1>The Venus Flytrap</h1>
+    <p class="deck">How to build a Facebook audience that buys — without running a single ad campaign.</p>
+    <span class="issue">Issued <b>September 2026</b> · Rev. 3</span>
+  </header>
+
+  <section>
+    <p class="eyebrow">Why this exists</p>
+    <h2>You don't need an ad account. You need an audience.</h2>
+    <p class="lead">Most electricians who say they "run Facebook ads" are doing one thing: paying Meta for lead form fills. It works until it doesn't. The leads get worse, the cost climbs, and the day you shut the spend off, everything stops cold. You spent all that money and you own nothing.</p>
+    <p>The Venus Flytrap is the opposite. You use small boosted posts to pull homeowners onto your page, warm them up over a few weeks, then make them an offer. At the end you own the audience. Turn the money off and the followers are still sitting there.</p>
+    <p>It's simpler than an ad account. It's cheaper. And you can run the whole thing yourself from your phone.</p>
+    <blockquote>
+      <p>"I never did well with boosted posts when I was still in the field — boosting like any amateur out there. Because I never had a complete strategy."</p>
+      <cite>Clay Neumeyer, Service Loop Electrical</cite>
+    </blockquote>
+    <p>That's the difference. Boosting isn't the strategy. The order you boost things in is the strategy.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">The proof</p>
+    <h2>What happened when we ran it on our own page</h2>
+    <p>Below is the real follower curve for the Million Dollar Electrician Facebook page, straight out of our analytics. Flat for seven weeks. Then one boosted post.</p>
+
+    <div class="proof">
+      <div class="proof-head">
+        <span class="proof-title">Million Dollar Electrician — Facebook page followers</span>
+        <span class="proof-src">Vista Social · Apr 1 – Jul 29, 2026</span>
+      </div>
+      <div class="chartbox">
+        <svg viewBox="-52 -26 1084 396" role="img" aria-label="Follower count sits flat near 1,140 from mid-April through June 3, then rises sharply to 1,614 by June 11 and continues to 1,754 by July 29.">
+          <g stroke="var(--rule)" stroke-width="1">
+            <line x1="0" y1="320" x2="1000" y2="320"/>
+            <line x1="0" y1="240" x2="1000" y2="240" stroke="var(--rule-soft)"/>
+            <line x1="0" y1="160" x2="1000" y2="160" stroke="var(--rule-soft)"/>
+            <line x1="0" y1="80"  x2="1000" y2="80"  stroke="var(--rule-soft)"/>
+            <line x1="0" y1="0"   x2="1000" y2="0"   stroke="var(--rule-soft)"/>
+          </g>
+          <g class="axis" text-anchor="end">
+            <text x="-10" y="324">1,000</text><text x="-10" y="244">1,200</text>
+            <text x="-10" y="164">1,400</text><text x="-10" y="84">1,600</text>
+            <text x="-10" y="4">1,800</text>
+          </g>
+          <g class="axis">
+            <text x="0" y="344">APR</text><text x="252" y="344">MAY</text>
+            <text x="504" y="344">JUN</text><text x="756" y="344">JUL</text>
+          </g>
+          <line x1="529.4" y1="-14" x2="529.4" y2="320" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="4 4" opacity=".7"/>
+          <text class="callout" x="537" y="-14">Boosted post goes live — Jun 4</text>
+          <polyline points="0.0,315.2 8.4,311.6 16.8,310.4 25.2,308.8 33.6,305.6 42.0,301.6 50.4,297.6 58.8,292.8 67.2,288.8 75.6,284.8 84.0,281.6 92.4,275.2 100.8,270.8 109.2,267.2 117.6,266.8 126.1,266.0 134.5,266.0 142.9,265.6 151.3,265.6 159.7,265.6 168.1,265.2 176.5,265.6 184.9,265.6 193.3,265.6 201.7,265.2 210.1,264.8 218.5,264.8 226.9,264.8 235.3,264.8 243.7,263.6 252.1,263.6 260.5,262.8 268.9,262.4 277.3,262.0 285.7,260.0 294.1,258.0 302.5,259.2 310.9,258.0 319.3,258.8 327.7,256.4 336.1,257.2 344.5,256.8 352.9,257.6 361.3,258.4 369.7,257.6 378.2,256.8 386.6,256.8 395.0,256.8 403.4,256.4 411.8,256.4 420.2,255.2 428.6,255.2 437.0,253.2 445.4,252.8 453.8,252.4 462.2,252.4 470.6,252.0 479.0,252.0 487.4,251.2 495.8,250.8 504.2,251.2 512.6,250.0 521.0,248.0 529.4,246.8 537.8,219.6 546.2,166.8 554.6,143.2 563.0,120.0 571.4,106.4 579.8,86.8 588.2,76.8 596.6,74.4 605.0,73.2 613.4,72.8 621.8,72.4 630.3,72.0 638.7,70.8 647.1,68.8 655.5,66.4 663.9,66.0 672.3,65.6 680.7,65.2 689.1,63.6 697.5,62.0 705.9,62.4 714.3,61.2 722.7,60.4 731.1,59.2 739.5,56.4 747.9,54.4 756.3,53.2 764.7,50.4 773.1,49.6 781.5,48.4 789.9,46.8 798.3,47.2 806.7,46.4 815.1,45.2 823.5,44.4 831.9,42.4 840.3,42.8 848.7,42.4 857.1,40.4 865.5,40.4 873.9,39.6 882.4,39.2 890.8,36.8 899.2,35.2 907.6,33.2 916.0,32.4 924.4,30.8 932.8,29.2 941.2,28.8 949.6,27.6 958.0,26.4 966.4,24.8 974.8,24.0 983.2,22.8 991.6,20.0 1000.0,18.4" fill="none" stroke="var(--gold)" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="529.4" cy="246.8" r="5" fill="var(--surface)" stroke="var(--gold)" stroke-width="2.5"/>
+          <circle cx="596.6" cy="74.4" r="5" fill="var(--gold)"/>
+          <text class="callout-sub" x="608" y="58">1,614 by Jun 11</text>
+          <text class="callout-sub" x="430" y="268" text-anchor="end">1,183</text>
+        </svg>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="n">+1/day</div><div class="l">Follower growth for the seven weeks before the boost</div></div>
+        <div class="stat"><div class="n">+431</div><div class="l">Followers gained in the 8 days after it went live</div></div>
+        <div class="stat"><div class="n">+571</div><div class="l">Net followers gained over the 8 weeks following</div></div>
+        <div class="stat"><div class="n">478,532</div><div class="l">Peak single-day impressions, vs. a 65,000 baseline</div></div>
+      </div>
+
+      <div class="disclose">
+        <span class="tag">Read this before you read the chart</span>
+        <p>This is <b>our</b> page — Million Dollar Electrician, our free content brand for electricians. It is not an electrical service company selling panel upgrades to homeowners. The audience is different and we're still proving this out on the homeowner side. What transfers is the mechanic: one organic post that already won, boosted to strangers, converts attention into followers you own and can reach again for pennies. Judge it on the shape of that curve, not the size of the numbers.</p>
+      </div>
+    </div>
+
+    <p>The post itself, per Facebook's own post insights: <strong>1.3 million impressions, 14,000 likes, ~3,600 shares, ~600 comments.</strong> One post. One page. A boost budget in the low tens of dollars a day.</p>
+
+    <figure class="clip">
+      <video controls preload="metadata" playsinline src="clips/clip-4.mp4">
+        Your browser can't play embedded video. <a href="clips/clip-4.mp4">Download Clip 4</a>.
+      </video>
+      <figcaption>
+        <span class="tc">34:05 – 34:53</span>
+        <span class="cap">The winning post inside native Facebook insights.</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <p class="eyebrow">The mechanic</p>
+    <h2>Facebook is an attention highway</h2>
+    <p>Here's the part nobody explains to you.</p>
+    <p>Facebook gives <em>you</em>, the person, a house right on the highway. You can walk out front and put a sign up every day, and most of your friends will drive past and see it. Free.</p>
+    <p>But it makes your <em>business</em> sit behind the house. No frontage. A business post gets maybe a quarter of the reach your personal post gets — often less. And every single time you post from the business page, Facebook pops up and asks: <strong>do you want to boost this post?</strong></p>
+    <p>That's not a trick. That's the toll for getting your business out to the highway. The Venus Flytrap is just paying that toll in the right order.</p>
+
+    <figure class="clip">
+      <video controls preload="metadata" playsinline src="clips/clip-2.mp4">
+        Your browser can't play embedded video. <a href="clips/clip-2.mp4">Download Clip 2</a>.
+      </video>
+      <figcaption>
+        <span class="tc">31:32 – 32:19</span>
+        <span class="cap">The house-on-the-highway explanation, start to finish. The clearest 45 seconds in the whole thing.</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <p class="eyebrow">Before you start</p>
+    <h2>Three rules that make or break it</h2>
+    <h3>1. Everything runs off the business page.</h3>
+    <p>Your personal page might get better engagement today. Doesn't matter. You can't boost from a personal profile and you can't build a retargetable audience there.</p>
+    <h3>2. Never hit "Share" from your personal page to the business page.</h3>
+    <p>A share is a dead post. Almost no reach, and you can't boost it. Instead: copy the text, re-upload the photo or video, and post it fresh on the business page. Forty extra seconds, and it's the difference between 200 views and 20,000.</p>
+    <h3>3. You are not selling in stage one. You're collecting.</h3>
+    <p>If your first boosted post has a phone number and a discount in it, you built a bad ad, not a flytrap. Selling comes in stage three — after they already know who you are.</p>
+  </section>
+
+  <section class="stage">
+    <div class="stage-head">
+      <div class="node">1</div>
+      <div class="stage-titles"><p class="stage-kicker">Top of funnel</p><h2>The Magnet</h2></div>
+    </div>
+    <div class="stage-body">
+      <p class="goal">Goal: get strangers in your service area to follow the page.</p>
+      <p>One piece of genuinely useful, local, free content. Not an ad. Something a homeowner actually wants to keep.</p>
+      <ul>
+        <li>Every rebate and energy credit available in your state and utility district this year</li>
+        <li>"The 7 things in your panel your home inspector never looks at"</li>
+        <li>A straight explainer on what's really driving their power bill</li>
+        <li>A local meme or a genuinely funny jobsite moment — engagement is engagement</li>
+      </ul>
+      <p>The rebate guide is the strongest play, because it's local, it's specific, and nobody else bothered to make it. Sit down with Claude or ChatGPT, feed it your state and your utilities, and have it pull the current programs together. <strong>Then check the numbers yourself before you publish.</strong> Your name is on it.</p>
+      <p>Or do what we did — take the post that already won organically and put it to work. Don't guess at what people want. Look at what already got shared 3,600 times, and pay to show it to more people.</p>
+
+      <figure class="clip">
+        <video controls preload="metadata" playsinline src="clips/clip-5.mp4">
+          Your browser can't play embedded video. <a href="clips/clip-5.mp4">Download Clip 5</a>.
+        </video>
+        <figcaption>
+          <span class="tc">35:01 – 35:33</span>
+          <span class="cap">"This performed better than all other content, so let's boost it."</span>
+        </figcaption>
+      </figure>
+
+      <h3>How to post it</h3>
+      <ul>
+        <li>Put the guide, or the link to it, right in the caption</li>
+        <li>End with a direct ask: <em>"Follow the page — we post this stuff every week."</em></li>
+        <li>No phone number. No "call for a free estimate." Not yet.</li>
+      </ul>
+
+      <div class="spec">
+        <div class="spec-row"><div class="spec-k">Budget</div><div class="spec-v"><b>$10/day for 30 days</b> — about $300</div></div>
+        <div class="spec-row"><div class="spec-k">Audience</div><div class="spec-v">Your service radius · homeowners · 30+</div></div>
+        <div class="spec-row"><div class="spec-k">Objective</div><div class="spec-v">Engagement or page likes — <b>not</b> lead generation</div></div>
+        <div class="spec-row"><div class="spec-k">Watch for</div><div class="spec-v">Follower count and cost per follower, weekly</div></div>
+      </div>
+
+      <p>Your target is a few hundred to a couple thousand new local followers in that first month. Treat that as the direction you're steering, not a promise — cost per follower swings with your market and how good the post is. Judge the post, not the plan.</p>
+
+      <figure class="clip">
+        <video controls preload="metadata" playsinline src="clips/clip-3.mp4">
+          Your browser can't play embedded video. <a href="clips/clip-3.mp4">Download Clip 3</a>.
+        </video>
+        <figcaption>
+          <span class="tc">32:19 – 33:26</span>
+          <span class="cap">Why the business name has to ride along on the post — not just a meme, a meme with your name on top.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="stage">
+    <div class="stage-head">
+      <div class="node">2</div>
+      <div class="stage-titles"><p class="stage-kicker">Middle of funnel</p><h2>Build the Trust</h2></div>
+    </div>
+    <div class="stage-body">
+      <p class="goal">Goal: those new followers know your name. Now make them trust you — before you ask for a dollar.</p>
+      <p>You're now boosting <strong>to your own followers only</strong>. That's the whole trick. Tiny budget, warm audience, nothing wasted on strangers.</p>
+
+      <h3>Proof you're legit</h3>
+      <ul>
+        <li>Local awards and readers'-choice wins</li>
+        <li>Real reviews, screenshotted</li>
+        <li>Your crew, your trucks, your community involvement</li>
+        <li>Years in business, licensing, who you actually are</li>
+      </ul>
+
+      <h3>Proof the problem is real</h3>
+      <ul>
+        <li>A burned exterior panel you pulled last month</li>
+        <li>A Zinsco or Federal Pacific breaker that didn't trip</li>
+        <li>Scorched wiring behind a receptacle</li>
+        <li>Walk through what you found and what it would have caused</li>
+      </ul>
+
+      <p>The hazard posts are the engine. But there's a line and it matters: <strong>you're educating, not scaring.</strong> Explain what it is, why it happens, what to look for. Don't imply their house burns down tonight. Homeowners can smell fearmongering, and it costs you the trust you just spent thirty days buying.</p>
+      <p>And get your facts straight before you post. Electrical fires are a top-three cause of house fires — not number one. Overstate it and one commenter with Google torches your credibility in public.</p>
+
+      <div class="spec">
+        <div class="spec-row"><div class="spec-k">Budget</div><div class="spec-v"><b>~$4/day</b> per post</div></div>
+        <div class="spec-row"><div class="spec-k">Audience</div><div class="spec-v">People who already follow your page</div></div>
+        <div class="spec-row"><div class="spec-k">Cadence</div><div class="spec-v">2–4 of these per month · roughly $120/mo</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage last">
+    <div class="stage-head">
+      <div class="node">3</div>
+      <div class="stage-titles"><p class="stage-kicker">Bottom of funnel</p><h2>The Offer</h2></div>
+    </div>
+    <div class="stage-body">
+      <p class="goal">Goal: now you ask.</p>
+      <p>By now your followers have gotten something useful from you, seen your work, seen your awards, and seen what a bad panel actually looks like. The resistance is already gone. You are not cold-calling anybody.</p>
+      <ul>
+        <li><strong>Panel Awareness Month</strong> — name the specific brands and conditions you're pulling out of houses in your area, then make an offer on inspections or replacements</li>
+        <li>A seasonal offer tied to something real — storm season, holiday load, AC season</li>
+        <li>A flat-rate safety inspection at a clear price</li>
+      </ul>
+      <p>Same small daily budget, same follower audience. Run it for a defined window and <strong>stop</strong>. An offer that runs forever isn't an offer.</p>
+      <p>Then go back to Stage 1 and feed the top again.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The money</p>
+    <h2>What this costs</h2>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Stage</th><th>Daily</th><th>Monthly</th></tr></thead>
+        <tbody>
+          <tr><td>Magnet — top of funnel</td><td class="num">$10</td><td class="num">~$300</td></tr>
+          <tr><td>Trust posts — middle</td><td class="num">~$4</td><td class="num">~$120</td></tr>
+          <tr><td>Offer — bottom</td><td class="num">~$4</td><td class="num">~$120</td></tr>
+          <tr class="total"><td>Running total</td><td class="num">—</td><td class="num">$300 – $540</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Month one is the heaviest, because you're filling the top from zero. Once the audience is built you can dial the top-of-funnel spend down and keep feeding the middle.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">The comments</p>
+    <h2>Somebody's going to be a jerk</h2>
+    <ul>
+      <li><strong>Trolls:</strong> ignore them, or delete if it's quick. Never argue in public. Nobody has ever won one of those.</li>
+      <li><strong>Competitors</strong> showing up to stir things: hide the comment, block the profile, move on.</li>
+      <li><strong>A real customer with a real complaint:</strong> answer publicly, once, short and professional — then take it to DM. Handled well in public, this sells harder than any post you could write.</li>
+    </ul>
+    <p>Hiding beats deleting. The person who wrote it still sees it, so they don't escalate — but nobody else does.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">The scoreboard</p>
+    <h2>What to actually watch</h2>
+    <p>Forget impressions. Four numbers.</p>
+    <ul>
+      <li><strong>Follower growth</strong> — is the top of funnel working?</li>
+      <li><strong>Cost per follower</strong> — total boost spend ÷ new followers</li>
+      <li><strong>Engagement on follower-targeted posts</strong> — is the middle actually warm?</li>
+      <li><strong>Calls and booked jobs that mention Facebook</strong> — ask every caller, write it down. This is the only number that pays you.</li>
+    </ul>
+    <p>Give it 90 days before you judge the strategy. Judge individual posts weekly and kill the ones that flop.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Failure modes</p>
+    <h2>Five ways this gets broken</h2>
+    <ol class="breaks">
+      <li><b>Selling in Stage 1.</b> The magnet post has a phone number and a coupon on it. Congratulations, you built a bad ad.</li>
+      <li><b>Sharing instead of reposting.</b> Kills your reach and you can't boost it.</li>
+      <li><b>Boosting hazard posts to strangers.</b> Out of context you look like you're scaring people for money. Those are for followers only.</li>
+      <li><b>Going quiet after month one.</b> The audience you paid to build goes cold and you got nothing for it.</li>
+      <li><b>Making it about you.</b> Every post answers "why does a homeowner care?" — not "look what we did."</li>
+    </ol>
+  </section>
+
+  <section>
+    <p class="eyebrow">Get moving</p>
+    <h2>Your first 30 days</h2>
+    <div class="weeks">
+      <div class="week"><div class="week-k">Week 1</div><div class="week-v">Clean up the business page — hours, service area, photos, a real profile picture. Build the rebate or energy-savings guide. Check the facts.</div></div>
+      <div class="week"><div class="week-k">Week 2</div><div class="week-v">Post the magnet. Turn on the $10/day boost. Leave it alone.</div></div>
+      <div class="week"><div class="week-k">Week 3</div><div class="week-v">Post your first trust piece. Boost to followers at $4/day.</div></div>
+      <div class="week"><div class="week-k">Week 4</div><div class="week-v">Post your first hazard breakdown. Boost to followers. Check follower count and cost per follower.</div></div>
+      <div class="week"><div class="week-k">Day 30</div><div class="week-v">Decide. Is the magnet working? If yes, keep it running and start building the Stage 3 offer. If not, write a better magnet — the problem is the content, not the strategy.</div></div>
+    </div>
+  </section>
+
+  <footer>
+    <img class="foot-logo" src="sle-logo-gold.png" alt="" width="76" height="64">
+    <p class="foot-tag"><b>Service Loop Electrical</b> — For Electricians. By Electricians.</p>
+  </footer>
+
+</div>
+</body>
+</html>
