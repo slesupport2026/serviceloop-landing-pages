@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stop Driving Past It — The X-Ray Advantage Playbook</title>
+<meta name="description" content="A field playbook for service electricians. Stop driving past the work you're paying to find — thank the customer properly, invite the referral, ask for the sign, and work the neighborhood around the job you just finished.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="icon" href="../venus-flytrap/favicon.png" type="image/png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Service Loop Electrical">
+<meta property="og:title" content="Stop Driving Past It — The X-Ray Advantage Playbook">
+<meta property="og:description" content="Stop driving past the work you're paying to find. A field playbook for service electricians.">
+<meta property="og:image" content="https://go.serviceloopelectrical.com/venus-flytrap/og-card.png">
+<meta property="og:url" content="https://go.serviceloopelectrical.com/goodneighbor/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0D0D; --bg2:#141414; --surface:#1A1A1A; --card:#1E1E1E; --card2:#232323;
+    --gold:#FDC33E; --gold-soft:#E3C575; --gold-dim:#8A6A22; --gold-wash:rgba(253,195,62,.075);
+    --ink:#F2F0EC; --ink-soft:#B5B2AB; --ink-faint:#86837C;
+    --rule:#2B2A28; --rule-soft:#1F1E1D;
+    --hot:#E8734A; --hot-wash:rgba(232,115,74,.09);
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    --display:'Playfair Display',Georgia,serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Consolas,'Liberation Mono',monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:70px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+       font-size:17.5px; line-height:1.68; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:810px; margin:0 auto; padding:0 24px 110px}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+
+  /* sticky bar */
+  .bar{position:sticky; top:0; z-index:50; background:rgba(13,13,13,.94);
+       backdrop-filter:blur(8px); border-bottom:1px solid var(--rule)}
+  .bar-in{max-width:810px; margin:0 auto; padding:11px 24px; display:flex;
+          justify-content:space-between; align-items:center; gap:14px;
+          font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase}
+  .bar-t{color:var(--ink-faint); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .bar-t b{color:var(--gold); font-weight:700}
+  .bar a{color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold-dim); white-space:nowrap}
+
+  /* cover */
+  .cover{padding:58px 0 46px; border-bottom:1px solid var(--rule); text-align:center}
+  .logo{width:118px; height:auto; display:block; margin:0 auto 26px}
+  .kicker{font-family:var(--mono); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase;
+          color:var(--gold); margin:0 0 22px; font-weight:600}
+  h1{font-weight:900; font-size:clamp(48px,12vw,104px); line-height:.86; letter-spacing:-.045em;
+     margin:0 0 22px; text-transform:uppercase}
+  .sub{font-size:clamp(18px,2.6vw,23px); line-height:1.4; color:var(--ink-soft);
+       margin:0 auto 10px; max-width:24ch; font-weight:500}
+  .tag{font-family:var(--display); font-style:italic; font-weight:600; font-size:clamp(17px,2.4vw,21px);
+       color:var(--gold); margin:18px auto 30px; max-width:30ch; line-height:1.4}
+  .issue{display:inline-block; font-family:var(--mono); font-size:10.5px; letter-spacing:.16em;
+         text-transform:uppercase; color:var(--ink-faint); border:1px solid var(--rule); padding:8px 16px}
+  .issue b{color:var(--gold); font-weight:600}
+
+  /* contents */
+  .toc{margin:52px 0 0; border-top:2px solid var(--gold-dim)}
+  .toc h2{font-size:22px; margin:26px 0 6px}
+  .toc .hint{font-size:15.5px; color:var(--ink-soft); margin:0 0 22px; max-width:62ch}
+  .toc ol{list-style:none; counter-reset:toc; padding:0; margin:0}
+  .toc li{counter-increment:toc; border-bottom:1px solid var(--rule-soft)}
+  .toc a{display:flex; gap:16px; align-items:baseline; padding:12px 2px;
+         color:var(--ink); text-decoration:none; font-size:16.5px}
+  .toc a:hover,.toc a:focus-visible{color:var(--gold)}
+  .toc a::before{content:counter(toc,decimal-leading-zero); font-family:var(--mono);
+                 font-size:11.5px; color:var(--gold); flex:0 0 26px; font-weight:700}
+  .toc .ax a::before{content:"APX"; font-size:10px; letter-spacing:.06em}
+  .quick{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1px;
+         background:var(--rule); border:1px solid var(--rule); margin:30px 0 0}
+  .quick div{background:var(--card); padding:15px 17px}
+  .quick b{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.14em;
+           text-transform:uppercase; color:var(--gold); margin-bottom:5px}
+  .quick span{font-size:14.5px; color:var(--ink-soft)}
+
+  /* sections */
+  section{padding-top:64px}
+  .num{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase;
+       color:var(--gold); margin:0 0 12px; font-weight:600}
+  h2{font-weight:800; font-size:clamp(28px,4.7vw,40px); line-height:1.06; letter-spacing:-.028em;
+     margin:0 0 20px; text-wrap:balance}
+  h3{font-weight:700; font-size:19.5px; line-height:1.32; letter-spacing:-.012em; margin:38px 0 12px; color:#fff}
+  h4{font-weight:700; font-size:16.5px; margin:26px 0 8px; color:var(--gold-soft)}
+  p{margin:0 0 18px; max-width:66ch}
+  strong{font-weight:650; color:#fff}
+  em{font-style:italic}
+  a{color:var(--gold)}
+  .lead{font-size:19.5px; line-height:1.56}
+  .punch{font-size:19px; font-weight:650; color:#fff; border-left:3px solid var(--gold);
+         padding:3px 0 3px 18px; margin:26px 0; max-width:62ch; line-height:1.48}
+
+  ul{margin:0 0 18px; padding:0; list-style:none; max-width:66ch}
+  ul li{position:relative; padding-left:24px; margin-bottom:10px}
+  ul li::before{content:""; position:absolute; left:2px; top:.68em; width:7px; height:7px;
+                background:var(--gold); transform:rotate(45deg)}
+
+  blockquote{margin:34px 0; padding:26px 28px; background:var(--surface); border-left:3px solid var(--gold)}
+  blockquote p{font-family:var(--display); font-style:italic; font-weight:600; font-size:21px;
+               line-height:1.46; margin:0; color:#fff; max-width:none}
+
+  /* script blocks — the dominant content type */
+  .say{margin:22px 0; border:1px solid var(--rule); background:var(--card); border-left:3px solid var(--gold)}
+  .say-h{font-family:var(--mono); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase;
+         color:var(--gold); padding:10px 20px 0; font-weight:700}
+  .say p{margin:0; padding:9px 20px 16px; font-size:17px; line-height:1.6; color:#fff; max-width:none}
+  .say p + p{padding-top:0}
+  .say p + p::before{content:""; display:block; height:1px; background:var(--rule-soft);
+                     margin:0 0 14px; width:46px}
+  .cue{font-size:15.5px; line-height:1.6; color:var(--ink-soft); font-style:italic;
+       margin:0 0 20px; max-width:64ch; padding-left:18px; border-left:1px solid var(--rule)}
+  .cue b{font-style:normal; color:var(--gold-soft); font-weight:600}
+
+  /* objection cards */
+  .obj{margin:30px 0 0; border:1px solid var(--rule); background:var(--surface); padding:0}
+  .obj-h{background:var(--card2); padding:15px 20px; border-bottom:1px solid var(--rule)}
+  .obj-h .lbl{display:block; font-family:var(--mono); font-size:9.5px; letter-spacing:.18em;
+              text-transform:uppercase; color:var(--ink-faint); margin-bottom:5px}
+  .obj-h .q{font-size:19px; font-weight:700; color:#fff; line-height:1.3}
+  .obj-b{padding:18px 20px 6px}
+  .obj-b .say{margin:0 0 18px; border-left-width:3px; background:var(--card2)}
+  .obj-b .cue{margin-bottom:18px}
+  .obj-b p{max-width:none; font-size:16px}
+
+  /* tables */
+  .tablebox{overflow-x:auto; margin:24px 0}
+  table{border-collapse:collapse; width:100%; min-width:540px; background:var(--card)}
+  th,td{text-align:left; padding:13px 15px; border-bottom:1px solid var(--rule-soft); vertical-align:top}
+  th{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+     color:var(--ink-faint); border-bottom:1px solid var(--rule); font-weight:600}
+  td{font-size:14.8px; line-height:1.55}
+  td b{color:#fff; font-weight:700}
+  td.k{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+       color:var(--gold); width:132px}
+  td.num2{font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right;
+          white-space:nowrap; color:var(--gold); font-weight:600}
+  tr.total td{border-bottom:0; border-top:2px solid var(--gold-dim); font-weight:700; padding-top:15px}
+  .col-bad{color:var(--ink-faint)}
+  .col-good{color:#fff}
+
+  /* steps */
+  ol.steps{counter-reset:s; list-style:none; padding:0; margin:24px 0; max-width:66ch}
+  ol.steps li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:0; font-family:var(--mono);
+    font-size:12px; font-weight:700; color:var(--gold); border:1px solid var(--gold-dim);
+    width:29px; height:29px; display:flex; align-items:center; justify-content:center}
+  ol.steps b{display:block; color:#fff; font-size:16.5px; margin-bottom:2px}
+
+  .warn{margin:28px 0; padding:22px 24px; background:var(--hot-wash); border:1px solid var(--hot)}
+  .warn .t{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.16em;
+           text-transform:uppercase; color:var(--hot); margin-bottom:10px; font-weight:700}
+  .warn p{margin:0 0 13px; max-width:none; font-size:16px; line-height:1.6}
+  .warn p:last-child{margin-bottom:0}
+
+  .note{margin:26px 0; padding:19px 21px; background:var(--gold-wash); border:1px solid var(--gold-dim)}
+  .note p{margin:0 0 12px; max-width:none; font-size:15.5px; line-height:1.6}
+  .note p:last-child{margin-bottom:0}
+  .note .t{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.16em;
+           text-transform:uppercase; color:var(--gold); margin-bottom:9px; font-weight:600}
+
+  /* launch sheet / fillable */
+  .sheet{border:1px solid var(--rule); background:var(--card); margin:22px 0}
+  .srow{display:flex; gap:18px; padding:14px 18px; border-bottom:1px solid var(--rule-soft); align-items:center}
+  .srow:last-child{border-bottom:0}
+  .sq{flex:1 1 56%; font-size:15.5px; line-height:1.5}
+  .sl{flex:1 1 44%; border-bottom:1px dashed var(--gold-dim); min-height:26px}
+  @media (max-width:620px){ .srow{flex-direction:column; align-items:stretch; gap:9px} .sl{min-height:30px} }
+
+  /* checklist */
+  .check{list-style:none; padding:0; margin:24px 0; max-width:66ch; border-top:1px solid var(--rule)}
+  .check li{display:flex; gap:14px; align-items:flex-start; padding:13px 2px;
+            border-bottom:1px solid var(--rule-soft); margin:0}
+  .check li::before{display:none}
+  .check input{appearance:none; flex:0 0 20px; width:20px; height:20px; margin-top:2px;
+               border:1.5px solid var(--gold-dim); background:transparent; cursor:pointer; position:relative}
+  .check input:checked{border-color:var(--gold)}
+  .check input:checked::after{content:"✓"; position:absolute; inset:0; display:flex;
+    align-items:center; justify-content:center; color:var(--gold); font-size:14px; font-weight:700}
+  .check label{font-size:15.5px; line-height:1.55; cursor:pointer}
+
+  footer{margin-top:80px; padding-top:32px; border-top:1px solid var(--rule); text-align:center}
+  .foot-logo{width:76px; height:auto; opacity:.85; margin:0 auto 16px; display:block}
+  .foot-tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-faint)}
+  .foot-tag b{color:var(--gold); font-weight:700}
+  .foot-close{font-weight:800; font-size:clamp(20px,3.4vw,28px); color:#fff; letter-spacing:-.02em;
+              margin:0 auto 26px; max-width:22ch; line-height:1.2}
+
+  @media print{
+    body{background:#fff; color:#000; font-size:11pt}
+    .bar{display:none}
+    .say,.obj,.warn,.note,.sheet,ol.steps li,.check li,table{break-inside:avoid}
+    section{break-before:auto}
+    a{color:#000; text-decoration:none}
+    .sl{border-bottom:1px solid #999}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="bar-t"><b>Stop Driving Past It</b> — The X-Ray Advantage</span>
+    <a href="#contents">Contents</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="cover">
+    <img class="logo" src="../venus-flytrap/sle-logo-gold.png" alt="Service Loop Electrical — For Electricians. By Electricians." width="118" height="99">
+    <p class="kicker">A Field Playbook for Service Electricians</p>
+    <h1>Stop<br>Driving<br>Past It.</h1>
+    <p class="sub">The Electrician's X-Ray Advantage Playbook</p>
+    <p class="tag">Stop driving past the work you're paying to find.</p>
+    <span class="issue">Field Edition · <b>V7.0</b></span>
+  </header>
+
+  <nav class="toc" id="contents">
+    <h2>The field guide</h2>
+    <p class="hint">Know the opportunity. Work the territory. Use the opening to get the team aligned. Keep the scripts close on the job. Use the launch sheet to assign the work and track what happens.</p>
+    <ol>
+      <li><a href="#s1">The X-Ray Advantage</a></li>
+      <li><a href="#s2">Underdoing the thank-you</a></li>
+      <li><a href="#s3">A repeatable campaign</a></li>
+      <li><a href="#s4">Start at the customer's door</a></li>
+      <li><a href="#s5">Ask for the referral</a></li>
+      <li><a href="#s6">Ask for the yard sign</a></li>
+      <li><a href="#s7">The opener and inspection offer</a></li>
+      <li><a href="#s8">Doorstep conversations</a></li>
+      <li><a href="#s9">Staffing, pay and booking</a></li>
+      <li><a href="#s10">Test it and make it yours</a></li>
+      <li><a href="#s11">Keep a simple scorecard</a></li>
+      <li><a href="#s12">Your launch sheet</a></li>
+      <li class="ax"><a href="#apx">Editorial notes and sources</a></li>
+    </ol>
+    <div class="quick">
+      <div><b>Customer conversations</b><span>Sections 4–6</span></div>
+      <div><b>Doorstep scripts</b><span>Sections 7–8</span></div>
+      <div><b>Team and pilot</b><span>Sections 9–10</span></div>
+      <div><b>Scorecard &amp; launch</b><span>Sections 11–12</span></div>
+    </div>
+  </nav>
+
+  <!-- ══════════ 1 ══════════ -->
+  <section id="s1">
+    <p class="num">Section 01</p>
+    <h2>We found the problem. Then we drove away.</h2>
+    <p class="lead">You walk into a home and find a serious electrical issue. You assess it, explain it, and help the homeowner get it corrected.</p>
+    <p>While you're there, you learn something. About the equipment. The installation. The workmanship. The attention that electrical system has — or hasn't — received over the years.</p>
+    <p>Then you step outside.</p>
+    <p>Same development. Same build era. Perhaps the same builder and original trades. A street full of homes that deserve a closer look for the same reason this one did.</p>
+    <p>You have a satisfied customer. A completed job. A van in the driveway. Actual knowledge from inside a home on that street.</p>
+    <p>And what do we do with it?</p>
+    <p>We barely get the thank-you out. We don't ask for an introduction. We don't explain a referral reward. We don't ask for a yard sign. We don't even ask, "Who around here should we talk to?"</p>
+    <p class="punch">We drive away. Then we pay for another lead and hope it takes us to someone we can help.</p>
+    <p>Read that again. We leave a place where we have evidence, experience, and a relationship — and pay to start from scratch somewhere else.</p>
+    <p><strong>That is a bloody expensive habit.</strong></p>
+    <p>You might genuinely need more leads. But before increasing that budget, ask: how many useful conversations did you leave sitting on the last street?</p>
+
+    <h3>The superpower you keep leaving in the van</h3>
+    <p>Imagine having X-ray vision as an electrician. You could see the problems hidden behind the walls. You'd know where your help mattered. How long would you sit around waiting for those homeowners to click an ad?</p>
+    <p>You'd get out of the van. You'd knock. You'd explain what you could help with.</p>
+    <p>You don't have literal X-ray vision. You have trade knowledge — and every properly assessed home can give you information that makes your next conversation more relevant.</p>
+    <p>You recognize patterns a homeowner may never think to question. Where reliable local information supports a connection, you can say:</p>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"We found something nearby that may be relevant to your home. Here's what we found, here's why we're sharing it, and here's how we can help you check."</p>
+    </div>
+    <p class="punch">That is your X-Ray Advantage: using what you discover on the job to decide where to start the next conversation.</p>
+    <p>A finding in one home is a reason to investigate nearby; it is not proof of a defect in another. You can be direct and confident about what you know while being honest about what still needs an assessment.</p>
+    <p><strong>The question is simple: if you have a credible reason to believe you could help, why wouldn't you offer?</strong></p>
+
+    <h3>Why do we keep ignoring it?</h3>
+    <p>Because the work feels finished when the invoice is paid. Because a referral ask feels awkward. Because knocking risks a no. Because buying another lead feels easier than walking across the street.</p>
+    <p>Those are understandable barriers. They are also trainable behaviors.</p>
+    <p>We can spend years learning to troubleshoot a system, then avoid learning a thirty-second introduction. We can explain a substantial repair to a homeowner, then get tongue-tied asking whether they'd host a yard sign.</p>
+    <p class="punch">The business pays for that hesitation. The next homeowner never hears what we had to offer.</p>
+    <p>This playbook makes the next action part of the job: express the thanks, invite the referral, request the sign, identify the opportunity, and assign the walking.</p>
+
+    <h3>You do not have to get big before you do this</h3>
+    <p>An owner with a van can start. Thank the customer properly. Ask for the introduction. Map a suitable route. Protect time to work it. Record the results.</p>
+    <p>As the work proves itself, train someone to carry the message and increase the volume. Your electricians provide the findings and the service; a trained representative can handle the walking and booking.</p>
+    <p><strong>This deserves to be tested as a channel you could build a business around. Treat it seriously enough to find out.</strong></p>
+    <p>Persistence means showing up consistently, covering the route, improving your conversations, and following up where invited. Put the pressure on your own execution. A homeowner's no is still a no.</p>
+
+    <h3>Where Good Neighbor ends and this campaign begins</h3>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th></th><th>Good Neighbor</th><th>The X-Ray Advantage campaign</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Assignment</td><td class="col-bad">Canvass the five doors around the job.</td><td class="col-good">Develop a wider territory using relevant findings from completed work.</td></tr>
+          <tr><td class="k">Rhythm</td><td class="col-bad">A small, repeatable habit around an individual service visit.</td><td class="col-good">Scheduled prospecting blocks, assigned routes, follow-up, and weekly review.</td></tr>
+          <tr><td class="k">Scale</td><td class="col-bad">Five nearby doors.</td><td class="col-good">An initial 50–100-home route, then hundreds or thousands of attempts as economics and capacity justify.</td></tr>
+          <tr><td class="k">Owner</td><td class="col-bad">The person assigned to the five-door task.</td><td class="col-good">The owner initially, then a trained representative or walking team.</td></tr>
+          <tr><td class="k">Measurement</td><td class="col-bad">Was the five-door task completed, and what came from it?</td><td class="col-good">Conversations through appointments, completed work, collected revenue, and acquisition cost.</td></tr>
+          <tr><td class="k">Relationship</td><td class="col-bad">Creates an immediate local introduction.</td><td class="col-good">Can revisit those introductions appropriately and extend well beyond them.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Keep Good Neighbor. Give this campaign a separate assignment and budget. <strong>Five doors completed does not mean a suitable territory has been worked.</strong></p>
+    <p>The yellow card is the conversation tool. The X-Ray Advantage is the reason for choosing the territory. Stop Driving Past It is the challenge to the electrician.</p>
+  </section>
+
+  <!-- ══════════ 2 ══════════ -->
+  <section id="s2">
+    <p class="num">Section 02</p>
+    <h2>You're probably underdoing the thank-you</h2>
+    <p class="lead">Most electricians are grateful for the work. Far fewer make that gratitude unmistakable to the homeowner.</p>
+    <p>You can feel deeply thankful and still leave a customer with nothing more than an invoice and a wave.</p>
+    <p class="punch">Gratitude the homeowner never hears is gratitude they never get to experience.</p>
+    <p>We underdo this badly. A rushed "thanks" is the entire recognition we sometimes give someone who trusted our judgment, welcomed our team, and funded our business. Then we wonder why more customers don't actively send their friends. Give them something worth remembering — and an invitation worth acting on.</p>
+    <p>They chose you. They let your people into their home. They trusted your advice and spent money they worked hard for. Say what that means. Say it specifically. Give the moment enough space to land.</p>
+    <p>Then make the next step easy. A happy customer may be willing to refer you, display a sign, or introduce you to a neighbor. They may simply never think to offer.</p>
+    <p>"They know we appreciate them" and "they'll refer us if they want to" leave a lot to chance.</p>
+
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>The rushed finish</th><th>The deliberate finish</th></tr></thead>
+        <tbody>
+          <tr><td class="col-bad">"Thanks. Receipt's in your email."</td><td class="col-good">Thank them by name, mention the work, and acknowledge their trust.</td></tr>
+          <tr><td class="col-bad">Assume they're happy because they paid.</td><td class="col-good">Ask how the experience went and resolve anything unfinished.</td></tr>
+          <tr><td class="col-bad">"Keep us in mind."</td><td class="col-good">Ask who they know who has mentioned needing an electrician.</td></tr>
+          <tr><td class="col-bad">Hope they remember your number.</td><td class="col-good">Give them a message or referral card they can pass along immediately.</td></tr>
+          <tr><td class="col-bad">Leave a sign in the van.</td><td class="col-good">Ask for permission, explain the display period, and arrange removal.</td></tr>
+          <tr><td class="col-bad">Drop a few hangers and leave.</td><td class="col-good">Schedule actual conversations around selected completed jobs.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="punch">The thank-you is owed. The referral is invited. The sign is requested. None of them happens reliably by accident.</p>
+    <p>A gift remains theirs whether they refer anyone or not. Their satisfaction comes first. If something is wrong, your next job is making it right.</p>
+  </section>
+
+  <!-- ══════════ 3 ══════════ -->
+  <section id="s3">
+    <p class="num">Section 03</p>
+    <h2>Choose the job. Then work the neighborhood.</h2>
+    <p class="lead">This is a selected-job campaign. You are not sending a representative back to every home.</p>
+    <p>Start with an above-average ticket and a satisfied customer. Then ask the electrician what they found and why it may matter to the surrounding homes. A substantial job plus useful neighborhood knowledge is the starting point.</p>
+    <p>A $10,000-or-more job is one possible selection threshold from Clay's latest direction. <strong>Set the threshold for your business before selecting the visits.</strong> Other customers can receive their thank-you by mail. Everybody deserves appreciation; the personal return visit is a deliberate investment.</p>
+
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Step</th><th>What happens</th><th>Who owns it</th></tr></thead>
+        <tbody>
+          <tr><td><b>1. Select the completed job</b></td><td>Above-average spend, a happy customer, and a finding relevant to nearby homes.</td><td class="k">Owner &amp; electrician</td></tr>
+          <tr><td><b>2. Hand-deliver the thanks</b></td><td>Bring the package, name the team, acknowledge the customer's support for your charity, and check satisfaction.</td><td class="k">Representative</td></tr>
+          <tr><td><b>3. Make the invitation count</b></td><td>Explain the $100 / $100 / $100 referral campaign. Ask for the sign and permission to introduce yourself nearby.</td><td class="k">Representative</td></tr>
+          <tr><td><b>4. Rerun Good Neighbor</b></td><td>Actually knock at the five nearby doors where the technicians should already have introduced the company or left hangers.</td><td class="k">Representative</td></tr>
+          <tr><td><b>5. Expand and repeat</b></td><td>Work the surrounding blocks. Let new qualifying jobs create the next opportunity.</td><td class="k">Rep &amp; office</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The gift goes to the customer you served. Neighbors receive the Yellow Alert information and a conversation.</p>
+    <p><strong>This is the ultimate happy call in person, followed by a campaign around an install you understand.</strong></p>
+  </section>
+
+  <!-- ══════════ 4 ══════════ -->
+  <section id="s4">
+    <p class="num">Section 04</p>
+    <h2>Start at the customer's door</h2>
+    <h3>Hand-deliver the thanks from the whole team</h3>
+    <p>Bring the thank-you package and know the names of the salesperson and installer. Arrange a suitable visit. The following scripts preserve the language and sequence of Clay's coaching call, with company and customer fields made reusable.</p>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Hey [NAME], from everyone here at [COMPANY NAME], I just wanted to hand deliver this package and say what an honor it has been to work with you. And that's meant by the whole team."</p>
+      <p>"[SALESPERSON] and [INSTALLER] wanted us to make sure you heard that personally. How has everything been since we finished?"</p>
+    </div>
+    <p class="cue"><b>Then:</b> Listen. If something needs attention, get it handled. This is the final touch on the customer's experience, not a delivery with a sales pitch stapled to it.</p>
+
+    <h3>You supported something beyond this job</h3>
+    <p>The original lumpy-mail idea connected the gift to a local cause. The customer learns that choosing your company helped that cause, too. A charitable purchase that produces a gift was the example in the call.</p>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Hey, you might not know this. It's not something we brag about, but we support [CHARITY]. Your investment with [COMPANY NAME] helped us support [ACTUAL CONTRIBUTION OR IMPACT]. We wanted you to know that, and to thank you for being part of it."</p>
+    </div>
+    <div class="warn">
+      <span class="t">Keep this honest</span>
+      <p>If the gift itself supports the cause, explain that connection in one sentence. Name the actual contribution or impact your company can substantiate. <strong>Do not invent a donation amount for the completed job, or describe a one-time contribution as a portion of every sale.</strong></p>
+    </div>
+    <p>The message is: you trusted us, that mattered to our whole team, and your business helped us do something worthwhile.</p>
+
+    <h3>What goes in the package</h3>
+    <ul>
+      <li>A personal thank-you naming the customer and the people who did the work.</li>
+      <li>A thoughtful gift, ideally connected to the cause you support.</li>
+      <li>A clear explanation of that support.</li>
+      <li>The referral certificate and a simple way to introduce someone.</li>
+    </ul>
+    <p>Some customers receive this by mail. Selected above-average jobs receive it in person, with the neighborhood campaign planned around that visit.</p>
+    <p>The thank-you and gift are theirs whether or not they refer anyone. <strong>Keep any review request separate from the referral reward.</strong></p>
+
+    <h3>The handwritten card</h3>
+    <div class="say">
+      <p class="say-h">Write this</p>
+      <p>"[NAME], what an honor it has been to work with you. Thank you for trusting [COMPANY NAME] with [WORK]. That thanks comes from all of us, including [SALESPERSON] and [INSTALLER]. Your support also helped [CHARITY / ACTUAL IMPACT]. We wanted you to know what your business means beyond the job itself. With thanks, [TEAM]."</p>
+    </div>
+  </section>
+
+  <!-- ══════════ 5 ══════════ -->
+  <section id="s5">
+    <p class="num">Section 05</p>
+    <h2>Make it a win-win-win</h2>
+    <p class="lead">Give the customer a reason to feel good about telling someone else. Make the offer worth talking about.</p>
+    <p>This is Clay's updated campaign: a $100 certificate for the person they recommend, a $100 credit for the customer, and a $100 donation to the charity.</p>
+
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Who benefits</th><th>What they receive</th></tr></thead>
+        <tbody>
+          <tr><td>The person they recommend</td><td class="num2">$100 certificate</td></tr>
+          <tr><td>The customer making the referral</td><td class="num2">$100 credit</td></tr>
+          <tr><td>The charity</td><td class="num2">$100 donation</td></tr>
+          <tr class="total"><td>Combined campaign value</td><td class="num2">$300</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The certificate and credit are service benefits; the donation is the charitable contribution.</p>
+
+    <h3>Say it plainly</h3>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"We'd love to help someone you know, too. When you recommend someone, we're going to give that person a $100 certificate. We're going to give you a $100 credit, and we're going to give [CHARITY] a $100 donation."</p>
+      <p>"If you'd rather, we'll put your $100 credit toward the charity as well. Then they get $200, and the person you recommend still gets their $100 certificate."</p>
+    </div>
+    <p class="cue"><b>Then:</b> Pause. Let that land.</p>
+    <div class="say">
+      <p class="say-h">Then ask</p>
+      <p>"Who comes to mind that we could help?"</p>
+    </div>
+    <p class="cue"><b>If someone comes to mind:</b></p>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Would you be comfortable introducing us, or would you rather pass this certificate along yourself?"</p>
+    </div>
+    <p>Help them make the introduction while it is easy. Give them the certificate and the contact details. Record the referral, their choice about the credit, and who will fulfill the promises.</p>
+    <p>The credit gives the original customer a reason to return. Redirecting it gives them a way to do more for the cause. Neither requires a separate menu of weak offers.</p>
+
+    <h3>One campaign, with a clear promise</h3>
+    <p>Make the offer easy to explain and easy to fulfill. The customer should know what happens next and who will take care of it.</p>
+    <div class="warn">
+      <span class="t">Settle this before you issue a single certificate</span>
+      <p>The owner must specify <strong>what event activates the credit and donation</strong>, and <strong>which services the certificate and credit cover</strong>. Those mechanics have not yet been set. Print the agreed terms clearly and make the spoken offer match them.</p>
+      <p>The charity support connected to the original job is separate from this new referral donation. Track both accurately and deliver what you promise.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ 6 ══════════ -->
+  <section id="s6">
+    <p class="num">Section 06</p>
+    <h2>Ask for the yard sign. It can't help you from the van.</h2>
+    <p>They trusted you with a substantial job. They may be happy to tell the neighborhood who helped them. But you have to ask.</p>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Would you be comfortable letting us put a sign out front? It helps your neighbors know who worked here. We'll agree on the spot and how long it stays, and we'll take care of picking it up."</p>
+    </div>
+    <p>If your company offers a thank-you for hosting a sign, explain the actual offer. <strong>The amount is an owner decision; this playbook does not invent one.</strong></p>
+    <p>Record permission, placement, the agreed display period, and who collects the sign. Make it easy on the homeowner.</p>
+
+    <h3>Ask about the neighbors, too</h3>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Because of what we found here, we're going to share some information with people nearby. Is there anyone you think we should talk to? Would you be comfortable introducing us?"</p>
+      <p>"Are you comfortable with us saying we worked for you?"</p>
+    </div>
+    <div class="warn">
+      <span class="t">Permission is not optional</span>
+      <p>Get permission for any customer name or job details you plan to use. Otherwise, say you recently worked nearby.</p>
+    </div>
+    <p class="punch">The referral, the sign, and the introduction are opportunities you keep leaving behind when nobody asks.</p>
+    <p>Check what the electrician already arranged before the return visit. Follow through on it; don't make the customer hear the same request from three people.</p>
+  </section>
+
+  <!-- ══════════ 7 ══════════ -->
+  <section id="s7">
+    <p class="num">Section 07</p>
+    <h2>Start the Yellow Card conversation</h2>
+    <p class="cue"><b>At the door:</b> Stand back. Big smile. Friendly face. Give the homeowner room to answer the door. A light chuckle can lower their guard before you say another word.</p>
+    <p>Know what the electrician found, why it could be relevant to nearby homes, and what you have permission to share. The scripts use placeholders so each contractor can make the conversation their own.</p>
+
+    <h3>The opener</h3>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Hey! Don't worry — I'm not here to give you a sales pitch. I'm [REP NAME] with [COMPANY NAME]. We just helped [NEARBY CUSTOMER NAME] down the street."</p>
+    </div>
+    <p class="cue"><b>Cue:</b> Point toward the yard sign if visible. Use the customer's name and job details only with permission; otherwise say "a homeowner down the street."</p>
+    <div class="say">
+      <p class="say-h">Then</p>
+      <p>"We found an electrical safety issue there that could affect other homes built around the same time. We call this our Yellow Card program — when we find something like that, we make it our business to let the neighbors know."</p>
+      <p>"I've got some information for you. Have you got a minute to go through it with me?"</p>
+    </div>
+    <p class="cue"><b>Then:</b> Pause. Let them answer. Information first, then an invitation to get help. <b>Do not stack the price, rebate, urgency, and booking request into the opening.</b></p>
+
+    <h3>Rerun Good Neighbor, then expand</h3>
+    <p>Start with the five nearby doors where technicians should already have introduced the company or left hangers. Where that actually happened, use it as a bridge:</p>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Did our team leave you the Yellow Card information when they were working nearby?"</p>
+    </div>
+    <p>Then explain the finding and ask:</p>
+    <div class="say">
+      <p class="say-h">Ask this</p>
+      <p>"Have you had an electrician in your home in the last few years?"</p>
+    </div>
+    <p>Take the same relevant message across the surrounding blocks. Start with <strong>50–100 homes</strong> around a selected install. New qualifying jobs can become new starting points.</p>
+
+    <h3>Bring something worth looking at</h3>
+    <p>Carry the Yellow Card flyer with the specific finding, company identity, and a QR code to short educational videos. Bring team photos and short bios, a step-by-step explanation of the inspection, and a sample handwritten electrical condition report.</p>
+    <p>The report describes what the electrician assesses today: findings, equipment age where identifiable, things to watch for, and improvement options. The "Homefax" idea is a teaching analogy; <strong>the deliverable is an electrical condition report, not a complete history of the home.</strong></p>
+    <div class="warn">
+      <span class="t">The line you don't cross</span>
+      <p>Keep homeowner education focused on things they can observe without opening equipment. Use real findings and accurate local context. <strong>A similar build era gives you a reason to investigate, not a diagnosis of the next house.</strong></p>
+    </div>
+
+    <h3>Know the offer before you knock</h3>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Offer</th><th>What the homeowner receives</th></tr></thead>
+        <tbody>
+          <tr><td><b>Yellow Card inspection</b></td><td>Normally $199; <strong>$49</strong> when booked with the representative during the area campaign. A $150 saving applied upfront.</td></tr>
+          <tr><td><b>Written report</b></td><td>A customized, handwritten electrical condition report with findings and improvement options; no pressure to buy corrective work.</td></tr>
+          <tr><td><b>Corrective-work credit</b></td><td>The $49 inspection payment goes toward corrective work they choose to have your company perform.</td></tr>
+          <tr><td><b>Satisfaction guarantee</b></td><td>If not completely satisfied with the inspection and report, the $49 is waived; the company keeps the report and you part as friends.</td></tr>
+          <tr><td><b>Inspection referral</b></td><td>When their friend or family member books, waive both inspection fees if unpaid. If the original customer already paid, issue a $49 service credit toward future work; waive the referred person's fee.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The inspection referral is separate from the $100 certificate / $100 customer credit / $100 charity donation campaign for selected completed jobs. Knocker compensation remains $50 per appointment booked plus $250 on the resulting sale.</p>
+    <div class="warn">
+      <span class="t">Price it honestly</span>
+      <p>Use <strong>$199 as the normal price only when it is genuine for that service.</strong> The advertised $49 is what they pay upfront; they do not pay $199 and wait for a rebate check. Describe the inspection scope accurately and offer actual availability.</p>
+      <p>Record the $49 payment, waiver, or credit in the customer account so the office can fulfill the promise correctly. Finalize any overlapping-credit rules before launch; the scripts do not promise multiple credits for the same $49 payment.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ 8 ══════════ -->
+  <section id="s8">
+    <p class="num">Section 08</p>
+    <h2>Keep the conversation moving</h2>
+    <p class="lead">Listen. Answer the concern. Finish with a useful question. Then stop talking long enough to hear the answer.</p>
+    <p>These are conversations to practice, not paragraphs to recite at every door. Use the branch that fits what the homeowner says.</p>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They say</span><span class="q">"Not interested."</span></div>
+      <div class="obj-b">
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"I totally understand. Thank you for giving me a moment. Just so I understand — have you had an electrician through in the last 12 months and feel you've got this covered, or have I caught you at a bad time?"</p>
+        </div>
+        <p class="cue"><b>If they've had an electrician / "We're in good care":</b></p>
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Oh, good! It wouldn't happen to be [COMPANY NAME], would it?"</p>
+        </div>
+        <p class="cue"><b>Cue:</b> Big smile. Let them answer. Then: <b>"That's who I'm here with!"</b></p>
+        <p>Let the joke become a conversation. There is no need to talk over their answer or criticize their electrician.</p>
+        <p class="cue"><b>If they haven't, but the timing is wrong:</b></p>
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Of course. Is there a better time? We'll be around talking with your neighbors and getting to know the homes here."</p>
+          <p>"And if we find another concern worth sharing, you might see us around again. Give us a wave — we won't be strangers by then!"</p>
+        </div>
+        <p>Confirm any agreed return time. <strong>A request for no further visits ends the follow-up.</strong></p>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They say</span><span class="q">"Is something wrong with my house?"</span></div>
+      <div class="obj-b">
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Oh, I'm not saying there's something wrong with your house! Actually, I love what you've done with the flowers."</p>
+        </div>
+        <p class="cue"><b>Cue:</b> Use the compliment only if genuine; otherwise leave it out.</p>
+        <div class="say"><p class="say-h">Then</p>
+          <p>"What we found nearby could also show up in homes built around the same time. That's why we're coming around. Have you had an electrician check your system in the last few years?"</p>
+        </div>
+        <p class="cue"><b>If they haven't:</b></p>
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Okay. Would you be against having one of our electricians take a look while we're working in the area?"</p>
+        </div>
+        <p>Pause. If they are open to it, explain the inspection offer. Answer the concern first; don't pile on a rebate and a scheduling pitch before they respond.</p>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They ask</span><span class="q">"How much does the inspection cost?"</span></div>
+      <div class="obj-b">
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"This is actually the best part — and why I love doing this. Our owner created the Yellow Card program because he wanted us to help more homeowners and make it more affordable."</p>
+          <p>"When we're already working in your neighborhood, we can bring that cost down. Our home electrical system inspection is normally $199. Through the Yellow Card rebate program, it's just $49 when you book with me while we're here."</p>
+          <p>"And it's not just an inspection. You know how a CARFAX report helps you understand a used car? This helps you understand your home's electrical system."</p>
+          <p>"We'll leave you a customized, handwritten report explaining what we found, the age of the equipment where we can identify it, things to watch for, and ways you could improve it. There's no pressure to have any work done — you'll have the information to decide."</p>
+          <p>"Is that a rebate you'd like to take advantage of?"</p>
+        </div>
+        <p class="cue"><b>Then:</b> Pause. Show a sample report if useful. The value is the inspection plus information they can use, not just the discount.</p>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They ask</span><span class="q">"Is this official?"</span></div>
+      <div class="obj-b">
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Absolutely — this is an official [COMPANY NAME] program. Our owner, [OWNER NAME], founded the company in [YEAR] and has been a master electrician for [YEARS]."</p>
+          <p>"Electrical safety is personal to him because [BRIEF, TRUE PERSONAL CONNECTION]. That's why he created the Yellow Card program."</p>
+          <p>"We believe in this city, and we believe the people living here deserve to understand what's going on with their electrical systems. That's why our owner created this program — and why we take it seriously."</p>
+        </div>
+        <div class="warn">
+          <span class="t">Answer the real question</span>
+          <p>Keep the personal story to one strong sentence. Use the owner's actual credentials and history. <strong>If they mean "Is this from the city?", answer directly: "It's our company's program."</strong></p>
+        </div>
+        <div class="say"><p class="say-h">Then invite the next step</p>
+          <p>"Would you like me to show you what the inspection involves?"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They say</span><span class="q">"I need to think about it."</span></div>
+      <div class="obj-b">
+        <p class="cue"><b>First, find out what they need to think through:</b></p>
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Absolutely. Just so I understand, what specifically do you feel you need to think through before having a professional come in and help you understand your electrical system?"</p>
+        </div>
+        <p class="cue"><b>Then:</b> Pause. Listen for cost, timing, trust, or wanting to involve their partner. Answer that concern.</p>
+        <div class="say"><p class="say-h">Help them picture the visit</p>
+          <p>"Would you like to know what happens during the inspection and who we'd be sending to your home to conduct it?"</p>
+        </div>
+        <p>Show the team photos and short bios. Walk through the flyer: what the electrician checks, how the visit works, and the handwritten report. Name the actual electrician when scheduling is confirmed.</p>
+        <p class="cue"><b>If they are leaning in and their concern is addressed:</b></p>
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Should we pull up the calendar and see if there's a time that works for you?"</p>
+        </div>
+        <p class="cue"><b>If they still want to learn before deciding:</b></p>
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"That sounds like a really good idea. In fact, that's the whole reason I'm coming around — to give you something worth thinking about."</p>
+          <p>"This flyer has a QR code with some short videos explaining what we're talking about. You can learn what to look out for around your own home and decide whether you'd like us to take a look."</p>
+          <p>"Would you like me to point out what's most relevant to your home before I leave it with you?"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They ask</span><span class="q">"How did you get my address?"</span></div>
+      <div class="obj-b">
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Oh, I didn't get your address from a list — we're visiting this whole area. These homes were built around [YEAR], and while working with [NEARBY CUSTOMER NAME] down the street, we found [ISSUE] that could also affect other homes here."</p>
+          <p>"That's what our Yellow Card program is about: making it our priority to help the neighbors understand what to look out for while we're here."</p>
+          <p>"Have you had an electrician in your home in the last few years?"</p>
+        </div>
+        <div class="warn">
+          <span class="t">Be accurate about this one</span>
+          <p>Use the actual route source and known build era. <strong>If a list was used, say so.</strong> Share customer names and findings only with permission; otherwise refer to work nearby.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They say</span><span class="q">"Everything seems fine."</span></div>
+      <div class="obj-b">
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"I totally get it. [NEARBY CUSTOMER NAME] down the road thought everything was fine, too. But when our electrician checked, we found [ISSUE]."</p>
+          <p>"I'm not saying your home has the same problem. But because these homes were built around the same time, it's worth finding out — and that's why we're coming around."</p>
+          <p>"Have you had an electrician check for this specifically in the last few years, or is it something you're still unsure about?"</p>
+        </div>
+        <div class="warn">
+          <span class="t">No invented numbers</span>
+          <p>Use the customer's experience only if accurate and permitted. The actual finding gives you a reason to ask; <strong>don't invent a percentage or likelihood claim.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They say</span><span class="q">"I need to talk to my spouse."</span></div>
+      <div class="obj-b">
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Of course. Are they home? I'd be happy to walk them through it with you."</p>
+        </div>
+        <p class="cue"><b>If they're out:</b></p>
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Is there a better time when you'll both be home? I'd be happy to come back and talk it through together."</p>
+        </div>
+        <p class="cue"><b>If there is still an unresolved concern:</b></p>
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"If they were here, what do you think they'd say about having a qualified electrician check this out for $49, knowing what we found nearby?"</p>
+          <p>"What do you think they'd want to know before feeling comfortable booking it?"</p>
+        </div>
+        <p>Use their answer to prepare the conversation with both people. <strong>Keep the partner part of the decision.</strong></p>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They ask</span><span class="q">"What's the catch with the $49?"</span></div>
+      <div class="obj-b">
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"Great question. There's no catch. The $49 covers the inspection and your written report. Even if we find something, there's no pressure to buy any work — we want you to understand what's there."</p>
+          <p>"If you do choose to have us correct something, that $49 goes toward the work."</p>
+          <p>"And we back it with a 100% satisfaction guarantee. If you're not completely satisfied with the inspection and report, we'll waive the $49, keep the report, and part as friends."</p>
+          <p>"Should we pull up the calendar and see if there's a time that works for you?"</p>
+        </div>
+        <p class="cue"><b>Note:</b> Explain the guarantee before booking. The report stays with the company only when the satisfaction waiver is used; under the standard offer, the customer receives it.</p>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-h"><span class="lbl">They ask</span><span class="q">"Are you an electrician?"</span></div>
+      <div class="obj-b">
+        <div class="say"><p class="say-h">Say this</p>
+          <p>"No, not me! I'm in the door-to-door education sector."</p>
+        </div>
+        <p class="cue"><b>Cue:</b> Grin. Deliver it like you've given yourself a very fancy job title.</p>
+        <div class="say"><p class="say-h">Then</p>
+          <p>"Just helping spread the good word for sparkies like [OWNER NAME] and the team at [COMPANY NAME]. They handle the electrical work — I help the neighbors understand why we're here."</p>
+          <p>"Have you ever had an electrical company come around like this, just to let you know about something they found in your neighborhood?"</p>
+        </div>
+        <p class="cue"><b>If they say no:</b> "That's what I love about this. Would you like to meet the team?"</p>
+        <p>Show the photos and short bios. "Meet the team" here introduces the people who could conduct the visit. <strong>Representatives share approved information and book; qualified electricians conduct the inspection.</strong></p>
+      </div>
+    </div>
+
+    <h3>Keep the welcome for the next visit</h3>
+    <p>If nobody answers, leave the flyer where permitted and record the attempt. <strong>A hanger supports the conversation; it does not count as one.</strong></p>
+    <div class="warn">
+      <span class="t">Non-negotiable</span>
+      <p>Respect no-soliciting signs and clear requests for no further contact. Confirm local canvassing requirements before assigning routes. When someone invites a return, record the time and purpose. <strong>A new nearby job does not override a previous refusal.</strong></p>
+    </div>
+  </section>
+
+  <!-- ══════════ 9 ══════════ -->
+  <section id="s9">
+    <p class="num">Section 09</p>
+    <h2>Put someone in charge of the walking</h2>
+    <h3>Start with the owner if that is who you have</h3>
+    <p>You do not need a department to make the first route happen. Choose a relevant territory and protect time to complete the assigned homes. The coaching call suggested four-hour daily shifts for a walking team; start at a scale you can staff and test. Track actual output and adjust the schedule to meet the pilot target.</p>
+    <p>Bring the approved information, a way to book, and a simple address log. <strong>Account for your own time in the campaign cost.</strong> Once you understand the conversations and the economics, you can train someone else on a process you have actually run.</p>
+
+    <h3>Add a representative when the numbers justify it</h3>
+    <p>Select a representative for warmth, listening, reliability, and the ability to handle a polite no. A college student may be a good fit; so may another capable community representative. Use demonstrated skill as your hiring standard.</p>
+    <h4>Train them to:</h4>
+    <ul>
+      <li>Explain the purpose in one breath and use the correct route script.</li>
+      <li>Deliver the thank-you personally and ask without pressuring.</li>
+      <li>Describe only the technical information the electrician approved.</li>
+      <li>Identify themselves accurately and leave technical assessment to the electrician.</li>
+      <li>Wear clear company identification, step back after knocking, and respect the homeowner's space.</li>
+      <li>Book accurately and record every outcome.</li>
+    </ul>
+    <p>Practice the customer thank-you and the neighbor introduction separately. Supervise their first two shifts and review real conversations together.</p>
+
+    <h3>Suggested knocker compensation</h3>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Milestone</th><th>Compensation</th></tr></thead>
+        <tbody>
+          <tr><td>Appointment booked</td><td class="num2">$50</td></tr>
+          <tr><td>That appointment results in a sale</td><td class="num2">+ $250</td></tr>
+          <tr class="total"><td>Booked appointment that sells</td><td class="num2">$300</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Pay for both actions: getting the appointment booked and bringing in work that sells. The $50 is for the booking, not a held appointment. The $250 is additional compensation when that appointment produces a sale.</p>
+    <div class="warn">
+      <span class="t">Budget this properly</span>
+      <p>This is a two-stage pay structure, <strong>not a conversion-rate assumption.</strong> Appointments that do not sell still carry their $50 booking payment. Track those payments when calculating the channel's actual cost per sale. Set payment timing and rules for duplicate, cancelled, or rescheduled bookings before launch.</p>
+      <p>The $300 referral offer and the knocker's compensation are separate. If both apply to the same sale, budget <strong>$300 in referral benefits plus $300 in knocker compensation</strong>, before other campaign costs. Any base pay is separate and must also be budgeted.</p>
+    </div>
+    <p>Track bookings, appointments held, sales, and customer feedback together so the team can see the quality of the work coming in.</p>
+
+    <h3>Equip the route</h3>
+    <p>The representative needs the scheduled thank-you visit, approved customer details, Yellow Card flyers with educational QR codes, team photos and bios, a sample report, sign permissions, a mapped route, available appointment slots, and direct contact details to share.</p>
+    <p>One representative owns each route. Record unique addresses separately from repeat attempts. Choose daytime or early-evening windows that fit local requirements, seasonal daylight, and actual response data.</p>
+
+    <h3>Book while the homeowner is ready</h3>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Should we pull up the calendar and see if there's a time that works for you?"</p>
+    </div>
+    <p>Use the booking system or connect to the office while the homeowner is ready. Confirm their name, address, contact details, appointment time, inspection scope, and the $49 price. Show who is coming when assigned; otherwise explain how the office will confirm the electrician. If you cannot book immediately, agree on a callback and assign it.</p>
+
+    <h3>Confirm the visit, then make the referral invitation</h3>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Thank you so much — we've got you booked for [DAY] at [TIME]. That's the $49 home electrical system inspection, including your handwritten electrical condition report. [ELECTRICIAN / OFFICE CONFIRMATION DETAILS]. What's the best number to send your confirmation to?"</p>
+    </div>
+    <p class="cue"><b>After confirming the details:</b></p>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"Oh, almost forgot — there's one more way we can waive that $49. If you refer a friend or family member and they book an inspection too, we'll waive the inspection fee for both of you. Who comes to mind who could use that?"</p>
+    </div>
+    <p class="cue"><b>If they name someone:</b></p>
+    <div class="say">
+      <p class="say-h">Say this</p>
+      <p>"You can send them my direct contact details, or, if they're happy for me to call, introduce us and I'll give them a ring. Once they book their inspection, we'll waive the $49 for both of you. Both inspections are on us. Pretty amazing, right?"</p>
+      <p>"If you haven't paid yet, we waive it. If you've already paid, we give you a $49 credit toward future work."</p>
+    </div>
+    <div class="warn">
+      <span class="t">Fulfillment rules</span>
+      <p>The referred person's inspection fee is waived. The trigger is <strong>their booking</strong>; they do not have to buy corrective work. <strong>Do not promise a cash refund when the original homeowner has already paid.</strong></p>
+      <p>Link both bookings in the system, record who made the referral, and assign the waiver or credit to the office. Make the fee adjustment when the referred person books. This inspection referral does not automatically activate the separate completed-job $100 / $100 / $100 offer.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ 10 ══════════ -->
+  <section id="s10">
+    <p class="num">Section 10</p>
+    <h2>Use what works. Drop what doesn't. Make it your own.</h2>
+    <p class="lead">That's the approach. Take the idea seriously enough to put it to work, then let experience make it yours.</p>
+    <p class="punch">You already have a reason to start: good work, a customer who trusts you, and useful knowledge about the homes you serve.</p>
+    <p>You do not need someone else's perfect success story before you try. You need a route, a clear conversation, some protected time, and the willingness to learn.</p>
+
+    <h3>A few numbers to get you moving</h3>
+    <p>Use the scale discussed in the call: <strong>50–100 homes</strong> around a selected install, building toward a <strong>500-home test</strong>. Those are activity goals, not a promise of bookings or sales. Set a budget, work the route, and see what it produces.</p>
+    <p>Expect unanswered doors. Expect some noes. Leave room for the conversations that go somewhere. Time your own routes before setting a daily quota.</p>
+    <p><strong>You are looking for a repeatable way to meet people you can help. Every door does not have to become a job.</strong></p>
+
+    <h3>Give it a fair test</h3>
+    <ol class="steps">
+      <li><b>Pick the opportunity.</b> Choose an above-average completed job with a satisfied customer and a relevant finding for the neighborhood.</li>
+      <li><b>Finish the relationship properly.</b> Deliver the thanks. Invite the referral. Ask for the sign and the introduction.</li>
+      <li><b>Work a real route.</b> Start with 50–100 nearby homes. Assign who goes and when. Build toward roughly 500 unique homes over your first month, with a budget you can afford.</li>
+      <li><b>Review it weekly.</b> What got people talking? Which appointments happened? What work resulted? What did the effort cost?</li>
+      <li><b>Keep, change, or expand.</b> Keep the parts producing good customers. Adjust the parts losing them. Put more boots on the ground when the results and your capacity support it.</li>
+    </ol>
+    <p>Record repeat attempts separately from unique homes, and give booked work time to finish before judging the final return. <strong>A homeowner who declines is still entitled to a no.</strong></p>
+
+    <h3>Let your results guide the next route</h3>
+    <p>A weak afternoon does not settle whether this works. Neither does one big sale.</p>
+    <p>If people aren't answering, try another suitable time. If they talk but don't book, review the message and offer. If bookings don't become useful visits, review the expectations and follow-through. <strong>Change one meaningful thing at a time so you can learn what helped.</strong></p>
+    <p>The roofing story discussed in the coaching call should raise your ambition. Your own results decide your budget.</p>
+    <p class="punch">The first route teaches you. The next route lets you improve. A process that earns its keep gives you something to grow.</p>
+    <p>Keep productive existing marketing running while you test. You can build this channel before you are big enough to hire a walking team.</p>
+  </section>
+
+  <!-- ══════════ 11 ══════════ -->
+  <section id="s11">
+    <p class="num">Section 11</p>
+    <h2>Keep score without making it a science project</h2>
+    <p>Keep one simple weekly record:</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>What to record</th><th>What it tells you</th></tr></thead>
+        <tbody>
+          <tr><td><b>Door attempts and conversations</b></td><td>Whether your route is reaching people</td></tr>
+          <tr><td><b>Appointments booked and held</b></td><td>Whether interest becomes an actual visit</td></tr>
+          <tr><td><b>Jobs completed, paid, and revenue collected</b></td><td>What the campaign produces</td></tr>
+          <tr><td><b>Campaign costs and direct job costs</b></td><td>Whether the work leaves worthwhile money behind</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Include wages, bonuses, travel, materials, gifts, redeemed certificates and credits, charity donations, and the cost of discounted or waived inspections. Record promised benefits still outstanding, too. <strong>Count each cost once.</strong> Compare customer acquisition costs with other channels using the same definition of a paying customer.</p>
+    <p>Alongside that record, check three simple habits: Did we thank the customer properly? Did we invite the referral? Did we ask for the sign? Record their answers and fulfill any promises.</p>
+    <p class="punch">Zero referrals can mean nobody asked. Zero signs can mean they never left the shop.</p>
+    <p>When new customers contact you, ask what prompted them to call. Connect the resulting job to the route or referral, and count its revenue once.</p>
+    <p>At the weekly review, answer three questions: <strong>What worked? What needs changing? What are we doing next week?</strong></p>
+    <p>You do not need a perfect spreadsheet to begin. You do need enough honesty in the numbers to know whether the effort is paying off.</p>
+  </section>
+
+  <!-- ══════════ 12 ══════════ -->
+  <section id="s12">
+    <p class="num">Section 12</p>
+    <h2>Your launch sheet</h2>
+    <p>Fill these in before the first route goes out. Print this page or work through it on screen.</p>
+
+    <h3>Campaign setup</h3>
+    <div class="sheet">
+      <div class="srow"><div class="sq">Campaign owner and start date</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Pilot spending cap and weekly review dates</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Above-average ticket threshold, selected jobs, home target</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Thank-you visit owner and timing</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Gift and total delivery cost</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">$100 certificate + $100 credit: scope and activation</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">$100 donation; $200 if credit redirected: timing and owner</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Sign offer, display period, and pickup owner</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Permission to identify the customer or discuss work</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Verified finding and relevant neighborhood connection</div><div class="sl"></div></div>
+    </div>
+
+    <h3>Field execution</h3>
+    <div class="sheet">
+      <div class="srow"><div class="sq">Electrician-approved topic, evidence, and wording</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">$199 / $49 scope, report, guarantee, and offer dates</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Representative: $50 booked + $250 sold; pay timing</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Routes, permitted hours, and contact exclusions</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Inspection-referral waivers / $49 credits: office owner</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Tracking number/link, campaign code, and origin job ID</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Target acquisition cost and contribution</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Conditions for fixing, stopping, repeating, or scaling</div><div class="sl"></div></div>
+      <div class="srow"><div class="sq">Booking capacity, callbacks, and quote follow-up</div><div class="sl"></div></div>
+    </div>
+
+    <h3>The field checklist</h3>
+    <ul class="check">
+      <li><input type="checkbox" id="c1"><label for="c1">The selected job meets our above-average ticket rule; concerns are handled.</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">Someone expressed a personal, specific thank-you.</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">The thank-you explains actual charity support; referral terms are agreed.</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">The referral invitation and sign request are assigned and recorded.</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">The representative knows what may be shared about the original job.</label></li>
+      <li><input type="checkbox" id="c6"><label for="c6">The route has a genuine purpose and approved language.</label></li>
+      <li><input type="checkbox" id="c7"><label for="c7">The $49 offer, report, guarantee, and referral waiver/credit are understood.</label></li>
+      <li><input type="checkbox" id="c8"><label for="c8">Attempts, conversations, appointments, and exclusions are logged.</label></li>
+      <li><input type="checkbox" id="c9"><label for="c9">Certificates, credits, donations, and sign pickups have owners and due dates.</label></li>
+      <li><input type="checkbox" id="c10"><label for="c10">Results are followed through to completed work and collected revenue.</label></li>
+    </ul>
+
+    <blockquote>
+      <p>Before you drive away, ask: "What did we learn here? Who else might it help? Have we thanked this customer properly, asked for their introduction and sign, and assigned someone to walk the opportunity?"</p>
+    </blockquote>
+    <p>If the answer is no, put an owner and a time against it.</p>
+  </section>
+
+  <!-- ══════════ APPENDIX ══════════ -->
+  <section id="apx">
+    <p class="num">Appendix</p>
+    <h2>Editorial notes and sources</h2>
+    <p>V7 incorporates the doorstep scripts developed with Clay Neumeyer in this working session. It replaces the earlier objection table with the agreed conversations, delivery cues, questions, inspection offer, and booking close.</p>
+    <p>The original coaching-call sequence remains: select an above-average completed job, hand-deliver the charity-connected thanks, invite the referral, rerun Good Neighbor, and expand across the surrounding blocks. The September 8, 2026 coaching transcript and uploaded V1 are the original source materials.</p>
+    <p>The current inspection offer supersedes the earlier blanket fee waiver: normally $199, offered at $49 during the area campaign, including a handwritten electrical condition report. The fee goes toward corrective work purchased from the company. Under the satisfaction guarantee, the fee is waived and the company retains the report.</p>
+    <p>The inspection-referral benefit activates when the referred person books: waive unpaid fees; if the original customer has already paid, give a $49 service credit toward future work. This is distinct from the selected completed-job $100 certificate / $100 credit / $100 donation campaign. That campaign's activation terms remain for the owner to set.</p>
+    <p>Knocker compensation remains $50 per appointment booked plus $250 when that appointment produces a sale. This pay structure makes no conversion-rate assumption.</p>
+    <p>All script identities use placeholders. Local findings, customer permissions, owner credentials, prices, and availability must match the contractor using the playbook. The supplied benchmarks remain background context; the field principle remains: <strong>use what works, drop what doesn't, and make it your own.</strong></p>
+  </section>
+
+  <footer>
+    <p class="foot-close">Stop driving past the work you're paying to find.</p>
+    <img class="foot-logo" src="../venus-flytrap/sle-logo-gold.png" alt="" width="76" height="64">
+    <p class="foot-tag"><b>Service Loop Electrical</b> — For Electricians. By Electricians.</p>
+  </footer>
+
+</div>
+</body>
+</html>
