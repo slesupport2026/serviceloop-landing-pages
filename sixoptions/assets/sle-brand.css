@@ -1,0 +1,106 @@
+/* ══════════════════════════════════════════════════════════════
+   SLE BRAND LAYER — Six Options Training
+   Loads AFTER app.css. Overrides only. The app bundle is untouched
+   so behavior stays identical to the original build.
+
+   House tokens (matches the SLE field guides at /venus-flytrap/,
+   /goodneighbor/): ground #0D0D0D, gold #FDC33E, Inter + Playfair.
+   ══════════════════════════════════════════════════════════════ */
+
+:root{
+  /* ground + surfaces — matched to the field guides */
+  --background: #0D0D0D;
+  --foreground: #F2F0EC;
+  --card:       #1A1A1A;
+  --card-foreground: #F2F0EC;
+  --popover:    #1A1A1A;
+  --popover-foreground: #F2F0EC;
+  --secondary:  #232323;
+  --secondary-foreground: #F2F0EC;
+  --muted:      #1E1E1E;
+  --muted-foreground: #B5B2AB;
+
+  /* the one accent */
+  --primary:    #FDC33E;
+  --primary-foreground: #0D0D0D;
+  --accent:     #FDC33E;
+  --accent-foreground: #0D0D0D;
+  --ring:       #FDC33E;
+
+  --border: rgba(253,195,62,.16);
+  --input:  rgba(242,240,236,.10);
+
+  --destructive: #CE2F29;
+  --destructive-foreground: #F2F0EC;
+
+  /* gold ramp for any charts/meters */
+  --chart-1: #FDC33E;
+  --chart-2: #E3C575;
+  --chart-3: #C9A45A;
+  --chart-4: #8A6A22;
+  --chart-5: #5C4714;
+
+  --sidebar: #141414;
+  --sidebar-foreground: #F2F0EC;
+  --sidebar-primary: #FDC33E;
+  --sidebar-primary-foreground: #0D0D0D;
+  --sidebar-accent: #232323;
+  --sidebar-accent-foreground: #F2F0EC;
+  --sidebar-border: rgba(242,240,236,.10);
+
+  --sle-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --sle-display: 'Playfair Display', Georgia, serif;
+}
+
+/* ── Typography: Montserrat / Open Sans → Inter ─────────────────
+   The bundle sets some families inline, so those need !important.
+   Playfair Display is kept — it's already part of the house system. */
+body,
+h4, h5, h6,
+.font-heading{
+  font-family: var(--sle-sans);
+}
+[style*="Montserrat"],
+[style*="Open Sans"]{
+  font-family: var(--sle-sans) !important;
+}
+[style*="Playfair"]{
+  font-family: var(--sle-display) !important;
+}
+
+/* Tighten headings to house spec */
+h1, h2, h3, .font-heading{ letter-spacing: -.02em; }
+
+/* ── Header brandmark: swap the "SL" placeholder for the real mark ──
+   Uses sle-mark.png — the shield/bolt cropped out of the full circular
+   lockup, because the ring text is illegible below about 90px. */
+.w-8.h-8.rounded:has(> span){
+  background: transparent !important;
+  background-image: url("../sle-mark.png") !important;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  width: 2.6rem !important;
+  height: 1.9rem !important;
+  border-radius: 0 !important;
+}
+.w-8.h-8.rounded:has(> span) > span{ display: none !important; }
+
+/* ── Kill the stray scrollbar on the tab strip ─────────────────── */
+.overflow-x-auto{ scrollbar-width: none; -ms-overflow-style: none; }
+.overflow-x-auto::-webkit-scrollbar{ display: none; }
+
+/* ── Focus visibility (house standard) ─────────────────────────── */
+:focus-visible{ outline: 2px solid var(--primary); outline-offset: 3px; }
+
+/* ── Respect reduced motion ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .hover\:scale-105:hover{ transform: none !important; }
+}
+
+/* ── Print: the options sheet is meant to be printed ───────────── */
+@media print{
+  body{ background:#fff !important; color:#000 !important; }
+  .no-print, header nav{ display:none !important; }
+}
