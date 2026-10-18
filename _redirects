@@ -58,6 +58,13 @@
 /interloop    /innerloop-plat/        301
 
 # ═══════════════════════════════════════════════════════════════
+# JOB OFFER TOOL — Opportunity Offer Builder (Oct 2026)
+#   Briefly lived at /offers/ on launch day; canonical is /job-offer-tool/
+# ═══════════════════════════════════════════════════════════════
+/offers/*  /job-offer-tool/:splat  301
+/offers    /job-offer-tool/        301
+
+# ═══════════════════════════════════════════════════════════════
 # SERVICE DNA — Night School app
 # ═══════════════════════════════════════════════════════════════
 /service-dna  /service-dna.html  200
