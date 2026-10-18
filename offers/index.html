@@ -1,0 +1,1454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Opportunity Offer Builder · SLE Off The Tools</title>
+<meta name="description" content="Build a branded, print-ready employment offer letter in under 30 minutes. From Service Loop Electrical.">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500;1,600;1,700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ============ SLE / Off The Tools brand tokens ============ */
+  :root{
+    --sle-black:#0A0A0A; --sle-gold:#E3C575; --sle-bright:#FDC33E; --sle-deep:#A78227; --sle-navy:#1B2A45;
+    --ink:#0A0A0A; --ink-2:#2E3A4F; --ink-3:#5B6576;
+    --rule:#DDD7C9; --rule-soft:#EFEBE1;
+    --surface:#F4F2EC; --panel:#FFFFFF; --paper:#FFFFFF;
+    --accent:#7C5E14; --accent-bright:#FDC33E; --accent-wash:#F7EED4;
+    --on-accent:#FFFFFF;
+    --amber:#7C5E14; --amber-wash:#FBF4E1; --amber-bright:#FDC33E;
+    --done:#1F7A55;
+    --shadow:0 1px 2px rgba(10,10,10,.05), 0 10px 26px -14px rgba(27,42,69,.28);
+    --display:"Playfair Display",Georgia,"Times New Roman",serif;
+    --head:"Montserrat",system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+    --sans:"Open Sans",system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:var(--head);
+    --serif:var(--display);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ink:#FFFFFF; --ink-2:#D3D9E3; --ink-3:#A9B3C3;
+      --rule:#2A3852; --rule-soft:#1B2A45;
+      --surface:#0A0A0A; --panel:#121A29; --paper:#0E1420;
+      --accent:#E3C575; --accent-bright:#FDC33E; --accent-wash:#2A2414;
+      --on-accent:#0A0A0A;
+      --amber:#FDC33E; --amber-wash:#1B2A45; --amber-bright:#FDC33E;
+      --done:#5FD3A2;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 26px -14px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#FFFFFF; --ink-2:#D3D9E3; --ink-3:#A9B3C3;
+    --rule:#2A3852; --rule-soft:#1B2A45;
+    --surface:#0A0A0A; --panel:#121A29; --paper:#0E1420;
+    --accent:#E3C575; --accent-bright:#FDC33E; --accent-wash:#2A2414;
+    --on-accent:#0A0A0A;
+    --amber:#FDC33E; --amber-wash:#1B2A45; --amber-bright:#FDC33E;
+    --done:#5FD3A2;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 26px -14px rgba(0,0,0,.8);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--surface);color:var(--ink);font-family:var(--sans);
+       font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{text-wrap:balance;margin:0}
+  button{font:inherit;color:inherit}
+
+  /* ---------- masthead (always SLE black) ---------- */
+  .masthead{--ink:#FFFFFF; --ink-3:#C9B98C; --rule:#2A3852; --panel:#0A0A0A; --accent:#E3C575; --on-accent:#0A0A0A;
+            border-bottom:1px solid #2A2414;background:#0A0A0A;color:#fff;
+            background-image:linear-gradient(90deg,rgba(227,197,117,.0),rgba(227,197,117,.10) 55%,rgba(227,197,117,0)),
+              linear-gradient(135deg,transparent 0 62%,rgba(227,197,117,.07) 62% 63%,transparent 63% 78%,rgba(227,197,117,.06) 78% 79%,transparent 79%);
+            padding:9px clamp(16px,3vw,28px);display:flex;align-items:center;
+            gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:30;min-height:70px}
+  .brand{display:flex;align-items:center;gap:14px;margin-right:auto;min-width:0}
+  .brand img{height:50px;width:auto;display:block;flex:none}
+  .brand .txt{display:flex;flex-direction:column;gap:1px;min-width:0}
+  .brand .mk{font-family:var(--head);font-size:10.5px;font-weight:700;letter-spacing:.18em;
+             text-transform:uppercase;color:var(--sle-gold)}
+  .brand h1{font-family:var(--display);font-style:italic;font-size:21px;font-weight:600;letter-spacing:-.005em;color:#fff;line-height:1.15}
+  .brand span.tag{font-size:12.5px;color:#C9CFD9}
+  .tools{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{border:1px solid var(--rule);background:var(--panel);border-radius:6px;
+       padding:8px 14px;font-family:var(--head);font-size:12.5px;font-weight:600;letter-spacing:.02em;cursor:pointer;
+       display:inline-flex;align-items:center;gap:7px;transition:.14s;color:var(--ink)}
+  .btn:hover{border-color:var(--accent);color:var(--accent)}
+  .btn:focus-visible{outline:2px solid var(--sle-bright);outline-offset:2px}
+  .btn.primary{background:linear-gradient(180deg,#FDC33E,#E3C575);border-color:#E3C575;color:#0A0A0A}
+  .btn.primary:hover{filter:brightness(1.06);color:#0A0A0A}
+
+  /* ---------- progress rail ---------- */
+  .rail{display:flex;gap:3px;padding:0 clamp(16px,3vw,28px);background:var(--panel);
+        border-bottom:1px solid var(--rule);position:sticky;top:70px;z-index:29;
+        overflow-x:auto;scrollbar-width:thin}
+  .rail button{border:0;background:none;cursor:pointer;padding:11px 10px 10px;
+               border-bottom:3px solid transparent;white-space:nowrap;
+               font-family:var(--head);font-weight:600;font-size:10.5px;letter-spacing:.1em;
+               text-transform:uppercase;color:var(--ink-3);transition:.14s}
+  .rail button:hover{color:var(--ink)}
+  .rail button[data-state="done"]{color:var(--done)}
+  .rail button[aria-current="true"]{color:var(--ink);border-bottom-color:var(--accent-bright)}
+
+  /* ---------- workbench ---------- */
+  .bench{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+         gap:0;align-items:start}
+  @media (max-width:1000px){
+    .bench{grid-template-columns:1fr}
+    .pane-preview{display:none}
+    body.show-preview .pane-build{display:none}
+    body.show-preview .pane-preview{display:block}
+  }
+  .mobile-switch{display:none}
+  @media (max-width:1000px){.mobile-switch{display:inline-flex}}
+
+  .pane-build{padding:clamp(16px,3vw,28px);min-width:0}
+  .pane-preview{padding:clamp(16px,3vw,28px);min-width:0;position:sticky;top:112px;
+                max-height:calc(100vh - 112px);overflow:auto}
+
+  /* ---------- sections ---------- */
+  .sec{background:var(--panel);border:1px solid var(--rule);border-radius:10px;
+       margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow)}
+  .sec[open]{border-color:color-mix(in srgb,var(--sle-gold) 55%,var(--rule))}
+  .sec > summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;
+                 gap:14px;align-items:flex-start;transition:.14s}
+  .sec > summary::-webkit-details-marker{display:none}
+  .sec > summary:hover{background:var(--rule-soft)}
+  .sec > summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .snum{font-family:var(--head);font-weight:700;font-size:12px;letter-spacing:.06em;color:var(--accent);
+        padding-top:4px;font-variant-numeric:tabular-nums}
+  .stitle{flex:1;min-width:0}
+  .stitle h2{font-family:var(--display);font-style:italic;font-size:19px;font-weight:600;letter-spacing:-.005em;line-height:1.25}
+  .stitle p{margin:4px 0 0;font-size:13px;color:var(--ink-3);line-height:1.45}
+  .scount{font-family:var(--head);font-weight:600;font-size:11px;color:var(--ink-3);
+          background:var(--rule-soft);border-radius:20px;padding:3px 10px;white-space:nowrap}
+  .sec[data-state="done"] .scount{background:var(--accent-wash);color:var(--accent)}
+  .sbody{padding:6px 18px 20px;border-top:1px solid var(--rule-soft);
+         display:flex;flex-direction:column;gap:17px}
+
+  /* ---------- fields ---------- */
+  .f{display:flex;flex-direction:column;gap:5px}
+  .f > label{font-family:var(--head);font-size:13px;font-weight:600;letter-spacing:.005em}
+  .f .help{font-size:12.5px;color:var(--ink-3);line-height:1.5}
+  .f input, .f textarea, .f select{
+    width:100%;border:1px solid var(--rule);background:var(--paper);color:var(--ink);
+    border-radius:6px;padding:9px 11px;font:inherit;font-size:14px;transition:.14s}
+  .f textarea{min-height:76px;resize:vertical;line-height:1.55}
+  .f input:focus, .f textarea:focus, .f select:focus{
+    outline:0;border-color:var(--sle-gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--sle-gold) 28%,transparent)}
+  .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
+  .prefix{position:relative}
+  .prefix input{padding-left:26px}
+  .prefix::before{content:attr(data-sym);position:absolute;left:11px;top:50%;
+                  transform:translateY(-50%);color:var(--ink-3);font-size:14px;
+                  pointer-events:none}
+  .suggest{align-self:flex-start;border:1px dashed var(--rule);background:none;
+           border-radius:5px;padding:4px 10px;font-family:var(--head);font-size:11.5px;color:var(--amber);
+           cursor:pointer;font-weight:600;transition:.14s}
+  .suggest:hover{background:var(--accent-wash);border-color:var(--amber);border-style:solid}
+  .suggest:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+  .note{background:var(--amber-wash);border-left:3px solid var(--amber-bright);
+        padding:11px 14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.55;
+        color:var(--ink-2)}
+  .note strong{color:var(--ink)}
+
+  /* ---------- OTE table in form ---------- */
+  .ote{width:100%;border-collapse:collapse;font-size:13.5px;
+       font-variant-numeric:tabular-nums}
+  .ote th{text-align:left;font-family:var(--head);font-size:10.5px;letter-spacing:.08em;
+          text-transform:uppercase;color:var(--ink-3);font-weight:600;
+          padding:0 10px 7px 0;border-bottom:1px solid var(--rule)}
+  .ote td{padding:7px 10px 7px 0;border-bottom:1px solid var(--rule-soft)}
+  .ote td.calc{color:var(--accent);font-weight:600}
+  .ote input{max-width:130px}
+
+  /* ---------- document preview: SLE letterhead, always on white paper ---------- */
+  .paperwrap{--ink:#0A0A0A; --ink-2:#333333; --ink-3:#66625A; --rule:#E2DBC8; --rule-soft:#F6F1E4;
+             --panel:#FBF9F4; --paper:#FFFFFF; --accent:#7C5E14; --accent-bright:#E3C575;
+             --amber:#7C5E14; --amber-wash:#FBF0D2;
+             background:#fff;color:var(--ink);border:1px solid var(--rule);border-radius:10px;
+             box-shadow:var(--shadow);overflow:hidden}
+  .paperbar{display:flex;align-items:center;gap:9px;padding:10px 16px;
+            border-bottom:1px solid #2A2414;background:#0A0A0A}
+  .paperbar span{font-family:var(--head);font-weight:600;font-size:10.5px;letter-spacing:.12em;
+                 text-transform:uppercase;color:#E3C575}
+  .paperbar .pages{margin-left:auto;font-variant-numeric:tabular-nums;color:#C9CFD9}
+  #doc{padding:clamp(22px,3.4vw,46px);font-family:var(--sans);font-size:13.8px;
+       line-height:1.68;color:var(--ink);
+       background:linear-gradient(90deg,#A78227,#FDC33E 45%,#E3C575) top/100% 6px no-repeat,#fff}
+  #doc .dhead{text-align:center;border-bottom:2px solid #E3C575;
+              padding-bottom:14px;margin-bottom:22px}
+  #doc .dhead .co{font-family:var(--head);font-weight:700;font-size:15px;
+                  letter-spacing:.08em;text-transform:uppercase}
+  #doc .dhead .meta{font-family:var(--head);font-weight:500;font-size:11px;color:var(--ink-3);margin-top:5px;letter-spacing:.02em}
+  #doc h1{font-family:var(--display);font-style:italic;font-size:30px;font-weight:600;letter-spacing:-.01em;margin:0 0 2px;line-height:1.2}
+  #doc .sub{font-family:var(--head);font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#7C5E14;margin-bottom:18px}
+  #doc .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+              gap:4px 26px;font-family:var(--sans);font-size:12.6px;
+              border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+              padding:13px 0;margin-bottom:22px}
+  #doc .facts div{display:flex;gap:7px}
+  #doc .facts b{font-family:var(--head);color:var(--ink-3);font-weight:600;min-width:94px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px}
+  #doc h2{font-family:var(--display);font-style:italic;font-size:20px;font-weight:600;letter-spacing:-.005em;
+          margin:30px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule);
+          background:linear-gradient(#E3C575,#E3C575) left bottom/76px 3px no-repeat}
+  #doc h3{font-family:var(--head);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:18px 0 6px;
+          color:#7C5E14}
+  #doc p{margin:0 0 11px}
+  #doc ul{margin:0 0 12px;padding-left:20px}
+  #doc li{margin-bottom:5px}
+  #doc li::marker{color:#A78227}
+  #doc strong{font-weight:600}
+  #doc table{width:100%;border-collapse:collapse;font-family:var(--sans);
+             font-size:12.4px;margin:0 0 14px;font-variant-numeric:tabular-nums}
+  #doc th{text-align:left;background:#1B2A45;color:#fff;padding:8px 10px;
+          font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid #1B2A45}
+  #doc td{padding:8px 10px;border:1px solid var(--rule);vertical-align:top}
+  #doc tbody tr:nth-child(even) td{background:#FCFAF5}
+  #doc .pledge{border-left:3px solid #E3C575;background:#FBF7EC;padding:12px 16px;
+               margin:14px 0;font-family:var(--display);font-style:italic;font-size:15px;color:var(--ink-2)}
+  #doc .sigs{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:30px}
+  #doc .sig{font-family:var(--sans);font-size:12.4px}
+  #doc .sig .lbl{font-family:var(--head);font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+                 color:#7C5E14;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #E3C575}
+  #doc .sig .line{border-bottom:1px solid var(--ink);height:26px;margin-bottom:4px}
+  #doc .sig .cap{color:var(--ink-3);font-size:11.3px}
+  #doc .sig .kv{display:flex;gap:10px;align-items:baseline;min-height:27px;padding:5px 0 3px;border-bottom:1px solid var(--rule)}
+  #doc .sig .kv span{font-family:var(--head);font-weight:600;min-width:66px;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+  #doc .contact{font-family:var(--sans);font-size:12.6px;background:#F3F5F9;border-left:3px solid #1B2A45;border-radius:0 6px 6px 0;padding:10px 14px;margin:14px 0 0}
+  #doc .gate td:first-child{white-space:nowrap}
+  #doc td ul{margin:0;padding-left:17px}
+  #doc td li{margin-bottom:3px}
+  @media (max-width:560px){#doc .sigs{grid-template-columns:1fr}}
+  #doc .foot{margin-top:28px;padding-top:12px;border-top:2px solid #E3C575;
+             font-family:var(--head);font-weight:500;font-size:10.5px;letter-spacing:.04em;color:#A78227;text-align:center}
+  #doc .todo{background:var(--amber-wash);color:var(--amber);border-radius:3px;
+             padding:0 5px;font-family:var(--head);font-size:11px;font-weight:600}
+
+  @media (max-width:640px){
+    .brand img{height:40px}
+    .brand span.tag{display:none}
+    .masthead{position:static}
+    .rail{top:0}
+    .pane-preview{top:44px;max-height:none}
+  }
+
+  /* ---------- print ---------- */
+  @media print{
+    .masthead,.rail,.pane-build,.paperbar,.mobile-switch{display:none!important}
+    body{background:#fff;color:#000}
+    .bench{display:block}
+    .pane-preview{position:static;max-height:none;overflow:visible;padding:0}
+    .paperwrap{border:0;border-radius:0;box-shadow:none}
+    #doc{padding:14px 0 0;font-size:10.5pt;color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    #doc h2{page-break-after:avoid}
+    #doc table,#doc .sigs{page-break-inside:avoid}
+    #doc .todo{background:none;color:#000}
+    @page{margin:16mm 16mm}
+  }
+  /* ---------- intro / how it works ---------- */
+  body.intro-on .rail, body.intro-on .bench, body.intro-on .mobile-switch{display:none!important}
+  .intro{max-width:900px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(16px,3vw,28px) 64px}
+  .intro[hidden]{display:none}
+  .intro-hero{background:#0A0A0A;color:#fff;border:1px solid #2A2414;border-radius:14px;
+              padding:clamp(22px,4vw,40px);position:relative;overflow:hidden;
+              background-image:linear-gradient(135deg,transparent 0 58%,rgba(227,197,117,.09) 58% 58.6%,transparent 58.6% 74%,rgba(227,197,117,.07) 74% 74.6%,transparent 74.6%),
+                linear-gradient(90deg,rgba(227,197,117,0),rgba(227,197,117,.08) 60%,rgba(227,197,117,0))}
+  .intro-hero::after{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,#A78227,#FDC33E 45%,#E3C575)}
+  .kicker{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E3C575}
+  .intro-hero h2{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(28px,4.6vw,44px);
+                 line-height:1.1;margin:10px 0 12px;color:#fff;max-width:18ch}
+  .intro-hero p{color:#D3D9E3;max-width:58ch;margin:0 0 20px;font-size:15.5px}
+  .steps{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
+  .step{display:flex;gap:18px;background:var(--panel);border:1px solid var(--rule);border-radius:12px;
+        padding:clamp(16px,2.6vw,24px);box-shadow:var(--shadow)}
+  .sn{flex:none;width:40px;height:40px;border-radius:50%;background:linear-gradient(180deg,#FDC33E,#E3C575);color:#0A0A0A;
+      font-family:var(--head);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center}
+  .sc{flex:1;min-width:0}
+  .sc h3{font-family:var(--display);font-style:italic;font-weight:600;font-size:22px;line-height:1.25;margin:5px 0 8px}
+  .opt{font-family:var(--head);font-style:normal;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+       color:var(--accent);background:var(--accent-wash);border-radius:20px;padding:3px 9px;vertical-align:middle;margin-left:6px;white-space:nowrap}
+  .sc p,.sc li{color:var(--ink-2);font-size:14.5px}
+  .sc p{margin:0 0 6px}
+  .sc ul{padding-left:18px;margin:0}
+  .sc li{margin-bottom:6px}
+  .sc b{color:var(--ink)}
+  .btnrow{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 6px}
+  .promptbox,#pasteBox{width:100%;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:8px;
+       padding:12px;font:12.5px/1.55 ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;resize:vertical}
+  .promptbox{height:300px;color:var(--ink-2);margin-top:6px}
+  #pasteBox{min-height:130px;margin-top:8px}
+  #pasteBox:focus,.promptbox:focus{outline:0;border-color:var(--sle-gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--sle-gold) 28%,transparent)}
+  .fine{font-size:12.5px!important;color:var(--ink-3)!important;margin:6px 0 0!important}
+  .gloss{width:100%;border-collapse:collapse;margin-top:2px}
+  .gloss th,.gloss td{border-top:1px solid var(--rule-soft);vertical-align:top;padding:12px 0}
+  .gloss tr:first-child th,.gloss tr:first-child td{border-top:0}
+  .gloss th{text-align:left;width:1%;white-space:nowrap;padding-right:16px}
+  .gloss td{color:var(--ink-2);font-size:14.5px}
+  .chip{display:inline-block;border:1px solid var(--rule);background:var(--paper);border-radius:6px;padding:5px 11px;
+        font-family:var(--head);font-size:12.5px;font-weight:600;color:var(--ink)}
+  .intro code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background:var(--rule-soft);padding:1px 5px;border-radius:4px}
+  .intro-foot{display:flex;justify-content:center;margin-top:24px}
+  @media (max-width:560px){.step{flex-direction:column;gap:10px}.gloss th{white-space:normal}.gloss tr{display:block}.gloss th,.gloss td{display:block;padding:8px 0}.gloss td{border-top:0;padding-top:0}}
+
+  /* pay calculator: SLE black card in both themes */
+  .calc{--ink:#FFFFFF; --ink-2:#D3D9E3; --ink-3:#A9B3C3; --rule:#2A3852; --rule-soft:#1B2A45; --paper:#0E1420; --panel:#121A29; --accent:#E3C575;
+        background:#0A0A0A;color:#fff;border:1px solid #2A2414;border-radius:12px;padding:clamp(16px,2.6vw,24px);position:relative;overflow:hidden;
+        scroll-margin-top:130px;
+        background-image:linear-gradient(135deg,transparent 0 70%,rgba(227,197,117,.08) 70% 70.5%,transparent 70.5%)}
+  .calc::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#A78227,#FDC33E 45%,#E3C575)}
+  .calc h3{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(20px,2.4vw,24px);line-height:1.2;margin:6px 0 8px;color:#fff}
+  .calc-lede{margin:0 0 18px;color:#D3D9E3;font-size:14px;line-height:1.55}
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 22px}
+  .cfield{display:flex;flex-direction:column;gap:6px}
+  .clabel{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .clabel label,.cstage label{font-family:var(--head);font-size:12.5px;font-weight:600;color:#fff}
+  .cstage label span{display:block;font-weight:500;font-size:11px;color:#A9B3C3;letter-spacing:.04em}
+  .cnum{position:relative;display:inline-block}
+  .cnum input{width:118px;background:#0E1420;color:#fff;border:1px solid #2A3852;border-radius:6px;padding:6px 8px;
+              font:600 13.5px var(--head);text-align:right;font-variant-numeric:tabular-nums}
+  .cnum.pre input{padding-left:20px}
+  .cnum.post input{padding-right:22px;width:84px}
+  .cnum::before{position:absolute;top:50%;transform:translateY(-50%);color:#A9B3C3;font-size:12.5px;pointer-events:none}
+  .cnum.pre::before{content:attr(data-u);left:8px}
+  .cnum.post::before{content:attr(data-u);right:8px}
+  .cnum input:focus{outline:0;border-color:#E3C575;box-shadow:0 0 0 3px rgba(227,197,117,.25)}
+  .calc input[type=range]{width:100%;accent-color:#E3C575;margin:2px 0}
+  .chelp{font-size:11.5px;color:#A9B3C3;line-height:1.45}
+  .cmode{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:4px}
+  .cmode span{font-family:var(--head);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#A9B3C3;flex-basis:100%;margin-bottom:1px}
+  .cmode button{background:#0E1420;border:1px solid #2A3852;color:#D3D9E3;border-radius:20px;padding:4px 12px;font:600 12px var(--head);cursor:pointer;transition:.14s}
+  .cmode button:hover{border-color:#E3C575;color:#fff}
+  .cmode button[aria-pressed="true"]{background:#E3C575;border-color:#E3C575;color:#0A0A0A}
+  .cmode button:focus-visible{outline:2px solid #FDC33E;outline-offset:2px}
+  .csub{font-family:var(--head);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E3C575;margin:20px 0 10px}
+  .cstages{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+  .cstage{display:flex;flex-direction:column;gap:8px;background:#121A29;border:1px solid #2A3852;border-radius:8px;padding:10px 12px}
+  .cstage .cnum,.cstage .cnum input{width:100%}
+  .ccards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0 12px}
+  .ccard{background:#1B2A45;border-radius:9px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;border-top:3px solid #E3C575}
+  .ccard b{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E3C575}
+  .ccard span{font-family:var(--head);font-size:24px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;line-height:1.25}
+  .ccard i{font-style:normal;font-size:11.5px;color:#C9CFD9}
+  .ccard.good{border-top-color:#5FD3A2}.ccard.good span{color:#5FD3A2}
+  .ccard.warn{border-top-color:#FDC33E}.ccard.warn span{color:#FDC33E}
+  .ctable{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;min-width:560px}
+  .ctable th{text-align:left;font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#A9B3C3;padding:8px 8px 8px 0;border-bottom:1px solid #2A3852}
+  .ctable td{padding:9px 8px 9px 0;border-bottom:1px solid #1B2A45;color:#D3D9E3}
+  .ctable td span{font-size:11px;color:#A9B3C3}
+  .ctable td strong{color:#fff;font-weight:600}
+  .ctable td.hi{color:#E3C575;font-weight:700}
+  .ctable td.ok{color:#5FD3A2;font-weight:600}
+  .ctable td.over{color:#FDC33E;font-weight:600}
+  .cprice{margin:14px 0 0;background:#121A29;border-left:3px solid #5FD3A2;border-radius:0 8px 8px 0;padding:12px 14px;font-size:13.5px;line-height:1.55;color:#D3D9E3}
+  .cprice.over{border-left-color:#FDC33E}
+  .cprice strong{color:#fff}
+  .cnote{display:block;margin-top:6px;font-size:12px;color:#A9B3C3}
+  .capply{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+  .capply span{font-size:12px;color:#A9B3C3;flex:1;min-width:200px}
+  .linkbtn{background:none;border:0;padding:0;margin-left:4px;color:var(--accent);font:600 13.5px var(--head);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+  /* member brand on the letter */
+  #doc .dlogo{display:block;max-height:64px;max-width:220px;margin:0 auto 12px;object-fit:contain}
+  #doc[data-brand]{background:linear-gradient(90deg,var(--lb),var(--lb)) top/100% 6px no-repeat,#fff}
+  #doc[data-brand] .dhead{border-bottom-color:var(--lb)}
+  #doc[data-brand] h2{background-image:linear-gradient(var(--lb),var(--lb))}
+  #doc[data-brand] .sig .lbl{border-bottom-color:var(--lb)}
+  #doc[data-brand] .pledge{border-left-color:var(--lb)}
+  #doc[data-brand] .foot{border-top-color:var(--lb)}
+
+  .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;z-index:60;
+         background:#0A0A0A;color:#fff;border:1px solid #E3C575;border-radius:8px;padding:10px 16px;
+         font-family:var(--head);font-size:13px;font-weight:600;box-shadow:0 10px 30px -10px rgba(0,0,0,.6);
+         transition:opacity .18s,transform .18s;pointer-events:none;max-width:calc(100vw - 32px)}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  .toast.bad{border-color:#FDC33E;color:#FDC33E}
+  body.dropping::after{content:"Drop your saved draft to open it";position:fixed;inset:12px;z-index:70;
+         display:flex;align-items:center;justify-content:center;border:2px dashed #E3C575;border-radius:14px;
+         background:rgba(10,10,10,.82);color:#E3C575;font-family:var(--display);font-style:italic;font-size:26px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="masthead">
+  <div class="brand">
+    <img src="data:image/png;base64,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" alt="Service Loop Electrical">
+    <div class="txt">
+      <span class="mk">Off The Tools&trade; &middot; Offer Builder</span>
+      <h1>The Opportunity Offer</h1>
+      <span class="tag">Answer the questions. The letter writes itself.</span>
+    </div>
+  </div>
+  <div class="tools">
+    <button class="btn" id="guide">How it works</button>
+    <button class="btn mobile-switch" id="swap">Preview</button>
+    <button class="btn" id="load" title="Open a draft you saved earlier (.json). You can also drag the file onto the page.">Open draft</button>
+    <button class="btn" id="save" title="Save every answer to a .json file you can open later to keep editing">Save draft</button>
+    <button class="btn" id="letter" title="Download the finished letter as a file you can open, print, or email">Download letter</button>
+    <button class="btn primary" id="print">Print / PDF</button>
+  </div>
+</header>
+
+<section id="intro" class="intro" aria-labelledby="intro-h" hidden>
+  <div class="intro-hero">
+    <div class="kicker">Start here</div>
+    <h2 id="intro-h">Build an offer a great candidate can't ignore.</h2>
+    <p>One letter that sells the job, sets the standard, and protects your shop. Four steps. Most owners are done in under 30 minutes.</p>
+    <button class="btn primary" data-go="build">Skip to the builder →</button>
+  </div>
+
+  <ol class="steps">
+    <li class="step">
+      <div class="sn">1</div>
+      <div class="sc">
+        <h3>Let your AI write the first draft <span class="opt">Optional · saves ~15 min</span></h3>
+        <p>Copy the prompt below and paste it into ChatGPT, Claude, Gemini, or whichever AI you use. It asks for your website and the role you're hiring, reads your site, and hands back a draft with your company details, mission, culture, and brand already filled in.</p>
+        <div class="btnrow">
+          <button class="btn primary" id="copyPrompt">Copy AI prompt</button>
+          <button class="btn" id="dlPrompt">Download prompt (.md)</button>
+          <button class="btn" id="showPrompt" aria-expanded="false" aria-controls="promptBox">Preview prompt</button>
+        </div>
+        <textarea id="promptBox" class="promptbox" readonly hidden aria-label="AI prompt"></textarea>
+        <p class="fine">Use an AI that can browse the web so it can read your site. If yours can't, it will ask you to paste your About and Careers page text instead.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="sn">2</div>
+      <div class="sc">
+        <h3>Bring the draft back</h3>
+        <p>Your AI replies with a block of text that starts with <code>{</code>. Copy all of it, paste it below, and load it. If it gave you a file instead, use <b>Open draft</b> at the top of the page.</p>
+        <textarea id="pasteBox" placeholder='Paste what your AI gave you here. It starts with {"app": "sle-offer-builder" …' aria-label="Paste your AI draft"></textarea>
+        <div class="btnrow"><button class="btn primary" id="pasteLoad">Load into the builder</button></div>
+        <p class="fine">Loading replaces what's in the builder right now. Save a draft first if you want to keep it.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="sn">3</div>
+      <div class="sc">
+        <h3>Fill the gaps and make it yours</h3>
+        <ul>
+          <li><b>The numbers are yours.</b> Pay, commission, sales targets, and dates are left blank on purpose. Your AI doesn't know your bank balance. You do.</li>
+          <li><b>Gold tags in the preview</b> mark anything still missing. When they're gone, you're done.</li>
+          <li><b>Not sure what to pay at each stage?</b> The pay calculator in section 06 shows their pay, your true cost, and whether your pricing supports it. One click drops the numbers into your offer. <button type="button" class="linkbtn" id="toCalc">Open the calculator →</button></li>
+          <li><b>Stuck on a question?</b> Hit <i>Not sure? Use a starting point</i> and edit from there.</li>
+          <li><b>Section 09, Expectations and terms,</b> is worth an hour with your employment attorney before you send it.</li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="sn">4</div>
+      <div class="sc">
+        <h3>Save it, send it, get it signed</h3>
+        <table class="gloss">
+          <tr><th><span class="chip">Save draft</span></th><td>Saves every answer to a file on your computer (<code>.json</code>). It's your work in progress, not the letter. Close the page, come back tomorrow or on another computer, and pick up where you left off.</td></tr>
+          <tr><th><span class="chip">Open draft</span></th><td>Loads a draft file you saved earlier back into the builder so you can keep editing, or reuse last hire's offer as the starting point for the next one. You can also drag the file onto the page.</td></tr>
+          <tr><th><span class="chip">Download letter</span></th><td>Saves the finished letter as a web page (<code>.html</code>). Open it in any browser to read it, email it, or print it.</td></tr>
+          <tr><th><span class="chip">Print / PDF</span></th><td>Opens your browser's print window. Choose <i>Save as PDF</i> for a PDF to send, or print it on paper for signatures.</td></tr>
+        </table>
+        <p class="fine">This page also remembers your answers on this browser automatically. A saved draft file is what lets you switch computers or keep one draft per candidate.</p>
+        <p class="fine" id="backendNote" hidden>When you save, download, or print, a copy of the offer is stored securely with Service Loop Electrical so our team can review it with you and support the hire.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="intro-foot"><button class="btn primary" data-go="build">Start building →</button></div>
+</section>
+
+<nav class="rail" id="rail"></nav>
+
+<main class="bench">
+  <div class="pane-build"><div id="form"></div></div>
+  <div class="pane-preview">
+    <div class="paperwrap">
+      <div class="paperbar">
+        <span>Live preview</span>
+        <span class="pages" id="fillstat">0% complete</span>
+      </div>
+      <div id="doc"></div>
+    </div>
+  </div>
+</main>
+
+<input type="file" id="file" accept=".json" hidden>
+
+<script>
+"use strict";
+
+/* ============================================================
+   SCHEMA — every question a partner answers, by section.
+   `sg` = the starting point we offer when they have nothing yet.
+   ============================================================ */
+const SECTIONS = [
+{ n:"00", id:"setup", t:"The basics",
+  b:"Who the offer is for, who it's from, and the dates that matter.",
+  f:[
+  {k:"company", l:"Company legal name", ph:"Northside Electrical Services, LLC", w:"half"},
+  {k:"city",    l:"City and state", ph:"Clermont, Florida", w:"half"},
+  {k:"address", l:"Street address", ph:"341 Main Street", w:"half"},
+  {k:"phone",   l:"Phone", ph:"(555) 555-0100", w:"half"},
+  {k:"title",   l:"Position title", ph:"Sales Representative", w:"half",
+   h:"Name the job the way a good candidate would want it on a business card."},
+  {k:"cand",    l:"Candidate's full name", ph:"Alex Rivera", w:"half"},
+  {k:"issued",  l:"Date issued", ty:"date", w:"third"},
+  {k:"start",   l:"Start date", ty:"date", w:"third"},
+  {k:"expires", l:"Offer expires", ty:"date", w:"third",
+   h:"Give a real deadline and hold it. An offer that never expires is just an option they shop against yours."},
+  {k:"reports", l:"Reports to", ph:"Brandy Shaw, Administrative Manager", w:"half",
+   h:"Obvious in a small shop today. Not obvious the day you add a second salesperson."},
+]},
+
+{ n:"01", id:"open", t:"The opening",
+  b:"Three short paragraphs that frame this as an invitation, not paperwork.",
+  f:[
+  {k:"mission", l:"What does your company actually do for people?", ty:"ta",
+   h:"One sentence. Not services — the difference you make.",
+   sg:"We change people's lives every day through honest, safe, and trustworthy electrical service."},
+  {k:"why", l:"Why this person?", ty:"ta",
+   h:"Name what you saw in them. This is the paragraph they'll read twice.",
+   sg:"We believe you have the hunger, the character, and the drive to not only succeed in this role but to grow into a leader within this company."},
+  {k:"invest", l:"What are you committing to on your side?", ty:"ta",
+   h:"You're asking a lot. Say what they get in return.",
+   sg:"We are making a significant investment in this position, and we have designed a clear 30/60/90 day plan to get you to your goals. You will have access to our systems, our training library, our mentor network, and the direct support of our leadership team. You will not be walking this alone."},
+]},
+
+{ n:"02", id:"role", t:"Role overview",
+  b:"What the job is, and what it grows into.",
+  f:[
+  {k:"focus", l:"What does this role focus on?", ty:"ta",
+   h:"One per line. Four to six is right.",
+   sg:"Generating revenue through professional, relationship-driven sales\nBuilding long-term client relationships rooted in trust and follow-through\nCoaching and developing the technical team\nTracking and reporting individual and team KPIs"},
+  {k:"nextrole", l:"What role does this grow into?", ph:"Sales Manager", w:"half",
+   h:"If there's no path, a good candidate assumes there's no ceiling worth climbing."},
+  {k:"promo_sales", l:"Monthly sales required for promotion", ty:"money", w:"half"},
+  {k:"promo_close", l:"Close rate required", ty:"pct", w:"half"},
+  {k:"promo_other", l:"What else must they prove?", ty:"ta",
+   h:"One per line.",
+   sg:"Demonstrated leadership of the technical team\nFull embodiment of our culture principles\nConsistent, accurate KPI reporting without prompting"},
+]},
+
+{ n:"03", id:"ramp", t:"The 30/60/90 plan",
+  b:"How you get them to the number. This is the section candidates remember.",
+  f:[
+  {k:"target", l:"Target monthly sales by day 90", ty:"money", w:"half",
+   h:"The whole plan works backward from this. Put it in writing on page one of the job."},
+  {k:"mid", l:"Checkpoint at day 60", ty:"money", w:"half",
+   h:"Usually about half the target."},
+  {k:"d30", l:"Days 1–30 — what happens?", ty:"ta",
+   sg:"Introductions to the team and systems. CRM and dispatch setup. Study our sales process. Learn the pricing model. Shadow calls with ownership. Training library onboarding begins."},
+  {k:"d30b", l:"Days 1–30 — what does success look like?", ty:"ta",
+   sg:"Fully operational in all platforms. First independent appointments completed. Pipeline established. Culture principles understood and demonstrated."},
+  {k:"d60", l:"Days 31–60 — what happens?", ty:"ta",
+   sg:"Independent appointments with weekly coaching. Begin one-on-one technician sessions. Full KPI reporting. Deposit and signed proposal process locked in."},
+  {k:"d60b", l:"Days 31–60 — what does success look like?", ty:"ta",
+   sg:"Checkpoint sales volume reached. Close rate trending at or above target. KPI reports submitted on time without prompting."},
+  {k:"d90", l:"Days 61–90 — what happens?", ty:"ta",
+   sg:"Full sales autonomy. Lead group training with the technical team. Daily KPI review. Commission fully activated on benchmark achievement. Formal 90-day review."},
+  {k:"d90b", l:"Days 61–90 — what does success look like?", ty:"ta",
+   sg:"Target monthly sales reached and verified. Close rate at or above target. All culture principles demonstrated. Management path evaluation begins."},
+  {k:"support", l:"Who and what supports them?", ty:"ta",
+   h:"One per line, in the form \"Name, role: what they handle.\" A candidate reading this sees a company, not a gamble.",
+   sg:"Primary day-to-day contact: systems, process questions, and operational support\nOwnership: escalation for anything unresolved, plus high-level deal support\nTraining library: process guides, scripts, and tools built for our team\nMentor network: extended mentorship from high-performing operators\nKPI tracker: daily visibility into performance and progress"},
+]},
+
+{ n:"04", id:"resp", t:"Responsibilities",
+  b:"Your sales process, the team duties, the numbers, and the vehicle.",
+  f:[
+  {k:"procname", l:"What do you call your sales process?", ph:"The 6-Step Process", w:"half",
+   h:"Naming it makes it a standard instead of a suggestion."},
+  {k:"options", l:"Options presented on every call", ty:"num", w:"half", ph:"4"},
+  {k:"steps", l:"Walk through the steps", ty:"ta",
+   h:"One per line. This is non-negotiable language — write it the way you want it run.",
+   sg:"Reach out before arrival and greet the customer professionally on site\nConduct a deep exploration of the home to uncover needs, safety concerns, and opportunities\nDevelop tailored solutions that address stated and unstated wants\nPresent clearly structured options on every single call without exception\nCollect a signed proposal and deposit on site, then call dispatch immediately\nDeliver a detailed material list to the purchaser so materials can be staged"},
+  {k:"team", l:"Team leadership duties", ty:"ta",
+   sg:"Fully embody our culture principles in every interaction, on and off the field\nProvide one-on-one coaching to technicians and lead group training sessions\nCommit to ongoing continuing education and bring new skills back to the group\nBe available to support technicians during active installations"},
+  {k:"closerate", l:"Minimum close rate", ty:"pct", w:"half"},
+  {k:"kpitool", l:"What do they track their numbers in?", ph:"Our KPI tracker", w:"half"},
+  {k:"kpiwho", l:"Who do they report to, and how often?", ph:"Weekly to the Administrative Manager", w:"half"},
+  {k:"pricing", l:"Your pricing compliance rule", ty:"ta",
+   h:"The rule that stops discounting from eating your margin.",
+   sg:"All work is sold at the current published service rate. Unauthorized pricing deviation may result in commission withholding on a per-job basis, proportional to the severity of the deviation."},
+  {k:"vehicle", l:"Vehicle policy", ty:"ta",
+   h:"Say where it sleeps. This is the single most common thing a candidate pushes back on — have that conversation now, not after they've pictured driving it home.",
+   sg:"A dedicated company vehicle is assigned for all sales appointments.\nThe vehicle is kept clean, organized, and professionally presented at all times as an extension of our brand.\nRoutine maintenance is reported proactively when due.\nThe vehicle returns to the shop at the end of each workday and remains on site after hours and on weekends unless prior written approval is granted.\nAny damage or incident is reported to ownership immediately. Personal use is not permitted without written authorization."},
+]},
+
+{ n:"05", id:"culture", t:"Culture principles",
+  b:"The standards you'll actually coach against. Three to five.",
+  note:"These are the lines you point at in a hard conversation eighteen months from now. Write them so they can be observed, not just agreed with.",
+  f:[
+  {k:"princ", l:"Your principles", ty:"ta",
+   h:"One per line, in the form \"Name: what it means in practice.\"",
+   sg:"Hunger: Obsessive modeling of success, voracious question-asking, constant off-field learning. You show up sharper than the day before.\nStandards: A 100% say-do ratio. Extreme ownership. You exceed expectations as a default, not an exception.\nKnowledge Sharing: Everything you learn, you share. When the tide rises, all boats rise.\nTruth: Unwavering integrity with clients, with the team, and with yourself. Radical transparency.\nEnergy: Conviction in everything you say and do. Full control of your attitude regardless of circumstances."},
+  {k:"princline", l:"Closing line", ph:"These are not posters on a wall.",
+   sg:"These are not posters on a wall. They are measured, coached, and expected every single day."},
+]},
+
+{ n:"06", id:"comp", t:"Compensation", calc:true,
+  b:"Base, commission, and what the commission is actually calculated on.",
+  note:"Before you send this, run one check: <strong>if this person sells nothing for 30 days, can you carry them?</strong> Only your bank balance answers that. A real salesperson is a cash pinch before they're a cash machine.",
+  f:[
+  {k:"base", l:"Base salary (annual)", ty:"money", w:"half"},
+  {k:"freq", l:"Paid", ty:"sel", o:["bi-weekly","weekly","semi-monthly","monthly"], w:"half"},
+  {k:"comm", l:"Commission rate", ty:"pct", w:"half"},
+  {k:"basis", l:"Commission is calculated on", ty:"sel", w:"half",
+   o:["total sale including equipment and materials","sale value less equipment cost","labor only"],
+   h:"Pick one now. Vague here becomes an argument on the first big generator job."},
+  {k:"earned", l:"When is a sale counted?", ty:"sel",
+   o:["once the deposit is collected or financing is confirmed","on signed proposal","at job completion"],
+   h:"Deposit-collected is cleanest. Nobody should wait five weeks on permitting for pay they earned in the field."},
+  {k:"activate", l:"When does full commission activate?", ty:"ta",
+   sg:"Full commission activates upon achieving the target monthly sales volume at the 90-day mark."},
+  {k:"ote", l:"On-track earnings", ty:"ote",
+   h:"The most persuasive thing in the whole letter. You stop telling them what you'll pay and start showing them what they can make."},
+]},
+
+{ n:"07", id:"review", t:"30/60/90 checkpoints",
+  b:"A formal review at the end of each stage. Pass the checkpoint, unlock the next stage.",
+  note:"Each checkpoint is a gate, not a formality. Write what must be <strong>true and verifiable</strong> on that day for the next stage to open. Nobody is blindsided by a review they signed up for.",
+  f:[
+  {k:"c30", l:"Day 30 checkpoint — what unlocks days 31–60?", ty:"ta",
+   h:"One per line.",
+   sg:"Fully operational in every platform (CRM, dispatch, KPI tracker)\nFirst independent appointments completed\nSales process run on every call\nPipeline established\nCulture principles understood and demonstrated"},
+  {k:"c60", l:"Day 60 checkpoint — what unlocks days 61–90?", ty:"ta",
+   h:"One per line. Tie it to the day-60 sales number from section 03.",
+   sg:"Day-60 checkpoint sales volume reached and verified\nClose rate at or trending toward target\nKPI reports submitted on time without prompting\nSigned proposal and deposit collected on every closed job\nOne-on-one technician coaching underway"},
+  {k:"crit", l:"Day 90 review — what unlocks full commission and the growth path?", ty:"ta",
+   h:"One per line.",
+   sg:"Revenue performance against the 90-day target\nClose rate on assigned appointments\nPricing compliance — all work sold at the published rate\nProcess adherence on every call\nTeam leadership and consistent knowledge sharing\nKPI reporting submitted without prompting\nObservable demonstration of all culture principles\nProactive, clear, and timely communication"},
+  {k:"revout", l:"What happens if day 90 goes well?", ty:"ta",
+   sg:"If both parties agree to continue following the 90-day review, commission terms are fully activated and the management development path formally begins."},
+  {k:"miss", l:"What happens if a checkpoint is missed?", ty:"ta",
+   h:"Decide this now, while everyone is optimistic.",
+   sg:"If a checkpoint is not met, we meet within five business days to document the gap and agree on a written improvement plan of up to 30 days. The next stage unlocks once the checkpoint is met. A checkpoint still unmet at the end of the improvement plan may trigger the compensation review described in section 8."},
+]},
+
+{ n:"08", id:"growth", t:"Growth path",
+  b:"Year one, year two, year three. Specific beats inspiring.",
+  note:"Say the quiet part too: moving into management usually means <strong>salary up, commission down</strong>. Someone who learns that in year two feels tricked. Someone who reads it here is making an informed choice.",
+  f:[
+  {k:"y1", l:"Year 1", ty:"ta",
+   sg:"Establish yourself as the top sales producer. Fully embody the culture. Own your KPIs. Coach technicians and build team trust."},
+  {k:"y2", l:"Year 2", ty:"ta",
+   sg:"Transition into a team leadership role. Begin overseeing appointment flow and supporting incoming sales staff."},
+  {k:"y3", l:"Year 3", ty:"ta",
+   sg:"Promotion to the manager role. Lead and manage a team of three or more representatives. Partner with ownership on hiring and growth strategy."},
+  {k:"compreneg", l:"What changes about pay at that level?", ty:"ta",
+   sg:"At the manager level, compensation is renegotiated to reflect expanded responsibilities, team oversight, and growth participation. Note that this generally means a higher base and a lower commission rate."},
+]},
+
+{ n:"09", id:"terms", t:"Expectations and terms",
+  b:"The benchmarks, the review triggers, and the legal language.",
+  note:"<strong>Have this section reviewed by your own employment attorney.</strong> Non-solicitation, confidentiality, and at-will language vary by state and some of it is unenforceable in certain places. The rest of this letter is yours to write. This part is worth a lawyer's hour.",
+  f:[
+  {k:"why_terms", l:"Why these terms exist", ty:"ta",
+   sg:"This role is funded by the revenue it generates. Total compensation and employment burden represent a significant portion of our operating expenses. The following terms exist to protect both parties and ensure this partnership starts on solid ground."},
+  {k:"triggers", l:"What triggers a compensation review?", ty:"ta",
+   h:"One per line. Be specific enough that nobody argues about whether it happened.",
+   sg:"Monthly sales fall below the day-60 checkpoint for two consecutive months\nClose rate falls below target for a 30-day period without an active documented improvement plan\nRepeated pricing violations that result in revenue loss to the company\nConduct inconsistent with our culture principles that impacts team morale or client relationships"},
+  {k:"conduct", l:"Conduct and confidentiality", ty:"ta",
+   sg:"Full embodiment of our culture principles is a condition of continued employment.\nAny conduct that damages client relationships, misrepresents our services or pricing, or violates the trust of ownership is grounds for immediate termination.\nAll confidential information including pricing models, client lists, KPI data, compensation structures, and internal systems is the exclusive property of the company and may not be disclosed externally."},
+  {k:"nonsolicit", l:"Non-solicitation period (months)", ty:"num", ph:"12", w:"half",
+   h:"Leave blank to omit this clause entirely."},
+  {k:"atwill", l:"At-will statement", ty:"ta",
+   sg:"Employment with the company is at-will. Either party may end the employment relationship at any time, with or without cause and with or without notice. Nothing in this offer letter creates a contract of employment for a fixed term."},
+  {k:"pledge", l:"Your commitment back to them", ty:"ta",
+   h:"The letter has just spent a page on what happens if they fall short. Balance it.",
+   sg:"We will provide the training, the systems, the coaching, the vehicle, and the direct support you need to win. If we are ever falling short on our end of this agreement, we expect you to tell us directly and immediately. This works both ways. We are all in."},
+]},
+
+{ n:"10", id:"about", t:"About us",
+  b:"Why someone would want to build a career here.",
+  f:[
+  {k:"who", l:"Who are you?", ty:"ta",
+   sg:"We are a fast-growing residential electrical company. We are not a typical electrical contractor — we operate at the intersection of skilled trades, client experience design, and intentional culture-building."},
+  {k:"believe", l:"What do you believe?", ty:"ta",
+   h:"One per line.",
+   sg:"Putting the client's safety and trust above all else\nOperating with radical integrity and transparency in every interaction\nBuilding systems that produce consistent, measurable results\nDeveloping people into leaders, not just keeping seats filled\nCreating a team culture where everyone teaches and everyone learns"},
+  {k:"closing", l:"Closing thought", ty:"ta",
+   sg:"We are scaling intentionally. The people who build this team today will shape its future."},
+  {k:"website", l:"Company website", ph:"www.yourcompany.com",
+   h:"Send them to the site you're proud of. A strong candidate will look anyway — point them at your reviews, your team page, your best work. It also prints in the letterhead and footer."},
+  {k:"brand_color", l:"Brand color", ph:"#C8102E", w:"half",
+   h:"A hex code from your logo or site. Colors the accent lines on the letter. Leave blank for SLE gold."},
+  {k:"logo_url", l:"Logo image link", ph:"https://yourcompany.com/logo.png", w:"half",
+   h:"A direct https:// link to your logo image. Prints at the top of the letter."},
+]},
+
+{ n:"11", id:"signoff", t:"Sign-off",
+  b:"The person accountable for this hire, and the candidate's signature.",
+  note:"Name <strong>one</strong> accountable person: the one who answers the phone when the candidate has a question before signing, and the one who owns their first 90 days.",
+  f:[
+  {k:"acc_name",  l:"Accountable party's name", ph:"Bill Harper", w:"half"},
+  {k:"acc_title", l:"Position", ph:"Owner", w:"half"},
+  {k:"acc_email", l:"Email", ph:"bill@yourcompany.com", w:"half"},
+  {k:"acc_phone", l:"Direct phone", ph:"(555) 555-0101", w:"half"},
+  {k:"cand_email", l:"Candidate's email", ph:"alex@email.com", w:"half"},
+  {k:"cand_phone", l:"Candidate's phone", ph:"(555) 555-0199", w:"half"},
+]},
+];
+
+/* ============================================================ */
+const D = {};
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const lines = v => String(v||"").split("\n").map(s=>s.trim()).filter(Boolean);
+const money = v => { const n=parseFloat(String(v).replace(/[^0-9.]/g,""));
+  return isNaN(n)?null:"$"+n.toLocaleString("en-US",{maximumFractionDigits:0}); };
+const num = v => { const n=parseFloat(String(v).replace(/[^0-9.]/g,"")); return isNaN(n)?0:n; };
+const dateFmt = v => { if(!v) return null;
+  const [y,m,d]=v.split("-"); if(!d) return v;
+  return new Date(+y,+m-1,+d).toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"}); };
+const TODO = t => `<span class="todo">${esc(t)}</span>`;
+const g = (k,t) => D[k] && String(D[k]).trim() ? esc(D[k]) : TODO(t);
+const siteHref = v => { const s=String(v||"").trim(); if(!s) return null; return /^https?:\/\//i.test(s)?s:"https://"+s; };
+const siteLabel = v => String(v||"").trim().replace(/^https?:\/\//i,"").replace(/\/$/,"");
+
+/* ---------- build the form ---------- */
+function buildForm(){
+  const form = $("#form"), rail = $("#rail");
+  SECTIONS.forEach((s,i)=>{
+    const det = document.createElement("details");
+    det.className = "sec"; det.id = "sec-"+s.id;
+    if(i===0) det.open = true;
+
+    let inner = "";
+    if(s.note) inner += `<div class="note">${s.note}</div>`;
+    if(s.calc) inner += calcMarkup();
+
+    let buf = [];
+    const flush = () => { if(buf.length){ inner += `<div class="row">${buf.join("")}</div>`; buf=[]; } };
+
+    s.f.forEach(f=>{
+      const id = s.id+"_"+f.k;
+      const help = f.h ? `<div class="help">${f.h}</div>` : "";
+      const sg = f.sg ? `<button type="button" class="suggest" data-for="${id}" data-sg="${esc(f.sg)}">Not sure? Use a starting point</button>` : "";
+      let ctl;
+
+      if(f.ty==="ta") ctl = `<textarea id="${id}" data-k="${f.k}" data-s="${s.id}" placeholder="${esc(f.ph||"")}"></textarea>`;
+      else if(f.ty==="sel") ctl = `<select id="${id}" data-k="${f.k}" data-s="${s.id}"><option value="">Choose one…</option>${f.o.map(o=>`<option>${esc(o)}</option>`).join("")}</select>`;
+      else if(f.ty==="money") ctl = `<div class="prefix" data-sym="$"><input id="${id}" data-k="${f.k}" data-s="${s.id}" inputmode="decimal" placeholder="${esc(f.ph||"100,000")}"></div>`;
+      else if(f.ty==="pct") ctl = `<div class="prefix" data-sym="%"><input id="${id}" data-k="${f.k}" data-s="${s.id}" inputmode="decimal" placeholder="${esc(f.ph||"60")}"></div>`;
+      else if(f.ty==="num") ctl = `<input id="${id}" data-k="${f.k}" data-s="${s.id}" inputmode="numeric" placeholder="${esc(f.ph||"")}">`;
+      else if(f.ty==="date") ctl = `<input type="date" id="${id}" data-k="${f.k}" data-s="${s.id}">`;
+      else if(f.ty==="ote") ctl = oteMarkup();
+      else ctl = `<input id="${id}" data-k="${f.k}" data-s="${s.id}" placeholder="${esc(f.ph||"")}">`;
+
+      const block = `<div class="f"><label for="${id}">${esc(f.l)}</label>${help}${ctl}${sg}</div>`;
+      if(f.w==="half"||f.w==="third") buf.push(block); else { flush(); inner += block; }
+    });
+    flush();
+
+    det.innerHTML =
+      `<summary><span class="snum">${s.n}</span>
+        <span class="stitle"><h2>${esc(s.t)}</h2><p>${esc(s.b)}</p></span>
+        <span class="scount" id="cnt-${s.id}">0 / 0</span></summary>
+       <div class="sbody">${inner}</div>`;
+    form.appendChild(det);
+
+    const rb = document.createElement("button");
+    rb.textContent = s.n+" · "+s.t; rb.dataset.target = s.id;
+    rb.addEventListener("click",()=>{
+      det.open = true;
+      det.scrollIntoView({behavior:"smooth",block:"start"});
+      document.body.classList.remove("show-preview");
+    });
+    rail.appendChild(rb);
+  });
+}
+
+function oteMarkup(){
+  const r = i => `<tr>
+    <td><div class="prefix" data-sym="$"><input data-k="v${i}" data-s="comp" inputmode="decimal" placeholder="${[50000,100000,150000][i-1].toLocaleString()}"></div></td>
+    <td class="calc" data-ote="base${i}">—</td>
+    <td class="calc" data-ote="com${i}">—</td>
+    <td class="calc" data-ote="tot${i}">—</td></tr>`;
+  return `<div style="overflow-x:auto"><table class="ote">
+    <thead><tr><th>Monthly sales</th><th>Base / mo</th><th>Commission</th><th>Monthly total</th></tr></thead>
+    <tbody>${r(1)}${r(2)}${r(3)}</tbody></table></div>`;
+}
+
+/* ---------- pay calculator (section 06) ---------- */
+const CALC_SLIDERS = [
+  {c:"cb", l:"Base annual salary", u:"$", min:0, max:150000, step:1000, v:50000},
+  {c:"cr", l:"Commission rate", u:"%", min:0, max:20, step:0.5, v:5},
+  {c:"cu", l:"Employer burden", u:"%", min:0, max:40, step:1, v:12,
+   h:"Payroll taxes, workers' comp, and benefits on top of pay. 10–15% is typical."},
+  {c:"ct", l:"Target role cost", u:"%", min:5, max:40, step:1, v:15,
+   h:"The share of what this person produces, through sales, installs, or both, that you can afford to spend on them, all-in.", mode:true},
+];
+const CALC_STAGES = [
+  {c:"s1", l:"Days 1–30", sub:"Ramping up", v:20000},
+  {c:"s2", l:"Day 60", sub:"Checkpoint", v:42500},
+  {c:"s3", l:"Day 90", sub:"Target", v:85000},
+];
+let CALC_MODE = "sales";
+const CALC_WORDS = {
+  sales:    {noun:"sales", short:"sales"},
+  installs: {noun:"install revenue", short:"installs"},
+  both:     {noun:"sales and install revenue", short:"production"},
+};
+const modeMarkup = () => `<div class="cmode" role="group" aria-label="This role produces"><span>This role produces</span>${
+  [["sales","Sales"],["installs","Installs"],["both","Both"]].map(([v,l])=>`<button type="button" data-mode="${v}" aria-pressed="${v===CALC_MODE}">${l}</button>`).join("")}</div>`;
+function calcMarkup(){
+  const sl = s => `<div class="cfield">
+      <div class="clabel"><label for="calc_${s.c}">${esc(s.l)}</label>
+        <span class="cnum ${s.u==="$"?"pre":"post"}" data-u="${s.u}"><input type="number" id="calc_${s.c}n" data-c="${s.c}" min="${s.min}" max="${s.max*4}" step="${s.step}" value="${s.v}" aria-label="${esc(s.l)}"></span></div>
+      <input type="range" id="calc_${s.c}" data-c="${s.c}" min="${s.min}" max="${s.max}" step="${s.step}" value="${s.v}">
+      ${s.mode?modeMarkup():""}
+      ${s.h?`<div class="chelp">${esc(s.h)}</div>`:""}</div>`;
+  const st = s => `<div class="cstage"><label for="calc_${s.c}">${esc(s.l)} <span>${esc(s.sub)}</span></label>
+      <span class="cnum pre" data-u="$"><input type="number" id="calc_${s.c}" data-c="${s.c}" min="0" step="1000" value="${s.v}"></span></div>`;
+  return `<div class="calc" id="calc">
+    <div class="kicker">Pay calculator</div>
+    <h3>Not exactly sure what your offer will be at each of the stages yet?</h3>
+    <p class="calc-lede">Use our calculator to figure that out now. Remember, a good hire is your biggest sale ever. Let's pay good people what they're worth and adjust your pricing to match.</p>
+    <div class="cgrid">${CALC_SLIDERS.map(sl).join("")}</div>
+    <div class="csub" id="calcSub">Monthly sales they produce at each stage</div>
+    <div class="cstages">${CALC_STAGES.map(st).join("")}</div>
+    <div class="ccards" id="calcCards"></div>
+    <div style="overflow-x:auto"><table class="ctable" id="calcTable"></table></div>
+    <div class="cprice" id="calcPrice"></div>
+    <div class="capply"><button type="button" class="btn primary" id="calcApply">Use these numbers in my offer</button>
+      <span>Fills in base salary, commission rate, the day-60 and day-90 sales targets, and the on-track earnings table below.</span></div>
+  </div>`;
+}
+const cval = c => { const el = document.getElementById("calc_"+c); return el ? Math.max(0, parseFloat(el.value)||0) : 0; };
+function calcSet(c, v){
+  [document.getElementById("calc_"+c), document.getElementById("calc_"+c+"n")].forEach(el=>{ if(el) el.value = v; });
+}
+function calcUpdate(){
+  const base = cval("cb"), rate = cval("cr")/100, bur = cval("cu")/100, tgt = cval("ct")/100;
+  const W = CALC_WORDS[CALC_MODE] || CALC_WORDS.sales;
+  $("#calcSub").textContent = "Monthly " + W.noun + " they produce at each stage";
+  const m$ = n => money(Math.round(n)) || "$0";
+  const pc = n => (isFinite(n) ? (n*100).toFixed(1) : "—") + "%";
+  const rows = CALC_STAGES.map(s=>{
+    const sales = cval(s.c), com = sales*rate, pay = base/12 + com, cost = pay*(1+bur);
+    return {s, sales, com, pay, cost, pct: sales ? cost/sales : Infinity};
+  });
+  const r = rows[2];
+  const ok = r.pct <= tgt;
+  $("#calcCards").innerHTML = `
+    <div class="ccard"><b>Their pay at target</b><span>${m$(r.pay*12)}</span><i>${m$(r.pay)} a month · ${m$(r.pay*12/52)} a week</i></div>
+    <div class="ccard"><b>Your true cost</b><span>${m$(r.cost*12)}</span><i>Pay plus ${pc(bur)} burden</i></div>
+    <div class="ccard ${ok?"good":"warn"}"><b>Cost as % of their ${W.short}</b><span>${pc(r.pct)}</span><i>Your target: ${pc(tgt)}</i></div>`;
+  $("#calcTable").innerHTML = `<thead><tr><th>Stage</th><th>Monthly ${W.short}</th><th>Base / mo</th><th>Commission / mo</th><th>Their pay / mo</th><th>Your cost / mo</th><th>% of ${W.short}</th></tr></thead>
+    <tbody>${rows.map(x=>`<tr><td><strong>${esc(x.s.l)}</strong><br><span>${esc(x.s.sub)}</span></td><td>${m$(x.sales)}</td><td>${m$(base/12)}</td><td>${m$(x.com)}</td><td class="hi">${m$(x.pay)}</td><td>${m$(x.cost)}</td><td class="${x.pct<=tgt?"ok":"over"}">${pc(x.pct)}</td></tr>`).join("")}</tbody>`;
+  /* pricing check: monthly sales needed for (base/12 + m*rate)(1+bur) <= tgt*m */
+  const denom = tgt - rate*(1+bur);
+  let msg;
+  if(!r.sales){
+    msg = `Enter the day-90 monthly ${W.noun} to see whether the numbers work.`;
+  } else if(ok){
+    msg = `<strong>The math works.</strong> At ${m$(r.sales)} a month, this role costs you ${pc(r.pct)} of what they produce, inside your ${pc(tgt)} target. You have room to pay a strong person well.`;
+  } else if(denom <= 0){
+    msg = `<strong>Check the commission.</strong> Commission plus burden alone is ${pc(rate*(1+bur))} of ${W.noun}, which is already over your ${pc(tgt)} target before base salary. Lower the rate or raise the target.`;
+  } else {
+    const need = (base/12)*(1+bur)/denom, lift = need/r.sales - 1;
+    msg = `<strong>Don't cut the pay. Fix the price.</strong> At ${m$(r.sales)} a month, this role costs ${pc(r.pct)} of ${W.noun}, over your ${pc(tgt)} target. To hit it, this role needs about <strong>${m$(need)} a month</strong> in ${W.noun}. Doing the same jobs, that's roughly a <strong>${pc(lift)} price increase</strong>.`
+        + (lift > 0.3 ? ` That's a big gap for pricing alone to close. Look at the commission rate and the day-90 target too.` : "");
+  }
+  if(rows[0].pct > tgt && r.sales) msg += ` <span class="cnote">The first 30 days always run over target while they ramp. Judge the role at day 90.</span>`;
+  const p = $("#calcPrice"); p.innerHTML = msg; p.classList.toggle("over", !!r.sales && !ok);
+}
+function calcPrefill(){
+  const n = v => { const x = parseFloat(String(v||"").replace(/[^0-9.]/g,"")); return isNaN(x) ? null : x; };
+  if(n(D.base) != null) calcSet("cb", n(D.base));
+  if(n(D.comm) != null) calcSet("cr", n(D.comm));
+  if(n(D.mid) != null) calcSet("s2", n(D.mid));
+  if(n(D.target) != null){ calcSet("s3", n(D.target)); if(n(D.mid) == null) calcSet("s2", Math.round(n(D.target)/2)); }
+  calcUpdate();
+}
+function calcApply(){
+  const put = (sel, v) => { const el = document.querySelector(sel); if(el) el.value = v; };
+  put("#comp_base", Math.round(cval("cb")));
+  put("#comp_comm", cval("cr"));
+  put("#ramp_mid", Math.round(cval("s2")));
+  put("#ramp_target", Math.round(cval("s3")));
+  CALC_STAGES.forEach((s,i)=> put(`[data-k="v${i+1}"]`, Math.round(cval(s.c))));
+  sync();
+  toast("Numbers added to your offer. Check sections 03 and 06.");
+}
+
+/* ---------- state ---------- */
+function collect(){
+  document.querySelectorAll("[data-k]").forEach(el=>{ D[el.dataset.k] = el.value; });
+}
+function recalcOte(){
+  const base = num(D.base)/12, rate = num(D.comm)/100;
+  [1,2,3].forEach(i=>{
+    const v = num(D["v"+i]);
+    const set = (sel,val)=>{ const c=document.querySelector(`[data-ote="${sel}"]`); if(c) c.textContent=val; };
+    if(!v && !base){ set("base"+i,"—"); set("com"+i,"—"); set("tot"+i,"—"); return; }
+    const com = v*rate;
+    set("base"+i, base?money(base):"—");
+    set("com"+i, money(com));
+    set("tot"+i, money(base+com));
+  });
+}
+function progress(){
+  let done=0, total=0;
+  SECTIONS.forEach(s=>{
+    const els=[...document.querySelectorAll(`[data-s="${s.id}"]`)];
+    const filled=els.filter(e=>e.value && e.value.trim()).length;
+    done+=filled; total+=els.length;
+    const c=$("#cnt-"+s.id); if(c) c.textContent=filled+" / "+els.length;
+    const sec=$("#sec-"+s.id), rb=document.querySelector(`[data-target="${s.id}"]`);
+    const st = filled===els.length ? "done" : filled ? "part" : "";
+    if(sec) sec.dataset.state=st; if(rb) rb.dataset.state=st;
+  });
+  $("#fillstat").textContent = Math.round(done/total*100)+"% complete";
+}
+function sync(){ collect(); recalcOte(); progress(); render();
+  try{ localStorage.setItem("offerBuilder", JSON.stringify(D)); }catch(e){} }
+
+/* ---------- render the document ---------- */
+function render(){
+  const ul = (v,fb) => { const L=lines(v); return L.length
+    ? `<ul>${L.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`
+    : `<p>${TODO(fb)}</p>`; };
+  const para = (v,fb) => { const L=lines(v); return L.length
+    ? L.map(x=>`<p>${esc(x)}</p>`).join("")
+    : `<p>${TODO(fb)}</p>`; };
+
+  const co = D.company && D.company.trim() ? esc(D.company) : TODO("Company name");
+  const cand = D.cand && D.cand.trim() ? esc(D.cand) : TODO("Candidate name");
+  const first = (D.cand||"").trim().split(/\s+/)[0] || null;
+  const target = money(D.target), mid = money(D.mid);
+  const accName = (D.acc_name||"").trim() || (D.owner||"").trim();
+  const v = k => D[k] && String(D[k]).trim() ? esc(D[k]) : "";
+  const cellList = (val,fb) => { const L=lines(val); return L.length
+    ? `<ul>${L.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` : TODO(fb); };
+
+  /* culture principles → name + body */
+  const princ = lines(D.princ).map(l=>{
+    const i = l.indexOf(":");
+    return i>0 ? `<li><strong>${esc(l.slice(0,i))}</strong> — ${esc(l.slice(i+1).trim())}</li>`
+               : `<li>${esc(l)}</li>`;
+  }).join("");
+
+  /* process steps */
+  const steps = lines(D.steps).map((l,i)=>
+    `<li><strong>Step ${i+1}.</strong> ${esc(l)}</li>`).join("");
+
+  /* ramp table */
+  const ramp = [
+    ["Days 1–30","Onboarding",D.d30,D.d30b],
+    ["Days 31–60","Building",D.d60,D.d60b],
+    ["Days 61–90","Proving ground",D.d90,D.d90b],
+  ].map(([d,ph,act,bench])=>`<tr>
+      <td><strong>${d}</strong><br><span style="color:var(--ink-3)">${ph}</span></td>
+      <td>${act?esc(act):TODO("Activities")}</td>
+      <td>${bench?esc(bench):TODO("Benchmark")}</td></tr>`).join("");
+
+  /* OTE table */
+  const base = num(D.base)/12, rate = num(D.comm)/100;
+  const oteRows = [1,2,3].map(i=>{
+    const v=num(D["v"+i]); if(!v) return "";
+    return `<tr><td>${money(v)} / month</td><td>${base?money(base):"—"}</td>
+      <td>${money(v*rate)}</td><td>${money(base+v*rate)}</td></tr>`;
+  }).join("");
+
+  const ns = num(D.nonsolicit);
+  const nsClause = ns ? `<li>During employment and for ${ns} months following separation for any reason, ${first?esc(first):"the employee"} agrees not to directly solicit our clients or recruit our team members for a competing purpose.</li>` : "";
+
+  $("#doc").innerHTML = `
+  <div class="dhead">
+    ${/^https:\/\/\S+$/i.test(String(D.logo_url||"").trim())?`<img class="dlogo" src="${esc(String(D.logo_url).trim())}" alt="">`:""}
+    <div class="co">${co}</div>
+    <div class="meta">${[D.address,D.city,D.phone,siteLabel(D.website)].filter(x=>x&&x.trim()).map(esc).join(" · ")||"&nbsp;"}</div>
+  </div>
+
+  <h1>Employment Offer Letter</h1>
+  <div class="sub">${g("title","Position title")}</div>
+
+  <div class="facts">
+    <div><b>Date</b> ${dateFmt(D.issued)||TODO("Date issued")}</div>
+    <div><b>Position</b> ${g("title","Title")}</div>
+    <div><b>Candidate</b> ${cand}</div>
+    <div><b>Start date</b> ${dateFmt(D.start)||TODO("Start date")}</div>
+    <div><b>Company</b> ${co}</div>
+    <div><b>Reporting to</b> ${g("reports","Manager")}</div>
+  </div>
+
+  <p>${first?esc(first)+",":TODO("Candidate name")}</p>
+  <p>We are proud to formally offer you the position of ${g("title","title")} at ${co}.</p>
+  <p>This is not simply an offer of employment. It is an invitation to join a mission-driven team.
+     ${D.mission?esc(D.mission):TODO("What your company does for people")}</p>
+  <p>${D.why?esc(D.why):TODO("Why this person")}</p>
+  <p>We want to be completely transparent with you from day one.
+     ${D.invest?esc(D.invest):TODO("What you're committing to")}</p>
+  <p>Our goal is to build something great together. We are fully in your corner.</p>
+
+  <h2>1. Role Overview</h2>
+  <p>The ${g("title","role")} is the front line of our client experience and a cornerstone of our growth. This position carries real responsibility and real opportunity.</p>
+  <h3>This position focuses on</h3>
+  ${ul(D.focus,"What the role focuses on")}
+  <p>This role is intentionally designed with a clear pathway to ${g("nextrole","the next role")}. We are not looking to fill a seat. We are looking to develop a leader.</p>
+  <h3>Promotion is contingent upon</h3>
+  <ul>
+    <li>Consistent achievement of ${money(D.promo_sales)||TODO("$ amount")} or more in monthly sales</li>
+    <li>Maintaining a ${D.promo_close?esc(D.promo_close)+"%":TODO("%")} or higher close rate</li>
+    ${lines(D.promo_other).map(x=>`<li>${esc(x)}</li>`).join("")}
+  </ul>
+
+  <h2>2. Work Schedule and Ramp Plan</h2>
+  <p>We designed this plan specifically to get you to ${target||TODO("your target")} or more in monthly sales. You will have everything you need to hit these benchmarks.</p>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th style="width:22%">Phase</th><th style="width:39%">Focus and activities</th><th style="width:39%">Success benchmark</th></tr></thead>
+    <tbody>${ramp}</tbody></table></div>
+  <h3>Your support system</h3>
+  <p>You will never be left to figure it out alone. From day one you have access to:</p>
+  ${ul(D.support,"Who and what supports them")}
+
+  <h2>3. Roles and Responsibilities</h2>
+  <h3>Client sales: ${g("procname","your process name")}</h3>
+  <p>Every appointment is run using ${D.procname?esc(D.procname):"our process"}. This is non-negotiable.</p>
+  ${steps?`<ul>${steps}</ul>`:`<p>${TODO("Your sales process steps")}</p>`}
+  ${D.options?`<p>A minimum of ${esc(D.options)} clearly structured options are presented on every single call, without exception.</p>`:""}
+  <h3>Team leadership and coaching</h3>
+  ${ul(D.team,"Team leadership duties")}
+  <h3>KPI tracking</h3>
+  <ul>
+    <li>Track personal sales metrics daily using ${D.kpitool?esc(D.kpitool):TODO("your tracker")}.</li>
+    <li>Report team sales metrics and KPIs ${D.kpiwho?esc(D.kpiwho):TODO("to whom, how often")}.</li>
+    <li>Maintain a close rate at or above ${D.closerate?esc(D.closerate)+"%":TODO("%")} at all times.</li>
+  </ul>
+  ${para(D.pricing,"Your pricing compliance rule")}
+  <h3>Company vehicle</h3>
+  ${ul(D.vehicle,"Vehicle policy")}
+
+  <h2>4. Core Performance Pillars</h2>
+  <p>Success in this role is measured against our culture principles, which serve as our performance operating system:</p>
+  ${princ?`<ul>${princ}</ul>`:`<p>${TODO("Your culture principles")}</p>`}
+  ${D.princline?`<p>${esc(D.princline)}</p>`:""}
+
+  <h2>5. Compensation</h2>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th style="width:34%">Component</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Base salary</td><td>${money(D.base)||TODO("$ amount")} annually, paid ${D.freq?esc(D.freq):TODO("how often")}</td></tr>
+      <tr><td>Commission</td><td>${D.comm?esc(D.comm)+"%":TODO("%")} of ${D.basis?esc(D.basis):TODO("what it's calculated on")}</td></tr>
+      <tr><td>A sale counts</td><td>${D.earned?esc(D.earned):TODO("when a sale counts")}</td></tr>
+      <tr><td>Commission activation</td><td>${D.activate?esc(D.activate):TODO("activation terms")}</td></tr>
+    </tbody></table></div>
+  <h3>On-track earnings</h3>
+  ${oteRows?`<div style="overflow-x:auto"><table>
+    <thead><tr><th>Monthly sales volume</th><th>Base pay (est.)</th><th>Commission</th><th>Monthly total</th></tr></thead>
+    <tbody>${oteRows}</tbody></table></div>
+    <p style="font-size:12px;color:var(--ink-3)">Projections based on verified sales at our published rate. Actual earnings depend on verified sales volume and pricing compliance.</p>`
+   :`<p>${TODO("Fill in three sales volumes in section 06")}</p>`}
+
+  <h2>6. 30/60/90 Checkpoint Reviews</h2>
+  <p>Your roadmap runs in three stages, and each stage ends with a formal checkpoint review. Meeting the checkpoint unlocks the next stage. Every review is a two-way conversation to celebrate wins, address gaps, and chart the next chapter of ${first?esc(first)+"'s ":"your "}growth at ${co}.</p>
+  <div style="overflow-x:auto"><table class="gate">
+    <thead><tr><th style="width:18%">Checkpoint</th><th>Must be demonstrated</th><th style="width:26%">Unlocks</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Day 30</strong><br><span style="color:var(--ink-3)">End of onboarding</span></td>
+          <td>${cellList(D.c30,"Day 30 checkpoint")}</td>
+          <td>Days 31–60: Building</td></tr>
+      <tr><td><strong>Day 60</strong><br><span style="color:var(--ink-3)">${mid?mid+" / month":"Midpoint"}</span></td>
+          <td>${cellList(D.c60,"Day 60 checkpoint")}</td>
+          <td>Days 61–90: Proving ground</td></tr>
+      <tr><td><strong>Day 90</strong><br><span style="color:var(--ink-3)">${target?target+" / month":"Final review"}</span></td>
+          <td>${cellList(D.crit,"Day 90 review criteria")}</td>
+          <td>Full commission activation and the path to ${g("nextrole","the next role")}</td></tr>
+    </tbody></table></div>
+  <h3>If a checkpoint is missed</h3>
+  ${para(D.miss,"What happens if a checkpoint is missed")}
+  <h3>After the day 90 review</h3>
+  ${para(D.revout,"What happens if it goes well")}
+
+  <h2>7. Growth Path</h2>
+  <p>This role is the foundation of a career, not just a position.</p>
+  <div style="overflow-x:auto"><table>
+    <tbody>
+      <tr><td style="width:18%"><strong>Year 1</strong></td><td>${D.y1?esc(D.y1):TODO("Year 1")}</td></tr>
+      <tr><td><strong>Year 2</strong></td><td>${D.y2?esc(D.y2):TODO("Year 2")}</td></tr>
+      <tr><td><strong>Year 3</strong></td><td>${D.y3?esc(D.y3):TODO("Year 3")}</td></tr>
+    </tbody></table></div>
+  ${para(D.compreneg,"What changes about pay at that level")}
+
+  <h2>8. Performance Expectations and Mutual Commitments</h2>
+  ${para(D.why_terms,"Why these terms exist")}
+  <h3>Revenue benchmarks</h3>
+  <p>Failure to meet the following benchmarks consistently and without documented cause gives ${co} the right to review and adjust the compensation structure, reduce base salary, modify position terms, or separate employment. Any adjustment will be communicated directly before implementation.</p>
+  <ul>
+    <li><strong>Day 30:</strong> Systems operational. First independent appointments completed. Pipeline established.</li>
+    <li><strong>Day 60:</strong> Minimum ${mid||TODO("$ checkpoint")} in verified monthly sales. Close rate at or trending toward ${D.closerate?esc(D.closerate)+"%":TODO("%")}.</li>
+    <li><strong>Day 90:</strong> Minimum ${target||TODO("$ target")} in verified monthly sales. Full commission activates upon achievement.</li>
+  </ul>
+  <h3>Compensation review triggers</h3>
+  <p>${co} reserves the right to initiate a compensation review at any time if any of the following occur:</p>
+  ${ul(D.triggers,"Review triggers")}
+  <h3>Conduct, confidentiality, and non-solicitation</h3>
+  <ul>${lines(D.conduct).map(x=>`<li>${esc(x)}</li>`).join("")||`<li>${TODO("Conduct and confidentiality terms")}</li>`}${nsClause}</ul>
+  <h3>At-will employment</h3>
+  ${para(D.atwill,"At-will statement")}
+  <p>Our commitment to ${first?esc(first):"you"} is equally firm:</p>
+  <div class="pledge">${D.pledge?esc(D.pledge):TODO("Your commitment back to them")}</div>
+
+  <h2>9. About ${co}</h2>
+  ${para(D.who,"Who you are")}
+  ${D.city?`<p>We are based in ${esc(D.city)}.</p>`:""}
+  <h3>We believe deeply in</h3>
+  ${ul(D.believe,"What you believe")}
+  ${para(D.closing,"Closing thought")}
+  ${siteHref(D.website)?`<p>See who we are and the work we're proud of at <a href="${esc(siteHref(D.website))}" target="_blank" rel="noopener" style="color:var(--accent)">${esc(siteLabel(D.website))}</a>.</p>`:""}
+  <p>We are genuinely excited about the possibility of ${first?esc(first):"you"} being a central part of that story.</p>
+
+  <h2>Acceptance and Sign-Off</h2>
+  <p>If you accept this offer, please sign below. Upon receipt of a signed copy we will begin onboarding and prepare for your ${dateFmt(D.start)||TODO("start date")} start date.</p>
+  <p><strong>Please return a signed copy by ${dateFmt(D.expires)||TODO("expiry date")}.</strong></p>
+  <p>By signing below, ${cand} confirms that he or she has read, understood, and agrees to all terms in this offer letter, including the compensation structure, the 30/60/90 benchmarks, vehicle policy, pricing compliance requirements, confidentiality obligations${ns?", non-solicitation terms":""}, and the at-will nature of this employment.</p>
+
+  <div class="contact"><strong>Questions before you sign?</strong> Contact ${accName?esc(accName):TODO("Accountable party")}${v("acc_title")?", "+v("acc_title"):""}, directly at ${v("acc_email")||TODO("email")} or ${v("acc_phone")||TODO("phone")}.</div>
+
+  <div class="sigs">
+    <div class="sig"><div class="lbl">Accountable party · ${co}</div>
+      <div class="kv"><span>Name</span>${accName?esc(accName):TODO("Name")}</div>
+      <div class="kv"><span>Position</span>${v("acc_title")||TODO("Position")}</div>
+      <div class="kv"><span>Email</span>${v("acc_email")||TODO("Email")}</div>
+      <div class="kv"><span>Phone</span>${v("acc_phone")||TODO("Phone")}</div>
+      <div class="line" style="margin-top:28px"></div><div class="cap">Signature</div>
+      <div class="line" style="margin-top:18px"></div><div class="cap">Date</div></div>
+    <div class="sig"><div class="lbl">Prospective hire</div>
+      <div class="kv"><span>Name</span>${cand}</div>
+      <div class="kv"><span>Position</span>${g("title","Position")}</div>
+      <div class="kv"><span>Email</span>${v("cand_email")}</div>
+      <div class="kv"><span>Phone</span>${v("cand_phone")}</div>
+      <div class="line" style="margin-top:28px"></div><div class="cap">Signature</div>
+      <div class="line" style="margin-top:18px"></div><div class="cap">Date</div></div>
+  </div>
+
+  <div class="foot">${[co.replace(/<[^>]+>/g,""),D.address,D.city,D.phone,siteLabel(D.website)].filter(x=>x&&String(x).trim()).map(x=>esc(x)).join(" | ")}</div>
+  `;
+
+  const docEl = $("#doc"), hex = String(D.brand_color||"").trim().replace(/^#/,"");
+  if(/^[0-9a-f]{6}$/i.test(hex)){ docEl.dataset.brand = "1"; docEl.style.setProperty("--lb", "#"+hex); }
+  else { delete docEl.dataset.brand; docEl.style.removeProperty("--lb"); }
+}
+
+/* ---------- wire up ---------- */
+buildForm();
+
+document.addEventListener("input", e=>{
+  const ds = e.target.dataset || {};
+  if(ds.k) sync();
+  if(ds.c){
+    const twin = document.getElementById(e.target.id.endsWith("n") ? e.target.id.slice(0,-1) : e.target.id+"n");
+    if(twin) twin.value = e.target.value;
+    calcUpdate();
+  }
+});
+$("#calcApply").addEventListener("click", calcApply);
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-mode]"); if(!b) return;
+  CALC_MODE = b.dataset.mode;
+  document.querySelectorAll("[data-mode]").forEach(x=>x.setAttribute("aria-pressed", String(x === b)));
+  calcUpdate();
+});
+document.addEventListener("change", e=>{ if(e.target.dataset && e.target.dataset.k) sync(); });
+
+document.addEventListener("click", e=>{
+  const b = e.target.closest(".suggest"); if(!b) return;
+  const el = document.getElementById(b.dataset.for); if(!el) return;
+  el.value = b.dataset.sg; el.focus();
+  el.setSelectionRange && el.setSelectionRange(0,0);
+  sync();
+});
+
+$("#print").addEventListener("click", ()=>window.print());
+$("#swap").addEventListener("click", ()=>{
+  const on = document.body.classList.toggle("show-preview");
+  $("#swap").textContent = on ? "Keep building" : "Preview";
+});
+
+/* ---------- save / open drafts, download the letter ---------- */
+const APP_ID = "sle-offer-builder";
+let dl = null;
+(async()=>{ try{ dl = (window.claude && claude.use) ? await claude.use("downloads") : null; }catch(e){ dl = null; } })();
+
+let toastT;
+function toast(msg, bad){
+  let t = $(".toast");
+  if(!t){ t = document.createElement("div"); t.className = "toast"; t.setAttribute("role","status"); document.body.appendChild(t); }
+  t.textContent = msg; t.classList.toggle("bad", !!bad); t.classList.add("on");
+  clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove("on"), 3200);
+}
+const slug = () => {
+  const s = String(D.cand||"").trim().replace(/[^A-Za-z0-9 \-]+/g,"").replace(/\s+/g,"-").toLowerCase();
+  return s || "offer";
+};
+async function offerFile(filename, data, mime){
+  if(dl){
+    try{ await dl.save({filename, data}); toast("Saved " + filename); return; }
+    catch(err){
+      const c = err && err.code;
+      if(c === "declined"){ toast("Save cancelled"); return; }
+      if(c === "rate_limited"){ toast("A save prompt is already open", true); return; }
+      /* anything else: fall back to a plain browser download */
+    }
+  }
+  try{
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([data],{type:mime}));
+    a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 5000);
+    toast("Downloading " + filename);
+  }catch(e){ toast("This view can't save files. Open the page in claude.ai to save.", true); }
+}
+
+$("#save").addEventListener("click", ()=>{
+  collect();
+  const payload = { app: APP_ID, version: 1, id: DRAFT_ID, savedAt: new Date().toISOString(), data: {...D} };
+  offerFile(slug() + "-offer-draft.json", JSON.stringify(payload, null, 2), "application/json");
+  recordCopy("save");
+});
+
+$("#letter").addEventListener("click", ()=>{
+  collect(); render();
+  const css = [...document.querySelectorAll("style")].map(s=>s.textContent).join("\n");
+  const fonts = '<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500;1,600;1,700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">';
+  const title = esc((D.cand||"Candidate").trim() + " — Offer Letter");
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>${fonts}<style>${css}
+html,body{background:#fff!important;margin:0}.paperwrap{max-width:860px;margin:24px auto;border:0;box-shadow:none}@media print{.paperwrap{margin:0}}</style></head><body><div class="paperwrap">${$("#doc").outerHTML}</div></body></html>`;
+  offerFile(slug() + "-offer-letter.html", html, "text/html");
+  recordCopy("download");
+});
+
+function applyDraft(text, fname){
+  let o;
+  try{ o = JSON.parse(text); }catch(e){ toast("That file isn't a saved draft from this builder.", true); return; }
+  const data = (o && o.app === APP_ID && o.data && typeof o.data === "object") ? o.data : o;
+  if(!data || typeof data !== "object" || Array.isArray(data)){ toast("That file isn't a saved draft from this builder.", true); return; }
+  const known = new Set([...document.querySelectorAll("[data-k]")].map(el=>el.dataset.k));
+  if(![...Object.keys(data)].some(k=>known.has(k))){ toast("That file isn't a saved draft from this builder.", true); return; }
+  if(data.owner && !data.acc_name) data.acc_name = data.owner;
+  document.querySelectorAll("[data-k]").forEach(el=>{
+    const v = data[el.dataset.k]; el.value = (v == null) ? "" : String(v);
+  });
+  sync(); calcPrefill();
+  const who = String(data.cand||"").trim();
+  toast(who ? "Opened the draft for " + who : "Draft opened");
+  if(o && o.app === APP_ID && o.id){ DRAFT_ID = String(o.id).slice(0,64); try{ localStorage.setItem("offerBuilderId", DRAFT_ID); }catch(e){} }
+  return true;
+}
+function readDraftFile(f){
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = () => applyDraft(String(r.result||""), f.name);
+  r.onerror = () => toast("That file could not be read.", true);
+  r.readAsText(f);
+}
+$("#load").addEventListener("click", ()=>$("#file").click());
+$("#file").addEventListener("change", ev=>{ readDraftFile(ev.target.files[0]); ev.target.value = ""; });
+
+/* drag a saved draft anywhere onto the page */
+let dragDepth = 0;
+const hasFiles = e => e.dataTransfer && [...(e.dataTransfer.types||[])].includes("Files");
+document.addEventListener("dragenter", e=>{ if(!hasFiles(e)) return; e.preventDefault(); dragDepth++; document.body.classList.add("dropping"); });
+document.addEventListener("dragover", e=>{ if(hasFiles(e)) e.preventDefault(); });
+document.addEventListener("dragleave", e=>{ if(!hasFiles(e)) return; dragDepth = Math.max(0,dragDepth-1); if(!dragDepth) document.body.classList.remove("dropping"); });
+document.addEventListener("drop", e=>{
+  if(!hasFiles(e)) return; e.preventDefault(); dragDepth = 0; document.body.classList.remove("dropping");
+  readDraftFile(e.dataTransfer.files[0]);
+});
+
+/* ============================================================
+   BACKEND (optional): store a copy of every offer in SLE's database.
+   Leave blank and the builder runs fully offline. Fill in the
+   Supabase project URL and its public "anon" key to switch it on.
+   The table only accepts inserts from the public, so nobody can
+   read other members' offers with this key. See supabase/schema.sql.
+   ============================================================ */
+const BACKEND = { supabaseUrl: "https://jxywghplxowytqwdsjyu.supabase.co", supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0", table: "offer_letters" };
+const APP_VERSION = "2026.10";
+const backendOn = () => !!(BACKEND.supabaseUrl && BACKEND.supabaseAnonKey);
+
+let DRAFT_ID = (()=>{
+  let id = null;
+  try{ id = localStorage.getItem("offerBuilderId"); }catch(e){}
+  if(!id){
+    id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+       : "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=Math.random()*16|0;return (c==="x"?r:(r&3|8)).toString(16);});
+    try{ localStorage.setItem("offerBuilderId", id); }catch(e){}
+  }
+  return id;
+})();
+
+function recordCopy(event){
+  if(!backendOn()) return;
+  collect();
+  const t = s => { const v = String(s||"").trim(); return v ? v.slice(0,300) : null; };
+  const body = JSON.stringify({
+    draft_id: /^[0-9a-f-]{36}$/i.test(DRAFT_ID) ? DRAFT_ID : null,
+    event, app_version: APP_VERSION,
+    company: t(D.company), candidate: t(D.cand), position: t(D.title),
+    member_name: t(D.acc_name), member_email: t(D.acc_email), website: t(D.website),
+    data: {...D}
+  });
+  fetch(BACKEND.supabaseUrl.replace(/\/+$/,"") + "/rest/v1/" + encodeURIComponent(BACKEND.table), {
+    method: "POST", keepalive: body.length < 60000,
+    headers: { "apikey": BACKEND.supabaseAnonKey, "Authorization": "Bearer " + BACKEND.supabaseAnonKey,
+               "Content-Type": "application/json", "Prefer": "return=minimal" },
+    body
+  }).then(r=>{ if(!r.ok) console.warn("Offer copy not stored:", r.status); })
+    .catch(err=>console.warn("Offer copy not stored:", err));
+}
+window.addEventListener("beforeprint", ()=>recordCopy("print"));
+
+/* ============================================================
+   AI PREP PROMPT, generated from the schema so it never drifts
+   from the fields the builder actually has.
+   ============================================================ */
+const OWNER_KEYS = new Set(["issued","start","expires","cand","promo_sales","promo_close","target","mid",
+  "options","closerate","base","freq","comm","basis","earned","v1","v2","v3","nonsolicit","cand_email","cand_phone"]);
+
+function buildPrompt(){
+  const BT = "`", FENCE = BT+BT+BT;
+  const TYPE = {money:"number in US dollars, digits only (e.g. 100000)", pct:"percent, digits only (e.g. 60)",
+                num:"whole number", date:"date as YYYY-MM-DD", sel:"one of the listed options, exactly as written",
+                ta:"text"};
+  const keys = [], ref = [];
+  SECTIONS.forEach(s=>{
+    ref.push("", "### " + s.n + " · " + s.t, s.b);
+    s.f.forEach(f=>{
+      if(f.ty === "ote"){
+        keys.push("v1","v2","v3");
+        ref.push("- " + BT+"v1"+BT + ", " + BT+"v2"+BT + ", " + BT+"v3"+BT + " — three example monthly sales volumes for the on-track earnings table. **LEAVE EMPTY — the owner fills these in.**");
+        return;
+      }
+      keys.push(f.k);
+      let line = "- " + BT + f.k + BT + " — " + f.l + ". Type: " + (TYPE[f.ty] || "short text") + ".";
+      if(f.ty === "sel") line += " Options: " + f.o.map(o=>'"'+o+'"').join(" | ") + ".";
+      if(f.h) line += " Guidance: " + f.h.replace(/<[^>]+>/g,"");
+      if(OWNER_KEYS.has(f.k)) line += " **LEAVE EMPTY — the owner fills this in.**";
+      else if(f.sg) line += "\n  - The standard we're after (tailor it to this company and role, don't copy it word for word): " + f.sg.replace(/\n/g," / ");
+      ref.push(line);
+    });
+  });
+  const template = JSON.stringify({ app: APP_ID, version: 1, data: Object.fromEntries(keys.map(k=>[k,""])) }, null, 2);
+
+  return [
+"# SLE Opportunity Offer Builder — AI Prep Prompt",
+"",
+"You are helping the owner of an electrical service company prepare an employment offer letter in the **SLE Opportunity Offer Builder**. Your job: research their company, then hand back ONE JSON draft the builder can load. Work in the four steps below, in order.",
+"",
+"## Step 1 — Ask me first",
+"Before doing anything else, ask me for:",
+"1. My company website URL, plus any Google Business, Facebook, or Instagram links.",
+"2. The position I'm hiring for (for example: Sales Representative, Service Technician, CSR, Install Lead).",
+"3. Who the new hire reports to, and the name, title, email, and direct phone of the person accountable for this hire.",
+"4. Anything specific about why I want this person, or what I saw in them. (Optional.)",
+"",
+"Then wait for my answers.",
+"",
+"## Step 2 — Research my company",
+"Read my website: home, about, services, reviews or testimonials, careers or join-the-team, contact, and the footer. Collect:",
+"- **Company details:** legal name, street address, city and state, main phone, website.",
+"- **Brand assets:** primary brand color as a hex code (from the logo, header, or buttons), and a direct https:// link to my logo image file (PNG, SVG, JPG, or WEBP).",
+"- **Brand messaging:** what we do for people, mission, values or culture principles, what makes us different, how we talk about our customers and our team, and our tone of voice.",
+"",
+"If you can't browse the web, say so and ask me to paste the text of my About and Careers pages.",
+"",
+"## Step 3 — Write the draft",
+"- Write in my company's voice and use my real words where my site has them. Plain, confident, people-first. No corporate buzzwords.",
+"- Fill every text field you reasonably can. Where my site doesn't cover something (sales process, 30/60/90 plan, checkpoints, review criteria, terms), write a strong first draft tailored to the role and to a residential electrical service company. I'll edit it.",
+"- **Leave these empty (\"\") — they're mine to decide:** pay, commission, sales targets, close rates, dates, non-solicitation months, and the candidate's name and contact details. Never guess compensation.",
+"- Never invent facts about my company (years in business, awards, headcount, licenses, reviews). If it isn't on my site or in my answers, leave it out.",
+"- Fields marked \"one per line\" separate items with a newline (\\n) inside the string. Fields in the form \"Name: what it means\" keep that colon format.",
+"- Every value is a string. Select fields use one of the listed options exactly, or \"\".",
+"",
+"## Step 4 — Hand it back",
+"Reply with three things, in this order:",
+"1. **Brand snapshot:** 3 to 6 bullets covering the colors, logo link, tone, and key messages you found, so I can sanity-check them.",
+"2. **Couldn't find:** a short list of anything you looked for and didn't find.",
+"3. **The draft:** ONE code block containing only the JSON below, every key present, filled in where you can:",
+"",
+FENCE + "json",
+template,
+FENCE,
+"",
+"Finish with this line: *Copy the JSON block, open the Offer Builder, go to How it works → step 2, paste it in, and click Load into the builder.*",
+"",
+"## Field reference",
+"What each key means, how to fill it, and the standard we're after.",
+...ref,
+""
+  ].join("\n");
+}
+
+/* ---------- intro view wiring ---------- */
+function showView(v){
+  const on = v === "intro";
+  $("#intro").hidden = !on;
+  document.body.classList.toggle("intro-on", on);
+  $("#guide").textContent = on ? "Back to builder" : "How it works";
+  try{ localStorage.setItem("offerBuilderView", v); }catch(e){}
+  window.scrollTo(0,0);
+}
+$("#guide").addEventListener("click", ()=> showView(document.body.classList.contains("intro-on") ? "build" : "intro"));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click", ()=>showView(b.dataset.go)));
+
+const promptText = () => buildPrompt();
+$("#showPrompt").addEventListener("click", ()=>{
+  const box = $("#promptBox"), open = box.hidden;
+  if(open) box.value = promptText();
+  box.hidden = !open;
+  $("#showPrompt").setAttribute("aria-expanded", String(open));
+  $("#showPrompt").textContent = open ? "Hide prompt" : "Preview prompt";
+});
+$("#copyPrompt").addEventListener("click", async ()=>{
+  const text = promptText();
+  try{
+    await navigator.clipboard.writeText(text);
+    toast("Prompt copied. Paste it into your AI.");
+  }catch(e){
+    const box = $("#promptBox"); box.value = text; box.hidden = false;
+    $("#showPrompt").setAttribute("aria-expanded","true"); $("#showPrompt").textContent = "Hide prompt";
+    box.focus(); box.select();
+    let ok = false; try{ ok = document.execCommand("copy"); }catch(_){}
+    toast(ok ? "Prompt copied. Paste it into your AI." : "Prompt selected. Press Ctrl+C (Cmd+C on Mac) to copy.", !ok);
+  }
+});
+$("#dlPrompt").addEventListener("click", ()=> offerFile("sle-offer-builder-ai-prompt.md", promptText(), "text/markdown"));
+$("#pasteLoad").addEventListener("click", ()=>{
+  const raw = $("#pasteBox").value || "";
+  const a = raw.indexOf("{"), b = raw.lastIndexOf("}");
+  if(a < 0 || b <= a){ toast("Paste the block your AI gave you. It starts with {", true); return; }
+  if(applyDraft(raw.slice(a, b+1), "pasted")){ $("#pasteBox").value = ""; showView("build"); }
+});
+if(backendOn()) $("#backendNote").hidden = false;
+$("#toCalc").addEventListener("click", ()=>{
+  showView("build");
+  const sec = $("#sec-comp"); sec.open = true;
+  setTimeout(()=>$("#calc").scrollIntoView({behavior:"smooth", block:"start"}), 50);
+});
+
+/* restore last session */
+let hadSaved = false;
+try{
+  const saved = JSON.parse(localStorage.getItem("offerBuilder")||"{}");
+  Object.keys(saved).forEach(k=>{
+    if(String(saved[k]||"").trim()) hadSaved = true;
+    document.querySelectorAll(`[data-k="${CSS.escape(k)}"]`).forEach(el=>el.value=saved[k]);
+  });
+}catch(e){}
+
+sync();
+calcPrefill();
+
+let startView = null;
+try{ startView = localStorage.getItem("offerBuilderView"); }catch(e){}
+showView(startView === "intro" || startView === "build" ? startView : (hadSaved ? "build" : "intro"));
+</script>
+
+</body>
+</html>
