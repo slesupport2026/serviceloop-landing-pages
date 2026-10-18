@@ -488,6 +488,11 @@ const SECTIONS = [
 { n:"00", id:"setup", t:"The basics",
   b:"Who the offer is for, who it's from, and the dates that matter.",
   f:[
+  {k:"role", l:"What kind of role is this?", ty:"sel", w:"half",
+   o:["Sales Rep","Service Tech","Installer / Install Lead","CSR / Dispatcher","Service Manager","Custom"],
+   h:"Pick first. It sets the wording, the questions, the KPIs, and the pay model for everything below."},
+  {k:"hybrid", l:"Also earns on sales?", ty:"sel", w:"half", o:["No","Yes"],
+   h:"Say Yes if this person also sells and earns commission on top of their main job."},
   {k:"company", l:"Company legal name", ph:"Northside Electrical Services, LLC", w:"half"},
   {k:"city",    l:"City and state", ph:"Clermont, Florida", w:"half"},
   {k:"address", l:"Street address", ph:"341 Main Street", w:"half"},
@@ -590,11 +595,21 @@ const SECTIONS = [
 ]},
 
 { n:"06", id:"comp", t:"Compensation", calc:true,
-  b:"Base, commission, and what the commission is actually calculated on.",
-  note:"Before you send this, run one check: <strong>if this person sells nothing for 30 days, can you carry them?</strong> Only your bank balance answers that. A real salesperson is a cash pinch before they're a cash machine.",
+  b:"Pay at each stage, plus any performance pay on top.",
+  note:"Before you send this, run one check: <strong>if this person produces nothing for 30 days, can you carry them?</strong> Only your bank balance answers that. A good hire is a cash pinch before they're a cash machine.",
   f:[
-  {k:"base", l:"Base salary (annual)", ty:"money", w:"half"},
+  {k:"paytype", l:"Pay type", ty:"sel", o:["salary","hourly"], w:"half",
+   h:"Salary for sales and management. Hourly for techs, installers, and CSRs is normal."},
   {k:"freq", l:"Paid", ty:"sel", o:["bi-weekly","weekly","semi-monthly","monthly"], w:"half"},
+  {k:"base", l:"Starting pay", ty:"money", w:"half",
+   h:"Annual if salary, per hour if hourly."},
+  {k:"hours", l:"Expected hours per week", ty:"num", ph:"40", w:"half",
+   h:"Hourly roles only. Used to show what the pay adds up to."},
+  {k:"raise30", l:"Pay at day 30", ty:"money", w:"third",
+   h:"Unlocked by passing the day-30 checkpoint. Leave blank for no raise at this stage."},
+  {k:"raise60", l:"Pay at day 60", ty:"money", w:"third"},
+  {k:"raise90", l:"Pay at day 90", ty:"money", w:"third",
+   h:"Even with no commission, raises through the 90 days show them there's always more."},
   {k:"comm", l:"Commission rate", ty:"pct", w:"half"},
   {k:"basis", l:"Commission is calculated on", ty:"sel", w:"half",
    o:["total sale including equipment and materials","sale value less equipment cost","labor only"],
@@ -604,6 +619,15 @@ const SECTIONS = [
    h:"Deposit-collected is cleanest. Nobody should wait five weeks on permitting for pay they earned in the field."},
   {k:"activate", l:"When does full commission activate?", ty:"ta",
    sg:"Full commission activates upon achieving the target monthly sales volume at the 90-day mark."},
+  {k:"spiff_amt", l:"Bonus per item sold ($)", ty:"money", w:"half",
+   h:"A flat spiff. Example: $25 per membership sold. Leave blank to skip."},
+  {k:"spiff_what", l:"Per what?", ph:"membership sold", w:"half"},
+  {k:"bonus_amt", l:"Bonus for hitting a target ($/month)", ty:"money", w:"half",
+   h:"Example: $300 a month at a 4.8+ happy-call average. Leave blank to skip."},
+  {k:"bonus_cond", l:"The target they hit", ph:"a 4.8+ happy-call average for the month", w:"half"},
+  {k:"override_pct", l:"Team override rate", ty:"pct", w:"half",
+   h:"Managers: a share of what the team produces above target."},
+  {k:"override_base", l:"Override is calculated on", ph:"team revenue above the monthly target", w:"half"},
   {k:"ote", l:"On-track earnings", ty:"ote",
    h:"The most persuasive thing in the whole letter. You stop telling them what you'll pay and start showing them what they can make."},
 ]},
@@ -693,6 +717,293 @@ const SECTIONS = [
 ]},
 ];
 
+/* ============================================================
+   ROLE PACKS — one fixed structure, role-specific specifics.
+   Every great offer has the same five things: a number they own,
+   a named way we do the work, money tied to milestones, a visible
+   path up, and commitments in writing both ways.
+   ============================================================ */
+const ROLE_KEYS = {"Sales Rep":"sales","Service Tech":"service","Installer / Install Lead":"install","CSR / Dispatcher":"csr","Service Manager":"manager","Custom":"custom"};
+const roleKey = () => ROLE_KEYS[String(D.role||"").trim()] || "sales";
+const isHybrid = () => String(D.hybrid||"").trim() === "Yes";
+const hasComm = () => { const r = roleKey(); return r === "sales" || r === "custom" || isHybrid(); };
+const isHourly = () => String(D.paytype||"").trim() === "hourly";
+
+const PACKS = {
+sales: {
+  label:"Sales Rep",
+  vocab:{metric:"monthly sales", metricMoney:"sales", verb:"sell", processArea:"Client sales",
+         unit:"appointment", quality:"close rate", qdir:"hi", perfPay:"commission",
+         frontLine:"front line of our client experience and a cornerstone of our growth"},
+  kpis:["monthly sales","close rate","average sale","options presented per call","deposit collected on every closed job"],
+  calcMode:"sales", targetCostPct:15, payType:"salary",
+  fill:{procname:"The 6-Step Process", nextrole:"Sales Manager", paytype:"salary"},
+  growth:"Sales Rep → Sales Manager",
+  q:{} /* today's content IS the sales pack */
+},
+service: {
+  label:"Service Tech",
+  vocab:{metric:"average ticket", metricMoney:"produced revenue", verb:"produce", processArea:"Service calls",
+         unit:"service call", quality:"callback rate", qdir:"lo", perfPay:"performance bonus",
+         frontLine:"face of our company in every home we step into"},
+  kpis:["average ticket","calls run","options presented on every call","memberships sold","callback rate","happy-call stars (CSAT)","5-star reviews"],
+  calcMode:"sales", targetCostPct:22, payType:"hourly",
+  fill:{procname:"The Service Call Standard", nextrole:"Lead Tech", paytype:"hourly"},
+  growth:"Service Tech → Lead Tech → Service Manager",
+  q:{
+    title:{ph:"Service Technician"},
+    focus:{sg:"Running service calls that clients talk about for years\nPresenting clearly structured options on every single call\nProtecting the home and leaving it cleaner than we found it\nOffering the membership and asking for the review on every job\nKeeping callbacks near zero through complete, code-right work"},
+    promo_sales:{l:"Monthly produced revenue required for promotion"},
+    promo_close:{l:"Callback rate ceiling (%)", h:"Lower is better. At or below this number."},
+    promo_other:{sg:"Average ticket at or above the team target for three consecutive months\nFull embodiment of our culture principles\nMentoring a newer tech without being asked"},
+    target:{l:"Target monthly produced revenue by day 90"},
+    mid:{l:"Checkpoint at day 60"},
+    d30:{sg:"Ride along with our senior tech on live calls. Learn the truck, the stock, and the paperwork. Study The Service Call Standard until it's muscle memory. Learn the pricing presentation and run it in practice reps. Happy-call and review scripts learned."},
+    d30b:{sg:"First solo calls completed to standard. Options presented on every call. Zero callbacks. Truck stocked and inspection-ready every morning."},
+    d60:{sg:"Full solo schedule with weekly ride-along coaching. Membership offer made on every call. Daily ticket and options tracking in the KPI tracker. First memberships sold."},
+    d60b:{sg:"Day-60 produced revenue checkpoint reached. Average ticket climbing toward target. Callback rate at or under the ceiling. Happy-call scores at 4.5 or better."},
+    d90:{sg:"Full production load. Average ticket at target. Present options without prompting, every time. Performance bonus activates on benchmark achievement. Formal 90-day review."},
+    d90b:{sg:"Target produced revenue reached and verified. Average ticket at or above target. Callback rate at or under the ceiling. All culture principles demonstrated."},
+    steps:{l:"Walk through the standard", sg:"Call ahead and arrive on time\nProtect the home — shoe covers, drop cloths, tools on mats\nDiagnose fully before talking solutions\nPresent clearly structured options on every call, no exceptions\nGet approval, do the work complete and to code\nWalk the client through everything you did\nOffer the membership\nAsk for the happy call and the review"},
+    team:{sg:"Fully embody our culture principles on every job, on and off the clock\nShare what you learn in the truck at team meetings\nHelp newer techs with diagnosis and presentation when asked\nFlag anything in the field that could be done safer or better"},
+    closerate:{l:"Callback rate ceiling (%)", h:"The percent of your jobs that turn into a callback. Lower is better."},
+    pricing:{sg:"All work is priced from the current published rate book. No field discounting. A price concern goes to the office before the client hears a number we can't keep."},
+    c30:{sg:"Solo calls completed to The Service Call Standard\nOptions presented on every call\nZero preventable callbacks\nTruck, paperwork, and KPI tracker in order daily\nCulture principles understood and demonstrated"},
+    c60:{sg:"Day-60 produced revenue checkpoint reached and verified\nAverage ticket trending to target\nMembership offered on every call\nCallback rate at or under the ceiling\nHappy-call scores at 4.5 or better"},
+    crit:{sg:"Produced revenue at or above the 90-day target\nAverage ticket at or above target\nCallback rate at or under the ceiling\nOptions presented on every call, verified in the tracker\nMemberships sold at or above target\nObservable demonstration of all culture principles\nKPI reporting submitted without prompting"},
+    y1:{sg:"Own your truck, your ticket, and your callbacks. Become the tech clients ask for by name."},
+    y2:{sg:"Step up to Lead Tech. Run point on bigger jobs, coach newer techs, and help set the standard for the whole service team."},
+    y3:{sg:"Move toward Service Manager: own the service board, the team's numbers, and the training calendar. Or move into sales if that's your lane — top techs make the best advisors."},
+    triggers:{sg:"Produced revenue below the day-60 checkpoint for two consecutive months\nCallback rate above the ceiling for a 30-day period without an active documented improvement plan\nRepeated pricing deviations from the published rate book\nConduct inconsistent with our culture principles that impacts clients or the team"},
+    activate:{sg:"Sales commission applies to work you personally sell, once the day-90 benchmarks are met."},
+    revout:{sg:"If both parties agree to continue following the 90-day review, the performance bonus is fully activated and the Lead Tech development path formally begins."},
+    compreneg:{sg:"At the Lead Tech and Service Manager levels, compensation is renegotiated to reflect expanded responsibilities and team results. The pay keeps climbing with the responsibility."},
+  }
+},
+install: {
+  label:"Installer / Install Lead",
+  vocab:{metric:"install revenue", metricMoney:"install revenue", verb:"install", processArea:"Installations",
+         unit:"install", quality:"first-time inspection pass rate", qdir:"hi", perfPay:"install bonus",
+         frontLine:"craftsmanship our clients live with every day"},
+  kpis:["CPI — estimated hours vs actual hours","install revenue","first-time inspection pass rate","callback rate","happy-call stars (CSAT)","5-star reviews"],
+  calcMode:"installs", targetCostPct:25, payType:"hourly",
+  fill:{procname:"The Install Quality Standard", nextrole:"Install Lead", paytype:"hourly"},
+  growth:"Installer → Install Lead → Install Manager",
+  q:{
+    title:{ph:"Installer"},
+    focus:{sg:"Installing to code and to our standard, every time\nBeating the estimated hours without cutting a single corner\nPassing inspection the first time\nProtecting the home and closing out jobs the same day\nDocumenting the work with photos so the office never has to ask"},
+    promo_sales:{l:"Monthly install revenue required for promotion"},
+    promo_close:{l:"First-time inspection pass rate required (%)"},
+    promo_other:{sg:"CPI at or above 1.0 for three consecutive months\nZero callbacks on your installs in the same period\nRunning a crew day without ownership on site"},
+    target:{l:"Target monthly install revenue by day 90"},
+    mid:{l:"Checkpoint at day 60"},
+    d30:{sg:"Work under our install lead on live jobs. Learn the material list system, the staging process, and the photo close-out. Study The Install Quality Standard. Learn how estimated hours are built so you know the number you're beating."},
+    d30b:{sg:"Working to standard without reminders. Self-inspection checklist used on every job. Clean, protected work areas every day. Zero callbacks."},
+    d60:{sg:"Running sections of jobs on your own. Tracking earned hours against actual in the KPI tracker. First solo close-outs with full photo documentation."},
+    d60b:{sg:"Day-60 install revenue checkpoint reached. CPI trending at or above 1.0. First-time inspection passes on everything you've touched."},
+    d90:{sg:"Running full installs at production pace. CPI at or above 1.0. Install bonus activates on benchmark achievement. Formal 90-day review."},
+    d90b:{sg:"Target install revenue reached and verified. CPI at or above 1.0. First-time inspection pass rate at target. Zero callbacks. All culture principles demonstrated."},
+    steps:{l:"Walk through the standard", sg:"Review the job and material list the day before\nProtect the home and stage materials before the first cut\nInstall to code and to our standard\nClean as you go — the site is show-ready at any hour\nSelf-inspect and photo-document before calling it done\nWalk the client through what you built\nPass inspection the first time\nClose out the job the same day"},
+    team:{sg:"Fully embody our culture principles on every site\nKeep the crew safe — stop work rather than work unsafe\nTeach what you know; a crew that shares skills finishes faster\nFlag material or estimate problems the day you see them, not at close-out"},
+    closerate:{l:"Minimum first-time inspection pass rate (%)"},
+    pricing:{sg:"Change orders are priced by the office before extra work starts. No verbal extras. If the client asks for more, we write it up — protecting them and us."},
+    vehicle:{sg:"A company vehicle may be assigned as a checkpoint unlock — earned, not issued.\nThe vehicle is kept clean, organized, and professionally presented at all times.\nRoutine maintenance is reported proactively when due.\nThe vehicle returns to the shop at the end of each workday unless prior written approval is granted.\nAny damage or incident is reported to ownership immediately. Personal use is not permitted without written authorization."},
+    c30:{sg:"Working to The Install Quality Standard without reminders\nSelf-inspection and photo close-out on every job\nSite protected and clean every day\nZero callbacks\nCulture principles understood and demonstrated"},
+    c60:{sg:"Day-60 install revenue checkpoint reached and verified\nCPI trending at or above 1.0\nFirst-time inspection passes on all work\nClose-outs complete the same day, every day"},
+    crit:{sg:"Install revenue at or above the 90-day target\nCPI at or above 1.0\nFirst-time inspection pass rate at or above target\nZero callbacks charged to your work\nPhoto documentation complete on every job\nObservable demonstration of all culture principles"},
+    y1:{sg:"Own your installs end to end: hours, inspections, close-outs. Become the installer the inspectors trust."},
+    y2:{sg:"Step up to Install Lead. Run the crew, own the schedule on your jobs, and train the next installer the way you were trained."},
+    y3:{sg:"Move toward Install Manager: own the install calendar, the material pipeline, and the margin on every job."},
+    triggers:{sg:"CPI below 1.0 for two consecutive months without a documented cause\nA failed inspection caused by work that skipped the self-inspection standard\nCallbacks charged to your installs above the ceiling\nConduct inconsistent with our culture principles that impacts clients or the crew"},
+    activate:{sg:"Sales commission applies to work you personally sell, once the day-90 benchmarks are met."},
+    revout:{sg:"If both parties agree to continue following the 90-day review, the install bonus is fully activated and the Install Lead development path formally begins."},
+    compreneg:{sg:"At the Install Lead and Install Manager levels, compensation is renegotiated to reflect crew leadership and job margin ownership. The pay keeps climbing with the responsibility."},
+  }
+},
+csr: {
+  label:"CSR / Dispatcher",
+  vocab:{metric:"booking rate", metricMoney:"booked job value", verb:"book", processArea:"Call handling",
+         unit:"call", quality:"booking rate", qdir:"hi", perfPay:"booking bonus",
+         frontLine:"first voice every client hears and the reason the board stays full"},
+  kpis:["booking rate","jobs booked","average ticket booked","memberships sold by phone","happy calls made","reviews requested"],
+  calcMode:"sales", targetCostPct:10, payType:"hourly",
+  fill:{procname:"The Call Flow", nextrole:"Lead CSR / Dispatcher", paytype:"hourly"},
+  growth:"CSR → Lead CSR / Dispatcher → Office or Operations Manager",
+  q:{
+    title:{ph:"Client Service Representative"},
+    focus:{sg:"Answering every call fast and turning it into a booked job\nKeeping the dispatch board full and the techs moving\nMaking the happy call after every job and asking for the review\nSelling memberships by phone\nBeing the calm, warm voice clients remember"},
+    promo_sales:{l:"Monthly booked job value required for promotion"},
+    promo_close:{l:"Booking rate required (%)"},
+    promo_other:{sg:"Booking rate at or above target for three consecutive months\nHappy calls completed on every finished job\nFull embodiment of our culture principles"},
+    target:{l:"Target monthly booked job value by day 90", h:"The dollar value of jobs booked, not revenue collected."},
+    mid:{l:"Checkpoint at day 60"},
+    d30:{sg:"Learn the phones, the booking system, and the dispatch board. Study The Call Flow and run it in practice reps. Shadow live calls. Learn the service offerings and the membership well enough to explain both in one breath."},
+    d30b:{sg:"Answering live calls to standard. First booked jobs on the board. Confirmation texts going out on every booking. Happy-call script learned."},
+    d60:{sg:"Owning the phones through the day. Happy calls made on every completed job. First memberships sold by phone. Booking rate tracked daily in the KPI tracker."},
+    d60b:{sg:"Day-60 booked-value checkpoint reached. Booking rate trending to target. Happy calls current — no backlog. Reviews being requested on every 5-star call."},
+    d90:{sg:"Full ownership of the front desk: calls, bookings, dispatch, happy calls, reviews. Booking bonus activates on benchmark achievement. Formal 90-day review."},
+    d90b:{sg:"Target booked value reached and verified. Booking rate at or above target. Happy-call queue cleared daily. All culture principles demonstrated."},
+    steps:{l:"Walk through the call flow", sg:"Answer by the third ring\nUse the warm greeting script\nCapture the need and the urgency\nBook the best slot — never \"we'll call you back\"\nConfirm and set expectations for the visit\nSend the confirmation text\nMake the happy call after the job\nAsk for the review"},
+    team:{sg:"Fully embody our culture principles on every call\nKeep the techs set up to win: tight routes, full job notes, no surprises\nFlag unhappy clients to ownership the same day, every time\nShare call recordings worth learning from at team meetings"},
+    closerate:{l:"Minimum booking rate (%)", h:"Booked jobs divided by booking opportunities."},
+    pricing:{sg:"Quote only from the published price guidance for phone estimates. Anything outside it books a visit instead — we price in the home, not on a guess."},
+    c30:{sg:"Live calls handled to The Call Flow\nFirst booked jobs on the board\nConfirmation texts on every booking\nBooking system and dispatch board run without help\nCulture principles understood and demonstrated"},
+    c60:{sg:"Day-60 booked-value checkpoint reached and verified\nBooking rate trending to target\nHappy calls current on every completed job\nFirst memberships sold by phone"},
+    crit:{sg:"Booked job value at or above the 90-day target\nBooking rate at or above target\nHappy-call queue cleared daily\nReviews requested on every 5-star happy call\nMemberships offered on qualifying calls\nObservable demonstration of all culture principles"},
+    y1:{sg:"Own the phones and the board. Become the voice of the company — the person clients mention by name in reviews."},
+    y2:{sg:"Step up to Lead CSR / Dispatcher. Own the booking numbers, train the next CSR, and run the front office rhythm."},
+    y3:{sg:"Move toward Office or Operations Manager: own scheduling, client experience, and the systems that keep the whole shop running."},
+    triggers:{sg:"Booking rate below target for a 30-day period without an active documented improvement plan\nHappy-call backlog older than two business days on a recurring basis\nBooked-value checkpoint missed for two consecutive months\nConduct inconsistent with our culture principles on calls or with the team"},
+    activate:{sg:"Sales commission applies to jobs and memberships you personally sell by phone, once the day-90 benchmarks are met."},
+    revout:{sg:"If both parties agree to continue following the 90-day review, the booking bonus is fully activated and the Lead CSR development path formally begins."},
+    compreneg:{sg:"At the Lead CSR and Office Manager levels, compensation is renegotiated to reflect team oversight and ownership of the front office. The pay keeps climbing with the responsibility."},
+    pledge:{sg:"We will provide the training, the systems, the scripts, the coaching, and the direct support you need to win. If we are ever falling short on our end of this agreement, we expect you to tell us directly and immediately. This works both ways. We are all in."},
+  }
+},
+manager: {
+  label:"Service Manager",
+  vocab:{metric:"team revenue", metricMoney:"team revenue", verb:"lead the team to", processArea:"Leadership",
+         unit:"week", quality:"team CSAT", qdir:"hi", perfPay:"team bonus",
+         frontLine:"engine that keeps the team winning"},
+  kpis:["team revenue","team average ticket","team CSAT","team callback rate","gross margin %","retention","huddles, ride-alongs, and 1:1s held"],
+  calcMode:"both", targetCostPct:12, payType:"salary",
+  fill:{procname:"The Leadership Rhythm", nextrole:"General Manager", paytype:"salary"},
+  growth:"Service Manager → General Manager / Operations Director",
+  q:{
+    title:{ph:"Service Manager"},
+    focus:{sg:"Owning the team's number: revenue, average ticket, CSAT, callbacks\nRunning the leadership rhythm — huddles, ride-alongs, 1:1s — every week without fail\nCoaching every tech and CSR against their own scoreboard\nProtecting gross margin through pricing compliance and job costing\nBuilding the bench: hiring, onboarding, and developing the next leaders"},
+    promo_sales:{l:"Monthly team revenue required for promotion"},
+    promo_close:{l:"Team CSAT required", h:"Average happy-call stars across the team, e.g. 4.8."},
+    promo_other:{sg:"Team callback rate at or under the ceiling for three consecutive months\nEvery direct report with a current scoreboard and a development plan\nA trained number two who can run the week without you"},
+    target:{l:"Target monthly team revenue by day 90"},
+    mid:{l:"Checkpoint at day 60"},
+    d30:{sg:"Ride with every tech. Sit with every CSR. Learn the pricing model, the KPI tracker, and the job costing. Audit the last 90 days of numbers so you know where the team actually stands. Start the daily huddle."},
+    d30b:{sg:"Leadership rhythm running: daily huddle, first ride-alongs, first 1:1s booked. Scoreboard live for every team member. Three biggest gaps named with a plan for each."},
+    d60:{sg:"Full rhythm in place: huddles daily, ride-alongs weekly, 1:1s bi-weekly, scoreboard review weekly. Coaching plans running for the bottom performers. First team training delivered."},
+    d60b:{sg:"Day-60 team revenue checkpoint reached. Team CSAT and callback rate moving the right direction. KPI reporting flowing up without prompting."},
+    d90:{sg:"The team runs on the rhythm, not on you chasing it. Team revenue at target. Team bonus activates on benchmark achievement. Formal 90-day review."},
+    d90b:{sg:"Target team revenue reached and verified. Team CSAT at or above target. Callback rate at or under the ceiling. Every report with a current scoreboard and development plan."},
+    steps:{l:"Walk through the rhythm", sg:"Daily huddle — yesterday's numbers, today's plan, one coaching point\nWeekly ride-alongs — coach in the field, not from the desk\nBi-weekly 1:1s — the person first, then the scoreboard\nWeekly scoreboard review with the whole team\nMonthly training — one skill, drilled until it's standard\nQuarterly reviews — formal, written, no surprises"},
+    team:{l:"Leadership duties", sg:"Fully embody our culture principles — the team copies what you do, not what you say\nHold the standard on every call and every install, especially when it's inconvenient\nDevelop people on purpose: every tech and CSR has a next step and knows it\nProtect the team from chaos: tight schedules, clear priorities, no surprise fire drills"},
+    closerate:{l:"Minimum team CSAT", h:"Average happy-call stars across the team, e.g. 4.8."},
+    pricing:{sg:"You own pricing compliance. All work sold at the current published rate. You review deviations weekly, coach the cause, and escalate repeat offenders to ownership."},
+    c30:{sg:"Leadership rhythm started: daily huddle live, ride-alongs underway, 1:1s booked\nScoreboard live for every team member\n90-day numbers audited and the three biggest gaps named\nCulture principles understood and demonstrated"},
+    c60:{sg:"Day-60 team revenue checkpoint reached and verified\nFull leadership rhythm running on schedule\nCoaching plans active for bottom performers\nTeam CSAT and callback rate trending the right way"},
+    crit:{sg:"Team revenue at or above the 90-day target\nTeam CSAT at or above target\nTeam callback rate at or under the ceiling\nLeadership rhythm verified: huddles, ride-alongs, 1:1s, scoreboard reviews held and logged\nGross margin protected — pricing compliance verified\nEvery report with a current scoreboard\nObservable demonstration of all culture principles"},
+    y1:{sg:"Own the team's number and the leadership rhythm. Build a team that hits target without heroics."},
+    y2:{sg:"Grow the team and the bench: a trained lead under you in service and install, and a front office that runs itself."},
+    y3:{sg:"Move toward General Manager / Operations Director: own the P&L, the growth plan, and the leaders under you."},
+    triggers:{sg:"Team revenue below the day-60 checkpoint for two consecutive months\nLeadership rhythm skipped for two consecutive weeks without documented cause\nTeam callback rate above the ceiling for 30 days without an active improvement plan\nConduct inconsistent with our culture principles — at this level the standard is highest"},
+    activate:{sg:"The team override applies to verified team revenue above the monthly target, once the day-90 benchmarks are met."},
+    revout:{sg:"If both parties agree to continue following the 90-day review, the team bonus is fully activated and the General Manager development path formally begins."},
+    compreneg:{sg:"At the General Manager level, compensation is renegotiated to reflect P&L ownership and growth participation. Pay shifts further toward company results — base plus performance on what the whole business produces."},
+    pledge:{sg:"We will provide the authority, the systems, the budget clarity, the coaching, and the direct backing of ownership you need to win. If we are ever falling short on our end of this agreement, we expect you to tell us directly and immediately. This works both ways. We are all in."},
+  }
+},
+custom: {
+  label:"Custom",
+  vocab:{metric:"your key number", metricMoney:"production", verb:"produce", processArea:"How we work",
+         unit:"job", quality:"quality standard", qdir:"hi", perfPay:"performance pay",
+         frontLine:"key part of how our clients experience this company"},
+  kpis:["the key number this role owns","quality measures you'll coach against"],
+  calcMode:"sales", targetCostPct:15, payType:"hourly",
+  fill:{},
+  growth:"",
+  q:{
+    promo_sales:{l:"Monthly production required for promotion"},
+    promo_close:{l:"Quality standard required (%)"},
+    target:{l:"Target monthly production by day 90"},
+    mid:{l:"Checkpoint at day 60"},
+    steps:{l:"Walk through your standard", sg:""},
+    closerate:{l:"Minimum quality standard (%)"},
+  }
+},
+};
+const pack = () => PACKS[roleKey()] || PACKS.sales;
+const V = k => (pack().vocab || PACKS.sales.vocab)[k] || PACKS.sales.vocab[k] || "";
+
+/* which fields show for which roles; everything else shows for all */
+function fieldVisible(k){
+  const r = roleKey();
+  switch(k){
+    case "hybrid": return r !== "sales";
+    case "options": return r === "sales" || r === "service" || r === "custom";
+    case "vehicle": return r !== "csr";
+    case "hours": return isHourly();
+    case "comm": case "basis": case "earned": case "activate": case "ote": return hasComm();
+    case "spiff_amt": case "spiff_what": return r !== "manager";
+    case "bonus_amt": case "bonus_cond": return true;
+    case "override_pct": case "override_base": return r === "manager" || r === "custom";
+    default: return true;
+  }
+}
+
+/* the base (sales) schema text, kept so role switches can restore it */
+const BASE_FIELDS = {};
+SECTIONS.forEach(s=>s.f.forEach(f=>{ BASE_FIELDS[f.k] = {l:f.l, h:f.h||"", ph:f.ph||"", sg:f.sg||""}; }));
+
+let PREV_ROLE = null;
+function applyRole(interactive){
+  const r = roleKey(), p = pack(), prev = PREV_ROLE && PACKS[PREV_ROLE] ? PACKS[PREV_ROLE] : null;
+
+  /* visibility */
+  document.querySelectorAll("[data-f]").forEach(w=>{ w.style.display = fieldVisible(w.dataset.f) ? "" : "none"; });
+
+  /* labels, help, placeholders, starting points: pack override or base */
+  document.querySelectorAll("[data-f]").forEach(w=>{
+    const k = w.dataset.f, base = BASE_FIELDS[k]; if(!base) return;
+    const o = (p.q && p.q[k]) || {};
+    const lab = w.querySelector("label"); if(lab && (o.l || base.l)) lab.textContent = o.l || base.l;
+    const help = w.querySelector(".help");
+    if(help){ help.textContent = String(o.h != null ? o.h : base.h).replace(/<[^>]+>/g,""); help.hidden = !help.textContent.trim(); }
+    const ctl = w.querySelector("input:not([type=date]), textarea");
+    if(ctl && (o.ph || base.ph)) ctl.placeholder = o.ph || base.ph;
+    const sgBtn = w.querySelector(".suggest");
+    if(sgBtn){ const sg = (o.sg != null ? o.sg : base.sg); sgBtn.dataset.sg = sg; sgBtn.style.display = sg ? "" : "none"; }
+  });
+
+  /* dynamic pay labels */
+  const relabel = (k, txt) => { const w = document.querySelector(`[data-f="${k}"] label`); if(w) w.textContent = txt; };
+  const u = isHourly() ? "($/hour)" : "($/year)";
+  relabel("base", "Starting pay " + u);
+  relabel("raise30", "Pay at day 30 " + u); relabel("raise60", "Pay at day 60 " + u); relabel("raise90", "Pay at day 90 " + u);
+
+  if(interactive && r !== PREV_ROLE){
+    /* fill only empty fields with the pack's fills */
+    const fills = Object.assign({}, p.fill);
+    Object.entries(fills).forEach(([k,v])=>{
+      const el = document.querySelector(`[data-k="${k}"]`);
+      if(el && !String(el.value||"").trim()) el.value = v;
+    });
+    /* fields still holding the previous pack's unchanged starting text: offer to swap */
+    if(prev){
+      const stale = [];
+      document.querySelectorAll("[data-k]").forEach(el=>{
+        const k = el.dataset.k, cur = String(el.value||"");
+        if(!cur.trim()) return;
+        const prevSg = (prev.q[k] && prev.q[k].sg != null) ? prev.q[k].sg : (BASE_FIELDS[k] ? BASE_FIELDS[k].sg : "");
+        const prevFill = prev.fill ? prev.fill[k] : null;
+        if((prevSg && cur === prevSg) || (prevFill && cur === prevFill)){
+          const nextSg = (p.q[k] && p.q[k].sg != null) ? p.q[k].sg : (BASE_FIELDS[k] ? BASE_FIELDS[k].sg : "");
+          const nextFill = p.fill ? p.fill[k] : null;
+          const next = nextFill || nextSg;
+          if(next && next !== cur) stale.push({el, next});
+        }
+      });
+      if(stale.length && confirm(`Update ${stale.length} starting-point answer${stale.length>1?"s":""} to the ${p.label} wording? Anything you typed yourself is left alone.`)){
+        stale.forEach(({el,next})=>{ el.value = next; });
+      }
+    }
+    /* calculator defaults for the role */
+    CALC_MODE = p.calcMode || "sales";
+    document.querySelectorAll("[data-mode]").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.mode === CALC_MODE)));
+    calcSet("ct", p.targetCostPct || 15);
+    const pt = document.querySelector('[data-k="paytype"]');
+    if(pt && !String(pt.value||"").trim() && p.payType) pt.value = p.payType;
+  }
+  PREV_ROLE = r;
+}
+
 /* ============================================================ */
 const D = {};
 const $ = s => document.querySelector(s);
@@ -726,7 +1037,7 @@ function buildForm(){
 
     s.f.forEach(f=>{
       const id = s.id+"_"+f.k;
-      const help = f.h ? `<div class="help">${f.h}</div>` : "";
+      const help = `<div class="help"${f.h?"":" hidden"}>${f.h||""}</div>`;
       const sg = f.sg ? `<button type="button" class="suggest" data-for="${id}" data-sg="${esc(f.sg)}">Not sure? Use a starting point</button>` : "";
       let ctl;
 
@@ -739,7 +1050,7 @@ function buildForm(){
       else if(f.ty==="ote") ctl = oteMarkup();
       else ctl = `<input id="${id}" data-k="${f.k}" data-s="${s.id}" placeholder="${esc(f.ph||"")}">`;
 
-      const block = `<div class="f"><label for="${id}">${esc(f.l)}</label>${help}${ctl}${sg}</div>`;
+      const block = `<div class="f" data-f="${f.k}"><label for="${id}">${esc(f.l)}</label>${help}${ctl}${sg}</div>`;
       if(f.w==="half"||f.w==="third") buf.push(block); else { flush(); inner += block; }
     });
     flush();
@@ -769,18 +1080,24 @@ function oteMarkup(){
     <td class="calc" data-ote="com${i}">—</td>
     <td class="calc" data-ote="tot${i}">—</td></tr>`;
   return `<div style="overflow-x:auto"><table class="ote">
-    <thead><tr><th>Monthly sales</th><th>Base / mo</th><th>Commission</th><th>Monthly total</th></tr></thead>
+    <thead><tr><th>Monthly volume</th><th>Base / mo</th><th>Commission</th><th>Monthly total</th></tr></thead>
     <tbody>${r(1)}${r(2)}${r(3)}</tbody></table></div>`;
 }
 
 /* ---------- pay calculator (section 06) ---------- */
 const CALC_SLIDERS = [
-  {c:"cb", l:"Base annual salary", u:"$", min:0, max:150000, step:1000, v:50000},
-  {c:"cr", l:"Commission rate", u:"%", min:0, max:20, step:0.5, v:5},
+  {c:"cr", l:"Commission rate", u:"%", min:0, max:20, step:0.5, v:5,
+   h:"Leave at 0 for roles with no commission. Raises and bonuses still show below."},
   {c:"cu", l:"Employer burden", u:"%", min:0, max:40, step:1, v:12,
    h:"Payroll taxes, workers' comp, and benefits on top of pay. 10–15% is typical."},
   {c:"ct", l:"Target role cost", u:"%", min:5, max:40, step:1, v:15,
    h:"The share of what this person produces, through sales, installs, or both, that you can afford to spend on them, all-in.", mode:true},
+];
+const CALC_PAYSTAGES = [
+  {c:"p0", l:"Starting pay", sub:"Day 1"},
+  {c:"p1", l:"Pay at day 30", sub:"Checkpoint 1"},
+  {c:"p2", l:"Pay at day 60", sub:"Checkpoint 2"},
+  {c:"p3", l:"Pay at day 90", sub:"Target"},
 ];
 const CALC_STAGES = [
   {c:"s1", l:"Days 1–30", sub:"Ramping up", v:20000},
@@ -788,6 +1105,7 @@ const CALC_STAGES = [
   {c:"s3", l:"Day 90", sub:"Target", v:85000},
 ];
 let CALC_MODE = "sales";
+let CALC_PAY = "salary";
 const CALC_WORDS = {
   sales:    {noun:"sales", short:"sales"},
   installs: {noun:"install revenue", short:"installs"},
@@ -795,6 +1113,8 @@ const CALC_WORDS = {
 };
 const modeMarkup = () => `<div class="cmode" role="group" aria-label="This role produces"><span>This role produces</span>${
   [["sales","Sales"],["installs","Installs"],["both","Both"]].map(([v,l])=>`<button type="button" data-mode="${v}" aria-pressed="${v===CALC_MODE}">${l}</button>`).join("")}</div>`;
+const payModeMarkup = () => `<div class="cmode" role="group" aria-label="Pay type"><span>Pay type</span>${
+  [["salary","Salary"],["hourly","Hourly"]].map(([v,l])=>`<button type="button" data-paymode="${v}" aria-pressed="${v===CALC_PAY}">${l}</button>`).join("")}</div>`;
 function calcMarkup(){
   const sl = s => `<div class="cfield">
       <div class="clabel"><label for="calc_${s.c}">${esc(s.l)}</label>
@@ -804,43 +1124,72 @@ function calcMarkup(){
       ${s.h?`<div class="chelp">${esc(s.h)}</div>`:""}</div>`;
   const st = s => `<div class="cstage"><label for="calc_${s.c}">${esc(s.l)} <span>${esc(s.sub)}</span></label>
       <span class="cnum pre" data-u="$"><input type="number" id="calc_${s.c}" data-c="${s.c}" min="0" step="1000" value="${s.v}"></span></div>`;
+  const ps = s => `<div class="cstage"><label for="calc_${s.c}">${esc(s.l)} <span>${esc(s.sub)}</span></label>
+      <span class="cnum pre" data-u="$"><input type="number" id="calc_${s.c}" data-c="${s.c}" min="0" step="1" ${s.c==="p0"?'value="50000"':'placeholder="no change"'} aria-label="${esc(s.l)}"></span></div>`;
   return `<div class="calc" id="calc">
     <div class="kicker">Pay calculator</div>
     <h3>Not exactly sure what your offer will be at each of the stages yet?</h3>
     <p class="calc-lede">Use our calculator to figure that out now. Remember, a good hire is your biggest sale ever. Let's pay good people what they're worth and adjust your pricing to match.</p>
-    <div class="cgrid">${CALC_SLIDERS.map(sl).join("")}</div>
+    <div class="cgrid">
+      <div class="cfield">${payModeMarkup()}
+        <div class="clabel" id="calcHoursRow"><label for="calc_chn">Hours per week</label>
+          <span class="cnum post" data-u="h"><input type="number" id="calc_chn" data-c="ch" min="1" max="80" step="1" value="40" aria-label="Hours per week"></span></div>
+        <div class="chelp" id="calcPayHelp">Salary pay is dollars per year. Hourly pay is dollars per hour.</div></div>
+      ${CALC_SLIDERS.map(sl).join("")}
+    </div>
+    <div class="csub" id="calcPaySub">Their pay at each stage — raises unlock at the checkpoints</div>
+    <div class="cstages">${CALC_PAYSTAGES.map(ps).join("")}</div>
     <div class="csub" id="calcSub">Monthly sales they produce at each stage</div>
     <div class="cstages">${CALC_STAGES.map(st).join("")}</div>
     <div class="ccards" id="calcCards"></div>
     <div style="overflow-x:auto"><table class="ctable" id="calcTable"></table></div>
     <div class="cprice" id="calcPrice"></div>
     <div class="capply"><button type="button" class="btn primary" id="calcApply">Use these numbers in my offer</button>
-      <span>Fills in base salary, commission rate, the day-60 and day-90 sales targets, and the on-track earnings table below.</span></div>
+      <span>Fills in the pay at each stage, commission rate, the day-60 and day-90 targets, and the on-track earnings table below.</span></div>
   </div>`;
 }
-const cval = c => { const el = document.getElementById("calc_"+c); return el ? Math.max(0, parseFloat(el.value)||0) : 0; };
+const cval = c => { const el = document.getElementById("calc_"+c) || document.getElementById("calc_"+c+"n"); return el ? Math.max(0, parseFloat(el.value)||0) : 0; };
 function calcSet(c, v){
   [document.getElementById("calc_"+c), document.getElementById("calc_"+c+"n")].forEach(el=>{ if(el) el.value = v; });
 }
+/* pay rate at each stage: blank raise = carry the last one forward */
+function stageRates(){
+  const p0 = cval("p0");
+  const raw = [p0, cval("p1"), cval("p2"), cval("p3")];
+  const out = [];
+  raw.forEach((v,i)=>{ out[i] = v > 0 ? v : (i ? out[i-1] : 0); });
+  return out;
+}
+const baseMonthly = rate => CALC_PAY === "hourly" ? rate * cval("ch") * 52 / 12 : rate / 12;
 function calcUpdate(){
-  const base = cval("cb"), rate = cval("cr")/100, bur = cval("cu")/100, tgt = cval("ct")/100;
+  const rate = cval("cr")/100, bur = cval("cu")/100, tgt = cval("ct")/100, hourly = CALC_PAY === "hourly";
   const W = CALC_WORDS[CALC_MODE] || CALC_WORDS.sales;
   $("#calcSub").textContent = "Monthly " + W.noun + " they produce at each stage";
+  $("#calcHoursRow").style.display = hourly ? "" : "none";
+  $("#calcPayHelp").textContent = hourly ? "Pay below is dollars per hour." : "Pay below is dollars per year.";
   const m$ = n => money(Math.round(n)) || "$0";
   const pc = n => (isFinite(n) ? (n*100).toFixed(1) : "—") + "%";
-  const rows = CALC_STAGES.map(s=>{
-    const sales = cval(s.c), com = sales*rate, pay = base/12 + com, cost = pay*(1+bur);
-    return {s, sales, com, pay, cost, pct: sales ? cost/sales : Infinity};
+  const pay$ = n => hourly ? "$" + (Math.round(n*100)/100).toLocaleString("en-US") + "/hr" : m$(n) + "/yr";
+  const rates = stageRates();
+  const vols = [cval("s1"), cval("s2"), cval("s3"), cval("s3")];
+  const stages = [
+    {l:"Days 1–30", sub:"Ramping up"}, {l:"Days 31–60", sub:"Building"},
+    {l:"Days 61–90", sub:"Proving ground"}, {l:"After day 90", sub:"At target"},
+  ];
+  const rows = stages.map((s,i)=>{
+    const bm = baseMonthly(rates[i]), sales = vols[i], com = sales*rate;
+    const pay = bm + com, cost = pay*(1+bur);
+    return {s, r:rates[i], bm, sales, com, pay, cost, pct: sales ? cost/sales : Infinity};
   });
-  const r = rows[2];
+  const r = rows[3];
   const ok = r.pct <= tgt;
   $("#calcCards").innerHTML = `
     <div class="ccard"><b>Their pay at target</b><span>${m$(r.pay*12)}</span><i>${m$(r.pay)} a month · ${m$(r.pay*12/52)} a week</i></div>
     <div class="ccard"><b>Your true cost</b><span>${m$(r.cost*12)}</span><i>Pay plus ${pc(bur)} burden</i></div>
     <div class="ccard ${ok?"good":"warn"}"><b>Cost as % of their ${W.short}</b><span>${pc(r.pct)}</span><i>Your target: ${pc(tgt)}</i></div>`;
-  $("#calcTable").innerHTML = `<thead><tr><th>Stage</th><th>Monthly ${W.short}</th><th>Base / mo</th><th>Commission / mo</th><th>Their pay / mo</th><th>Your cost / mo</th><th>% of ${W.short}</th></tr></thead>
-    <tbody>${rows.map(x=>`<tr><td><strong>${esc(x.s.l)}</strong><br><span>${esc(x.s.sub)}</span></td><td>${m$(x.sales)}</td><td>${m$(base/12)}</td><td>${m$(x.com)}</td><td class="hi">${m$(x.pay)}</td><td>${m$(x.cost)}</td><td class="${x.pct<=tgt?"ok":"over"}">${pc(x.pct)}</td></tr>`).join("")}</tbody>`;
-  /* pricing check: monthly sales needed for (base/12 + m*rate)(1+bur) <= tgt*m */
+  $("#calcTable").innerHTML = `<thead><tr><th>Stage</th><th>Pay rate</th><th>Monthly ${W.short}</th><th>Base / mo</th><th>Commission / mo</th><th>Their pay / mo</th><th>Your cost / mo</th><th>% of ${W.short}</th></tr></thead>
+    <tbody>${rows.map(x=>`<tr><td><strong>${esc(x.s.l)}</strong><br><span>${esc(x.s.sub)}</span></td><td>${pay$(x.r)}</td><td>${m$(x.sales)}</td><td>${m$(x.bm)}</td><td>${m$(x.com)}</td><td class="hi">${m$(x.pay)}</td><td>${m$(x.cost)}</td><td class="${x.pct<=tgt?"ok":"over"}">${pc(x.pct)}</td></tr>`).join("")}</tbody>`;
+  /* pricing check at full performance: (baseMonthly + m*rate)(1+bur) <= tgt*m */
   const denom = tgt - rate*(1+bur);
   let msg;
   if(!r.sales){
@@ -848,18 +1197,24 @@ function calcUpdate(){
   } else if(ok){
     msg = `<strong>The math works.</strong> At ${m$(r.sales)} a month, this role costs you ${pc(r.pct)} of what they produce, inside your ${pc(tgt)} target. You have room to pay a strong person well.`;
   } else if(denom <= 0){
-    msg = `<strong>Check the commission.</strong> Commission plus burden alone is ${pc(rate*(1+bur))} of ${W.noun}, which is already over your ${pc(tgt)} target before base salary. Lower the rate or raise the target.`;
+    msg = `<strong>Check the commission.</strong> Commission plus burden alone is ${pc(rate*(1+bur))} of ${W.noun}, which is already over your ${pc(tgt)} target before base pay. Lower the rate or raise the target.`;
   } else {
-    const need = (base/12)*(1+bur)/denom, lift = need/r.sales - 1;
+    const need = r.bm*(1+bur)/denom, lift = need/r.sales - 1;
     msg = `<strong>Don't cut the pay. Fix the price.</strong> At ${m$(r.sales)} a month, this role costs ${pc(r.pct)} of ${W.noun}, over your ${pc(tgt)} target. To hit it, this role needs about <strong>${m$(need)} a month</strong> in ${W.noun}. Doing the same jobs, that's roughly a <strong>${pc(lift)} price increase</strong>.`
-        + (lift > 0.3 ? ` That's a big gap for pricing alone to close. Look at the commission rate and the day-90 target too.` : "");
+        + (lift > 0.3 ? ` That's a big gap for pricing alone to close. Look at the pay, the rate, and the day-90 target too.` : "");
   }
   if(rows[0].pct > tgt && r.sales) msg += ` <span class="cnote">The first 30 days always run over target while they ramp. Judge the role at day 90.</span>`;
   const p = $("#calcPrice"); p.innerHTML = msg; p.classList.toggle("over", !!r.sales && !ok);
 }
 function calcPrefill(){
   const n = v => { const x = parseFloat(String(v||"").replace(/[^0-9.]/g,"")); return isNaN(x) ? null : x; };
-  if(n(D.base) != null) calcSet("cb", n(D.base));
+  if(String(D.paytype||"").trim()) CALC_PAY = isHourly() ? "hourly" : "salary";
+  document.querySelectorAll("[data-paymode]").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.paymode === CALC_PAY)));
+  if(n(D.hours) != null) calcSet("ch", n(D.hours));
+  if(n(D.base) != null) calcSet("p0", n(D.base));
+  if(n(D.raise30) != null) calcSet("p1", n(D.raise30));
+  if(n(D.raise60) != null) calcSet("p2", n(D.raise60));
+  if(n(D.raise90) != null) calcSet("p3", n(D.raise90));
   if(n(D.comm) != null) calcSet("cr", n(D.comm));
   if(n(D.mid) != null) calcSet("s2", n(D.mid));
   if(n(D.target) != null){ calcSet("s3", n(D.target)); if(n(D.mid) == null) calcSet("s2", Math.round(n(D.target)/2)); }
@@ -867,8 +1222,14 @@ function calcPrefill(){
 }
 function calcApply(){
   const put = (sel, v) => { const el = document.querySelector(sel); if(el) el.value = v; };
-  put("#comp_base", Math.round(cval("cb")));
-  put("#comp_comm", cval("cr"));
+  put("#comp_paytype", CALC_PAY);
+  if(CALC_PAY === "hourly") put("#comp_hours", Math.round(cval("ch")));
+  const r2 = v => Math.round(v*100)/100;
+  put("#comp_base", r2(cval("p0")));
+  if(cval("p1") > 0) put("#comp_raise30", r2(cval("p1")));
+  if(cval("p2") > 0) put("#comp_raise60", r2(cval("p2")));
+  if(cval("p3") > 0) put("#comp_raise90", r2(cval("p3")));
+  if(cval("cr") > 0) put("#comp_comm", cval("cr"));
   put("#ramp_mid", Math.round(cval("s2")));
   put("#ramp_target", Math.round(cval("s3")));
   CALC_STAGES.forEach((s,i)=> put(`[data-k="v${i+1}"]`, Math.round(cval(s.c))));
@@ -880,8 +1241,21 @@ function calcApply(){
 function collect(){
   document.querySelectorAll("[data-k]").forEach(el=>{ D[el.dataset.k] = el.value; });
 }
+/* pay rate at a stage (0=start, 1=day30, 2=day60, 3=day90), raises carry forward */
+function payAt(stage){
+  const seq = [num(D.base), num(D.raise30), num(D.raise60), num(D.raise90)];
+  const out = []; seq.forEach((v,i)=>{ out[i] = v > 0 ? v : (i ? out[i-1] : 0); });
+  return out[stage];
+}
+function baseMonthlyAt(stage){
+  const r = payAt(stage); if(!r) return 0;
+  return isHourly() ? r * (num(D.hours)||40) * 52 / 12 : r / 12;
+}
+const fmtRate = r => !r ? null : (isHourly()
+  ? "$" + (Math.round(r*100)/100).toLocaleString("en-US") + " per hour"
+  : money(r) + " per year");
 function recalcOte(){
-  const base = num(D.base)/12, rate = num(D.comm)/100;
+  const base = baseMonthlyAt(3), rate = num(D.comm)/100;
   [1,2,3].forEach(i=>{
     const v = num(D["v"+i]);
     const set = (sel,val)=>{ const c=document.querySelector(`[data-ote="${sel}"]`); if(c) c.textContent=val; };
@@ -895,7 +1269,8 @@ function recalcOte(){
 function progress(){
   let done=0, total=0;
   SECTIONS.forEach(s=>{
-    const els=[...document.querySelectorAll(`[data-s="${s.id}"]`)];
+    const els=[...document.querySelectorAll(`[data-s="${s.id}"]`)]
+      .filter(e=>{ const w=e.closest("[data-f]"); return !w || w.style.display !== "none"; });
     const filled=els.filter(e=>e.value && e.value.trim()).length;
     done+=filled; total+=els.length;
     const c=$("#cnt-"+s.id); if(c) c.textContent=filled+" / "+els.length;
@@ -916,6 +1291,15 @@ function render(){
   const para = (v,fb) => { const L=lines(v); return L.length
     ? L.map(x=>`<p>${esc(x)}</p>`).join("")
     : `<p>${TODO(fb)}</p>`; };
+
+  const QHI = V("qdir") !== "lo";   /* higher-is-better quality metric */
+  const qAtOr = QHI ? "at or above" : "at or below";
+  const qOrBetter = QHI ? "or higher" : "or lower";
+  const hasPerf = hasComm() || num(D.spiff_amt) > 0 || num(D.bonus_amt) > 0 || (roleKey()==="manager"||roleKey()==="custom") && num(D.override_pct) > 0;
+  /* quality values are percents, except CSAT which is stars out of 5 */
+  const qVal = v => { const s = String(v||"").trim(); if(!s) return null;
+    if(/%$/.test(s)) return esc(s);
+    return V("quality").includes("CSAT") ? esc(s) + " stars" : esc(s) + "%"; };
 
   const co = D.company && D.company.trim() ? esc(D.company) : TODO("Company name");
   const cand = D.cand && D.cand.trim() ? esc(D.cand) : TODO("Candidate name");
@@ -947,13 +1331,32 @@ function render(){
       <td>${act?esc(act):TODO("Activities")}</td>
       <td>${bench?esc(bench):TODO("Benchmark")}</td></tr>`).join("");
 
-  /* OTE table */
-  const base = num(D.base)/12, rate = num(D.comm)/100;
+  /* OTE table — base pay shown at the day-90 rate */
+  const base = baseMonthlyAt(3), rate = num(D.comm)/100;
   const oteRows = [1,2,3].map(i=>{
     const v=num(D["v"+i]); if(!v) return "";
     return `<tr><td>${money(v)} / month</td><td>${base?money(base):"—"}</td>
       <td>${money(v*rate)}</td><td>${money(base+v*rate)}</td></tr>`;
   }).join("");
+
+  /* compensation rows: pay, raises, then every active performance-pay line */
+  const payRows = [];
+  payRows.push(`<tr><td>${isHourly()?"Hourly pay":"Base salary"}</td><td>${fmtRate(num(D.base))||TODO("$ amount")}${isHourly()&&num(D.hours)?", about "+num(D.hours)+" hours a week":""}, paid ${D.freq?esc(D.freq):TODO("how often")}</td></tr>`);
+  const raisePath = [["Day 30",num(D.raise30)],["Day 60",num(D.raise60)],["Day 90",num(D.raise90)]].filter(x=>x[1]>0);
+  if(raisePath.length) payRows.push(`<tr><td>Raises at each checkpoint</td><td>${raisePath.map(x=>`<strong>${x[0]}:</strong> ${fmtRate(x[1])}`).join(" &middot; ")} — each raise unlocks by passing that checkpoint review (section 6)</td></tr>`);
+  if(hasComm()){
+    payRows.push(`<tr><td>Commission</td><td>${D.comm?esc(D.comm)+"%":TODO("%")} of ${D.basis?esc(D.basis):TODO("what it's calculated on")}</td></tr>`);
+    payRows.push(`<tr><td>A sale counts</td><td>${D.earned?esc(D.earned):TODO("when a sale counts")}</td></tr>`);
+    payRows.push(`<tr><td>Commission activation</td><td>${D.activate?esc(D.activate):TODO("activation terms")}</td></tr>`);
+  }
+  if(num(D.spiff_amt)) payRows.push(`<tr><td>Bonus per item</td><td>${money(D.spiff_amt)} per ${D.spiff_what?esc(D.spiff_what):TODO("per what")}</td></tr>`);
+  if(num(D.bonus_amt)) payRows.push(`<tr><td>Target bonus</td><td>${money(D.bonus_amt)} per month when you hit ${D.bonus_cond?esc(D.bonus_cond):TODO("the target")}</td></tr>`);
+  if(fieldVisible("override_pct") && num(D.override_pct)) payRows.push(`<tr><td>Team override</td><td>${esc(D.override_pct)}% of ${D.override_base?esc(D.override_base):TODO("what it's calculated on")}</td></tr>`);
+
+  /* what you can make at each stage (no-commission roles) */
+  const stageEarnRows = [["Days 1–30","Onboarding",0],["Days 31–60","Building",1],["Days 61–90","Proving ground",2],["After day 90","At target",3]]
+    .map(x=>{ const bm = baseMonthlyAt(x[2]);
+      return `<tr><td><strong>${x[0]}</strong><br><span style="color:var(--ink-3)">${x[1]}</span></td><td>${fmtRate(payAt(x[2]))||"—"}</td><td>${bm?money(bm):"—"} / month</td></tr>`; }).join("");
 
   const ns = num(D.nonsolicit);
   const nsClause = ns ? `<li>During employment and for ${ns} months following separation for any reason, ${first?esc(first):"the employee"} agrees not to directly solicit our clients or recruit our team members for a competing purpose.</li>` : "";
@@ -987,19 +1390,19 @@ function render(){
   <p>Our goal is to build something great together. We are fully in your corner.</p>
 
   <h2>1. Role Overview</h2>
-  <p>The ${g("title","role")} is the front line of our client experience and a cornerstone of our growth. This position carries real responsibility and real opportunity.</p>
+  <p>The ${g("title","role")} is the ${V("frontLine")}. This position carries real responsibility and real opportunity.</p>
   <h3>This position focuses on</h3>
   ${ul(D.focus,"What the role focuses on")}
   <p>This role is intentionally designed with a clear pathway to ${g("nextrole","the next role")}. We are not looking to fill a seat. We are looking to develop a leader.</p>
   <h3>Promotion is contingent upon</h3>
   <ul>
-    <li>Consistent achievement of ${money(D.promo_sales)||TODO("$ amount")} or more in monthly sales</li>
-    <li>Maintaining a ${D.promo_close?esc(D.promo_close)+"%":TODO("%")} or higher close rate</li>
+    <li>Consistent achievement of ${money(D.promo_sales)||TODO("$ amount")} or more in monthly ${V("metricMoney")}</li>
+    <li>Maintaining a ${V("quality")} of ${qVal(D.promo_close)||TODO(V("quality"))} ${qOrBetter}</li>
     ${lines(D.promo_other).map(x=>`<li>${esc(x)}</li>`).join("")}
   </ul>
 
   <h2>2. Work Schedule and Ramp Plan</h2>
-  <p>We designed this plan specifically to get you to ${target||TODO("your target")} or more in monthly sales. You will have everything you need to hit these benchmarks.</p>
+  <p>We designed this plan specifically to get you to ${target||TODO("your target")} or more in monthly ${V("metricMoney")}. You will have everything you need to hit these benchmarks.</p>
   <div style="overflow-x:auto"><table>
     <thead><tr><th style="width:22%">Phase</th><th style="width:39%">Focus and activities</th><th style="width:39%">Success benchmark</th></tr></thead>
     <tbody>${ramp}</tbody></table></div>
@@ -1008,21 +1411,21 @@ function render(){
   ${ul(D.support,"Who and what supports them")}
 
   <h2>3. Roles and Responsibilities</h2>
-  <h3>Client sales: ${g("procname","your process name")}</h3>
-  <p>Every appointment is run using ${D.procname?esc(D.procname):"our process"}. This is non-negotiable.</p>
-  ${steps?`<ul>${steps}</ul>`:`<p>${TODO("Your sales process steps")}</p>`}
-  ${D.options?`<p>A minimum of ${esc(D.options)} clearly structured options are presented on every single call, without exception.</p>`:""}
+  <h3>${esc(V("processArea"))}: ${g("procname","your process name")}</h3>
+  <p>Every ${esc(V("unit"))} is run using ${D.procname?esc(D.procname):"our standard"}. This is non-negotiable.</p>
+  ${steps?`<ul>${steps}</ul>`:`<p>${TODO("Your process steps")}</p>`}
+  ${fieldVisible("options") && D.options?`<p>A minimum of ${esc(D.options)} clearly structured options are presented on every single call, without exception.</p>`:""}
   <h3>Team leadership and coaching</h3>
   ${ul(D.team,"Team leadership duties")}
   <h3>KPI tracking</h3>
   <ul>
-    <li>Track personal sales metrics daily using ${D.kpitool?esc(D.kpitool):TODO("your tracker")}.</li>
-    <li>Report team sales metrics and KPIs ${D.kpiwho?esc(D.kpiwho):TODO("to whom, how often")}.</li>
-    <li>Maintain a close rate at or above ${D.closerate?esc(D.closerate)+"%":TODO("%")} at all times.</li>
+    <li>Track your numbers daily using ${D.kpitool?esc(D.kpitool):TODO("your tracker")}: ${esc((pack().kpis||[]).join(", "))}.</li>
+    <li>Report your KPIs ${D.kpiwho?esc(D.kpiwho):TODO("to whom, how often")}.</li>
+    <li>Keep your ${esc(V("quality"))} ${qAtOr} ${qVal(D.closerate)||TODO(V("quality"))} at all times.</li>
   </ul>
   ${para(D.pricing,"Your pricing compliance rule")}
-  <h3>Company vehicle</h3>
-  ${ul(D.vehicle,"Vehicle policy")}
+  ${fieldVisible("vehicle")?`<h3>Company vehicle</h3>
+  ${ul(D.vehicle,"Vehicle policy")}`:""}
 
   <h2>4. Core Performance Pillars</h2>
   <p>Success in this role is measured against our culture principles, which serve as our performance operating system:</p>
@@ -1032,18 +1435,18 @@ function render(){
   <h2>5. Compensation</h2>
   <div style="overflow-x:auto"><table>
     <thead><tr><th style="width:34%">Component</th><th>Detail</th></tr></thead>
-    <tbody>
-      <tr><td>Base salary</td><td>${money(D.base)||TODO("$ amount")} annually, paid ${D.freq?esc(D.freq):TODO("how often")}</td></tr>
-      <tr><td>Commission</td><td>${D.comm?esc(D.comm)+"%":TODO("%")} of ${D.basis?esc(D.basis):TODO("what it's calculated on")}</td></tr>
-      <tr><td>A sale counts</td><td>${D.earned?esc(D.earned):TODO("when a sale counts")}</td></tr>
-      <tr><td>Commission activation</td><td>${D.activate?esc(D.activate):TODO("activation terms")}</td></tr>
-    </tbody></table></div>
-  <h3>On-track earnings</h3>
-  ${oteRows?`<div style="overflow-x:auto"><table>
-    <thead><tr><th>Monthly sales volume</th><th>Base pay (est.)</th><th>Commission</th><th>Monthly total</th></tr></thead>
+    <tbody>${payRows.join("")}</tbody></table></div>
+  <h3>What you can make</h3>
+  ${hasComm() ? (oteRows?`<div style="overflow-x:auto"><table>
+    <thead><tr><th>Monthly ${esc(V("metricMoney"))} volume</th><th>Base pay (est.)</th><th>Commission</th><th>Monthly total</th></tr></thead>
     <tbody>${oteRows}</tbody></table></div>
-    <p style="font-size:12px;color:var(--ink-3)">Projections based on verified sales at our published rate. Actual earnings depend on verified sales volume and pricing compliance.</p>`
-   :`<p>${TODO("Fill in three sales volumes in section 06")}</p>`}
+    <p style="font-size:12px;color:var(--ink-3)">Projections based on verified ${esc(V("metricMoney"))} at our published rate. Actual earnings depend on verified volume and pricing compliance.</p>`
+   :`<p>${TODO("Fill in three volumes in section 06")}</p>`)
+  : (raisePath.length || num(D.base) ? `<div style="overflow-x:auto"><table>
+    <thead><tr><th style="width:26%">Stage</th><th>Pay rate</th><th>Base pay (est.)</th></tr></thead>
+    <tbody>${stageEarnRows}</tbody></table></div>
+    ${hasPerf?`<p style="font-size:12px;color:var(--ink-3)">Plus the performance pay above, on top of every stage.</p>`:`<p>Your raises through the first 90 days are written above, and the growth path in section 7 is how the number keeps climbing after that. There is always more here for people who earn it.</p>`}`
+   : `<p>${TODO("Fill in the pay fields in section 06")}</p>`)}
 
   <h2>6. 30/60/90 Checkpoint Reviews</h2>
   <p>Your roadmap runs in three stages, and each stage ends with a formal checkpoint review. Meeting the checkpoint unlocks the next stage. Every review is a two-way conversation to celebrate wins, address gaps, and chart the next chapter of ${first?esc(first)+"'s ":"your "}growth at ${co}.</p>
@@ -1058,7 +1461,7 @@ function render(){
           <td>Days 61–90: Proving ground</td></tr>
       <tr><td><strong>Day 90</strong><br><span style="color:var(--ink-3)">${target?target+" / month":"Final review"}</span></td>
           <td>${cellList(D.crit,"Day 90 review criteria")}</td>
-          <td>Full commission activation and the path to ${g("nextrole","the next role")}</td></tr>
+          <td>${hasPerf?`Full ${esc(V("perfPay"))} activation and the`:"The"} path to ${g("nextrole","the next role")}</td></tr>
     </tbody></table></div>
   <h3>If a checkpoint is missed</h3>
   ${para(D.miss,"What happens if a checkpoint is missed")}
@@ -1080,9 +1483,9 @@ function render(){
   <h3>Revenue benchmarks</h3>
   <p>Failure to meet the following benchmarks consistently and without documented cause gives ${co} the right to review and adjust the compensation structure, reduce base salary, modify position terms, or separate employment. Any adjustment will be communicated directly before implementation.</p>
   <ul>
-    <li><strong>Day 30:</strong> Systems operational. First independent appointments completed. Pipeline established.</li>
-    <li><strong>Day 60:</strong> Minimum ${mid||TODO("$ checkpoint")} in verified monthly sales. Close rate at or trending toward ${D.closerate?esc(D.closerate)+"%":TODO("%")}.</li>
-    <li><strong>Day 90:</strong> Minimum ${target||TODO("$ target")} in verified monthly sales. Full commission activates upon achievement.</li>
+    <li><strong>Day 30:</strong> Working to our standard. First independent work completed. Systems operational.</li>
+    <li><strong>Day 60:</strong> Minimum ${mid||TODO("$ checkpoint")} in verified monthly ${esc(V("metricMoney"))}. ${esc(V("quality")[0].toUpperCase()+V("quality").slice(1))} at or trending toward ${qVal(D.closerate)||TODO(V("quality"))}.</li>
+    <li><strong>Day 90:</strong> Minimum ${target||TODO("$ target")} in verified monthly ${esc(V("metricMoney"))}.${hasPerf?` Full ${esc(V("perfPay"))} activates upon achievement.`:""}</li>
   </ul>
   <h3>Compensation review triggers</h3>
   <p>${co} reserves the right to initiate a compensation review at any time if any of the following occur:</p>
@@ -1106,7 +1509,7 @@ function render(){
   <h2>Acceptance and Sign-Off</h2>
   <p>If you accept this offer, please sign below. Upon receipt of a signed copy we will begin onboarding and prepare for your ${dateFmt(D.start)||TODO("start date")} start date.</p>
   <p><strong>Please return a signed copy by ${dateFmt(D.expires)||TODO("expiry date")}.</strong></p>
-  <p>By signing below, ${cand} confirms that he or she has read, understood, and agrees to all terms in this offer letter, including the compensation structure, the 30/60/90 benchmarks, vehicle policy, pricing compliance requirements, confidentiality obligations${ns?", non-solicitation terms":""}, and the at-will nature of this employment.</p>
+  <p>By signing below, ${cand} confirms that they have read, understood, and agree to all terms in this offer letter, including the compensation structure, the 30/60/90 benchmarks, ${fieldVisible("vehicle")&&lines(D.vehicle).length?"vehicle policy, ":""}pricing compliance requirements, confidentiality obligations${ns?", non-solicitation terms":""}, and the at-will nature of this employment.</p>
 
   <div class="contact"><strong>Questions before you sign?</strong> Contact ${accName?esc(accName):TODO("Accountable party")}${v("acc_title")?", "+v("acc_title"):""}, directly at ${v("acc_email")||TODO("email")} or ${v("acc_phone")||TODO("phone")}.</div>
 
@@ -1140,7 +1543,11 @@ buildForm();
 
 document.addEventListener("input", e=>{
   const ds = e.target.dataset || {};
-  if(ds.k) sync();
+  if(ds.k){
+    if(ds.k === "role"){ collect(); applyRole(true); }
+    else if(ds.k === "hybrid" || ds.k === "paytype"){ collect(); applyRole(false); }
+    sync();
+  }
   if(ds.c){
     const twin = document.getElementById(e.target.id.endsWith("n") ? e.target.id.slice(0,-1) : e.target.id+"n");
     if(twin) twin.value = e.target.value;
@@ -1152,6 +1559,15 @@ document.addEventListener("click", e=>{
   const b = e.target.closest("[data-mode]"); if(!b) return;
   CALC_MODE = b.dataset.mode;
   document.querySelectorAll("[data-mode]").forEach(x=>x.setAttribute("aria-pressed", String(x === b)));
+  calcUpdate();
+});
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-paymode]"); if(!b) return;
+  CALC_PAY = b.dataset.paymode;
+  document.querySelectorAll("[data-paymode]").forEach(x=>x.setAttribute("aria-pressed", String(x === b)));
+  /* swap untouched defaults between sensible salary and hourly numbers */
+  if(CALC_PAY === "hourly" && cval("p0") === 50000) calcSet("p0", 26);
+  if(CALC_PAY === "salary" && cval("p0") === 26) calcSet("p0", 50000);
   calcUpdate();
 });
 document.addEventListener("change", e=>{ if(e.target.dataset && e.target.dataset.k) sync(); });
@@ -1234,6 +1650,7 @@ function applyDraft(text, fname){
   document.querySelectorAll("[data-k]").forEach(el=>{
     const v = data[el.dataset.k]; el.value = (v == null) ? "" : String(v);
   });
+  collect(); PREV_ROLE = null; applyRole(false);
   sync(); calcPrefill();
   const who = String(data.cand||"").trim();
   toast(who ? "Opened the draft for " + who : "Draft opened");
@@ -1269,7 +1686,7 @@ document.addEventListener("drop", e=>{
    read other members' offers with this key. See supabase/schema.sql.
    ============================================================ */
 const BACKEND = { supabaseUrl: "https://jxywghplxowytqwdsjyu.supabase.co", supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0", table: "offer_letters" };
-const APP_VERSION = "2026.10";
+const APP_VERSION = "2026.10.2";
 const backendOn = () => !!(BACKEND.supabaseUrl && BACKEND.supabaseAnonKey);
 
 let DRAFT_ID = (()=>{
@@ -1309,38 +1726,64 @@ window.addEventListener("beforeprint", ()=>recordCopy("print"));
    from the fields the builder actually has.
    ============================================================ */
 const OWNER_KEYS = new Set(["issued","start","expires","cand","promo_sales","promo_close","target","mid",
-  "options","closerate","base","freq","comm","basis","earned","v1","v2","v3","nonsolicit","cand_email","cand_phone"]);
+  "options","closerate","base","freq","comm","basis","earned","v1","v2","v3","nonsolicit","cand_email","cand_phone",
+  "hybrid","raise30","raise60","raise90","hours","spiff_amt","bonus_amt","override_pct"]);
 
 function buildPrompt(){
   const BT = "`", FENCE = BT+BT+BT;
   const TYPE = {money:"number in US dollars, digits only (e.g. 100000)", pct:"percent, digits only (e.g. 60)",
                 num:"whole number", date:"date as YYYY-MM-DD", sel:"one of the listed options, exactly as written",
                 ta:"text"};
+  const r = roleKey(), p = PACKS[r] || PACKS.sales;
+  const roleChosen = !!String(D.role||"").trim();
   const keys = [], ref = [];
   SECTIONS.forEach(s=>{
+    const fields = s.f.filter(f=> f.ty === "ote" ? (!roleChosen || fieldVisible("ote")) : (!roleChosen || fieldVisible(f.k)));
+    if(!fields.length) return;
     ref.push("", "### " + s.n + " · " + s.t, s.b);
-    s.f.forEach(f=>{
+    fields.forEach(f=>{
       if(f.ty === "ote"){
         keys.push("v1","v2","v3");
-        ref.push("- " + BT+"v1"+BT + ", " + BT+"v2"+BT + ", " + BT+"v3"+BT + " — three example monthly sales volumes for the on-track earnings table. **LEAVE EMPTY — the owner fills these in.**");
+        ref.push("- " + BT+"v1"+BT + ", " + BT+"v2"+BT + ", " + BT+"v3"+BT + " — three example monthly volumes for the earnings table. **LEAVE EMPTY — the owner fills these in.**");
         return;
       }
       keys.push(f.k);
-      let line = "- " + BT + f.k + BT + " — " + f.l + ". Type: " + (TYPE[f.ty] || "short text") + ".";
-      if(f.ty === "sel") line += " Options: " + f.o.map(o=>'"'+o+'"').join(" | ") + ".";
-      if(f.h) line += " Guidance: " + f.h.replace(/<[^>]+>/g,"");
+      const o = (roleChosen && p.q && p.q[f.k]) || {};
+      const label = o.l || f.l, help = (o.h != null ? o.h : f.h), sg = (o.sg != null ? o.sg : f.sg);
+      let line = "- " + BT + f.k + BT + " — " + label + ". Type: " + (TYPE[f.ty] || "short text") + ".";
+      if(f.ty === "sel") line += " Options: " + f.o.map(x=>'"'+x+'"').join(" | ") + ".";
+      if(help) line += " Guidance: " + String(help).replace(/<[^>]+>/g,"");
       if(OWNER_KEYS.has(f.k)) line += " **LEAVE EMPTY — the owner fills this in.**";
-      else if(f.sg) line += "\n  - The standard we're after (tailor it to this company and role, don't copy it word for word): " + f.sg.replace(/\n/g," / ");
+      else if(sg) line += "\n  - The standard we're after (tailor it to this company and role, don't copy it word for word): " + sg.replace(/\n/g," / ");
       ref.push(line);
     });
   });
-  const template = JSON.stringify({ app: APP_ID, version: 1, data: Object.fromEntries(keys.map(k=>[k,""])) }, null, 2);
+  const roleBlock = roleChosen ? [
+    "## The role",
+    "This offer is for a **" + p.label + "**. Set " + BT + "role" + BT + " to \"" + String(D.role).trim() + "\".",
+    "- The number this role owns: " + p.vocab.metric + ".",
+    "- KPIs: " + p.kpis.join(", ") + ".",
+    "- Named process: " + (p.fill.procname || "the owner's own standard") + ".",
+    p.growth ? "- Growth path: " + p.growth + "." : "",
+    "- Use this role's vocabulary everywhere. Never describe this job in sales-rep language unless the role is Sales Rep" + (isHybrid() ? ", though this hire ALSO earns on sales — keep the commission block" : "") + ".",
+    ""
+  ].filter(Boolean) : [
+    "## The role",
+    "Ask which role this is (step 1), then set " + BT + "role" + BT + " to the matching option and write the whole draft in that role's language:",
+    ...Object.values(PACKS).filter(x=>x.label!=="Custom").map(x=>"- **" + x.label + "** — owns " + x.vocab.metric + "; process: " + (x.fill.procname||"their standard") + "; KPIs: " + x.kpis.slice(0,4).join(", ") + (x.growth ? "; grows into: " + x.growth.split("→").pop().trim() : "") + "."),
+    "- **Custom** — any other role; use the owner's own words for the key number and standard.",
+    ""
+  ];
+  const tdata = Object.fromEntries(keys.map(k=>[k,""]));
+  if(roleChosen) tdata.role = String(D.role).trim();
+  const template = JSON.stringify({ app: APP_ID, version: 1, data: tdata }, null, 2);
 
   return [
 "# SLE Opportunity Offer Builder — AI Prep Prompt",
 "",
 "You are helping the owner of an electrical service company prepare an employment offer letter in the **SLE Opportunity Offer Builder**. Your job: research their company, then hand back ONE JSON draft the builder can load. Work in the four steps below, in order.",
 "",
+...roleBlock,
 "## Step 1 — Ask me first",
 "Before doing anything else, ask me for:",
 "1. My company website URL, plus any Google Business, Facebook, or Instagram links.",
@@ -1442,6 +1885,8 @@ try{
   });
 }catch(e){}
 
+collect();
+applyRole(false);
 sync();
 calcPrefill();
 
