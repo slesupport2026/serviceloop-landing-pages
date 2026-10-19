@@ -148,6 +148,8 @@ button{font:inherit; color:inherit; cursor:pointer;}
 .herologo{display:flex; justify-content:center; margin:-4px 0 18px;}
 .herologo img{width:min(250px,64%); height:auto; display:block; filter:var(--logo-shadow);}
 .herologo.small img{width:min(150px,40%);}
+.endcta{display:flex; flex-direction:column; gap:12px; margin-top:28px;}
+.endcta .btn{display:block; text-align:center; text-decoration:none;}
 .stamp{
   text-align:center; font-size:11.5px; font-weight:800; letter-spacing:.14em;
   text-transform:uppercase; color:var(--ink-faint); margin:-8px 0 18px;
@@ -597,7 +599,7 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
 
       <!-- 0 · WELCOME -->
       <section class="card" data-step="0">
-        <div class="herologo"><img data-logo alt="Million Dollar Electrician" width="250" height="268"></div>
+        <div class="herologo small"><img data-logo alt="Million Dollar Electrician" width="150" height="161"></div>
         <div class="kicker">A Million Dollar Electrician tool · For electrical service owners — one van or twenty</div>
         <h1>Let's find the number your business actually needs.</h1>
         <p class="say">Not the market rate. Not what your old boss charged. The rate that pays
@@ -605,6 +607,23 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
         <p class="say"><b>Phase 1</b> is seven quick cards, mostly tapping, and gives you a rate
           you can start quoting on your next job. <b>Phase 2</b> goes deeper and builds your
           number from your real costs.</p>
+
+        <form class="gate" id="leadForm" novalidate>
+          <div class="gate-head">
+            <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+            <div><b>First — who's this rate for?</b><span>Ten seconds. Your numbers stay tied to you, so you can come back any time and pick up right where you left off.</span></div>
+          </div>
+          <div class="fgrid">
+            <label class="f full"><span>First name</span><input id="fFirst" autocomplete="given-name" enterkeyhint="next" required></label>
+            <label class="f full"><span>Email</span><input id="fEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" enterkeyhint="next" required></label>
+            <label class="f full"><span>Mobile</span><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="done" required></label>
+          </div>
+          <div class="hp" aria-hidden="true"><label>Website<input id="fWebsite" tabindex="-1" autocomplete="off"></label></div>
+          <label class="consent"><input type="checkbox" id="fConsent"><span>Send me pricing tips, new tools and Night School invites from Million Dollar Electrician. Unsubscribe anytime.</span></label>
+          <p class="ferr" id="fErr" role="alert" hidden></p>
+          <button class="btn" type="submit" id="fSubmit">Start — find my rate</button>
+          <p class="tiny">Your details stay with Million Dollar Electrician and Service Loop Electrical. We never sell them.</p>
+        </form>
       </section>
 
       <!-- 1 · WORK TYPE -->
@@ -689,32 +708,7 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
         </div>
         <div class="chips" id="rateChips"></div>
 
-        <form class="gate" id="leadForm" novalidate>
-          <div class="gate-head">
-            <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
-            <div><b>Your Phase 1 rate is ready.</b><span>Tell us where to send it. It unlocks on this screen the moment you tap the button, and a copy goes to your inbox.</span></div>
-          </div>
-          <div class="hero-n warm locked" aria-hidden="true">
-            <div class="lab">Phase 1 rate</div>
-            <div class="n"><span class="sg">$</span><span id="p1Tease">000.00</span><span class="pr">/hr</span></div>
-          </div>
-          <div class="fgrid">
-            <label class="f"><span>First name</span><input id="fFirst" autocomplete="given-name" enterkeyhint="next" required></label>
-            <label class="f"><span>Last name</span><input id="fLast" autocomplete="family-name" enterkeyhint="next" required></label>
-            <label class="f full"><span>Email</span><input id="fEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" enterkeyhint="next" required></label>
-            <label class="f full"><span>Mobile</span><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next" required></label>
-            <label class="f full"><span>Company name</span><input id="fCompany" autocomplete="organization" enterkeyhint="next" required></label>
-            <label class="f"><span>City</span><input id="fCity" autocomplete="address-level2" enterkeyhint="next" required></label>
-            <label class="f"><span>State / prov.</span><input id="fRegion" autocomplete="address-level1" enterkeyhint="done" required></label>
-          </div>
-          <div class="hp" aria-hidden="true"><label>Website<input id="fWebsite" tabindex="-1" autocomplete="off"></label></div>
-          <label class="consent"><input type="checkbox" id="fConsent"><span>Send me pricing tips, new tools and Night School invites from Million Dollar Electrician. Unsubscribe anytime.</span></label>
-          <p class="ferr" id="fErr" role="alert" hidden></p>
-          <button class="btn" type="submit" id="fSubmit">Show my Phase 1 rate</button>
-          <p class="tiny">Your details stay with Million Dollar Electrician and Service Loop Electrical. We never sell them.</p>
-        </form>
-
-        <div id="p1Reveal" hidden>
+        <div id="p1Reveal">
         <div class="hero-n warm">
           <div class="lab">Phase one rate</div>
           <div class="n"><span class="sg">$</span><span id="p1Val">0</span><span class="pr">/hr</span></div>
@@ -947,6 +941,11 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
         </div>
         <div class="note" id="pieNote"></div>
 
+        <div class="endcta">
+          <button class="btn" type="button" id="emailResultsBtn" hidden>Email me my numbers</button>
+          <a class="btn" id="bookCallBtn" hidden target="_blank" rel="noopener">Book a call — walk through your number with us</a>
+        </div>
+
         <div class="note calm" id="multiNote"></div>
       </section>
 
@@ -1128,6 +1127,9 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
   /* true while videos are being recorded so the slot shows; set false at launch
      and any card without a link simply hides its slot */
   var SHOW_EMPTY_SLOTS = true;
+  /* Team feedback 2026-10-19: a video on every card is too many. Placeholders only
+     show on these key cards; a card gets a video slot anyway the moment its URL is set. */
+  var PLACEHOLDER_STEPS = {0:1, 7:1, 8:1, 14:1};
   /* Inline playback works when this page is hosted on your own site (Netlify).
      On claude.ai the player can't be embedded, so the slot opens the video in a new tab. */
   var INLINE = !!location.hostname && !/claude|anthropic/i.test(location.hostname);
@@ -1152,7 +1154,7 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
         ? '<button type="button" class="vbox" data-vid-id="' + id + '" data-prov="' + prov + '" aria-label="Play video: ' + t + '">' + PLAY + cap + '</button>'
         : '<a class="vbox" href="' + out + '" target="_blank" rel="noopener" aria-label="Watch: ' + t + '">' + PLAY + cap + '</a>';
     }
-    if(!SHOW_EMPTY_SLOTS) return "";
+    if(!SHOW_EMPTY_SLOTS || !PLACEHOLDER_STEPS[step]) return "";
     return '<div class="vbox empty" role="img" aria-label="Video coming soon">' + PLAY
       + '<span class="vcap"><b>' + t + '</b><small>Video coming soon</small></span></div>';
   }
@@ -1163,7 +1165,8 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
       if(!html) return;
       var slot = document.createElement("div");
       slot.className = "vid"; slot.setAttribute("data-vid", step); slot.innerHTML = html;
-      var head = card.querySelector("h1, h2");
+      /* welcome card: the VSL is the hero — it sits where the logo used to be */
+      var head = step === 0 ? card.querySelector(".herologo") : card.querySelector("h1, h2");
       head.parentNode.insertBefore(slot, head.nextSibling);
     });
     document.addEventListener("click", function(e){
@@ -1377,12 +1380,24 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
     });
   }
 
+  /* Team feedback 2026-10-19: a tap should always take you somewhere — either the card
+     advances on its own or the page glides to the next unanswered question. */
+  var advT = null;
+  function autoNext(fromStep, ms){
+    clearTimeout(advT);
+    advT = setTimeout(function(){ if(state.step === fromStep) next(); }, ms || 550);
+  }
+  function glideTo(id){
+    var el = $(id); if(!el) return;
+    try{ el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"}); }catch(e){}
+  }
+
   /* work type */
   function drawWork(){
     buildPick($("pickWork"), WORK.map(function(w){
       return {t:w.t, d:w.d, n:w.eff + "% billable", art:w.art, k:w.k};
     }), function(it){ return state.work === it.k; },
-    function(it){ state.work = it.k; render(); save(); });
+    function(it){ state.work = it.k; render(); save(); autoNext(1, 650); });
     var w = WORK.filter(function(x){ return x.k === state.work; })[0];
     $("workNote").innerHTML = w ? "<b>" + w.eff + "% billable.</b> " + w.note
       : "Tap the one you're pricing.";
@@ -1393,7 +1408,8 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
       return {t: v + (v === 4 ? "+ vans" : (v === 1 ? " van" : " vans")),
               art:"van", v:v, n: commas(hoursPerVan()*v) + " hrs"};
     }), function(it){ return num(state.vans) === it.v; },
-    function(it){ state.vans = it.v; render(); save(); });
+    function(it){ state.vans = it.v; render(); save();
+      if(!state.rev) glideTo("revChips"); else if(!state.team) glideTo("teamChips"); else autoNext(2); });
 
     var h = hoursPerVan() * num(state.vans);
     $("hoursVal").textContent = commas(h);
@@ -1439,6 +1455,8 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
       if(it.v === 0) state.margin = 0;
       else if(!num(state.margin)) state.margin = 5;
       render(); save();
+      /* keep them reading the payoff line, not hunting for what's next */
+      if(it.v === 0) glideTo("signNote"); else glideTo("magWrap");
     });
 
     var mg = marginFrac();
@@ -1453,7 +1471,7 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
         : [[2,"thin"],[5,"decent"],[10,"healthy"],[20,"strong"]];
       buildChips($("magChips"), bands,
         function(b){ return num(state.margin) === b[0]; },
-        function(b){ state.margin = b[0]; render(); save(); },
+        function(b){ state.margin = b[0]; render(); save(); glideTo("signNote"); },
         function(b){ return b[0] + "% — " + b[1]; });
     }
 
@@ -1942,9 +1960,11 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
   var TEAM = [["1","Just me"],["2-3","2–3"],["4-6","4–6"],["7-10","7–10"],["11+","11+"]];
   function drawSize(){
     buildChips($("revChips"), REV, function(r){ return state.rev === r[0]; },
-      function(r){ state.rev = r[0]; render(); save(); }, function(r){ return r[1]; });
+      function(r){ state.rev = r[0]; render(); save();
+        if(!state.team) glideTo("teamChips"); else autoNext(2); }, function(r){ return r[1]; });
     buildChips($("teamChips"), TEAM, function(r){ return state.team === r[0]; },
-      function(r){ state.team = r[0]; render(); save(); }, function(r){ return r[1]; });
+      function(r){ state.team = r[0]; render(); save();
+        if(state.rev) autoNext(2); else glideTo("revChips"); }, function(r){ return r[1]; });
     $("sizeAsk").hidden = !!(state.rev && state.team);
   }
 
@@ -1953,7 +1973,12 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
      https://<project-ref>.supabase.co/functions/v1/capture-lead
      Left empty, nothing is sent and the gate unlocks locally (preview mode). */
   var LEAD_ENDPOINT = "https://jxywghplxowytqwdsjyu.supabase.co/functions/v1/capture-lead";
-  var TOOL = "required-rate", TOOL_VERSION = "2026-10-18";
+  var TOOL = "required-rate", TOOL_VERSION = "2026-10-19";
+  /* strategy-call link — the Book-a-call button on the result card hides until this is set */
+  var BOOKING_URL = "";
+  /* flips on once GHL (or another sender) can actually email the results; until then the
+     button stays hidden so we never promise an email that won't arrive */
+  var RESULTS_EMAIL = false;
 
   function uuid(){
     try{ if(window.crypto && crypto.randomUUID) return crypto.randomUUID(); }catch(e){}
@@ -2004,17 +2029,13 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
     }catch(e){ return Promise.resolve({ok:false}); }
   }
 
-  var F = ["fFirst","fLast","fEmail","fPhone","fCompany","fCity","fRegion"];
+  var F = ["fFirst","fEmail","fPhone"];
   function drawGate(){
-    var unlocked = !!state.unlocked;
-    $("leadForm").hidden = unlocked;
-    $("p1Reveal").hidden = !unlocked;
-    var m = multiplier();
-    $("p1Tease").textContent = m === null ? "000.00" : (num(state.curRate)*m).toFixed(2);
+    $("leadForm").hidden = !!state.unlocked;
     if(state.lead && !$("leadForm").dataset.filled){
       var L = state.lead;
-      [["fFirst",L.first_name],["fLast",L.last_name],["fEmail",L.email],["fPhone",L.phone],
-       ["fCompany",L.company],["fCity",L.city],["fRegion",L.region]].forEach(function(p){ if(p[1]) $(p[0]).value = p[1]; });
+      [["fFirst",L.first_name],["fEmail",L.email],["fPhone",L.phone]]
+        .forEach(function(p){ if(p[1]) $(p[0]).value = p[1]; });
       $("fConsent").checked = !!L.consent;
       $("leadForm").dataset.filled = "1";
     }
@@ -2026,23 +2047,21 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
   F.forEach(function(id){ $(id).addEventListener("input", function(){ this.removeAttribute("aria-invalid"); $("fErr").hidden = true; }); });
   $("leadForm").addEventListener("submit", function(e){
     e.preventDefault();
-    if($("fWebsite").value){ state.unlocked = true; render(); save(); return; } /* bot: pretend */
+    if($("fWebsite").value){ state.unlocked = true; render(); save(); go(1); return; } /* bot: pretend */
     var v = function(id){ return $(id).value.trim(); };
-    var labels = {fFirst:"your first name", fLast:"your last name", fEmail:"your email", fPhone:"your mobile number",
-      fCompany:"your company name", fCity:"your city", fRegion:"your state or province"};
-    for(var i = 0; i < F.length; i++){ if(!v(F[i])) return formErr("Add " + labels[F[i]] + " to unlock your rate.", F[i]); }
+    var labels = {fFirst:"your first name", fEmail:"your email", fPhone:"your mobile number"};
+    for(var i = 0; i < F.length; i++){ if(!v(F[i])) return formErr("Add " + labels[F[i]] + " to get started.", F[i]); }
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v("fEmail"))) return formErr("That email doesn't look right. Check it and try again.", "fEmail");
     if(v("fPhone").replace(/\D/g,"").length < 10) return formErr("Enter your mobile with the area code.", "fPhone");
-    state.lead = {first_name:v("fFirst"), last_name:v("fLast"), email:v("fEmail").toLowerCase(), phone:v("fPhone"),
-      company:v("fCompany"), city:v("fCity"), region:v("fRegion"), consent:$("fConsent").checked,
+    state.lead = {first_name:v("fFirst"), email:v("fEmail").toLowerCase(), phone:v("fPhone"),
+      consent:$("fConsent").checked,
       consent_text:$("fConsent").parentNode.textContent.trim(), consent_at:new Date().toISOString()};
-    $("fSubmit").disabled = true; $("fSubmit").textContent = "Unlocking…";
+    $("fSubmit").disabled = true; $("fSubmit").textContent = "Starting…";
     send("lead").then(function(r){
       state.sent.lead = !!r.ok;
       if(!r.ok) state.sent.leadRetry = true;   /* never block the owner; retry on the next card */
-      state.unlocked = true; $("fSubmit").disabled = false; $("fSubmit").textContent = "Show my Phase 1 rate";
-      render(); save();
-      try{ $("p1Reveal").scrollIntoView({behavior:"smooth", block:"start"}); }catch(err){}
+      state.unlocked = true; $("fSubmit").disabled = false; $("fSubmit").textContent = "Start — find my rate";
+      save(); go(1);
     });
   });
 
@@ -2061,14 +2080,16 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
       dots.children[j].className = j === state.step ? "now" : (j < state.step ? "done" : "");
     }
     $("backBtn").style.visibility = state.step === 0 ? "hidden" : "visible";
+    /* before the welcome form is in, the form's own button is the only way forward */
+    $("nextBtn").style.display = (state.step === 0 && !state.unlocked) ? "none" : "";
     $("nextBtn").textContent = state.step === 0 ? "Start"
       : (state.step === LAST ? "Start over" : "Next");
 
-    var blocked = (state.step === 1 && !state.work)
+    var blocked = (state.step === 0 && !state.unlocked)
+               || (state.step === 1 && !state.work)
                || (state.step === 2 && !(state.rev && state.team))
-               || (state.step === 4 && state.sign === null)
-               || (state.step === 7 && !state.unlocked);
-    if(state.step === 7 && state.unlocked) $("nextBtn").textContent = "Start Phase 2";
+               || (state.step === 4 && state.sign === null);
+    if(state.step === 7) $("nextBtn").textContent = "Start Phase 2";
     $("nextBtn").disabled = blocked;
 
     var rt = $("runTot");
@@ -2121,6 +2142,19 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;
       state.exact = wantExact; render(); save();
     });
   });
+
+  /* end-of-tool CTAs — each stays hidden until its config above is filled in */
+  if(BOOKING_URL){
+    var bc = $("bookCallBtn"); bc.href = BOOKING_URL; bc.hidden = false;
+    bc.addEventListener("click", function(){ send("book_call_clicked"); });
+  }
+  if(RESULTS_EMAIL){
+    var er = $("emailResultsBtn"); er.hidden = false;
+    er.addEventListener("click", function(){
+      send("email_results_requested");
+      er.disabled = true; er.textContent = "On its way — check your inbox";
+    });
+  }
 
   $("themeBtn").addEventListener("click", function(){
     var r = document.documentElement, cur = r.getAttribute("data-theme");
