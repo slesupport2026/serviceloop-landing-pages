@@ -75,3 +75,6 @@
 
 # SPA fallback for 1mplaybook React app
 /1mplaybook/*  /1mplaybook/index.html  200
+
+# SPA fallback for Service GRID React app
+/grid/*  /grid/index.html  200
