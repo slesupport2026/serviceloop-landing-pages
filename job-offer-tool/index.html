@@ -679,6 +679,9 @@ const SECTIONS = [
    sg:"Full embodiment of our culture principles is a condition of continued employment.\nAny conduct that damages client relationships, misrepresents our services or pricing, or violates the trust of ownership is grounds for immediate termination.\nAll confidential information including pricing models, client lists, KPI data, compensation structures, and internal systems is the exclusive property of the company and may not be disclosed externally."},
   {k:"nonsolicit", l:"Non-solicitation period (months)", ty:"num", ph:"12", w:"half",
    h:"Leave blank to omit this clause entirely."},
+  {k:"probation", l:"90-day proving period", ty:"ta",
+   h:"Both directions, in plain words: either side can walk during the first 90 days.",
+   sg:"The first 90 days are a mutual proving period. During this time, either of us can end this relationship simply, without cause and without hard feelings — you can walk, and so can we. That is exactly what the 30/60/90 checkpoints are for: nobody gets surprised in either direction. After the proving period, employment continues on an at-will basis."},
   {k:"atwill", l:"At-will statement", ty:"ta",
    sg:"Employment with the company is at-will. Either party may end the employment relationship at any time, with or without cause and with or without notice. Nothing in this offer letter creates a contract of employment for a fixed term."},
   {k:"pledge", l:"Your commitment back to them", ty:"ta",
@@ -1492,6 +1495,8 @@ function render(){
   ${ul(D.triggers,"Review triggers")}
   <h3>Conduct, confidentiality, and non-solicitation</h3>
   <ul>${lines(D.conduct).map(x=>`<li>${esc(x)}</li>`).join("")||`<li>${TODO("Conduct and confidentiality terms")}</li>`}${nsClause}</ul>
+  <h3>The 90-day proving period</h3>
+  ${para(D.probation,"90-day proving period — either side can walk")}
   <h3>At-will employment</h3>
   ${para(D.atwill,"At-will statement")}
   <p>Our commitment to ${first?esc(first):"you"} is equally firm:</p>
@@ -1686,7 +1691,7 @@ document.addEventListener("drop", e=>{
    read other members' offers with this key. See supabase/schema.sql.
    ============================================================ */
 const BACKEND = { supabaseUrl: "https://jxywghplxowytqwdsjyu.supabase.co", supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0", table: "offer_letters" };
-const APP_VERSION = "2026.10.2";
+const APP_VERSION = "2026.10.3";
 const backendOn = () => !!(BACKEND.supabaseUrl && BACKEND.supabaseAnonKey);
 
 let DRAFT_ID = (()=>{
