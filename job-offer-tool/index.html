@@ -23,8 +23,8 @@
     --amber:#16567A; --amber-wash:#FBF4E1; --amber-bright:#FCC23D;
     --done:#1F7A55;
     --shadow:0 1px 2px rgba(10,10,10,.05), 0 10px 26px -14px rgba(27,42,69,.28);
-    --display:"Antonio",Oswald,"Arial Narrow",sans-serif;
-    --head:"Antonio",Oswald,"Arial Narrow",sans-serif;
+    --display:"Nunito",system-ui,sans-serif;
+    --head:"Nunito",system-ui,sans-serif;
     --sans:"Nunito",system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
     --mono:var(--head);
     --serif:var(--display);
@@ -66,11 +66,11 @@
             padding:9px clamp(16px,3vw,28px);display:flex;align-items:center;
             gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:30;min-height:70px}
   .brand{display:flex;align-items:center;gap:14px;margin-right:auto;min-width:0}
-  .brand img{height:50px;width:auto;display:block;flex:none}
+  .brand img{height:50px;width:auto;display:block;flex:none;filter:drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff)}
   .brand .txt{display:flex;flex-direction:column;gap:1px;min-width:0}
   .brand .mk{font-family:var(--head);font-size:10.5px;font-weight:700;letter-spacing:.18em;
              text-transform:uppercase;color:var(--sle-gold)}
-  .brand h1{font-family:var(--display);text-transform:uppercase;font-size:21px;font-weight:600;letter-spacing:-.005em;color:#fff;line-height:1.15}
+  .brand h1{font-family:"Antonio",Oswald,sans-serif;text-transform:uppercase;font-size:21px;font-weight:600;letter-spacing:-.005em;color:#fff;line-height:1.15}
   .brand span.tag{font-size:12.5px;color:#C3CFE2}
   .tools{display:flex;gap:8px;flex-wrap:wrap}
   .btn{border:1px solid var(--rule);background:var(--panel);border-radius:999px;
@@ -121,7 +121,7 @@
   .snum{font-family:var(--head);font-weight:700;font-size:12px;letter-spacing:.06em;color:var(--accent);
         padding-top:4px;font-variant-numeric:tabular-nums}
   .stitle{flex:1;min-width:0}
-  .stitle h2{font-family:var(--display);text-transform:uppercase;font-size:19px;font-weight:600;letter-spacing:-.005em;line-height:1.25}
+  .stitle h2{font-family:var(--display);font-weight:800;font-size:19px;font-weight:600;letter-spacing:-.005em;line-height:1.25}
   .stitle p{margin:4px 0 0;font-size:13px;color:var(--ink-3);line-height:1.45}
   .scount{font-family:var(--head);font-weight:600;font-size:11px;color:var(--ink-3);
           background:var(--rule-soft);border-radius:20px;padding:3px 10px;white-space:nowrap}
@@ -185,7 +185,7 @@
   #doc .dhead .co{font-family:var(--head);font-weight:700;font-size:15px;
                   letter-spacing:.08em;text-transform:uppercase}
   #doc .dhead .meta{font-family:var(--head);font-weight:500;font-size:11px;color:var(--ink-3);margin-top:5px;letter-spacing:.02em}
-  #doc h1{font-family:var(--display);text-transform:uppercase;font-size:30px;font-weight:600;letter-spacing:-.01em;margin:0 0 2px;line-height:1.2}
+  #doc h1{font-family:var(--display);font-weight:800;font-size:30px;font-weight:600;letter-spacing:-.01em;margin:0 0 2px;line-height:1.2}
   #doc .sub{font-family:var(--head);font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#16567A;margin-bottom:18px}
   #doc .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
               gap:4px 26px;font-family:var(--sans);font-size:12.6px;
@@ -193,7 +193,7 @@
               padding:13px 0;margin-bottom:22px}
   #doc .facts div{display:flex;gap:7px}
   #doc .facts b{font-family:var(--head);color:var(--ink-3);font-weight:600;min-width:94px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px}
-  #doc h2{font-family:var(--display);text-transform:uppercase;font-size:20px;font-weight:600;letter-spacing:-.005em;
+  #doc h2{font-family:var(--display);font-weight:800;font-size:20px;font-weight:600;letter-spacing:-.005em;
           margin:30px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule);
           background:linear-gradient(#FCC23D,#FCC23D) left bottom/76px 3px no-repeat}
   #doc h3{font-family:var(--head);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:18px 0 6px;
@@ -210,7 +210,7 @@
   #doc td{padding:8px 10px;border:1px solid var(--rule);vertical-align:top}
   #doc tbody tr:nth-child(even) td{background:#FCFAF5}
   #doc .pledge{border-left:3px solid #FCC23D;background:#FBF7EC;padding:12px 16px;
-               margin:14px 0;font-family:var(--display);text-transform:uppercase;font-size:15px;color:var(--ink-2)}
+               margin:14px 0;font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink-2)}
   #doc .sigs{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:30px}
   #doc .sig{font-family:var(--sans);font-size:12.4px}
   #doc .sig .lbl{font-family:var(--head);font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
@@ -260,7 +260,7 @@
                 linear-gradient(90deg,rgba(252,194,61,0),rgba(252,194,61,.08) 60%,rgba(252,194,61,0))}
   .intro-hero::after{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(180deg,#CE2F29 0 20%,#B9531C 20% 40%,#F25E22 40% 60%,#FDA016 60% 80%,#FCC23D 80% 100%)}
   .kicker{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FCC23D}
-  .intro-hero h2{font-family:var(--display);text-transform:uppercase;font-weight:600;font-size:clamp(28px,4.6vw,44px);
+  .intro-hero h2{font-family:var(--display);font-weight:800;font-weight:600;font-size:clamp(28px,4.6vw,44px);
                  line-height:1.1;margin:10px 0 12px;color:#fff;max-width:18ch}
   .intro-hero p{color:#C3CFE2;max-width:58ch;margin:0 0 20px;font-size:15.5px}
   .steps{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
@@ -269,7 +269,7 @@
   .sn{flex:none;width:40px;height:40px;border-radius:50%;background:#FCC23D;color:#0F1629;
       font-family:var(--head);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center}
   .sc{flex:1;min-width:0}
-  .sc h3{font-family:var(--display);text-transform:uppercase;font-weight:600;font-size:22px;line-height:1.25;margin:5px 0 8px}
+  .sc h3{font-family:var(--display);font-weight:800;font-weight:600;font-size:22px;line-height:1.25;margin:5px 0 8px}
   .opt{font-family:var(--head);font-style:normal;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
        color:var(--accent);background:var(--accent-wash);border-radius:20px;padding:3px 9px;vertical-align:middle;margin-left:6px;white-space:nowrap}
   .sc p,.sc li{color:var(--ink-2);font-size:14.5px}
@@ -301,7 +301,7 @@
         scroll-margin-top:130px;
         background-image:linear-gradient(135deg,transparent 0 70%,rgba(252,194,61,.08) 70% 70.5%,transparent 70.5%)}
   .calc::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(180deg,#CE2F29 0 20%,#B9531C 20% 40%,#F25E22 40% 60%,#FDA016 60% 80%,#FCC23D 80% 100%)}
-  .calc h3{font-family:var(--display);text-transform:uppercase;font-weight:600;font-size:clamp(20px,2.4vw,24px);line-height:1.2;margin:6px 0 8px;color:#fff}
+  .calc h3{font-family:var(--display);font-weight:800;font-weight:600;font-size:clamp(20px,2.4vw,24px);line-height:1.2;margin:6px 0 8px;color:#fff}
   .calc-lede{margin:0 0 18px;color:#C3CFE2;font-size:14px;line-height:1.55}
   .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 22px}
   .cfield{display:flex;flex-direction:column;gap:6px}
@@ -369,7 +369,7 @@
   .toast.bad{border-color:#FCC23D;color:#FCC23D}
   body.dropping::after{content:"Drop your saved draft to open it";position:fixed;inset:12px;z-index:70;
          display:flex;align-items:center;justify-content:center;border:2px dashed #FCC23D;border-radius:14px;
-         background:rgba(10,10,10,.82);color:#FCC23D;font-family:var(--display);text-transform:uppercase;font-size:26px}
+         background:rgba(10,10,10,.82);color:#FCC23D;font-family:var(--display);font-weight:800;font-size:26px}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -452,7 +452,7 @@
           <tr><th><span class="chip">Print / PDF</span></th><td>Opens your browser's print window. Choose <i>Save as PDF</i> for a PDF to send, or print it on paper for signatures.</td></tr>
         </table>
         <p class="fine">This page also remembers your answers on this browser automatically. A saved draft file is what lets you switch computers or keep one draft per candidate.</p>
-        <p class="fine" id="backendNote" hidden>When you save, download, or print, a copy of the offer is stored securely with Service Loop Electrical so our team can review it with you and support the hire.</p>
+        <p class="fine" id="backendNote" hidden>When you save, download, or print, a copy of the offer is stored securely so our team can review it with you and support the hire. Powered by SLE.</p>
       </div>
     </li>
   </ol>
