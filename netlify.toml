@@ -1,0 +1,27 @@
+# Netlify configuration for serviceloop-landing-pages.
+#
+# Added Oct 2026 for the password-gated /FAQs review page. Everything else in
+# this repo stays a plain public static page — nothing here changes how the
+# existing landing pages build or deploy.
+
+# Deliberately no [build] block — the site's existing publish settings in the
+# Netlify UI stay exactly as they are. This file only adds the /FAQs gate.
+
+# /FAQs is gated by an edge function. The password lives in the FAQ_PASSWORD
+# environment variable (Site configuration → Environment variables), never in
+# this repo. The function fails closed if that variable is missing.
+[[edge_functions]]
+  function = "faq-gate"
+  path = "/FAQs"
+
+[[edge_functions]]
+  function = "faq-gate"
+  path = "/FAQs/*"
+
+# Belt and braces: even though the edge function blocks unauthenticated
+# requests, tell crawlers not to index or archive anything under /FAQs.
+[[headers]]
+  for = "/FAQs/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Cache-Control = "no-store"

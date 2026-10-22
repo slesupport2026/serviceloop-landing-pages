@@ -75,8 +75,16 @@
 
 # SPA fallback for 1mplaybook React app
 /1mplaybook/*  /1mplaybook/index.html  200
-
 # SPA fallback for Service GRID React app
 /grid/*  /grid/index.html  200
 # SPA fallback for Post-Call Facts React app
 /facts/*  /facts/index.html  200
+
+# ==============================================================
+# FAQ ANSWERS - go.serviceloopelectrical.com/FAQs
+# ==============================================================
+# Lives at /FAQs/. These just catch the lowercase spellings.
+# NOTE: /facts/ is the Post-Call Facts app, nothing to do with FAQs.
+/faqs     /FAQs/  301
+/faq      /FAQs/  301
+/faqs/*   /FAQs/  301

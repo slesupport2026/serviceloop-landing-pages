@@ -1,0 +1,1622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>SLE FAQ — Top 50 Answers (internal review)</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#0D0D0D; --surface:#161616; --surface2:#1E1E1E; --line:#2C2C2C;
+  --gold:#C9A45A; --gold-br:#E8C97A; --cream:#F5F0E6;
+  --text:#E8E8E8; --muted:#9A9A9A; --flag:#E07A5F;
+}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.65;overflow-x:hidden}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+a{color:var(--gold-br)}
+
+header{border-bottom:1px solid var(--line);padding:44px 0 32px;margin-bottom:0}
+.eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:14px}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 18px;
+  color:#fff;font-weight:800;letter-spacing:-.02em}
+h1 .accent{color:var(--gold);font-style:italic;font-weight:700}
+.lede{font-size:17px;color:var(--muted);max-width:62ch;margin:0 0 22px}
+.lede strong{color:var(--cream)}
+
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  padding:10px 16px;min-width:96px}
+.stat b{display:block;font-size:22px;color:var(--gold);line-height:1.2;font-weight:800}
+.stat span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.notice{margin:26px 0 0;padding:14px 18px;background:rgba(224,122,95,.08);
+  border-left:3px solid var(--flag);border-radius:4px;font-size:14px;color:var(--cream)}
+
+/* toolbar */
+.toolbar{position:sticky;top:0;z-index:20;background:rgba(13,13,13,.96);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px 0}
+.search{width:100%;background:var(--surface);border:1px solid var(--line);
+  border-radius:6px;color:var(--text);padding:11px 14px;font-size:15px;
+  font-family:inherit}
+.search:focus{outline:none;border-color:var(--gold)}
+.search::placeholder{color:#6a6a6a}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.chip{background:var(--surface);border:1px solid var(--line);color:var(--muted);
+  border-radius:999px;padding:5px 13px;font-size:12.5px;cursor:pointer;
+  font-family:inherit;letter-spacing:.02em}
+.chip:hover{border-color:#444;color:var(--text)}
+.chip[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);
+  color:#111;font-weight:700}
+.count{font-size:12.5px;color:var(--muted);margin-top:11px}
+
+h2.sec{font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin:40px 0 4px}
+.sec-note{font-size:14px;color:var(--muted);margin:0 0 18px}
+
+/* needs-input index */
+.gaps{border:1px solid var(--line);border-left:3px solid var(--flag);
+  border-radius:8px;overflow:hidden;margin-bottom:8px}
+.grow{display:flex;gap:12px;align-items:baseline;padding:11px 16px;
+  text-decoration:none;color:var(--text);border-bottom:1px solid var(--line);
+  font-size:14.5px}
+.grow:last-child{border-bottom:0}
+.grow:hover{background:var(--surface2)}
+.grank{flex:0 0 auto;color:var(--flag);font-weight:800;font-size:12px;min-width:20px}
+.gq{flex:1 1 auto;min-width:0}
+.gwho{flex:0 0 auto;color:var(--gold);font-size:12px;font-weight:700}
+.gn{flex:0 0 auto;color:var(--muted);font-size:12px;min-width:34px;text-align:right}
+@media(max-width:560px){.gwho{display:none}}
+
+/* cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  scroll-margin-top:130px;
+  margin-bottom:12px;overflow:hidden}
+.card.flag{border-left:3px solid var(--flag)}
+.card.hide{display:none}
+.chead{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;
+  cursor:pointer;user-select:none}
+.chead:hover{background:var(--surface2)}
+.rank{flex:0 0 auto;font-size:12px;font-weight:800;color:var(--gold);
+  background:rgba(201,164,90,.12);border-radius:5px;padding:4px 8px;min-width:34px;
+  text-align:center;margin-top:2px}
+.qh{flex:1 1 auto;min-width:0}
+.q{font-size:16.5px;font-weight:650;color:#fff;line-height:1.4}
+.meta{font-size:12px;color:var(--muted);margin-top:7px;
+  display:flex;flex-wrap:wrap;gap:4px 12px}
+.meta .asked{color:var(--gold-br);font-weight:700}
+.meta .need{color:var(--flag);font-weight:700;letter-spacing:.05em}
+.caret{flex:0 0 auto;color:var(--muted);font-size:13px;margin-top:4px;
+  transition:transform .15s}
+.card[open] .caret{transform:rotate(90deg)}
+
+.short{padding:0 18px 16px 66px;font-size:15px;color:var(--cream);
+  border-top:1px solid transparent}
+@media(max-width:620px){.short{padding-left:18px}}
+
+.body{padding:4px 18px 20px 66px;border-top:1px solid var(--line);margin-top:2px;
+  display:none}
+.card[open] .body{display:block}
+@media(max-width:620px){.body{padding-left:18px}}
+.body p{margin:0 0 13px}
+.body ul,.body ol{margin:0 0 13px;padding-left:22px}
+.body li{margin-bottom:6px}
+.body strong{color:var(--cream)}
+.body hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+.body blockquote{margin:0 0 14px;padding:11px 16px;background:var(--surface2);
+  border-left:3px solid var(--gold);border-radius:0 4px 4px 0;color:var(--cream);
+  font-size:15px}
+.body code{background:var(--surface2);padding:2px 5px;border-radius:3px;
+  font-size:13.5px;color:var(--gold-br)}
+.tw{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch}
+.body table{border-collapse:collapse;width:100%;font-size:14px;min-width:380px}
+.body th,.body td{border:1px solid var(--line);padding:8px 11px;text-align:left;
+  vertical-align:top}
+.body th{background:var(--surface2);color:var(--gold);font-size:12px;
+  letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+.src{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:12px;color:#777;line-height:1.5}
+.src b{color:var(--muted);font-weight:600}
+
+.empty{padding:40px 0;text-align:center;color:var(--muted);display:none}
+footer{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 60px;
+  font-size:13px;color:#6a6a6a}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Internal review · not for partners</div>
+    <h1>The 50 Questions Electricians <span class="accent">Actually</span> Ask Us</h1>
+    <p class="lede">Drafted answers to the 50 most-asked questions in the SLE question
+      bank — <strong>1,026 of 6,068 recorded askings</strong> mined from Circle,
+      Notion, Grain and Fathom 1:1s between Jan 2023 and Oct 2026.
+      Every answer is built from existing SLE material only: the Electricpreneur
+      Playbook, the $1M Service Playbook, the $1M+ Offers teaching content, Joseph's
+      Salesbot DNA and the Brand Bible. <strong>Nothing is invented.</strong></p>
+    <div class="stats">
+      <div class="stat"><b>50</b><span>Questions</span></div>
+      <div class="stat"><b>42</b><span>Drafted</span></div>
+      <div class="stat"><b>8</b><span>Need input</span></div>
+      <div class="stat"><b>1,026</b><span>Askings</span></div>
+    </div>
+    <p class="notice"><strong>These are unreviewed drafts.</strong> Nothing here is
+      client-facing until Clay signs it off. The 8 flagged below are questions
+      where SLE has no documented position — they say what they need rather than
+      guessing at one.</p>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="wrap">
+    <input id="q" class="search" type="search" autocomplete="off"
+           placeholder="Search questions, topics, owners…">
+    <div class="chips">
+      <button class="chip" data-k="status" data-v="needs_input" aria-pressed="false">Needs input</button><button class="chip" data-k="status" data-v="draft" aria-pressed="false">Drafted</button><button class="chip" data-k="owner" data-v="Clay" aria-pressed="false">Clay</button><button class="chip" data-k="owner" data-v="Forrest" aria-pressed="false">Forrest</button><button class="chip" data-k="owner" data-v="Joseph" aria-pressed="false">Joseph</button><button class="chip" data-k="owner" data-v="Rayna" aria-pressed="false">Rayna</button>
+      <button class="chip" id="expand" style="margin-left:auto">Expand all</button>
+    </div>
+    <div class="count" id="count"></div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <h2 class="sec">Needs your input first</h2>
+  <p class="sec-note">No documented SLE position exists for these 8. Each one
+    says exactly what's missing and who it's for — tap to jump to it.</p>
+  <div class="gaps"><a class="grow" href="#q14"><span class="grank">14</span><span class="gq">Is tonight's class on, and where is the link to join it?</span><span class="gwho">Rayna</span><span class="gn">22×</span></a><a class="grow" href="#q27"><span class="grank">27</span><span class="gq">How do I get my team members added to SLE, and how many can I bring in?</span><span class="gwho">Clay</span><span class="gn">15×</span></a><a class="grow" href="#q32"><span class="grank">32</span><span class="gq">Which CRM should I use for my business?</span><span class="gwho">Clay</span><span class="gn">15×</span></a><a class="grow" href="#q36"><span class="grank">36</span><span class="gq">Why aren't my Google Local Services Ads generating leads?</span><span class="gwho">Forrest</span><span class="gn">14×</span></a><a class="grow" href="#q40"><span class="grank">40</span><span class="gq">How do I get my van/truck inventory and material ordering under control so it doesn't waste time or money?</span><span class="gwho">Clay</span><span class="gn">13×</span></a><a class="grow" href="#q42"><span class="grank">42</span><span class="gq">How should I structure and price options for an EV charger install?</span><span class="gwho">Joseph</span><span class="gn">13×</span></a><a class="grow" href="#q44"><span class="grank">44</span><span class="gq">How can I use AI or tools/templates to build sales options faster?</span><span class="gwho">Joseph</span><span class="gn">12×</span></a><a class="grow" href="#q50"><span class="grank">50</span><span class="gq">Should I upgrade to a higher membership tier, and can I afford it?</span><span class="gwho">Clay</span><span class="gn">12×</span></a></div>
+
+  <h2 class="sec">All 50, by how often they're asked</h2>
+  <p class="sec-note">Tap any question to open the full answer and its sources.</p>
+  <article class="card" id="q1"
+  data-owner="Joseph" data-status="draft"
+  data-search="what do i say when a customer wants the quote or options emailed over instead of deciding in person? objection handling joseph don&#x27;t fight it and don&#x27;t refuse it. move the conversation to their timeline, then ask which option they&#x27;d like emailed — that turns a stall into a decision.">
+  <div class="chead">
+    <div class="rank">1</div>
+    <div class="qh">
+      <div class="q">What do I say when a customer wants the quote or options emailed over instead of deciding in person?</div>
+      <div class="meta"><span class="asked">Asked 89×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2023-09-13 – 2026-10-15</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Don't fight it and don't refuse it. Move the conversation to their timeline, then ask which option they'd like emailed — that turns a stall into a decision.</div>
+  <div class="body">
+    <p><strong>The mistake:</strong> arguing about email. You can't win that, and you look like you're hiding something.</p>
+<p><strong>What to do instead — two moves.</strong></p>
+<p><strong>1. Redirect to their date, not yours.</strong></p>
+<blockquote>"Just so I know how to serve you best — when were you hoping to have all this taken care of?"</blockquote>
+<p>Ask when they want it <em>done</em>, never when they're finishing their proposals. Their timeline is a real conversation. Your competitors' timeline is not your business and asking about it benefits you, not them.</p>
+<p><strong>2. Ask which one.</strong></p>
+<p>If you've presented six options, "email it over" has an easy answer:</p>
+<blockquote>"Absolutely — which option would you like me to email you?"</blockquote>
+<p>That single question forces clarity. They either name one, which means you're closing, or they admit they haven't decided, which puts you back in a conversation.</p>
+<p><strong>Why in person matters, and how to say it.</strong> The presentation is part of what they're buying:</p>
+<blockquote>"We are providing a service. The before is the design of the options and the presentation. The during is the work. The after is the follow-up and the warranty. It's a whole experience — if you take away part of the experience, you're not getting everything you paid for."</blockquote>
+<p>You can say that to them, out loud, exactly that way.</p>
+<p><strong>If the job genuinely isn't scoped yet,</strong> don't guess on paper. Book the evaluation:</p>
+<blockquote>"Let's schedule a time where I'm at your home for a few hours. I'll do a thorough evaluation and have your options designed and ready to present. This way we're not guessing — we're building you something custom."</blockquote>
+<p><strong>The root cause.</strong> Most "email it over" requests happen because one price was presented. One choice is no choice — it's an ultimatum, and email is how a homeowner escapes an ultimatum politely. Six options removes the reason to ask.</p>
+    <div class="src"><b>Drafted from:</b> Salesbot DNA §3 'Can You Just Email Me the Quote?'; Multiplier webinar pt.11; Playbook ch.9 two-step presentation</div>
+  </div>
+</article><article class="card" id="q2"
+  data-owner="Joseph" data-status="draft"
+  data-search="what do i say when a customer tells me my price is too high? objection handling joseph acknowledge it without apologising, reframe onto what they&#x27;re actually buying, then ask again. never discount before they ask, and never discount first.">
+  <div class="chead">
+    <div class="rank">2</div>
+    <div class="qh">
+      <div class="q">What do I say when a customer tells me my price is too high?</div>
+      <div class="meta"><span class="asked">Asked 61×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2023-11-02 – 2026-10-01</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Acknowledge it without apologising, reframe onto what they're actually buying, then ask again. Never discount before they ask, and never discount first.</div>
+  <div class="body">
+    <p>Price objections are usually surprise, not inability. Most homeowners have no idea what it costs to run a licensed electrical business.</p>
+<p><strong>The framework: Acknowledge → Reframe → Ask Again.</strong></p>
+<p><strong>Acknowledge.</strong> Don't flinch and don't defend:</p>
+<blockquote>"I understand this may be more than you were expecting."</blockquote>
+<p><strong>Reframe onto value, not parts:</strong></p>
+<blockquote>"What you're paying for is reliability, safety, and the peace of mind that the job is done right the first time."</blockquote>
+<p>Expand into the before, during and after — the evaluation, the design, the presentation, the workmanship, the warranty, the follow-up. That's the product. The wire is not the product.</p>
+<p><strong>Ask again.</strong> Go back to the options. You have six for exactly this reason:</p>
+<blockquote>"Which of these feels like the right fit for your home?"</blockquote>
+<p><strong>Two things to never do.</strong></p>
+<ol><li><strong>Never discount before they ask.</strong> #STYO — Stick To Your Offer. An unconfident price sounds like an apology, and an apology sounds like incompetence.</li><li><strong>Never devalue the service to justify the number.</strong> If you talk your own work down, they'll believe you.</li></ol>
+<p><strong>The internal version of this objection is the real one.</strong> If <em>you</em> don't believe your price, the homeowner hears it in your tone before they hear the number. Two questions to settle it:</p>
+<blockquote>"If you weren't an electrician, would you hire this company at full price to help with a safety concern?"<br>"So why do you think other people hire us then?"</blockquote>
+<p><strong>And remember the pattern.</strong> Once you've charged your true rate a few times and people keep saying yes, the shock fades. The same customer who thought $30/hr was too high will hire you at $300/hr once they trust the experience.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.25 'Price Shock'; Salesbot DNA §3 'That's More Than I Expected'; ACDC ch.5 Acknowledge-Reframe-Ask Again</div>
+  </div>
+</article><article class="card" id="q3"
+  data-owner="Forrest" data-status="draft"
+  data-search="how do i generate more leads when my lead flow is low or inconsistent? marketing &amp; lead gen forrest run three lead engines at once — paid, organic and referral — and fix speed-to-lead first. the first company to call back wins 78% of the time.">
+  <div class="chead">
+    <div class="rank">3</div>
+    <div class="qh">
+      <div class="q">How do I generate more leads when my lead flow is low or inconsistent?</div>
+      <div class="meta"><span class="asked">Asked 58×</span><span>Marketing &amp; Lead Gen</span><span>partner</span><span>Forrest</span><span>2023-06-16 – 2025-11-14</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Run three lead engines at once — paid, organic and referral — and fix speed-to-lead first. The first company to call back wins 78% of the time.</div>
+  <div class="body">
+    <p>Inconsistent lead flow is almost always a one-engine problem. Most electricians either spend everything on ads and pray, or live on word-of-mouth and hope. Neither is a business model.</p>
+<p><strong>Run three engines at the same time.</strong> When one slows, the others carry.</p>
+<p><strong>Engine 1 — Paid (fast, controllable, costs money).</strong></p>
+<ul><li>Google Local Service Ads — top of "electrician near me." Google rewards fast response.</li><li>Meta ads — post organic video first, find what performs, then put spend behind the proven posts.</li><li>Lead aggregators (Angi, Thumbtack) — good training ground for speed-to-lead. Dorian Hayes turned a $24 Angi lead into $66,700 because his system was good, not because the lead was.</li></ul>
+<p><strong>Engine 2 — Organic (slow start, compounds forever).</strong></p>
+<ul><li>Facebook personal profile, 4–5 posts a week. Most work and most hires come from second- and third-degree connections.</li><li>Google Business Profile, complete, with photos. Target 100 reviews to start, then 1,000.</li><li>SEO — a marathon. Start now, stay consistent.</li></ul>
+<p><strong>Engine 3 — Referral (highest quality, most ignored).</strong></p>
+<ul><li>Van wraps, 5 door hangers at every job, a yard sign at every completed job, photos and a review ask every time.</li><li><strong>Database reactivation</strong> — your best lead source is already in your phone. Work unsold leads up to 10 times before you close the file. They're waiting for help, not lost.</li><li>Happy calls after every job, made by your CSR rather than the tech.</li></ul>
+<p><strong>Fix this before you spend a dollar: speed-to-lead.</strong> The first company to call back wins <strong>78% of the time</strong> — not the cheapest, not the most experienced, the fastest. Close rate halves by the 30-minute mark. If you're on a job when the phone rings, that's a CSR problem, not a marketing problem.</p>
+<p><strong>Then score your leads</strong> so the best tech runs the best calls — 5-star (in area, responsive, ready, multiple needs) down to 1-star (time wasters, no decision authority). Don't run 1-star calls at all.</p>
+<p><strong>Start where the cost is zero.</strong> Nathan Miles did $75,005 in his first full month with zero ad spend — BNI, referrals and conversations. The system came before the leads. That's the order that matters.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.2 Three Engines + 9 Truths + speed-to-lead; Playbook ch.7 Facebook; ch.6 NDP</div>
+  </div>
+</article><article class="card" id="q4"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i justify my price when a customer compares me to a cheaper competitor? objection handling joseph never ask them to pay more for less. name everything included in your price and invite them to ask the cheaper quote what it leaves out.">
+  <div class="chead">
+    <div class="rank">4</div>
+    <div class="qh">
+      <div class="q">How do I justify my price when a customer compares me to a cheaper competitor?</div>
+      <div class="meta"><span class="asked">Asked 36×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2023-09-13 – 2026-10-06</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Never ask them to pay more for less. Name everything included in your price and invite them to ask the cheaper quote what it leaves out.</div>
+  <div class="body">
+    <p><strong>The line that does the work:</strong></p>
+<blockquote>"I would never ask you to pay more for less. What I can tell you is that when you work with us, you're getting the evaluation, the design, the presentation, the warranty and the follow-up. If someone's offering you less, it's worth asking what part of that experience they're leaving out."</blockquote>
+<p>That reframes the comparison without ever criticising the other electrician. The moment you run a competitor down, you look threatened.</p>
+<p><strong>Why this works.</strong> The homeowner is comparing two numbers because nobody has given them anything else to compare. Your job is to put more on the table than price:</p>
+<ul><li>A lifetime craftsmanship warranty in writing</li><li>Six options so they control the budget, not you</li><li>A full inspection and a designed solution, not a guessed number</li><li>One price with nothing added at checkout — no "taxes and fees not included," no card surcharge</li></ul>
+<p><strong>Build the offer so the comparison stops happening.</strong> The six pillars of an irresistible offer are sustainable pricing, trip charges, club memberships, value drivers, six options, and lifetime warranty plus financing. When those are in place, homeowners stop comparing you to the cheap quote — there's nothing to compare it to.</p>
+<p><strong>Use the warranty tier break.</strong> Everything from Economy up carries the lifetime guarantee. Below that is explicitly a temporary fix:</p>
+<blockquote>"I can't guarantee a temporary solution for life."</blockquote>
+<p>That gives the cheaper quote a category, and it isn't the category most people want for their home.</p>
+<p><strong>Last thing: don't prejudge.</strong> Appearance, neighbourhood and accent do not predict buying behaviour. Plenty of homes that "looked like" a cheap-quote house have taken the top option. Give everyone the dignity of the full choice.</p>
+    <div class="src"><b>Drafted from:</b> Salesbot DNA §3 'The Other Guy Was Cheaper'; $1M+ Offers 2.12 Irresistible Offer; ACDC ch.3</div>
+  </div>
+</article><article class="card" id="q5"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i decide on joining sle with my spouse or business partner? sle program, price &amp; fit clay bring them into the conversation rather than relaying it. decide together what the next 12 months need to look like, and use the deal formula — raise trust and desire, lower risk and cost.">
+  <div class="chead">
+    <div class="rank">5</div>
+    <div class="qh">
+      <div class="q">How do I decide on joining SLE with my spouse or business partner?</div>
+      <div class="meta"><span class="asked">Asked 35×</span><span>SLE Program, Price &amp; Fit</span><span>prospect</span><span>Clay</span><span>2024-10-07 – 2025-03-10</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Bring them into the conversation rather than relaying it. Decide together what the next 12 months need to look like, and use the Deal Formula — raise trust and desire, lower risk and cost.</div>
+  <div class="body">
+    <p>This is the most-asked question on the prospect side, and the honest answer is: don't go away and sell it for us.</p>
+<p><strong>Get them on the call.</strong> A decision made in the kitchen afterwards is a decision made with half the information and none of the energy. If your spouse or business partner shares the risk, they should hear it first-hand and get to ask their own questions. We would rather run the conversation twice than have you relay it once.</p>
+<p><strong>What they're really asking.</strong> Their questions are almost never about the curriculum. They are:</p>
+<ul><li>Can we afford this right now, honestly?</li><li>What happens to our family or our cash if it doesn't work?</li><li>Is this the thing that finally changes something, or is it another thing we buy and don't use?</li></ul>
+<p>Those are fair questions. Answer them out loud together.</p>
+<p><strong>The Deal Formula:</strong></p>
+<blockquote><strong>(Trust × Desire) ÷ (Risk × Cost) = Partnership</strong></blockquote>
+<p>If the decision is stuck, one of those four is off. Usually it's perceived risk. That's what the guarantees exist for — the Kickspark $6K rolls forward into the next tier, and Guaranteed Results is money-back if you don't get the $30K+ sales improvement.</p>
+<p><strong>Three questions to decide on together:</strong></p>
+<ol><li>What does the next 12 months look like if nothing changes?</li><li>What would have to be true for this to be the best money we spend this year?</li><li>What's the real number we can commit without putting the house under pressure?</li></ol>
+<p><strong>What we won't do.</strong> We won't pressure a partner into a decision their spouse hasn't agreed to. Partnerships that start that way don't last, and we're building a ten-year relationship, not a transaction.</p>
+<hr>
+<p><em>Clay / Joseph: this is the top prospect question in the bank (35 asks) and the one where our answer most needs to be in your words, not a framework. Please rewrite freely.</em></p>
+    <div class="src"><b>Drafted from:</b> Brand Bible §9 Deal Formula + §10 program tiers; ACDC ch.9 identity questions; Electric Conversion Framework steps 6–9</div>
+  </div>
+</article><article class="card" id="q6"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i afford this investment, or justify the cost, when money is tight? sle program, price &amp; fit joseph price the decision against the cost of another year unchanged, not against your bank balance today. then pick the tier that fits the cash you actually have.">
+  <div class="chead">
+    <div class="rank">6</div>
+    <div class="qh">
+      <div class="q">How do I afford this investment, or justify the cost, when money is tight?</div>
+      <div class="meta"><span class="asked">Asked 34×</span><span>SLE Program, Price &amp; Fit</span><span>prospect</span><span>Joseph</span><span>2024-02-15 – 2025-09-18</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Price the decision against the cost of another year unchanged, not against your bank balance today. Then pick the tier that fits the cash you actually have.</div>
+  <div class="body">
+    <p>Money being tight is the normal condition of the electricians who need this most. It's not a disqualifier — but it does change which door you walk through.</p>
+<p><strong>Reframe the comparison.</strong> The question isn't "can I afford this?" in isolation. It's "which costs more — this, or another twelve months of the same?"</p>
+<p>The 5 Pillars math: a shop running 10 leads a week at a 40% close rate and a $450 average ticket does about $1,800 a week. Grow every pillar by 10% and you don't get 10% more — you get <strong>61% more</strong>. That compounding is the whole argument, and it's arithmetic, not a pitch.</p>
+<p><strong>Then be honest about tiers.</strong> There's a ladder for exactly this reason:</p>
+<div class="tw"><table><thead><tr><th>Tier</th><th>Commitment</th></tr></thead><tbody><tr><td>Open Circuit</td><td>Free — community, free tools, weekly calls</td></tr><tr><td>Kickspark Sprint</td><td>90 days / $6K — the Loop Method foundations</td></tr><tr><td>Inner Loop</td><td>12 months / $30K+ — accountability or mastery</td></tr><tr><td>Guaranteed Results</td><td>$30K+ sales improvement or money back</td></tr></tbody></table></div>
+<p>If $30K isn't real for you right now, Kickspark is the honest answer, and the $6K rolls forward into the next tier when you're ready. If even that isn't real, Open Circuit is free and genuinely useful. We would rather you start where you can actually pay than sign something that puts your family under pressure.</p>
+<p><strong>On risk.</strong> We take the risk deliberately — the Guaranteed Results program is money-back if you don't get the sales improvement. That exists because we'd rather carry the risk than have you carry it.</p>
+<p><strong>What we won't tell you.</strong> We won't tell you to put it on a card you can't service, and we won't tell you money will magically appear. What we will tell you is that the single biggest cause of "money is tight" in this trade is underpricing — and that's fixable in a week once you know your real rate.</p>
+<hr>
+<p><em>Joseph: the tier ladder and guarantee wording here are from the Brand Bible. Please confirm the current Kickspark roll-forward terms before this is used with anyone.</em></p>
+    <div class="src"><b>Drafted from:</b> Brand Bible §9 Deal Formula, §10 tiers + guarantees; $1M+ Offers 2.6 financing ethics; ACDC ch.8 $83,333 threshold</div>
+  </div>
+</article><article class="card" id="q7"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i find time to run and grow my business when i&#x27;m still doing the selling, installing, and admin work myself? operations &amp; admin clay you&#x27;re at 50–60% of your growth capacity while overwhelmed. sort every open loop into do / delegate / drop, eat the frog first, and delegate one thing a week — starting with the phone.">
+  <div class="chead">
+    <div class="rank">7</div>
+    <div class="qh">
+      <div class="q">How do I find time to run and grow my business when I'm still doing the selling, installing, and admin work myself?</div>
+      <div class="meta"><span class="asked">Asked 25×</span><span>Operations &amp; Admin</span><span>partner</span><span>Clay</span><span>2023-07-12 – 2026-10-13</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">You're at 50–60% of your growth capacity while overwhelmed. Sort every open loop into do / delegate / drop, eat the frog first, and delegate one thing a week — starting with the phone.</div>
+  <div class="body">
+    <p><strong>The cost of staying here.</strong> Overwhelmed, you run at 50–60% of your growth capacity. Organised, you run at 90–100%. Across one year that gap is more than 100 days of lost productivity. You're not short of hours. You're short of offense.</p>
+<p><strong>Step 1 — Empty your head onto paper.</strong> Write three lists: Health open cycles, Relationship open cycles, Business open cycles. Every unfinished thing in your head is an open cycle and every open cycle drains energy whether you're working on it or not.</p>
+<p><strong>Step 2 — Label every item 1, 2 or 3.</strong></p>
+<ol><li><strong>Must do myself</strong> — genuinely only you, right now</li><li><strong>Must delegate</strong> — outside your specialty or better done by someone else</li><li><strong>Must eat crow</strong> — commitments, habits or relationships you need to cut loose</li></ol>
+<p><strong>Step 3 — Work the list in this order.</strong></p>
+<ul><li><strong>Eat the frog.</strong> Hardest and shortest item first, every morning, before anything else.</li><li><strong>Delegate one item per week</strong>, starting with the one with the highest revenue impact.</li><li><strong>Eat crow on one item every day</strong> until the list is empty.</li></ul>
+<p><strong>Step 4 — Hire the phone, not the tools.</strong> Your first hire is a CSR, not a tech. If a CSR prevents 5 missed calls a week and each is worth $1,500 in pipeline, that's $7,500/week you're currently losing. A CSR costs $3,000–$4,000/month. Nathan Miles's revenue accelerated the month he hired his CSR — not because he got more leads, but because he stopped losing the ones he had.</p>
+<blockquote><em>"While I'm doing installs, no growth is happening to my company."</em> — Nathan Miles</blockquote>
+<p><strong>Step 5 — The 72-hour rule.</strong> Any decision that isn't made within 72 hours costs you momentum. Make it, or take it off the list.</p>
+<p><strong>The honest diagnosis.</strong> Two things keep electricians at "self-employed" instead of "entrepreneur": <strong>discipline</strong> (the right things, for the right people, at the right times) and <strong>trust</strong> (the willingness to let someone else own something). The time problem is almost always the trust problem wearing a disguise.</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.3 Offense Over Overwhelm; ACDC ch.6 first hire CSR; ch.9 scale prerequisites</div>
+  </div>
+</article><article class="card" id="q8"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i get my team (or myself) to consistently present the full set of options instead of settling for one price, and raise average ticket by doing it? sales &amp; closing joseph make six options the standard, not the stretch goal — build bottom-up, price top-down, present top-down, and inspect it weekly. most &#x27;we do options&#x27; shops are actually doing two.">
+  <div class="chead">
+    <div class="rank">8</div>
+    <div class="qh">
+      <div class="q">How do I get my team (or myself) to consistently present the full set of options instead of settling for one price, and raise average ticket by doing it?</div>
+      <div class="meta"><span class="asked">Asked 25×</span><span>Sales &amp; Closing</span><span>partner</span><span>Joseph</span><span>2023-07-31 – 2026-05-21</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Make six options the standard, not the stretch goal — build bottom-up, price top-down, present top-down, and inspect it weekly. Most 'we do options' shops are actually doing two.</div>
+  <div class="body">
+    <p><strong>Why it has to be six.</strong> One option is an ultimatum. Three options ("good, better, best") still gives each buyer type exactly one real choice — still an ultimatum, just dressed up. Six covers every buyer:</p>
+<ul><li><strong>2 premium</strong> — Platinum, Gold</li><li><strong>2 mid-range</strong> — Silver, Bronze</li><li><strong>2 economy</strong> — Economy, Basic</li></ul>
+<p>Platinum isn't meant to be sold; it sets the ceiling. Basic isn't meant to be sold either; it proves you're informing, not pushing.</p>
+<p><strong>The mechanics that make it repeatable.</strong></p>
+<p><strong>Build from the bottom up. Price from the top down.</strong> Start the build at the immediate need and layer upward. Start the <em>presentation</em> at Platinum and come down. Each step down should drop <strong>15–30%</strong> — consistent gaps. A jump from $4,200 to $1,500 creates a mental hole and the customer starts wondering what they're missing.</p>
+<p><strong>Use "same as above."</strong> Full description on Platinum, then "same as above, without X" for Gold. Full description on Silver, "same as above, without Y" for Bronze. Each pair becomes easy to compare and you stop rewriting the same lines.</p>
+<p><strong>Hide the price until value is built.</strong> Present all six without numbers first. Let them react to the <em>solutions</em>. Then reveal pricing. At that point price is the last objection, because every other one is already resolved.</p>
+<p><strong>Getting the team to actually do it.</strong> This is where most shops fail. Our Offers scoring rule exists because of it:</p>
+<blockquote>Options Score = MIN(options presented, AVERAGE(tiers clear + tech can present without owner))</blockquote>
+<p>That's deliberately hard to game. "We do six options" means nothing if it only happens when you're in the van.</p>
+<p>What actually moves it:</p>
+<ol><li><strong>Weekly option-building sessions.</strong> Treat designing options as technical training, not sales training — it genuinely improves install knowledge and confidence.</li><li><strong>A blank tablet template, not your CRM.</strong> Faster, more flexible, keeps you present with the customer.</li><li><strong>Inspect it.</strong> Review real option sheets in a huddle. Coach the gap. An expectation you don't inspect is a suggestion.</li><li><strong>Pay for it.</strong> Tie performance pay to average ticket and close rate so the behaviour has a reason to stick.</li></ol>
+<p><strong>What it's worth.</strong> One partner's first three presentations with a service rate instead of a price book: a Basic at $694 that would previously have been $225, plus Gold options at $2,794 and $2,523. Three calls, $6,011 against roughly $675 under the old approach.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.7 / 2.72 / 2.75; Playbook ch.9 6 Options Secrets; ACDC ch.3; Offers Survey Q14–Q16</div>
+  </div>
+</article><article class="card" id="q9"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i handle it when the decision-maker isn&#x27;t present for the appointment? sales &amp; closing joseph prevent it at the booking, not at the door. if you&#x27;re already there, run the full evaluation, build the options, and schedule the presentation when both people can be present.">
+  <div class="chead">
+    <div class="rank">9</div>
+    <div class="qh">
+      <div class="q">How do I handle it when the decision-maker isn't present for the appointment?</div>
+      <div class="meta"><span class="asked">Asked 23×</span><span>Sales &amp; Closing</span><span>partner</span><span>Joseph</span><span>2024-04-16 – 2026-09-01</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Prevent it at the booking, not at the door. If you're already there, run the full evaluation, build the options, and schedule the presentation when both people can be present.</div>
+  <div class="body">
+    <p><strong>Fix this at the front door — the phone call.</strong> Your CSR should confirm at booking that everyone involved in the decision will be there. It's a service framing, not a screening one:</p>
+<blockquote>"So that we can go over everything properly and nobody has to hear it second-hand — will both of you be home at that time?"</blockquote>
+<p><strong>If you arrive and they're not there, don't present.</strong> A presentation to half a household gets relayed badly and dies. Instead:</p>
+<ol><li><strong>Do the full evaluation anyway.</strong> The inspection is real work and it's what you came for.</li><li><strong>Gather the absent person's perspective</strong> through the one who's there — what matters to them, what they've noticed, what they've been worried about. You'll need their words in the observations.</li><li><strong>Design the options.</strong></li><li><strong>Book the presentation</strong> when both can be there:</li></ol>
+<blockquote>"I've got everything I need and I'm going to have your options designed and ready. The last thing I want is for you to have to explain my recommendations for me — when's a time this week you're both around for twenty minutes?"</blockquote>
+<p><strong>Write both people into the observations.</strong> When you do present, name them:</p>
+<blockquote>"Doug and Emma expressed multiple priorities, including safety upgrades, lighting improvements, and future power needs for the shed."</blockquote>
+<p>That one sentence tells both of them they were heard.</p>
+<p><strong>The realtor version.</strong> If a realtor is arranging work for a buyer, don't email the realtor a quote. The realtor isn't the decision-maker. Set the expectation that you'll meet the actual buyer to go over scope and pricing, and present to them directly.</p>
+<p><strong>And if they insist you present anyway?</strong> Present, then close the loop yourself rather than leaving it to be relayed — offer to call the absent partner right there, or book the follow-up before you leave. Don't walk out with the decision in someone else's hands and no appointment.</p>
+    <div class="src"><b>Drafted from:</b> Salesbot DNA §7 realtor scenario + CSR integration; Playbook ch.10 step 5; $1M+ Offers 2.74 both decision-makers</div>
+  </div>
+</article><article class="card" id="q10"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i manage my time and delegate better so i&#x27;m not drowning in work as the business grows? operations &amp; admin clay delegation fails on trust, not on time. pick one item a week, hand over the whole outcome rather than the task, and write the sop as you go.">
+  <div class="chead">
+    <div class="rank">10</div>
+    <div class="qh">
+      <div class="q">How do I manage my time and delegate better so I'm not drowning in work as the business grows?</div>
+      <div class="meta"><span class="asked">Asked 23×</span><span>Operations &amp; Admin</span><span>partner</span><span>Clay</span><span>2023-11-17 – 2026-07-30</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Delegation fails on trust, not on time. Pick one item a week, hand over the whole outcome rather than the task, and write the SOP as you go.</div>
+  <div class="body">
+    <p><strong>Start with the diagnosis.</strong> Two things keep electricians stuck at self-employed: <strong>discipline</strong> and <strong>trust</strong>. If you've read the time-management advice and you're still drowning, it's almost never that you don't know what to delegate. It's that you don't believe anyone will do it properly.</p>
+<p><strong>The weekly rhythm.</strong></p>
+<p><strong>1. Sort every open cycle</strong> into: must do myself / must delegate / must eliminate. Be ruthless about the third list — it's usually the longest and it's free to clear.</p>
+<p><strong>2. Delegate one item per week.</strong> One. Start with whatever has the highest revenue impact that you're doing unnecessarily. In a year that's 52 things off your plate, which is a different business.</p>
+<p><strong>3. Delegate the outcome, not the task.</strong> "Book the Tuesday calls" is a task and you'll still own it. "You own the schedule — here's what a good week looks like" is an outcome, and it transfers.</p>
+<p><strong>4. Write the SOP while they learn it.</strong> Have the person doing the work write the steps down as you train them. You get documentation for free, they get ownership, and the next hire costs a fraction to onboard.</p>
+<p><strong>5. Inspect, don't hover.</strong> ITRS — <strong>I</strong>nspect, <strong>T</strong>rain, <strong>R</strong>ecognise, <strong>S</strong>upport. Set the KPI, look at it weekly, coach the gap. Checking the number is not the same as doing the job for them.</p>
+<p><strong>Order of operations if you're solo.</strong> CSR first, always. They take the phone, the scheduling, the follow-up and the happy calls — which is most of what's drowning you — and they pay for themselves on missed calls alone.</p>
+<p><strong>The test you're aiming for.</strong> Can the business run for two weeks without you? Can your techs sell without you coaching every call? If not, you don't have a business yet, you have a job with employees. That's not an insult — it's the specific thing the next 90 days need to fix.</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.3 Law of Open Cycles + Law of Hindrance; ACDC ch.6 APEX; ch.9 scale decision</div>
+  </div>
+</article><article class="card" id="q11"
+  data-owner="Joseph" data-status="draft"
+  data-search="what do i say when a customer needs to talk to their spouse or another decision-maker before deciding? objection handling joseph agree with them, mention you&#x27;re married too, then find out what the spouse will actually ask — and give them the answer to take back, or get the spouse on the phone now.">
+  <div class="chead">
+    <div class="rank">11</div>
+    <div class="qh">
+      <div class="q">What do I say when a customer needs to talk to their spouse or another decision-maker before deciding?</div>
+      <div class="meta"><span class="asked">Asked 23×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2024-10-22 – 2026-04-16</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Agree with them, mention you're married too, then find out what the spouse will actually ask — and give them the answer to take back, or get the spouse on the phone now.</div>
+  <div class="body">
+    <p>This one is usually genuine, and treating it as a brush-off is how you lose it.</p>
+<p><strong>Acknowledge and join them.</strong></p>
+<blockquote>"Of course — I'd do exactly the same. I'm married too, I wouldn't make a call like this on my own either."</blockquote>
+<p>Mentioning that you're married too is deliberate. It takes the objection out of "excuse" territory and puts you on the same side of the table.</p>
+<p><strong>Then find the real question.</strong></p>
+<blockquote>"So I can make sure you've got what you need — what do you think will be the first thing they ask?"</blockquote>
+<p>Whatever comes back is the actual objection. Price, timing, disruption, whether it's really necessary. Now you can answer <em>that</em> instead of guessing.</p>
+<p><strong>Give them something to carry back.</strong> Don't send them home with a number and a memory. Send them with the option sheet, the observations in their own words, and a one-line reason for each item. If the spouse's first question is "why do we need the panel done," the answer should already be written where they'll look.</p>
+<p><strong>Offer the easy version.</strong></p>
+<blockquote>"Would it be easier if I just said hello to them now? I'm happy to answer anything directly so it's not on you to explain my job."</blockquote>
+<p>A lot of people take this, and it closes the loop in two minutes.</p>
+<p><strong>Then book the next step before you leave.</strong></p>
+<blockquote>"When were you hoping to have this taken care of? ... Let's put a time in for Thursday so I'm not chasing you — if it's a no by then, just tell me and I'll close the file."</blockquote>
+<p>Never leave with "they'll call you." Leave with a time.</p>
+<p><strong>Prevention.</strong> This objection mostly disappears when both decision-makers are at the appointment. Have your CSR confirm that at booking.</p>
+    <div class="src"><b>Drafted from:</b> Salesbot DNA §3 spouse objection; Playbook ch.10 step 5; ACDC ch.5 Acknowledge-Reframe-Ask Again</div>
+  </div>
+</article><article class="card" id="q12"
+  data-owner="Joseph" data-status="draft"
+  data-search="what do i say when a customer wants to think it over before deciding? objection handling joseph &#x27;think it over&#x27; is a missing piece, not a no. ask what they want to think about, answer that, and anchor on when they want the work done — then book the follow-up before you leave.">
+  <div class="chead">
+    <div class="rank">12</div>
+    <div class="qh">
+      <div class="q">What do I say when a customer wants to think it over before deciding?</div>
+      <div class="meta"><span class="asked">Asked 23×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2023-09-25 – 2025-09-03</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">'Think it over' is a missing piece, not a no. Ask what they want to think about, answer that, and anchor on when they want the work done — then book the follow-up before you leave.</div>
+  <div class="body">
+    <p><strong>What it actually means.</strong> Nobody needs to think over a decision they fully understand and can afford. "Let me think about it" means one of three things: I don't understand something, I can't afford this one, or I'm not the only decider. Your job is to find out which.</p>
+<p><strong>The question:</strong></p>
+<blockquote>"Absolutely — what part of it do you want to think about most?"</blockquote>
+<p>Said warmly, this almost always gets a real answer. Then handle <em>that</em> objection, which is the one you were actually facing.</p>
+<p><strong>The timeline redirect.</strong> Don't ask when they'll decide. Ask when they want it done:</p>
+<blockquote>"When were you hoping to bring this to a conclusion?"<br>"When did you want to have all this taken care of?"</blockquote>
+<p>Their <em>project</em> date is a real constraint you can work with. Their <em>decision</em> date is a date they invented to end the conversation.</p>
+<p><strong>Then make the next step concrete.</strong> Never leave with "give me a call." Leave with a booked time:</p>
+<blockquote>"How about I check in Thursday at 10? If it's a no by then, just say so and I'll close the file — you won't hear from me again."</blockquote>
+<p>Giving them permission to say no is what makes them answer the phone.</p>
+<p><strong>The two-call close is legitimate.</strong> For big or unclear jobs, a deliberate second visit beats a rushed decision — evaluate now, present properly next week. That's not losing the sale, it's structuring it.</p>
+<p><strong>And if it still goes unsold:</strong> it goes into the unsold follow-up process, framed as quality control rather than a second pitch. Many "not today" customers simply needed more time, a conversation with a spouse, or a pay cheque. That revenue is deferred, not gone — and it belongs to whoever follows up first.</p>
+    <div class="src"><b>Drafted from:</b> Salesbot DNA §3 'I Need to Think About It' + §4 When Were You Hoping; ACDC ch.5 Two-Call Close; Playbook ch.15</div>
+  </div>
+</article><article class="card" id="q13"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i build a full set of pricing options on a small, simple job? pricing &amp; options joseph small jobs are where the full option set matters most. layer by safety priority, scope, materials and future-proofing — and if you can only honestly build four, build four and label them correctly.">
+  <div class="chead">
+    <div class="rank">13</div>
+    <div class="qh">
+      <div class="q">How do I build a full set of pricing options on a small, simple job?</div>
+      <div class="meta"><span class="asked">Asked 22×</span><span>Pricing &amp; Options</span><span>partner</span><span>Joseph</span><span>2024-05-30 – 2026-04-24</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Small jobs are where the full option set matters most. Layer by safety priority, scope, materials and future-proofing — and if you can only honestly build four, build four and label them correctly.</div>
+  <div class="body">
+    <p><strong>The trap.</strong> "It's just a GFI" is how a $300 call stays a $300 call. The home has more than one electrical need — it always does — and the only question is whether you looked.</p>
+<p><strong>Four axes to build on when the job itself is small:</strong></p>
+<ol><li><strong>Fix the fault</strong> — exactly what they called you for, nothing else. That's Basic.</li><li><strong>Method and materials</strong> — same fix, done better. Surface mount vs recessed in the wall. Residential grade vs commercial grade. Patched vs painted and finished.</li><li><strong>Same problem, whole house</strong> — one GFI becomes every non-GFI location that should have one: bathrooms, exterior, laundry, kitchen. Outlets take priority over switches, and anything near water takes priority over everything.</li><li><strong>The system behind it</strong> — the panel, the circuit, the protection. If the panel feeding it is a Federal Pacific, that's an option, not a footnote.</li></ol>
+<p><strong>Joseph's junction-box example, start to finish:</strong> Basic is running the power surface mount, 20 amp into the junction. Economy is the same thing recessed within the wall. Above that, you're not changing the task, you're changing the <em>capacity</em> — running a 240V 30-amp line instead. They may never need 60 amps total, but if it's ever going to happen, now is when the wall is open.</p>
+<p><strong>Then add what's genuinely available:</strong> whole-home electronics protection, circuit identification and labelling, a safety inspection, the First Class membership. These are real services, not padding.</p>
+<p><strong>If you honestly can't build six, don't fake it.</strong> Build four and label them for what they are:</p>
+<ul><li>Building bottom-up from a small fault → Gold, Silver, Bronze, Economy</li><li>Building top-heavy → start at Gold and come down</li></ul>
+<p>The labels must match what you're actually delivering. A "Platinum" that's a GFI and a handshake destroys the ladder for every future job.</p>
+<p><strong>Language matters more on small jobs than big ones.</strong> "Install a duplex outlet" invites a hardware-store price comparison. "Upgrading your home's electrical points for safer power distribution" doesn't. Describe what the part <em>does</em>, never what it <em>is</em>.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.72 'What to do if you can't build all six' + 2.74; Salesbot DNA §2 junction box example</div>
+  </div>
+</article><article class="card flag" id="q14"
+  data-owner="Rayna" data-status="needs_input"
+  data-search="is tonight&#x27;s class on, and where is the link to join it? sle program, price &amp; fit rayna the standing weekly schedule is below. the live join link and the current confirmation channel need to be confirmed before this is published anywhere.">
+  <div class="chead">
+    <div class="rank">14</div>
+    <div class="qh">
+      <div class="q">Is tonight's class on, and where is the link to join it?</div>
+      <div class="meta"><span class="need">NEEDS INPUT</span><span class="asked">Asked 22×</span><span>SLE Program, Price &amp; Fit</span><span>partner</span><span>Rayna</span><span>2025-05-28 – 2026-06-29</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">The standing weekly schedule is below. The live join link and the current confirmation channel need to be confirmed before this is published anywhere.</div>
+  <div class="body">
+    <p><strong>The standing weekly schedule</strong> (Brand Bible, SLE Pro programming):</p>
+<div class="tw"><table><thead><tr><th>Day</th><th>Host</th><th>Session</th><th>Length</th></tr></thead><tbody><tr><td>Monday</td><td>Joseph</td><td>Marketing Monday</td><td>90 min</td></tr><tr><td>Tuesday</td><td>Forrest / Zac</td><td>Sales (EST / CST / MST)</td><td>180 min</td></tr><tr><td>Wednesday</td><td>Rayna</td><td>CSR / Dispatch / Profitable Offices</td><td>90 min</td></tr><tr><td>Thursday</td><td>Clay</td><td>SLE Process+ / Operations</td><td>90 min</td></tr><tr><td>Friday</td><td>Clay</td><td>Advanced Ops + Finance</td><td>90 min</td></tr><tr><td>Weekly</td><td>Scott Parker</td><td>Electric Roundtable</td><td>Ongoing</td></tr></tbody></table></div>
+<hr>
+<p><strong>This one needs your input before it can be answered properly.</strong></p>
+<p>This question was asked <strong>22 times</strong> — it's the 14th most common question in the bank and the single most common pure-operations question. That volume is the finding: partners cannot reliably work out whether a class is running or where to join it.</p>
+<p>To close it I need from you:</p>
+<ul><li>The canonical join link (or where a partner should always look for it)</li><li>Where cancellations and schedule changes get posted</li><li>Whether this schedule is still current as of October 2026</li></ul>
+<p><strong>Worth considering separately:</strong> 22 asks is a signal that the answer should be a pinned post and a calendar subscription, not an FAQ entry. The fix here is operational, not editorial.</p>
+    <div class="src"><b>Drafted from:</b> Brand Bible §11 weekly programming schedule</div>
+  </div>
+</article><article class="card" id="q15"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i get off the tools and build a team so the business runs without me? team &amp; leadership clay hire the phone first, then a tech, then write down what you know. the four scale prerequisites tell you honestly whether you&#x27;re ready.">
+  <div class="chead">
+    <div class="rank">15</div>
+    <div class="qh">
+      <div class="q">How do I get off the tools and build a team so the business runs without me?</div>
+      <div class="meta"><span class="asked">Asked 21×</span><span>Team &amp; Leadership</span><span>partner</span><span>Clay</span><span>2023-06-21 – 2026-05-07</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Hire the phone first, then a tech, then write down what you know. The four scale prerequisites tell you honestly whether you're ready.</div>
+  <div class="body">
+    <blockquote><em>"While I'm doing installs, no growth is happening to my company."</em> — Nathan Miles</blockquote>
+<p>That's the whole problem in one line. Every hour on the tools is an hour not selling, not leading, not building.</p>
+<p><strong>The honest readiness test.</strong> Four questions:</p>
+<ol><li>Can the business run two weeks without you?</li><li>Do your techs sell without you coaching every call?</li><li>Is your profit consistent month over month?</li><li>Do you have documented SOPs for every major process?</li></ol>
+<p>A "no" anywhere isn't a failure — it's your next 90 days. Most electricians are one or two of these away.</p>
+<p><strong>The order that works.</strong></p>
+<p><strong>First hire: a CSR, not a tech.</strong> Counter-intuitive and the data is one-sided. They fix speed-to-lead immediately, stop you losing calls while you're in a wall, and take scheduling, follow-up and happy calls off you. Nathan hired a CSR first and his revenue accelerated that month — not from more leads, from no longer losing the ones he had.</p>
+<blockquote><em>"Having a CSR as the first hire makes so much sense and yet no one does it. Who better to understand your company and help you grow it?"</em> — Nathan Miles</blockquote>
+<p><strong>Then a tech, hired on character.</strong> You can teach skills. You can't teach integrity. An A-player is coachable, values-aligned, reliable and fit to represent you in someone's home.</p>
+<p><strong>Then systems, written down.</strong> Your knowledge is currently trapped in your head, which means it can't be transferred, delegated or sold. Documented SOPs are what turn a job into a business.</p>
+<p><strong>Retention is the part people skip.</strong> The best techs don't leave for money — they leave because they stopped growing. Base for stability, performance pay tied to real KPIs (close rate, average ticket, CSat, reviews), a visible growth path from tech to lead tech to manager, and recognition that happens publicly.</p>
+<p><strong>What it looks like when it works.</strong> Nathan: solo at the start, CSR in June, first journeyman in August, and by month 12 three full-time electricians, a CSR, two vans and a shop — with Jordan closing his first job solo. He didn't grind his way past the bottleneck. He hired his way past it.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.6 recruiting + CSR first; ch.9 scale decision; Playbook ch.3 Law of Hindrance</div>
+  </div>
+</article><article class="card" id="q16"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i fix an unstable or tight cash flow — debt, feast-or-famine deposits, no reserve, or seasonal slow periods? money &amp; financials clay run four buckets — operating, tax, profit, growth — and a monday cash rhythm. then fix the two causes: no deposits, and no recurring revenue to carry the slow months.">
+  <div class="chead">
+    <div class="rank">16</div>
+    <div class="qh">
+      <div class="q">How do I fix an unstable or tight cash flow — debt, feast-or-famine deposits, no reserve, or seasonal slow periods?</div>
+      <div class="meta"><span class="asked">Asked 18×</span><span>Money &amp; Financials</span><span>partner</span><span>Clay</span><span>2023-06-21 – 2026-02-24</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Run four buckets — operating, tax, profit, growth — and a Monday cash rhythm. Then fix the two causes: no deposits, and no recurring revenue to carry the slow months.</div>
+  <div class="body">
+    <p>Cash is oxygen. Revenue on paper means nothing if you can't make payroll, and most electricians judge their position by looking at one bank balance and feeling either rich or panicked.</p>
+<p><strong>The Cash Bucket System.</strong> Split collected revenue four ways:</p>
+<ul><li><strong>Operating</strong> — payroll, materials, fuel, the week's expenses</li><li><strong>Tax</strong> — 25–30% of profit, set aside <em>before</em> you touch anything</li><li><strong>Profit</strong> — yours. Take it monthly. Don't reinvest all of it</li><li><strong>Growth</strong> — funded by the Growth Rate already in your SSR, spent only on planned expansion</li></ul>
+<p><strong>The Monday rhythm.</strong> Every week, same order:</p>
+<ol><li>Review last week's collected revenue</li><li>Allocate to the four buckets</li><li>Review outstanding invoices and chase them</li><li>Ask: can I make payroll? Can I cover this week's materials?</li><li>If a bucket is low, that's a signal — adjust now, before it's a crisis</li></ol>
+<p><strong>The three numbers to watch:</strong> Days Sales Outstanding (how fast you collect), cash conversion cycle (how fast revenue becomes usable cash), and weekly collection rate — <strong>target 90%+ of invoiced work collected within 7 days.</strong></p>
+<p><strong>Now the two root causes.</strong></p>
+<p><strong>1. You're floating the job.</strong> If you're buying materials and paying labour before you see money, you've lent the customer your working capital. Standard is a <strong>50% deposit</strong> on projects — it covers materials, part of labour and part of profit. The Casino Principle: structure it so that if the client walks, your costs are still covered. Where deposits are legally limited, phase the job with payment milestones at design, permitting, material ordering and installation.</p>
+<p><strong>2. You have no recurring revenue.</strong> Feast-or-famine is a membership problem. The First Class Service Club — front of the line, after-hours access, waived diagnostics, annual safety inspection — at $250–$450 a year with ~30% adoption gives you a base that doesn't care what the season is. Pair it with warranty follow-ups scheduled deliberately into November–February and the slow season becomes the maintenance season.</p>
+<p><strong>On debt.</strong> Debt is a symptom here, not the disease. The disease is almost always underpricing plus floating jobs. Fix the rate and the deposits and the hole stops getting deeper — then you can plan your way out of the rest with a reverse P&amp;L.</p>
+<hr>
+<p><em>Clay: this is your chapter and the specific debt-paydown guidance isn't written down anywhere I can cite. If you want a documented position on debt order (highest rate first vs smallest balance first, when to consolidate), it needs to come from you.</em></p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.8 Cash Bucket System + weekly rhythm + DSO; $1M+ Offers 2.3 deposits; Playbook ch.12 memberships</div>
+  </div>
+</article><article class="card" id="q17"
+  data-owner="Joseph" data-status="draft"
+  data-search="what do i do when a customer doesn&#x27;t want to see multiple options and just wants the cheapest or bare-minimum fix? objection handling joseph show all six anyway, with a disclaimer up front. presenting the cheapest-only option is what creates callbacks, regret and &#x27;you never told me&#x27; — and it&#x27;s often not what they actually buy.">
+  <div class="chead">
+    <div class="rank">17</div>
+    <div class="qh">
+      <div class="q">What do I do when a customer doesn't want to see multiple options and just wants the cheapest or bare-minimum fix?</div>
+      <div class="meta"><span class="asked">Asked 18×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2024-04-09 – 2025-06-02</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Show all six anyway, with a disclaimer up front. Presenting the cheapest-only option is what creates callbacks, regret and 'you never told me' — and it's often not what they actually buy.</div>
+  <div class="body">
+    <p><strong>Don't skip the presentation. Shorten it.</strong></p>
+<p>Use the disclaimer first — it removes the pressure they're bracing for:</p>
+<blockquote>"I don't expect you to choose this one, but I want you to see what the best possible option looks like for your home. From there we can work down to what fits best."</blockquote>
+<p>And the framing that makes six options feel like service rather than a pitch:</p>
+<blockquote>"We have six ways we can take care of this for you, ranging from the best available solution where you won't have to worry about a thing, down to the most economical option. Any of these are good choices as long as you choose us."</blockquote>
+<p><strong>Then present top-down, fast.</strong> If they genuinely want cheap, you'll be at Basic in ninety seconds and you'll have lost nothing. But they'll have seen the ladder, which matters later.</p>
+<p><strong>Why you don't just give them the cheap number.</strong></p>
+<ol><li><strong>Don't prejudge.</strong> Appearance, home condition and lifestyle do not predict buying behaviour. Homes that "obviously" wanted the cheapest have taken Platinum. Everyone deserves the dignity of the full choice.</li><li><strong>It protects you.</strong> A customer who saw all six can never say "you never told me." A customer who saw one can, and will, when the panel fails next year.</li><li><strong>Basic isn't meant to be sold.</strong> It exists to prove you're informing rather than pushing. Showing it is what makes the others credible.</li></ol>
+<p><strong>Be straight about what Basic is.</strong> Use the warranty tier break:</p>
+<blockquote>"Everything from Economy up carries our lifetime guarantee. Basic is a temporary solution — and I can't guarantee a temporary solution for life."</blockquote>
+<p>That's not a scare tactic, it's true, and it reframes "cheapest" as "temporary," which is the honest comparison.</p>
+<p><strong>Then let them choose, and mean it.</strong> Even a Basic sale is a win if the service is exceptional. They'll remember the six options when the next thing breaks — and they won't call anyone else.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.7 §4 serving not selling + 2.72 §3 Basic isn't meant to be sold; Multiplier webinar pt.8, 9, 10</div>
+  </div>
+</article><article class="card" id="q18"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i calculate my ssr so it truly covers all my costs (labor, overhead, csr/future hires, profit)? pricing &amp; options clay burden + growth + profit + material = your simple service rate. divide real annual costs by 1,000 billable hours per van, add growth and 30%, then add the material rate.">
+  <div class="chead">
+    <div class="rank">18</div>
+    <div class="qh">
+      <div class="q">How do I calculate my SSR so it truly covers all my costs (labor, overhead, CSR/future hires, profit)?</div>
+      <div class="meta"><span class="asked">Asked 17×</span><span>Pricing &amp; Options</span><span>partner</span><span>Clay</span><span>2023-09-20 – 2026-10-20</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Burden + Growth + Profit + Material = your Simple Service Rate. Divide real annual costs by 1,000 billable hours per van, add growth and 30%, then add the material rate.</div>
+  <div class="body">
+    <p>Four stages. Do them in order and don't skip one.</p>
+<p><strong>Stage 1 — Burden Rate.</strong> What does it cost to run the business for one billable hour?</p>
+<ol><li>Pull <strong>total annual expenses</strong> from your accounting software or P&amp;L.</li><li>Include everything, especially the things owners leave out: <strong>your own salary</strong>, retirement/investment (10% is the recommendation), and a <strong>90-day nest egg</strong>.</li><li>Count <strong>billable units</strong> — each active van is one unit. Only count vans you have <em>today</em>.</li><li>Apply the <strong>50% rule.</strong> A full-time year is ~2,000 hours but only about half is billable after admin, travel, training and downtime. Use <strong>1,000 billable hours per unit.</strong></li></ol>
+<blockquote>$236,000 ÷ 1,000 = <strong>$236/hr burden rate</strong></blockquote>
+<p><strong>The mistake that kills this:</strong> projecting future vans or future hires into the model. It drops your rate and destroys your margin before those people exist. Price the business you have.</p>
+<p><strong>Stage 2 — Growth Rate.</strong> What it costs to get where you're going: new vans, wraps and branding, marketing, training, raises, website and tech. Look at your 1–3 year goals, cost them, divide. Most businesses land at <strong>$50–$150 per billable hour.</strong></p>
+<blockquote><em>"It is always better to be looking at the money than looking for it."</em></blockquote>
+<p><strong>Stage 3 — Profit.</strong> Combine burden + growth, multiply by <strong>0.30</strong>, add it back.</p>
+<blockquote>$236 + $90 = $326. +30% ($98) = <strong>$424/hr</strong></blockquote>
+<p>Note: 30% <em>markup</em> is not a 30% <em>margin</em>. It realises roughly 23% net once everything is counted.</p>
+<p><strong>Stage 4 — Material Rate.</strong> Consumables that leave the van but never get billed — wire nuts, screws, boxes, connectors, plates, spackle. Across hundreds of service electricians this lands consistently at <strong>$50–$75/hr.</strong></p>
+<blockquote>$424 + $50 = <strong>$474/hr Simple Service Rate</strong></blockquote>
+<p><strong>Sanity check.</strong> A correct rate almost always lands between <strong>$250 and $500 per billable hour.</strong> If you're under $250, something is missing — usually your own salary, the nest egg, or you've counted vans you don't own yet.</p>
+<p><strong>Then use it:</strong> SSR × hours + specialty materials + third-party (marked up 20–30%) + permits = price. A 10-hour panel replacement at $474 is $4,740 before arc-fault breakers, surge protection and permits, which go on top.</p>
+<p><strong>On the number feeling wrong.</strong> Trust your math more than your emotions. Price shock is the discomfort of a number being new to <em>you</em> — it isn't new to the market. Review the whole thing twice a year and after every annual budget.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.21 / 2.22 / 2.23 / 2.24; Playbook ch.4 Service Rate Formula; ACDC ch.1</div>
+  </div>
+</article><article class="card" id="q19"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i grow my revenue/business to the next level (hit a specific monthly or annual revenue target)? growth stage &amp; getting off the tools clay don&#x27;t chase the revenue number — engineer it. run a reverse p&amp;l backward from the profit you want, then grow all five pillars at once; 10% on each is 61% more revenue.">
+  <div class="chead">
+    <div class="rank">19</div>
+    <div class="qh">
+      <div class="q">How do I grow my revenue/business to the next level (hit a specific monthly or annual revenue target)?</div>
+      <div class="meta"><span class="asked">Asked 17×</span><span>Growth Stage &amp; Getting Off the Tools</span><span>prospect</span><span>Clay</span><span>2023-06-12 – 2025-02-27</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Don't chase the revenue number — engineer it. Run a reverse P&amp;L backward from the profit you want, then grow all five pillars at once; 10% on each is 61% more revenue.</div>
+  <div class="body">
+    <p><strong>Stop chasing the number. Build it.</strong></p>
+<p>$1M/year is <strong>$83,333/month.</strong> That number isn't just math, it's the point where the business starts carrying you instead of the other way round — you can hire, market and breathe.</p>
+<p>The uncomfortable part: you're not far off because you're lazy. You're far off because <strong>your current way of operating will never produce that number consistently.</strong> More hours and more small jobs don't get there.</p>
+<p><strong>The 5 Pillars are the whole dashboard:</strong></p>
+<div class="tw"><table><thead><tr><th>Pillar</th><th>What it measures</th></tr></thead><tbody><tr><td>Qualified leads</td><td>Real, ready-to-buy prospects per week</td></tr><tr><td>Qualified close rate</td><td>How many convert</td></tr><tr><td>Transactions per client</td><td>How often you sell more than one thing per visit</td></tr><tr><td>Average ticket</td><td>Dollar value per job</td></tr><tr><td>Gross profit margin</td><td>What you keep</td></tr></tbody></table></div>
+<p><strong>Why you work all five, not one.</strong> Grow every pillar by 10% and you don't get 10% more revenue — <strong>you get 61%.</strong> That's compounding, and it's why "get more leads" is usually the wrong first move.</p>
+<p>For reference, Joseph's $1.3M-per-van week: 14 qualified leads, 80% close, 1.1 transactions, $2,800 average ticket, 60% gross margin.</p>
+<p><strong>The Reverse P&amp;L — build the month on purpose.</strong> Instead of looking at what's left after expenses, start at the end:</p>
+<ol><li>What net profit do I want this year?</li><li>What revenue does that need at my current margin?</li><li>What cost structure supports that?</li><li>What team size? What marketing spend?</li><li>How many billable hours? How many vans?</li></ol>
+<p>Run it once and you'll see the exact gap between your current structure and your target. It stings. A known gap is a solvable gap.</p>
+<p><strong>Then pull the five profit levers in order of return:</strong> revenue per van, material cost % (should be 10–15% — above 15% you're leaking), labour efficiency (target 50%+ billable), overhead discipline (should shrink as a % as you grow), and average ticket.</p>
+<p><strong>The proof it's structure, not effort:</strong> two vans, same market, same services — $350K and $780K. <strong>Double the revenue from about 10% fewer calls run.</strong> Better tickets, better close rate, better options. Same van, same tech.</p>
+<p><strong>The question to actually answer:</strong> what would have to change in how you sell, price and operate to make $83K inevitable?</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.2 5 Pillars + compound growth; ACDC ch.8 $83,333 threshold + Reverse P&amp;L</div>
+  </div>
+</article><article class="card" id="q20"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i present or sell more without feeling pushy? sales &amp; closing joseph pushy is what one option feels like. options make you a guide instead of a closer — and the feeling usually means you don&#x27;t believe your own price yet.">
+  <div class="chead">
+    <div class="rank">20</div>
+    <div class="qh">
+      <div class="q">How do I present or sell more without feeling pushy?</div>
+      <div class="meta"><span class="asked">Asked 17×</span><span>Sales &amp; Closing</span><span>prospect</span><span>Joseph</span><span>2023-08-03 – 2025-12-03</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Pushy is what one option feels like. Options make you a guide instead of a closer — and the feeling usually means you don't believe your own price yet.</div>
+  <div class="body">
+    <p><strong>The feeling is real and it's diagnostic.</strong> Pushiness isn't a personality trait, it's a structural outcome. If you present one price, you <em>are</em> applying pressure — the customer's only choices are yes or no, and you're standing there waiting. That's an ultimatum, and it feels like one to both of you.</p>
+<p><strong>Six options changes the question</strong> from "should I buy from this guy?" to "which of these is right for my home?" You stop being the obstacle. You become the person helping them choose.</p>
+<blockquote>"We have six ways we can take care of this, ranging from the best available solution down to the most economical. Any of these are good choices as long as you choose us."</blockquote>
+<p><strong>Four things that remove the pressure entirely.</strong></p>
+<p><strong>1. The disclaimer, up front.</strong></p>
+<blockquote>"I don't expect you to choose this one, but I want you to see what the best possible option looks like."</blockquote>
+<p><strong>2. Make the friend first.</strong> Your number one goal in every situation is to be a person they'd want to work with. Competence plus professionalism plus genuinely being decent already puts you above most of the trade. That's not a technique, it's the job.</p>
+<p><strong>3. Don't educate during the walkthrough.</strong> This is the biggest cause of "pushy." Explaining and solving as you walk around makes customers feel sold to, and they shoot ideas down defensively. Observe, ask questions, take notes in <em>their</em> words. Education belongs in the presentation.</p>
+<p><strong>4. Hide price until value is built.</strong> Price before value creates instant rejection, and rejection is what makes you push.</p>
+<p><strong>The part nobody says out loud.</strong> If you feel pushy, you probably don't believe your price. Settle it:</p>
+<blockquote>"If you weren't an electrician, would you hire this company at full price to help with a safety concern?"<br>"So why do you think other people hire us then?"</blockquote>
+<p><strong>Reframe the whole thing.</strong> Options are not upselling — they're <strong>informed consent.</strong> You're showing someone everything that's wrong and everything that's possible, and letting them pick. A homeowner who never got shown the panel problem wasn't protected from a sales pitch. They were left with a panel problem.</p>
+<blockquote>The goal isn't to sell more. It's to serve better. The selling takes care of itself.</blockquote>
+    <div class="src"><b>Drafted from:</b> Multiplier webinar pts.1, 6, 10; $1M+ Offers 2.7 §4; Salesbot DNA §1 make the friend first; Playbook ch.9 buyer psychology</div>
+  </div>
+</article><article class="card" id="q21"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i stop doing everything myself (field work, sales, estimating, management) and build the systems or team i need to delegate, step back, and scale? growth stage &amp; getting off the tools clay growth means more of you. scale means systems that run without you. hire the phone, document as you train, and work the four prerequisites in order.">
+  <div class="chead">
+    <div class="rank">21</div>
+    <div class="qh">
+      <div class="q">How do I stop doing everything myself (field work, sales, estimating, management) and build the systems or team I need to delegate, step back, and scale?</div>
+      <div class="meta"><span class="asked">Asked 17×</span><span>Growth Stage &amp; Getting Off the Tools</span><span>prospect</span><span>Clay</span><span>2024-12-05 – 2025-10-24</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Growth means more of you. Scale means systems that run without you. Hire the phone, document as you train, and work the four prerequisites in order.</div>
+  <div class="body">
+    <p><strong>First, name the difference.</strong></p>
+<ul><li><strong>Growth</strong> — more revenue by adding vans, techs and output. Linear. You're still the engine.</li><li><strong>Scale</strong> — more revenue <em>without</em> proportionally more cost, time or stress. Systems run without you. You're the architect.</li><li><strong>Exit</strong> — something someone else would pay to own, valued on profit, systems and transferability, not on you showing up.</li></ul>
+<p>Most electricians say "scale" and are describing growth. That matters, because growth with no systems just multiplies the chaos.</p>
+<p><strong>The four prerequisites.</strong> Answer honestly:</p>
+<ol><li>Can the business run two weeks without you?</li><li>Do your techs sell without you coaching every call?</li><li>Is profit consistent month over month?</li><li>Do you have documented SOPs for every major process?</li></ol>
+<p>Every "no" is a chapter you haven't finished. That's not a verdict — most people are one or two away.</p>
+<p><strong>The sequence that works.</strong></p>
+<p><strong>1. Buy back the phone.</strong> CSR first. They stop you losing the leads you already paid for, and they take scheduling, follow-up and happy calls off your plate. The ROI is immediate.</p>
+<p><strong>2. Buy back the estimating.</strong> Your Simple Service Rate is what makes this possible — a tech with an SSR and the six-option framework can price a job without you. A price book can't be delegated reliably; a rate can.</p>
+<p><strong>3. Buy back the selling.</strong> This is the hard one and it's done by inspection, not hope: weekly option-building sessions, ride-alongs, real option sheets reviewed in a huddle, and performance pay tied to close rate and average ticket.</p>
+<p><strong>4. Buy back the field work.</strong> Only now. Hiring a tech before you've fixed pricing and sales just adds cost to a broken model.</p>
+<p><strong>Document as you go, don't stop to document.</strong> Have whoever learns the task write the steps while they learn. You get the SOP free and they get ownership. Knowledge in your head can't be delegated, transferred or sold.</p>
+<p><strong>Why it's worth it even if you never sell.</strong> Building a business that <em>could</em> be sold means building one that doesn't depend on you. Dan T. built past $1M in year one not because he wanted out, but because systems that work without him in the van gave him options. Options are the whole point.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.9 growth vs scale + scale decision; ch.6 CSR first; Playbook ch.3 delegate one per week</div>
+  </div>
+</article><article class="card" id="q22"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i build sops and systems for my business so it isn&#x27;t dependent on me personally? operations &amp; admin clay write sops in the order that money leaks: phone, pricing, options, install, follow-up. have the person doing the job write it while they learn, and keep each one to a page.">
+  <div class="chead">
+    <div class="rank">22</div>
+    <div class="qh">
+      <div class="q">How do I build SOPs and systems for my business so it isn't dependent on me personally?</div>
+      <div class="meta"><span class="asked">Asked 16×</span><span>Operations &amp; Admin</span><span>partner</span><span>Clay</span><span>2023-09-19 – 2026-09-22</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Write SOPs in the order that money leaks: phone, pricing, options, install, follow-up. Have the person doing the job write it while they learn, and keep each one to a page.</div>
+  <div class="body">
+    <p><strong>Why this matters beyond tidiness.</strong> Undocumented knowledge can't be delegated, can't be trained, can't be inspected, and can't be sold. "Documented SOPs" is one of the four things that makes an electrical company valuable — alongside recurring revenue, a team that operates independently, and clean financials.</p>
+<p><strong>Write them in the order money leaks.</strong></p>
+<ol><li><strong>The phone</strong> — the Brighter Day call process, call-type identification (demand / opportunity / maintenance), booking, deposit and membership offer. This is the front door and it's where the most revenue leaks fastest.</li><li><strong>Pricing</strong> — your SSR and how a job gets priced. One page. A tech should be able to price without calling you.</li><li><strong>The sales call</strong> — the #DemandCallLotto steps from pre-arrival through survey. Pre-arrival, foyer rapport, walk to panel, open panel, fault location, design options, present, survey.</li><li><strong>Install</strong> — the What/Who/Why huddle, the upgrade offers, the final walkthrough.</li><li><strong>Follow-up</strong> — unsold follow-up, happy calls, review requests, warranty touchpoints.</li></ol>
+<p><strong>How to write one that gets used.</strong></p>
+<ul><li><strong>One page.</strong> If it's longer, it's a manual and nobody reads manuals.</li><li><strong>Written by the doer, not the owner.</strong> Have them write the steps as you train them. Free documentation, and they own it.</li><li><strong>Include the words.</strong> For anything customer-facing, write the actual script. "Build rapport" is not an instruction.</li><li><strong>Name the standard.</strong> What does "done" look like? What's the KPI?</li><li><strong>Date it and own it.</strong> Every SOP has one name against it and a review date.</li></ul>
+<p><strong>Then inspect it.</strong> ITRS — <strong>I</strong>nspect, <strong>T</strong>rain, <strong>R</strong>ecognise, <strong>S</strong>upport. An SOP nobody checks is a suggestion. Our own Offers survey scores this directly: when the process gets ignored, is anything reviewed and coached, or does nothing happen?</p>
+<p><strong>Feed it with real data.</strong> The FACTS sheet after every call — <strong>F</strong>ind, <strong>A</strong>ction, <strong>C</strong>lient response, <strong>T</strong>ransaction, <strong>S</strong>ummary — turns your calls into a data set you can coach from instead of a set of feelings. That's how Joseph went from a 20% close rate to 80%.</p>
+<p><strong>Start with one.</strong> Pick the process that broke most recently. Write it this week. Then the next.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.9 'documented SOPs' + what makes a company valuable; ch.6 onboarding; ch.7 Service 5; Playbook ch.11 FACTS</div>
+  </div>
+</article><article class="card" id="q23"
+  data-owner="Forrest" data-status="draft"
+  data-search="how do i generate leads beyond word-of-mouth and referrals? marketing &amp; lead gen forrest word-of-mouth is one engine of three. add organic social and the good neighbor referral system first — they cost discipline, not money — then paid once those are running.">
+  <div class="chead">
+    <div class="rank">23</div>
+    <div class="qh">
+      <div class="q">How do I generate leads beyond word-of-mouth and referrals?</div>
+      <div class="meta"><span class="asked">Asked 16×</span><span>Marketing &amp; Lead Gen</span><span>partner</span><span>Forrest</span><span>2023-11-28 – 2025-10-06</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Word-of-mouth is one engine of three. Add organic social and the Good Neighbor referral system first — they cost discipline, not money — then paid once those are running.</div>
+  <div class="body">
+    <p>Word-of-mouth is a great engine. The problem is it's your <em>only</em> one, which means your revenue is set by other people's timing.</p>
+<p><strong>Think of the market in three buckets.</strong></p>
+<ul><li><strong>"They tell us"</strong> — homeowners actively searching. About <strong>5% of the market</strong>, and every contractor is fighting over it.</li><li><strong>"We offer"</strong> — people who'd buy if they knew you existed. Reached by content and consistency. A prospect needs <strong>5–12 touches</strong> before they're ready.</li><li><strong>"We find"</strong> — needs nobody knows about yet. There's a Carfax for cars; there's no house-fax. Every home has panels, outlets and hazards with a lifespan and nobody has looked.</li></ul>
+<p>Word-of-mouth only serves bucket one. Here's how to open the other two.</p>
+<p><strong>Organic (costs consistency, not money).</strong> Your personal Facebook profile beats your business page — people relate to people, and the platform pushes business pages toward paid. 15–20 minutes a day:</p>
+<ul><li>Join 3 local community groups of 1,000+ members</li><li>Engage in 3 conversations a day. Help, don't pitch</li><li>Add 10 friends a day (3,650 a year)</li><li>Post 5–7 days a week rotating four content types: <strong>Character</strong> (who you are), <strong>Authority</strong> (results and expertise), <strong>Affinity</strong> (relatable, invites replies), <strong>Action</strong> (direct CTA on a real problem)</li></ul>
+<p>Then follow up in Messenger with anyone who engages. SLE has had months where Facebook organic drove roughly $150,000 in sales with zero ad spend.</p>
+<p><strong>Good Neighbor referral (costs discipline).</strong></p>
+<ul><li>Van wraps — every job is a rolling billboard</li><li>5 door hangers at every job; hand one over personally if you make eye contact</li><li>A yard sign at every completed job</li><li>Photos at every job, review asked for immediately</li><li>EDDM — 1,000+ mailers into neighbourhoods that already performed</li></ul>
+<p><strong>Database reactivation (costs a phone).</strong> Your best lead source is already in your phone. Work every unsold lead up to <strong>10 times</strong> before closing the file. Most shops are sitting on tens of thousands of dollars and never dial.</p>
+<p><strong>The 10-point inspection (bucket three).</strong> Run a documented safety inspection on every home. It finds work the homeowner didn't know about and builds a database of real needs you can market to. One partner turned a single neighbourhood audit into roughly <strong>$100,000</strong> of multi-family inspection and replacement work.</p>
+<p><strong>Only then, paid.</strong> LSA, Meta (boost organic posts that already proved themselves), aggregators. Paid amplifies a working system — it doesn't create one.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.2 Three Engines, Good Neighbor, database reactivation; Playbook ch.6 NDP three buckets; ch.7 Facebook</div>
+  </div>
+</article><article class="card" id="q24"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i handle a customer who says they (or someone else) could just do the electrical work themselves? objection handling joseph don&#x27;t argue about capability — be clear about what you can and can&#x27;t stand behind. one number, your materials, your warranty, and a straight answer about what&#x27;s at stake.">
+  <div class="chead">
+    <div class="rank">24</div>
+    <div class="qh">
+      <div class="q">How do I handle a customer who says they (or someone else) could just do the electrical work themselves?</div>
+      <div class="meta"><span class="asked">Asked 16×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2024-06-18 – 2025-06-02</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Don't argue about capability — be clear about what you can and can't stand behind. One number, your materials, your warranty, and a straight answer about what's at stake.</div>
+  <div class="body">
+    <p>Two versions of this come up: "my brother-in-law could do it," and "I'll buy the parts, you just install them." Same answer underneath.</p>
+<p><strong>Don't challenge their competence.</strong> The moment you imply they couldn't, you've lost. Go to warranty and responsibility instead.</p>
+<p><strong>On supplying their own materials:</strong></p>
+<blockquote>"I appreciate you thinking about that. Here's my concern — if I install materials I didn't source, I can't guarantee the quality or compatibility, and I can't warranty the work the same way. Let me include the materials and give you one number that covers everything, including the warranty. That way if anything ever goes sideways, you call me and it's handled."</blockquote>
+<p>Never say "I guess you can, but I can't warranty it." That hands over your leverage and leaves you doing the work anyway with no protection.</p>
+<p><strong>On someone else doing the work:</strong></p>
+<blockquote>"Honestly, some of it probably could be. The part I'd want you to think about is what happens in two years — who's responsible, who pulls the permit, and who your insurance is going to ask about if something goes wrong."</blockquote>
+<p>Permits, insurance and resale are facts, not scare tactics. State them plainly once and move on.</p>
+<p><strong>Use the collaboration question.</strong></p>
+<blockquote>"Did you choose this panel? Did you choose this wiring?"</blockquote>
+<p>They didn't. Now they're not defending the existing work, and they're open to solving it with you rather than against you.</p>
+<p><strong>Remind them who the second customer is.</strong> You serve the person paying today <em>and</em> the person who opens that wall in ten years. That's why the work is done the way it's done.</p>
+<p><strong>And the code point:</strong> code is the <strong>bare minimum standard to prevent a fire</strong> — not a benchmark for comfort, reliability or longevity. "It'll pass" and "it's good" are different sentences.</p>
+<p><strong>Then make it easy to say yes.</strong> Give them a Basic option that's honest and affordable. If budget is the real driver, the ladder solves it — and they stay your customer instead of becoming somebody's cautionary tale.</p>
+    <div class="src"><b>Drafted from:</b> Salesbot DNA §3 customer-supplied materials + 'Did You Choose This?'; ACDC ch.7 two customers; $1M+ Offers 2.74 code is the minimum</div>
+  </div>
+</article><article class="card" id="q25"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i present/improve my options presentation to customers? sales &amp; closing joseph observations first in their words, then top-down from platinum with no prices, then reveal pricing. value before numbers, always.">
+  <div class="chead">
+    <div class="rank">25</div>
+    <div class="qh">
+      <div class="q">How do I present/improve my options presentation to customers?</div>
+      <div class="meta"><span class="asked">Asked 16×</span><span>Sales &amp; Closing</span><span>partner</span><span>Joseph</span><span>2023-11-15 – 2025-08-27</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Observations first in their words, then top-down from Platinum with no prices, then reveal pricing. Value before numbers, always.</div>
+  <div class="body">
+    <p><strong>The flow, in order.</strong></p>
+<p><strong>1. Set the room.</strong> Confirm it's a good time, everyone's present, and ask permission:</p>
+<blockquote>"Would it be okay if I walked you through what I found and some ways we can help?"</blockquote>
+<p><strong>2. Read the observations as a story — in their words.</strong> Bullet points, ordered in the same sequence as your Platinum option so the whole thing reads as one narrative. Each observation carries four things: <em>what</em> you saw, <em>why</em> it matters to them, <em>how</em> you'd address it, and the practical or emotional reason behind fixing it.</p>
+<p>Use the <strong>4 Whats</strong> to structure what you noticed:</p>
+<ul><li>What they called you for</li><li>What's directly connected to it</li><li><strong>What's good</strong> — genuine positives about their system</li><li>What else you found</li></ul>
+<p>"What's good" is the one people skip and it's the one that buys you credibility. If everything you say is a problem, you sound like a salesman.</p>
+<p><strong>3. Present all six options with no prices.</strong> Let them react to the <em>solutions</em> first. Disclaimer up front:</p>
+<blockquote>"I don't expect you to choose this one, but I want you to see what the best possible option looks like for your home."</blockquote>
+<p><strong>4. Start at Platinum and work down.</strong> Never from the bottom. The first number sets the mental anchor — if Basic comes first, everything else feels expensive and you have nowhere to go.</p>
+<p><strong>5. Value-stack each tier with outcomes, not items.</strong></p>
+<ul><li>Smart thermostat → "turn the heat on before you even get home"</li><li>Electronics protection → "your TV, your fridge, your HVAC, all protected from spikes"</li><li>First Class membership → "priority scheduling, no diagnostic fees, annual safety check"</li></ul>
+<p><strong>6. Reveal price last.</strong></p>
+<blockquote>"For everything I just described, the total investment is…"</blockquote>
+<p><strong>7. Navigate down.</strong> "If you'd like the same core solution without X, here's what that looks like."</p>
+<p><strong>Language, everywhere.</strong> Describe what the part <em>does</em>, not what it <em>is</em>. "Whole-home electronics safety system," not "surge protector." "Install dedicated circuits for kitchen appliances to prevent future tripping," not "add circuit to countertop." The moment you name a part, they price it at the hardware store.</p>
+<p><strong>And the thing underneath all of it:</strong> it's not the words. You can run the exact play and lose it on tone, eye contact, or not having bonded first. Make the friend first.</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.9 two-step presentation; $1M+ Offers 2.74 observations + 2.75 anchoring; Salesbot DNA §5 presentation flow; ACDC ch.5 8 Secrets</div>
+  </div>
+</article><article class="card" id="q26"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i stop being pulled in a thousand directions and constantly firefighting so i can focus on growing the business instead of just reacting to it? mindset &amp; personal clay firefighting is defense, and defense costs you 40% of your capacity. clear the open cycles, book the growth work first, and give the week a fixed rhythm so the fires land somewhere.">
+  <div class="chead">
+    <div class="rank">26</div>
+    <div class="qh">
+      <div class="q">How do I stop being pulled in a thousand directions and constantly firefighting so I can focus on growing the business instead of just reacting to it?</div>
+      <div class="meta"><span class="asked">Asked 16×</span><span>Mindset &amp; Personal</span><span>partner</span><span>Clay</span><span>2023-09-14 – 2026-06-05</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Firefighting is defense, and defense costs you 40% of your capacity. Clear the open cycles, book the growth work first, and give the week a fixed rhythm so the fires land somewhere.</div>
+  <div class="body">
+    <p><strong>Name what's happening.</strong> Defense is the opposite of productivity. Too much on the go, you look at the big picture, you panic, and you default to reacting. Overwhelmed you run at 50–60% of capacity; organised you run at 90–100%. That gap is over 100 days a year.</p>
+<p><strong>Step 1 — Get the open cycles out of your head.</strong> Every unfinished thing you're carrying is draining you whether you're working on it or not. Three lists: health, relationships, business. Everything, however small.</p>
+<p><strong>Step 2 — Label each one.</strong> 1 = must do myself, 2 = must delegate, 3 = must eliminate. Then: eat the frog first each morning, delegate one item a week, and eat crow on one eliminate item every single day until the list is gone.</p>
+<p><strong>Step 3 — Book the growth work before the week fills.</strong> The reason growth never happens is that it's the only thing with no deadline attached. Put it in the calendar first, as a real appointment:</p>
+<ul><li>One block for the numbers (the Monday cash rhythm — collected revenue, buckets, outstanding invoices, can I make payroll)</li><li>One block for people (coaching, option-building practice, one huddle)</li><li>One block for marketing (15–20 minutes a day is enough for organic)</li></ul>
+<p>Everything else fills in around those. If growth work is what moves when a fire starts, nothing will ever change.</p>
+<p><strong>Step 4 — Give the fires somewhere to go.</strong> Most firefighting is a missing system, not bad luck:</p>
+<ul><li>Phone chaos → CSR and the Brighter Day process</li><li>Pricing chaos → your SSR, so nobody has to ask you</li><li>Schedule chaos → lead scoring, so the right tech runs the right call</li><li>Cash chaos → deposits and the bucket system</li><li>Callbacks → track them for <em>patterns</em>, not incidents</li></ul>
+<p>Each fire you keep fighting is a process you haven't written yet.</p>
+<p><strong>Step 5 — The 72-hour rule.</strong> Any decision not made within 72 hours costs momentum. Make it or drop it. A lot of the noise in your head is undecided things, not unfinished ones.</p>
+<p><strong>The mindset, honestly.</strong> Progress = happiness. Present, not perfect. Launch, learn, pivot, adjust, fire again. You're not going to think your way out of overwhelm in one sitting — you're going to clear one cycle at a time until there's room to breathe.</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.3 Offense Over Overwhelm, open cycles, eat the frog, 72-hour rule; ACDC ch.8 weekly rhythm</div>
+  </div>
+</article><article class="card flag" id="q27"
+  data-owner="Clay" data-status="needs_input"
+  data-search="how do i get my team members added to sle, and how many can i bring in? sle program, price &amp; fit clay seat counts and the process for adding team members aren&#x27;t documented in any source i have. this needs a written policy from you before it can be answered.">
+  <div class="chead">
+    <div class="rank">27</div>
+    <div class="qh">
+      <div class="q">How do I get my team members added to SLE, and how many can I bring in?</div>
+      <div class="meta"><span class="need">NEEDS INPUT</span><span class="asked">Asked 15×</span><span>SLE Program, Price &amp; Fit</span><span>partner</span><span>Clay</span><span>2025-05-28 – 2026-01-23</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Seat counts and the process for adding team members aren't documented in any source I have. This needs a written policy from you before it can be answered.</div>
+  <div class="body">
+    <p><strong>I can't answer this one from existing material, and I'm not going to guess at a policy.</strong></p>
+<p>Nothing in the Brand Bible, the Playbook or the teaching content specifies how many team seats each tier includes or what the process is for adding someone.</p>
+<p><strong>Why it's worth writing down.</strong> This was asked <strong>15 times</strong> — the 27th most common question in the entire bank, and the second most common SLE-program question after the spouse decision. Partners are asking repeatedly and there's no canonical answer, which means they're getting different answers depending on who they ask.</p>
+<p><strong>What I need from you to write it:</strong></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Seats included</td><td>How many per tier — Open Circuit, Kickspark, Inner Loop Accountability, Inner Loop Mastery</td></tr><tr><td>Who counts</td><td>Owner only, selling techs, CSRs, installers, office staff?</td></tr><tr><td>Adding someone</td><td>Who do they ask, and what happens — self-serve, or a request to the team?</td></tr><tr><td>Extra seats</td><td>Is there a cost per additional seat, and does it differ by tier?</td></tr><tr><td>Leavers</td><td>What happens to a seat when someone leaves the company</td></tr></tbody></table></div>
+<p><strong>Suggested shape of the answer</strong> once you've given me the policy: a short table by tier, one sentence on the request process, and a named person to contact. Three sentences and a table will retire 15 recurring questions.</p>
+<p>Given the volume, this probably also belongs in onboarding and in the app, not only in an FAQ.</p>
+    <div class="src"><b>Drafted from:</b> Brand Bible §10 program tiers (no seat policy documented)</div>
+  </div>
+</article><article class="card" id="q28"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i respond when a customer asks me to break down my quote or hourly rate? objection handling joseph don&#x27;t itemise, and never do it by text or email. explain why you price the project rather than the hour — they&#x27;re buying a finished outcome, not your time.">
+  <div class="chead">
+    <div class="rank">28</div>
+    <div class="qh">
+      <div class="q">How do I respond when a customer asks me to break down my quote or hourly rate?</div>
+      <div class="meta"><span class="asked">Asked 15×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2024-04-09 – 2025-06-02</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Don't itemise, and never do it by text or email. Explain why you price the project rather than the hour — they're buying a finished outcome, not your time.</div>
+  <div class="body">
+    <p><strong>The request behind the request.</strong> Nobody wants a line-item breakdown so they can admire your maths. They want it so they can delete lines, or price-shop the parts. Give them a breakdown and you've handed them a menu to argue with.</p>
+<p><strong>Never do this over text or email.</strong> It's a conversation, in person, every time. In writing it reads as a defence and they're reading it alone with no one to answer the follow-up.</p>
+<p><strong>The redirect:</strong></p>
+<blockquote>"I'd love to walk you through exactly what's involved. The reason I price this as a project rather than hourly is because I want you to know the total investment upfront — no surprises. Can we find fifteen minutes so I can show you exactly what you're getting?"</blockquote>
+<p><strong>If they push on the hourly maths</strong> — "if I divide this by your rate it seems like it'd take too long" — the answer is that hours aren't the product:</p>
+<blockquote>"If I billed you hourly, you'd be paying for my learning curve, my parts runs and anything that goes sideways. Pricing the project means that's my risk, not yours. The number doesn't move."</blockquote>
+<p>That's a genuinely better deal for them and you should say so.</p>
+<p><strong>What you <em>can</em> be transparent about.</strong> Be absolute about this:</p>
+<blockquote>"Everything you see here is included. There are no additional charges. The price you see is the price you pay."</blockquote>
+<p>Never "taxes and fees not included." Never a card surcharge at checkout. Those destroy more trust than an itemised quote ever builds.</p>
+<p><strong>Re-anchor on the whole product.</strong> The before (evaluation, design, presentation), the during (the work), the after (follow-up, lifetime warranty). An hourly rate only describes the middle third.</p>
+<p><strong>And go back to the options.</strong> If they want to see what moves the price, that's exactly what the six options are:</p>
+<blockquote>"Rather than break the price apart, let me show you the six ways we can do this — you'll see precisely what changes at each level and you can pick where you want to be."</blockquote>
+<p>That answers the real question, honestly, without ever itemising.</p>
+    <div class="src"><b>Drafted from:</b> Salesbot DNA §3 'Can You Break Down the Price by Hour?'; $1M+ Offers 2.73 transparency + SSR vs price book</div>
+  </div>
+</article><article class="card" id="q29"
+  data-owner="Rayna" data-status="draft"
+  data-search="how do i set up, train, and structure my csr&#x27;s role with clear sops? csr &amp; call booking rayna script the front door first — intake, empathy, the membership offer, review and praise — then train to call types, speed-to-lead and lead scoring, and inspect with recordings.">
+  <div class="chead">
+    <div class="rank">29</div>
+    <div class="qh">
+      <div class="q">How do I set up, train, and structure my CSR's role with clear SOPs?</div>
+      <div class="meta"><span class="asked">Asked 15×</span><span>CSR &amp; Call Booking</span><span>partner</span><span>Rayna</span><span>2024-01-11 – 2026-04-09</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Script the front door first — intake, empathy, the membership offer, review and praise — then train to call types, speed-to-lead and lead scoring, and inspect with recordings.</div>
+  <div class="body">
+    <p>Your CSR isn't a receptionist. They're the front door, the speed-to-lead engine and your first brand ambassador. Build the role in this order.</p>
+<p><strong>1. Start with the script, not the job description.</strong> The Brighter Day call process is the SOP. Four blocks:</p>
+<p><strong>Intake.</strong> <em>"It's a great day at [Company], this is [Name] — how can I brighten your day?"</em> Then: who am I speaking with, are you a First Class member, best callback number, confirm the address is in the service area.</p>
+<p><strong>Empathy and clarity.</strong> <em>"Can you tell me a bit more about what's going on?"</em> Then the empathy moment — <em>"That doesn't sound good. Before we go any further, is everyone okay?"</em> Then set expectations: a licensed electrician comes out, diagnoses, and builds an easy-to-understand menu of ways to fix it, so the homeowner controls the budget with no surprises.</p>
+<p><strong>The First Class Pass offer.</strong> Front of the line, waived diagnostics for a year, after-hours access, annual safety inspection. <em>"That level of service is only $X — or if you'd prefer our standard level, today's diagnostic is $X. Which would you prefer?"</em></p>
+<p><strong>Review and praise.</strong> Confirm the day and window, say you'll call the day before and text on the way, invite questions, thank them properly.</p>
+<p><strong>2. Teach the three call types.</strong> Demand (something's wrong — always carries a diagnostic fee), Opportunity (quote on a specific project — stays free), Maintenance/Inspection. Each gets dispatched and communicated differently.</p>
+<p><strong>3. Make speed-to-lead the headline KPI.</strong> The first company to call back wins <strong>78% of the time.</strong> Close rate halves by 30 minutes. This is the single number the role lives or dies on.</p>
+<p><strong>4. Score every lead 1–5.</strong> In-area, responsive, ready to buy, multiple needs = 5 stars and your best tech. 1 star = don't run it at all.</p>
+<p><strong>5. Give them the rest of the loop.</strong> Confirmation calls, on-the-way texts, happy calls after completion (CSR makes these, never the tech), review requests inside an hour of job completion, and unsold follow-up.</p>
+<p><strong>6. Inspect it weekly.</strong> Listen to real calls together. Score against the script. Coach one thing at a time. A script you don't review is a suggestion.</p>
+<p><strong>The KPIs to put on the wall:</strong> speed-to-lead, booking rate, membership attach rate, confirmed-appointment rate, review request rate.</p>
+<p><strong>And the business case if you're hesitating:</strong> 5 missed calls a week at $1,500 of pipeline each is $7,500/week. A CSR costs $3,000–$4,000/month.</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.8 Brighter Day Call Process; ACDC ch.2 speed-to-lead + lead scoring; ch.6 CSR first; $1M+ Call Center pillar</div>
+  </div>
+</article><article class="card" id="q30"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i structure and present options for a job with many issues or a long task list, without overwhelming the customer or overbuilding the scope? pricing &amp; options joseph rank their list 1–6 by their own priority, then map it onto the ladder — safety at basic, their top want at bronze, the whole list at silver, materials and finish above that.">
+  <div class="chead">
+    <div class="rank">30</div>
+    <div class="qh">
+      <div class="q">How do I structure and present options for a job with many issues or a long task list, without overwhelming the customer or overbuilding the scope?</div>
+      <div class="meta"><span class="asked">Asked 15×</span><span>Pricing &amp; Options</span><span>partner</span><span>Joseph</span><span>2023-10-20 – 2026-09-10</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Rank their list 1–6 by their own priority, then map it onto the ladder — safety at Basic, their top want at Bronze, the whole list at Silver, materials and finish above that.</div>
+  <div class="body">
+    <p>A twenty-item list isn't a problem, it's a gift — but only if you organise it by <em>their</em> priority rather than by room or by trade.</p>
+<p><strong>Step 1 — Find the order of importance. In their words.</strong></p>
+<blockquote>"If we did nothing else, what's the one thing you most want to get done?"<br>"What would be next on your priority list?"</blockquote>
+<p>Keep going until you've got them ranked 1 through 6. You're not estimating yet, you're interviewing.</p>
+<p><strong>Step 2 — Map the ranked list onto the ladder.</strong></p>
+<div class="tw"><table><thead><tr><th>Tier</th><th>What goes in it</th></tr></thead><tbody><tr><td><strong>Basic</strong></td><td>The most immediate, pressing safety concern. Only that.</td></tr><tr><td><strong>Economy</strong></td><td>Same safety issue, slightly better materials or method</td></tr><tr><td><strong>Bronze</strong></td><td>Safety concerns + their single most important "want"</td></tr><tr><td><strong>Silver</strong></td><td>Everything on their list, residential-grade materials</td></tr><tr><td><strong>Gold</strong></td><td>Everything on their list, finest available materials</td></tr><tr><td><strong>Platinum</strong></td><td>Best version of every service + upgrades — premium materials, electronics protection, membership, turnkey finishing like paint and patch</td></tr></tbody></table></div>
+<p>That structure answers "where do I even start" for both of you, and it means Silver is the first tier that does the whole list — which is usually where the conversation lands.</p>
+<p><strong>Step 3 — Consolidate things that must happen together.</strong> Don't present items that can't exist independently as separate choices. If adding 100 amps of load requires a panel upgrade, those are one line, not two. Joseph's phrasing: one circuit and one mount at the lower tier; two circuits <em>with</em> the panel upgrade above it, because there's no honest version where those are separate.</p>
+<p><strong>Step 4 — Keep the price gaps even.</strong> Each step down should drop <strong>15–30%</strong>. If you jump $4,200 to $1,500, you've created a hole and they'll start wondering what's missing rather than choosing.</p>
+<p><strong>Step 5 — Write the observations in Platinum order.</strong> Each bullet: what you saw, why it matters to them, how you'll address it, and the reason behind fixing it. Then the presentation reads as one story instead of twenty errands.</p>
+<p><strong>On overbuilding.</strong> You're not overbuilding if everything in the top option is real, useful and honestly described. Platinum isn't meant to be sold — it sets the ceiling. What <em>would</em> be overbuilding is padding it with things you can't explain in terms of what they do for that family.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.74 'Handling the Laundry List'; Salesbot DNA §2 consolidate and layer; 2.73 pricing spread</div>
+  </div>
+</article><article class="card" id="q31"
+  data-owner="Clay" data-status="draft"
+  data-search="what deposit amount or payment-checkpoint policy should i use so i&#x27;m not stuck carrying unpaid balances on big jobs? money &amp; financials clay 50% deposit on projects, collect on completion for service work, and phase anything large with its own milestone payments. never float labour and materials.">
+  <div class="chead">
+    <div class="rank">31</div>
+    <div class="qh">
+      <div class="q">What deposit amount or payment-checkpoint policy should I use so I'm not stuck carrying unpaid balances on big jobs?</div>
+      <div class="meta"><span class="asked">Asked 15×</span><span>Money &amp; Financials</span><span>partner</span><span>Clay</span><span>2024-06-05 – 2026-09-29</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">50% deposit on projects, collect on completion for service work, and phase anything large with its own milestone payments. Never float labour and materials.</div>
+  <div class="body">
+    <p><strong>The rule: 50% deposit on projects.</strong> That covers materials, part of your labour and part of your profit. The Casino Principle — structure it so that if the client backs out, your costs are already protected. The house always wins.</p>
+<p><strong>By job type:</strong></p>
+<div class="tw"><table><thead><tr><th>Work</th><th>Payment</th></tr></thead><tbody><tr><td>Service / demand calls</td><td>Collect at completion</td></tr><tr><td>Projects</td><td>50% deposit, balance on completion</td></tr><tr><td>Large or multi-week</td><td>Phased — each phase has its own deposit and completion payment</td></tr><tr><td>Inspections / real estate</td><td>Retainer up front, credited against the work if they proceed</td></tr></tbody></table></div>
+<p><strong>Phasing a big job</strong> does two things at once: it protects your cash and it lets you honour a price across a longer timeline.</p>
+<blockquote>"I want to help you with this, and I want to honour this price. Let's agree the job is done in three stages. Phase one, deposit, finish on completion. Phase two, same. Phase three, same. I'll pre-schedule all of those appointments now so I can hold this number for you."</blockquote>
+<p>Pre-scheduling is the part that makes it work — otherwise phase three drifts and your price ages.</p>
+<p><strong>Where deposits are legally capped</strong> (California, for instance): split the project into phases with their own milestones — design, permitting, material ordering, installation — each with its own payment.</p>
+<p><strong>Asking for it, plainly:</strong></p>
+<blockquote>"I'm really looking forward to getting this started for you. Before we can schedule the installation, we just need to collect a 50% deposit. How would you like to take care of that?"</blockquote>
+<p>Not "would you mind." Not "we usually ask." It's how the job starts.</p>
+<p><strong>The three objections:</strong></p>
+<p><em>"I've never had to pay a deposit before."</em></p>
+<blockquote>"I understand. Because our services are in high demand, we schedule only with clients who are fully committed. This guarantees your date won't move and that all materials will be ready in advance."</blockquote>
+<p><em>"I can only put down a small amount."</em></p>
+<blockquote>"No problem. Let's look at what we can start with — we can take a smaller initial payment and collect the remainder once the materials are ready or permits are approved."</blockquote>
+<p><em>"Isn't that risky for me?"</em></p>
+<blockquote>"Fair question. Every deposit is protected by a written agreement that sets out exactly what will be completed. We take deposits only to secure materials, your date, and your project priority."</blockquote>
+<p><strong>Then measure it.</strong> Watch Days Sales Outstanding and target <strong>90%+ of invoiced work collected within 7 days.</strong> A deposit policy you don't enforce isn't a policy — it's a preference.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.3 Deposits; Salesbot DNA §4 three-phase payment; ACDC ch.8 cashflow + DSO</div>
+  </div>
+</article><article class="card flag" id="q32"
+  data-owner="Clay" data-status="needs_input"
+  data-search="which crm should i use for my business? software &amp; tools clay sle has no documented crm recommendation. what is documented is that you shouldn&#x27;t build options inside one — and that matters more than which you pick.">
+  <div class="chead">
+    <div class="rank">32</div>
+    <div class="qh">
+      <div class="q">Which CRM should I use for my business?</div>
+      <div class="meta"><span class="need">NEEDS INPUT</span><span class="asked">Asked 15×</span><span>Software &amp; Tools</span><span>partner</span><span>Clay</span><span>2024-04-30 – 2026-10-14</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">SLE has no documented CRM recommendation. What is documented is that you shouldn't build options inside one — and that matters more than which you pick.</div>
+  <div class="body">
+    <p><strong>I'm not going to invent a recommendation.</strong> Nothing in the Playbook, the teaching content or the Brand Bible names a preferred CRM, and this gets asked enough (15 times) that a made-up answer would spread.</p>
+<p><strong>What SLE's material <em>does</em> say, clearly:</strong></p>
+<p><strong>Don't build your options in the CRM.</strong> Use a blank tablet template instead. It's faster, more flexible, and it keeps you present with the customer rather than watching software load while they watch you. This is stated directly in the 6 Options chapter and it's the opposite of how most CRMs want you to work.</p>
+<p><strong>Don't let a CRM push you back into a price book.</strong> The Simple Service Rate exists because price books produce inconsistent and inflated pricing, need constant expensive updating, and mislead techs with task pricing that doesn't fit the actual job. A CRM with a built-in price book will quietly undo your rate.</p>
+<p><strong>So the real criteria are:</strong></p>
+<ol><li>Does it get out of the way during the call?</li><li>Does it let you price from a rate rather than forcing a task catalogue?</li><li>Does it support speed-to-lead — instant notification, fast callback, visible response times?</li><li>Does it track what you actually manage: close rate, average ticket, DSO, membership attach, review requests?</li><li>Can your CSR run the whole front door in it?</li></ol>
+<p><strong>What I need from you and Joseph to finish this:</strong></p>
+<ul><li>Which CRMs our partners most commonly run, and which ones you'd actively steer someone away from</li><li>Whether SLE has any partnership or affiliate relationship that should be disclosed</li><li>Whether there's a documented position by shop size (solo vs multi-van)</li></ul>
+<p>Given this is asked 15 times, it's probably worth a short written stance rather than a per-call answer.</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.9 'do NOT build options in your CRM'; $1M+ Offers 2.73 SSR beats a price book — no CRM recommendation documented</div>
+  </div>
+</article><article class="card" id="q33"
+  data-owner="Joseph" data-status="draft"
+  data-search="what do i say when a customer tells me they&#x27;re getting multiple quotes to compare? objection handling joseph agree with them, then position yourself as the benchmark rather than the last quote in. don&#x27;t ask when they&#x27;re collecting proposals — ask when they want the work done.">
+  <div class="chead">
+    <div class="rank">33</div>
+    <div class="qh">
+      <div class="q">What do I say when a customer tells me they're getting multiple quotes to compare?</div>
+      <div class="meta"><span class="asked">Asked 14×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2024-10-03 – 2025-08-18</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Agree with them, then position yourself as the benchmark rather than the last quote in. Don't ask when they're collecting proposals — ask when they want the work done.</div>
+  <div class="body">
+    <p><strong>Agree first. Immediately and genuinely.</strong></p>
+<blockquote>"That makes total sense. If I was making a $20,000 investment, I'd want to be sure I was working with the right team too."</blockquote>
+<p>Any resistance here reads as fear. Agreement reads as confidence.</p>
+<p><strong>Then change your role in the process.</strong> Don't be quote number three:</p>
+<blockquote>"Here's what I'd suggest — rather than me being the last one in after you've seen everyone else's proposals, let me give you the most thorough evaluation possible. That way you've got a real benchmark for what quality actually looks like."</blockquote>
+<p>You've just reframed yourself from a competitor into the standard the others get measured against.</p>
+<p><strong>Never ask when they're finishing their proposals.</strong> That question serves you, not them, and they know it. Ask about <em>their</em> timeline:</p>
+<blockquote>"When were you hoping to have all this taken care of?"</blockquote>
+<p><strong>Give them something the others won't.</strong> Most competitors will hand over one number on one page. You're leaving them with six options, written observations in their own words, a lifetime craftsmanship warranty and a named point of contact. Say that out loud:</p>
+<blockquote>"When you're comparing, the thing to look at isn't just the number — it's what's included, what's warrantied, and who you'll actually reach if something goes wrong in two years."</blockquote>
+<p><strong>And know why this is happening.</strong> Homeowners shop because one quote gives them nothing to compare <em>except</em> price. Six options largely removes the reason to keep looking — you've already shown them every path, including the cheap one. That's the structural fix. The script above is for the ones who were already shopping before you arrived.</p>
+<p><strong>Book the next step before you leave.</strong> Not "let me know." A time:</p>
+<blockquote>"I'll check in Thursday at ten. If you've gone another way by then, just tell me and I'll close the file."</blockquote>
+<p><strong>And if you genuinely lose it,</strong> it goes into the unsold follow-up process. Plenty of those come back when the cheap quote turns into a change order.</p>
+    <div class="src"><b>Drafted from:</b> Salesbot DNA §3 'I'm Getting Other Quotes' + §4 When Were You Hoping; $1M+ Offers 2.7 §5 six options stop shopping</div>
+  </div>
+</article><article class="card" id="q34"
+  data-owner="Joseph" data-status="draft"
+  data-search="what is the framework for handling objections, and how do i get better at it? objection handling joseph acknowledge → reframe → ask again, every time. then get better by rehearsing specific objections weekly and logging real ones on a facts sheet.">
+  <div class="chead">
+    <div class="rank">34</div>
+    <div class="qh">
+      <div class="q">What is the framework for handling objections, and how do I get better at it?</div>
+      <div class="meta"><span class="asked">Asked 14×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2024-10-26 – 2026-10-19</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Acknowledge → Reframe → Ask Again, every time. Then get better by rehearsing specific objections weekly and logging real ones on a FACTS sheet.</div>
+  <div class="body">
+    <p><strong>The framework is three steps and it never changes.</strong></p>
+<p><strong>1. Acknowledge.</strong> Agree with the feeling before you address the content. <em>"I understand."</em> <em>"That makes total sense."</em> <em>"I don't blame you for asking."</em> You cannot shift someone's view until you've shared it — that's a golden rule, not a technique.</p>
+<p><strong>2. Reframe.</strong> Move from what they said to what's actually true. Price becomes the whole experience. Email becomes which option. Spouse becomes what will they ask. Thinking it over becomes what part.</p>
+<p><strong>3. Ask again.</strong> This is the step everyone drops. After the reframe, go back to the question — which option, when did you want this done, shall we get you on the calendar. Acknowledging and reframing without asking again is a nice conversation, not a sale.</p>
+<p><strong>Underneath it, the Deal Formula:</strong></p>
+<blockquote><strong>(Trust × Desire) ÷ (Risk × Cost) = Partnership</strong></blockquote>
+<p>Every objection is one of those four out of balance. "Too expensive" is usually low desire, not high cost. "Let me think" is usually high risk. Diagnose which one and you'll know what to say.</p>
+<p><strong>How to actually get better — it's reps, not reading.</strong></p>
+<ol><li><strong>Rehearse one objection a week</strong> as a team. Out loud, role-played, not discussed. The one that beat you most recently.</li><li><strong>Keep a FACTS sheet on every call</strong> — <strong>F</strong>ind, <strong>A</strong>ction, <strong>C</strong>lient response, <strong>T</strong>ransaction, <strong>S</strong>ummary. Fill it in after the drive-away, from facts rather than feelings. That turns your calls into data you can coach from. It's how Joseph went from a 20% close rate to 80%.</li><li><strong>Look for the pattern, not the incident.</strong> One lost job is noise. The same objection three weeks running is a gap in your presentation, usually upstream of where you think.</li><li><strong>Fix it upstream.</strong> Most objections are symptoms of something earlier — one option instead of six, price before value, educating during the walkthrough, or the decision-maker not being there. The best objection handling is the objection that never gets raised.</li></ol>
+<p><strong>The thing to remember when a script feels fake:</strong></p>
+<blockquote>"It's not the words. I could walk in and run the exact play and not sell it if my tone is off, if my eye contact is off, if I'm not bonding. Your number one goal is make the friend first."</blockquote>
+<p>Learn the structure. Say it your own way.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.5 'Acknowledge, Reframe, Ask Again'; Salesbot DNA §3 all scripts + §11 make it your own; Playbook ch.11 FACTS</div>
+  </div>
+</article><article class="card" id="q35"
+  data-owner="Joseph" data-status="draft"
+  data-search="what&#x27;s the best general approach to building and presenting pricing options to a customer? pricing &amp; options joseph build from the bottom up, price from the top down, present from the top down. six tiers, 15–30% gaps, prices hidden until the value is built.">
+  <div class="chead">
+    <div class="rank">35</div>
+    <div class="qh">
+      <div class="q">What's the best general approach to building and presenting pricing options to a customer?</div>
+      <div class="meta"><span class="asked">Asked 14×</span><span>Pricing &amp; Options</span><span>partner</span><span>Joseph</span><span>2023-09-14 – 2026-07-03</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Build from the bottom up, price from the top down, present from the top down. Six tiers, 15–30% gaps, prices hidden until the value is built.</div>
+  <div class="body">
+    <p>This is the short version of the whole method. Six moves.</p>
+<p><strong>1. Observe before you solve.</strong> From the moment you're in the door you're collecting, not explaining. Don't solve or educate during the walkthrough — it makes people defensive and they'll shoot ideas down before you've built any value. Ask questions, note things in <em>their</em> words, and detach from the sale.</p>
+<p><strong>2. Build from the bottom up.</strong> Start at the immediate fault — exactly what they called about, nothing else. That's Basic. Then layer upward: better method or materials, then the same problem solved across the whole house, then the system behind it, then future-proofing and finishing.</p>
+<p><strong>3. Use the precious metals.</strong> Platinum, Gold, Silver, Bronze, Economy, Basic. Everyone understands the podium instantly, and you never have to explain the ranking. If you can honestly only build four, build four and label them correctly — never stretch a label to fill a slot.</p>
+<p><strong>4. Price from the top down, in even steps.</strong> Start at Platinum and come down, each step dropping <strong>15–30%</strong>:</p>
+<blockquote>Platinum $6,685 · Gold $5,179 · Silver $4,241 · Bronze $3,167 · Economy $2,195 · Basic $1,417</blockquote>
+<p>Big jumps create a mental gap and the customer starts hunting for what's missing instead of choosing.</p>
+<p><strong>5. Write it so it's readable.</strong> Full description on Platinum, "same as above, without X" on Gold. Full description on Silver, "same as above" on Bronze. All six on one page. Odd numbers at the end ($6,689, not $6,700) — they read as calculated rather than invented. Start by making your hourly rate an odd number and the rest follows.</p>
+<p><strong>6. Present top-down with prices hidden until the end.</strong> Disclaimer first, observations as a story in Platinum order, all six solutions, then the numbers.</p>
+<p><strong>The language rule that runs through all of it.</strong> Describe what the part <em>does</em>, never what it <em>is</em>:</p>
+<ul><li>"Installing a duplex outlet" → "upgrading your home's electrical points for safer power distribution"</li><li>"Adding a switch" → "installing a new lighting control point"</li><li>"Surge protector" → "whole-home electronics safety system"</li></ul>
+<p>Name a part and they'll price it at the hardware store. Name an outcome and they can't.</p>
+<p><strong>And the pricing itself is simple:</strong> SSR × hours + specialty materials + third party (20–30% markup) + permits. That's it. No lookup table, no software, no fumbling with a tablet while they watch.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.72 constructing six + 2.73 pricing + 2.75 anchoring; ACDC ch.3; Playbook ch.9</div>
+  </div>
+</article><article class="card flag" id="q36"
+  data-owner="Forrest" data-status="needs_input"
+  data-search="why aren&#x27;t my google local services ads generating leads? marketing &amp; lead gen forrest the documented cause is response time — google ranks lsa on how fast and how often you answer. the full diagnostic checklist isn&#x27;t written down anywhere and needs forrest&#x27;s input.">
+  <div class="chead">
+    <div class="rank">36</div>
+    <div class="qh">
+      <div class="q">Why aren't my Google Local Services Ads generating leads?</div>
+      <div class="meta"><span class="need">NEEDS INPUT</span><span class="asked">Asked 14×</span><span>Marketing &amp; Lead Gen</span><span>partner</span><span>Forrest</span><span>2025-05-21 – 2026-06-01</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">The documented cause is response time — Google ranks LSA on how fast and how often you answer. The full diagnostic checklist isn't written down anywhere and needs Forrest's input.</div>
+  <div class="body">
+    <p><strong>What SLE's material actually says about LSA</strong>, which is short but load-bearing:</p>
+<blockquote>Google Local Service Ads put you at the very top of search for "electrician near me." <strong>You're paying for position, and Google rewards companies that respond quickly.</strong></blockquote>
+<p>That's the main lever. LSA is not a bid-only auction — your ranking is affected by answer rate, response speed, review volume and rating, and whether you dispute bad leads. If the phone rings out while you're in a wall, your ranking drops and the leads dry up. The problem then looks like "LSA doesn't work" when it's actually a speed-to-lead problem.</p>
+<p><strong>The same chapter's rule applies:</strong> the first company to call back wins <strong>78% of the time</strong>, and close rate halves by thirty minutes. For LSA specifically that compounds — slow answers cost you both the lead <em>and</em> future impressions.</p>
+<p><strong>So before anything else, check:</strong></p>
+<ol><li>Are you answering every LSA call live? Missed calls are the single biggest ranking killer.</li><li>Is your Google Business Profile complete, verified, and accurate on service area and hours?</li><li>How many reviews do you have? Target 100 as a floor, then keep going.</li><li>Are you disputing genuinely bad leads? Unchallenged bad leads distort your cost per lead and your rating.</li><li>Is your budget actually competitive for your area, or set at a number from a year ago?</li></ol>
+<hr>
+<p><strong>This needs Forrest's input to be a real answer.</strong></p>
+<p>I have no documented SLE troubleshooting guide for LSA — no benchmark cost-per-lead by market, no target answer rate, no documented position on budget levels or on how aggressively to dispute. Those are the things a partner actually needs, and I'm not going to invent industry numbers.</p>
+<p><strong>Forrest: what's your checklist when a partner says LSA has gone quiet?</strong> Give me that and this becomes a proper answer. It was asked 14 times, so it's worth writing down once.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.2 Engine 1 LSA + speed-to-lead; no LSA troubleshooting guide documented</div>
+  </div>
+</article><article class="card" id="q37"
+  data-owner="Clay" data-status="draft"
+  data-search="why is my business not profitable (or barely breaking even) even though sales and revenue look strong, and what should a healthy margin look like? money &amp; financials clay revenue without margin is expensive exercise. check the five levers in order — material % is usually the leak — and remember 30% markup is only ~23% margin.">
+  <div class="chead">
+    <div class="rank">37</div>
+    <div class="qh">
+      <div class="q">Why is my business not profitable (or barely breaking even) even though sales and revenue look strong, and what should a healthy margin look like?</div>
+      <div class="meta"><span class="asked">Asked 14×</span><span>Money &amp; Financials</span><span>partner</span><span>Clay</span><span>2023-10-18 – 2025-12-10</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Revenue without margin is expensive exercise. Check the five levers in order — material % is usually the leak — and remember 30% markup is only ~23% margin.</div>
+  <div class="body">
+    <p><strong>Most operators can tell you their revenue. Very few can tell you their profit per van, per job or per employee.</strong> That's the gap between a busy company and a wealthy one.</p>
+<p><strong>First, the arithmetic that fools people.</strong> A 30% markup is <strong>not</strong> a 30% margin. 30% markup typically nets around <strong>23%</strong> once everything is counted. If you built your pricing assuming markup equals margin, you're short before you start.</p>
+<p><strong>Then check the five levers, in this order.</strong></p>
+<p><strong>1. Material cost %.</strong> Should be <strong>10–15% of revenue.</strong> Above 15% you're leaking. This is the fastest fix and usually the biggest. One $4M partner took materials from <strong>19% to 11% in 30 days</strong> — $210K incremental, $500K annualised. Causes: no van inventory discipline, buying retail, no job-level material tracking, giving away "while I'm here" extras.</p>
+<p><strong>2. Labour efficiency.</strong> Billable hours as a percentage of total hours. <strong>Target 50%+.</strong> Every 5% you recover is tens of thousands. If you priced on 1,000 billable hours a van and you're actually running 700, your real rate is 40% below what you think.</p>
+<p><strong>3. Revenue per van.</strong> Benchmark is 1,000 hours × your SSR. Compare each van. The spread between your best and worst van is your coaching list.</p>
+<p><strong>4. Overhead discipline.</strong> Fixed costs as a percentage of revenue should <strong>shrink</strong> as you grow. If it isn't shrinking, you're scaling your problems rather than your business.</p>
+<p><strong>5. Average ticket.</strong> A 10% improvement with the same call volume and close rate is a 10% revenue increase at zero additional cost. This is the pure one.</p>
+<p><strong>What healthy looks like.</strong> The $4M partner holds <strong>30%+ net profit</strong> with a 12-person team, materials at 11% and marketing at 7–8%. That's the shape of a profitable service business, and it came from "addition by subtraction" — removing misaligned people, installing cost discipline, and upgrading the installer process.</p>
+<p><strong>Then run the Reverse P&amp;L.</strong> Start from the profit you want and work backward: profit → revenue at your margin → cost structure → team size and marketing spend → billable hours and vans. You'll see exactly where your current structure can't get there.</p>
+<p><strong>The honest sequence:</strong> if revenue is strong and profit isn't, it is almost always (a) markup/margin confusion in your rate, (b) material leakage, or (c) labour efficiency well under 50%. Check those three before you touch anything else.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.8 Five Profit Levers + Reverse P&amp;L; $4M partner proof point; $1M+ Offers 2.23 markup vs margin; Playbook ch.2</div>
+  </div>
+</article><article class="card" id="q38"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i delegate sales calls to someone on my team instead of running every sale myself? team &amp; leadership joseph transfer the system, not your personality. ssr + six options + a script they can run, then ride along, inspect real option sheets weekly, and pay for the behaviour.">
+  <div class="chead">
+    <div class="rank">38</div>
+    <div class="qh">
+      <div class="q">How do I delegate sales calls to someone on my team instead of running every sale myself?</div>
+      <div class="meta"><span class="asked">Asked 13×</span><span>Team &amp; Leadership</span><span>partner</span><span>Joseph</span><span>2023-06-01 – 2025-11-20</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Transfer the system, not your personality. SSR + six options + a script they can run, then ride along, inspect real option sheets weekly, and pay for the behaviour.</div>
+  <div class="body">
+    <p><strong>Why this usually fails.</strong> Owners try to delegate <em>themselves</em> — their judgement, their relationships, their feel for a room. That can't be handed over. What can be handed over is a system. If your sales process lives in your head, you don't have a sales process. You <em>are</em> the sales process.</p>
+<p><strong>The honest test</strong> — our own Offers survey asks it directly: <em>if you rode along tomorrow, how likely is it the tech runs the call exactly as designed?</em> And: <em>can a tech present without the owner there, consistently?</em> Most shops score "depends on the tech." That's the gap.</p>
+<p><strong>The four things that have to exist before you hand over a call.</strong></p>
+<p><strong>1. A rate they can price with.</strong> The Simple Service Rate is what makes delegation possible. A tech with an SSR can price any job in minutes without calling you. A tech with a price book will either guess or phone you — and a price book can't be delegated reliably.</p>
+<p><strong>2. A fixed structure.</strong> Six options, built bottom-up, priced top-down, presented top-down with prices hidden. Not "do your best." The same shape on every call.</p>
+<p><strong>3. The actual words.</strong> The disclaimer, the observations format, the 4 Whats, the objection framework. Write the scripts down. "Build rapport" is not an instruction.</p>
+<p><strong>4. A call flow.</strong> Pre-arrival through survey — the #DemandCallLotto steps. Checklist, not vibes.</p>
+<p><strong>Then transfer it in this order:</strong></p>
+<ul><li>They watch you run three calls</li><li>You watch them run three calls and say nothing</li><li>They run calls alone, you review the option sheet and the FACTS sheet after each</li><li>You spot-check with a ride-along monthly</li></ul>
+<p><strong>Inspect weekly, forever.</strong> ITRS — Inspect, Train, Recognise, Support. Bring real option sheets to a weekly huddle. Count the options. Check the price gaps. Read the observations. Coach one thing. Drift is the default state of any process you stop looking at.</p>
+<p><strong>Pay for the behaviour you want.</strong> Base for stability plus performance pay tied to close rate, average ticket and CSat. If the pay plan rewards speed and volume, you'll get speed and volume, regardless of what the script says.</p>
+<p><strong>And accept the dip.</strong> Your close rate will drop while they learn. That's the cost of buying your time back, and it's cheaper than you staying in every call forever.</p>
+    <div class="src"><b>Drafted from:</b> Offers Survey Q16 + Q22 ride-along test; $1M+ Offers 2.72; ACDC ch.6 compensation + ITRS; Playbook ch.13 install upgrade</div>
+  </div>
+</article><article class="card" id="q39"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i get control of my business finances — build a budget, track where money goes, understand my p&amp;l — when i&#x27;ve never had a system? money &amp; financials clay start with four buckets and a monday rhythm — that&#x27;s a system you can run this week. the p&amp;l becomes readable once the money is already sorted.">
+  <div class="chead">
+    <div class="rank">39</div>
+    <div class="qh">
+      <div class="q">How do I get control of my business finances — build a budget, track where money goes, understand my P&amp;L — when I've never had a system?</div>
+      <div class="meta"><span class="asked">Asked 13×</span><span>Money &amp; Financials</span><span>partner</span><span>Clay</span><span>2023-10-02 – 2025-09-24</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Start with four buckets and a Monday rhythm — that's a system you can run this week. The P&amp;L becomes readable once the money is already sorted.</div>
+  <div class="body">
+    <p>You don't need to become an accountant. You need a rhythm and four buckets.</p>
+<p><strong>Start here: the Cash Bucket System.</strong> Every dollar collected gets split:</p>
+<ul><li><strong>Operating</strong> — payroll, materials, fuel, this week's costs</li><li><strong>Tax</strong> — 25–30% of profit, moved <strong>before</strong> you touch anything</li><li><strong>Profit</strong> — yours, taken monthly. Don't reinvest all of it</li><li><strong>Growth</strong> — funded by the Growth Rate already inside your SSR, spent only on planned expansion</li></ul>
+<p>Separate accounts, not notional categories. The whole point is that the operating balance tells you the truth without you having to work anything out.</p>
+<p><strong>Then the Monday rhythm.</strong> Same five steps, every week, 20 minutes:</p>
+<ol><li>Review last week's <strong>collected</strong> revenue (collected, not invoiced)</li><li>Allocate to the four buckets</li><li>Review outstanding invoices and chase them</li><li>Ask: can I make payroll? Can I cover this week's materials?</li><li>If a bucket is low, that's a signal, not a crisis — adjust now</li></ol>
+<p>This replaces the thing you're doing currently, which is looking at one bank balance and feeling either rich or panicked.</p>
+<p><strong>Three numbers to track from day one:</strong></p>
+<ul><li><strong>Days Sales Outstanding</strong> — how long from job done to money in</li><li><strong>Weekly collection rate</strong> — target <strong>90%+ of invoiced work collected within 7 days</strong></li><li><strong>Material cost %</strong> — should be 10–15% of revenue</li></ul>
+<p><strong>Reading the P&amp;L.</strong> You don't need to love it, you need to check five lines monthly: revenue, material %, labour, overhead as a % of revenue, and net profit. Overhead % should shrink as you grow. If it's growing, you're scaling problems.</p>
+<p><strong>Build the budget backwards, not forwards.</strong> The Reverse P&amp;L: start with the net profit you want this year, work back to the revenue needed at your margin, then the cost structure, team size and marketing spend that supports it, then billable hours and vans. Forward budgeting tells you what you can afford. Backward budgeting tells you what has to be true.</p>
+<p><strong>The expenses owners systematically forget</strong> — worth checking yours includes all of them, because they're the same ones that go missing from pricing: your own salary at a real number, retirement/investment at ~10%, and a 90-day nest egg.</p>
+<blockquote><em>"It is always better to be looking at the money than looking for it."</em></blockquote>
+<p><strong>If the numbers genuinely don't click,</strong> that's what the Friday Advanced Ops and Finance session is for — bring your actual figures rather than a general question.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.8 four pillars, buckets, weekly rhythm, Reverse P&amp;L; $1M+ Offers 2.21 burden rate expense list</div>
+  </div>
+</article><article class="card flag" id="q40"
+  data-owner="Clay" data-status="needs_input"
+  data-search="how do i get my van/truck inventory and material ordering under control so it doesn&#x27;t waste time or money? operations &amp; admin clay the benchmark is documented — materials should be 10–15% of revenue — but sle has no written van-inventory or purchasing sop. the target is real; the method needs writing.">
+  <div class="chead">
+    <div class="rank">40</div>
+    <div class="qh">
+      <div class="q">How do I get my van/truck inventory and material ordering under control so it doesn't waste time or money?</div>
+      <div class="meta"><span class="need">NEEDS INPUT</span><span class="asked">Asked 13×</span><span>Operations &amp; Admin</span><span>partner</span><span>Clay</span><span>2025-03-27 – 2026-07-06</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">The benchmark is documented — materials should be 10–15% of revenue — but SLE has no written van-inventory or purchasing SOP. The target is real; the method needs writing.</div>
+  <div class="body">
+    <p><strong>What's documented, and it's the important half.</strong></p>
+<p><strong>Material cost should be 10–15% of revenue.</strong> Above 15% you are leaking money. This is Profit Lever 2 and it's usually the fastest fix available to a service shop.</p>
+<p>The proof it moves: one $4M partner took materials from <strong>19% to 11% in 30 days</strong> — <strong>$210K incremental, roughly $500K annualised.</strong> No price increase, no extra calls. Just cost discipline.</p>
+<p><strong>So the first action is measurement, not organisation.</strong> Work out your material cost as a percentage of revenue for the last three months. If it's under 15%, your van is untidy but it isn't expensive, and your time is better spent elsewhere. If it's over 15%, you've found a large amount of money.</p>
+<p><strong>Where the leak normally is</strong> (reasoning from the lever, not from a documented SLE SOP):</p>
+<ul><li>Buying retail at the counter instead of on a supply-house account</li><li>No job-level material tracking, so nobody knows which jobs lose money</li><li>"While I'm here" extras given away and never priced</li><li>Re-buying stock that's already in the van because nobody can see it</li><li>Specialty materials absorbed into the service rate instead of billed on top — your SSR's material component covers <strong>consumables only</strong> (wire nuts, screws, boxes, connectors, plates, spackle), not specialty items</li></ul>
+<p>That last one is worth checking first. It's a pricing error that looks like a materials problem.</p>
+<hr>
+<p><strong>What I need from you to finish this properly.</strong></p>
+<p>SLE has no documented van inventory or purchasing SOP that I can find — no par-level system, no restock cadence, no preferred approach to supplier accounts or job costing. This was asked <strong>13 times</strong>, so partners are looking for one.</p>
+<p>If you want a written standard, I need: how you'd set par levels, who restocks and when, how material gets attached to a job, and whether there's a tool you recommend for it. Otherwise this answer stops honestly at the benchmark and the diagnosis.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.8 Lever 2 material cost % (10–15% benchmark, $4M partner 19%→11%); no inventory SOP documented</div>
+  </div>
+</article><article class="card" id="q41"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i switch from hourly/time-and-material pricing to flat-rate pricing without losing profit or customer trust? pricing &amp; options clay you&#x27;re not switching to flat rate — you&#x27;re switching to a service rate, which is simpler than both. calculate the ssr, price the job in minutes, and stop quoting hours out loud.">
+  <div class="chead">
+    <div class="rank">41</div>
+    <div class="qh">
+      <div class="q">How do I switch from hourly/time-and-material pricing to flat-rate pricing without losing profit or customer trust?</div>
+      <div class="meta"><span class="asked">Asked 13×</span><span>Pricing &amp; Options</span><span>partner</span><span>Clay</span><span>2023-06-21 – 2025-12-19</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">You're not switching to flat rate — you're switching to a service rate, which is simpler than both. Calculate the SSR, price the job in minutes, and stop quoting hours out loud.</div>
+  <div class="body">
+    <p><strong>The framing matters.</strong> The choice isn't hourly versus a price book. SLE's method is a third thing — the <strong>Service Rate Method</strong> — and it's less work than either.</p>
+<p><strong>Why hourly is costing you.</strong></p>
+<ul><li>You're punished for being good. Faster work earns less.</li><li>The customer can do arithmetic at you — "that's four hours, why so much?"</li><li>Anything that goes wrong comes out of your margin while you explain it.</li><li>It makes the conversation about your time, which is the one thing they'll always think is too expensive.</li></ul>
+<p><strong>Why a price book isn't the answer either.</strong> Joseph used one until it failed him on a single price and cost him <strong>over $1,000 on one job.</strong> The Service Rate Method was born the next day. Price books need laborious, expensive updating, miss job-specific variables, mislead techs with task pricing that doesn't fit the actual scope, and need heavy training to use properly.</p>
+<p><strong>The Service Rate Method, start to finish:</strong></p>
+<ol><li>Establish your <strong>Sold Rate</strong> — your billable labour rate without materials</li><li>Add roughly <strong>$60/hr for general materials</strong> → your <strong>Service Rate</strong> (e.g. $290 + $60 = $350/hr)</li><li>Walk the job in your head — time, materials, any third party</li><li>Add <strong>specialty materials</strong> that exceed the general inclusion</li><li>Add <strong>permits</strong></li><li>Add <strong>third-party contractors</strong> with a 20–30% markup</li></ol>
+<blockquote>3 hours × $350 = $1,050 · specialty materials $150 · third party $300 → <strong>$1,600</strong></blockquote>
+<p>No software. No lookup table. No tablet loading while the customer watches you fumble.</p>
+<p><strong>On "losing profit."</strong> You won't, if you did the burden/growth/profit/material work first — the rate is built to cover everything. What usually happens is the opposite: a partner's first three presentations off a service rate produced a Basic at <strong>$694</strong> that would previously have been about <strong>$225</strong>, plus Gold options at $2,794 and $2,523. Three calls, $6,011 against roughly $675 the old way.</p>
+<p><strong>On "losing trust."</strong> Customers don't trust hourly — they <em>fear</em> it, because it's open-ended. A single number with everything included is the more trustworthy offer, and you can say so:</p>
+<blockquote>"Everything you see here is included. There are no additional charges. The price you see is the price you pay."</blockquote>
+<p><strong>The transition.</strong> Do your SSR this week. Price your next ten jobs both ways privately and compare. Then switch cleanly on a date — don't run two systems, it just lets you talk yourself back out of it.</p>
+<p><strong>Expect price shock — yours.</strong> It's the number being new to you, not new to the market. Trust the math more than the feeling.</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.5 Anti-Pricebook + Service Rate Method; $1M+ Offers 2.73 §3; 2.25 price shock; client win story</div>
+  </div>
+</article><article class="card flag" id="q42"
+  data-owner="Joseph" data-status="needs_input"
+  data-search="how should i structure and price options for an ev charger install? pricing &amp; options joseph the options framework applies cleanly — load, distance, capacity, future-proofing. the ev-specific scope at each tier needs joseph&#x27;s electrical detail before this ships.">
+  <div class="chead">
+    <div class="rank">42</div>
+    <div class="qh">
+      <div class="q">How should I structure and price options for an EV charger install?</div>
+      <div class="meta"><span class="need">NEEDS INPUT</span><span class="asked">Asked 13×</span><span>Pricing &amp; Options</span><span>partner</span><span>Joseph</span><span>2024-10-02 – 2026-09-29</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">The options framework applies cleanly — load, distance, capacity, future-proofing. The EV-specific scope at each tier needs Joseph's electrical detail before this ships.</div>
+  <div class="body">
+    <p><strong>The framework holds — build on capacity and future-proofing, not on the charger.</strong></p>
+<p>The axes that make an EV install a six-option job:</p>
+<ol><li><strong>Charger level and amperage</strong> — what they need today</li><li><strong>Panel capacity</strong> — whether the existing service can carry it</li><li><strong>Run length and routing</strong> — surface vs recessed, conduit, trenching for detached garages</li><li><strong>Future load</strong> — a second vehicle, a hot tub, a shop, a heat pump</li><li><strong>Protection and monitoring</strong> — surge protection, dedicated circuits, load management</li><li><strong>Finishing</strong> — patch, paint, clean install</li></ol>
+<p><strong>The structural logic</strong>, same as any job: Basic is the minimum that solves what they asked for. Each step up changes either the <em>method</em> (surface → recessed → trenched), the <em>capacity</em> (one circuit → a larger feed → a panel upgrade), or the <em>scope</em> (one charger → provision for a second → the whole system).</p>
+<p><strong>Joseph's rule on capacity applies directly here.</strong> From the junction-box teaching: if you're running a circuit and it's already maxed, the tier above isn't a nicer charger — it's more power. <em>"You may never need that much, but if we're ever going to do it, now is the time."</em> With EV that's the strongest argument you'll make, because the wall is open and the second vehicle is coming.</p>
+<p><strong>And if the panel can't take it,</strong> the panel upgrade isn't an upsell, it's a prerequisite — consolidate it into one option rather than presenting it as a separate choice the customer can decline into a non-working install.</p>
+<hr>
+<p><strong>Joseph: this needs your specifics before it goes to partners.</strong></p>
+<p>I can give the structure from the options framework, but I'm not going to invent amperages, charger tiers, load-calculation guidance or typical hour counts — that's electrical detail and getting it wrong in a published answer would be worse than not answering.</p>
+<p>What would finish it: a worked six-option EV example the way you do them live — Basic through Platinum with the actual scope at each tier. One worked example retires this question permanently, and it's the 42nd most asked (13 times).</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.72 / 2.74 options framework; Salesbot DNA §7 detached-building scenario (analogous, not EV-specific)</div>
+  </div>
+</article><article class="card" id="q43"
+  data-owner="Clay" data-status="draft"
+  data-search="how should i structure commission or pay for a technician who sells? team &amp; leadership clay base for stability plus performance pay tied to close rate, average ticket and csat — not commission on revenue alone. sle has no published percentages, so the structure is below, not the numbers.">
+  <div class="chead">
+    <div class="rank">43</div>
+    <div class="qh">
+      <div class="q">How should I structure commission or pay for a technician who sells?</div>
+      <div class="meta"><span class="asked">Asked 13×</span><span>Team &amp; Leadership</span><span>partner</span><span>Clay</span><span>2024-10-07 – 2026-06-18</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Base for stability plus performance pay tied to close rate, average ticket and CSat — not commission on revenue alone. SLE has no published percentages, so the structure is below, not the numbers.</div>
+  <div class="body">
+    <p><strong>The documented structure:</strong></p>
+<ul><li><strong>Base salary for stability.</strong> A pure-commission tech sells under pressure, and pressure is what customers smell. Base first.</li><li><strong>Performance bonuses tied to KPIs</strong> — close rate, average ticket, CSat score, review count</li><li><strong>Growth incentives</strong> — hit milestones, unlock raises</li><li><strong>Benefits that matter</strong> — health cover, retirement matching, paid training</li></ul>
+<p><strong>Why it's KPIs rather than straight commission on revenue.</strong> Commission on revenue alone rewards the one behaviour you don't want: closing whatever is easiest, fastest and biggest. Paying against close rate <em>and</em> average ticket <em>and</em> customer satisfaction means the only way to earn well is to run the process properly on every call.</p>
+<p><strong>Tie the pay plan to the five pillars</strong> — those are already your dashboard: qualified leads, close rate, transactions per client, average ticket, gross margin. A tech can directly move three of them.</p>
+<p><strong>What to be careful of:</strong></p>
+<ul><li>Paying on <strong>sold</strong> rather than <strong>collected</strong> work — you'll fund commissions out of money you haven't received. Pay on collected, or hold back until collection.</li><li>Rewarding speed and volume, which quietly kills the six-option process.</li><li>Leaving CSat out. Without it, you'll pay for revenue that generates callbacks and bad reviews.</li></ul>
+<p><strong>And the retention truth:</strong> the best techs don't leave for money. They leave because they stopped growing. A clear path from tech to lead tech to manager, real training, and recognition that happens publicly will hold people that a slightly higher percentage elsewhere won't.</p>
+<hr>
+<p><strong>On the actual percentages — I'm not going to invent them.</strong></p>
+<p>SLE's material documents the <em>structure</em> (base + performance bonuses tied to KPIs) but publishes no commission rates, no bonus thresholds and no split by job type. This was asked 13 times and partners want numbers.</p>
+<p><strong>Clay: if you want a documented position,</strong> I need your view on the base/variable split, what a bonus triggers on, and whether it differs for a selling tech versus a dedicated salesperson. Until then this answer gives the shape and says the numbers are a coaching conversation — which is honest, and better than a made-up percentage spreading through the partner base.</p>
+    <div class="src"><b>Drafted from:</b> ACDC ch.6 'Compensation That Retains' + APEX retain; Offers Survey Q24 enforcement; Playbook ch.2 pillars as KPIs</div>
+  </div>
+</article><article class="card flag" id="q44"
+  data-owner="Joseph" data-status="needs_input"
+  data-search="how can i use ai or tools/templates to build sales options faster? software &amp; tools joseph the documented speed-ups are offer templates for your top ten call types and a blank tablet template rather than your crm. the ai tooling exists but its current status needs confirming.">
+  <div class="chead">
+    <div class="rank">44</div>
+    <div class="qh">
+      <div class="q">How can I use AI or tools/templates to build sales options faster?</div>
+      <div class="meta"><span class="need">NEEDS INPUT</span><span class="asked">Asked 12×</span><span>Software &amp; Tools</span><span>partner</span><span>Joseph</span><span>2025-03-10 – 2026-02-02</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">The documented speed-ups are offer templates for your top ten call types and a blank tablet template rather than your CRM. The AI tooling exists but its current status needs confirming.</div>
+  <div class="body">
+    <p><strong>What's documented, and it works today without any AI at all.</strong></p>
+<p><strong>1. Build offer templates for your top ten call types.</strong> Each one holds a ready script, three to six options, deposit rules, financing language and the exact warranty wording. Build one a week and in ten weeks you have a core library that covers most of what you run. Update them quarterly.</p>
+<p>This is the single biggest speed-up available and almost nobody does it. Most electricians rebuild the same panel-upgrade options from scratch every time.</p>
+<p><strong>2. Use a blank tablet template, not your CRM.</strong> Faster, more flexible, and it keeps you present with the customer instead of watching software load. Building options inside a CRM is explicitly advised against.</p>
+<p><strong>3. Use the SLE Inspection Hotlist.</strong> It's organised by area of the home — kitchen, laundry, bathrooms, living room, garage, outdoors — and exists precisely so you're not trying to remember everything on the spot. Review the relevant sections before the appointment, reference it during the walkthrough, use it to build the menu afterwards. <a href="https://serviceloop.notion.site/SLE-Inspection-Hotlist-Options-Reference-Manual-bc37272a1d884ce5b095d8c99580df23" target="_blank" rel="noopener">SLE Inspection Hotlist &amp; Options Reference Manual</a></p>
+<p><strong>4. Know your SSR cold.</strong> This is the real bottleneck. With a service rate, options design takes about <strong>12 minutes</strong>. With a price book, it takes as long as the lookup does. The speed problem is usually a pricing-method problem wearing a disguise.</p>
+<hr>
+<p><strong>On the AI tooling — needs confirmation before I publish anything.</strong></p>
+<p>There is an <strong>Options Wizard</strong> built on Joseph's methodology (the Salesbot DNA document exists specifically as its knowledge base). I'm not going to tell partners how to use it, where it lives, or which tiers get access, because I can't verify any of that from the material I have.</p>
+<p><strong>Joseph / Clay: to finish this I need</strong> — is the Options Wizard live for partners, where do they access it, which tiers, and is there anything it should <em>not</em> be used for? Asked 12 times, so it's worth a clear line.</p>
+    <div class="src"><b>Drafted from:</b> Salesbot DNA header (Options Wizard AI knowledge base); Playbook ch.9 blank tablet template; $1M+ Offers 2.1 offer templates</div>
+  </div>
+</article><article class="card" id="q45"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i build (ideally 6) pricing options quickly and consistently on every call instead of running out of time, ideas, or confidence? pricing &amp; options joseph twelve minutes is the target and it&#x27;s reachable. know your ssr, work from templates for your top ten call types, build bottom-up, and use &#x27;same as above&#x27; so you&#x27;re not rewriting.">
+  <div class="chead">
+    <div class="rank">45</div>
+    <div class="qh">
+      <div class="q">How do I build (ideally 6) pricing options quickly and consistently on every call instead of running out of time, ideas, or confidence?</div>
+      <div class="meta"><span class="asked">Asked 12×</span><span>Pricing &amp; Options</span><span>partner</span><span>Joseph</span><span>2023-09-18 – 2025-12-18</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Twelve minutes is the target and it's reachable. Know your SSR, work from templates for your top ten call types, build bottom-up, and use 'same as above' so you're not rewriting.</div>
+  <div class="body">
+    <p><strong>The benchmark: about 12 minutes</strong> to design six options, inside a 30–45 minute call. If you're well past that, one of four things is missing.</p>
+<p><strong>1. Your SSR isn't automatic.</strong> This is the usual culprit. With a service rate you estimate hours, multiply, add specialty materials and permits — done. With a price book you're hunting through a catalogue while the customer waits. Know your number cold and the rest gets fast.</p>
+<p><strong>2. You don't have templates.</strong> Build a complete offer for each of your <strong>top ten call types</strong> — panel upgrade, EV charger, recessed lighting, generator, service call, and so on. Each with its options already shaped, the deposit rule, the financing language and the warranty wording. Then you're adapting, not inventing. One a week for ten weeks.</p>
+<p><strong>3. You're building top-down.</strong> Build from the <strong>bottom up</strong> — start at the fault, layer upward. Price from the top down. Trying to invent Platinum first on a cold job is where people freeze.</p>
+<p><strong>4. You're writing every line out.</strong> Use "same as above":</p>
+<ul><li>Platinum: full description</li><li>Gold: same as above, without X</li><li>Silver: full description</li><li>Bronze: same as above, without Y</li><li>Economy: full description</li><li>Basic: separate if it's genuinely different</li></ul>
+<p>You write three descriptions, not six, and the pairs become easier for the customer to compare.</p>
+<p><strong>For the "running out of ideas" problem</strong>, the four axes always give you six:</p>
+<ol><li>The fault itself</li><li>Method and materials (surface vs recessed, residential vs commercial grade, patched vs finished)</li><li>The same problem across the whole house</li><li>The system behind it, plus protection, labelling, inspection and membership</li></ol>
+<p>And when their list is long, rank it 1–6 in their words first, then map it: Basic = most pressing safety item, Bronze = safety + their top want, Silver = the whole list, Gold = the whole list in the best materials, Platinum = the best version of everything plus finishing.</p>
+<p><strong>For the confidence problem:</strong> run weekly option-building sessions with your team. It's technical training, not sales training — it genuinely improves install knowledge, and confidence follows competence rather than the other way round.</p>
+<p><strong>And use the Hotlist</strong> so you're not relying on memory in someone's hallway.</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.10 '~12 minutes' + ch.9; $1M+ Offers 2.1 templates, 2.72 same-as-above, 2.74 laundry list; 2.73 SSR</div>
+  </div>
+</article><article class="card" id="q46"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i build a consistent follow-up process so leads, quiet prospects, and unsold estimates don&#x27;t fall through the cracks? sales &amp; closing clay unsold work is deferred, not lost — and it belongs to whoever follows up first. frame the call as quality control, run it from the office, and touch every lead up to 10 times.">
+  <div class="chead">
+    <div class="rank">46</div>
+    <div class="qh">
+      <div class="q">How do I build a consistent follow-up process so leads, quiet prospects, and unsold estimates don't fall through the cracks?</div>
+      <div class="meta"><span class="asked">Asked 12×</span><span>Sales &amp; Closing</span><span>partner</span><span>Clay</span><span>2023-11-13 – 2026-04-29</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Unsold work is deferred, not lost — and it belongs to whoever follows up first. Frame the call as quality control, run it from the office, and touch every lead up to 10 times.</div>
+  <div class="body">
+    <p><strong>The premise:</strong> every time a tech leaves without a sale, that revenue isn't gone. It's deferred. And it belongs to whoever follows up first.</p>
+<p><strong>Build three follow-up motions, not one.</strong></p>
+<hr>
+<p><strong>1. The unsold follow-up call</strong> — after every call where options weren't bought. Made by a customer service manager or the owner, <strong>not</strong> the tech who ran it. It does three jobs at once: quality control, revenue recovery, and finding out why people don't buy.</p>
+<p>The framing is what makes it work — <strong>it's a quality check, not a second pitch</strong>:</p>
+<blockquote>"I'm following up to make sure you got everything you paid for on your most recent visit from [Tech]. Do you have a couple of minutes?"</blockquote>
+<p>Then service quality: <em>"What did you think about the level of service [Tech] provided?"</em> Then confirm the original reason for the visit. Then the unsold option:</p>
+<blockquote>"I see that during his visit, [Tech] had a concern with [the fault] in [location]. The reason he offered that was to [benefit/risk]. If you don't mind my asking — what was the reason you didn't move forward with that?"<br>"Just so we know how to communicate it better in future — what would have motivated you to have it taken care of?"<br>"Would you be open to having one of our quality control specialists come out and re-evaluate the project to see if we can accommodate that for you?"</blockquote>
+<p>That last question books calls. And the "how could we have communicated it better" answer is worth as much as the sale — it tells you what's broken in your presentation.</p>
+<hr>
+<p><strong>2. Database reactivation</strong> — the long game. Work every unsold lead up to <strong>10 touches</strong> before you close the file. Call, text, email. Treat them as someone waiting for help, not someone lost. Most shops are sitting on tens of thousands of dollars in a phone they never open.</p>
+<hr>
+<p><strong>3. Warranty and seasonal follow-up</strong> — 6–12 months post-install, framed around the guarantee:</p>
+<blockquote>"I wanted to check everything's running perfectly. Your installation is covered for life, and part of that guarantee includes an annual inspection. When would be a good time to schedule it?"</blockquote>
+<p>Three tiers: <strong>Basic</strong> — call at one year. <strong>Advanced</strong> — schedule into the slow months, November to February. <strong>Expert</strong> — for generators, pre-season <em>and</em> post-season, doubling the touchpoints. This is how slow seasons stop existing.</p>
+<hr>
+<p><strong>Make it a system, not a good intention.</strong> Whose job is it, triggered by what, logged where, reviewed when. A follow-up process that depends on someone remembering is not a process. Many "not today" customers simply needed more time, a word with their spouse, or a pay cheque.</p>
+    <div class="src"><b>Drafted from:</b> Playbook ch.15 Unsold Follow-Up full script; ACDC ch.2 database reactivation 10 touches; ch.7 warranty follow-up tiers</div>
+  </div>
+</article><article class="card" id="q47"
+  data-owner="Clay" data-status="draft"
+  data-search="how do i correctly set up my pricing calculator / simple service rate (salary, burden rate, units, commission, overhead)? pricing &amp; options clay the errors are nearly always the same five: no owner salary, projected vans, too many billable hours assumed, markup confused with margin, and specialty materials absorbed into the rate.">
+  <div class="chead">
+    <div class="rank">47</div>
+    <div class="qh">
+      <div class="q">How do I correctly set up my pricing calculator / Simple Service Rate (salary, burden rate, units, commission, overhead)?</div>
+      <div class="meta"><span class="asked">Asked 12×</span><span>Pricing &amp; Options</span><span>partner</span><span>Clay</span><span>2023-09-20 – 2026-01-28</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">The errors are nearly always the same five: no owner salary, projected vans, too many billable hours assumed, markup confused with margin, and specialty materials absorbed into the rate.</div>
+  <div class="body">
+    <p>The calculator is four inputs in sequence. Almost every wrong answer comes from the same handful of mistakes, so here's the setup with the traps marked.</p>
+<p><strong>1. Salary — yours, at a real number.</strong> Pay yourself what you'd have to pay someone to replace you. The most common error in the whole model is an owner entering a token salary or none at all, which hides the true cost of the business and guarantees you can never afford to stop working.</p>
+<p>Also include: <strong>retirement/investment at ~10%</strong>, and a <strong>90-day nest egg</strong>. Both belong in expenses, not in hope.</p>
+<p><strong>2. Billable units — vans you have <em>today</em>.</strong> Each active service vehicle is one unit.</p>
+<blockquote><strong>The trap that destroys more rates than any other:</strong> projecting future vans or future hires into the model. It lowers your rate immediately and kills your margin before those people exist. Price the business you have.</blockquote>
+<p><strong>3. Billable hours — use 1,000, not 2,000.</strong> A full-time year is about 2,000 hours, but only roughly <strong>50%</strong> is billable after admin, travel, training and downtime. If you don't know your real efficiency, assume 50%. Entering 1,500 or 2,000 is how you end up with a rate that looks competitive and loses money.</p>
+<p>Burden rate = total annual expenses ÷ (1,000 × units).</p>
+<blockquote>$236,000 ÷ 1,000 = <strong>$236/hr</strong></blockquote>
+<p><strong>4. Growth rate.</strong> Cost your 1–3 year plans — vans, wraps, marketing, training, raises, website, tech — and divide. Most land at <strong>$50–$150/hr.</strong></p>
+<p><strong>5. Profit — 30% markup, and know what that means.</strong></p>
+<blockquote>($236 + $90) × 1.30 = <strong>$424/hr</strong></blockquote>
+<blockquote><strong>Trap:</strong> 30% markup is <strong>not</strong> a 30% margin. It realises roughly <strong>23% net</strong>. If you set markup at 30% expecting 30% margin, you're short by a quarter of your profit.</blockquote>
+<p><strong>6. Material rate — consumables only.</strong> $50–$75/hr covers what leaves the van and never gets billed: wire nuts, screws, boxes, connectors, plates, spackle.</p>
+<blockquote><strong>Trap:</strong> absorbing specialty materials here. Arc-fault breakers, surge protectors, fixtures and permits are billed <strong>on top</strong>, not inside the rate.</blockquote>
+<blockquote>$424 + $50 = <strong>$474/hr Simple Service Rate</strong></blockquote>
+<p><strong>Sanity check your output.</strong> A correct rate lands between <strong>$250 and $500 per billable hour.</strong> Under $250 means something is missing — nine times out of ten it's your salary, the nest egg, or vans you don't own yet.</p>
+<p><strong>Then maintain it.</strong> Price only goes up, never down. Annual increases of <strong>5% + local inflation</strong>. Review quarterly, and always after annual budgeting. Add transaction fees to expenses (assume half your customers pay by card at 2–3%), and add 2% of projected revenue if you carry premium guarantees.</p>
+<p><strong>If your number still feels wrong,</strong> bring your actual figures to the Friday Advanced Ops and Finance session rather than adjusting the inputs until the answer feels comfortable. Trust the math more than the feeling.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.21–2.24; Playbook ch.4 Casino Principle rules; ACDC ch.1</div>
+  </div>
+</article><article class="card" id="q48"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i get my team to actually stick to the sales process and scripts instead of drifting from them? team &amp; leadership joseph drift is the default for anything you don&#x27;t inspect. make the standard visible, review real option sheets weekly, coach one thing at a time, and pay for the behaviour.">
+  <div class="chead">
+    <div class="rank">48</div>
+    <div class="qh">
+      <div class="q">How do I get my team to actually stick to the sales process and scripts instead of drifting from them?</div>
+      <div class="meta"><span class="asked">Asked 12×</span><span>Team &amp; Leadership</span><span>partner</span><span>Joseph</span><span>2024-11-06 – 2026-02-10</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Drift is the default for anything you don't inspect. Make the standard visible, review real option sheets weekly, coach one thing at a time, and pay for the behaviour.</div>
+  <div class="body">
+    <p><strong>Start with the uncomfortable question</strong> — it's the one our own Offers survey asks: <em>when someone ignores the process, what actually happens?</em> If the honest answer is "nothing," or "I mention it," you don't have a process problem. You have an enforcement problem, and no amount of retraining will fix it.</p>
+<p><strong>The four things that hold a process in place.</strong></p>
+<p><strong>1. Make the standard visible and specific.</strong> "Present six options" is a slogan. "Six options, built bottom-up, priced top-down with 15–30% gaps, presented top-down with prices hidden, observations in the customer's words" is a standard you can check. Write it on one page. If it isn't written, it isn't a standard.</p>
+<p><strong>2. Inspect weekly, with artefacts.</strong> Not "how'd it go." Bring <strong>real option sheets</strong> to the huddle:</p>
+<ul><li>Count the options</li><li>Check the price gaps</li><li>Read the observations — are they in the customer's words or the tech's jargon?</li><li>Check the FACTS sheet got filled in</li></ul>
+<p>Numbers back it up: close rate and average ticket by tech, tracked and visible. The spread between your best and worst tech is your coaching list.</p>
+<p><strong>3. Ride along monthly.</strong> The survey's test is blunt: if you rode along tomorrow, would they run the call as designed? The only way to know is to go. And the knowledge that it happens is half the effect.</p>
+<p><strong>4. Pay for it.</strong> Performance pay tied to close rate, average ticket and CSat. If the pay plan rewards volume and speed, you'll get volume and speed whatever the script says. People do what they're paid for, not what they're told.</p>
+<p><strong>Then coach with ITRS — Inspect, Train, Recognise, Support.</strong> One thing at a time. A tech given five corrections changes nothing; a tech given one changes one. And <strong>recognise publicly</strong> — the fastest way to spread a behaviour is to celebrate someone doing it in front of everyone.</p>
+<p><strong>Look upstream before you blame the tech.</strong> Three of the four enablement questions in the survey aren't about techs at all: is the customer pre-framed before arrival, does the office set expectations, or do techs have to reset everything on the doorstep? If your CSR isn't setting up the visit properly, your tech is starting every call from behind — and they'll drift to whatever works.</p>
+<p><strong>And make the practice real.</strong> Weekly option-building sessions where the team designs options on real jobs together. It's technical training as much as sales training, and people stick to a process they're genuinely good at. Drift is usually low confidence, not defiance.</p>
+    <div class="src"><b>Drafted from:</b> Offers Survey Q21–Q24 enablement + enforcement; ACDC ch.6 ITRS + performance pay; Playbook ch.13 huddle; ch.11 FACTS</div>
+  </div>
+</article><article class="card" id="q49"
+  data-owner="Joseph" data-status="draft"
+  data-search="how do i handle it when my quote is way more than the customer expected or budgeted for? objection handling joseph condition them before the number lands, acknowledge without apologising, and then use the ladder — that&#x27;s what six options are for. never discount to close the gap.">
+  <div class="chead">
+    <div class="rank">49</div>
+    <div class="qh">
+      <div class="q">How do I handle it when my quote is way more than the customer expected or budgeted for?</div>
+      <div class="meta"><span class="asked">Asked 12×</span><span>Objection Handling</span><span>partner</span><span>Joseph</span><span>2023-12-21 – 2026-09-23</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">Condition them before the number lands, acknowledge without apologising, and then use the ladder — that's what six options are for. Never discount to close the gap.</div>
+  <div class="body">
+    <p><strong>Prevent most of it with conditioning.</strong> Before the number, set the frame — "brace for impact," done warmly:</p>
+<blockquote>"May I be free and blunt with you?"<br>"I don't expect you to choose this one, but I want you to see what the best possible option looks like."</blockquote>
+<p>And Joseph's version before a top-tier price, said with a smile: <em>"Don't freak out — don't shoot me."</em> Said lightly, it gives them permission to react, which stops the reaction becoming a rejection.</p>
+<p><strong>When it lands, acknowledge without apologising:</strong></p>
+<blockquote>"I understand this may be more than you were expecting. What you're paying for is reliability, safety, and the peace of mind that the job is done right the first time."</blockquote>
+<p>Note the two halves. Acknowledge the feeling. Do not acknowledge that the price is wrong.</p>
+<p><strong>Understand what's actually happening.</strong> Customers experience price shock because they <strong>weren't expecting it</strong>, not because they can't afford it. Most homeowners have no idea what it costs to run a licensed business with insurance, a van, a warranty and staff. The number isn't unreasonable — it's unfamiliar.</p>
+<p><strong>Then use the ladder. This is precisely what six options are for.</strong></p>
+<blockquote>"Let's find the one that fits. If you'd like the same core solution without [X], here's what that looks like."</blockquote>
+<p>Walk down. Each step drops 15–30%. Somewhere on that ladder is a number that works, and it's a number <em>they</em> chose rather than one you discounted to.</p>
+<p><strong>Offer financing before you offer a discount:</strong></p>
+<blockquote>"Have I given the impression this all has to be paid today? We have payment options — your total is $18,000, or about $325 a month."</blockquote>
+<p>Financing is access, not debt. Even customers who could pay cash use it strategically. Build the cost into your pricing and never add a financing fee at checkout.</p>
+<p><strong>What you must not do.</strong> Don't discount before they ask — #STYO, Stick To Your Offer. Don't cut your price to rescue the moment. A number you drop the first time it's questioned was never a real number, and they'll know it.</p>
+<p><strong>And if nothing fits today?</strong> Basic honestly, or book the follow-up. A customer who respected your process and couldn't afford it this month is a customer. A customer you discounted to is a precedent.</p>
+    <div class="src"><b>Drafted from:</b> $1M+ Offers 2.25 customer price shock + 2.6 financing; Salesbot DNA §3 'That's More Than I Expected'; ACDC ch.5 price conditioning</div>
+  </div>
+</article><article class="card flag" id="q50"
+  data-owner="Clay" data-status="needs_input"
+  data-search="should i upgrade to a higher membership tier, and can i afford it? sle program, price &amp; fit clay the tier ladder and legacy pricing are documented; the upgrade criteria and credit terms aren&#x27;t. below is the honest framing plus what i need from you to make it a real answer.">
+  <div class="chead">
+    <div class="rank">50</div>
+    <div class="qh">
+      <div class="q">Should I upgrade to a higher membership tier, and can I afford it?</div>
+      <div class="meta"><span class="need">NEEDS INPUT</span><span class="asked">Asked 12×</span><span>SLE Program, Price &amp; Fit</span><span>partner</span><span>Clay</span><span>2024-10-11 – 2025-06-06</span></div>
+    </div>
+    <div class="caret">&#9654;</div>
+  </div>
+  <div class="short">The tier ladder and legacy pricing are documented; the upgrade criteria and credit terms aren't. Below is the honest framing plus what I need from you to make it a real answer.</div>
+  <div class="body">
+    <p><strong>The ladder, as documented:</strong></p>
+<div class="tw"><table><thead><tr><th>Tier</th><th>Length</th><th>What it is</th></tr></thead><tbody><tr><td>Open Circuit</td><td>Ongoing</td><td>Free — community, tools, weekly calls</td></tr><tr><td>Kickspark Sprint</td><td>90 days / $6K</td><td>Loop Method foundations</td></tr><tr><td>Inner Loop: Accountability</td><td>12 months / $30K+</td><td>Weekly team + 1:1 calls</td></tr><tr><td>Inner Loop: Mastery</td><td>12 months</td><td>All the above + unlimited Clay/Joseph 1:1</td></tr><tr><td>Guaranteed Results</td><td>1 month</td><td>$30K+ sales improvement or money back</td></tr></tbody></table></div>
+<p><strong>Legacy pricing</strong> for partners who stay: year 2 −20%, year 3 −30%, year 4 −40%, year 5 −50%.</p>
+<p><strong>How to think about whether it's the right move.</strong> The question isn't whether you can afford the fee — it's whether the thing currently limiting you is something the next tier actually fixes.</p>
+<p>Be honest about which of these is true:</p>
+<ul><li><strong>"I know what to do and I'm not doing it."</strong> → accountability is the bottleneck. The upgrade targets it directly.</li><li><strong>"I keep hitting situations the framework doesn't cover."</strong> → mastery and direct access is the bottleneck.</li><li><strong>"I haven't implemented what I already have."</strong> → the upgrade won't fix it. Finish the current tier first. We'd rather tell you that than take the money.</li></ul>
+<p><strong>And the Deal Formula applies to us as much as to your customers</strong> — (Trust × Desire) ÷ (Risk × Cost). If you're stuck, name which of those four is actually the problem. Usually it's risk, which is a conversation, not a price.</p>
+<hr>
+<p><strong>What I need from you before this is publishable.</strong></p>
+<p>Not documented anywhere I can find:</p>
+<ul><li>Whether and how a current tier's fee credits toward an upgrade (Kickspark's $6K roll-forward is documented; mid-term Inner Loop upgrades are not)</li><li>Whether upgrading mid-term restarts the 12 months or extends it</li><li>Whether legacy pricing survives a tier change</li><li>Who a partner should actually talk to</li></ul>
+<p><strong>Clay: this one is a sales conversation, not an FAQ answer, and it should probably route to a person rather than a page.</strong> It was asked 12 times by <em>existing partners</em>, which means people are wondering quietly instead of asking — that's worth knowing on its own.</p>
+    <div class="src"><b>Drafted from:</b> Brand Bible §10 tiers + legacy pricing; Deal Formula; no upgrade criteria or credit policy documented</div>
+  </div>
+</article>
+
+  <div class="empty" id="empty">Nothing matches that.</div>
+</main>
+
+<footer class="wrap">
+  SLE FAQ bank · rev 01 · 22 October 2026 · generated from
+  <code>_working/answers_top50.py</code><br>
+  Source data: 6,068 questions / 2,890 distinct, in SLE Tools Supabase.
+  Partner names and their call details stay in <code>faq_questions</code>,
+  which is service-role only and never reaches this page.
+</footer>
+
+<script>
+(function(){
+  var q=document.getElementById('q'), cards=[].slice.call(document.querySelectorAll('.card'));
+  var count=document.getElementById('count'), empty=document.getElementById('empty');
+  var f={owner:'',status:''};
+
+  function apply(){
+    var t=(q.value||'').toLowerCase().trim(), n=0;
+    cards.forEach(function(c){
+      var ok = (!t || c.dataset.search.indexOf(t)>-1)
+            && (!f.owner  || c.dataset.owner===f.owner)
+            && (!f.status || c.dataset.status===f.status);
+      c.classList.toggle('hide',!ok);
+      if(ok) n++;
+    });
+    count.textContent = n + (n===1?' question':' questions');
+    empty.style.display = n?'none':'block';
+    [].forEach.call(document.querySelectorAll('h2.sec,.sec-note'),function(e){
+      e.style.display = (t||f.owner||f.status)?'none':'';
+    });
+  }
+
+  q.addEventListener('input',apply);
+  [].forEach.call(document.querySelectorAll('.chip'),function(b){
+    b.addEventListener('click',function(){
+      var k=b.dataset.k, v=b.dataset.v, on=f[k]===v;
+      f[k]= on?'':v;
+      [].forEach.call(document.querySelectorAll('.chip[data-k="'+k+'"]'),function(o){
+        o.setAttribute('aria-pressed', (!on && o===b)?'true':'false');
+      });
+      apply();
+    });
+  });
+
+  cards.forEach(function(c){
+    c.querySelector('.chead').addEventListener('click',function(){
+      c.toggleAttribute('open');
+    });
+  });
+
+  // Jumping from the needs-input index should land on the card AND open it,
+  // otherwise you arrive at a collapsed row and have to tap again.
+  function openHash(){
+    var id=location.hash.slice(1);
+    if(!id) return;
+    var t=document.getElementById(id);
+    if(t && t.classList.contains('card')){
+      q.value=''; f.owner=''; f.status='';
+      [].forEach.call(document.querySelectorAll('.chip[data-k]'),function(o){
+        o.setAttribute('aria-pressed','false');
+      });
+      apply();
+      t.setAttribute('open','');
+      t.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  }
+  window.addEventListener('hashchange',openHash);
+  [].forEach.call(document.querySelectorAll('.grow'),function(a){
+    a.addEventListener('click',function(){ setTimeout(openHash,0); });
+  });
+
+  document.getElementById('expand').addEventListener('click',function(){
+    var any=cards.some(function(c){return !c.hasAttribute('open') && !c.classList.contains('hide')});
+    cards.forEach(function(c){
+      if(c.classList.contains('hide')) return;
+      if(any) c.setAttribute('open',''); else c.removeAttribute('open');
+    });
+    this.textContent = any?'Collapse all':'Expand all';
+  });
+
+  apply();
+})();
+</script>
+</body>
+</html>
