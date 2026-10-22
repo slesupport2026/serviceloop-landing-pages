@@ -78,3 +78,5 @@
 
 # SPA fallback for Service GRID React app
 /grid/*  /grid/index.html  200
+# SPA fallback for Post-Call Facts React app
+/facts/*  /facts/index.html  200
