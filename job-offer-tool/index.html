@@ -237,18 +237,21 @@
     .pane-preview{top:44px;max-height:none}
   }
 
-  /* ---------- print ---------- */
+  /* ---------- print ----------
+     Print pages are ~816px wide, which triggers the max-width:1000px mobile
+     rules above — so the preview pane must be forced visible here. */
   @media print{
-    .masthead,.rail,.pane-build,.paperbar,.mobile-switch{display:none!important}
+    .masthead,.rail,.pane-build,.paperbar,.mobile-switch,.toast,.intro{display:none!important}
     body{background:#fff;color:#000}
-    .bench{display:block}
-    .pane-preview{position:static;max-height:none;overflow:visible;padding:0}
-    .paperwrap{border:0;border-radius:0;box-shadow:none}
-    #doc{padding:14px 0 0;font-size:10.5pt;color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .bench{display:block!important}
+    .pane-preview{display:block!important;position:static!important;max-height:none!important;overflow:visible!important;padding:0!important}
+    .paperwrap{border:0;border-radius:0;box-shadow:none;max-width:none}
+    #doc{padding:0;font-size:10.5pt;color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     #doc h2{page-break-after:avoid}
     #doc table,#doc .sigs{page-break-inside:avoid}
+    #doc div[style*="overflow"]{overflow:visible!important}
     #doc .todo{background:none;color:#000}
-    @page{margin:16mm 16mm}
+    @page{size:letter;margin:14mm 16mm}
   }
   /* ---------- intro / how it works ---------- */
   body.intro-on .rail, body.intro-on .bench, body.intro-on .mobile-switch{display:none!important}
@@ -387,6 +390,7 @@
     <button class="btn mobile-switch" id="swap">Preview</button>
     <button class="btn" id="load" title="Open a draft you saved earlier (.json). You can also drag the file onto the page.">Open draft</button>
     <button class="btn" id="save" title="Save every answer to a .json file you can open later to keep editing">Save draft</button>
+    <button class="btn" id="clearall" title="Clear every field and start a fresh offer">Start over</button>
     <button class="btn" id="letter" title="Download the finished letter as a file you can open, print, or email">Download letter</button>
     <button class="btn primary" id="print">Print / PDF</button>
   </div>
@@ -449,7 +453,8 @@
           <tr><th><span class="chip">Save draft</span></th><td>Saves every answer to a file on your computer (<code>.json</code>). It's your work in progress, not the letter. Close the page, come back tomorrow or on another computer, and pick up where you left off.</td></tr>
           <tr><th><span class="chip">Open draft</span></th><td>Loads a draft file you saved earlier back into the builder so you can keep editing, or reuse last hire's offer as the starting point for the next one. You can also drag the file onto the page.</td></tr>
           <tr><th><span class="chip">Download letter</span></th><td>Saves the finished letter as a web page (<code>.html</code>). Open it in any browser to read it, email it, or print it.</td></tr>
-          <tr><th><span class="chip">Print / PDF</span></th><td>Opens your browser's print window. Choose <i>Save as PDF</i> for a PDF to send, or print it on paper for signatures.</td></tr>
+          <tr><th><span class="chip">Print / PDF</span></th><td>Opens your browser's print window. Choose <i>Save as PDF</i> for a PDF to send, or print it on paper for signatures. Sized for letter paper with proper margins.</td></tr>
+          <tr><th><span class="chip">Start over</span></th><td>Clears every field for a fresh offer. Save a draft first if you want to keep the current one.</td></tr>
         </table>
         <p class="fine">This page also remembers your answers on this browser automatically. A saved draft file is what lets you switch computers or keep one draft per candidate.</p>
         <p class="fine" id="backendNote" hidden>When you save, download, or print, a copy of the offer is stored securely so our team can review it with you and support the hire. Powered by SLE.</p>
@@ -1470,6 +1475,16 @@ document.addEventListener("click", e=>{
 });
 
 $("#print").addEventListener("click", ()=>window.print());
+
+$("#clearall").addEventListener("click", ()=>{
+  if(!confirm("Clear every field and start a fresh offer? Save a draft first if you want to keep this one.")) return;
+  document.querySelectorAll("[data-k]").forEach(el=>{ el.value = ""; });
+  Object.keys(D).forEach(k=>{ delete D[k]; });
+  try{ localStorage.removeItem("offerBuilder"); }catch(e){}
+  PREV_ROLE = null; applyRole(false); sync();
+  window.scrollTo(0,0);
+  toast("Cleared. Fresh start.");
+});
 $("#swap").addEventListener("click", ()=>{
   const on = document.body.classList.toggle("show-preview");
   $("#swap").textContent = on ? "Keep building" : "Preview";
@@ -1523,7 +1538,9 @@ $("#letter").addEventListener("click", ()=>{
   const fonts = '<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">';
   const title = esc((D.cand||"Candidate").trim() + " — Offer Letter");
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>${fonts}<style>${css}
-html,body{background:#fff!important;margin:0}.paperwrap{max-width:860px;margin:24px auto;border:0;box-shadow:none}@media print{.paperwrap{margin:0}}</style></head><body><div class="paperwrap">${$("#doc").outerHTML}</div></body></html>`;
+html,body{background:#fff!important;margin:0}.paperwrap{max-width:816px;margin:24px auto;border:0;box-shadow:none}
+@page{size:letter;margin:14mm 16mm}
+@media print{html,body{margin:0}.paperwrap{max-width:none;margin:0}#doc{padding:0!important;font-size:10.5pt}#doc div[style*="overflow"]{overflow:visible!important}}</style></head><body><div class="paperwrap">${$("#doc").outerHTML}</div></body></html>`;
   offerFile(slug() + "-offer-letter.html", html, "text/html");
   recordCopy("download");
 });
@@ -1575,7 +1592,7 @@ document.addEventListener("drop", e=>{
    read other members' offers with this key. See supabase/schema.sql.
    ============================================================ */
 const BACKEND = { supabaseUrl: "https://jxywghplxowytqwdsjyu.supabase.co", supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0", table: "offer_letters" };
-const APP_VERSION = "2026.10.5";
+const APP_VERSION = "2026.10.6";
 const backendOn = () => !!(BACKEND.supabaseUrl && BACKEND.supabaseAnonKey);
 
 let DRAFT_ID = (()=>{
