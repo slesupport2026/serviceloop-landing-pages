@@ -84,6 +84,7 @@
 # FAQ ANSWERS - go.serviceloopelectrical.com/FAQs
 # ==============================================================
 # Lives at /FAQs/. These just catch the lowercase spellings.
+# Password gate is currently OFF - see netlify.toml.
 # NOTE: /facts/ is the Post-Call Facts app, nothing to do with FAQs.
 /faqs     /FAQs/  301
 /faq      /FAQs/  301
