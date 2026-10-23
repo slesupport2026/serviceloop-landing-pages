@@ -509,7 +509,7 @@ const SECTIONS = [
 ]},
 
 { n:"01", id:"open", t:"The opening",
-  b:"Three short paragraphs that frame this as an invitation, not paperwork.",
+  b:"Two short paragraphs that frame this as an invitation, not paperwork.",
   f:[
   {k:"mission", l:"What does your company actually do for people?", ty:"ta",
    h:"One sentence. Not services — the difference you make.",
@@ -518,8 +518,8 @@ const SECTIONS = [
    h:"Name what you saw in them. This is the paragraph they'll read twice.",
    sg:"We believe you have the hunger, the character, and the drive to not only succeed in this role but to grow into a leader within this company."},
   {k:"invest", l:"What are you committing to on your side?", ty:"ta",
-   h:"You're asking a lot. Say what they get in return.",
-   sg:"We are making a significant investment in this position, and we have designed a clear 30/60/90 day plan to get you to your goals. You will have access to our systems, our training library, our mentor network, and the direct support of our leadership team. You will not be walking this alone."},
+   h:"One or two sentences. The detailed support system lives in its own section later.",
+   sg:"We are making a significant investment in your success, and we have designed a clear 90-day plan to get you to your goals. You will not be walking this alone."},
 ]},
 
 { n:"02", id:"role", t:"Role overview",
@@ -530,32 +530,22 @@ const SECTIONS = [
    sg:"Generating revenue through professional, relationship-driven sales\nBuilding long-term client relationships rooted in trust and follow-through\nCoaching and developing the technical team\nTracking and reporting individual and team KPIs"},
   {k:"nextrole", l:"What role does this grow into?", ph:"Sales Manager", w:"half",
    h:"If there's no path, a good candidate assumes there's no ceiling worth climbing."},
-  {k:"promo_sales", l:"Monthly sales required for promotion", ty:"money", w:"half"},
-  {k:"promo_close", l:"Close rate required", ty:"pct", w:"half"},
-  {k:"promo_other", l:"What else must they prove?", ty:"ta",
-   h:"One per line.",
-   sg:"Demonstrated leadership of the technical team\nFull embodiment of our culture principles\nConsistent, accurate KPI reporting without prompting"},
 ]},
 
-{ n:"03", id:"ramp", t:"The 30/60/90 plan",
+{ n:"03", id:"ramp", t:"Your first 90 days",
   b:"How you get them to the number. This is the section candidates remember.",
   f:[
   {k:"target", l:"Target monthly sales by day 90", ty:"money", w:"half",
    h:"The whole plan works backward from this. Put it in writing on page one of the job."},
   {k:"mid", l:"Checkpoint at day 60", ty:"money", w:"half",
    h:"Usually about half the target."},
-  {k:"d30", l:"Days 1–30 — what happens?", ty:"ta",
+  {k:"d30", l:"Days 1–30 — the focus", ty:"ta",
+   h:"What they'll actually do. The checkpoint that ends this stage is in section 07.",
    sg:"Introductions to the team and systems. CRM and dispatch setup. Study our sales process. Learn the pricing model. Shadow calls with ownership. Training library onboarding begins."},
-  {k:"d30b", l:"Days 1–30 — what does success look like?", ty:"ta",
-   sg:"Fully operational in all platforms. First independent appointments completed. Pipeline established. Culture principles understood and demonstrated."},
-  {k:"d60", l:"Days 31–60 — what happens?", ty:"ta",
+  {k:"d60", l:"Days 31–60 — the focus", ty:"ta",
    sg:"Independent appointments with weekly coaching. Begin one-on-one technician sessions. Full KPI reporting. Deposit and signed proposal process locked in."},
-  {k:"d60b", l:"Days 31–60 — what does success look like?", ty:"ta",
-   sg:"Checkpoint sales volume reached. Close rate trending at or above target. KPI reports submitted on time without prompting."},
-  {k:"d90", l:"Days 61–90 — what happens?", ty:"ta",
-   sg:"Full sales autonomy. Lead group training with the technical team. Daily KPI review. Commission fully activated on benchmark achievement. Formal 90-day review."},
-  {k:"d90b", l:"Days 61–90 — what does success look like?", ty:"ta",
-   sg:"Target monthly sales reached and verified. Close rate at or above target. All culture principles demonstrated. Management path evaluation begins."},
+  {k:"d90", l:"Days 61–90 — the focus", ty:"ta",
+   sg:"Full sales autonomy. Lead group training with the technical team. Daily KPI review. Formal 90-day review."},
   {k:"support", l:"Who and what supports them?", ty:"ta",
    h:"One per line, in the form \"Name, role: what they handle.\" A candidate reading this sees a company, not a gamble.",
    sg:"Primary day-to-day contact: systems, process questions, and operational support\nOwnership: escalation for anything unresolved, plus high-level deal support\nTraining library: process guides, scripts, and tools built for our team\nMentor network: extended mentorship from high-performing operators\nKPI tracker: daily visibility into performance and progress"},
@@ -653,17 +643,12 @@ const SECTIONS = [
 ]},
 
 { n:"08", id:"growth", t:"Growth path",
-  b:"Year one, year two, year three. Specific beats inspiring.",
+  b:"One strong paragraph: where this goes and what earns the promotion.",
   note:"Say the quiet part too: moving into management usually means <strong>salary up, commission down</strong>. Someone who learns that in year two feels tricked. Someone who reads it here is making an informed choice.",
   f:[
-  {k:"y1", l:"Year 1", ty:"ta",
-   sg:"Establish yourself as the top sales producer. Fully embody the culture. Own your KPIs. Coach technicians and build team trust."},
-  {k:"y2", l:"Year 2", ty:"ta",
-   sg:"Transition into a team leadership role. Begin overseeing appointment flow and supporting incoming sales staff."},
-  {k:"y3", l:"Year 3", ty:"ta",
-   sg:"Promotion to the manager role. Lead and manage a team of three or more representatives. Partner with ownership on hiring and growth strategy."},
-  {k:"compreneg", l:"What changes about pay at that level?", ty:"ta",
-   sg:"At the manager level, compensation is renegotiated to reflect expanded responsibilities, team oversight, and growth participation. Note that this generally means a higher base and a lower commission rate."},
+  {k:"growth", l:"Where does this role go, and what earns it?", ty:"ta",
+   h:"One short paragraph (a line or two per thought is fine). Name the destination role, what consistently proves readiness, and what changes about pay at that level.",
+   sg:"Establish yourself as the top sales producer, then grow into sales leadership: overseeing appointment flow, mentoring incoming reps, and eventually running the sales department as Sales Manager.\nPromotion is earned, not scheduled: sustained target performance, a close rate at or above target, consistent KPI reporting without prompting, and proof you can develop the people around you.\nAt the manager level, compensation is renegotiated to reflect expanded responsibility — generally a higher base and a lower commission rate."},
 ]},
 
 { n:"09", id:"terms", t:"Expectations and terms",
@@ -679,26 +664,20 @@ const SECTIONS = [
    sg:"Full embodiment of our culture principles is a condition of continued employment.\nAny conduct that damages client relationships, misrepresents our services or pricing, or violates the trust of ownership is grounds for immediate termination.\nAll confidential information including pricing models, client lists, KPI data, compensation structures, and internal systems is the exclusive property of the company and may not be disclosed externally."},
   {k:"nonsolicit", l:"Non-solicitation period (months)", ty:"num", ph:"12", w:"half",
    h:"Leave blank to omit this clause entirely."},
-  {k:"probation", l:"90-day proving period", ty:"ta",
-   h:"Both directions, in plain words: either side can walk during the first 90 days.",
-   sg:"The first 90 days are a mutual proving period. During this time, either of us can end this relationship simply, without cause and without hard feelings — you can walk, and so can we. That is exactly what the 30/60/90 checkpoints are for: nobody gets surprised in either direction. After the proving period, employment continues on an at-will basis."},
-  {k:"atwill", l:"At-will statement", ty:"ta",
-   sg:"Employment with the company is at-will. Either party may end the employment relationship at any time, with or without cause and with or without notice. Nothing in this offer letter creates a contract of employment for a fixed term."},
+  {k:"probation", l:"90-day proving period and at-will terms", ty:"ta",
+   h:"Both directions, in plain words: either side can walk during the first 90 days — and the at-will statement lives here too, said once.",
+   sg:"The first 90 days are a mutual proving period. During this time, either of us can end this relationship simply, without cause and without hard feelings — you can walk, and so can we. That is exactly what the 30/60/90 checkpoints are for: nobody gets surprised in either direction. After the proving period, employment continues on an at-will basis: either party may end the employment relationship at any time, with or without cause and with or without notice, and nothing in this offer letter creates a contract of employment for a fixed term."},
   {k:"pledge", l:"Your commitment back to them", ty:"ta",
    h:"The letter has just spent a page on what happens if they fall short. Balance it.",
    sg:"We will provide the training, the systems, the coaching, the vehicle, and the direct support you need to win. If we are ever falling short on our end of this agreement, we expect you to tell us directly and immediately. This works both ways. We are all in."},
 ]},
 
 { n:"10", id:"about", t:"About us",
-  b:"Why someone would want to build a career here.",
+  b:"One or two strong sentences — they print in the opening, not as their own section.",
   f:[
   {k:"who", l:"Who are you?", ty:"ta",
+   h:"One or two sentences. This folds into the opening paragraph of the letter.",
    sg:"We are a fast-growing residential electrical company. We are not a typical electrical contractor — we operate at the intersection of skilled trades, client experience design, and intentional culture-building."},
-  {k:"believe", l:"What do you believe?", ty:"ta",
-   h:"One per line.",
-   sg:"Putting the client's safety and trust above all else\nOperating with radical integrity and transparency in every interaction\nBuilding systems that produce consistent, measurable results\nDeveloping people into leaders, not just keeping seats filled\nCreating a team culture where everyone teaches and everyone learns"},
-  {k:"closing", l:"Closing thought", ty:"ta",
-   sg:"We are scaling intentionally. The people who build this team today will shape its future."},
   {k:"website", l:"Company website", ph:"www.yourcompany.com",
    h:"Send them to the site you're proud of. A strong candidate will look anyway — point them at your reviews, your team page, your best work. It also prints in the letterhead and footer."},
   {k:"brand_color", l:"Brand color", ph:"#C8102E", w:"half",
@@ -709,12 +688,13 @@ const SECTIONS = [
 
 { n:"11", id:"signoff", t:"Sign-off",
   b:"The person accountable for this hire, and the candidate's signature.",
-  note:"Name <strong>one</strong> accountable person: the one who answers the phone when the candidate has a question before signing, and the one who owns their first 90 days.",
+  note:"Name <strong>one</strong> accountable person on the company side — the hiring manager or owner, <strong>never the candidate</strong>: the one who answers the phone when the candidate has a question before signing, and the one who owns their first 90 days.",
   f:[
-  {k:"acc_name",  l:"Accountable party's name", ph:"Bill Harper", w:"half"},
-  {k:"acc_title", l:"Position", ph:"Owner", w:"half"},
-  {k:"acc_email", l:"Email", ph:"bill@yourcompany.com", w:"half"},
-  {k:"acc_phone", l:"Direct phone", ph:"(555) 555-0101", w:"half"},
+  {k:"acc_name",  l:"Hiring manager / signer — name", ph:"Bill Harper", w:"half",
+   h:"The company-side person who signs and answers questions. Not the candidate."},
+  {k:"acc_title", l:"Their position", ph:"Owner", w:"half"},
+  {k:"acc_email", l:"Their email", ph:"bill@yourcompany.com", w:"half"},
+  {k:"acc_phone", l:"Their direct phone", ph:"(555) 555-0101", w:"half"},
   {k:"cand_email", l:"Candidate's email", ph:"alex@email.com", w:"half"},
   {k:"cand_phone", l:"Candidate's phone", ph:"(555) 555-0199", w:"half"},
 ]},
@@ -756,17 +736,11 @@ service: {
   q:{
     title:{ph:"Service Technician"},
     focus:{sg:"Running service calls that clients talk about for years\nPresenting clearly structured options on every single call\nProtecting the home and leaving it cleaner than we found it\nOffering the membership and asking for the review on every job\nKeeping callbacks near zero through complete, code-right work"},
-    promo_sales:{l:"Monthly produced revenue required for promotion"},
-    promo_close:{l:"Callback rate ceiling (%)", h:"Lower is better. At or below this number."},
-    promo_other:{sg:"Average ticket at or above the team target for three consecutive months\nFull embodiment of our culture principles\nMentoring a newer tech without being asked"},
     target:{l:"Target monthly produced revenue by day 90"},
     mid:{l:"Checkpoint at day 60"},
     d30:{sg:"Ride along with our senior tech on live calls. Learn the truck, the stock, and the paperwork. Study The Service Call Standard until it's muscle memory. Learn the pricing presentation and run it in practice reps. Happy-call and review scripts learned."},
-    d30b:{sg:"First solo calls completed to standard. Options presented on every call. Zero callbacks. Truck stocked and inspection-ready every morning."},
     d60:{sg:"Full solo schedule with weekly ride-along coaching. Membership offer made on every call. Daily ticket and options tracking in the KPI tracker. First memberships sold."},
-    d60b:{sg:"Day-60 produced revenue checkpoint reached. Average ticket climbing toward target. Callback rate at or under the ceiling. Happy-call scores at 4.5 or better."},
-    d90:{sg:"Full production load. Average ticket at target. Present options without prompting, every time. Performance bonus activates on benchmark achievement. Formal 90-day review."},
-    d90b:{sg:"Target produced revenue reached and verified. Average ticket at or above target. Callback rate at or under the ceiling. All culture principles demonstrated."},
+    d90:{sg:"Full production load. Average ticket at target. Present options without prompting, every time. Formal 90-day review."},
     steps:{l:"Walk through the standard", sg:"Call ahead and arrive on time\nProtect the home — shoe covers, drop cloths, tools on mats\nDiagnose fully before talking solutions\nPresent clearly structured options on every call, no exceptions\nGet approval, do the work complete and to code\nWalk the client through everything you did\nOffer the membership\nAsk for the happy call and the review"},
     team:{sg:"Fully embody our culture principles on every job, on and off the clock\nShare what you learn in the truck at team meetings\nHelp newer techs with diagnosis and presentation when asked\nFlag anything in the field that could be done safer or better"},
     closerate:{l:"Callback rate ceiling (%)", h:"The percent of your jobs that turn into a callback. Lower is better."},
@@ -774,13 +748,10 @@ service: {
     c30:{sg:"Solo calls completed to The Service Call Standard\nOptions presented on every call\nZero preventable callbacks\nTruck, paperwork, and KPI tracker in order daily\nCulture principles understood and demonstrated"},
     c60:{sg:"Day-60 produced revenue checkpoint reached and verified\nAverage ticket trending to target\nMembership offered on every call\nCallback rate at or under the ceiling\nHappy-call scores at 4.5 or better"},
     crit:{sg:"Produced revenue at or above the 90-day target\nAverage ticket at or above target\nCallback rate at or under the ceiling\nOptions presented on every call, verified in the tracker\nMemberships sold at or above target\nObservable demonstration of all culture principles\nKPI reporting submitted without prompting"},
-    y1:{sg:"Own your truck, your ticket, and your callbacks. Become the tech clients ask for by name."},
-    y2:{sg:"Step up to Lead Tech. Run point on bigger jobs, coach newer techs, and help set the standard for the whole service team."},
-    y3:{sg:"Move toward Service Manager: own the service board, the team's numbers, and the training calendar. Or move into sales if that's your lane — top techs make the best advisors."},
+    growth:{sg:"Own your truck, your ticket, and your callbacks, then step up to Lead Tech: running point on bigger jobs, coaching newer techs, and setting the standard for the whole service team — with Service Manager beyond that for the ones who want the board, the numbers, and the training calendar.\nThe step up is earned: average ticket at or above target for three straight months, callbacks at or under the ceiling, and mentoring a newer tech without being asked.\nAt the Lead Tech and Service Manager levels, compensation is renegotiated to reflect expanded responsibilities and team results. The pay keeps climbing with the responsibility."},
     triggers:{sg:"Produced revenue below the day-60 checkpoint for two consecutive months\nCallback rate above the ceiling for a 30-day period without an active documented improvement plan\nRepeated pricing deviations from the published rate book\nConduct inconsistent with our culture principles that impacts clients or the team"},
     activate:{sg:"Sales commission applies to work you personally sell, once the day-90 benchmarks are met."},
     revout:{sg:"If both parties agree to continue following the 90-day review, the performance bonus is fully activated and the Lead Tech development path formally begins."},
-    compreneg:{sg:"At the Lead Tech and Service Manager levels, compensation is renegotiated to reflect expanded responsibilities and team results. The pay keeps climbing with the responsibility."},
   }
 },
 install: {
@@ -795,17 +766,11 @@ install: {
   q:{
     title:{ph:"Installer"},
     focus:{sg:"Installing to code and to our standard, every time\nBeating the estimated hours without cutting a single corner\nPassing inspection the first time\nProtecting the home and closing out jobs the same day\nDocumenting the work with photos so the office never has to ask"},
-    promo_sales:{l:"Monthly install revenue required for promotion"},
-    promo_close:{l:"First-time inspection pass rate required (%)"},
-    promo_other:{sg:"CPI at or above 1.0 for three consecutive months\nZero callbacks on your installs in the same period\nRunning a crew day without ownership on site"},
     target:{l:"Target monthly install revenue by day 90"},
     mid:{l:"Checkpoint at day 60"},
     d30:{sg:"Work under our install lead on live jobs. Learn the material list system, the staging process, and the photo close-out. Study The Install Quality Standard. Learn how estimated hours are built so you know the number you're beating."},
-    d30b:{sg:"Working to standard without reminders. Self-inspection checklist used on every job. Clean, protected work areas every day. Zero callbacks."},
     d60:{sg:"Running sections of jobs on your own. Tracking earned hours against actual in the KPI tracker. First solo close-outs with full photo documentation."},
-    d60b:{sg:"Day-60 install revenue checkpoint reached. CPI trending at or above 1.0. First-time inspection passes on everything you've touched."},
-    d90:{sg:"Running full installs at production pace. CPI at or above 1.0. Install bonus activates on benchmark achievement. Formal 90-day review."},
-    d90b:{sg:"Target install revenue reached and verified. CPI at or above 1.0. First-time inspection pass rate at target. Zero callbacks. All culture principles demonstrated."},
+    d90:{sg:"Running full installs at production pace. CPI at or above 1.0. Formal 90-day review."},
     steps:{l:"Walk through the standard", sg:"Review the job and material list the day before\nProtect the home and stage materials before the first cut\nInstall to code and to our standard\nClean as you go — the site is show-ready at any hour\nSelf-inspect and photo-document before calling it done\nWalk the client through what you built\nPass inspection the first time\nClose out the job the same day"},
     team:{sg:"Fully embody our culture principles on every site\nKeep the crew safe — stop work rather than work unsafe\nTeach what you know; a crew that shares skills finishes faster\nFlag material or estimate problems the day you see them, not at close-out"},
     closerate:{l:"Minimum first-time inspection pass rate (%)"},
@@ -814,13 +779,10 @@ install: {
     c30:{sg:"Working to The Install Quality Standard without reminders\nSelf-inspection and photo close-out on every job\nSite protected and clean every day\nZero callbacks\nCulture principles understood and demonstrated"},
     c60:{sg:"Day-60 install revenue checkpoint reached and verified\nCPI trending at or above 1.0\nFirst-time inspection passes on all work\nClose-outs complete the same day, every day"},
     crit:{sg:"Install revenue at or above the 90-day target\nCPI at or above 1.0\nFirst-time inspection pass rate at or above target\nZero callbacks charged to your work\nPhoto documentation complete on every job\nObservable demonstration of all culture principles"},
-    y1:{sg:"Own your installs end to end: hours, inspections, close-outs. Become the installer the inspectors trust."},
-    y2:{sg:"Step up to Install Lead. Run the crew, own the schedule on your jobs, and train the next installer the way you were trained."},
-    y3:{sg:"Move toward Install Manager: own the install calendar, the material pipeline, and the margin on every job."},
+    growth:{sg:"Own your installs end to end — hours, inspections, close-outs — and become the installer the inspectors trust. From there the path is Install Lead: running the crew, owning the schedule on your jobs, and training the next installer the way you were trained, with Install Manager beyond that.\nThe step up is earned: CPI at or above 1.0 for three straight months, zero callbacks in the same period, and running a crew day without ownership on site.\nAt the Install Lead and Install Manager levels, compensation is renegotiated to reflect crew leadership and job margin ownership. The pay keeps climbing with the responsibility."},
     triggers:{sg:"CPI below 1.0 for two consecutive months without a documented cause\nA failed inspection caused by work that skipped the self-inspection standard\nCallbacks charged to your installs above the ceiling\nConduct inconsistent with our culture principles that impacts clients or the crew"},
     activate:{sg:"Sales commission applies to work you personally sell, once the day-90 benchmarks are met."},
     revout:{sg:"If both parties agree to continue following the 90-day review, the install bonus is fully activated and the Install Lead development path formally begins."},
-    compreneg:{sg:"At the Install Lead and Install Manager levels, compensation is renegotiated to reflect crew leadership and job margin ownership. The pay keeps climbing with the responsibility."},
   }
 },
 csr: {
@@ -835,17 +797,11 @@ csr: {
   q:{
     title:{ph:"Client Service Representative"},
     focus:{sg:"Answering every call fast and turning it into a booked job\nKeeping the dispatch board full and the techs moving\nMaking the happy call after every job and asking for the review\nSelling memberships by phone\nBeing the calm, warm voice clients remember"},
-    promo_sales:{l:"Monthly booked job value required for promotion"},
-    promo_close:{l:"Booking rate required (%)"},
-    promo_other:{sg:"Booking rate at or above target for three consecutive months\nHappy calls completed on every finished job\nFull embodiment of our culture principles"},
     target:{l:"Target monthly booked job value by day 90", h:"The dollar value of jobs booked, not revenue collected."},
     mid:{l:"Checkpoint at day 60"},
     d30:{sg:"Learn the phones, the booking system, and the dispatch board. Study The Call Flow and run it in practice reps. Shadow live calls. Learn the service offerings and the membership well enough to explain both in one breath."},
-    d30b:{sg:"Answering live calls to standard. First booked jobs on the board. Confirmation texts going out on every booking. Happy-call script learned."},
     d60:{sg:"Owning the phones through the day. Happy calls made on every completed job. First memberships sold by phone. Booking rate tracked daily in the KPI tracker."},
-    d60b:{sg:"Day-60 booked-value checkpoint reached. Booking rate trending to target. Happy calls current — no backlog. Reviews being requested on every 5-star call."},
-    d90:{sg:"Full ownership of the front desk: calls, bookings, dispatch, happy calls, reviews. Booking bonus activates on benchmark achievement. Formal 90-day review."},
-    d90b:{sg:"Target booked value reached and verified. Booking rate at or above target. Happy-call queue cleared daily. All culture principles demonstrated."},
+    d90:{sg:"Full ownership of the front desk: calls, bookings, dispatch, happy calls, reviews. Formal 90-day review."},
     steps:{l:"Walk through the call flow", sg:"Answer by the third ring\nUse the warm greeting script\nCapture the need and the urgency\nBook the best slot — never \"we'll call you back\"\nConfirm and set expectations for the visit\nSend the confirmation text\nMake the happy call after the job\nAsk for the review"},
     team:{sg:"Fully embody our culture principles on every call\nKeep the techs set up to win: tight routes, full job notes, no surprises\nFlag unhappy clients to ownership the same day, every time\nShare call recordings worth learning from at team meetings"},
     closerate:{l:"Minimum booking rate (%)", h:"Booked jobs divided by booking opportunities."},
@@ -853,13 +809,10 @@ csr: {
     c30:{sg:"Live calls handled to The Call Flow\nFirst booked jobs on the board\nConfirmation texts on every booking\nBooking system and dispatch board run without help\nCulture principles understood and demonstrated"},
     c60:{sg:"Day-60 booked-value checkpoint reached and verified\nBooking rate trending to target\nHappy calls current on every completed job\nFirst memberships sold by phone"},
     crit:{sg:"Booked job value at or above the 90-day target\nBooking rate at or above target\nHappy-call queue cleared daily\nReviews requested on every 5-star happy call\nMemberships offered on qualifying calls\nObservable demonstration of all culture principles"},
-    y1:{sg:"Own the phones and the board. Become the voice of the company — the person clients mention by name in reviews."},
-    y2:{sg:"Step up to Lead CSR / Dispatcher. Own the booking numbers, train the next CSR, and run the front office rhythm."},
-    y3:{sg:"Move toward Office or Operations Manager: own scheduling, client experience, and the systems that keep the whole shop running."},
+    growth:{sg:"Own the phones and the board, and become the voice of the company — the person clients mention by name in reviews. From there the path is Lead CSR / Dispatcher: owning the booking numbers, training the next CSR, and running the front office rhythm, with Office or Operations Manager beyond that.\nThe step up is earned: booking rate at or above target for three straight months, happy calls completed on every finished job, and full embodiment of our culture principles.\nAt the Lead CSR and Office Manager levels, compensation is renegotiated to reflect team oversight and ownership of the front office. The pay keeps climbing with the responsibility."},
     triggers:{sg:"Booking rate below target for a 30-day period without an active documented improvement plan\nHappy-call backlog older than two business days on a recurring basis\nBooked-value checkpoint missed for two consecutive months\nConduct inconsistent with our culture principles on calls or with the team"},
     activate:{sg:"Sales commission applies to jobs and memberships you personally sell by phone, once the day-90 benchmarks are met."},
     revout:{sg:"If both parties agree to continue following the 90-day review, the booking bonus is fully activated and the Lead CSR development path formally begins."},
-    compreneg:{sg:"At the Lead CSR and Office Manager levels, compensation is renegotiated to reflect team oversight and ownership of the front office. The pay keeps climbing with the responsibility."},
     pledge:{sg:"We will provide the training, the systems, the scripts, the coaching, and the direct support you need to win. If we are ever falling short on our end of this agreement, we expect you to tell us directly and immediately. This works both ways. We are all in."},
   }
 },
@@ -875,17 +828,11 @@ manager: {
   q:{
     title:{ph:"Service Manager"},
     focus:{sg:"Owning the team's number: revenue, average ticket, CSAT, callbacks\nRunning the leadership rhythm — huddles, ride-alongs, 1:1s — every week without fail\nCoaching every tech and CSR against their own scoreboard\nProtecting gross margin through pricing compliance and job costing\nBuilding the bench: hiring, onboarding, and developing the next leaders"},
-    promo_sales:{l:"Monthly team revenue required for promotion"},
-    promo_close:{l:"Team CSAT required", h:"Average happy-call stars across the team, e.g. 4.8."},
-    promo_other:{sg:"Team callback rate at or under the ceiling for three consecutive months\nEvery direct report with a current scoreboard and a development plan\nA trained number two who can run the week without you"},
     target:{l:"Target monthly team revenue by day 90"},
     mid:{l:"Checkpoint at day 60"},
     d30:{sg:"Ride with every tech. Sit with every CSR. Learn the pricing model, the KPI tracker, and the job costing. Audit the last 90 days of numbers so you know where the team actually stands. Start the daily huddle."},
-    d30b:{sg:"Leadership rhythm running: daily huddle, first ride-alongs, first 1:1s booked. Scoreboard live for every team member. Three biggest gaps named with a plan for each."},
     d60:{sg:"Full rhythm in place: huddles daily, ride-alongs weekly, 1:1s bi-weekly, scoreboard review weekly. Coaching plans running for the bottom performers. First team training delivered."},
-    d60b:{sg:"Day-60 team revenue checkpoint reached. Team CSAT and callback rate moving the right direction. KPI reporting flowing up without prompting."},
-    d90:{sg:"The team runs on the rhythm, not on you chasing it. Team revenue at target. Team bonus activates on benchmark achievement. Formal 90-day review."},
-    d90b:{sg:"Target team revenue reached and verified. Team CSAT at or above target. Callback rate at or under the ceiling. Every report with a current scoreboard and development plan."},
+    d90:{sg:"The team runs on the rhythm, not on you chasing it. Team revenue at target. Formal 90-day review."},
     steps:{l:"Walk through the rhythm", sg:"Daily huddle — yesterday's numbers, today's plan, one coaching point\nWeekly ride-alongs — coach in the field, not from the desk\nBi-weekly 1:1s — the person first, then the scoreboard\nWeekly scoreboard review with the whole team\nMonthly training — one skill, drilled until it's standard\nQuarterly reviews — formal, written, no surprises"},
     team:{l:"Leadership duties", sg:"Fully embody our culture principles — the team copies what you do, not what you say\nHold the standard on every call and every install, especially when it's inconvenient\nDevelop people on purpose: every tech and CSR has a next step and knows it\nProtect the team from chaos: tight schedules, clear priorities, no surprise fire drills"},
     closerate:{l:"Minimum team CSAT", h:"Average happy-call stars across the team, e.g. 4.8."},
@@ -893,13 +840,10 @@ manager: {
     c30:{sg:"Leadership rhythm started: daily huddle live, ride-alongs underway, 1:1s booked\nScoreboard live for every team member\n90-day numbers audited and the three biggest gaps named\nCulture principles understood and demonstrated"},
     c60:{sg:"Day-60 team revenue checkpoint reached and verified\nFull leadership rhythm running on schedule\nCoaching plans active for bottom performers\nTeam CSAT and callback rate trending the right way"},
     crit:{sg:"Team revenue at or above the 90-day target\nTeam CSAT at or above target\nTeam callback rate at or under the ceiling\nLeadership rhythm verified: huddles, ride-alongs, 1:1s, scoreboard reviews held and logged\nGross margin protected — pricing compliance verified\nEvery report with a current scoreboard\nObservable demonstration of all culture principles"},
-    y1:{sg:"Own the team's number and the leadership rhythm. Build a team that hits target without heroics."},
-    y2:{sg:"Grow the team and the bench: a trained lead under you in service and install, and a front office that runs itself."},
-    y3:{sg:"Move toward General Manager / Operations Director: own the P&L, the growth plan, and the leaders under you."},
+    growth:{sg:"Own the team's number and the leadership rhythm, and build a team that hits target without heroics. From there the path is General Manager / Operations Director: the P&L, the growth plan, and the leaders under you.\nThe step up is earned: team callback rate at or under the ceiling for three straight months, every direct report with a current scoreboard and development plan, and a trained number two who can run the week without you.\nAt the General Manager level, compensation is renegotiated to reflect P&L ownership and growth participation. Pay shifts further toward company results — base plus performance on what the whole business produces."},
     triggers:{sg:"Team revenue below the day-60 checkpoint for two consecutive months\nLeadership rhythm skipped for two consecutive weeks without documented cause\nTeam callback rate above the ceiling for 30 days without an active improvement plan\nConduct inconsistent with our culture principles — at this level the standard is highest"},
     activate:{sg:"The team override applies to verified team revenue above the monthly target, once the day-90 benchmarks are met."},
     revout:{sg:"If both parties agree to continue following the 90-day review, the team bonus is fully activated and the General Manager development path formally begins."},
-    compreneg:{sg:"At the General Manager level, compensation is renegotiated to reflect P&L ownership and growth participation. Pay shifts further toward company results — base plus performance on what the whole business produces."},
     pledge:{sg:"We will provide the authority, the systems, the budget clarity, the coaching, and the direct backing of ownership you need to win. If we are ever falling short on our end of this agreement, we expect you to tell us directly and immediately. This works both ways. We are all in."},
   }
 },
@@ -913,8 +857,6 @@ custom: {
   fill:{},
   growth:"",
   q:{
-    promo_sales:{l:"Monthly production required for promotion"},
-    promo_close:{l:"Quality standard required (%)"},
     target:{l:"Target monthly production by day 90"},
     mid:{l:"Checkpoint at day 60"},
     steps:{l:"Walk through your standard", sg:""},
@@ -1297,7 +1239,6 @@ function render(){
 
   const QHI = V("qdir") !== "lo";   /* higher-is-better quality metric */
   const qAtOr = QHI ? "at or above" : "at or below";
-  const qOrBetter = QHI ? "or higher" : "or lower";
   const hasPerf = hasComm() || num(D.spiff_amt) > 0 || num(D.bonus_amt) > 0 || (roleKey()==="manager"||roleKey()==="custom") && num(D.override_pct) > 0;
   /* quality values are percents, except CSAT which is stars out of 5 */
   const qVal = v => { const s = String(v||"").trim(); if(!s) return null;
@@ -1308,7 +1249,9 @@ function render(){
   const cand = D.cand && D.cand.trim() ? esc(D.cand) : TODO("Candidate name");
   const first = (D.cand||"").trim().split(/\s+/)[0] || null;
   const target = money(D.target), mid = money(D.mid);
-  const accName = (D.acc_name||"").trim() || (D.owner||"").trim();
+  const accName = (D.acc_name||"").trim();
+  /* ISO date strings compare lexically: warn when the sign-by date can't work */
+  const dateWarn = !!(D.expires && ((D.start && D.expires >= D.start) || (D.issued && D.expires <= D.issued)));
   const v = k => D[k] && String(D[k]).trim() ? esc(D[k]) : "";
   const cellList = (val,fb) => { const L=lines(val); return L.length
     ? `<ul>${L.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` : TODO(fb); };
@@ -1319,20 +1262,6 @@ function render(){
     return i>0 ? `<li><strong>${esc(l.slice(0,i))}</strong> — ${esc(l.slice(i+1).trim())}</li>`
                : `<li>${esc(l)}</li>`;
   }).join("");
-
-  /* process steps */
-  const steps = lines(D.steps).map((l,i)=>
-    `<li><strong>Step ${i+1}.</strong> ${esc(l)}</li>`).join("");
-
-  /* ramp table */
-  const ramp = [
-    ["Days 1–30","Onboarding",D.d30,D.d30b],
-    ["Days 31–60","Building",D.d60,D.d60b],
-    ["Days 61–90","Proving ground",D.d90,D.d90b],
-  ].map(([d,ph,act,bench])=>`<tr>
-      <td><strong>${d}</strong><br><span style="color:var(--ink-3)">${ph}</span></td>
-      <td>${act?esc(act):TODO("Activities")}</td>
-      <td>${bench?esc(bench):TODO("Benchmark")}</td></tr>`).join("");
 
   /* OTE table — base pay shown at the day-90 rate */
   const base = baseMonthlyAt(3), rate = num(D.comm)/100;
@@ -1346,7 +1275,7 @@ function render(){
   const payRows = [];
   payRows.push(`<tr><td>${isHourly()?"Hourly pay":"Base salary"}</td><td>${fmtRate(num(D.base))||TODO("$ amount")}${isHourly()&&num(D.hours)?", about "+num(D.hours)+" hours a week":""}, paid ${D.freq?esc(D.freq):TODO("how often")}</td></tr>`);
   const raisePath = [["Day 30",num(D.raise30)],["Day 60",num(D.raise60)],["Day 90",num(D.raise90)]].filter(x=>x[1]>0);
-  if(raisePath.length) payRows.push(`<tr><td>Raises at each checkpoint</td><td>${raisePath.map(x=>`<strong>${x[0]}:</strong> ${fmtRate(x[1])}`).join(" &middot; ")} — each raise unlocks by passing that checkpoint review (section 6)</td></tr>`);
+  if(raisePath.length) payRows.push(`<tr><td>Raises at each checkpoint</td><td>${raisePath.map(x=>`<strong>${x[0]}:</strong> ${fmtRate(x[1])}`).join(" &middot; ")} — each raise unlocks by passing that checkpoint review (section 3)</td></tr>`);
   if(hasComm()){
     payRows.push(`<tr><td>Commission</td><td>${D.comm?esc(D.comm)+"%":TODO("%")} of ${D.basis?esc(D.basis):TODO("what it's calculated on")}</td></tr>`);
     payRows.push(`<tr><td>A sale counts</td><td>${D.earned?esc(D.earned):TODO("when a sale counts")}</td></tr>`);
@@ -1384,58 +1313,27 @@ function render(){
   </div>
 
   <p>${first?esc(first)+",":TODO("Candidate name")}</p>
-  <p>We are proud to formally offer you the position of ${g("title","title")} at ${co}.</p>
-  <p>This is not simply an offer of employment. It is an invitation to join a mission-driven team.
-     ${D.mission?esc(D.mission):TODO("What your company does for people")}</p>
-  <p>${D.why?esc(D.why):TODO("Why this person")}</p>
-  <p>We want to be completely transparent with you from day one.
-     ${D.invest?esc(D.invest):TODO("What you're committing to")}</p>
-  <p>Our goal is to build something great together. We are fully in your corner.</p>
+  <p>We are proud to formally offer you the position of ${g("title","title")} at ${co}. This is not simply an offer of employment — it is an invitation to join a mission-driven team. ${D.mission?esc(D.mission):TODO("What your company does for people")}${lines(D.who).length?" "+lines(D.who).map(esc).join(" "):""}</p>
+  <p>${D.why?esc(D.why):TODO("Why this person")} ${D.invest?esc(D.invest):TODO("What you're committing to")}${siteHref(D.website)?` See who we are and the work we're proud of at <a href="${esc(siteHref(D.website))}" target="_blank" rel="noopener" style="color:var(--accent)">${esc(siteLabel(D.website))}</a>.`:""}</p>
 
-  <h2>1. Role Overview</h2>
+  <h2>1. The Role</h2>
   <p>The ${g("title","role")} is the ${V("frontLine")}. This position carries real responsibility and real opportunity.</p>
   <h3>This position focuses on</h3>
   ${ul(D.focus,"What the role focuses on")}
-  <p>This role is intentionally designed with a clear pathway to ${g("nextrole","the next role")}. We are not looking to fill a seat. We are looking to develop a leader.</p>
-  <h3>Promotion is contingent upon</h3>
-  <ul>
-    <li>Consistent achievement of ${money(D.promo_sales)||TODO("$ amount")} or more in monthly ${V("metricMoney")}</li>
-    <li>Maintaining a ${V("quality")} of ${qVal(D.promo_close)||TODO(V("quality"))} ${qOrBetter}</li>
-    ${lines(D.promo_other).map(x=>`<li>${esc(x)}</li>`).join("")}
-  </ul>
-
-  <h2>2. Work Schedule and Ramp Plan</h2>
-  <p>We designed this plan specifically to get you to ${target||TODO("your target")} or more in monthly ${V("metricMoney")}. You will have everything you need to hit these benchmarks.</p>
-  <div style="overflow-x:auto"><table>
-    <thead><tr><th style="width:22%">Phase</th><th style="width:39%">Focus and activities</th><th style="width:39%">Success benchmark</th></tr></thead>
-    <tbody>${ramp}</tbody></table></div>
-  <h3>Your support system</h3>
-  <p>You will never be left to figure it out alone. From day one you have access to:</p>
-  ${ul(D.support,"Who and what supports them")}
-
-  <h2>3. Roles and Responsibilities</h2>
   <h3>${esc(V("processArea"))}: ${g("procname","your process name")}</h3>
-  <p>Every ${esc(V("unit"))} is run using ${D.procname?esc(D.procname):"our standard"}. This is non-negotiable.</p>
-  ${steps?`<ul>${steps}</ul>`:`<p>${TODO("Your process steps")}</p>`}
-  ${fieldVisible("options") && D.options?`<p>A minimum of ${esc(D.options)} clearly structured options are presented on every single call, without exception.</p>`:""}
+  <p>Every ${esc(V("unit"))} runs on ${D.procname?`<strong>${esc(D.procname)}</strong>`:"our standard"} — ${lines(D.steps).length?lines(D.steps).map((l,i)=>`(${i+1}) ${esc(l.replace(/\.\s*$/,""))}`).join("; ")+".":TODO("your process steps")} This is non-negotiable${fieldVisible("options") && D.options?`, and a minimum of ${esc(D.options)} clearly structured options are presented on every single ${esc(V("unit"))}`:""}. The full standard is trained and drilled in onboarding.</p>
   <h3>Team leadership and coaching</h3>
   ${ul(D.team,"Team leadership duties")}
   <h3>KPI tracking</h3>
   <ul>
     <li>Track your numbers daily using ${D.kpitool?esc(D.kpitool):TODO("your tracker")}: ${esc((pack().kpis||[]).join(", "))}.</li>
-    <li>Report your KPIs ${D.kpiwho?esc(D.kpiwho):TODO("to whom, how often")}.</li>
+    <li>KPI reporting: ${D.kpiwho?esc(D.kpiwho):TODO("to whom, how often")}.</li>
     <li>Keep your ${esc(V("quality"))} ${qAtOr} ${qVal(D.closerate)||TODO(V("quality"))} at all times.</li>
   </ul>
   ${para(D.pricing,"Your pricing compliance rule")}
-  ${fieldVisible("vehicle")?`<h3>Company vehicle</h3>
-  ${ul(D.vehicle,"Vehicle policy")}`:""}
+  ${fieldVisible("vehicle")?`<p><strong>Company vehicle.</strong> ${lines(D.vehicle).length?lines(D.vehicle).map(esc).join(" "):TODO("Vehicle policy")}</p>`:""}
 
-  <h2>4. Core Performance Pillars</h2>
-  <p>Success in this role is measured against our culture principles, which serve as our performance operating system:</p>
-  ${princ?`<ul>${princ}</ul>`:`<p>${TODO("Your culture principles")}</p>`}
-  ${D.princline?`<p>${esc(D.princline)}</p>`:""}
-
-  <h2>5. Compensation</h2>
+  <h2>2. Compensation</h2>
   <div style="overflow-x:auto"><table>
     <thead><tr><th style="width:34%">Component</th><th>Detail</th></tr></thead>
     <tbody>${payRows.join("")}</tbody></table></div>
@@ -1444,77 +1342,60 @@ function render(){
     <thead><tr><th>Monthly ${esc(V("metricMoney"))} volume</th><th>Base pay (est.)</th><th>Commission</th><th>Monthly total</th></tr></thead>
     <tbody>${oteRows}</tbody></table></div>
     <p style="font-size:12px;color:var(--ink-3)">Projections based on verified ${esc(V("metricMoney"))} at our published rate. Actual earnings depend on verified volume and pricing compliance.</p>`
-   :`<p>${TODO("Fill in three volumes in section 06")}</p>`)
+   :`<p>${TODO("Add three example monthly volumes (the earnings table fields in section 06) to show what this role can make")}</p>`)
   : (raisePath.length || num(D.base) ? `<div style="overflow-x:auto"><table>
     <thead><tr><th style="width:26%">Stage</th><th>Pay rate</th><th>Base pay (est.)</th></tr></thead>
     <tbody>${stageEarnRows}</tbody></table></div>
-    ${hasPerf?`<p style="font-size:12px;color:var(--ink-3)">Plus the performance pay above, on top of every stage.</p>`:`<p>Your raises through the first 90 days are written above, and the growth path in section 7 is how the number keeps climbing after that. There is always more here for people who earn it.</p>`}`
-   : `<p>${TODO("Fill in the pay fields in section 06")}</p>`)}
+    ${hasPerf?`<p style="font-size:12px;color:var(--ink-3)">Plus the performance pay above, on top of every stage.</p>`:`<p>Your raises through the first 90 days are written above, and the growth path in section 4 is how the number keeps climbing after that. There is always more here for people who earn it.</p>`}`
+   : `<p>${TODO("Add the pay fields in section 06 to show what this role can make")}</p>`)}
 
-  <h2>6. 30/60/90 Checkpoint Reviews</h2>
-  <p>Your roadmap runs in three stages, and each stage ends with a formal checkpoint review. Meeting the checkpoint unlocks the next stage. Every review is a two-way conversation to celebrate wins, address gaps, and chart the next chapter of ${first?esc(first)+"'s ":"your "}growth at ${co}.</p>
+  <h2>3. Your First 90 Days</h2>
+  <p>This plan is designed to get you to ${target||TODO("your target")} or more in monthly ${V("metricMoney")}, and you will have everything you need to get there. It runs in three stages. Each stage ends with a formal checkpoint review — a two-way conversation to celebrate wins, address gaps, and chart what comes next. Meet the checkpoint and the next stage unlocks.</p>
   <div style="overflow-x:auto"><table class="gate">
-    <thead><tr><th style="width:18%">Checkpoint</th><th>Must be demonstrated</th><th style="width:26%">Unlocks</th></tr></thead>
+    <thead><tr><th style="width:20%">Stage</th><th style="width:38%">The focus</th><th style="width:42%">Checkpoint to pass</th></tr></thead>
     <tbody>
-      <tr><td><strong>Day 30</strong><br><span style="color:var(--ink-3)">End of onboarding</span></td>
-          <td>${cellList(D.c30,"Day 30 checkpoint")}</td>
-          <td>Days 31–60: Building</td></tr>
-      <tr><td><strong>Day 60</strong><br><span style="color:var(--ink-3)">${mid?mid+" / month":"Midpoint"}</span></td>
-          <td>${cellList(D.c60,"Day 60 checkpoint")}</td>
-          <td>Days 61–90: Proving ground</td></tr>
-      <tr><td><strong>Day 90</strong><br><span style="color:var(--ink-3)">${target?target+" / month":"Final review"}</span></td>
-          <td>${cellList(D.crit,"Day 90 review criteria")}</td>
-          <td>${hasPerf?`Full ${esc(V("perfPay"))} activation and the`:"The"} path to ${g("nextrole","the next role")}</td></tr>
+      <tr><td><strong>Days 1–30</strong><br><span style="color:var(--ink-3)">Onboarding</span></td>
+          <td>${D.d30?esc(D.d30):TODO("Days 1–30 focus")}</td>
+          <td>${cellList(D.c30,"Day 30 checkpoint")}</td></tr>
+      <tr><td><strong>Days 31–60</strong><br><span style="color:var(--ink-3)">Building${mid?" · "+mid+" / month":""}</span></td>
+          <td>${D.d60?esc(D.d60):TODO("Days 31–60 focus")}</td>
+          <td>${cellList(D.c60,"Day 60 checkpoint")}</td></tr>
+      <tr><td><strong>Days 61–90</strong><br><span style="color:var(--ink-3)">Proving ground${target?" · "+target+" / month":""}</span></td>
+          <td>${D.d90?esc(D.d90):TODO("Days 61–90 focus")}</td>
+          <td>${cellList(D.crit,"Day 90 review criteria")}${hasPerf?`<p style="margin-top:6px">Passing this review activates full ${esc(V("perfPay"))} (section 2) and opens the path to ${g("nextrole","the next role")}.</p>`:`<p style="margin-top:6px">Passing this review opens the path to ${g("nextrole","the next role")}.</p>`}</td></tr>
     </tbody></table></div>
+  <h3>Your support system</h3>
+  <p>You will never be left to figure it out alone. From day one you have access to:</p>
+  ${ul(D.support,"Who and what supports them")}
   <h3>If a checkpoint is missed</h3>
   ${para(D.miss,"What happens if a checkpoint is missed")}
   <h3>After the day 90 review</h3>
   ${para(D.revout,"What happens if it goes well")}
 
-  <h2>7. Growth Path</h2>
-  <p>This role is the foundation of a career, not just a position.</p>
-  <div style="overflow-x:auto"><table>
-    <tbody>
-      <tr><td style="width:18%"><strong>Year 1</strong></td><td>${D.y1?esc(D.y1):TODO("Year 1")}</td></tr>
-      <tr><td><strong>Year 2</strong></td><td>${D.y2?esc(D.y2):TODO("Year 2")}</td></tr>
-      <tr><td><strong>Year 3</strong></td><td>${D.y3?esc(D.y3):TODO("Year 3")}</td></tr>
-    </tbody></table></div>
-  ${para(D.compreneg,"What changes about pay at that level")}
+  <h2>4. Standards and Growth</h2>
+  <p>Success here is measured against our culture principles — our performance operating system:</p>
+  ${princ?`<ul>${princ}</ul>`:`<p>${TODO("Your culture principles")}</p>`}
+  ${D.princline?`<p>${esc(D.princline)}</p>`:""}
+  <h3>Where this role goes</h3>
+  <p>This role is intentionally designed with a clear pathway to ${g("nextrole","the next role")}. We are not looking to fill a seat — we are looking to develop a leader.</p>
+  ${para(D.growth,"Where this role goes, and what earns the promotion")}
 
-  <h2>8. Performance Expectations and Mutual Commitments</h2>
+  <h2>5. Employment Terms</h2>
   ${para(D.why_terms,"Why these terms exist")}
-  <h3>Revenue benchmarks</h3>
-  <p>Failure to meet the following benchmarks consistently and without documented cause gives ${co} the right to review and adjust the compensation structure, reduce base salary, modify position terms, or separate employment. Any adjustment will be communicated directly before implementation.</p>
-  <ul>
-    <li><strong>Day 30:</strong> Working to our standard. First independent work completed. Systems operational.</li>
-    <li><strong>Day 60:</strong> Minimum ${mid||TODO("$ checkpoint")} in verified monthly ${esc(V("metricMoney"))}. ${esc(V("quality")[0].toUpperCase()+V("quality").slice(1))} at or trending toward ${qVal(D.closerate)||TODO(V("quality"))}.</li>
-    <li><strong>Day 90:</strong> Minimum ${target||TODO("$ target")} in verified monthly ${esc(V("metricMoney"))}.${hasPerf?` Full ${esc(V("perfPay"))} activates upon achievement.`:""}</li>
-  </ul>
-  <h3>Compensation review triggers</h3>
-  <p>${co} reserves the right to initiate a compensation review at any time if any of the following occur:</p>
+  <h3>Compensation review</h3>
+  <p>Consistently missing the checkpoints in section 3 without documented cause gives ${co} the right to review the arrangement — adjusting the compensation structure, modifying position terms, or separating employment — always communicated directly before implementation. A review may be initiated at any time if any of the following occur:</p>
   ${ul(D.triggers,"Review triggers")}
-  <h3>Conduct, confidentiality, and non-solicitation</h3>
+  <h3>Conduct, confidentiality${ns?", and non-solicitation":""}</h3>
   <ul>${lines(D.conduct).map(x=>`<li>${esc(x)}</li>`).join("")||`<li>${TODO("Conduct and confidentiality terms")}</li>`}${nsClause}</ul>
   <h3>The 90-day proving period</h3>
-  ${para(D.probation,"90-day proving period — either side can walk")}
-  <h3>At-will employment</h3>
-  ${para(D.atwill,"At-will statement")}
+  ${para(D.probation,"90-day proving period and at-will terms")}
   <p>Our commitment to ${first?esc(first):"you"} is equally firm:</p>
   <div class="pledge">${D.pledge?esc(D.pledge):TODO("Your commitment back to them")}</div>
+  <p>We are genuinely excited about the possibility of ${first?esc(first):"you"} being a central part of this story.</p>
 
-  <h2>9. About ${co}</h2>
-  ${para(D.who,"Who you are")}
-  ${D.city?`<p>We are based in ${esc(D.city)}.</p>`:""}
-  <h3>We believe deeply in</h3>
-  ${ul(D.believe,"What you believe")}
-  ${para(D.closing,"Closing thought")}
-  ${siteHref(D.website)?`<p>See who we are and the work we're proud of at <a href="${esc(siteHref(D.website))}" target="_blank" rel="noopener" style="color:var(--accent)">${esc(siteLabel(D.website))}</a>.</p>`:""}
-  <p>We are genuinely excited about the possibility of ${first?esc(first):"you"} being a central part of that story.</p>
-
-  <h2>Acceptance and Sign-Off</h2>
-  <p>If you accept this offer, please sign below. Upon receipt of a signed copy we will begin onboarding and prepare for your ${dateFmt(D.start)||TODO("start date")} start date.</p>
-  <p><strong>Please return a signed copy by ${dateFmt(D.expires)||TODO("expiry date")}.</strong></p>
-  <p>By signing below, ${cand} confirms that they have read, understood, and agree to all terms in this offer letter, including the compensation structure, the 30/60/90 benchmarks, ${fieldVisible("vehicle")&&lines(D.vehicle).length?"vehicle policy, ":""}pricing compliance requirements, confidentiality obligations${ns?", non-solicitation terms":""}, and the at-will nature of this employment.</p>
+  <h2>6. Acceptance and Sign-Off</h2>
+  <p>If you accept this offer, please sign below and <strong>return a signed copy by ${dateFmt(D.expires)||TODO("expiry date")}</strong>.${dateWarn?` ${TODO("Heads up: this expiry date lands on or after the start date — move it earlier")}`:""} Upon receipt we will begin onboarding and prepare for your ${dateFmt(D.start)||TODO("start date")} start date.</p>
+  <p>By signing below, ${cand} confirms that they have read, understood, and agree to the terms of this offer, including the compensation structure, the 90-day plan and checkpoints, ${fieldVisible("vehicle")&&lines(D.vehicle).length?"the vehicle policy, ":""}pricing compliance and confidentiality obligations${ns?", non-solicitation terms":""}, and the at-will nature of this employment.</p>
 
   <div class="contact"><strong>Questions before you sign?</strong> Contact ${accName?esc(accName):TODO("Accountable party")}${v("acc_title")?", "+v("acc_title"):""}, directly at ${v("acc_email")||TODO("email")} or ${v("acc_phone")||TODO("phone")}.</div>
 
@@ -1691,7 +1572,7 @@ document.addEventListener("drop", e=>{
    read other members' offers with this key. See supabase/schema.sql.
    ============================================================ */
 const BACKEND = { supabaseUrl: "https://jxywghplxowytqwdsjyu.supabase.co", supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0", table: "offer_letters" };
-const APP_VERSION = "2026.10.3";
+const APP_VERSION = "2026.10.4";
 const backendOn = () => !!(BACKEND.supabaseUrl && BACKEND.supabaseAnonKey);
 
 let DRAFT_ID = (()=>{
@@ -1730,7 +1611,7 @@ window.addEventListener("beforeprint", ()=>recordCopy("print"));
    AI PREP PROMPT, generated from the schema so it never drifts
    from the fields the builder actually has.
    ============================================================ */
-const OWNER_KEYS = new Set(["issued","start","expires","cand","promo_sales","promo_close","target","mid",
+const OWNER_KEYS = new Set(["issued","start","expires","cand","target","mid",
   "options","closerate","base","freq","comm","basis","earned","v1","v2","v3","nonsolicit","cand_email","cand_phone",
   "hybrid","raise30","raise60","raise90","hours","spiff_amt","bonus_amt","override_pct"]);
 
@@ -1810,6 +1691,7 @@ function buildPrompt(){
 "- Write in my company's voice and use my real words where my site has them. Plain, confident, people-first. No corporate buzzwords.",
 "- Fill every text field you reasonably can. Where my site doesn't cover something (sales process, 30/60/90 plan, checkpoints, review criteria, terms), write a strong first draft tailored to the role and to a residential electrical service company. I'll edit it.",
 "- **Leave these empty (\"\") — they're mine to decide:** pay, commission, sales targets, close rates, dates, non-solicitation months, and the candidate's name and contact details. Never guess compensation.",
+"- The accountable-party fields (`acc_name`, `acc_title`, `acc_email`, `acc_phone`) are the COMPANY-SIDE hiring manager or owner from my Step 1 answers — **never the candidate**. If I didn't name one, leave them empty.",
 "- Never invent facts about my company (years in business, awards, headcount, licenses, reviews). If it isn't on my site or in my answers, leave it out.",
 "- Fields marked \"one per line\" separate items with a newline (\\n) inside the string. Fields in the form \"Name: what it means\" keep that colon format.",
 "- Every value is a string. Select fields use one of the listed options exactly, or \"\".",
