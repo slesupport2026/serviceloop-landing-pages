@@ -89,3 +89,6 @@
 /faqs     /FAQs/  301
 /faq      /FAQs/  301
 /faqs/*   /FAQs/  301
+
+# Preview of the next Post-Call Facts build (not the live app)
+/facts-preview/*  /facts-preview/index.html  200
