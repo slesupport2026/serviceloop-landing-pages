@@ -31,6 +31,7 @@
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
+      color-scheme:dark;
       --ink:#FFFFFF; --ink-2:#C3CFE2; --ink-3:#AEBBD0;
       --rule:#2E3A55; --rule-soft:#16567A;
       --surface:#0F1629; --panel:#17213A; --paper:#0C1322;
@@ -42,6 +43,7 @@
     }
   }
   :root[data-theme="dark"]{
+    color-scheme:dark;
     --ink:#FFFFFF; --ink-2:#C3CFE2; --ink-3:#AEBBD0;
     --rule:#2E3A55; --rule-soft:#16567A;
     --surface:#0F1629; --panel:#17213A; --paper:#0C1322;
@@ -137,6 +139,9 @@
     width:100%;border:1px solid var(--rule);background:var(--paper);color:var(--ink);
     border-radius:6px;padding:9px 11px;font:inherit;font-size:14px;transition:.14s}
   .f textarea{min-height:76px;resize:vertical;line-height:1.55}
+  /* built-in icons (calendar, dropdown, datalist arrows) follow the theme: white in dark mode */
+  .f input::-webkit-calendar-picker-indicator{opacity:1;cursor:pointer}
+  .f select{cursor:pointer}
   .f input:focus, .f textarea:focus, .f select:focus{
     outline:0;border-color:var(--sle-gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--sle-gold) 28%,transparent)}
   .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
@@ -1435,6 +1440,8 @@ window.addEventListener("load", async ()=>{
   const r = await aiCall({ action:"status" });
   AI.on = !!(r && r.status === "ok");
   const p = document.getElementById("aiPanel"); if(p) p.hidden = !AI.on;
+  /* a website is already there (reopened page, loaded draft) but the company boxes are empty: read it now */
+  if(AI.on){ collect(); if(String(D.website||"").trim() && !String(D.who||"").trim() && !String(D.princ||"").trim()) aiProfile(true); }
 });
 
 function buildForm(){
@@ -2099,7 +2106,7 @@ document.addEventListener("drop", e=>{
    read other members' offers with this key. See supabase/schema.sql.
    ============================================================ */
 const BACKEND = { supabaseUrl: "https://jxywghplxowytqwdsjyu.supabase.co", supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0", table: "offer_letters" };
-const APP_VERSION = "2026.11.3";
+const APP_VERSION = "2026.11.4";
 const backendOn = () => !!(BACKEND.supabaseUrl && BACKEND.supabaseAnonKey);
 
 let DRAFT_ID = (()=>{
