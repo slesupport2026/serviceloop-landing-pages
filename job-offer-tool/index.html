@@ -376,6 +376,26 @@
   .brandcheck li{margin:2px 0}
   .brandcheck li.ok{color:var(--done)}
   .brandcheck li.bad{color:var(--amber)}
+  /* pull-my-brand panel */
+  .brandpull{margin:4px 0 10px}
+  .brandpull .bp-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .brandpull .bp-status{font-size:13px;line-height:1.5;margin:8px 0 0;color:var(--ink-3)}
+  .brandpull .bp-status:empty{display:none}
+  .brandpull .bp-status.bad{color:var(--amber)}
+  .brandpull .bp-found{border:1px dashed var(--rule);border-radius:10px;padding:10px 12px;margin-top:8px;font-size:12.5px}
+  .brandpull .bp-found h4{margin:0 0 6px;font-family:var(--head);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .brandpull .bp-line{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0}
+  .brandpull .bp-line > span{min-width:84px;color:var(--ink-3)}
+  .brandpull .bp-sw{width:30px;height:30px;border-radius:6px;border:2px solid transparent;box-shadow:0 0 0 1px var(--rule);cursor:pointer;padding:0}
+  .brandpull .bp-sw[aria-pressed="true"]{border-color:var(--panel);box-shadow:0 0 0 2px var(--ink)}
+  .brandpull .bp-sw:focus-visible,.brandpull .bp-logo:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .brandpull .bp-logo{height:44px;max-width:140px;padding:4px 8px;border-radius:6px;border:1px solid var(--rule);background:#fff;cursor:pointer;object-fit:contain}
+  .brandpull .bp-logo[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+  .brandpull .bp-target{display:inline-flex;gap:4px}
+  .brandpull .bp-target button{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:999px;padding:3px 10px;font-size:12px;cursor:pointer}
+  .brandpull .bp-target button[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+  .brandpull .bp-undo{background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:12.5px;padding:0}
+  .btn[disabled]{opacity:.6;cursor:progress}
 
   .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;z-index:60;
          background:#0F1629;color:#fff;border:1px solid #FCC23D;border-radius:8px;padding:10px 16px;
@@ -450,6 +470,7 @@
         <h3>Fill the gaps and make it yours</h3>
         <ul>
           <li><b>The numbers are yours.</b> Pay, commission, sales targets, and dates are left blank on purpose. Your AI doesn't know your bank balance. You do.</li>
+          <li><b>Your brand goes on the letter.</b> In The basics, type your website and click <i>Pull my brand from my website</i>. It grabs your colors, logo, and fonts straight from your site. Check them in the preview.</li>
           <li><b>Gold tags in the preview</b> mark anything still missing. When they're gone, you're done.</li>
           <li><b>Not sure what to pay at each stage?</b> The pay calculator in section 06 shows their pay, your true cost, and whether your pricing supports it. One click drops the numbers into your offer. <button type="button" class="linkbtn" id="toCalc">Open the calculator →</button></li>
           <li><b>Stuck on a question?</b> Hit <i>Not sure? Use a starting point</i> and edit from there.</li>
@@ -515,6 +536,8 @@ const SECTIONS = [
   {k:"city",    l:"City and state", ph:"Clermont, Florida", w:"half"},
   {k:"address", l:"Street address", ph:"341 Main Street", w:"half"},
   {k:"phone",   l:"Phone", ph:"(555) 555-0100", w:"half"},
+  {k:"website", l:"Company website", ph:"www.yourcompany.com",
+   h:"Type it here first. The builder reads your site and pulls your brand colors, logo, and fonts onto the letter. It also prints in the letterhead and footer, and a strong candidate will look anyway, so point them at the site you're proud of."},
   {k:"brand_color", l:"Main brand color", ph:"#C8102E", w:"half",
    h:"From your logo, header, or buttons. A hex code like #C8102E works, so does rgb(200,16,46). Colors the headings, lines, and tables on the letter."},
   {k:"brand_color2", l:"Second brand color", ph:"#1B2A45", w:"half",
@@ -707,8 +730,6 @@ const SECTIONS = [
   {k:"who", l:"Who are you?", ty:"ta",
    h:"One or two sentences. This folds into the opening paragraph of the letter.",
    sg:"We are a fast-growing residential electrical company. We are not a typical electrical contractor — we operate at the intersection of skilled trades, client experience design, and intentional culture-building."},
-  {k:"website", l:"Company website", ph:"www.yourcompany.com",
-   h:"Send them to the site you're proud of. A strong candidate will look anyway — point them at your reviews, your team page, your best work. It also prints in the letterhead and footer."},
 ]},
 
 { n:"11", id:"signoff", t:"Sign-off",
@@ -1038,7 +1059,8 @@ function ensureFont(name){
   l.href = "https://fonts.googleapis.com/css?family=" + encodeURIComponent(name).replace(/%20/g,"+") + ":400,600,700&display=swap";
   document.head.appendChild(l);
 }
-const logoLink = () => { const u = String(D.logo_url||"").trim(); return /^https:\/\/[^\s"'<>]+$/i.test(u) ? u : ""; };
+const logoLink = () => { const u = String(D.logo_url||"").trim();
+  return /^https:\/\/[^\s"'<>]+$/i.test(u) || /^data:image\/(png|jpeg|webp|gif|svg\+xml);base64,[A-Za-z0-9+\/=]+$/.test(u) ? u : ""; };
 const LOGO_STATE = {};   /* url -> "ok" | "bad" | "wait" */
 function probeLogo(u){
   if(!u || LOGO_STATE[u]) return;
@@ -1104,6 +1126,194 @@ function brandCheck(){
     <ul>${ready ? `<li class="ok">Brand is set. The letter uses your colors, logo, and fonts.</li>` : ""}${issues.map(x=>`<li class="${x[0]}">${esc(x[1])}</li>`).join("")}</ul>`;
 }
 
+/* ============================================================
+   PULL MY BRAND. The brand-extract function (Supabase SLE Tools)
+   reads the member's site: CSS colors and tokens, the header logo,
+   fonts. The logo comes back as data so we can read its colors here
+   and pick the brand colors that are really in the logo.
+   ============================================================ */
+const BRAND_FIELDS = ["brand_color","brand_color2","logo_url","logo_bg","brand_font","brand_font_body"];
+let PULL = null, PULL_UNDO = null, PULL_TARGET = "brand_color", PULLING = false;
+const fieldEl = k => document.querySelector(`[data-k="${k}"]`);
+function setField(k, v){ const el = fieldEl(k); if(el) el.value = v == null ? "" : String(v); }
+function rgbDist(a, b){ const x = hexRgb(a), y = hexRgb(b); return Math.hypot(x[0]-y[0], x[1]-y[1], x[2]-y[2]); }
+function hslOf(h){
+  const [r,g,b] = hexRgb(h).map(x=>x/255), mx = Math.max(r,g,b), mn = Math.min(r,g,b), l = (mx+mn)/2, d = mx-mn;
+  return { s: d === 0 ? 0 : d / (1 - Math.abs(2*l - 1)), l };
+}
+const isNeutral = h => { const c = hslOf(h); return c.s < .2 || c.l > .92 || c.l < .08; };
+/* read an image (data URL or blob URL) into colors, lightness, and a letter-sized PNG */
+function analyzeImage(src){
+  return new Promise(res=>{
+    const im = new Image();
+    im.onload = () => {
+      try{
+        let w = im.naturalWidth || 600, h = im.naturalHeight || 300;
+        const sc = Math.min(1, 640 / w, 320 / h); w = Math.max(1, Math.round(w*sc)); h = Math.max(1, Math.round(h*sc));
+        const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+        const cx = cv.getContext("2d"); cx.drawImage(im, 0, 0, w, h);
+        const px = cx.getImageData(0, 0, w, h).data, buckets = new Map();
+        let opaque = 0, lumSum = 0;
+        for(let i = 0; i < px.length; i += 4){
+          if(px[i+3] < 200) continue;
+          opaque++;
+          const r = px[i], g = px[i+1], b = px[i+2];
+          lumSum += (.2126*r + .7152*g + .0722*b) / 255;
+          const key = (r>>4)<<8 | (g>>4)<<4 | (b>>4);
+          const e = buckets.get(key) || [0,0,0,0]; e[0]+=r; e[1]+=g; e[2]+=b; e[3]++; buckets.set(key, e);
+        }
+        const total = w*h, colors = [];
+        [...buckets.values()].sort((a,b)=>b[3]-a[3]).forEach(e=>{
+          if(e[3] < opaque * .004) return;
+          const hex = rgbHex([e[0]/e[3], e[1]/e[3], e[2]/e[3]]);
+          if(isNeutral(hex)) return;
+          const near = colors.find(c=>rgbDist(c.hex, hex) < 48);
+          if(near) near.n += e[3]; else colors.push({hex, n:e[3]});
+        });
+        colors.sort((a,b)=>b.n-a.n);
+        const transparent = 1 - opaque / total, avgLum = opaque ? lumSum / opaque : 1;
+        res({ ok:true, colors: colors.slice(0,6).map(c=>c.hex), light: transparent > .12 && avgLum > .72,
+              png: cv.toDataURL("image/png") });
+      }catch(err){ res({ ok:false, colors:[], light:false, png:"" }); }
+    };
+    im.onerror = () => res({ ok:false, colors:[], light:false, png:"" });
+    im.src = src;
+  });
+}
+/* rank site colors, favoring the ones that are really in the logo */
+function rankColors(siteColors, logoColors){
+  const out = (siteColors||[]).filter(c=>c && /^#[0-9a-f]{6}$/i.test(c.hex) && !isNeutral(c.hex))
+    .map(c=>({ hex:c.hex.toLowerCase(), score:+c.score||0, token:c.token||"", inLogo:false }));
+  (logoColors||[]).forEach((h, i)=>{
+    const near = out.find(c=>rgbDist(c.hex, h) < 50);
+    if(near){ if(!near.inLogo){ near.inLogo = true; near.score += 40 - i*4; } }
+    else out.push({ hex:h.toLowerCase(), score: 22 - i*3, token:"", inLogo:true });
+  });
+  out.sort((a,b)=>b.score-a.score);
+  return out;
+}
+function choosePair(ranked){
+  if(!ranked.length) return ["",""];
+  /* a second color has to be a different color, not a lighter or darker shade of the first */
+  const hueOf = h => { const [r,g,bb] = hexRgb(h).map(x=>x/255), mx = Math.max(r,g,bb), d = mx - Math.min(r,g,bb);
+    if(!d) return 0; const x = mx === r ? ((g-bb)/d) % 6 : mx === g ? (bb-r)/d + 2 : (r-g)/d + 4; return (x*60 + 360) % 360; };
+  const differs = (x, y) => { const dh = Math.abs(hueOf(x) - hueOf(y)), hd = Math.min(dh, 360 - dh);
+    return rgbDist(x, y) > 70 && (hd > 28 || Math.abs(hslOf(x).l - hslOf(y).l) > .38); };
+  let a = ranked[0], b = ranked.find(c=>c !== a && c.inLogo && differs(c.hex, a.hex)) || ranked.find(c=>c !== a && differs(c.hex, a.hex));
+  /* the main color carries headings and tables, so of two strong brand colors use the one that reads better on white */
+  if(b && b.score >= a.score * .35 && contrastW(b.hex) > contrastW(a.hex) + 1.5) [a, b] = [b, a];
+  return [a.hex.toUpperCase(), b ? b.hex.toUpperCase() : ""];
+}
+function pullStatus(msg, bad){ const el = $("#pullStatus"); if(el){ el.textContent = msg || ""; el.classList.toggle("bad", !!bad); } }
+async function pullBrand(auto){
+  if(PULLING) return;
+  collect();
+  const site = String(D.website||"").trim();
+  if(!site){ pullStatus("Type your company website above first, then click Pull my brand.", true); const w = fieldEl("website"); if(w) w.focus(); return; }
+  if(!backendOn()){ pullStatus("Brand pulling isn't switched on in this copy of the builder.", true); return; }
+  PULLING = true;
+  const btn = $("#pullBrand"); if(btn){ btn.disabled = true; btn.textContent = "Reading your site…"; }
+  pullStatus("Reading " + siteLabel(site) + " for your colors, logo, and fonts. This takes a few seconds.");
+  let r = null;
+  try{
+    const ctl = new AbortController(), t = setTimeout(()=>ctl.abort(), 30000);
+    const resp = await fetch(BACKEND.supabaseUrl.replace(/\/+$/,"") + "/functions/v1/brand-extract", {
+      method:"POST", signal: ctl.signal,
+      headers:{ "apikey":BACKEND.supabaseAnonKey, "Authorization":"Bearer " + BACKEND.supabaseAnonKey, "Content-Type":"application/json" },
+      body: JSON.stringify({ url: site }) });
+    clearTimeout(t);
+    r = resp.ok ? await resp.json() : { ok:false, reason:"The brand reader is busy. Try again in a minute." };
+  }catch(err){ r = { ok:false, reason:"Couldn't reach the brand reader. Check your connection and try again." }; }
+  PULLING = false;
+  if(btn){ btn.disabled = false; btn.textContent = "Pull my brand from my website"; }
+  if(!r || !r.ok){
+    pullStatus((r && r.reason ? r.reason + " " : "") + "You can upload your logo file instead, and the builder will read its colors.", true);
+    return;
+  }
+  const lg = r.logo && r.logo.dataUrl ? await analyzeImage(r.logo.dataUrl) : { ok:false, colors:[], light:false, png:"" };
+  const ranked = rankColors(r.colors, lg.colors);
+  const [main, second] = choosePair(ranked);
+  let logo = "";
+  if(r.logo){
+    if(r.logo.url && /^https:\/\//i.test(r.logo.url) && !/\.ico(\?|$)/i.test(r.logo.url)) logo = r.logo.url;
+    else if(lg.ok && lg.png) logo = lg.png;
+  }
+  const head = fontName(r.fonts && r.fonts.heading), body = fontName(r.fonts && r.fonts.body) || head;
+  PULL_UNDO = Object.fromEntries(BRAND_FIELDS.map(k=>[k, D[k] || ""]));
+  const next = { brand_color: main, brand_color2: second, logo_url: logo,
+                 logo_bg: logo ? (lg.light ? "Dark" : "White") : "", brand_font: head, brand_font_body: body };
+  /* fill everything the site gave us; keep what it didn't */
+  BRAND_FIELDS.forEach(k=>{ if(next[k]) setField(k, next[k]); });
+  const fl = document.getElementById("fontlist");
+  if(fl && r.fonts && r.fonts.all) r.fonts.all.map(fontName).filter(Boolean).reverse().forEach(f=>{
+    if(![...fl.options].some(o=>o.value === f)){ const o = document.createElement("option"); o.value = f; fl.prepend(o); }
+  });
+  PULL = { site: r.site || site, ranked: ranked.slice(0, 8), logos: (r.logos||[]).map(x=>x.url).filter(u=>/^https:\/\//i.test(u) && !/\.ico(\?|$)/i.test(u)).slice(0, 5),
+           fonts: (r.fonts && r.fonts.all || []).map(fontName).filter(Boolean) };
+  if(logo && !PULL.logos.includes(logo)) PULL.logos.unshift(logo);
+  sync(); renderPull();
+  const got = [main && "colors", logo && "logo", head && "fonts"].filter(Boolean);
+  const miss = [!main && "colors", !logo && "a logo", !head && "fonts"].filter(Boolean);
+  pullStatus(got.length
+    ? "Pulled your " + got.join(", ").replace(/, ([^,]*)$/, " and $1") + " from " + siteLabel(PULL.site) + ". Check the letter. Click any swatch or logo below to swap." + (miss.length ? " Couldn't find " + miss.join(" or ") + ", so add it by hand." : "")
+    : "Read " + siteLabel(PULL.site) + " but couldn't find a brand color, logo, or font. Upload your logo instead.", !got.length);
+  if(!auto) toast(got.length ? "Brand pulled from " + siteLabel(PULL.site) : "No brand found on that site", !got.length);
+}
+function renderPull(){
+  const el = $("#pullFound"); if(!el) return;
+  if(!PULL){ el.innerHTML = ""; return; }
+  collect();
+  const cur = normColor(D[PULL_TARGET]);
+  const sw = PULL.ranked.map(c=>`<button type="button" class="bp-sw" data-pick="${c.hex}" style="background:${c.hex}" title="${c.hex.toUpperCase()}${c.inLogo?" (in your logo)":""}" aria-label="Use ${c.hex.toUpperCase()}" aria-pressed="${cur === c.hex.toLowerCase()}"></button>`).join("");
+  const lu = logoLink();
+  const logos = PULL.logos.map(u=>`<img class="bp-logo" src="${esc(u)}" data-logo="${esc(u)}" alt="Logo option" tabindex="0" role="button" aria-pressed="${u === lu}" onerror="this.remove()">`).join("");
+  el.innerHTML = `<div class="bp-found"><h4>${PULL.upload ? "Colors in your logo" : "Found on " + esc(siteLabel(PULL.site))}</h4>
+    ${sw ? `<div class="bp-line"><span>Colors</span><span class="bp-target" role="group" aria-label="Clicking a color sets">
+        <button type="button" data-target="brand_color" aria-pressed="${PULL_TARGET==="brand_color"}">Main</button>
+        <button type="button" data-target="brand_color2" aria-pressed="${PULL_TARGET==="brand_color2"}">Second</button></span>${sw}</div>` : ""}
+    ${logos ? `<div class="bp-line"><span>Logos</span>${logos}</div>` : ""}
+    ${PULL.fonts.length ? `<div class="bp-line"><span>Fonts</span>${PULL.fonts.map(esc).join(", ")}</div>` : ""}
+    ${PULL_UNDO ? `<button type="button" class="bp-undo" id="pullUndo">Undo the pull</button>` : ""}</div>`;
+}
+document.addEventListener("click", e=>{
+  const t = e.target;
+  if(!t || !t.closest) return;
+  if(t.closest("#pullBrand")){ pullBrand(false); return; }
+  if(t.closest("#upLogoBtn")){ const f = $("#upLogo"); if(f) f.click(); return; }
+  const tg = t.closest(".bp-target button");
+  if(tg){ PULL_TARGET = tg.dataset.target; renderPull(); return; }
+  const pk = t.closest("[data-pick]");
+  if(pk){ setField(PULL_TARGET, pk.dataset.pick.toUpperCase()); sync(); renderPull(); return; }
+  const lgo = t.closest("[data-logo]");
+  if(lgo){ setField("logo_url", lgo.dataset.logo); sync(); renderPull(); return; }
+  if(t.closest("#pullUndo") && PULL_UNDO){ BRAND_FIELDS.forEach(k=>setField(k, PULL_UNDO[k])); PULL_UNDO = null; sync(); renderPull(); pullStatus("Put your brand fields back the way they were."); }
+});
+document.addEventListener("keydown", e=>{
+  if((e.key === "Enter" || e.key === " ") && e.target && e.target.matches && e.target.matches("[data-logo]")){ e.preventDefault(); e.target.click(); }
+});
+document.addEventListener("change", async e=>{
+  if(!e.target || e.target.id !== "upLogo") return;
+  const f = e.target.files && e.target.files[0]; e.target.value = "";
+  if(!f) return;
+  if(!/^image\//.test(f.type)){ pullStatus("That file isn't an image. Use a PNG, JPG, SVG, or WEBP of your logo.", true); return; }
+  if(f.size > 8e6){ pullStatus("That image is over 8 MB. Use a smaller copy of your logo.", true); return; }
+  const src = await new Promise(res=>{ const rd = new FileReader(); rd.onload = () => res(String(rd.result||"")); rd.onerror = () => res(""); rd.readAsDataURL(f); });
+  const lg = src ? await analyzeImage(src) : { ok:false };
+  if(!lg.ok){ pullStatus("Couldn't read that image. Try a PNG or JPG of your logo.", true); return; }
+  collect();
+  PULL_UNDO = Object.fromEntries(BRAND_FIELDS.map(k=>[k, D[k] || ""]));
+  /* keep a crisp SVG as is; everything else becomes a letter-sized PNG */
+  const keepSvg = f.type === "image/svg+xml" && src.length < 200000 && !/<script|on\w+=/i.test(atob(src.split(",")[1] || ""));
+  setField("logo_url", keepSvg ? src : lg.png);
+  setField("logo_bg", lg.light ? "Dark" : "White");
+  const ranked = rankColors([], lg.colors), [main, second] = choosePair(ranked);
+  if(main && !normColor(D.brand_color)) setField("brand_color", main);
+  if(second && !normColor(D.brand_color2)) setField("brand_color2", second);
+  PULL = { site: f.name, upload: true, ranked, logos: [], fonts: [] };
+  sync(); renderPull();
+  pullStatus(main ? "Logo added. Its colors are below; click one to use it." : "Logo added. Add your brand color by hand.");
+});
+
 function buildForm(){
   const form = $("#form"), rail = $("#rail");
   SECTIONS.forEach((s,i)=>{
@@ -1133,7 +1343,12 @@ function buildForm(){
       else if(f.ty==="ote") ctl = oteMarkup();
       else ctl = `<input id="${id}" data-k="${f.k}" data-s="${s.id}" placeholder="${esc(f.ph||"")}"${f.list?` list="${f.list}" autocomplete="off"`:""}>`;
 
-      if(f.k === "brand_color"){ flush(); inner += `<div class="brandcheck" id="brandCheck" aria-live="polite"></div>`; }
+      if(f.k === "brand_color"){ flush(); inner += `<div class="brandpull" id="brandPull">
+          <div class="bp-row"><button type="button" class="btn primary" id="pullBrand">Pull my brand from my website</button>
+          <button type="button" class="btn" id="upLogoBtn">Upload my logo instead</button>
+          <input type="file" id="upLogo" accept="image/png,image/jpeg,image/webp,image/svg+xml,image/gif" hidden></div>
+          <div class="bp-status" id="pullStatus" aria-live="polite"></div><div id="pullFound"></div></div>
+        <div class="brandcheck" id="brandCheck" aria-live="polite"></div>`; }
       const block = `<div class="f" data-f="${f.k}"><label for="${id}">${esc(f.l)}</label>${help}${ctl}${sg}</div>`;
       if(f.w==="half"||f.w==="third") buf.push(block); else { flush(); inner += block; }
     });
@@ -1599,6 +1814,11 @@ document.addEventListener("click", e=>{
   calcUpdate();
 });
 document.addEventListener("change", e=>{ if(e.target.dataset && e.target.dataset.k) sync(); });
+/* pull the brand automatically the first time a website is typed into an unbranded offer */
+document.addEventListener("change", e=>{
+  if(!e.target.dataset || e.target.dataset.k !== "website") return;
+  if(String(D.website||"").trim() && !String(D.brand_color||"").trim() && !String(D.logo_url||"").trim()) pullBrand(true);
+});
 
 document.addEventListener("click", e=>{
   const b = e.target.closest(".suggest"); if(!b) return;
@@ -1700,6 +1920,13 @@ function applyDraft(text, fname){
     if(hit) data[k] = hit.trim();
   });
   if(data.logo_bg){ const m = ["White","Brand color","Dark"].find(o=>o.toLowerCase() === String(data.logo_bg).trim().toLowerCase()); data.logo_bg = m || ""; }
+  /* an AI draft never overwrites a brand already pulled from the site or typed in;
+     a builder-saved draft is a whole offer and brings its own brand */
+  let keptBrand = false;
+  if(!(o && o.app === APP_ID)){
+    collect();
+    BRAND_FIELDS.forEach(k=>{ if(String(D[k]||"").trim()){ if(String(data[k]||"").trim() !== String(D[k]).trim()) keptBrand = true; data[k] = D[k]; } });
+  }
   document.querySelectorAll("[data-k]").forEach(el=>{
     const v = data[el.dataset.k]; el.value = (v == null) ? "" : String(v);
   });
@@ -1709,8 +1936,8 @@ function applyDraft(text, fname){
   const missing = [!normColor(D.brand_color) && "brand color", !logoLink() && "logo"].filter(Boolean);
   if(missing.length){
     const sec = $("#sec-setup"); if(sec) sec.open = true;
-    toast("Draft opened, but no " + missing.join(" or ") + " came through. Add it in The basics so the letter carries your brand.", true);
-  } else toast(who ? "Opened the draft for " + who : "Draft opened");
+    toast("Draft opened, but no " + missing.join(" or ") + " came through. In The basics, click Pull my brand from my website.", true);
+  } else toast((who ? "Opened the draft for " + who : "Draft opened") + (keptBrand ? ". Kept the brand already in The basics." : ""));
   if(o && o.app === APP_ID && o.id){ DRAFT_ID = String(o.id).slice(0,64); try{ localStorage.setItem("offerBuilderId", DRAFT_ID); }catch(e){} }
   return true;
 }
@@ -1743,7 +1970,7 @@ document.addEventListener("drop", e=>{
    read other members' offers with this key. See supabase/schema.sql.
    ============================================================ */
 const BACKEND = { supabaseUrl: "https://jxywghplxowytqwdsjyu.supabase.co", supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0", table: "offer_letters" };
-const APP_VERSION = "2026.11.1";
+const APP_VERSION = "2026.11.2";
 const backendOn = () => !!(BACKEND.supabaseUrl && BACKEND.supabaseAnonKey);
 
 let DRAFT_ID = (()=>{
@@ -1862,6 +2089,7 @@ function buildPrompt(){
 "  - `logo_bg`: \"White\" if the logo reads on white paper, \"Dark\" if it is white or very light, or \"Brand color\" if it is a white logo that sits on my brand color on the site.",
 "  - `brand_font`: the font family my site uses for headings, from its CSS font-family or its Google Fonts link (e.g. Montserrat). Name only, no fallbacks.",
 "  - `brand_font_body`: the font family my site uses for paragraph text.",
+"  - Use exact values from the site's code (CSS, the logo's image link). Never estimate a color from how a page looks. If you can't read the code, leave that brand field empty: the builder pulls my brand straight from my website.",
 "- **Brand messaging:** what we do for people, mission, values or culture principles, what makes us different, how we talk about our customers and our team, and our tone of voice.",
 "",
 "If you can't browse the web, say so and ask me to paste the text of my About and Careers pages, plus my logo link and brand colors.",
@@ -1872,7 +2100,7 @@ function buildPrompt(){
 "- **Leave these empty (\"\") — they're mine to decide:** pay, commission, sales targets, close rates, dates, non-solicitation months, and the candidate's name and contact details. Never guess compensation.",
 "- The accountable-party fields (`acc_name`, `acc_title`, `acc_email`, `acc_phone`) are the COMPANY-SIDE hiring manager or owner from my Step 1 answers — **never the candidate**. If I didn't name one, leave them empty.",
 "- Never invent facts about my company (years in business, awards, headcount, licenses, reviews). If it isn't on my site or in my answers, leave it out.",
-"- **The brand fields are not optional.** Everything you found in Step 2 goes into `brand_color`, `brand_color2`, `logo_url`, `logo_bg`, `brand_font`, and `brand_font_body` in the JSON. The builder only reads the JSON. Anything you mention in chat but leave out of the JSON is lost. Leave a brand field empty only if you truly could not find it, and then list it under Couldn't find.",
+"- **The brand fields are not optional.** Everything you found in Step 2 goes into `brand_color`, `brand_color2`, `logo_url`, `logo_bg`, `brand_font`, and `brand_font_body` in the JSON. The builder only reads the JSON. Anything you mention in chat but leave out of the JSON is lost. Leave a brand field empty only if you couldn't get the exact value, and then list it under Couldn't find.",
 "- Fields marked \"one per line\" separate items with a newline (\\n) inside the string. Fields in the form \"Name: what it means\" keep that colon format.",
 "- Every value is a string. Select fields use one of the listed options exactly, or \"\".",
 "",
