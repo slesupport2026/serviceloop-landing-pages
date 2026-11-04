@@ -396,6 +396,17 @@
   .brandpull .bp-target button[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
   .brandpull .bp-undo{background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:12.5px;padding:0}
   .btn[disabled]{opacity:.6;cursor:progress}
+  /* AI draft panel + "from your site" tags */
+  .aipanel{border:1px solid var(--rule);border-radius:10px;padding:12px 14px;margin:0 0 14px;background:var(--panel);font-size:13px;line-height:1.5}
+  .aipanel .ai-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .aipanel .ai-note{margin:8px 0 0;color:var(--ink-3)}
+  .aipanel .bp-status{font-size:13px;line-height:1.5;margin:8px 0 0}
+  .aipanel .bp-status:empty{display:none}
+  .aipanel .bp-status.bad{color:var(--amber)}
+  .aipanel .bp-undo{background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:12.5px;padding:0;margin-top:6px}
+  .f[data-ai] > label::after{content:"From your site";margin-left:8px;font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--done);border:1px solid currentColor;border-radius:999px;padding:1px 7px;vertical-align:1px}
+  .f[data-ai="role"] > label::after{content:"Drafted for you"}
 
   .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;z-index:60;
          background:#0F1629;color:#fff;border:1px solid #FCC23D;border-radius:8px;padding:10px 16px;
@@ -1314,6 +1325,118 @@ document.addEventListener("change", async e=>{
   pullStatus(main ? "Logo added. Its colors are below; click one to use it." : "Logo added. Add your brand color by hand.");
 });
 
+/* ============================================================
+   DRAFT MY OFFER FROM MY SITE. The offer-ai function (Supabase
+   SLE Tools) reads the site once (Haiku), caches the profile, and
+   writes the role sections (Sonnet) when a role is picked. Only
+   empty boxes, or boxes still holding the starting point, get filled.
+   The server owns the prompts, caps, and budget; it stays dark
+   ({status:"no_key"}) until switched on.
+   ============================================================ */
+const AI = { on:false, busy:false, domain:"", profiled:"", undo:null, rolesDone:{} };
+const AI_PREVIEW = (()=>{ try{ return new URLSearchParams(location.search).get("aipreview") || ""; }catch(e){ return ""; } })();
+const AI_FACTS = ["company","address","city","phone","who","mission","princ","princline"];
+async function aiCall(body){
+  if(!backendOn()) return { status:"no_key" };
+  try{
+    const ctl = new AbortController(), t = setTimeout(()=>ctl.abort(), 90000);
+    const r = await fetch(BACKEND.supabaseUrl.replace(/\/+$/,"") + "/functions/v1/offer-ai", {
+      method:"POST", signal: ctl.signal,
+      headers:{ "apikey":BACKEND.supabaseAnonKey, "Authorization":"Bearer " + BACKEND.supabaseAnonKey, "Content-Type":"application/json" },
+      body: JSON.stringify(Object.assign({ preview: AI_PREVIEW || undefined }, body)) });
+    clearTimeout(t);
+    return await r.json();
+  }catch(err){ return { status:"error", reason:"Couldn't reach the AI drafter. Check your connection and try again." }; }
+}
+function aiStatus(msg, bad){ const el = $("#aiStatus"); if(el){ el.textContent = msg || ""; el.classList.toggle("bad", !!bad); } }
+/* a box is ours to fill if it's empty or still holds the role pack's starting point */
+function aiFillable(k){
+  const el = fieldEl(k); if(!el) return false;
+  const w = el.closest("[data-f]"); if(w && w.style.display === "none") return false;
+  const v = String(el.value||"").trim(); if(!v) return true;
+  const sg = w && w.querySelector(".suggest"), fill = (pack().fill || {})[k];
+  return (sg && v === String(sg.dataset.sg||"").trim()) || (fill != null && v === String(fill).trim());
+}
+function aiApply(fields, tag){
+  const done = [];
+  Object.entries(fields || {}).forEach(([k, v])=>{
+    if(!v || !aiFillable(k)) return;
+    const el = fieldEl(k);
+    if(!AI.undo) AI.undo = {};
+    if(!(k in AI.undo)) AI.undo[k] = el.value;
+    el.value = String(v);
+    const w = el.closest("[data-f]"); if(w) w.dataset.ai = tag;
+    done.push(k);
+  });
+  if(done.length){ sync(); const u = $("#aiUndo"); if(u) u.hidden = false; }
+  return done;
+}
+const fieldLabel = k => { const w = document.querySelector(`[data-f="${k}"] label`); return w ? w.textContent.trim() : k; };
+async function aiProfile(auto){
+  if(AI.busy || !AI.on) return;
+  collect();
+  const site = String(D.website||"").trim();
+  if(!site){ aiStatus("Type your company website above first.", true); const w = fieldEl("website"); if(w) w.focus(); return; }
+  AI.busy = true;
+  const btn = $("#aiGo"); if(btn){ btn.disabled = true; btn.textContent = "Reading your site…"; }
+  aiStatus("Reading " + siteLabel(site) + ": home, About, Careers, and values pages. About 20 seconds.");
+  const r = await aiCall({ action:"profile", url: site });
+  AI.busy = false;
+  if(btn){ btn.disabled = false; btn.textContent = "Draft my offer from my site"; }
+  if(r.status === "no_key"){ AI.on = false; const p = $("#aiPanel"); if(p) p.hidden = true; return; }
+  if(r.status !== "ok"){ aiStatus((r.reason || "The AI drafter couldn't read that site.") + " The starting points in each section still work.", true); return; }
+  if(AI.profiled && AI.profiled !== r.domain) AI.rolesDone = {};
+  AI.profiled = r.domain || siteLabel(site);
+  const got = aiApply(r.fields, "site");
+  const pages = (r.sources || []).map(s=>s.kind).filter(k=>k !== "home");
+  aiStatus("Read your site" + (pages.length ? " (" + [...new Set(pages)].join(", ") + ")" : "") + ". " +
+    (got.length ? "Filled " + got.length + " boxes: " + got.map(fieldLabel).join(", ") + ". " : "Your company boxes were already filled, so I left them. ") +
+    (String(D.role||"").trim() ? "Writing the role sections next…" : "Pick the role above and I'll write the role sections in your voice."));
+  if(!auto) toast(got.length ? "Filled " + got.length + " boxes from your site" : "Read your site");
+  if(String(D.role||"").trim()) aiRole();
+}
+async function aiRole(){
+  if(AI.busy || !AI.on || !AI.profiled) return;
+  collect();
+  const role = String(D.role||"").trim(); if(!role) return;
+  const key = role + "|" + String(D.title||"").trim().toLowerCase();
+  if(AI.rolesDone[key]) { aiApply(AI.rolesDone[key], "role"); return; }
+  AI.busy = true;
+  const btn = $("#aiGo"); if(btn){ btn.disabled = true; btn.textContent = "Writing…"; }
+  aiStatus("Writing the " + role + " sections in your company's voice. About 30 seconds.");
+  const r = await aiCall({ action:"role", url: String(D.website||"").trim(), role, title: String(D.title||"").trim() });
+  AI.busy = false;
+  if(btn){ btn.disabled = false; btn.textContent = "Draft my offer from my site"; }
+  if(r.status !== "ok"){ aiStatus((r.reason || "The AI writer couldn't finish.") + " The starting points in each section still work.", true); return; }
+  AI.rolesDone[key] = r.fields;
+  const got = aiApply(r.fields, "role");
+  aiStatus(got.length
+    ? "Wrote " + got.length + " sections for the " + role + " in your voice. Look for the Drafted for you tags, read each one, and make it yours. Pay, dates, and the candidate are still yours to fill."
+    : "The role sections already have your own words, so I left them alone.");
+  toast(got.length ? "Drafted " + got.length + " sections" : "Nothing to fill");
+}
+document.addEventListener("click", e=>{
+  const t = e.target; if(!t || !t.closest) return;
+  if(t.closest("#aiGo")){ if(AI.profiled && AI.profiled === String(D.website||"").replace(/^https?:\/\//i,"").replace(/^www\./i,"").replace(/\/.*$/,"").toLowerCase()) aiRole(); else aiProfile(false); return; }
+  if(t.closest("#aiUndo") && AI.undo){
+    Object.entries(AI.undo).forEach(([k, v])=>{ setField(k, v); const w = document.querySelector(`[data-f="${k}"]`); if(w) delete w.dataset.ai; });
+    AI.undo = null; AI.rolesDone = {}; sync(); t.closest("#aiUndo").hidden = true; aiStatus("Put those boxes back the way they were.");
+  }
+});
+/* editing a box makes it yours: drop the tag */
+document.addEventListener("input", e=>{ const w = e.target && e.target.closest && e.target.closest("[data-ai]"); if(w && e.isTrusted) delete w.dataset.ai; });
+document.addEventListener("change", e=>{
+  if(!AI.on || !e.target.dataset) return;
+  if(e.target.dataset.k === "website" && String(e.target.value||"").trim()) setTimeout(()=>aiProfile(true), 50);
+  if(e.target.dataset.k === "role" && AI.profiled) setTimeout(aiRole, 50);
+});
+/* is the drafter switched on? (free: no AI call). Runs after load so BACKEND (defined below) exists. */
+window.addEventListener("load", async ()=>{
+  const r = await aiCall({ action:"status" });
+  AI.on = !!(r && r.status === "ok");
+  const p = document.getElementById("aiPanel"); if(p) p.hidden = !AI.on;
+});
+
 function buildForm(){
   const form = $("#form"), rail = $("#rail");
   SECTIONS.forEach((s,i)=>{
@@ -1348,7 +1471,13 @@ function buildForm(){
           <button type="button" class="btn" id="upLogoBtn">Upload my logo instead</button>
           <input type="file" id="upLogo" accept="image/png,image/jpeg,image/webp,image/svg+xml,image/gif" hidden></div>
           <div class="bp-status" id="pullStatus" aria-live="polite"></div><div id="pullFound"></div></div>
-        <div class="brandcheck" id="brandCheck" aria-live="polite"></div>`; }
+        <div class="brandcheck" id="brandCheck" aria-live="polite"></div>
+        <div class="aipanel" id="aiPanel" hidden>
+          <div class="ai-top"><span class="bc-title">Your offer, drafted from your site</span>
+            <button type="button" class="btn primary" id="aiGo">Draft my offer from my site</button></div>
+          <p class="ai-note">Reads your About, Careers, and values pages, fills in your company details, mission, and values, then writes the role sections in your voice once you pick the role. It only fills empty boxes. Pay, dates, and the candidate stay yours.</p>
+          <div class="bp-status" id="aiStatus" aria-live="polite"></div>
+          <button type="button" class="bp-undo" id="aiUndo" hidden>Undo the AI draft</button></div>`; }
       const block = `<div class="f" data-f="${f.k}"><label for="${id}">${esc(f.l)}</label>${help}${ctl}${sg}</div>`;
       if(f.w==="half"||f.w==="third") buf.push(block); else { flush(); inner += block; }
     });
@@ -1970,7 +2099,7 @@ document.addEventListener("drop", e=>{
    read other members' offers with this key. See supabase/schema.sql.
    ============================================================ */
 const BACKEND = { supabaseUrl: "https://jxywghplxowytqwdsjyu.supabase.co", supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0", table: "offer_letters" };
-const APP_VERSION = "2026.11.2";
+const APP_VERSION = "2026.11.3";
 const backendOn = () => !!(BACKEND.supabaseUrl && BACKEND.supabaseAnonKey);
 
 let DRAFT_ID = (()=>{
