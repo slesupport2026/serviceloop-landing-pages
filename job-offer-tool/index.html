@@ -177,55 +177,58 @@
   .paperbar span{font-family:var(--head);font-weight:600;font-size:10.5px;letter-spacing:.12em;
                  text-transform:uppercase;color:#FCC23D}
   .paperbar .pages{margin-left:auto;font-variant-numeric:tabular-nums;color:#C3CFE2}
-  #doc{padding:clamp(22px,3.4vw,46px);font-family:var(--sans);font-size:13.8px;
+  /* letter brand tokens: MDE defaults, overridden per member in render() */
+  #doc{--lr:#FCC23D;--lt:#16567A;--lth:#16567A;--lm:#FDA016;--lw:#FBF7EC;--lzebra:#FCFAF5;--lcw:#F3F5F9;--lc2:#16567A;--lco:var(--ink);--lfoot:#B9531C;
+       --lhf:var(--display);--lbf:var(--sans)}
+  #doc{padding:clamp(22px,3.4vw,46px);font-family:var(--lbf);font-size:13.8px;
        line-height:1.68;color:var(--ink);
        background:linear-gradient(180deg,#CE2F29 0 20%,#B9531C 20% 40%,#F25E22 40% 60%,#FDA016 60% 80%,#FCC23D 80% 100%) top/100% 6px no-repeat,#fff}
-  #doc .dhead{text-align:center;border-bottom:2px solid #FCC23D;
+  #doc .dhead{text-align:center;border-bottom:2px solid var(--lr);
               padding-bottom:14px;margin-bottom:22px}
-  #doc .dhead .co{font-family:var(--head);font-weight:700;font-size:15px;
+  #doc .dhead .co{font-family:var(--lhf);font-weight:700;font-size:15px;color:var(--lco);
                   letter-spacing:.08em;text-transform:uppercase}
-  #doc .dhead .meta{font-family:var(--head);font-weight:500;font-size:11px;color:var(--ink-3);margin-top:5px;letter-spacing:.02em}
-  #doc h1{font-family:var(--display);font-weight:800;font-size:30px;font-weight:600;letter-spacing:-.01em;margin:0 0 2px;line-height:1.2}
-  #doc .sub{font-family:var(--head);font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#16567A;margin-bottom:18px}
+  #doc .dhead .meta{font-family:var(--lbf);font-weight:500;font-size:11px;color:var(--ink-3);margin-top:5px;letter-spacing:.02em}
+  #doc h1{font-family:var(--lhf);font-weight:800;font-size:30px;font-weight:600;letter-spacing:-.01em;margin:0 0 2px;line-height:1.2}
+  #doc .sub{font-family:var(--lhf);font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--lt);margin-bottom:18px}
   #doc .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
-              gap:4px 26px;font-family:var(--sans);font-size:12.6px;
+              gap:4px 26px;font-family:var(--lbf);font-size:12.6px;
               border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
               padding:13px 0;margin-bottom:22px}
   #doc .facts div{display:flex;gap:7px}
-  #doc .facts b{font-family:var(--head);color:var(--ink-3);font-weight:600;min-width:94px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px}
-  #doc h2{font-family:var(--display);font-weight:800;font-size:20px;font-weight:600;letter-spacing:-.005em;
+  #doc .facts b{font-family:var(--lhf);color:var(--ink-3);font-weight:600;min-width:94px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px}
+  #doc h2{font-family:var(--lhf);font-weight:800;font-size:20px;font-weight:600;letter-spacing:-.005em;
           margin:30px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule);
-          background:linear-gradient(#FCC23D,#FCC23D) left bottom/76px 3px no-repeat}
-  #doc h3{font-family:var(--head);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:18px 0 6px;
-          color:#16567A}
+          background:linear-gradient(var(--lr),var(--lr)) left bottom/76px 3px no-repeat}
+  #doc h3{font-family:var(--lhf);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:18px 0 6px;
+          color:var(--lt)}
   #doc p{margin:0 0 11px}
   #doc ul{margin:0 0 12px;padding-left:20px}
   #doc li{margin-bottom:5px}
-  #doc li::marker{color:#FDA016}
+  #doc li::marker{color:var(--lm)}
   #doc strong{font-weight:600}
-  #doc table{width:100%;border-collapse:collapse;font-family:var(--sans);
+  #doc table{width:100%;border-collapse:collapse;font-family:var(--lbf);
              font-size:12.4px;margin:0 0 14px;font-variant-numeric:tabular-nums}
-  #doc th{text-align:left;background:#16567A;color:#fff;padding:8px 10px;
-          font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid #16567A}
+  #doc th{text-align:left;background:var(--lth);color:#fff;padding:8px 10px;
+          font-family:var(--lhf);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--lth)}
   #doc td{padding:8px 10px;border:1px solid var(--rule);vertical-align:top}
-  #doc tbody tr:nth-child(even) td{background:#FCFAF5}
-  #doc .pledge{border-left:3px solid #FCC23D;background:#FBF7EC;padding:12px 16px;
-               margin:14px 0;font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink-2)}
+  #doc tbody tr:nth-child(even) td{background:var(--lzebra)}
+  #doc .pledge{border-left:3px solid var(--lr);background:var(--lw);padding:12px 16px;
+               margin:14px 0;font-family:var(--lhf);font-weight:800;font-size:15px;color:var(--ink-2)}
   #doc .sigs{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:30px}
-  #doc .sig{font-family:var(--sans);font-size:12.4px}
-  #doc .sig .lbl{font-family:var(--head);font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-                 color:#16567A;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #FCC23D}
+  #doc .sig{font-family:var(--lbf);font-size:12.4px}
+  #doc .sig .lbl{font-family:var(--lhf);font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+                 color:var(--lt);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--lr)}
   #doc .sig .line{border-bottom:1px solid var(--ink);height:26px;margin-bottom:4px}
   #doc .sig .cap{color:var(--ink-3);font-size:11.3px}
   #doc .sig .kv{display:flex;gap:10px;align-items:baseline;min-height:27px;padding:5px 0 3px;border-bottom:1px solid var(--rule)}
-  #doc .sig .kv span{font-family:var(--head);font-weight:600;min-width:66px;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
-  #doc .contact{font-family:var(--sans);font-size:12.6px;background:#F3F5F9;border-left:3px solid #16567A;border-radius:0 6px 6px 0;padding:10px 14px;margin:14px 0 0}
+  #doc .sig .kv span{font-family:var(--lhf);font-weight:600;min-width:66px;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+  #doc .contact{font-family:var(--lbf);font-size:12.6px;background:var(--lcw);border-left:3px solid var(--lc2);border-radius:0 6px 6px 0;padding:10px 14px;margin:14px 0 0}
   #doc .gate td:first-child{white-space:nowrap}
   #doc td ul{margin:0;padding-left:17px}
   #doc td li{margin-bottom:3px}
   @media (max-width:560px){#doc .sigs{grid-template-columns:1fr}}
-  #doc .foot{margin-top:28px;padding-top:12px;border-top:2px solid #FCC23D;
-             font-family:var(--head);font-weight:500;font-size:10.5px;letter-spacing:.04em;color:#FDA016;text-align:center}
+  #doc .foot{margin-top:28px;padding-top:12px;border-top:2px solid var(--lr);
+             font-family:var(--lbf);font-weight:500;font-size:10.5px;letter-spacing:.04em;color:var(--lfoot);text-align:center}
   #doc .todo{background:var(--amber-wash);color:var(--amber);border-radius:3px;
              padding:0 5px;font-family:var(--head);font-size:11px;font-weight:600}
 
@@ -356,13 +359,23 @@
   .linkbtn{background:none;border:0;padding:0;margin-left:4px;color:var(--accent);font:600 13.5px var(--head);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 
   /* member brand on the letter */
-  #doc .dlogo{display:block;max-height:64px;max-width:220px;margin:0 auto 12px;object-fit:contain}
-  #doc[data-brand]{background:linear-gradient(90deg,var(--lb),var(--lb)) top/100% 6px no-repeat,#fff}
-  #doc[data-brand] .dhead{border-bottom-color:var(--lb)}
-  #doc[data-brand] h2{background-image:linear-gradient(var(--lb),var(--lb))}
-  #doc[data-brand] .sig .lbl{border-bottom-color:var(--lb)}
-  #doc[data-brand] .pledge{border-left-color:var(--lb)}
-  #doc[data-brand] .foot{border-top-color:var(--lb)}
+  #doc .dlogo-wrap{display:inline-block;margin:0 auto 12px;line-height:0;border-radius:8px}
+  #doc .dlogo-wrap.on-dark,#doc .dlogo-wrap.on-brand{padding:12px 20px}
+  #doc .dlogo-wrap.on-dark{background:#14161A}
+  #doc .dlogo-wrap.on-brand{background:var(--lp,#16567A)}
+  #doc .dlogo{display:block;max-height:84px;max-width:280px;object-fit:contain}
+  #doc[data-brand]{background:linear-gradient(90deg,var(--lp) 0 72%,var(--ls) 72% 100%) top/100% 6px no-repeat,#fff}
+  /* brand check panel in the form */
+  .brandcheck{border:1px solid var(--rule);border-radius:10px;padding:12px 14px;margin:4px 0 14px;background:var(--panel);font-size:13px;line-height:1.5}
+  .brandcheck .bc-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brandcheck .bc-sw{width:28px;height:28px;border-radius:6px;border:1px solid var(--rule);box-shadow:0 0 0 1px rgba(255,255,255,.35);flex:none}
+  .brandcheck .bc-logo{height:40px;max-width:150px;object-fit:contain;border-radius:4px;padding:4px 8px;background:#fff;border:1px solid var(--rule)}
+  .brandcheck .bc-logo.on-dark{background:#14161A}
+  .brandcheck .bc-title{font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-right:auto}
+  .brandcheck ul{margin:8px 0 0;padding-left:18px}
+  .brandcheck li{margin:2px 0}
+  .brandcheck li.ok{color:var(--done)}
+  .brandcheck li.bad{color:var(--amber)}
 
   .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;z-index:60;
          background:#0F1629;color:#fff;border:1px solid #FCC23D;border-radius:8px;padding:10px 16px;
@@ -502,6 +515,18 @@ const SECTIONS = [
   {k:"city",    l:"City and state", ph:"Clermont, Florida", w:"half"},
   {k:"address", l:"Street address", ph:"341 Main Street", w:"half"},
   {k:"phone",   l:"Phone", ph:"(555) 555-0100", w:"half"},
+  {k:"brand_color", l:"Main brand color", ph:"#C8102E", w:"half",
+   h:"From your logo, header, or buttons. A hex code like #C8102E works, so does rgb(200,16,46). Colors the headings, lines, and tables on the letter."},
+  {k:"brand_color2", l:"Second brand color", ph:"#1B2A45", w:"half",
+   h:"Optional. Your accent color, used for the smaller touches. Leave blank to use the main color for everything."},
+  {k:"logo_url", l:"Logo image link", ph:"https://yourcompany.com/logo.png",
+   h:"A direct https:// link to the logo image itself (ends in .png, .svg, .jpg, or .webp), not your homepage. Right-click your logo on your site and choose Copy image address."},
+  {k:"logo_bg", l:"Logo background", ty:"sel", w:"half", o:["White","Brand color","Dark"],
+   h:"Pick Dark or Brand color if your logo is white or light, so it doesn't disappear on white paper."},
+  {k:"brand_font", l:"Heading font", ph:"Montserrat", w:"half", list:"fontlist",
+   h:"The font your site uses for headlines. Any Google Font name works."},
+  {k:"brand_font_body", l:"Body text font", ph:"Open Sans", w:"half", list:"fontlist",
+   h:"Optional. The font for paragraphs. Leave blank to match the heading font family."},
   {k:"title",   l:"Position title", ph:"Sales Representative", w:"half",
    h:"Name the job the way a good candidate would want it on a business card."},
   {k:"cand",    l:"Candidate's full name", ph:"Alex Rivera", w:"half"},
@@ -684,10 +709,6 @@ const SECTIONS = [
    sg:"We are a fast-growing residential electrical company. We are not a typical electrical contractor — we operate at the intersection of skilled trades, client experience design, and intentional culture-building."},
   {k:"website", l:"Company website", ph:"www.yourcompany.com",
    h:"Send them to the site you're proud of. A strong candidate will look anyway — point them at your reviews, your team page, your best work. It also prints in the letterhead and footer."},
-  {k:"brand_color", l:"Brand color", ph:"#C8102E", w:"half",
-   h:"A hex code from your logo or site. Colors the accent lines on the letter. Leave blank for SLE gold."},
-  {k:"logo_url", l:"Logo image link", ph:"https://yourcompany.com/logo.png", w:"half",
-   h:"A direct https:// link to your logo image. Prints at the top of the letter."},
 ]},
 
 { n:"11", id:"signoff", t:"Sign-off",
@@ -974,6 +995,115 @@ const siteHref = v => { const s=String(v||"").trim(); if(!s) return null; return
 const siteLabel = v => String(v||"").trim().replace(/^https?:\/\//i,"").replace(/\/$/,"");
 
 /* ---------- build the form ---------- */
+/* ============================================================
+   MEMBER BRAND. The letter wears the member's brand, not MDE's.
+   Colors accept any CSS color; text uses a darkened copy when the
+   brand color is too light to read on white paper.
+   ============================================================ */
+const FONT_SUGGEST = ["Montserrat","Open Sans","Roboto","Lato","Poppins","Oswald","Raleway","Inter","Source Sans 3",
+  "Barlow","Barlow Condensed","Work Sans","Nunito Sans","Rubik","Archivo","Bebas Neue","Anton","Teko","Exo 2","Titillium Web",
+  "PT Sans","Noto Sans","Mulish","Manrope","DM Sans","Figtree","Outfit","Kanit","Josefin Sans","Ubuntu",
+  "Merriweather","Playfair Display","Lora","Roboto Slab","Zilla Slab","Libre Baskerville","EB Garamond","Arvo"];
+const SERIF_FONTS = new Set(["Merriweather","Playfair Display","Lora","Roboto Slab","Zilla Slab","Libre Baskerville","EB Garamond","Arvo"]);
+let colorProbe = null;
+function normColor(v){
+  let t = String(v||"").trim(); if(!t) return "";
+  if(/^[0-9a-f]{3}([0-9a-f]{3})?$/i.test(t)) t = "#" + t;
+  if(!colorProbe){ colorProbe = document.createElement("span"); colorProbe.style.display = "none"; document.body.appendChild(colorProbe); }
+  colorProbe.style.color = ""; colorProbe.style.color = t;
+  if(!colorProbe.style.color) return "";
+  const m = getComputedStyle(colorProbe).color.match(/[\d.]+/g); if(!m || m.length < 3) return "";
+  if(m.length > 3 && parseFloat(m[3]) === 0) return "";
+  return "#" + m.slice(0,3).map(x=>Math.round(+x).toString(16).padStart(2,"0")).join("");
+}
+const hexRgb = h => [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const rgbHex = a => "#" + a.map(x=>Math.max(0,Math.min(255,Math.round(x))).toString(16).padStart(2,"0")).join("");
+function lum(h){ return hexRgb(h).map(c=>{ c/=255; return c<=.03928 ? c/12.92 : Math.pow((c+.055)/1.055,2.4); })
+  .reduce((s,c,i)=>s + c*[.2126,.7152,.0722][i], 0); }
+const contrastW = h => 1.05 / (lum(h) + .05);
+const mix = (h, w, t) => { const a = hexRgb(h), b = hexRgb(w); return rgbHex(a.map((c,i)=>c + (b[i]-c)*t)); };
+/* darken toward black until it reads on white (4.5:1) */
+function textSafe(h){ let c = h, i = 0; while(contrastW(c) < 4.5 && i++ < 40) c = mix(c, "#000000", .06); return c; }
+const fontName = v => { const t = String(v||"").trim().replace(/^["']|["']$/g,"").split(",")[0].trim(); return /^[A-Za-z0-9 ]{2,40}$/.test(t) ? t : ""; };
+function fontStack(name, fallback){
+  if(!name) return fallback;
+  return `"${name}", ` + (SERIF_FONTS.has(name) ? 'Georgia, "Times New Roman", serif' : 'system-ui, "Segoe UI", Helvetica, Arial, sans-serif');
+}
+function ensureFont(name){
+  if(!name || name === "Nunito" || name === "Antonio") return;
+  const id = "bf-" + name.toLowerCase().replace(/\s+/g,"-");
+  if(document.getElementById(id)) return;
+  const l = document.createElement("link"); l.rel = "stylesheet"; l.id = id; l.dataset.brandfont = "1";
+  /* v1 css API: tolerant of weights a family doesn't have */
+  l.href = "https://fonts.googleapis.com/css?family=" + encodeURIComponent(name).replace(/%20/g,"+") + ":400,600,700&display=swap";
+  document.head.appendChild(l);
+}
+const logoLink = () => { const u = String(D.logo_url||"").trim(); return /^https:\/\/[^\s"'<>]+$/i.test(u) ? u : ""; };
+const LOGO_STATE = {};   /* url -> "ok" | "bad" | "wait" */
+function probeLogo(u){
+  if(!u || LOGO_STATE[u]) return;
+  LOGO_STATE[u] = "wait";
+  const im = new Image();
+  im.onload = () => { LOGO_STATE[u] = im.naturalWidth > 1 ? "ok" : "bad"; render(); brandCheck(); };
+  im.onerror = () => { LOGO_STATE[u] = "bad"; render(); brandCheck(); };
+  im.src = u;
+}
+function brandState(){
+  const p = normColor(D.brand_color), s2 = normColor(D.brand_color2);
+  const hf = fontName(D.brand_font), bf = fontName(D.brand_font_body) || hf;
+  const logo = logoLink(), raw = String(D.logo_url||"").trim();
+  return { p, s2, hf, bf, logo, raw, logoState: logo ? (LOGO_STATE[logo] || "wait") : "",
+           pRaw: String(D.brand_color||"").trim(), s2Raw: String(D.brand_color2||"").trim() };
+}
+function applyBrand(docEl){
+  const b = brandState(), st = docEl.style;
+  const props = ["--lp","--ls","--lr","--lt","--lth","--lm","--lw","--lzebra","--lcw","--lc2","--lco","--lfoot","--lhf","--lbf"];
+  props.forEach(x=>st.removeProperty(x));
+  if(b.p){
+    const s = b.s2 || b.p, pt = textSafe(b.p), stx = textSafe(s);
+    docEl.dataset.brand = "1";
+    st.setProperty("--lp", b.p);  st.setProperty("--ls", s);
+    st.setProperty("--lr", b.p);  st.setProperty("--lt", pt);  st.setProperty("--lth", pt);
+    st.setProperty("--lm", s);    st.setProperty("--lc2", stx); st.setProperty("--lco", pt); st.setProperty("--lfoot", pt);
+    st.setProperty("--lw", mix(b.p, "#ffffff", .92)); st.setProperty("--lcw", mix(s, "#ffffff", .93));
+    st.setProperty("--lzebra", mix(b.p, "#ffffff", .965));
+  } else delete docEl.dataset.brand;
+  if(b.hf){ ensureFont(b.hf); st.setProperty("--lhf", fontStack(b.hf, "")); }
+  if(b.bf){ ensureFont(b.bf); st.setProperty("--lbf", fontStack(b.bf, "")); }
+}
+function logoMarkup(){
+  const b = brandState();
+  if(!b.logo) return "";
+  probeLogo(b.logo);
+  if(b.logoState === "bad") return "";
+  const bg = D.logo_bg === "Dark" ? " on-dark" : D.logo_bg === "Brand color" ? " on-brand" : "";
+  return `<div><span class="dlogo-wrap${bg}"><img class="dlogo" src="${esc(b.logo)}" alt="${esc(String(D.company||"").trim())} logo"></span></div>`;
+}
+/* the live "your brand on the letter" panel above the brand fields */
+function brandIssues(){
+  const b = brandState(), out = [];
+  if(!b.pRaw) out.push(["bad","No main brand color yet, so the letter is in the default MDE colors."]);
+  else if(!b.p) out.push(["bad",`"${b.pRaw}" isn't a color the builder can read. Use a hex code like #C8102E.`]);
+  if(b.s2Raw && !b.s2) out.push(["bad",`"${b.s2Raw}" (second color) isn't a color the builder can read.`]);
+  if(!b.raw) out.push(["bad","No logo link yet."]);
+  else if(!b.logo) out.push(["bad","The logo link must start with https:// and point straight at the image file."]);
+  else if(b.logoState === "bad") out.push(["bad","The logo link didn't load as an image. It may be a web page, not the image itself. Right-click the logo on your site, choose Copy image address, and paste that."]);
+  else if(b.logoState === "wait") out.push(["ok","Checking the logo link…"]);
+  if(!b.hf) out.push(["bad","No heading font set. Headings use the default font."]);
+  return out;
+}
+function brandCheck(){
+  const el = document.getElementById("brandCheck"); if(!el) return;
+  const b = brandState(), issues = brandIssues();
+  const sw = c => `<span class="bc-sw" style="background:${c}" title="${c}"></span>`;
+  const logo = b.logo && b.logoState === "ok" ? `<img class="bc-logo${D.logo_bg==="Dark"||D.logo_bg==="Brand color"?" on-dark":""}" src="${esc(b.logo)}" alt=""${D.logo_bg==="Brand color"&&b.p?` style="background:${b.p}"`:""}>` : "";
+  const ready = !issues.some(x=>x[0]==="bad");
+  el.innerHTML = `<div class="bc-top"><span class="bc-title">Your brand on the letter</span>
+      ${b.p?sw(b.p):""}${b.s2?sw(b.s2):""}${logo}
+      ${b.hf?`<span style="font-family:${esc(fontStack(b.hf,""))};font-weight:700">${esc(b.hf)}</span>`:""}</div>
+    <ul>${ready ? `<li class="ok">Brand is set. The letter uses your colors, logo, and fonts.</li>` : ""}${issues.map(x=>`<li class="${x[0]}">${esc(x[1])}</li>`).join("")}</ul>`;
+}
+
 function buildForm(){
   const form = $("#form"), rail = $("#rail");
   SECTIONS.forEach((s,i)=>{
@@ -1001,8 +1131,9 @@ function buildForm(){
       else if(f.ty==="num") ctl = `<input id="${id}" data-k="${f.k}" data-s="${s.id}" inputmode="numeric" placeholder="${esc(f.ph||"")}">`;
       else if(f.ty==="date") ctl = `<input type="date" id="${id}" data-k="${f.k}" data-s="${s.id}">`;
       else if(f.ty==="ote") ctl = oteMarkup();
-      else ctl = `<input id="${id}" data-k="${f.k}" data-s="${s.id}" placeholder="${esc(f.ph||"")}">`;
+      else ctl = `<input id="${id}" data-k="${f.k}" data-s="${s.id}" placeholder="${esc(f.ph||"")}"${f.list?` list="${f.list}" autocomplete="off"`:""}>`;
 
+      if(f.k === "brand_color"){ flush(); inner += `<div class="brandcheck" id="brandCheck" aria-live="polite"></div>`; }
       const block = `<div class="f" data-f="${f.k}"><label for="${id}">${esc(f.l)}</label>${help}${ctl}${sg}</div>`;
       if(f.w==="half"||f.w==="third") buf.push(block); else { flush(); inner += block; }
     });
@@ -1014,6 +1145,11 @@ function buildForm(){
         <span class="scount" id="cnt-${s.id}">0 / 0</span></summary>
        <div class="sbody">${inner}</div>`;
     form.appendChild(det);
+    if(i===0 && !document.getElementById("fontlist")){
+      const dl = document.createElement("datalist"); dl.id = "fontlist";
+      dl.innerHTML = FONT_SUGGEST.map(x=>`<option value="${esc(x)}">`).join("");
+      document.body.appendChild(dl);
+    }
 
     const rb = document.createElement("button");
     rb.textContent = s.n+" · "+s.t; rb.dataset.target = s.id;
@@ -1233,7 +1369,7 @@ function progress(){
   });
   $("#fillstat").textContent = Math.round(done/total*100)+"% complete";
 }
-function sync(){ collect(); recalcOte(); progress(); render();
+function sync(){ collect(); recalcOte(); progress(); render(); brandCheck();
   try{ localStorage.setItem("offerBuilder", JSON.stringify(D)); }catch(e){} }
 
 /* ---------- render the document ---------- */
@@ -1303,7 +1439,7 @@ function render(){
 
   $("#doc").innerHTML = `
   <div class="dhead">
-    ${/^https:\/\/\S+$/i.test(String(D.logo_url||"").trim())?`<img class="dlogo" src="${esc(String(D.logo_url).trim())}" alt="">`:""}
+    ${logoMarkup()}
     <div class="co">${co}</div>
     <div class="meta">${[D.address,D.city,D.phone,siteLabel(D.website)].filter(x=>x&&x.trim()).map(esc).join(" · ")||"&nbsp;"}</div>
   </div>
@@ -1322,7 +1458,7 @@ function render(){
 
   <p>${first?esc(first)+",":TODO("Candidate name")}</p>
   <p>We are proud to formally offer you the position of ${g("title","title")} at ${co}. This is not simply an offer of employment — it is an invitation to join a mission-driven team. ${D.mission?esc(D.mission):TODO("What your company does for people")}${lines(D.who).length?" "+lines(D.who).map(esc).join(" "):""}</p>
-  <p>${D.why?esc(D.why):TODO("Why this person")} ${D.invest?esc(D.invest):TODO("What you're committing to")}${siteHref(D.website)?` See who we are and the work we're proud of at <a href="${esc(siteHref(D.website))}" target="_blank" rel="noopener" style="color:var(--accent)">${esc(siteLabel(D.website))}</a>.`:""}</p>
+  <p>${D.why?esc(D.why):TODO("Why this person")} ${D.invest?esc(D.invest):TODO("What you're committing to")}${siteHref(D.website)?` See who we are and the work we're proud of at <a href="${esc(siteHref(D.website))}" target="_blank" rel="noopener" style="color:var(--lt)">${esc(siteLabel(D.website))}</a>.`:""}</p>
 
   <h2>1. The Role</h2>
   <p>The ${g("title","role")} is the ${V("frontLine")}. This position carries real responsibility and real opportunity.</p>
@@ -1427,9 +1563,7 @@ function render(){
   <div class="foot">${[co.replace(/<[^>]+>/g,""),D.address,D.city,D.phone,siteLabel(D.website)].filter(x=>x&&String(x).trim()).map(x=>esc(x)).join(" | ")}</div>
   `;
 
-  const docEl = $("#doc"), hex = String(D.brand_color||"").trim().replace(/^#/,"");
-  if(/^[0-9a-f]{6}$/i.test(hex)){ docEl.dataset.brand = "1"; docEl.style.setProperty("--lb", "#"+hex); }
-  else { delete docEl.dataset.brand; docEl.style.removeProperty("--lb"); }
+  applyBrand($("#doc"));
 }
 
 /* ---------- wire up ---------- */
@@ -1500,7 +1634,7 @@ function toast(msg, bad){
   let t = $(".toast");
   if(!t){ t = document.createElement("div"); t.className = "toast"; t.setAttribute("role","status"); document.body.appendChild(t); }
   t.textContent = msg; t.classList.toggle("bad", !!bad); t.classList.add("on");
-  clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove("on"), 3200);
+  clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove("on"), msg.length > 90 ? 7000 : 3200);
 }
 const slug = () => {
   const s = String(D.cand||"").trim().replace(/[^A-Za-z0-9 \-]+/g,"").replace(/\s+/g,"-").toLowerCase();
@@ -1535,7 +1669,8 @@ $("#save").addEventListener("click", ()=>{
 $("#letter").addEventListener("click", ()=>{
   collect(); render();
   const css = [...document.querySelectorAll("style")].map(s=>s.textContent).join("\n");
-  const fonts = '<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">';
+  const fonts = '<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">'
+    + [...document.querySelectorAll("link[data-brandfont]")].map(l=>`<link href="${esc(l.href)}" rel="stylesheet">`).join("");
   const title = esc((D.cand||"Candidate").trim() + " — Offer Letter");
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>${fonts}<style>${css}
 html,body{background:#fff!important;margin:0}.paperwrap{max-width:816px;margin:24px auto;border:0;box-shadow:none}
@@ -1548,18 +1683,34 @@ html,body{background:#fff!important;margin:0}.paperwrap{max-width:816px;margin:2
 function applyDraft(text, fname){
   let o;
   try{ o = JSON.parse(text); }catch(e){ toast("That file isn't a saved draft from this builder.", true); return; }
-  const data = (o && o.app === APP_ID && o.data && typeof o.data === "object") ? o.data : o;
+  const data = (o && o.data && typeof o.data === "object" && !Array.isArray(o.data)) ? o.data : o;
   if(!data || typeof data !== "object" || Array.isArray(data)){ toast("That file isn't a saved draft from this builder.", true); return; }
   const known = new Set([...document.querySelectorAll("[data-k]")].map(el=>el.dataset.k));
   if(![...Object.keys(data)].some(k=>known.has(k))){ toast("That file isn't a saved draft from this builder.", true); return; }
   if(data.owner && !data.acc_name) data.acc_name = data.owner;
+  /* brand: accept the names an AI tends to invent, and a nested "brand" object */
+  const nest = (data.brand && typeof data.brand === "object") ? data.brand : {};
+  const BRAND_ALIASES = {
+    brand_color:["primary_color","brand_primary","color","primary"], brand_color2:["secondary_color","brand_secondary","accent_color","secondary","accent"],
+    logo_url:["logo","logo_link","logo_image"], logo_bg:["logo_background"],
+    brand_font:["heading_font","font","font_heading","headings"], brand_font_body:["body_font","font_body","body"] };
+  Object.entries(BRAND_ALIASES).forEach(([k,al])=>{
+    if(String(data[k]||"").trim()) return;
+    const hit = [k, ...al].map(a=>nest[a] != null ? nest[a] : (a === k ? null : data[a])).find(v=>typeof v === "string" && v.trim());
+    if(hit) data[k] = hit.trim();
+  });
+  if(data.logo_bg){ const m = ["White","Brand color","Dark"].find(o=>o.toLowerCase() === String(data.logo_bg).trim().toLowerCase()); data.logo_bg = m || ""; }
   document.querySelectorAll("[data-k]").forEach(el=>{
     const v = data[el.dataset.k]; el.value = (v == null) ? "" : String(v);
   });
   collect(); PREV_ROLE = null; applyRole(false);
   sync(); calcPrefill();
   const who = String(data.cand||"").trim();
-  toast(who ? "Opened the draft for " + who : "Draft opened");
+  const missing = [!normColor(D.brand_color) && "brand color", !logoLink() && "logo"].filter(Boolean);
+  if(missing.length){
+    const sec = $("#sec-setup"); if(sec) sec.open = true;
+    toast("Draft opened, but no " + missing.join(" or ") + " came through. Add it in The basics so the letter carries your brand.", true);
+  } else toast(who ? "Opened the draft for " + who : "Draft opened");
   if(o && o.app === APP_ID && o.id){ DRAFT_ID = String(o.id).slice(0,64); try{ localStorage.setItem("offerBuilderId", DRAFT_ID); }catch(e){} }
   return true;
 }
@@ -1592,7 +1743,7 @@ document.addEventListener("drop", e=>{
    read other members' offers with this key. See supabase/schema.sql.
    ============================================================ */
 const BACKEND = { supabaseUrl: "https://jxywghplxowytqwdsjyu.supabase.co", supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0", table: "offer_letters" };
-const APP_VERSION = "2026.10.6";
+const APP_VERSION = "2026.11.1";
 const backendOn = () => !!(BACKEND.supabaseUrl && BACKEND.supabaseAnonKey);
 
 let DRAFT_ID = (()=>{
@@ -1680,7 +1831,9 @@ function buildPrompt(){
     "- **Custom** — any other role; use the owner's own words for the key number and standard.",
     ""
   ];
-  const tdata = Object.fromEntries(keys.map(k=>[k,""]));
+  const BRAND_KEYS = ["brand_color","brand_color2","logo_url","logo_bg","brand_font","brand_font_body"];
+  const ordered = [...BRAND_KEYS.filter(k=>keys.includes(k)), ...keys.filter(k=>!BRAND_KEYS.includes(k))];
+  const tdata = Object.fromEntries(ordered.map(k=>[k,""]));
   if(roleChosen) tdata.role = String(D.role).trim();
   const template = JSON.stringify({ app: APP_ID, version: 1, data: tdata }, null, 2);
 
@@ -1702,10 +1855,16 @@ function buildPrompt(){
 "## Step 2 — Research my company",
 "Read my website: home, about, services, reviews or testimonials, careers or join-the-team, contact, and the footer. Collect:",
 "- **Company details:** legal name, street address, city and state, main phone, website.",
-"- **Brand assets:** primary brand color as a hex code (from the logo, header, or buttons), and a direct https:// link to my logo image file (PNG, SVG, JPG, or WEBP).",
+"- **Brand guidelines (required, the letter is printed in my brand):**",
+"  - `brand_color`: my main brand color as a 6-digit hex code (e.g. #B1181E). Take it from the logo, the header, or the main buttons. Prefer the color in the site's CSS over a guess from a screenshot.",
+"  - `brand_color2`: my second brand color as a hex code, if there is one (accent buttons, highlights, a second logo color). Never white, near-white, or plain black.",
+"  - `logo_url`: a direct https:// link to the logo IMAGE FILE (ends in .png, .svg, .jpg, or .webp, or is an image service link). Never my homepage or a web page. Look in the site header's <img> tag, then the og:image tag, then the apple-touch-icon. Prefer a full-color version over a white one.",
+"  - `logo_bg`: \"White\" if the logo reads on white paper, \"Dark\" if it is white or very light, or \"Brand color\" if it is a white logo that sits on my brand color on the site.",
+"  - `brand_font`: the font family my site uses for headings, from its CSS font-family or its Google Fonts link (e.g. Montserrat). Name only, no fallbacks.",
+"  - `brand_font_body`: the font family my site uses for paragraph text.",
 "- **Brand messaging:** what we do for people, mission, values or culture principles, what makes us different, how we talk about our customers and our team, and our tone of voice.",
 "",
-"If you can't browse the web, say so and ask me to paste the text of my About and Careers pages.",
+"If you can't browse the web, say so and ask me to paste the text of my About and Careers pages, plus my logo link and brand colors.",
 "",
 "## Step 3 — Write the draft",
 "- Write in my company's voice and use my real words where my site has them. Plain, confident, people-first. No corporate buzzwords.",
@@ -1713,14 +1872,18 @@ function buildPrompt(){
 "- **Leave these empty (\"\") — they're mine to decide:** pay, commission, sales targets, close rates, dates, non-solicitation months, and the candidate's name and contact details. Never guess compensation.",
 "- The accountable-party fields (`acc_name`, `acc_title`, `acc_email`, `acc_phone`) are the COMPANY-SIDE hiring manager or owner from my Step 1 answers — **never the candidate**. If I didn't name one, leave them empty.",
 "- Never invent facts about my company (years in business, awards, headcount, licenses, reviews). If it isn't on my site or in my answers, leave it out.",
+"- **The brand fields are not optional.** Everything you found in Step 2 goes into `brand_color`, `brand_color2`, `logo_url`, `logo_bg`, `brand_font`, and `brand_font_body` in the JSON. The builder only reads the JSON. Anything you mention in chat but leave out of the JSON is lost. Leave a brand field empty only if you truly could not find it, and then list it under Couldn't find.",
 "- Fields marked \"one per line\" separate items with a newline (\\n) inside the string. Fields in the form \"Name: what it means\" keep that colon format.",
 "- Every value is a string. Select fields use one of the listed options exactly, or \"\".",
 "",
 "## Step 4 — Hand it back",
 "Reply with three things, in this order:",
-"1. **Brand snapshot:** 3 to 6 bullets covering the colors, logo link, tone, and key messages you found, so I can sanity-check them.",
+"1. **Brand snapshot:** bullets listing the exact values you put in the JSON (main color hex, second color hex, logo link, logo background, heading font, body font), then my tone and key messages, so I can sanity-check them.",
 "2. **Couldn't find:** a short list of anything you looked for and didn't find.",
-"3. **The draft:** ONE code block containing only the JSON below, every key present, filled in where you can:",
+"3. **The draft:** ONE code block containing only the JSON below, every key present, filled in where you can. The brand keys come first.",
+"",
+"**Before you reply, check:** every brand value in your snapshot appears, character for character, in the JSON under its key. If the snapshot has a color, a logo, or a font that the JSON doesn't, fix the JSON.",
+"",
 "",
 FENCE + "json",
 template,
