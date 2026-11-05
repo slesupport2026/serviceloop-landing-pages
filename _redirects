@@ -92,3 +92,8 @@
 
 # Preview of the next Post-Call Facts build (not the live app)
 /facts-preview/*  /facts-preview/index.html  200
+
+# — Options Trainer (replaced the Manus "Six Options" build, Nov 2026) —
+/sixoptions             /options-trainer/    301!
+/sixoptions/*           /options-trainer/    301!
+/options                /options-trainer/    302

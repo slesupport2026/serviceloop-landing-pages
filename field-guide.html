@@ -652,6 +652,7 @@
   <div class="hero-badge">For Electricians. By Electricians.</div>
   <h1>The <em>Field</em> Guide</h1>
   <p>Tech-to-homeowner language translation + room-by-room inspection hotlist. Everything you need on the truck.</p>
+  <a href="/options-trainer/" style="display:inline-block;margin-top:18px;color:var(--gold);font-weight:700;font-size:14px;text-decoration:none;border:1px solid var(--gold-dim);padding:8px 16px;border-radius:20px;">Practice it in the Options Trainer &rarr;</a>
 </div>
 
 <!-- ═══════════ NAV ═══════════ -->
@@ -1714,6 +1715,37 @@ if (searchInput) {
     });
   });
 }
+
+// Deep links (used by the Options Trainer and anyone sharing a link):
+//   /field-guide#tiers            → opens the Tier Framing tab
+//   /field-guide?q=GFCI           → opens Translation Tables, pre-searched
+//   tabs: rules translate outcomes tiers banned analogies hotlist
+function openTab(name) {
+  const tab = document.querySelector('.nav-tab[data-tab="' + name + '"]');
+  if (!tab || !tabMap[name]) return false;
+  tabs.forEach(t => t.classList.remove('active'));
+  sections.forEach(s => s.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById(tabMap[name]).classList.add('active');
+  return true;
+}
+function applyDeepLink() {
+  const q = new URLSearchParams(location.search).get('q');
+  const hash = location.hash.replace('#', '');
+  if (q && searchInput) {
+    openTab('translate');
+    searchInput.value = q;
+    searchInput.dispatchEvent(new Event('input'));
+  } else if (hash) {
+    openTab(hash);
+  }
+  if (q || hash) document.querySelector('.nav-bar').scrollIntoView();
+}
+tabs.forEach(tab => tab.addEventListener('click', () => {
+  history.replaceState(null, '', location.pathname + '#' + tab.dataset.tab);
+}));
+window.addEventListener('hashchange', applyDeepLink);
+applyDeepLink();
 </script>
 
 </body>
