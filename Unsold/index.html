@@ -68,19 +68,6 @@ h2{font-size:clamp(24px,4vw,32px);font-weight:900;letter-spacing:-.6px;line-heig
 .grid input{display:block;width:100%;margin-top:4px;background:var(--card);border:1px solid var(--line);color:var(--white);border-radius:8px;padding:9px 11px;font-size:14px}
 .grid input:focus{outline:none;border-color:var(--gold)}
 .grp{grid-column:1/-1;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dim);margin-top:8px}
-.pull{grid-column:1/-1;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
-.pull label{flex:1;min-width:200px}
-.pull .btn{padding:10px 16px}
-.btn:disabled{opacity:.6;cursor:wait}
-.pull-out{grid-column:1/-1;display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
-.pull-out[hidden]{display:none}
-.pull-out img{max-height:44px;max-width:140px;object-fit:contain;background:#fff;border-radius:6px;padding:4px}
-.pull-out img:not([src]),.pull-out img[src=""]{display:none}
-.pull-out p{font-size:13px;color:var(--gray-light)}
-.pull-out p.bad{color:var(--red)}
-.ai-filled{border-color:var(--gold-dim)!important;background:rgba(201,164,90,.06)!important}
-.sig-logo{display:block;max-height:48px;max-width:180px;object-fit:contain;margin-top:10px}
-.print-head{display:none}
 .fill-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 
 .btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--gold-dim);background:var(--gold-wash);color:var(--gold-bright);font-weight:700;font-size:13px;padding:8px 14px;border-radius:20px;cursor:pointer}
@@ -139,9 +126,6 @@ footer a{text-decoration:none}
 @media print{
   :root{--bg:#fff;--bg2:#fff;--card:#fff;--card2:#f4f4f4;--line:#ddd;--white:#111;--gray:#555;--gray-light:#333;--gold:#8B7340;--gold-bright:#6b5520}
   .top,.fill,.no-print,.toast{display:none!important}
-  .print-head:not([hidden]){display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:2px solid #ddd}
-  .print-head img{max-height:56px;max-width:200px;object-fit:contain}
-  .print-head b{font-size:18px}
   body{font-size:12.5px}
   section{padding:16px 0;break-inside:avoid-page}
   .step,.card{break-inside:avoid}
@@ -161,8 +145,6 @@ footer a{text-decoration:none}
     </nav>
   </div>
 </header>
-
-<div class="wrap print-head" id="printHead" hidden><img id="printLogo" alt=""><b id="printCo"></b></div>
 
 <div class="hero">
   <div class="wrap">
@@ -193,11 +175,6 @@ footer a{text-decoration:none}
       <p class="hint">Type once and every script below fills itself in. Saved in this browser only. Leave a field empty and it shows as a blank to fill on the call.</p>
       <div class="grid" id="fields">
         <div class="grp">Your shop</div>
-        <div class="pull">
-          <label>Company website<input data-k="site" placeholder="www.yourcompany.com" inputmode="url" autocomplete="url"></label>
-          <button class="btn solid" id="pullBtn" type="button">Pull from my website</button>
-        </div>
-        <div class="pull-out" id="pullOut" hidden><img id="pullLogo" alt="Your logo"><p id="pullStatus"></p></div>
         <label>Company name<input data-k="co" placeholder="Brighter Day Electric"></label>
         <label>Your first name (CSM)<input data-k="me" placeholder="Sarah"></label>
         <label>Office phone<input data-k="phone" placeholder="555-555-0123"></label>
@@ -310,7 +287,6 @@ footer a{text-decoration:none}
         <p>I took some time to review the options that were designed for you, and I see some ways we can make them work even better for you. When you get a chance, please give me a call at {phone} between {hours}, or let me know a time and day that works best for us to touch base.</p>
         <p>Have a blessed day,</p>
         <p>{me}<br>Customer Service Manager, {co}</p>
-        <img class="sig-logo" id="sigLogo" alt="" hidden>
       </div>
     </div>
   </div>
@@ -361,85 +337,7 @@ footer a{text-decoration:none}
     render();
   }
   document.getElementById('clearCall').onclick=function(){clear(CALL)};
-  document.getElementById('clearAll').onclick=function(){clear(Object.keys(LABELS).concat(['site','logo']));showPull('', false);};
-
-  /* ---------- Pull from my website ----------
-     brand-extract (Supabase SLE Tools, shared with the Offer Builder) gives the company name and logo.
-     site-facts gives phone and office hours; if it isn't deployed yet, that half is skipped quietly.
-     Only empty boxes get filled. */
-  var SB='https://jxywghplxowytqwdsjyu.supabase.co/functions/v1/';
-  var ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0';
-  var pulling=false;
-  function call(fn, site, ms){
-    var ctl=new AbortController(), t=setTimeout(function(){ctl.abort()}, ms);
-    return fetch(SB+fn,{method:'POST',signal:ctl.signal,headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify({url:site})})
-      .then(function(r){clearTimeout(t);return r.ok?r.json():null})
-      .catch(function(){clearTimeout(t);return null});
-  }
-  function siteLabel(s){return String(s||'').replace(/^https?:\/\//i,'').replace(/^www\./i,'').replace(/\/.*$/,'')}
-  function showPull(msg, bad){
-    var box=document.getElementById('pullOut'), p=document.getElementById('pullStatus'), img=document.getElementById('pullLogo');
-    box.hidden=!msg && !vals.logo;
-    p.textContent=msg||''; p.classList.toggle('bad',!!bad);
-    if(vals.logo) img.src=vals.logo; else img.removeAttribute('src');
-    paintLogo();
-  }
-  function paintLogo(){
-    var sig=document.getElementById('sigLogo'), ph=document.getElementById('printHead');
-    if(vals.logo){sig.src=vals.logo;sig.hidden=false;document.getElementById('printLogo').src=vals.logo}
-    else{sig.hidden=true;sig.removeAttribute('src')}
-    document.getElementById('printCo').textContent=(vals.co||'').trim();
-    ph.hidden=!vals.logo && !(vals.co||'').trim();
-  }
-  function goodName(n){
-    n=String(n||'').replace(/\s+/g,' ').trim();
-    /* page titles are often SEO lines ("Electrician Near Me, Serving Tulsa 24/7"), not the company name */
-    if(!n || n.length>45 || n.split(' ').length>6) return '';
-    if(/^(home|welcome|index)\b|near me|serving|\bservices?$|residential|commercial|\bbest\b|#1|\btop\b|24\/7|&|\b(in|for|and)\b|^electrician/i.test(n)) return '';
-    return n;
-  }
-  function setVal(k, v){
-    var inp=document.querySelector('#fields input[data-k="'+k+'"]');
-    if(!v || !inp || String(inp.value||'').trim()) return false;
-    inp.value=v; vals[k]=v; inp.classList.add('ai-filled');
-    return true;
-  }
-  function pull(auto){
-    var site=String(vals.site||'').trim();
-    if(!site){ if(!auto){showPull('Type your company website first.', true); document.querySelector('[data-k="site"]').focus();} return; }
-    if(pulling) return;
-    pulling=true;
-    var btn=document.getElementById('pullBtn'); btn.disabled=true; btn.textContent='Reading your site…';
-    showPull('Reading '+siteLabel(site)+' for your company name, logo, phone and hours. This takes a few seconds.');
-    Promise.all([call('brand-extract', site, 30000), call('site-facts', site, 25000)]).then(function(res){
-      pulling=false; btn.disabled=false; btn.textContent='Pull from my website';
-      var b=res[0]||{}, f=res[1]||{};
-      if(!b.ok && !f.ok){ showPull(((b.reason||f.reason)||'Couldn\'t read that site.')+' You can type your details in below.', true); return; }
-      var got=[];
-      if(setVal('co', goodName(f.name)||goodName(b.company))) got.push('company name');
-      if(setVal('phone', f.phone)) got.push('phone');
-      if(setVal('hours', f.hours)) got.push('office hours');
-      var logo='';
-      if(b.logo){
-        if(b.logo.url && /^https:\/\//i.test(b.logo.url) && !/\.ico(\?|$)/i.test(b.logo.url)) logo=b.logo.url;
-        else if(b.logo.dataUrl && b.logo.dataUrl.length<250000) logo=b.logo.dataUrl;
-      }
-      if(logo){vals.logo=logo; got.push('logo');}
-      try{localStorage.setItem(KEY,JSON.stringify(vals))}catch(e){}
-      render();
-      var miss=[];
-      ['co','phone','hours'].forEach(function(k){ if(!String(vals[k]||'').trim()) miss.push({co:'company name',phone:'phone',hours:'office hours'}[k]); });
-      showPull(got.length
-        ? 'Pulled your '+got.join(', ').replace(/, ([^,]*)$/,' and $1')+' from '+siteLabel(b.site||f.site||site)+'. Check them below.'+(miss.length?' Couldn\'t find your '+miss.join(' or ')+', so type it in.':'')
-        : 'Read '+siteLabel(site)+(miss.length?', but couldn\'t find your '+miss.join(' or ')+'. Type it in below.':'. Your boxes were already filled, so I left them.'), !got.length && !!miss.length);
-    });
-  }
-  document.getElementById('pullBtn').onclick=function(){pull(false)};
-  var siteInp=document.querySelector('[data-k="site"]');
-  siteInp.addEventListener('change',function(){ if(String(siteInp.value||'').trim() && !String(vals.co||'').trim()) pull(true); });
-  siteInp.addEventListener('keydown',function(e){ if(e.key==='Enter'){e.preventDefault();pull(false)} });
-  inputs.forEach(function(inp){ inp.addEventListener('input',function(){inp.classList.remove('ai-filled'); if(inp.dataset.k==='co') paintLogo();}); });
-  showPull('', false);
+  document.getElementById('clearAll').onclick=function(){clear(Object.keys(LABELS))};
 
   var toast=document.getElementById('toast');
   document.querySelectorAll('[data-copy]').forEach(function(b){
