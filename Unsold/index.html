@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unsold Follow-Up</title>
+<meta name="description" content="The SLE Unsold Follow-Up Process: the phone, voicemail and email scripts your customer service manager uses to turn unsold options into booked calls.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Service Loop Electrical">
+<meta property="og:title" content="Unsold Follow-Up Process">
+<meta property="og:description" content="Phone, voicemail and email scripts for following up on every unsold option. Fill in your names and it writes itself.">
+<meta property="og:url" content="https://go.serviceloopelectrical.com/Unsold/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+/* Palette matches /field-guide and /options-trainer */
+:root{
+  --bg:#0D0D0D;--bg2:#141414;--card:#1E1E1E;--card2:#242424;--line:#2c2c2c;
+  --gold:#C9A45A;--gold-bright:#E8C97A;--gold-dim:#8B7340;--gold-wash:rgba(201,164,90,.10);
+  --white:#fff;--gray:#A0A0A0;--gray-light:#CCCCCC;
+  --red:#E0584A;--red-wash:rgba(224,88,74,.10);--green:#2ECC71;--green-wash:rgba(46,204,113,.09);
+  --r:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:15px}
+a{color:var(--gold)}
+button,input{font-family:inherit}
+.wrap{max-width:880px;margin:0 auto;padding:0 16px}
+
+.top{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:12px;height:58px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);flex-shrink:0}
+.brand img{width:30px;height:30px;object-fit:contain}
+.brand b{font-weight:800;font-size:15px}
+.brand span{color:var(--gold)}
+.nav{display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none;justify-content:flex-end}
+.nav::-webkit-scrollbar{display:none}
+.nav a{color:var(--gray);text-decoration:none;font-size:13px;font-weight:600;padding:8px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{color:var(--white)}
+
+.hero{padding:52px 0 34px;background:radial-gradient(ellipse at 20% 0%,rgba(201,164,90,.10),transparent 60%)}
+.kicker{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+h1{font-weight:900;font-size:clamp(32px,6vw,52px);letter-spacing:-1.2px;line-height:1.08;margin-bottom:16px}
+h1 em,h2 em{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold-bright);font-weight:700}
+.lede{color:var(--gray-light);font-size:17px;max-width:640px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.pill{font-size:12px;font-weight:700;color:var(--gold-bright);background:var(--gold-wash);border:1px solid var(--gold-dim);padding:5px 12px;border-radius:20px}
+
+section{padding:34px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(24px,4vw,32px);font-weight:900;letter-spacing:-.6px;line-height:1.15;margin-bottom:8px}
+.sub{color:var(--gray);margin-bottom:22px;max-width:660px}
+
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.why div{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.why b{display:block;color:var(--gold-bright);font-size:15px;margin-bottom:4px}
+.why p{color:var(--gray-light);font-size:14px}
+
+/* fill-in panel */
+.fill{background:var(--bg2);border:1px solid var(--gold-dim);border-radius:var(--r);padding:20px}
+.fill h3{font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.fill .hint{font-size:13px;color:var(--gray);margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px 12px}
+.grid label{display:block;font-size:12px;font-weight:600;color:var(--gray-light)}
+.grid input{display:block;width:100%;margin-top:4px;background:var(--card);border:1px solid var(--line);color:var(--white);border-radius:8px;padding:9px 11px;font-size:14px}
+.grid input:focus{outline:none;border-color:var(--gold)}
+.grp{grid-column:1/-1;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dim);margin-top:8px}
+.fill-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--gold-dim);background:var(--gold-wash);color:var(--gold-bright);font-weight:700;font-size:13px;padding:8px 14px;border-radius:20px;cursor:pointer}
+.btn:hover{background:rgba(201,164,90,.2)}
+.btn.solid{background:linear-gradient(135deg,var(--gold),var(--gold-bright));color:var(--bg);border-color:transparent}
+.btn.ghost{background:transparent;color:var(--gray-light);border-color:var(--line)}
+
+/* tokens */
+.tok{color:var(--gold-bright);font-weight:600;border-bottom:1px dashed var(--gold-dim)}
+.tok.empty{color:var(--gray);font-weight:500;font-style:italic}
+
+/* script steps */
+.steps{display:flex;flex-direction:column;gap:14px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px 58px;position:relative}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:16px;top:16px;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--bg);font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
+.step .lab{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.say{font-size:16px;color:var(--white)}
+.say q{quotes:"\201C" "\201D"}
+.br{margin-top:10px;border-radius:10px;padding:11px 14px;font-size:14.5px;border-left:3px solid}
+.br .if{display:block;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:3px}
+.br.good{background:var(--green-wash);border-color:var(--green)}
+.br.good .if{color:var(--green)}
+.br.bad{background:var(--red-wash);border-color:var(--red)}
+.br.bad .if{color:var(--red)}
+.br .br{margin-left:4px}
+.book{display:inline-block;margin-left:4px;font-size:11px;font-weight:900;letter-spacing:1px;color:var(--bg);background:var(--green);padding:2px 8px;border-radius:10px;vertical-align:2px}
+.note{font-size:13px;color:var(--gray);margin-top:8px}
+.recap{list-style:none;margin-top:6px}
+.recap li{padding:6px 0 6px 22px;position:relative;font-size:15.5px}
+.recap li::before{content:"";position:absolute;left:4px;top:15px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+/* voicemail / email cards */
+.two{display:grid;grid-template-columns:1fr;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.card-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;background:var(--card2);border-bottom:1px solid var(--line)}
+.card-h b{font-size:14px;font-weight:800}
+.card-b{padding:18px;font-size:15.5px}
+.card-b p+p{margin-top:12px}
+.card-b ol{padding-left:20px}
+.card-b ol li{margin:6px 0}
+
+.coach{background:linear-gradient(90deg,#1a1510,#141414);border:1px solid var(--gold-dim);border-radius:var(--r);padding:16px 18px;font-size:14.5px;color:var(--gray-light)}
+.coach b{color:var(--gold-bright)}
+
+footer{padding:34px 0 48px;border-top:1px solid var(--line);color:var(--gray);font-size:13px;text-align:center}
+footer a{text-decoration:none}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--gold);color:var(--bg);font-weight:800;font-size:13px;padding:10px 18px;border-radius:20px;opacity:0;transition:.25s;pointer-events:none;z-index:99}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:560px){
+  .step{padding:16px 14px 14px 50px}
+  .step::before{left:12px}
+  .nav a{padding:8px 8px}
+}
+@media print{
+  :root{--bg:#fff;--bg2:#fff;--card:#fff;--card2:#f4f4f4;--line:#ddd;--white:#111;--gray:#555;--gray-light:#333;--gold:#8B7340;--gold-bright:#6b5520}
+  .top,.fill,.no-print,.toast{display:none!important}
+  body{font-size:12.5px}
+  section{padding:16px 0;break-inside:avoid-page}
+  .step,.card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/"><img src="sle-mark.png" alt=""><b>Service Loop <span>Electrical</span></b></a>
+    <nav class="nav">
+      <a href="#phone">Phone</a>
+      <a href="#voicemail">Voicemail</a>
+      <a href="#email">Email</a>
+      <a href="/field-guide">Field Guide</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">Value Piece · Office Scripts</div>
+    <h1>The Unsold <em>Follow-Up</em> Process</h1>
+    <p class="lede">Every call where the homeowner said "not today" is a warm lead sitting in your software. This is the exact call your customer service manager makes to find out why, fix anything that went wrong, and get the work back on the calendar.</p>
+    <div class="pills"><span class="pill">Phone script</span><span class="pill">Voicemail script</span><span class="pill">Email script</span><span class="pill">Fill in once, use every day</span></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Why this call <em>works</em></h2>
+    <p class="sub">It doesn't sound like a sales call because it isn't one. It's a service check, and it opens the door to the options the homeowner passed on.</p>
+    <div class="why">
+      <div><b>It comes from the office</b><p>A customer service manager, not the tech. The homeowner gets to be honest about what happened in their home.</p></div>
+      <div><b>It leads with service</b><p>"Did you get everything you paid for?" earns the right to ask about anything else.</p></div>
+      <div><b>It asks why, not "will you buy"</b><p>You learn what held them back, then offer to have someone come back and re-look at it.</p></div>
+      <div><b>It ends on the calendar</b><p>Every branch ends one of two ways: a booked visit or a booked callback.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="no-print">
+  <div class="wrap">
+    <div class="fill">
+      <h3>Fill in your details</h3>
+      <p class="hint">Type once and every script below fills itself in. Saved in this browser only. Leave a field empty and it shows as a blank to fill on the call.</p>
+      <div class="grid" id="fields">
+        <div class="grp">Your shop</div>
+        <label>Company name<input data-k="co" placeholder="Brighter Day Electric"></label>
+        <label>Your first name (CSM)<input data-k="me" placeholder="Sarah"></label>
+        <label>Office phone<input data-k="phone" placeholder="555-555-0123"></label>
+        <label>Office hours<input data-k="hours" placeholder="8am and 5pm"></label>
+        <div class="grp">This call</div>
+        <label>Customer first name<input data-k="cust" placeholder="Mike"></label>
+        <label>Tech's first name<input data-k="tech" placeholder="Jordan"></label>
+        <label>Visit date<input data-k="date" placeholder="Tuesday"></label>
+        <label>Reason for the visit<input data-k="reason" placeholder="the kitchen lights flickering"></label>
+        <label>Main concern the tech found<input data-k="concern" placeholder="the main electrical control system"></label>
+        <label>Where in the home<input data-k="room" placeholder="garage"></label>
+        <label>What fixing it does for them<input data-k="benefit" placeholder="keep the family safe from overheating"></label>
+        <label>The option they passed on<input data-k="option" placeholder="the safety upgrade"></label>
+      </div>
+      <div class="fill-actions">
+        <button class="btn ghost" id="clearCall" type="button">Clear this call</button>
+        <button class="btn ghost" id="clearAll" type="button">Clear everything</button>
+        <button class="btn" type="button" onclick="window.print()">Print scripts</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="phone">
+  <div class="wrap">
+    <div class="kicker">Script 1</div>
+    <h2>The phone call</h2>
+    <p class="sub">Read the white lines word for word. Green is where the call is going well. Red is where you slow down and listen.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="lab">Open</div>
+        <p class="say">"Hey {cust}, this is {me}, the customer service manager over at {co}. How are you doing today? I'm following up to make sure you got everything you paid for on your most recent visit from {tech}. Do you have a couple minutes to make sure you got everything you paid for?"</p>
+        <div class="br bad"><span class="if">If no</span>"Ok, when would be a better time and day for me to reach back out to you?" <span class="book">BOOK THE CALLBACK</span></div>
+      </div>
+
+      <div class="step">
+        <div class="lab">Service check</div>
+        <p class="say">"Thank you so much for your time. What did you think about the level of service {tech} provided to you?"</p>
+        <div class="br good"><span class="if">If good</span>"Fantastic! Thank you so much for those kind words. Do you mind if I let {tech} know the nice things you said about the visit?"</div>
+        <div class="br bad"><span class="if">If bad</span>"I appreciate you letting me know, because this is exactly why I do my job. To make sure every client's experience meets or exceeds the {co} standard, can you tell me more about your experience so we can get it corrected?"</div>
+      </div>
+
+      <div class="step">
+        <div class="lab">Confirm the reason</div>
+        <p class="say">"I noticed the reason {tech} visited your home was because of {reason}. Is that correct?"</p>
+        <div class="br bad"><span class="if">If that's not right</span>"Ok, if you don't mind me asking, what was the main thing you were hoping to accomplish with our visit?" <br>Then: "Thank you for clarifying. Our goal is to always make sure you have a 5-star experience. Would you be open to us scheduling a time to come out and re-address that?" <span class="book">BOOK THE CALL</span></div>
+      </div>
+
+      <div class="step">
+        <div class="lab">Name the concern</div>
+        <p class="say">"I see that during the visit {tech} had a concern with {concern} in the {room}."</p>
+      </div>
+
+      <div class="step">
+        <div class="lab">Ask why not</div>
+        <p class="say">"The reason {tech} offered that was to {benefit}. If you don't mind me asking, {cust}, what was the reason you didn't go with that?"</p>
+        <div class="br good"><span class="if">Then</span>"We really do feel like {option} would help with the comfort, safety and reliability of your home and family. Just so we know how to explain it better in the future, what would have made you want to get it taken care of?"
+          <div class="br good" style="margin-top:10px"><span class="if">Then</span>"Would you be open to having one of our quality control specialists come out and re-look at the project, to see if we can make it work for you?" <span class="book">BOOK THE CALL</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="lab">Recap and close</div>
+        <p class="say">"Ok {cust}, before we finish I'd like to do a quick review so we're set to serve you best..."</p>
+        <ul class="recap">
+          <li>"We have you on the calendar on <span class="tok empty">[day]</span> between <span class="tok empty">[time window]</span>, where our certified electrician will help take care of this and brighten your day."</li>
+          <li>"We'll call the day before to confirm the appointment, and send you a text or call when we're on our way."</li>
+          <li>"Do you have any questions at this point?"</li>
+          <li>"Ok {cust}, on behalf of the entire team here at {co}, I'd like to thank you for the opportunity to help you with this. We really look forward to working with you soon. Have an amazing day!"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="coach" style="margin-top:18px"><b>Coach's eye:</b> when you name the concern and what fixing it does, use homeowner language, not trade terms. Not sure how to say something? Look it up in the <a href="/field-guide#translate">Field Guide translation tables</a>.</div>
+  </div>
+</section>
+
+<section id="voicemail">
+  <div class="wrap">
+    <div class="kicker">Script 2</div>
+    <h2>No answer? Leave this <em>voicemail</em></h2>
+    <p class="sub">Short, friendly, and about their service, not a sale. Then send the email the same day.</p>
+    <div class="card">
+      <div class="card-h"><b>Voicemail</b><button class="btn no-print" type="button" data-copy="vm">Copy</button></div>
+      <div class="card-b" id="vm">
+        <ol>
+          <li>"Hello {cust}, this is {me}, the customer service manager over at {co}.</li>
+          <li>I noticed {tech} came out to your home on {date} for {reason}.</li>
+          <li>The reason I was calling is to make sure {tech} gave you 5-star service and you got everything you paid for.</li>
+          <li>I'm here in the office between {hours}. When you get the chance, please give me a call back at {phone}. I look forward to hearing from you.</li>
+          <li>Thank you for your time and have a great day."</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="email">
+  <div class="wrap">
+    <div class="kicker">Script 3</div>
+    <h2>The follow-up <em>email</em></h2>
+    <p class="sub">Send it after the voicemail so they have your number in writing.</p>
+    <div class="card">
+      <div class="card-h"><b>Email</b><button class="btn no-print" type="button" data-copy="em">Copy</button></div>
+      <div class="card-b" id="em">
+        <p>Hello {cust},</p>
+        <p>This is {me}, the customer service manager at {co}.</p>
+        <p>The reason I'm reaching out is that my role is to make sure our clients get a 5-star experience when we visit their home, and to take care of any concerns they might have had.</p>
+        <p>I took some time to review the options that were designed for you, and I see some ways we can make them work even better for you. When you get a chance, please give me a call at {phone} between {hours}, or let me know a time and day that works best for us to touch base.</p>
+        <p>Have a blessed day,</p>
+        <p>{me}<br>Customer Service Manager, {co}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Service Loop Electrical · For electricians, by electricians · <a href="/field-guide">SLE Field Guide</a></div>
+</footer>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+(function(){
+  var KEY='sle-unsold-fields';
+  var CALL=['cust','tech','date','reason','concern','room','benefit','option'];
+  var LABELS={co:'Company Name',me:'Your Name',phone:'phone number',hours:'x am and x pm',cust:'Customer First Name',tech:'Tech',date:'Date',reason:'Reason for Visit',concern:'Main Concern',room:'Room',benefit:'what it does for them',option:'the option'};
+  var vals={};
+  try{vals=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){vals={}}
+
+  // Keep each template's original text so re-renders start clean
+  var tpl=[];
+  document.querySelectorAll('.say,.br,.recap li,#vm li,#em p').forEach(function(el){
+    tpl.push({el:el,html:el.innerHTML});
+  });
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function render(){
+    tpl.forEach(function(t){
+      t.el.innerHTML=t.html.replace(/\{(\w+)\}/g,function(m,k){
+        var v=(vals[k]||'').trim();
+        return v?'<span class="tok">'+esc(v)+'</span>':'<span class="tok empty">['+(LABELS[k]||k)+']</span>';
+      });
+    });
+  }
+  var inputs=document.querySelectorAll('#fields input');
+  inputs.forEach(function(inp){
+    var k=inp.dataset.k;
+    inp.value=vals[k]||'';
+    inp.addEventListener('input',function(){
+      vals[k]=inp.value;
+      try{localStorage.setItem(KEY,JSON.stringify(vals))}catch(e){}
+      render();
+    });
+  });
+  function clear(keys){
+    keys.forEach(function(k){delete vals[k]});
+    inputs.forEach(function(inp){if(keys.indexOf(inp.dataset.k)>-1)inp.value=''});
+    try{localStorage.setItem(KEY,JSON.stringify(vals))}catch(e){}
+    render();
+  }
+  document.getElementById('clearCall').onclick=function(){clear(CALL)};
+  document.getElementById('clearAll').onclick=function(){clear(Object.keys(LABELS))};
+
+  var toast=document.getElementById('toast');
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.dataset.copy);
+      var txt=el.id==='vm'
+        ? Array.prototype.map.call(el.querySelectorAll('li'),function(li){return li.innerText}).join(' ').replace(/"/g,'')
+        : Array.prototype.map.call(el.querySelectorAll('p'),function(p){return p.innerText}).join('\n\n');
+      var done=function(){toast.classList.add('on');setTimeout(function(){toast.classList.remove('on')},1400)};
+      if(navigator.clipboard){navigator.clipboard.writeText(txt).then(done,function(){})}
+    });
+  });
+  render();
+})();
+</script>
+</body>
+</html>

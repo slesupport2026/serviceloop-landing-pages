@@ -97,3 +97,7 @@
 /sixoptions             /options-trainer/    301!
 /sixoptions/*           /options-trainer/    301!
 /options                /options-trainer/    302
+
+# - Unsold Follow-Up value piece (Nov 2026). Canonical is /Unsold/ -
+/unsold     /Unsold/  301
+/unsold/*   /Unsold/  301
