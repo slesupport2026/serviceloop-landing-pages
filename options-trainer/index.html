@@ -144,7 +144,7 @@ h3{font-weight:800;font-size:18px;margin-bottom:6px}
 .t-plat{--c:var(--plat)}.t-gold{--c:var(--goldt)}.t-silv{--c:var(--silv)}.t-bron{--c:var(--bron)}.t-econ{--c:var(--econ)}.t-basic{--c:var(--basic)}
 
 /* scenarios */
-.scen-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.scen-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .scen{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;cursor:pointer;text-align:left;color:var(--white);display:flex;flex-direction:column;gap:6px;transition:border-color .15s,transform .15s}
 .scen:hover{border-color:var(--gold-dim);transform:translateY(-2px)}
 .scen .n{font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase}
@@ -326,7 +326,7 @@ td a{text-decoration:none}
 <div id="sheet"></div>
 
 <script>
-const APP_VERSION = '2026.11.4-1';
+const APP_VERSION = '2026.11.4-2';
 const FG = 'https://go.serviceloopelectrical.com/field-guide';
 const fgUrl = (tab, q) => q ? FG + '?q=' + encodeURIComponent(q) : (tab ? FG + '#' + tab : FG);
 const FG_NAMES = {rules:'Golden Rules & 4 Whats', translate:'Translation Tables', outcomes:'Outcome Language', tiers:'Tier Framing', banned:'Never Say', analogies:'Analogies', hotlist:'Inspection Hotlist'};
@@ -348,7 +348,7 @@ const TIPS = {
   choose:{t:'How to Choose (say it, never print it)', b:'Verbal guides for a client who is stuck between tiers. Never print them on the option sheet. Showing a preference for a tier can communicate bias and reduce impact if they choose a different level.', tab:'tiers'},
   banned:{t:'Words to Never Say', b:'Amps, volts, watts. Model and part numbers. Brand names. Code numbers. Wire gauge. Breaker sizes. AFCI/GFCI as acronyms. "Deficiency", "violation", "obsolete", "failure", "we recommend", and "upgrade" without the why. If it\'s on a client-facing document, you\'ve already lost them.', tab:'banned'},
   translate:{t:'Translation Tables', b:'100+ term-by-term translations from tech speak to homeowner language: panel & service, protection devices, wiring, electrical points, lighting, generators, specialty systems. Search any term.', tab:'translate'},
-  outcomes:{t:'Outcome Language', b:'Don\'t describe the thing. Describe what it does for their life. "Install dedicated circuit" becomes "No more tripping breakers when you run two things at once." "Install whole-home generator" becomes "Your home keeps running, even when the neighborhood goes dark."', tab:'outcomes'},
+  outcomes:{t:'Outcome Language', b:'Don\'t describe the thing. Describe what it does for their life. "Install dedicated circuit" becomes "No more shutdowns when you run two things at once." "Install whole-home generator" becomes "Your home keeps running, even when the neighborhood goes dark."', tab:'outcomes'},
   analogies:{t:'Analogy Toolkit', b:'Panel capacity, overloaded circuits, surge protection as "a giant sponge for your home", water and electricity, old wiring as "a fire hose through a garden hose connector". Straight from the clinics.', tab:'analogies'},
   hotlist:{t:'Inspection Hotlist', b:'Room-by-room list of the opportunities that show up when you look beyond the original call. Walk it for every room you were in. That\'s where What\'s MORE comes from.', tab:'hotlist'},
   firstclass:{t:'First Class Pass', b:'"Imagine it as a first-class flight with our company. At that level you\'d be receiving priority scheduling, absolutely no diagnostic or troubleshooting fees, after-hours emergency service, and a whole home electrical safety evaluation."', tab:'analogies'},
@@ -558,6 +558,43 @@ const SCENARIOS = [
     Basic:'A repair, not a fix. It doesn\'t remove the risk, and the observations already say so in plain English. They still deserve to know this option exists.'
   },
   coach:['Laundry-list jobs feel overwhelming. Start with what they called for (the inspector and the kitchen), connect it to the safety concern, then layer in What\'s MORE. Platinum handles everything; each tier below trims, and every tier still reads as a list of benefits.','Brand names hurt you here. "Federal Pacific Stab-Lok" means nothing to Robert and Linda, and it starts a Google search you don\'t control. "The emergency shutoffs don\'t always turn off when they should" tells them what matters.']
+},
+{
+  id:'outlet', n:4, title:'The Dead Outlet', sub:'One bathroom outlet stopped working', client:'Denise', tech:'Tyler',
+  why:'The purest "nothing here" call. One dead point, and it looks like a 15-minute repair until you ask why it matters.',
+  transcript:[
+    ['tech','Hi Denise, Tyler with Northline Electric. You said one of the plugs in your bathroom stopped working?'],
+    ['client','About a week ago. It just went dead. I\'ve been drying my hair at the kitchen table, which is ridiculous. And my daughter\'s getting married in two weeks. The whole family is getting ready here that morning.'],
+    ['tech','Congratulations! Two weeks out, with the whole family getting ready here. That bathroom has to work. Can I ask, what does that morning look like in there?', {t:'Ask WHY it matters', b:'"A dead outlet" is the call reason. "The wedding morning" is why it matters, and every tier gets written toward it. This is how you beat the "nothing here" trap.', tab:'rules'}],
+    ['client','Hair dryers, curling irons, makeup. Honestly, the light in there is terrible and the mirror fogs up the second anyone showers.'],
+    ['tech','Let me take a look at the dead electrical point, and everything that feeds it.', {t:'Use their words back', b:'"Terrible light" and "the mirror fogs up" are hers. They\'ll show up in What\'s MORE and in the tier bullets, in her words. Golden Rule 3.', tab:'rules'}],
+    ['tech','Found it. The wires behind this electrical point were just pushed in, not actually secured. Over time they work loose, and this one got hot enough to stop working. It\'s also connected to the electrical point by the tub, so they depend on each other, like Christmas lights: when one goes out, the next one can too.', {t:'Analogy Toolkit', b:'Not "backstabbed receptacle on a daisy-chained circuit." Two Field Guide analogies do the whole job: "just pushed in, not actually secured" and "like Christmas lights."', tab:'analogies'}],
+    ['client','Is that dangerous?'],
+    ['tech','It\'s a concern we want handled. Here\'s the good news: the wiring inside the wall is in great shape past that box, and you were smart to call before it got worse.', {t:'What\'s Good', b:'A real positive right after the concern. It keeps the conversation calm and builds trust.', tab:'rules'}],
+    ['tech','Two more things. The electrical points near your sink and tub don\'t have water shock protection, which is a safety system required in modern homes. Is there a reason you chose not to have it? And your ventilation fan isn\'t clearing the moisture, which is why the mirror fogs.', {t:'What\'s MORE, as a question', b:'Straight from the Field Guide: name what should be there, then ask "Is there a reason you chose not to have it?" No "GFCI", no "code".', tab:'rules'}],
+    ['client','No reason. Nobody ever told us.'],
+    ['tech','Then let me put together a full range of options, from making that whole bathroom wedding-ready to simply getting your electrical point working again today, and you choose what fits.']
+  ],
+  obs:{
+    called:'An electrical point in your bathroom went dead a week ago. You\'ve been drying your hair at the kitchen table, and your daughter\'s wedding is in two weeks. The whole family is getting ready in that bathroom that morning.',
+    connected:'The wires behind that electrical point were pushed in instead of secured, worked loose, and got hot enough to stop working. It\'s connected to the electrical point by the tub, so they depend on each other: when one goes out, the next one can too.',
+    good:'The wiring inside your wall is in great shape past that box. And you were smart to call before this got worse.',
+    more:'The electrical points near your sink and tub don\'t have water shock protection, a safety system required in modern homes. The light over the vanity is dim, which makes getting ready hard. Your ventilation fan isn\'t clearing moisture, so the mirror fogs up after every shower.'
+  },
+  options:{
+    Platinum:['Every electrical point and control point in your home replaced and securely connected, matching throughout, so what happened here can\'t happen anywhere else','Each bathroom electrical point given its own secure connection, so one going out never takes down another','Its own private electrical line for your bathroom, so hair dryers and curling irons run together on the wedding morning','Water shock protection on every electrical point near water','Bright, even vanity lighting, so getting ready looks the way it should','A whisper-quiet ventilation system that clears the fog fast. No more foggy mirrors','First Class Pass: priority scheduling, no diagnostic fees, after-hours emergency service, and an annual whole-home safety evaluation'],
+    Gold:['Each bathroom electrical point given its own secure connection, so one going out never takes down another','Its own private electrical line for your bathroom, so hair dryers and curling irons run together','Water shock protection on every electrical point near water','Bright, even vanity lighting, so getting ready looks the way it should','A whisper-quiet ventilation system that clears the fog fast'],
+    Silver:['Each bathroom electrical point given its own secure connection, so one going out never takes down another','Its own private electrical line for your bathroom, so the whole family can get ready at once','Water shock protection on every bathroom electrical point'],
+    Bronze:['Your dead electrical point restored, and every point connected to it re-secured, so the next one stays working'],
+    Economy:['Your dead electrical point restored with a properly secured connection, and the electrical point by the tub checked'],
+    Basic:['Power restored to your bathroom electrical point today, so you can get ready at home again']
+  },
+  notes:{
+    Platinum:'One dead electrical point became a whole-home safety story, because the same pushed-in connections are likely everywhere. The Field Guide calls this a re-device: everything matches, it\'s designed for the family, and it\'s far safer.',
+    Silver:'What she called for, done permanently, with the safety finding near water. It makes the bathroom work for the wedding morning without major enhancement.',
+    Basic:'A repair, not a fix. It gets her through the day. The observations already explain why the next one could go out too.'
+  },
+  coach:['Nobody can build six options from "one dead outlet." You build them from the wedding. Ask what the room is for, then walk the Field Guide\'s Inspection Hotlist for bathrooms: ventilation, lighting, water shock protection, its own private line. Every one of those was sitting right there.','Notice how much of the sheet comes from her own words: "drying my hair at the kitchen table," "terrible light," "the mirror fogs up." Mirror them and the tiers sell themselves.']
 }
 ];
 
@@ -568,7 +605,6 @@ const MODS = [
    blocks:[
      ['The ultimatum problem','With one or two options the client makes a yes-or-no decision about you. With six, the decision is about the level of service, and the client stays in your camp.'],
      ['Six options, three buyer types','Every client is a premium, midrange, or economy buyer. Six tiers give each buyer type two real choices: Platinum and Gold for premium, Silver and Bronze for midrange, Economy and Basic for economy.', 'tiers'],
-     ['The spread','A well-built six-option sheet lands in a predictable spread: Platinum sells about 10–15% of the time, Gold through Bronze about 75–80%, and Economy and Basic the remaining 5–15%.'],
      ['This is not an upsell','"Here\'s the full range of what we can do for you, from the finest and most permanent to the most economical." You\'re giving people the dignity of choice.']
    ]},
   {id:'obs', n:'02', t:'Observations: the 4 Whats', tip:'fourwhats',
@@ -584,7 +620,7 @@ const MODS = [
    sum:'If a homeowner has to Google it, rewrite it. The Field Guide\'s Golden Rules apply to every word on the sheet.',
    blocks:[
      ['Describe the benefit, not the component','"Spark-sensing protection" beats "AFCI breaker" every time.', 'rules'],
-     ['Lead with the feeling, follow with the fix','', 'outcomes', ['Install dedicated 20A circuit','No more tripping breakers every time you run the microwave']],
+     ['Lead with the feeling, follow with the fix','', 'outcomes', ['Install dedicated 20A circuit','No more power shutting off every time you run the microwave']],
      ['Use their words back to them','If they said "it\'s driving me crazy," your option sheet says "eliminates the frustrating kitchen shutdowns."'],
      ['Never assume they know what\'s normal','Explain what should be there, not just what\'s missing.', null, ['No GFCI present','The electrical points near water should have water shock protection']],
      ['Danger in plain English','"Unreliable fire detection systems" lands. "Old smoke detector" doesn\'t. Grade 3 reading level.'],
@@ -691,8 +727,8 @@ function renderLearn(modId){
     <p class="lede">The average electrician offers one or two options. That's an ultimatum. Learn the framework, practice it on real calls, then build a sheet from your own call, in homeowner language, checked against the Field Guide as you type.</p>
     <div class="stats">
       <div class="stat"><b>6</b><span>options on every call</span></div>
-      <div class="stat"><b>10–15%</b><span>choose Platinum</span></div>
-      <div class="stat"><b>75–80%</b><span>land Gold through Bronze</span></div>
+      <div class="stat"><b>3</b><span>buyer types, two choices each</span></div>
+      <div class="stat"><b>4</b><span>Whats before a single price</span></div>
     </div>
     <div class="cta-row">
       <a class="btn btn-gold" href="#practice">Practice a call →</a>
@@ -759,7 +795,7 @@ function renderPractice(id, step){
   const el = document.getElementById('v-practice');
   const sc = SCENARIOS.find(s => s.id === id);
   if (!sc) {
-    el.innerHTML = `<div class="wrap"><div class="sec-head"><div class="kicker">Practice</div><h2>Three real calls. <em>Your options.</em></h2>
+    el.innerHTML = `<div class="wrap"><div class="sec-head"><div class="kicker">Practice</div><h2>Four real calls. <em>Your options.</em></h2>
       <p class="sub">Read the call, write the 4 Whats, build six tiers, then compare with an example written to the Field Guide. As you type, the trainer flags any word the Field Guide says to translate or never say.</p></div>
       ${fgCall('rules', '<b>Before you start:</b> the examples follow the Field Guide\'s Golden Rules and Translation Tables. If you\'re not sure how to say something, search the Translation Tables. That\'s what they\'re for.')}
       <div class="scen-grid">${SCENARIOS.map(s => { const p = P(s.id); const done = WHATS.filter(w => (p.obs[w.k] || '').trim()).length + TIERS.filter(t => (p.tiers[t.n] || '').trim()).length; return `<button class="scen" data-go="practice/${s.id}/1"><span class="n">Scenario ${s.n}</span><h3>${esc(s.title)}</h3><p>${esc(s.sub)}</p><p style="color:var(--gray-light)">${esc(s.why)}</p><div class="meta"><span>${esc(s.client)}</span><span>${done ? done + '/10 filled' : 'Not started'}</span></div><div class="prog"><i style="width:${done * 10}%"></i></div></button>`; }).join('')}</div>
