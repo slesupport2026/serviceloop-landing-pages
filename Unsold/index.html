@@ -430,7 +430,7 @@ footer a{text-decoration:none}
       var miss=[];
       ['co','phone','hours'].forEach(function(k){ if(!String(vals[k]||'').trim()) miss.push({co:'company name',phone:'phone',hours:'office hours'}[k]); });
       showPull(got.length
-        ? 'Pulled your '+got.join(', ').replace(/, ([^,]*)$/,' and $1')+' from '+siteLabel(b.site||f.site||site)+'. Check them below.'+(miss.length?' Couldn\'t find your '+miss.join(' or ')+', so type it in.':'')
+        ? 'Pulled your '+got.join(', ').replace(/, ([^,]*)$/,' and $1')+' from '+siteLabel(b.site||f.site||site)+'. Give it a quick check below.'+(miss.length?' Couldn\'t find your '+miss.join(' or ')+', so type it in.':'')
         : 'Read '+siteLabel(site)+(miss.length?', but couldn\'t find your '+miss.join(' or ')+'. Type it in below.':'. Your boxes were already filled, so I left them.'), !got.length && !!miss.length);
     });
   }
