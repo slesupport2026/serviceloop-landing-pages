@@ -237,6 +237,58 @@ td a{text-decoration:none}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gold);color:var(--bg);font-weight:800;padding:10px 18px;border-radius:24px;transition:transform .25s;z-index:300;font-size:14px}
 .toast.on{transform:translateX(-50%) translateY(0)}
 
+/* pricing: monthly + ladder + finance */
+.muted{color:var(--gray);font-size:13px}
+.ok{color:var(--green);font-weight:700;font-size:13px}
+.price-row .mo{font-size:13.5px;color:var(--white);white-space:nowrap}
+.fin h4,.ladder h4{display:flex;align-items:center;gap:6px;font-size:15px;margin-bottom:8px}
+.fin-row{display:grid;grid-template-columns:48px minmax(0,1fr) 92px;gap:10px;align-items:center;margin-bottom:6px;font-size:14px}
+.fin-row input[type=range]{width:100%;accent-color:var(--gold)}
+.fin-row b{text-align:right}
+.fin{margin-bottom:16px}
+.ladder{margin-bottom:16px}
+.lrow{display:grid;grid-template-columns:78px minmax(0,1fr) 84px 110px;gap:10px;align-items:center;font-size:13.5px;padding:4px 0}
+.lrow b{color:var(--c)}
+.lrow .bar{position:relative;height:10px;background:var(--bg2);border-radius:5px}
+.lrow .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--c);border-radius:5px;opacity:.85}
+.lrow .bar u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--white);opacity:.6;text-decoration:none}
+
+/* grader */
+.ghero{display:flex;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin:16px 0}
+.gring{width:88px;height:88px;border-radius:50%;border:5px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.gring b{font-size:28px;line-height:1}.gring span{font-size:13px;font-weight:800;letter-spacing:1px;color:var(--gray-light)}
+.g-A{border-color:var(--green)}.g-B{border-color:var(--teal)}.g-C{border-color:var(--gold)}.g-D,.g-F{border-color:var(--red)}
+.ghero h3{font-size:20px;margin-bottom:4px}
+.rub-h{display:flex;align-items:center;font-size:15px;margin:20px 0 8px;color:var(--gold)}
+.rub{display:grid;grid-template-columns:26px minmax(0,1fr) 64px 22px;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);margin-bottom:6px}
+.rub .ic{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.rub.pass .ic{background:var(--green-wash);color:var(--green)}.rub.part .ic{background:rgba(201,164,90,.15);color:var(--gold)}.rub.miss .ic{background:var(--red-wash);color:var(--red)}.rub.pend .ic{background:var(--bg2);color:var(--gray)}
+.rub b{font-size:14px}.rub p{font-size:13px;color:var(--gray-light);margin-top:2px}
+.rub .pts{font-size:13px;font-weight:800;text-align:right;color:var(--gray-light);white-space:nowrap}
+.rub .fgl{color:var(--gold);padding-top:2px}
+.fb h5{font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin:12px 0 6px}
+.fb ul{padding-left:18px}.fb li{font-size:14px;margin-bottom:3px}
+.fix{border-top:1px solid #0d6b75;padding:8px 0}.fix p{font-size:14px}
+.fix .try{background:var(--green-wash);border:1px solid rgba(46,204,113,.35);color:#b8f0cf;border-radius:8px;padding:6px 10px;margin-top:6px}
+.fix .try small{display:block;font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;opacity:.8}
+.gsubmit{margin-top:18px}.gsubmit h4{font-size:16px;margin-bottom:4px}
+.stale{background:rgba(201,164,90,.12);border:1px solid var(--gold-dim);border-radius:10px;padding:10px 14px;font-size:14px;margin:12px 0}
+
+/* coach view */
+.gfilters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.gfilters select,.gfilters input[type=search]{background:var(--card);color:var(--white);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px}
+.gfilters .chk{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--gray-light)}
+.grow{position:relative;border:1px solid var(--line);border-radius:12px;background:var(--card);margin-bottom:8px}
+.grow.open{border-color:var(--gold-dim)}
+.ghead{width:100%;display:grid;grid-template-columns:62px minmax(0,1.4fr) minmax(0,1.2fr) 64px;gap:12px;align-items:center;background:none;border:none;color:var(--white);text-align:left;padding:12px 52px 12px 12px;cursor:pointer}
+.gbadge{width:52px;height:52px;border-radius:50%;border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-size:17px;line-height:1}
+.gbadge i{font-style:normal;font-size:11px;color:var(--gray-light)}
+.gwho{display:flex;flex-direction:column;min-width:0}.gwho b{font-size:15px}
+.gstar{position:absolute;right:12px;top:22px;background:none;border:none;font-size:22px;color:var(--gray);cursor:pointer}
+.gstar.on{color:var(--gold-bright)}
+.gdetail{padding:0 12px 14px}
+.gd2{align-items:start}
+
 /* print sheet (client-facing) */
 #sheet{display:none}
 @media print{
@@ -256,6 +308,10 @@ td a{text-decoration:none}
   #sheet .tier .tt{display:flex;justify-content:space-between;font-weight:800;font-size:12.5pt}
   #sheet .tier ul{padding-left:16pt;margin-top:3pt}
   #sheet .tier li{font-size:10.5pt;margin-bottom:2pt}
+  #sheet .tier .tp{margin-top:5pt;padding-top:5pt;border-top:1px solid #e3e3e3;font-size:11pt}
+  #sheet .tier .tp b{font-size:12.5pt}
+  #sheet .tier .tp span{color:#444}
+  #sheet .fineprint{font-size:8.5pt;color:#666;margin-top:4pt}
   #sheet .sig{margin-top:18pt;font-size:10pt;color:#555;display:flex;justify-content:space-between}
   a{color:#111}
 }
@@ -277,6 +333,13 @@ td a{text-decoration:none}
   .brand{flex:1}
   .summary .row{flex-direction:column;gap:4px}
   .summary .row b{min-width:0}
+  .lrow{grid-template-columns:64px minmax(0,1fr) 70px;font-size:12.5px}
+  .lrow > span:last-child{display:none}
+  .rub{grid-template-columns:24px minmax(0,1fr) 54px}
+  .rub .fgl,.rub > span:last-child:empty{display:none}
+  .ghead{grid-template-columns:56px minmax(0,1fr);padding-right:44px}
+  .ghead .gsrc,.ghead .gdate{grid-column:2;font-size:12px}
+  .ghero{flex-direction:column;text-align:center}
 }
 </style>
 </head>
@@ -313,11 +376,12 @@ td a{text-decoration:none}
   <section class="view" id="v-practice"></section>
   <section class="view" id="v-build"></section>
   <section class="view" id="v-cheat"></section>
+  <section class="view" id="v-graded"></section>
 </main>
 
 <footer class="footer">
   <div class="wrap">
-    For Electricians. By Electricians. · Language follows the <a data-fg="" target="_blank" rel="noopener">SLE Field Guide</a>, compiled from Joseph Lucanie's Options Design Clinics. · Property of Service Loop Electrical Inc. Not for external distribution. · <span id="ver"></span>
+    For Electricians. By Electricians. · Language follows the <a data-fg="" target="_blank" rel="noopener">SLE Field Guide</a>, compiled from Joseph Lucanie's Options Design Clinics. · Property of Service Loop Electrical Inc. Not for external distribution. · <a href="#graded">Coaches: graded sheets</a> · <span id="ver"></span>
   </div>
 </footer>
 
@@ -326,7 +390,7 @@ td a{text-decoration:none}
 <div id="sheet"></div>
 
 <script>
-const APP_VERSION = '2026.11.4-2';
+const APP_VERSION = '2026.11.5';
 const FG = 'https://go.serviceloopelectrical.com/field-guide';
 const fgUrl = (tab, q) => q ? FG + '?q=' + encodeURIComponent(q) : (tab ? FG + '#' + tab : FG);
 const FG_NAMES = {rules:'Golden Rules & 4 Whats', translate:'Translation Tables', outcomes:'Outcome Language', tiers:'Tier Framing', banned:'Never Say', analogies:'Analogies', hotlist:'Inspection Hotlist'};
@@ -344,7 +408,7 @@ const TIPS = {
   good:{t:'What\'s Good', b:'Genuine positives. It shows you\'re not just looking for problems, and it builds trust. "You were smart to call before this got worse." "The wiring within the walls is in great shape, which is really good news!"', tab:'rules'},
   more:{t:'What\'s MORE', b:'Additional findings framed as opportunities, not scare tactics. Not "No AFCI protection on bedroom circuits." Say "Your bedrooms don\'t have spark-sensing shutoffs, which is a safety system required in modern homes. Is there a reason you chose not to have it?"', tab:'rules'},
   tiers:{t:'Tier Framing', b:'Platinum is the apex. Gold is premium and turnkey. Silver is the permanent fix without major enhancement. Bronze is reliable and limited to the original scope. Economy is the most economical way to get the fault fixed. Basic is a repair, not a fix, and the client always gets the dignity of knowing it exists.', tab:'tiers'},
-  format:{t:'Client-facing format', b:'Every tier on a homeowner-facing sheet uses value-framed bullet points. Only describe what it does for them. Never write "What This Doesn\'t Do", "not included", or "same as above without…". That only gives them ammunition for why they shouldn\'t buy.', tab:'tiers'},
+  format:{t:'Client-facing format', b:'Platinum, Silver, Economy and Basic each get a full description in value-framed bullets. Gold is written "Same as Platinum, except… / without…" and Bronze is written "Same as Silver, except… / without…". Never write "What This Doesn\'t Do" or "not included".', tab:'tiers'},
   choose:{t:'How to Choose (say it, never print it)', b:'Verbal guides for a client who is stuck between tiers. Never print them on the option sheet. Showing a preference for a tier can communicate bias and reduce impact if they choose a different level.', tab:'tiers'},
   banned:{t:'Words to Never Say', b:'Amps, volts, watts. Model and part numbers. Brand names. Code numbers. Wire gauge. Breaker sizes. AFCI/GFCI as acronyms. "Deficiency", "violation", "obsolete", "failure", "we recommend", and "upgrade" without the why. If it\'s on a client-facing document, you\'ve already lost them.', tab:'banned'},
   translate:{t:'Translation Tables', b:'100+ term-by-term translations from tech speak to homeowner language: panel & service, protection devices, wiring, electrical points, lighting, generators, specialty systems. Search any term.', tab:'translate'},
@@ -352,7 +416,10 @@ const TIPS = {
   analogies:{t:'Analogy Toolkit', b:'Panel capacity, overloaded circuits, surge protection as "a giant sponge for your home", water and electricity, old wiring as "a fire hose through a garden hose connector". Straight from the clinics.', tab:'analogies'},
   hotlist:{t:'Inspection Hotlist', b:'Room-by-room list of the opportunities that show up when you look beyond the original call. Walk it for every room you were in. That\'s where What\'s MORE comes from.', tab:'hotlist'},
   firstclass:{t:'First Class Pass', b:'"Imagine it as a first-class flight with our company. At that level you\'d be receiving priority scheduling, absolutely no diagnostic or troubleshooting fees, after-hours emergency service, and a whole home electrical safety evaluation."', tab:'analogies'},
-  pricing:{t:'Pricing (SLE Offer Roadmap)', b:'Price from Basic up: hours × your Simple Service Rate, plus special materials, third-party costs, and any membership. Avoid round numbers: $3,597 reads as calculated, $3,600 reads as a guess. Price at the table, in front of the client.', tab:null}
+  pricing:{t:'Pricing (SLE Offer Roadmap)', b:'Price from Basic up: hours × your Simple Service Rate, plus special materials, third-party costs, and any membership. Keep the five gaps from Platinum to Basic about even. The price goes under each option, after you explain it, with a low monthly amount beside it.', tab:null},
+  finance:{t:'The monthly amount', b:'Every price on the sheet gets a low monthly finance amount beside it. The default is 36 months at 10%, an average for SLE. Change it to match the plan you actually offer. The sheet prints the terms in small print under the options.', tab:null},
+  grade:{t:'How grading works', b:'The instant score covers what the trainer can check on its own: every box filled in, Never Say words, the Gold and Bronze format, First Class Pass, prices and even steps, first names, and short cue-card bullets. Coach feedback adds what only a reader can judge: does it make sense to a non-electrician, does Platinum do everything, is Basic the safe minimum, spelling and polish.', tab:'tiers'},
+  turnkey:{t:'Platinum does everything', b:'Permits, patching, painting, trenching, utility coordination, cleanup: whatever it takes. It doesn\'t matter how much it adds. Without it, even your best option still leaves the client with work to do. Platinum always includes the First Class Pass, and anything that needs upkeep (like a generator) includes extra years of service.', tab:'tiers'}
 };
 
 /* ═════════════ TIERS (Field Guide → Tier Framing) ═════════════ */
@@ -405,15 +472,22 @@ const RULES = [
   {re:/\bswitch(?:es)?\b/gi, sev:'tip', say:'"control point"', q:'control'},
   {re:/\bcircuits?\b|\bcircuitry\b/gi, sev:'tip', say:'"electrical line"', q:'circuit'},
   {re:/\bupgrade[sd]?\b/gi, sev:'tip', say:'pair "upgrade" with WHY: "upgrade so your home is ready for…"', tab:'banned', check:(txt, i) => !/\b(so|ready|prepare|handle|future|room to grow|because)\b/i.test(sentenceAt(txt, i))},
-  {re:/\bsame as (?:above|platinum|gold|silver|bronze|economy)\b/gi, sev:'never', tierOnly:true, say:'write each tier as full value-framed bullets. Never "same as above without…"', tab:'tiers'},
+  {re:/\bsame as\b/gi, sev:'never', tierOnly:true, onlyTiers:['Platinum','Silver','Economy','Basic'], say:'Platinum, Silver, Economy and Basic get a full description. Only Gold and Bronze start with "Same as…"', tab:'tiers'},
+  {re:/\bMrs?\.?\s+[A-Z]|\bMs\.?\s+[A-Z]|\bMiss\s+[A-Z]/g, sev:'never', names:true, say:'first names only. Not Mr. or Mrs.', tab:'tiers'},
   {re:/\bnot included\b|\bdoes ?n[o’']t include\b|\bexclud\w*\b|\bcustomer (?:is )?responsible\b|\bdocumented but not\b|\bnot (?:be )?(?:corrected|addressed|replaced)\b/gi, sev:'never', tierOnly:true, say:'never describe what a tier doesn\'t do. Only what it does for them', tab:'tiers'}
 ];
 function sentenceAt(txt, i){ const s = txt.lastIndexOf('.', i) + 1; let e = txt.indexOf('.', i); if (e < 0) e = txt.length; return txt.slice(s, e); }
-function lint(text, isTier){
+/* tier: a tier name ('Gold'…) for tier bullets, true for "some tier", falsy for observations */
+const SAME_AS = {Gold:'Platinum', Bronze:'Silver'};
+const firstLine = text => (String(text || '').trim().split('\n')[0] || '').replace(/^\s*[-•*]\s*/, '');
+function lint(text, tier){
   const hits = []; const seen = new Set();
   if (!text) return hits;
+  if (SAME_AS[tier] && String(text).trim() && !new RegExp('^same as ' + SAME_AS[tier] + '\\b', 'i').test(firstLine(text)))
+    hits.push({word:'', r:{sev:'tip', plain:true, say:`Start ${tier} with "Same as ${SAME_AS[tier]}, except… / without…"`, tab:'tiers'}});
   RULES.forEach((r, ri) => {
-    if (r.tierOnly && !isTier) return;
+    if (r.tierOnly && !tier) return;
+    if (r.onlyTiers && !r.onlyTiers.includes(tier)) return;
     r.re.lastIndex = 0; let m;
     while ((m = r.re.exec(text))) {
       if (r.check && !r.check(text, m.index)) continue;
@@ -428,11 +502,12 @@ function lint(text, isTier){
 function chipHtml(h){
   const href = h.r.q === null ? fgUrl('translate') : h.r.q ? fgUrl(null, h.r.q) : fgUrl(h.r.tab);
   const lab = h.r.sev === 'never' ? 'Never say' : h.r.sev === 'trans' ? 'Translate' : 'Try';
+  if (h.r.plain) return `<a class="chip ${h.r.sev === 'never' ? 'never' : 'tip-c'}" href="${href}" target="_blank" rel="noopener" title="Open in the Field Guide">${esc(h.r.say)}</a>`;
   return `<a class="chip ${h.r.sev === 'never' ? 'never' : h.r.sev === 'trans' ? 'trans' : 'tip-c'}" href="${href}" target="_blank" rel="noopener" title="${lab}. Open in the Field Guide"><s>“${esc(h.word)}”</s> → ${esc(h.r.say)}</a>`;
 }
-function lintHtml(text, isTier){
+function lintHtml(text, tier){
   if (!text || !text.trim()) return '';
-  const hits = lint(text, isTier);
+  const hits = lint(text, tier);
   if (!hits.length) return '<span class="ok">✓ Reads like the Field Guide</span>';
   return '<span class="lint-head">Field Guide check</span>' + hits.slice(0, 8).map(chipHtml).join('') + (hits.length > 8 ? `<span class="lint-head">+${hits.length - 8} more</span>` : '');
 }
@@ -467,20 +542,21 @@ const SCENARIOS = [
     more:'Two connections in your main electrical control system were improperly installed, which increases the danger of that wiring overheating. Your home\'s early warning system is about 15 years old, past its designed life. Your computers and electronics have no protection from power spikes from the utility or a storm.'
   },
   options:{
-    Platinum:['Two private electrical lines just for your office equipment. No more shutdowns in the middle of a call','Its own private line for your space heater, so you stay warm without putting your work at risk','Correction of every improperly installed connection in your main electrical control system, removing the overheating risk we found','Home electronics protection guarding your computers, TV, fridge and heating system from power spikes','A battery backup for your computer, so a short outage never drops a call or loses your work','Rapid-charge electrical points at your desk, plus cord management for a clean workspace','A complete new early warning system: when one detector senses smoke or gas, every detector in the home sounds the alarm','First Class Pass: priority scheduling, no diagnostic fees, after-hours emergency service, and an annual whole-home safety evaluation'],
-    Gold:['Two private electrical lines just for your office equipment. No more shutdowns in the middle of a call','Its own private line for your space heater, so you stay warm without putting your work at risk','Correction of every improperly installed connection in your main electrical control system','Home electronics protection guarding your computers and appliances from power spikes','A complete new early warning system, connected so every detector sounds together'],
+    Platinum:['Two private electrical lines just for your office equipment. No more shutdowns in the middle of a call','Its own private line for your space heater, so you stay warm without putting your work at risk','Correction of every improperly installed connection in your main electrical control system, removing the overheating risk we found','Home electronics protection guarding your computers, TV, fridge and heating system from power spikes','A battery backup for your computer, so a short outage never drops a call or loses your work','Rapid-charge electrical points at your desk, plus cord management for a clean workspace','A complete new early warning system: when one detector senses smoke or gas, every detector in the home sounds the alarm','Completely turnkey: permits and inspection handled, any wall openings patched and painted, and your office left cleaner than we found it','First Class Pass: priority scheduling, no diagnostic fees, after-hours emergency service, and an annual whole-home safety evaluation'],
+    Gold:['Same as Platinum, without the battery backup, the desk charging points, and the First Class Pass'],
     Silver:['Two private electrical lines just for your office equipment. Your calls and your work stay on, all day','Its own private line for your space heater, so you stay warm without putting your work at risk','Correction of every improperly installed connection in your main electrical control system, removing the overheating risk'],
-    Bronze:['A new private electrical line for your computers and monitors, so the heater and your work stop competing for power','Rebalancing of your office electrical points so the printer and heater run without interrupting your calls'],
+    Bronze:['Same as Silver, except one private electrical line for your computers and monitors instead of two'],
     Economy:['Your space heater moved to an electrical point on a line with spare room, so your office line can keep up','Safety check and re-securing of every connection on your office line'],
     Basic:['Power restored and your office safety shutoff tested and confirmed working','A simple plan showing which equipment to keep on which electrical points to cut down on shutdowns']
   },
   notes:{
-    Gold:'Premium and turnkey. It trims Platinum\'s extras (the battery backup, desk charging points, First Class Pass) but every bullet still says what it does for Mark.',
+    Platinum:'The "pay me and I\'ll do everything" option: every finding, the enhancements, and the turnkey line, so Mark has nothing left to do. First Class Pass is always in Platinum.',
+    Gold:'Premium and turnkey, written as "Same as Platinum, without…". One line, and Mark sees exactly what changes between his two premium choices.',
     Silver:'What he called for, done permanently and well, plus the safety finding. No major enhancements.',
-    Bronze:'Reliable, and limited to the original scope: the office shutdowns. The overheating finding stays on the sheet in What\'s MORE, so he decides with full information.',
+    Bronze:'"Same as Silver, except…". The midrange buyer sees one difference between the two choices. The overheating finding stays on the sheet in What\'s MORE, so he decides with full information.',
     Basic:'A repair, not a fix. Never "solve" tripping by putting a bigger shutoff on the same wiring. That removes the protection, not the problem. Basic still has to be something you\'d put your name on.'
   },
-  coach:['This is the "nothing here" trap. A tripping line looks like a quick repair until you ask why it matters: video calls, embarrassment, his income. That WHY is what makes Platinum through Silver make sense to him.','Notice that no tier says what it doesn\'t do. Gold isn\'t "Platinum without the membership." It\'s its own list of benefits. The safety findings live in What\'s MORE, so every tier is an informed choice.']
+  coach:['This is the "nothing here" trap. A tripping line looks like a quick repair until you ask why it matters: video calls, embarrassment, his income. That WHY is what makes Platinum through Silver make sense to him.','Look at the pattern: Platinum, Silver, Economy and Basic are full descriptions. Gold and Bronze are "Same as" the tier above, so each buyer type sees its two choices side by side, one line apart. The safety findings live in What\'s MORE, so every tier is an informed choice.']
 },
 {
   id:'ev', n:2, title:'The EV Charger Quote', sub:'New electric car, slow charging, long commute', client:'Sandra', tech:'Tyler',
@@ -507,16 +583,17 @@ const SCENARIOS = [
     more:'The electrical points in your garage don\'t have water shock protection, a safety system required in modern homes for spaces that get wet. The garage is lit by a single bulb, so it\'s hard to see at night. And if a second electric car is ever in the plans, preparing for it now saves opening walls twice.'
   },
   options:{
-    Platinum:['A charging station permanently mounted in your garage: full charge overnight, every night, for the 60-mile commute','Smart charging that watches your home\'s power use and adjusts automatically, so nothing ever gets overworked','A second high-power line ready for a future electric car. No walls opened twice','Water shock protection on every garage electrical point','Bright, motion-activated garage lighting that turns on the moment you walk in','Home electronics protection guarding your car\'s charging system, appliances and electronics from power spikes','First Class Pass: priority scheduling, no diagnostic fees, after-hours emergency service, and an annual whole-home safety evaluation'],
-    Gold:['A charging station permanently mounted in your garage: full charge overnight, every night','A second high-power line ready for a future electric car','Water shock protection on every garage electrical point','Home electronics protection guarding your car\'s charging system and appliances from power spikes'],
+    Platinum:['A charging station permanently mounted in your garage: full charge overnight, every night, for the 60-mile commute','Smart charging that watches your home\'s power use and adjusts automatically, so nothing ever gets overworked','A second high-power line ready for a future electric car. No walls opened twice','Water shock protection on every garage electrical point','Bright, motion-activated garage lighting that turns on the moment you walk in','Home electronics protection guarding your car\'s charging system, appliances and electronics from power spikes','Completely turnkey: permits and inspection handled, any coordination with the utility done for you, every wall opening patched and painted, and the garage left spotless','First Class Pass: priority scheduling, no diagnostic fees, after-hours emergency service, and an annual whole-home safety evaluation'],
+    Gold:['Same as Platinum, without the smart charging, the motion-activated lighting, and the First Class Pass'],
     Silver:['A charging station permanently mounted in your garage: clean look, nothing to unplug, full charge overnight','Water shock protection on every garage electrical point, keeping your family safe where things get wet'],
-    Bronze:['A high-power electrical point where the car parks: your car\'s own charger fills it overnight, and it moves with you if you ever change chargers'],
+    Bronze:['Same as Silver, except a high-power electrical point instead of a mounted station: your car\'s own charger plugs in, and it moves with you if you ever change chargers'],
     Economy:['A high-power electrical point installed by the most direct path from your main electrical control system: the fastest, simplest way to overnight charging'],
     Basic:['Your car\'s included charger moved to its own private standard line, so it charges steadily without sharing power with anything else in the garage']
   },
   notes:{
     Platinum:'Everything a commuter family could want, including what\'s next (a second car). Most clients won\'t take it. Its job is to show what the best looks like.',
-    Bronze:'Reliable and limited to what she called for: faster charging. Water shock protection is still documented in What\'s MORE.',
+    Gold:'"Same as Platinum, without…". The premium buyer sees exactly what they give up for a tighter budget, in one line.',
+    Bronze:'"Same as Silver, except…". Same safety, a simpler way to charge. One line tells the midrange buyer the whole difference.',
     Basic:'A repair, not a fix: it doesn\'t make charging overnight-fast, but it makes the slow way reliable. Every bullet still says what it does, not what it doesn\'t.'
   },
   coach:['The call reason was "quote an EV charger." The options came from the WHY (the commute and the stress), from What\'s MORE (the wet garage, the dark garage), and from what\'s next (a second car).','Watch the language: no car brand, no charger brand, no part numbers, no amps. "The kind of line your dryer uses" does all the explaining the homeowner needs.']
@@ -545,10 +622,10 @@ const SCENARIOS = [
     more:'Your bedrooms don\'t have spark-sensing protection, a safety system required in modern homes. Your early warning system is original, and the detectors don\'t talk to each other. Some older two-slot electrical points aren\'t connected to the home\'s shock diversion system. Your electronics have no protection from power spikes.'
   },
   options:{
-    Platinum:['A brand-new main electrical control system that can handle everything you need, now and in the future, removing the fire risk from shutoffs that don\'t turn off','Every new private electrical line your kitchen needs, so your appliances all run together without shutdowns','Spark-sensing protection for every bedroom and living space','Water shock protection everywhere near water','Every electrical point in the home replaced with modern, childproof points that are connected to the shock diversion system and match throughout','A complete early warning system: when one detector senses smoke or gas, every detector in the home sounds the alarm','Home electronics protection guarding your TV, fridge, computers and heating system from power spikes','Clear labeling of every emergency shutoff, so you know you\'re turning off the right thing in an emergency','First Class Pass: priority scheduling, no diagnostic fees, after-hours emergency service, and an annual whole-home safety evaluation'],
-    Gold:['A brand-new main electrical control system that can handle everything you need, now and in the future','Every new private electrical line your kitchen needs','Spark-sensing protection for every bedroom','Water shock protection everywhere near water','A complete early warning system, connected so every detector sounds together','Home electronics protection guarding your appliances and electronics from power spikes','Clear labeling of every emergency shutoff'],
+    Platinum:['A brand-new main electrical control system that can handle everything you need, now and in the future, removing the fire risk from shutoffs that don\'t turn off','Every new private electrical line your kitchen needs, so your appliances all run together without shutdowns','Spark-sensing protection for every bedroom and living space','Water shock protection everywhere near water','Every electrical point in the home replaced with modern, childproof points that are connected to the shock diversion system and match throughout','A complete early warning system: when one detector senses smoke or gas, every detector in the home sounds the alarm','Home electronics protection guarding your TV, fridge, computers and heating system from power spikes','Clear labeling of every emergency shutoff, so you know you\'re turning off the right thing in an emergency','Completely turnkey: permits and inspections handled, the power shutoff coordinated with the utility, every wall opening patched and painted, and the schedule worked out with your kitchen contractor','First Class Pass: priority scheduling, no diagnostic fees, after-hours emergency service, and an annual whole-home safety evaluation'],
+    Gold:['Same as Platinum, without replacing every electrical point in the home, and without the First Class Pass'],
     Silver:['A brand-new main electrical control system, removing the fire risk from shutoffs that don\'t turn off','Every new private electrical line your kitchen needs','Spark-sensing protection for every bedroom','Clear labeling of every emergency shutoff'],
-    Bronze:['A brand-new main electrical control system, removing the fire risk from shutoffs that don\'t turn off','Every new private electrical line your kitchen needs, ready for the renovation'],
+    Bronze:['Same as Silver, without the bedroom spark-sensing protection'],
     Economy:['A brand-new main electrical control system with every existing line reconnected, removing the fire risk, with room set aside for your kitchen lines when the renovation starts'],
     Basic:['A full safety check of your current main electrical control system: every connection re-secured and every emergency shutoff tested','Clear labeling of every emergency shutoff, so you know you\'re turning off the right thing in an emergency']
   },
@@ -557,7 +634,7 @@ const SCENARIOS = [
     Economy:'The most economical way to remove the fire risk without cutting corners. "Room set aside for your kitchen lines" says what it does, not "kitchen not included."',
     Basic:'A repair, not a fix. It doesn\'t remove the risk, and the observations already say so in plain English. They still deserve to know this option exists.'
   },
-  coach:['Laundry-list jobs feel overwhelming. Start with what they called for (the inspector and the kitchen), connect it to the safety concern, then layer in What\'s MORE. Platinum handles everything; each tier below trims, and every tier still reads as a list of benefits.','Brand names hurt you here. "Federal Pacific Stab-Lok" means nothing to Robert and Linda, and it starts a Google search you don\'t control. "The emergency shutoffs don\'t always turn off when they should" tells them what matters.']
+  coach:['Laundry-list jobs feel overwhelming. Start with what they called for (the inspector and the kitchen), connect it to the safety concern, then layer in What\'s MORE. Platinum handles everything, including the permits, the patching and the utility. Gold and Bronze are one line each ("Same as…"), which keeps a big job from becoming a wall of text.','Brand names hurt you here. "Federal Pacific Stab-Lok" means nothing to Robert and Linda, and it starts a Google search you don\'t control. "The emergency shutoffs don\'t always turn off when they should" tells them what matters.']
 },
 {
   id:'outlet', n:4, title:'The Dead Outlet', sub:'One bathroom outlet stopped working', client:'Denise', tech:'Tyler',
@@ -579,15 +656,15 @@ const SCENARIOS = [
     called:'An electrical point in your bathroom went dead a week ago. You\'ve been drying your hair at the kitchen table, and your daughter\'s wedding is in two weeks. The whole family is getting ready in that bathroom that morning.',
     connected:'The wires behind that electrical point were pushed in instead of secured, worked loose, and got hot enough to stop working. It\'s connected to the electrical point by the tub, so they depend on each other: when one goes out, the next one can too.',
     good:'The wiring inside your wall is in great shape past that box. And you were smart to call before this got worse.',
-    more:'The electrical points near your sink and tub don\'t have water shock protection, a safety system required in modern homes. The light over the vanity is dim, which makes getting ready hard. Your ventilation fan isn\'t clearing moisture, so the mirror fogs up after every shower.'
+    more:'The electrical points near your sink and tub don\'t have water shock protection, a safety system required in modern homes. Is there a reason you chose not to have it? The light over the vanity is dim, which makes getting ready hard. Your ventilation fan isn\'t clearing moisture, so the mirror fogs up after every shower.'
   },
   options:{
-    Platinum:['Every electrical point and control point in your home replaced and securely connected, matching throughout, so what happened here can\'t happen anywhere else','Each bathroom electrical point given its own secure connection, so one going out never takes down another','Its own private electrical line for your bathroom, so hair dryers and curling irons run together on the wedding morning','Water shock protection on every electrical point near water','Bright, even vanity lighting, so getting ready looks the way it should','A whisper-quiet ventilation system that clears the fog fast. No more foggy mirrors','First Class Pass: priority scheduling, no diagnostic fees, after-hours emergency service, and an annual whole-home safety evaluation'],
-    Gold:['Each bathroom electrical point given its own secure connection, so one going out never takes down another','Its own private electrical line for your bathroom, so hair dryers and curling irons run together','Water shock protection on every electrical point near water','Bright, even vanity lighting, so getting ready looks the way it should','A whisper-quiet ventilation system that clears the fog fast'],
+    Platinum:['Every electrical point and control point in your home replaced and securely connected, matching throughout, so what happened here can\'t happen anywhere else','Each bathroom electrical point given its own secure connection, so one going out never takes down another','Its own private electrical line for your bathroom, so hair dryers and curling irons run together on the wedding morning','Water shock protection on every electrical point near water','Bright, even vanity lighting, so getting ready looks the way it should','A whisper-quiet ventilation system that clears the fog fast. No more foggy mirrors','Completely turnkey: permits handled, every wall and ceiling opening patched and painted, and your bathroom left spotless and wedding-ready','First Class Pass: priority scheduling, no diagnostic fees, after-hours emergency service, and an annual whole-home safety evaluation'],
+    Gold:['Same as Platinum, without replacing the electrical points and control points in the rest of your home, and without the First Class Pass'],
     Silver:['Each bathroom electrical point given its own secure connection, so one going out never takes down another','Its own private electrical line for your bathroom, so the whole family can get ready at once','Water shock protection on every bathroom electrical point'],
-    Bronze:['Your dead electrical point restored, and every point connected to it re-secured, so the next one stays working'],
+    Bronze:['Same as Silver, without the private electrical line for your bathroom'],
     Economy:['Your dead electrical point restored with a properly secured connection, and the electrical point by the tub checked'],
-    Basic:['Power restored to your bathroom electrical point today, so you can get ready at home again']
+    Basic:['The loose connection that overheated made safe and secure, so your bathroom electrical point works again today and you can get ready at home']
   },
   notes:{
     Platinum:'One dead electrical point became a whole-home safety story, because the same pushed-in connections are likely everywhere. The Field Guide calls this a re-device: everything matches, it\'s designed for the family, and it\'s far safer.',
@@ -627,13 +704,15 @@ const MODS = [
      ['The words that cost you the job','Amps, volts, watts. Model numbers. Brand names. Code numbers. Wire gauge. Breaker sizes. AFCI/GFCI. "Deficiency," "violation," "obsolete," "failure," "we recommend." The trainer flags every one of these as you type, and each flag links straight to the Field Guide.', 'banned']
    ]},
   {id:'build', n:'04', t:'Building the six tiers', tip:'format',
-   sum:'Start at Platinum, the perfect outcome, and work your way down to Basic. Every tier is its own list of benefits.',
+   sum:'Start at Platinum, the perfect outcome, and work your way down to Basic. Four full descriptions, two "Same as" lines.',
    blocks:[
      ['Start at the top','Begin with Platinum: everything done the most complete way, with enhancements. Then work down. Don\'t think about price yet.', 'tiers'],
-     ['Every tier gets full, value-framed bullets','Write each bullet as what it does for their life, tied to their words. Never write "same as above without…", "not included", or a "What This Doesn\'t Do" section. That only hands them reasons not to buy.', 'format', ['Same as Platinum without the service membership','Turnkey restoration of the master bedroom ceiling fan, removing all flickering and noise to keep Melanie from waking up at night']],
+     ['The pattern: full, same as, full, same as, full, full','Platinum: full description. Gold: "Same as Platinum, except… / without…". Silver: full description. Bronze: "Same as Silver, except… / without…". Economy: full description. Basic: full description. Each buyer type sees its two choices side by side, and the difference is one line.', 'format', ['Gold: Two private lines for your office, its own line for the heater, the connection corrections, home electronics protection… (Platinum retyped minus three bullets)','Gold: Same as Platinum, without the battery backup, the desk charging points, and the First Class Pass']],
+     ['Full descriptions are value-framed','Write each bullet as what it does for their life, tied to their words. Never write "not included" or a "What This Doesn\'t Do" section. That only hands them reasons not to buy.', 'format', ['Upgrade bedroom fan wiring and replace switch','Turnkey restoration of the master bedroom ceiling fan, removing all flickering and noise to keep Melanie from waking up at night']],
+     ['Platinum does everything','The "pay me and I\'ll do EVERYTHING" option. Permits, patching, painting, trenching, utility coordination, cleanup: whatever it takes, no matter what it adds. Without it, even your best option still leaves them with work to do. Always include the First Class Pass, and extra years of service on anything that needs upkeep, like a generator.', 'turnkey'],
      ['Where the safety findings go','Document every safety concern in What\'s MORE. Then a client who picks Bronze or Basic is making an informed choice. You\'ve covered your bases without printing negatives on the tiers.'],
      ['The purpose of the extremes','Platinum shows what the best looks like, even if it\'s unaffordable to most, and makes everything below it feel reasonable. Basic is a repair, not a fix. The client always gets the dignity of knowing it\'s available.', 'tiers'],
-     ['Basic never cuts safety','Basic is the cheapest way to restore function. Never "fix" tripping by putting a bigger shutoff on the same wiring: that removes the protection, not the problem. If you wouldn\'t sign it, it isn\'t an option.'],
+     ['Basic never cuts safety','Basic is the bare minimum way to get the job done safely and legally. Never "fix" tripping by putting a bigger shutoff on the same wiring: that removes the protection, not the problem. If you wouldn\'t sign it, it isn\'t an option.'],
      ['The laundry-list job','Platinum: everything on their list plus enhancements. Gold: premium and turnkey, trimming Platinum\'s extras. Silver: what they called for done permanently, without major enhancement. Bronze: a reliable fix limited to the original scope. Economy: the most economical way to fix the fault without cutting corners. Basic: restore function.', 'tiers']
    ]},
   {id:'price', n:'05', t:'Pricing your options', tip:'pricing',
@@ -641,6 +720,8 @@ const MODS = [
    blocks:[
      ['The formula','For each tier, starting at Basic: estimate the hours, multiply by your Simple Service Rate, add special materials, add third-party costs (paint, drywall, excavation), and add membership fees if included.'],
      ['Why start at the bottom','Each higher tier adds to the one below it, so you build up instead of pricing a complex Platinum from scratch. You also see the real difference between tiers.'],
+     ['Equal steps','Platinum to Basic is five gaps. Keep them about even. With Platinum at $10,000 and Basic at $2,000, each step is $1,600: $10,000, $8,400, $6,800, $5,200, $3,600, $2,000. A big drop, like $6,000 to $1,500, makes the client wonder what fits in between, and they go get more quotes. The trainer shows your even-step targets as you price.', 'pricing'],
+     ['Price under every option, after you explain it','Walk through the option first. Then the price, under the bullets, never at the top by the title. Beside every price goes a low monthly amount. The trainer works it out for you (36 months at 10% unless you change it).', 'finance'],
      ['The odd number rule','Round numbers look like a guess. $3,597 looks calculated; $3,600 looks made up. The trainer flags prices ending in 00 or 50.'],
      ['Price in front of the client','Never go to the van to calculate. Pricing at the table shows the client it was built for their home, not a template with their name on it.']
    ]},
@@ -648,6 +729,8 @@ const MODS = [
    sum:'You become memorable, you cover your bases, and the question changes from "should I use you?" to "which option?"',
    blocks:[
      ['How to Choose: say it, never print it','When a client is stuck, ask the Field Guide\'s questions out loud. "Want maximum peace of mind and no redo work later?" → Platinum. "Want safety and reliability restored?" → Silver. Never put these on the sheet; showing a preference communicates bias.', 'choose'],
+     ['It\'s a presentation tool, not an invoice','Short cue-card bullets you talk through at the table. No line items, no quantities, no paragraphs. First names only, never Mr. or Mrs. Check spelling and keep the formatting consistent: a sharp client reads sloppiness as a lack of professionalism.'],
+     ['Read it as a non-electrician','Before you present, read the sheet as someone who has never opened a main electrical control system. Does every line make clear sense? If not, rewrite it. Electricians reviewing each other\'s sheets miss this, because both of you already know what it means.', 'rules'],
      ['Explain with analogies','First Class Pass: "Imagine it as a first-class flight with our company." Surge protection: "a giant sponge for your home." The Field Guide\'s Analogy Toolkit has the rest.', 'analogies'],
      ['Everyone deserves the best option','Never hide your premium choices and never hide your economy choices. Mansions go Basic. Trailer parks go Platinum. Offering the best tells them you consider them worthy of it.'],
      ['The "nothing here" trap','A tripping line, a single dead electrical point. You can always build six options. Ask WHY they called (kids, work, safety, a renovation), then walk the Inspection Hotlist. There\'s always something.', 'hotlist']
@@ -769,9 +852,9 @@ function tierFields(store, prefix, withPrice){
   return TIERS.map(t => `<div class="field tier-ed t-${t.k}">
     <div class="th"><b>${t.n}</b>${tipBtn('tiers')}<span class="buyer" style="margin:0">${t.buyer} buyer</span></div>
     <div class="frame"><em>${esc(t.a)}</em> ${esc(t.b)}</div>
-    <textarea data-bind="${prefix}tiers.${t.n}" data-tier="1" placeholder="One benefit per line. What does it do for their life?">${esc(store.tiers[t.n] || '')}</textarea>
-    <div class="lint" data-lint="${prefix}tiers.${t.n}">${lintHtml(store.tiers[t.n], true)}</div>
-    ${withPrice ? `<div class="price-row"><input type="text" inputmode="decimal" data-bind="${prefix}prices.${t.n}" placeholder="$ price" value="${esc((store.prices || {})[t.n] || '')}">${tipBtn('pricing')}<span data-pricewarn="${t.n}">${priceWarn((store.prices || {})[t.n])}</span></div>` : ''}
+    <textarea data-bind="${prefix}tiers.${t.n}" data-tier="${t.n}" placeholder="${SAME_AS[t.n] ? `Same as ${SAME_AS[t.n]}, except… / without…` : 'One benefit per line. What does it do for their life?'}">${esc(store.tiers[t.n] || '')}</textarea>
+    <div class="lint" data-lint="${prefix}tiers.${t.n}">${lintHtml(store.tiers[t.n], t.n)}</div>
+    ${withPrice ? `<div class="price-row"><input type="text" inputmode="decimal" data-bind="${prefix}prices.${t.n}" placeholder="$ price" value="${esc((store.prices || {})[t.n] || '')}"><b class="mo" data-mo="${t.n}">${moTxt((store.prices || {})[t.n], finOf(store))}</b>${tipBtn('pricing')}<span data-pricewarn="${t.n}">${priceWarn((store.prices || {})[t.n])}</span></div>` : ''}
   </div>`).join('');
 }
 function priceWarn(v){
@@ -782,7 +865,7 @@ function priceWarn(v){
 function summaryHtml(store, title){
   const rows = [];
   WHATS.forEach(w => { const h = lint(store.obs[w.k]); if (h.length) rows.push([w.label, h]); });
-  TIERS.forEach(t => { const h = lint(store.tiers[t.n], true); if (h.length) rows.push([t.n, h]); });
+  TIERS.forEach(t => { const h = lint(store.tiers[t.n], t.n); if (h.length) rows.push([t.n, h]); });
   const total = rows.reduce((a, r) => a + r[1].length, 0);
   const never = rows.reduce((a, r) => a + r[1].filter(h => h.r.sev === 'never').length, 0);
   return `<div class="summary"><h4>${BOOK.replace('<svg', '<svg width="18" height="18" style="color:var(--gold)"')} ${esc(title)} ${tipBtn('banned')}</h4>
@@ -803,7 +886,7 @@ function renderPractice(id, step){
     </div>`;
     return;
   }
-  const p = P(sc.id); step = Math.min(Math.max(step || 1, 1), 4);
+  const p = P(sc.id); step = Math.min(Math.max(step || 1, 1), 5);
   const base = 'practice/' + sc.id;
   let body = '';
   if (step === 1) {
@@ -815,9 +898,11 @@ function renderPractice(id, step){
     ${whatsFields(p, sc.obs, 'p:')}
     <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-ghost" data-go="${base}/1">← Back to the call</button><button class="btn btn-gold" data-go="${base}/3">Build the six tiers →</button></div>`;
   } else if (step === 3) {
-    body = `${fgCall('format', '<b>Start at Platinum and work down.</b> Every tier is its own list of benefits, one per line, in their words. Never write "same as above without…" or "not included". Each tier shows the Field Guide\'s Tier Framing to keep you on track.')}
+    body = `${fgCall('format', '<b>Start at Platinum and work down.</b> Platinum, Silver, Economy and Basic get a full description, one benefit per line, in their words. Gold is "Same as Platinum, except… / without…", and Bronze is "Same as Silver, except… / without…". Platinum does everything, First Class Pass included.')}
     ${tierFields(p, 'p:', false)}
     <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-ghost" data-go="${base}/2">← Back to the 4 Whats</button><button class="btn btn-gold" data-go="${base}/4">Compare with the example →</button></div>`;
+  } else if (step === 5) {
+    body = renderGrade(p, 'practice', sc, `<button class="btn btn-ghost" data-go="${base}/4">← Compare with the example</button><button class="btn btn-ghost" data-go="${base}/3">Edit my tiers</button>${sc.n < SCENARIOS.length ? `<button class="btn btn-ghost" data-go="practice/${SCENARIOS[sc.n].id}/1">Next scenario →</button>` : ''}`);
   } else {
     const mine = t => (t || '').trim() ? `<div class="mine">${esc(t)}</div>` : '<div class="empty">You left this blank.</div>';
     body = `<p class="sub">There's no single right answer. Compare your language and your scope with an example written to the Field Guide. What did you include that it didn't? What did it include that you missed?</p>
@@ -830,19 +915,20 @@ function renderPractice(id, step){
     ${fgCall('choose', '<b>Presenting this sheet?</b> If they get stuck between tiers, use the Field Guide\'s How to Choose questions out loud. Never print them.')}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn btn-ghost" data-go="${base}/3">← Edit my tiers</button>
+      <button class="btn btn-gold" data-go="${base}/5">Grade my sheet →</button>
       <button class="btn btn-ghost" data-print="practice:${sc.id}">Print my practice sheet</button>
       <button class="btn btn-ghost" data-reset="${sc.id}">Start this scenario over</button>
-      ${sc.n < SCENARIOS.length ? `<button class="btn btn-gold" data-go="practice/${SCENARIOS[sc.n].id}/1">Next scenario →</button>` : `<a class="btn btn-gold" href="#build">Now build from your own call →</a>`}
+      ${sc.n < SCENARIOS.length ? `<button class="btn btn-ghost" data-go="practice/${SCENARIOS[sc.n].id}/1">Next scenario →</button>` : `<a class="btn btn-ghost" href="#build">Now build from your own call →</a>`}
     </div>`;
   }
   el.innerHTML = `<div class="wrap"><div class="sec-head"><div class="kicker">Scenario ${sc.n} of ${SCENARIOS.length} · ${esc(sc.client)}</div><h2>${esc(sc.title)}</h2></div>
-    ${stepNav(sc.id, step, ['Read the call', '4 Whats', 'Six tiers', 'Compare'], base)}
+    ${stepNav(sc.id, step, ['Read the call', '4 Whats', 'Six tiers', 'Compare', 'Grade'], base)}
     ${body}
     <button class="back" data-go="practice">← All scenarios</button></div>`;
 }
 
 function renderBuild(step){
-  const b = B(); step = Math.min(Math.max(step || 1, 1), 4);
+  const b = B(); step = Math.min(Math.max(step || 1, 1), 5);
   const el = document.getElementById('v-build');
   let body = '';
   if (step === 1) {
@@ -861,9 +947,13 @@ function renderBuild(step){
     ${whatsFields(b, null, 'b:')}
     <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-ghost" data-go="build/1">← Notes</button><button class="btn btn-gold" data-go="build/3">Build the six tiers →</button></div>`;
   } else if (step === 3) {
-    body = `${fgCall('format', '<b>Platinum first, then work down.</b> One benefit per line, tied to their life. Every tier stands on its own: no "same as above without…". Price from Basic up, at the table.')}
+    body = `${fgCall('format', '<b>Platinum first, then work down.</b> Full descriptions for Platinum, Silver, Economy and Basic, one benefit per line, tied to their life. Gold: "Same as Platinum, except… / without…". Bronze: "Same as Silver, except… / without…". Price from Basic up, at the table, in even steps.')}
+    ${finHtml(b)}
     ${tierFields(b, 'b:', true)}
+    <div class="card ladder" id="ladder">${ladderHtml(b)}</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-ghost" data-go="build/2">← 4 Whats</button><button class="btn btn-gold" data-go="build/4">Review & print →</button></div>`;
+  } else if (step === 5) {
+    body = renderGrade(b, 'build', null, `<button class="btn btn-ghost" data-go="build/4">← Review & print</button><button class="btn btn-ghost" data-go="build/3">Edit tiers</button>`);
   } else {
     body = `<p class="sub">Last pass before the client sees it. Clean up anything the Field Guide check flags, then print or copy. The printed sheet is client-facing: observations and tiers only. No coaching notes, no How to Choose.</p>
     ${summaryHtml(b, 'Field Guide check')}
@@ -871,12 +961,13 @@ function renderBuild(step){
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
       <button class="btn btn-ghost" data-go="build/3">← Edit tiers</button>
       <button class="btn btn-gold" data-print="build">Print / save as PDF</button>
+      <button class="btn btn-gold" data-go="build/5">Grade this sheet →</button>
       <button class="btn btn-ghost" data-copy>Copy as text</button>
       <button class="btn btn-ghost" data-newbuild>Start a new sheet</button>
     </div>`;
   }
   el.innerHTML = `<div class="wrap"><div class="sec-head"><div class="kicker">Build from my call</div><h2>Your call. <em>Six options.</em></h2></div>
-    ${stepNav('build', step, ['Notes', '4 Whats', 'Six tiers', 'Review & print'], 'build')}${body}</div>`;
+    ${stepNav('build', step, ['Notes', '4 Whats', 'Six tiers', 'Review & print', 'Grade'], 'build')}${body}</div>`;
 }
 
 function renderCheat(){
@@ -902,18 +993,21 @@ function renderCheat(){
 
 /* client-facing sheet */
 function sheetHtml(store, preview){
+  const f = finOf(store);
   const obs = WHATS.filter(w => (store.obs[w.k] || '').trim()).map(w => `<div class="obs"><b>${esc(w.label)}</b><p>${esc(store.obs[w.k])}</p></div>`).join('');
   const tiers = TIERS.filter(t => (store.tiers[t.n] || '').trim()).map(t => {
     const items = store.tiers[t.n].split('\n').map(s => s.replace(/^\s*[-•*]\s*/, '').trim()).filter(Boolean);
-    const price = (store.prices || {})[t.n];
-    return `<div class="tier ${tierClass(t.n)}" ${preview ? `style="border-left:4px solid var(--c);padding:10px 14px;margin-bottom:10px;background:var(--bg2);border-radius:8px"` : ''}><div class="tt" style="display:flex;justify-content:space-between;font-weight:800"><span ${preview ? `style="color:var(--c)"` : ''}>${t.n}</span><span>${esc(price || '')}</span></div><ul style="padding-left:18px;margin-top:4px">${items.map(i => `<li ${preview ? 'style="font-size:14px;color:var(--gray-light)"' : ''}>${esc(i)}</li>`).join('')}</ul></div>`;
+    const price = num((store.prices || {})[t.n]);
+    return `<div class="tier ${tierClass(t.n)}" ${preview ? `style="border-left:4px solid var(--c);padding:10px 14px;margin-bottom:10px;background:var(--bg2);border-radius:8px"` : ''}><div class="tt" style="font-weight:800"><span ${preview ? `style="color:var(--c)"` : ''}>${t.n}</span></div><ul style="padding-left:18px;margin-top:4px">${items.map(i => `<li ${preview ? 'style="font-size:14px;color:var(--gray-light)"' : ''}>${esc(i)}</li>`).join('')}</ul>${price ? `<div class="tp" ${preview ? 'style="margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-size:15px"' : ''}><b ${preview ? 'style="color:var(--white)"' : ''}>${money(price)}</b> <span ${preview ? 'style="color:var(--gray-light)"' : ''}>${moTxt(price, f, true)}</span></div>` : ''}</div>`;
   }).join('');
+  const anyPrice = TIERS.some(t => num((store.prices || {})[t.n]) && (store.tiers[t.n] || '').trim());
   const date = new Date().toLocaleDateString(undefined, {year:'numeric', month:'long', day:'numeric'});
   const pv = preview ? 'style="font-size:22px;font-weight:900;color:var(--white)"' : '';
   return `<h1 ${pv}>${esc(store.company || 'Your Options')}</h1>
     <div class="meta" ${preview ? 'style="color:var(--gray);font-size:13px;margin-bottom:10px"' : ''}>${store.client ? 'Prepared for ' + esc(store.client) + ' · ' : ''}${date}</div>
     ${obs ? `<h2 ${preview ? 'style="font-size:16px;margin:14px 0 8px;color:var(--gold)"' : ''}>What we found</h2>${obs}` : ''}
     ${tiers ? `<h2 ${preview ? 'style="font-size:16px;margin:18px 0 8px;color:var(--gold)"' : ''}>Your options</h2>${tiers}` : '<p style="color:#888">Add your tiers to see them here.</p>'}
+    ${anyPrice ? `<p class="fineprint" ${preview ? 'style="font-size:11.5px;color:var(--gray)"' : ''}>${esc(finNote(f))}</p>` : ''}
     <div class="sig" ${preview ? 'style="display:none"' : ''}><span>Option chosen: ______________________</span><span>Signature: ______________________</span></div>`;
 }
 function printSheet(store){ const sh = document.getElementById('sheet'); sh.innerHTML = sheetHtml(store, false); document.body.classList.add('printing-sheet'); window.print(); }
@@ -923,21 +1017,279 @@ function sheetText(store){
   const obs = WHATS.filter(w => (store.obs[w.k] || '').trim());
   if (obs.length) { out.push('WHAT WE FOUND'); obs.forEach(w => out.push(w.label + ': ' + store.obs[w.k].trim(), '')); }
   out.push('YOUR OPTIONS');
-  TIERS.filter(t => (store.tiers[t.n] || '').trim()).forEach(t => { out.push('', t.n.toUpperCase() + ((store.prices || {})[t.n] ? ' · ' + store.prices[t.n] : '')); store.tiers[t.n].split('\n').map(s => s.replace(/^\s*[-•*]\s*/, '').trim()).filter(Boolean).forEach(i => out.push('• ' + i)); });
+  const f = finOf(store); let anyPrice = false;
+  TIERS.filter(t => (store.tiers[t.n] || '').trim()).forEach(t => {
+    out.push('', t.n.toUpperCase()); bullets(store.tiers[t.n]).forEach(i => out.push('• ' + i));
+    const p = num((store.prices || {})[t.n]); if (p) { anyPrice = true; out.push(`${money(p)} ${moTxt(p, f, true)}`); }
+  });
+  if (anyPrice) out.push('', finNote(f));
   return out.join('\n');
+}
+
+/* ═════════════ FINANCE + PRICE LADDER ═════════════ */
+const FIN_DEFAULT = {months:36, apr:10};
+const finOf = store => Object.assign({}, FIN_DEFAULT, (store && store.fin) || {});
+const num = v => { const n = parseFloat(String(v == null ? '' : v).replace(/[^0-9.]/g, '')); return isFinite(n) ? n : 0; };
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+function monthly(price, f){
+  const p = num(price); if (!p) return 0;
+  const n = Math.max(1, +f.months || 36), r = (+f.apr || 0) / 1200;
+  return Math.ceil(r ? p * r / (1 - Math.pow(1 + r, -n)) : p / n);
+}
+const moTxt = (price, f, star) => { const m = monthly(price, f); return m ? `or ${money(m)}/mo${star ? '*' : ''}` : ''; };
+const finNote = f => `*Estimated monthly payment: ${f.months} months at ${f.apr}% APR, subject to credit approval.`;
+function ladderInfo(store){
+  const pr = TIERS.map(t => ({t:t.n, v:num((store.prices || {})[t.n])}));
+  const have = pr.filter(x => x.v), out = {pr, have:have.length, issues:[], targets:null, step:0};
+  for (let i = 1; i < have.length; i++) if (have[i].v >= have[i - 1].v) out.issues.push(`${have[i].t} should cost less than ${have[i - 1].t}`);
+  const P = pr[0].v, Bv = pr[5].v;
+  if (P && Bv && P > Bv) {
+    const step = (P - Bv) / 5; out.step = step; out.targets = pr.map((x, i) => P - i * step);
+    for (let i = 1; i < 6; i++) {
+      const a = pr[i - 1].v, b = pr[i].v; if (!a || !b || b >= a) continue;
+      const g = a - b;
+      if (g > step * 1.5) out.issues.push(`Big drop from ${pr[i - 1].t} to ${pr[i].t} (${money(g)}). An even step is about ${money(step)}`);
+      else if (g < step * 0.5) out.issues.push(`${pr[i - 1].t} and ${pr[i].t} are only ${money(g)} apart. An even step is about ${money(step)}`);
+    }
+  }
+  return out;
+}
+function ladderHtml(store){
+  const L = ladderInfo(store), f = finOf(store), top = Math.max(...L.pr.map(x => x.v), 1);
+  const head = `<h4>Price ladder ${tipBtn('pricing')}</h4>`;
+  if (!L.pr[0].v || !L.pr[5].v) return `${head}<p class="muted">Price Basic and Platinum first. The ladder then shows even-step targets for the four in between.</p>`;
+  return `${head}<p class="muted">Five even gaps of about <b>${money(L.step)}</b> from Platinum to Basic.</p>
+    ${L.pr.map((x, i) => `<div class="lrow ${tierClass(x.t)}"><b>${x.t}</b><div class="bar"><i style="width:${x.v ? Math.max(4, x.v / top * 100) : 0}%"></i>${L.targets ? `<u style="left:${L.targets[i] / top * 100}%"></u>` : ''}</div><span>${x.v ? money(x.v) : '<span class="muted">not priced</span>'}</span><span class="muted">${L.targets && i > 0 && i < 5 ? 'target ' + money(L.targets[i]) : ''}</span></div>`).join('')}
+    ${L.issues.length ? `<div class="lint" style="margin-top:8px">${L.issues.map(s => `<span class="chip tip-c">${esc(s)}</span>`).join('')}</div>` : (L.have >= 6 ? '<p class="ok" style="margin-top:8px">✓ Even steps from Platinum to Basic</p>' : '')}
+    <p class="muted" style="margin-top:6px">Monthly at ${f.months} months, ${f.apr}% APR: Platinum ${moTxt(L.pr[0].v, f) || 'n/a'}, Basic ${moTxt(L.pr[5].v, f) || 'n/a'}.</p>`;
+}
+function finHtml(store){
+  const f = finOf(store);
+  return `<div class="card fin"><h4>Monthly amount beside every price ${tipBtn('finance')}</h4>
+    <div class="fin-row"><label>Term</label><input type="range" min="12" max="144" step="12" data-fin="months" value="${f.months}"><b data-finout="months">${f.months} months</b></div>
+    <div class="fin-row"><label>APR</label><input type="range" min="0" max="25" step="0.5" data-fin="apr" value="${f.apr}"><b data-finout="apr">${f.apr}%</b></div>
+    <button class="btn btn-ghost btn-sm" data-findefault>Reset to 36 months at 10%</button></div>`;
+}
+function refreshPricing(store){
+  const f = finOf(store);
+  TIERS.forEach(t => { const m = document.querySelector(`[data-mo="${t.n}"]`); if (m) m.textContent = moTxt((store.prices || {})[t.n], f); });
+  const l = document.getElementById('ladder'); if (l) l.innerHTML = ladderHtml(store);
+  const mo = document.querySelector('[data-finout="months"]'); if (mo) mo.textContent = f.months + ' months';
+  const ap = document.querySelector('[data-finout="apr"]'); if (ap) ap.textContent = f.apr + '%';
+}
+
+/* ═════════════ GRADER ═════════════
+   Automatic checks run here, instantly. Coach checks (AI_ITEMS) come from the options-grade
+   function in Supabase SLE Tools: keep ids and max points in sync with it. */
+const SB_URL = 'https://jxywghplxowytqwdsjyu.supabase.co';
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0';
+const GRADE_URL = SB_URL + '/functions/v1/options-grade';
+const AI_ITEMS = [
+  {id:'plain', max:10, label:'Reads clearly to a non-electrician', link:'rules'},
+  {id:'their_words', max:6, label:'Uses their words and their why', link:'rules'},
+  {id:'whats_fit', max:4, label:'Each of the 4 Whats does its job', link:'rules'},
+  {id:'plat_all', max:6, label:'Platinum does everything', link:'tiers'},
+  {id:'basic_min', max:6, label:'Basic is the safe, legal minimum, and the tiers step down', link:'tiers'},
+  {id:'polish', max:6, label:'Spelling, grammar and consistent formatting', link:null}
+];
+const AI_MAX = AI_ITEMS.reduce((a, i) => a + i.max, 0);
+const LETTER = s => s >= 90 ? 'A' : s >= 80 ? 'B' : s >= 70 ? 'C' : s >= 60 ? 'D' : 'F';
+const bullets = txt => String(txt || '').split('\n').map(s => s.replace(/^\s*[-•*]\s*/, '').trim()).filter(Boolean);
+function autoGrade(store, kind){
+  const items = [];
+  const add = (sec, id, label, max, pts, detail, link) => { pts = Math.max(0, Math.min(max, Math.round(pts * 2) / 2)); items.push({sec, id, label, max, points:pts, status: pts >= max ? 'pass' : pts > 0 ? 'part' : 'miss', detail, link}); };
+  const obs = store.obs || {}, tiers = store.tiers || {};
+  // Observations
+  const missW = WHATS.filter(w => !(obs[w.k] || '').trim());
+  add('Observations', 'whats4', 'All 4 Whats written, in order', 8, (4 - missW.length) * 2, missW.length ? 'Missing: ' + missW.map(w => w.label).join(', ') : 'All four are there.', 'rules');
+  const oh = WHATS.flatMap(w => lint(obs[w.k]).filter(h => !h.r.names));
+  const on = oh.filter(h => h.r.sev === 'never'), ot = oh.filter(h => h.r.sev === 'trans');
+  add('Observations', 'obs_lang', 'Homeowner language in the observations', 8, missW.length === 4 ? 0 : 8 - on.length * 3 - ot.length, on.length + ot.length ? [on.length ? `Never Say: ${on.map(h => '“' + h.word + '”').join(', ')}` : '', ot.length ? `Translate: ${ot.map(h => '“' + h.word + '”').join(', ')}` : ''].filter(Boolean).join('. ') : 'No Never Say words, nothing to translate.', 'banned');
+  const all = [store.client || '', ...WHATS.map(w => obs[w.k] || ''), ...TIERS.map(t => tiers[t.n] || '')].join('\n');
+  const formal = all.match(/\b(?:Mrs?|Ms|Miss|Dr)\.?\s+[A-Z][a-z]+/g);
+  add('Observations', 'names', 'First names only', 4, formal ? 0 : 4, formal ? `Use their first name, not ${[...new Set(formal)].join(', ')}` : 'No Mr. or Mrs. anywhere.', 'tiers');
+  // Options
+  const missT = TIERS.filter(t => !(tiers[t.n] || '').trim());
+  add('Options', 'six', 'All six options', 8, (6 - missT.length) * 8 / 6, missT.length ? 'Missing: ' + missT.map(t => t.n).join(', ') : 'Platinum through Basic, all there.', 'tiers');
+  let fmt = 0; const fmtNotes = [];
+  Object.entries(SAME_AS).forEach(([t, base]) => { if (new RegExp('^same as ' + base + '\\b', 'i').test(firstLine(tiers[t]))) fmt += 2; else fmtNotes.push(`${t} should start "Same as ${base}, except… / without…"`); });
+  const fullBad = ['Platinum', 'Silver', 'Economy', 'Basic'].filter(t => /\bsame as\b/i.test(tiers[t] || '') || !(tiers[t] || '').trim());
+  const neg = TIERS.filter(t => lint(tiers[t.n], t.n).some(h => h.r.tierOnly && !h.r.onlyTiers));
+  if (!fullBad.length && !neg.length) fmt += 2;
+  if (fullBad.length) fmtNotes.push(`${fullBad.join(', ')} need${fullBad.length === 1 ? 's' : ''} a full description`);
+  if (neg.length) fmtNotes.push(`Remove "not included" style lines from ${neg.map(t => t.n).join(', ')}`);
+  add('Options', 'format', 'Full descriptions, with Gold and Bronze as "Same as"', 6, fmt, fmtNotes.length ? fmtNotes.join('. ') : 'Full, same as, full, same as, full, full.', 'tiers');
+  const th = TIERS.flatMap(t => lint(tiers[t.n], t.n).filter(h => !h.r.tierOnly && !h.r.plain && !h.r.names));
+  const tn = th.filter(h => h.r.sev === 'never'), tt = th.filter(h => h.r.sev === 'trans');
+  add('Options', 'opt_lang', 'Homeowner language in the options', 8, missT.length === 6 ? 0 : 8 - tn.length * 3 - tt.length, tn.length + tt.length ? [tn.length ? `Never Say: ${[...new Set(tn.map(h => '“' + h.word + '”'))].join(', ')}` : '', tt.length ? `Translate: ${[...new Set(tt.map(h => '“' + h.word + '”'))].join(', ')}` : ''].filter(Boolean).join('. ') : 'Every bullet reads like the Field Guide.', 'translate');
+  const fc = /first[- ]class|membership|service (?:plan|agreement|club)|maintenance plan/i.test(tiers.Platinum || '');
+  add('Options', 'firstclass', 'First Class Pass in Platinum', 4, fc ? 4 : 0, fc ? 'Platinum includes the membership.' : 'Add the First Class Pass to Platinum.', 'analogies');
+  // Pricing (only when building from a real call)
+  if (kind === 'build') {
+    const priced = TIERS.filter(t => num((store.prices || {})[t.n]));
+    add('Pricing', 'prices', 'A price under every option, with the monthly amount', 6, priced.length, priced.length === 6 ? 'All six priced. The monthly amount prints beside each one.' : `${6 - priced.length} option${6 - priced.length === 1 ? '' : 's'} without a price.`, null);
+    const L = ladderInfo(store);
+    const ok = L.targets && L.have >= 4;
+    add('Pricing', 'steps', 'Even steps from Platinum to Basic', 6, ok ? 6 - L.issues.length * 2 : 0, ok ? (L.issues.length ? L.issues.join('. ') : 'Even steps all the way down.') : 'Price Platinum, Basic and the tiers between to check the steps.', null);
+  }
+  // Presentation
+  const bl = TIERS.flatMap(t => bullets(tiers[t.n]));
+  const long = bl.filter(b => b.split(/\s+/).length > 32);
+  const lineItems = bl.filter(b => /^\(?\d+\)?\s*[x×]\s|\b\d+\s?(?:pcs?|ea|qty)\b|\bqty\b|\$\s?\d|@\s?\$/i.test(b));
+  add('Presentation', 'cue', 'Cue-card bullets, not an invoice', 4, bl.length ? 4 - (long.length ? 2 : 0) - (lineItems.length ? 2 : 0) : 0, !bl.length ? 'No bullets yet.' : [long.length ? `${long.length} bullet${long.length > 1 ? 's' : ''} over 30 words. Split or trim` : '', lineItems.length ? 'Line items, quantities or prices inside the bullets. Keep prices under the option' : ''].filter(Boolean).join('. ') || 'Short, presentable bullets.', null);
+  const points = items.reduce((a, i) => a + i.points, 0), max = items.reduce((a, i) => a + i.max, 0);
+  return {items, points, max, pct: max ? Math.round(points / max * 100) : 0};
+}
+const sheetSig = store => { const s = JSON.stringify([store.obs, store.tiers, store.prices, store.fin]); let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return String(h); };
+function gradePayload(store, kind, sc){
+  if (kind === 'practice') return {source:'practice', scenario:sc.id, scenarioTitle:sc.title, client:sc.client, notes:sc.transcript.map(([who, t]) => (who === 'tech' ? sc.tech : sc.client) + ': ' + t).join('\n'), obs:store.obs, tiers:store.tiers};
+  return {source:'build', client:store.client || '', company:store.company || '', notes:store.notes || '', obs:store.obs, tiers:store.tiers, prices:store.prices || {}, fin:finOf(store)};
+}
+const ICON = {pass:'✓', part:'◐', miss:'✕', pend:'…'};
+function rubricRows(items){
+  return items.map(i => `<div class="rub ${i.status}"><span class="ic">${ICON[i.status]}</span><div><b>${esc(i.label)}</b>${i.detail ? `<p>${esc(i.detail)}</p>` : ''}</div><span class="pts">${i.status === 'pend' ? i.max + ' pts' : (+i.points.toFixed(1)) + ' / ' + i.max}</span>${i.link ? `<a class="fgl" href="${fgUrl(i.link)}" target="_blank" rel="noopener" title="Open in the Field Guide">${BOOK.replace('<svg', '<svg width="14" height="14"')}</a>` : '<span></span>'}</div>`).join('');
+}
+function aiRows(ai){
+  return AI_ITEMS.map(it => { const r = ai && ai.items ? ai.items.find(x => x.id === it.id) : null; return {label:it.label, max:it.max, link:it.link, points: r ? r.points : 0, status: !r ? 'pend' : r.result === 'full' ? 'pass' : r.result === 'partial' ? 'part' : 'miss', detail: r ? r.note : 'Get coach feedback to score this one.'}; });
+}
+function feedbackHtml(ai){
+  if (!ai) return '';
+  return `<div class="coach fb"><h4>${EYE} Coach feedback</h4><p>${esc(ai.summary)}</p>
+    ${ai.strengths && ai.strengths.length ? `<h5>What's working</h5><ul>${ai.strengths.map(s => `<li>${esc(s)}</li>`).join('')}</ul>` : ''}
+    ${ai.fixes && ai.fixes.length ? `<h5>Three fixes that raise your score</h5>${ai.fixes.map((f, i) => `<div class="fix"><b>${i + 1}. ${esc(f.where)}</b><p>${esc(f.problem)}</p><p class="try"><small>Try</small>${esc(f.try)}</p></div>`).join('')}` : ''}</div>`;
+}
+function scoreHero(pct, label, sub){
+  return `<div class="ghero"><div class="gring g-${LETTER(pct)}"><b>${pct}</b><span>${LETTER(pct)}</span></div><div><h3>${esc(label)}</h3><p class="muted">${sub}</p></div></div>`;
+}
+function renderGrade(store, kind, sc, back){
+  const A = autoGrade(store, kind), sig = sheetSig(store), G = store.graded && store.graded.sig === sig ? store.graded : null;
+  const ai = G && G.ai;
+  const final = G && ai ? G.score : null;
+  const me = S.me || {};
+  const secs = [...new Set(A.items.map(i => i.sec))];
+  const hero = final != null
+    ? scoreHero(final, 'Your grade', `Automatic checks ${+A.points.toFixed(1)} of ${A.max}, coach checks ${+G.aiPoints.toFixed(1)} of ${G.aiMax}. Saved for the SLE coaches.`)
+    : scoreHero(A.pct, 'Instant score', `${+A.points.toFixed(1)} of ${A.max} on the automatic checks. Get coach feedback below to add the coach checks and save your grade.`);
+  return `${fgCall('grade', '<b>Grade it like Joseph would.</b> The instant score covers everything the trainer can check by itself. Coach feedback reads your sheet the way a coach does, and saves it for the SLE coaching team. Every check links to the Field Guide.')}
+    ${store.graded && !G ? `<div class="stale">You've edited this sheet since your last grade (${esc(store.graded.grade)}, ${store.graded.score}). Grade it again to save the new version.</div>` : ''}
+    ${hero}
+    ${secs.map(s => `<h3 class="rub-h">${esc(s)}</h3>${rubricRows(A.items.filter(i => i.sec === s))}`).join('')}
+    <h3 class="rub-h">Coach checks ${tipBtn('grade')}</h3>${rubricRows(aiRows(ai))}
+    ${feedbackHtml(ai)}
+    <div class="card gsubmit"><h4>${ai ? 'Grade it again' : 'Get coach feedback'}</h4>
+      <p class="muted">About 20 seconds. Your sheet, your name and your score are saved for the SLE coaches, who use the best sheets as examples for the cohort.</p>
+      <div class="grid3"><div class="field" style="margin:0"><label>Your name</label><input type="text" data-me="name" value="${esc(me.name || '')}" placeholder="First and last"></div>
+      <div class="field" style="margin:0"><label>Company</label><input type="text" data-me="company" value="${esc(me.company || store.company || '')}" placeholder="Your company"></div>
+      <div class="field" style="margin:0"><label>Email (optional)</label><input type="email" data-me="email" value="${esc(me.email || '')}" placeholder="you@company.com"></div></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center"><button class="btn btn-gold" data-grade="${kind}${sc ? ':' + sc.id : ''}">${ai ? 'Grade it again' : 'Get my coach feedback'} →</button><span class="muted" id="gstatus"></span></div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">${back}</div>`;
+}
+async function submitGrade(kind, id, btn){
+  const store = kind === 'build' ? B() : P(id), sc = kind === 'practice' ? SCENARIOS.find(s => s.id === id) : null;
+  const me = S.me || {}, st = document.getElementById('gstatus');
+  if (!(me.name || '').trim()) { st.textContent = 'Add your name first.'; document.querySelector('[data-me="name"]').focus(); return; }
+  const A = autoGrade(store, kind);
+  btn.disabled = true; st.textContent = 'Your coach is reading your sheet…';
+  try {
+    const r = await fetch(GRADE_URL, {method:'POST', headers:{'Content-Type':'application/json', Authorization:'Bearer ' + SB_ANON, apikey:SB_ANON},
+      body: JSON.stringify({sheet:gradePayload(store, kind, sc), auto:{points:A.points, max:A.max, items:A.items.map(({id, label, status, points, max, detail}) => ({id, label, status, points, max, detail}))}, who:{name:me.name, company:me.company || store.company || '', email:me.email || ''}, app_version:APP_VERSION})});
+    const d = await r.json();
+    if (d.status === 'error') { st.textContent = d.reason || 'Something went wrong. Try again.'; btn.disabled = false; return; }
+    store.graded = {sig:sheetSig(store), id:d.id, at:Date.now(), score:d.score, grade:d.grade, ai:d.ai, aiPoints:d.aiPoints, aiMax:d.aiMax}; save();
+    route(); window.scrollTo(0, 0);
+    if (d.status !== 'ok') toast(d.reason || 'Saved with your instant score.');
+    else toast(`Graded: ${d.grade} (${d.score})`);
+  } catch (e) { st.textContent = 'Couldn\'t reach the grader. Check your connection and try again.'; btn.disabled = false; }
+}
+
+/* ═════════════ COACH VIEW: graded sheets ═════════════ */
+let sb = null, GV = {rows:[], sort:'score', src:'all', star:false, q:'', open:null, detail:{}};
+function loadScript(src){ return new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
+async function sbClient(){
+  if (sb) return sb;
+  if (!window.supabase) await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js');
+  sb = window.supabase.createClient(SB_URL, SB_ANON, {auth:{persistSession:true, autoRefreshToken:true, detectSessionInUrl:false}});
+  return sb;
+}
+const srcLabel = r => r.source === 'build' ? 'Real call' : 'Practice: ' + ((SCENARIOS.find(s => s.id === r.scenario) || {}).title || r.scenario);
+async function renderGraded(){
+  const el = document.getElementById('v-graded');
+  const shell = inner => `<div class="wrap"><div class="sec-head"><div class="kicker">Coaches</div><h2>Graded <em>sheets.</em></h2><p class="sub">Every sheet techs send for coach feedback. Sort by score, open any sheet, and star the strong ones to use as examples.</p></div>${inner}</div>`;
+  el.innerHTML = shell('<p class="muted">Loading…</p>');
+  try {
+    const c = await sbClient();
+    const {data:{session}} = await c.auth.getSession();
+    if (!session) { el.innerHTML = shell(`<div class="card"><p>Sign in to <a href="/facts/" style="color:var(--gold)">Post-Call Facts</a> with your SLE coach account, then come back to this page. It uses the same sign-in.</p></div>`); return; }
+    const {data:isCoach} = await c.rpc('options_is_coach');
+    if (!isCoach) { el.innerHTML = shell(`<div class="card"><p>You're signed in as ${esc(session.user.email)}, which isn't on the SLE coach list. Ask Clay to add you in Post-Call Facts.</p></div>`); return; }
+    const {data, error} = await c.from('options_grades').select('id,created_at,source,scenario,tech_name,company,email,score,grade,starred,coach_note,auto_points,auto_max,ai_points,ai_max,ok,note').order('created_at', {ascending:false}).limit(500);
+    if (error) throw error;
+    GV.rows = data || [];
+    drawGraded();
+  } catch (e) { el.innerHTML = shell(`<div class="card"><p>Couldn't load graded sheets: ${esc(e.message || e)}</p></div>`); }
+}
+function drawGraded(){
+  const el = document.getElementById('v-graded');
+  let rows = GV.rows.slice();
+  if (GV.src !== 'all') rows = rows.filter(r => GV.src === 'build' ? r.source === 'build' : r.scenario === GV.src);
+  if (GV.star) rows = rows.filter(r => r.starred);
+  if (GV.q) { const q = GV.q.toLowerCase(); rows = rows.filter(r => [r.tech_name, r.company, r.email].join(' ').toLowerCase().includes(q)); }
+  rows.sort((a, b) => GV.sort === 'score' ? (b.score ?? -1) - (a.score ?? -1) || b.created_at.localeCompare(a.created_at) : b.created_at.localeCompare(a.created_at));
+  el.innerHTML = `<div class="wrap"><div class="sec-head"><div class="kicker">Coaches</div><h2>Graded <em>sheets.</em></h2><p class="sub">${GV.rows.length} sheet${GV.rows.length === 1 ? '' : 's'} sent for coach feedback. Star the strong ones to use as examples.</p></div>
+    <div class="gfilters">
+      <select data-gv="sort"><option value="score" ${GV.sort === 'score' ? 'selected' : ''}>Highest score first</option><option value="new" ${GV.sort === 'new' ? 'selected' : ''}>Newest first</option></select>
+      <select data-gv="src"><option value="all">All sheets</option><option value="build" ${GV.src === 'build' ? 'selected' : ''}>Real calls</option>${SCENARIOS.map(s => `<option value="${s.id}" ${GV.src === s.id ? 'selected' : ''}>Practice: ${esc(s.title)}</option>`).join('')}</select>
+      <label class="chk"><input type="checkbox" data-gv="star" ${GV.star ? 'checked' : ''}> Starred only</label>
+      <input type="search" data-gv="q" placeholder="Search name or company" value="${esc(GV.q)}">
+    </div>
+    ${rows.length ? rows.map(r => `<div class="grow ${GV.open === r.id ? 'open' : ''}">
+      <button class="ghead" data-gopen="${r.id}"><span class="gbadge g-${r.grade || 'F'}">${r.score ?? '–'}<i>${r.grade || ''}</i></span><span class="gwho"><b>${esc(r.tech_name)}</b><span class="muted">${esc(r.company || '')}${r.email ? ' · ' + esc(r.email) : ''}</span></span><span class="muted gsrc">${esc(srcLabel(r))}${r.ai_points == null ? ' · instant score only' : ''}</span><span class="muted gdate">${new Date(r.created_at).toLocaleDateString(undefined, {month:'short', day:'numeric'})}</span></button>
+      <button class="gstar ${r.starred ? 'on' : ''}" data-gstar="${r.id}" title="${r.starred ? 'Starred as an example' : 'Star as an example'}">★</button>
+      ${GV.open === r.id ? `<div class="gdetail" id="gd-${r.id}">${GV.detail[r.id] ? gradedDetail(GV.detail[r.id]) : '<p class="muted">Loading…</p>'}</div>` : ''}
+    </div>`).join('') : '<div class="card"><p class="muted">Nothing matches yet.</p></div>'}
+  </div>`;
+}
+function gradedDetail(r){
+  const sh = r.sheet || {};
+  const store = {company: sh.source === 'practice' ? 'Practice: ' + (sh.scenarioTitle || '') : (sh.company || r.company || ''), client: sh.client, obs: sh.obs || {}, tiers: sh.tiers || {}, prices: sh.prices || {}, fin: sh.fin && sh.fin.months ? sh.fin : null};
+  const autoItems = ((r.auto || {}).items || []).map(i => Object.assign({}, i, {status: i.status || 'miss'}));
+  return `<div class="grid2 gd2"><div class="card">${sheetHtml(store, true)}</div><div>
+    <p class="muted" style="margin-bottom:8px">Automatic ${+(r.auto_points || 0).toFixed(1)} / ${r.auto_max || 0}${r.ai_points != null ? ` · Coach ${+r.ai_points.toFixed(1)} / ${r.ai_max}` : ` · No coach feedback${r.note ? ' (' + esc(r.note) + ')' : ''}`}</p>
+    ${rubricRows(autoItems)}${r.ai ? rubricRows(aiRows(r.ai)) + feedbackHtml(r.ai) : ''}
+    ${sh.notes ? `<details class="card" style="margin-top:10px"><summary style="cursor:pointer;font-weight:700">Call notes / transcript</summary><p style="white-space:pre-wrap;font-size:13px;color:var(--gray-light);margin-top:8px">${esc(sh.notes)}</p></details>` : ''}
+    <div class="field" style="margin-top:12px"><label>Coach note</label><textarea data-gnote="${r.id}" placeholder="Private to SLE coaches">${esc(r.coach_note || '')}</textarea><button class="btn btn-ghost btn-sm" style="margin-top:8px" data-gsavenote="${r.id}">Save note</button></div>
+  </div></div>`;
+}
+async function gradedClick(e){
+  const o = e.target.closest('[data-gopen]');
+  if (o) { const id = o.dataset.gopen; GV.open = GV.open === id ? null : id; drawGraded();
+    if (GV.open && !GV.detail[id]) { const {data, error} = await sb.from('options_grades').select('*').eq('id', id).single(); if (error) { toast('Couldn\'t open that sheet'); return; } GV.detail[id] = data; if (GV.open === id) drawGraded(); }
+    return true; }
+  const st = e.target.closest('[data-gstar]');
+  if (st) { const r = GV.rows.find(x => x.id === st.dataset.gstar); const v = !r.starred;
+    const {error} = await sb.from('options_grades').update({starred:v}).eq('id', r.id);
+    if (error) toast('Couldn\'t save the star'); else { r.starred = v; if (GV.detail[r.id]) GV.detail[r.id].starred = v; drawGraded(); toast(v ? 'Starred as an example' : 'Star removed'); }
+    return true; }
+  const sn = e.target.closest('[data-gsavenote]');
+  if (sn) { const id = sn.dataset.gsavenote, v = document.querySelector(`[data-gnote="${id}"]`).value;
+    const {error} = await sb.from('options_grades').update({coach_note:v}).eq('id', id);
+    if (error) toast('Couldn\'t save the note'); else { const r = GV.rows.find(x => x.id === id); if (r) r.coach_note = v; if (GV.detail[id]) GV.detail[id].coach_note = v; toast('Note saved'); }
+    return true; }
+  return false;
 }
 
 /* ═════════════ ROUTER ═════════════ */
 function route(){
   hidePop();
   const h = (location.hash || '#learn').slice(1).split('/');
-  const v = ['learn', 'practice', 'build', 'cheat'].includes(h[0]) ? h[0] : 'learn';
+  const v = ['learn', 'practice', 'build', 'cheat', 'graded'].includes(h[0]) ? h[0] : 'learn';
   document.querySelectorAll('section.view').forEach(s => s.classList.toggle('on', s.id === 'v-' + v));
   document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.dataset.v === v));
   if (v === 'learn') renderLearn(h[1]);
   if (v === 'practice') renderPractice(h[1], parseInt(h[2], 10));
   if (v === 'build') renderBuild(parseInt(h[1], 10));
   if (v === 'cheat') renderCheat();
+  if (v === 'graded') renderGraded();
 }
 window.addEventListener('hashchange', () => {
   route();
@@ -947,6 +1299,10 @@ window.addEventListener('hashchange', () => {
 
 /* ═════════════ EVENTS ═════════════ */
 document.addEventListener('click', e => {
+  if (location.hash.startsWith('#graded') && sb && e.target.closest('[data-gopen],[data-gstar],[data-gsavenote]')) { gradedClick(e); return; }
+  const gr = e.target.closest('[data-grade]');
+  if (gr) { const [kind, id] = gr.dataset.grade.split(':'); submitGrade(kind, id, gr); return; }
+  if (e.target.closest('[data-findefault]')) { const b = B(); b.fin = Object.assign({}, FIN_DEFAULT); save(); document.querySelectorAll('[data-fin]').forEach(i => i.value = b.fin[i.dataset.fin]); refreshPricing(b); return; }
   const go = e.target.closest('[data-go]');
   if (go) { location.hash = go.dataset.go; return; }
   const mod = e.target.closest('[data-mod]');
@@ -961,7 +1317,11 @@ document.addEventListener('click', e => {
   if (e.target.closest('[data-newbuild]')) { const keep = S.build.company; S.build = {company:keep}; save(); location.hash = 'build/1'; route(); toast('New sheet started'); return; }
 });
 document.addEventListener('input', e => {
-  const k = e.target.dataset.bind; if (!k) return;
+  const d = e.target.dataset;
+  if (d.me) { S.me = S.me || {}; S.me[d.me] = e.target.value; save(); return; }
+  if (d.fin) { const b = B(); b.fin = finOf(b); b.fin[d.fin] = +e.target.value; save(); refreshPricing(b); return; }
+  if (d.gv) { GV[d.gv] = e.target.type === 'checkbox' ? e.target.checked : e.target.value; if (d.gv === 'q') { clearTimeout(GV.t); GV.t = setTimeout(() => { drawGraded(); const q = document.querySelector('[data-gv="q"]'); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }, 250); } else drawGraded(); return; }
+  const k = d.bind; if (!k) return;
   const [scope, path] = k.split(':');
   const store = scope === 'b' ? B() : P(location.hash.split('/')[1]);
   const parts = path.split('.');
@@ -969,8 +1329,8 @@ document.addEventListener('input', e => {
   else { store[parts[0]] = store[parts[0]] || {}; store[parts[0]][parts[1]] = e.target.value; }
   save();
   const l = document.querySelector(`[data-lint="${CSS.escape(k)}"]`);
-  if (l) l.innerHTML = lintHtml(e.target.value, !!e.target.dataset.tier);
-  if (parts[0] === 'prices') { const w = document.querySelector(`[data-pricewarn="${parts[1]}"]`); if (w) w.innerHTML = priceWarn(e.target.value); }
+  if (l) l.innerHTML = lintHtml(e.target.value, e.target.dataset.tier || false);
+  if (parts[0] === 'prices') { const w = document.querySelector(`[data-pricewarn="${parts[1]}"]`); if (w) w.innerHTML = priceWarn(e.target.value); refreshPricing(store); }
 });
 
 /* field guide links in chrome */
