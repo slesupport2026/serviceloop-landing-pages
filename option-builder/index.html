@@ -1330,7 +1330,8 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   /* ---------- backend: Supabase SLE Tools (public.ob_* tables, row-level security per signed-in tester) ---------- */
   var SB_URL = 'https://jxywghplxowytqwdsjyu.supabase.co';
   var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4eXdnaHBseG93eXRxd2Rzanl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNTA4MTEsImV4cCI6MjEwNzkyNjgxMX0.s_jHNFtdnyYDeXWPKdOMJND8yhFuqze0krMswwn8Uk0';
-  var sb = window.supabase.createClient(SB_URL, ANON, { auth: { persistSession:true, autoRefreshToken:true, detectSessionInUrl:false } });
+  // Its own saved login, so a Post-Call Facts or Grid login in the same browser is never picked up here.
+  var sb = window.supabase.createClient(SB_URL, ANON, { auth: { persistSession:true, autoRefreshToken:true, detectSessionInUrl:false, storageKey:'sle-option-builder-auth' } });
   var ME = null, IS_ADMIN = false;
   function token(){ return sb.auth.getSession().then(function(r){ return r.data && r.data.session ? r.data.session.access_token : ''; }); }
 
@@ -2606,7 +2607,7 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
       body.innerHTML =
         '<h3>Testers (' + t.length + ')</h3>' +
         '<form id="admAdd" class="adm-add"><input name="email" type="email" required placeholder="tester@company.com" aria-label="Tester email"><input name="note" placeholder="Company or note" aria-label="Note"><button class="btn primary" type="submit">Add tester</button></form>' +
-        '<p class="fin-ex">They sign in at this page with that email: first time, they tap "First time here" and get a code.</p>' +
+        '<p class="fin-ex">Anyone who signs in can use the builder; this list is your record of who you invited. First time, they tap "First time here" and get a code by email.</p>' +
         '<div class="adm-list">' + (t.length ? t.map(function(x){ return '<div class="adm-row"><span><b>' + esc(x.email) + '</b>' + (x.note ? ' &middot; ' + esc(x.note) : '') + '</span><button type="button" class="est-del" data-rm="' + esc(x.email) + '" aria-label="Remove ' + esc(x.email) + '">' + TRASH + '</button></div>'; }).join('') : '<p class="muted">No testers yet.</p>') + '</div>' +
         '<h3 style="margin-top:20px">Feedback (' + f.length + ')</h3>' +
         '<div class="adm-list">' + (f.length ? f.map(function(x){ return '<div class="adm-fb"><span class="adm-kind k-' + esc(x.kind) + '">' + (KIND[x.kind] || esc(x.kind)) + '</span><div><p>' + esc(x.note) + '</p><small>' + esc(x.email || '') + (x.company ? ' &middot; ' + esc(x.company) : '') + (x.area ? ' &middot; ' + esc(x.area) : '') + ' &middot; ' + esc(fmtDate(x.created_at)) + '</small></div></div>'; }).join('') : '<p class="muted">No feedback yet.</p>') + '</div>';
