@@ -475,6 +475,20 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
 .adm-kind{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:999px;padding:3px 9px;align-self:start;border:1px solid currentColor}
 .k-broke{color:var(--bad)} .k-sucks{color:var(--warn)} .k-amazing{color:var(--good)} .k-idea{color:var(--red)}
 
+/* ---------- first-run tour ---------- */
+.tour{position:fixed;inset:0;z-index:85}
+.tour-hole{position:fixed;border-radius:16px;box-shadow:0 0 0 9999px rgba(5,6,8,.66),0 0 0 3px var(--red);pointer-events:none;transition:all .28s cubic-bezier(.2,.7,.2,1)}
+.tour-hole.center{width:0;height:0;left:50%;top:40%;box-shadow:0 0 0 9999px rgba(5,6,8,.66)}
+.tour-card{position:fixed;width:min(380px,calc(100vw - 32px));background:var(--surface);color:var(--ink);border-radius:18px;padding:18px 18px 14px;box-shadow:0 24px 60px -12px rgba(0,0,0,.6);transition:top .28s,left .28s}
+.tour-card h3{font-size:20px;margin:6px 0 6px}
+.tour-card p{margin:0;font-size:15px;line-height:1.5;color:var(--ink)}
+.tour-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tour-count{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--red)}
+.tour-skip{background:transparent;border:0;color:var(--muted);font-weight:600;font-size:13px;padding:4px}
+.tour-nav{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
+.tour-nav .btn{padding:9px 18px}
+@media (prefers-reduced-motion:reduce){ .tour-hole,.tour-card{transition:none} }
+
 /* ---------- sticky price ladder ---------- */
 .ladder{position:fixed;left:0;right:0;bottom:0;z-index:15;background:rgba(11,13,18,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);color:var(--on-night);padding-block:10px calc(10px + env(safe-area-inset-bottom,0px))}
 .ladder-row{display:flex;align-items:center;gap:12px}
@@ -527,6 +541,7 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
           <button class="btn ghost" id="openEst" type="button" aria-haspopup="true" aria-expanded="false">Saved estimates &#9662;</button>
           <button class="btn ghost" id="copySummary" type="button">Copy summary</button>
           <button class="btn ghost" id="startFresh" type="button">Start fresh</button>
+          <button class="btn ghost" id="tourBtn" type="button">Tour</button>
         </div>
         <div class="save-state" id="saveState"></div>
         <div class="acct" id="acct"></div>
@@ -747,6 +762,16 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   <div class="modal-card wide">
     <div class="modal-head"><h2 id="admTitle">Beta admin</h2><button type="button" class="icon-btn" id="admClose" aria-label="Close">&times;</button></div>
     <div id="admBody"></div>
+  </div>
+</div>
+
+<div class="tour" id="tour" hidden>
+  <div class="tour-hole" id="tourHole"></div>
+  <div class="tour-card" id="tourCard" role="dialog" aria-modal="true" aria-labelledby="tourTitle" aria-describedby="tourText">
+    <div class="tour-top"><span class="tour-count" id="tourCount"></span><button type="button" class="tour-skip" id="tourSkip">Skip tour</button></div>
+    <h3 id="tourTitle"></h3>
+    <p id="tourText"></p>
+    <div class="tour-nav"><button type="button" class="btn" id="tourBack">Back</button><button type="button" class="btn primary" id="tourNext">Next</button></div>
   </div>
 </div>
 
@@ -2471,7 +2496,7 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
         paintFields(); applyBrand(); paintBrandForm(); paintGuar(); render(); save();
       }
       hideGate(); paintAcct();
-      loadSetupFromDb(); loadLib();
+      loadSetupFromDb().then(maybeTour, maybeTour); loadLib();
       sb.rpc('ob_is_admin').then(function(a){ IS_ADMIN = a.data === true; paintAcct(); });
     }, function(){ booted = null; gateStep('gPass', 'Could not reach the server. Check your connection and try again.'); });
   }
@@ -2561,6 +2586,78 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
       if (r.error) showToast('That tester was not added: ' + r.error.message, false); else { showToast('Added ' + email + '.', false); paintAdmin(); }
     });
   });
+  /* ================= FIRST-RUN TOUR (once per tester; replay with the Tour button) ================= */
+  var TOUR = [
+    { t:'Welcome to Option Builder', x:'Build good-better-best options at the kitchen table, present them in your brand, let the homeowner pick one, then hand it to your office and your install crew. Two minutes and you will know your way around.' },
+    { el:'#brandBox', t:'Make it yours first', x:'Open Your brand and tap Pull my brand from my website. Your logo, colors and fonts land on everything, including what the homeowner sees. No website handy? Upload your logo and the colors are read from it.' },
+    { el:'#guarBox', t:'Your guarantees', x:'The four promises that come with every job. Change the wording, uncheck any you do not offer, or add your own. The card shows right above the observations, so you say it every time.' },
+    { el:'#ratesBox', t:'Your pricing', x:'Set your SSR (your hourly rate) and your consumables. Add the financing terms you offer; the one marked Show puts a monthly amount on every option. Put your CRM link here too.' },
+    { el:'#libBar', t:'Your price book', x:'Every line you save lands here, private to your company. Next time you start typing a scope line, your saved lines pop up with their hours and material already filled in.' },
+    { el:'#obsCallOut', pad:60, t:'Observations', x:'Called about, connected to it, working well, would recommend. Type it, or tap the mic and just talk. This is your why, and it carries into the presentation and the work order.' },
+    { el:'.opt', t:'Build your first option', x:'Each line is scope on the left, numbers on the right: hours, material, sub, misc. The price adds itself up. Drag the dots to reorder, tap the bookmark to save a line to your price book, the trash can to delete it.' },
+    { el:'#addBelow', t:'Add the next option', x:'Add a lesser option below and it copies every line and price, so you only delete what changes. Building from the bottom up? Add a better option above. Platinum is always the one on top. Lower options can say "Same as the one above, except…" with one checkbox.' },
+    { el:'#customer', t:'What the customer sees', x:'A live preview of the option sheet, stacked top to bottom, with the monthly amount under each price.' },
+    { el:'#presentBtn', pad:8, t:'Present to customer', x:'Opens the full-screen presentation: your guarantees, your observations, then the options. Switch Prices on or off at the top. The homeowner taps Choose and types their initials, then hands the device back to you.' },
+    { el:'.ladder', pad:0, t:'After they choose', x:'Send to CRM copies the option and opens your CRM for the deposit. Send to Work Order gives the crew only what they bought: material breakdown per line, photos per line, install notes and the observations.' },
+    { el:'.hero-actions', pad:10, t:'Save as you go', x:'Save estimate keeps this job so you can leave and come back. Saved estimates opens any of them on any device you sign in from. Start fresh clears the builder for the next house.' },
+    { el:'#fbOpen', pad:8, t:'Tell us everything', x:'This is a beta. If something breaks, sucks, or is amazing, tap Feedback and say it in a sentence. It comes straight to the SLE team.' },
+    { el:'#tourBtn', pad:8, t:'You are ready', x:'Start with Your brand, then build your first job. Want to see this again? Tap Tour, right here, anytime.' }
+  ];
+  var tourEl = document.getElementById('tour'), tourI = 0, tourSteps = [];
+  function tourTarget(s){ if (!s.el) return null; var el = document.querySelector(s.el); if (!el) return null; var r = el.getBoundingClientRect(); return (r.width || r.height) ? el : null; }
+  function placeTour(){
+    if (tourEl.hidden) return;
+    var s = tourSteps[tourI], el = tourTarget(s), hole = document.getElementById('tourHole'), card = document.getElementById('tourCard');
+    var vw = window.innerWidth, vh = window.innerHeight, cw = card.offsetWidth, ch = card.offsetHeight, pad = s.pad == null ? 10 : s.pad;
+    if (!el) {
+      hole.className = 'tour-hole center'; hole.removeAttribute('style');
+      card.style.left = Math.round((vw - cw) / 2) + 'px'; card.style.top = Math.round(Math.max(16, (vh - ch) / 2)) + 'px'; return;
+    }
+    var r = el.getBoundingClientRect(), top = r.top - pad, h = Math.min(r.height + pad * 2, vh * .62);
+    hole.className = 'tour-hole';
+    hole.style.left = Math.round(r.left - pad) + 'px'; hole.style.top = Math.round(top) + 'px';
+    hole.style.width = Math.round(r.width + pad * 2) + 'px'; hole.style.height = Math.round(h) + 'px';
+    var below = top + h + 14, above = top - ch - 14, y;
+    if (below + ch < vh - 12) y = below; else if (above > 12) y = above; else y = vh - ch - 16;
+    var x = Math.min(Math.max(16, r.left + r.width / 2 - cw / 2), vw - cw - 16);
+    card.style.left = Math.round(x) + 'px'; card.style.top = Math.round(y) + 'px';
+  }
+  function showTourStep(i){
+    tourI = i; var s = tourSteps[i], el = tourTarget(s);
+    document.getElementById('tourCount').textContent = (i + 1) + ' of ' + tourSteps.length;
+    document.getElementById('tourTitle').textContent = s.t;
+    document.getElementById('tourText').textContent = s.x;
+    document.getElementById('tourBack').style.visibility = i ? 'visible' : 'hidden';
+    document.getElementById('tourNext').textContent = i === tourSteps.length - 1 ? 'Got it' : 'Next';
+    var fixed = el && /fixed|sticky/.test(getComputedStyle(el).position) || (el && el.closest('.ladder'));
+    if (el && !fixed) el.scrollIntoView({ block: el.offsetHeight > window.innerHeight * .5 ? 'start' : 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    placeTour(); setTimeout(placeTour, 380); setTimeout(placeTour, 800);
+    document.getElementById('tourNext').focus({ preventScroll:true });
+  }
+  function startTour(){
+    closeMenu(); closeSugg();
+    tourSteps = TOUR.filter(function(s){ return !s.el || document.querySelector(s.el); });
+    tourEl.hidden = false; showTourStep(0);
+  }
+  function endTour(){
+    tourEl.hidden = true;
+    if (!SETUP.tourDone) { SETUP.tourDone = true; saveSetup(); }
+    window.scrollTo({ top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+  function maybeTour(){ if (ME && !SETUP.tourDone && gate.hidden) setTimeout(startTour, 500); }
+  document.getElementById('tourNext').addEventListener('click', function(){ if (tourI < tourSteps.length - 1) showTourStep(tourI + 1); else endTour(); });
+  document.getElementById('tourBack').addEventListener('click', function(){ if (tourI > 0) showTourStep(tourI - 1); });
+  document.getElementById('tourSkip').addEventListener('click', endTour);
+  document.getElementById('tourBtn').addEventListener('click', startTour);
+  window.addEventListener('resize', placeTour);
+  window.addEventListener('scroll', placeTour, { passive:true });
+  document.addEventListener('keydown', function(e){
+    if (tourEl.hidden) return;
+    if (e.key === 'Escape') { e.stopImmediatePropagation(); endTour(); }
+    else if (e.key === 'ArrowRight') document.getElementById('tourNext').click();
+    else if (e.key === 'ArrowLeft') document.getElementById('tourBack').click();
+  }, true);
+
 })();
 </script>
 </body>
