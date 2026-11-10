@@ -771,8 +771,9 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
       <button class="gate-link" type="button" id="gSkipPw">Skip for now</button>
     </form>
     <div id="gNo" hidden>
-      <p><b id="gNoEmail"></b> is signed in but is not on the beta list yet. Ask your SLE coach to add this email, then sign in again.</p>
-      <button class="btn" type="button" id="gSignOut">Sign out</button>
+      <p>You're signed in as <b id="gNoEmail"></b>, and that email isn't on the beta list.</p>
+      <p class="muted">This browser may have remembered a login from another SLE app. Sign in with the email you were invited with, or ask the SLE team to add this one.</p>
+      <button class="btn primary" type="button" id="gSignOut">Sign in with a different email</button>
     </div>
     <div id="gLoad" hidden><p class="muted">Opening your builder&hellip;</p></div>
     <p class="gate-err" id="gErr" role="alert"></p>
