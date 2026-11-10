@@ -18,3 +18,11 @@
   for = "/FAQs/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow, noarchive"
+
+# ── /3dsales ─────────────────────────────────────────────────────────────
+# Service Loop Process, Level One (3D home map + agenda card). Training
+# content with the sales script: unlisted, not indexed.
+[[headers]]
+  for = "/3dsales/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"

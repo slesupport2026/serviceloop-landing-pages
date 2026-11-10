@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Agenda Card | Service Loop Process Level One</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: one landscape card (tablet-shaped) in a 2x2 grid of numbered quadrants; tech notes below it. */
+:root{
+  --bg:#eef1f4; --text:#132033; --card:#ffffff; --ink:#132033; --muted:#55627a; --line:#dde3ea;
+  --gold:#f2b632; --gold-soft:#fdf4dd; --gold-ink:#8a5f00; --navy:#1b2a45;
+  --f-head:"Montserrat","Segoe UI",Arial,sans-serif; --f-body:"Open Sans","Segoe UI",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0d141c;--text:#e5ecf2;--muted:#9aa7b8;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d141c;--text:#e5ecf2;--muted:#9aa7b8;color-scheme:dark}
+/* the card itself stays light in both themes: it is shown to homeowners as-is */
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 56px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+.top{display:flex;flex-direction:column;gap:6px;color:var(--muted)}
+.top h1{font-family:var(--f-head);font-weight:800;font-size:28px;margin:0;color:var(--muted)}
+.top label{font-size:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.top input{font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;min-width:0;width:280px;max-width:100%;background:#fff;color:#132033}
+.top input:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+
+.card{background:var(--card);color:var(--ink);border-radius:18px;padding:44px 48px 36px;display:flex;flex-direction:column;gap:26px;box-shadow:0 10px 40px rgba(19,32,51,.12)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.co{font-family:var(--f-head);font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+.head h2{font-family:var(--f-head);font-weight:800;font-size:clamp(28px,4vw,46px);line-height:1.05;margin:4px 0 0;text-wrap:balance}
+.head p{margin:0;color:#4a566b;font-size:17px;max-width:34ch}
+.grid{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:18px;flex:1}
+.q{background:#f6f8fa;border-radius:14px;padding:24px 26px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-content:center;min-width:0}
+.q.last{background:var(--gold-soft)}
+.n{grid-row:span 2;width:54px;height:54px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--f-head);font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center}
+.q.last .n{background:var(--gold);color:var(--navy)}
+.q h3{font-family:var(--f-head);font-weight:700;font-size:23px;line-height:1.15;margin:0;text-wrap:balance;align-self:center;display:flex;align-items:center;gap:10px}
+.q h3 svg{width:26px;height:26px;flex:none;stroke:var(--gold-ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.q p{margin:0;color:#3a475c;font-size:17px;grid-column:2}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:16px;color:#4a566b;border-top:1px solid var(--line);padding-top:14px}
+.foot b{color:var(--ink);font-weight:600}
+.card[hidden]{display:none}
+.n.ic svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tabs{display:flex;gap:6px;margin-bottom:-24px}
+.tabs button{font:700 15px var(--f-head);color:var(--muted);background:transparent;border:1px solid var(--line);border-bottom:0;border-radius:10px 10px 0 0;padding:10px 18px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--card);color:#132033;border-color:var(--card)}
+.tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.tabs + .card,.tabs ~ .card{border-top-left-radius:0}
+
+.tech{display:flex;flex-direction:column;gap:10px;color:var(--muted);font-size:14px}
+.tech .l1{align-self:flex-start;font:600 12px var(--f-body);letter-spacing:.08em;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:4px;padding:3px 9px;cursor:pointer;opacity:.6}
+.tech .l1:hover,.tech .l1[aria-expanded="true"]{opacity:1}
+.tech .l1:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#l1Notes{display:flex;flex-direction:column;gap:10px}
+#l1Notes[hidden]{display:none}
+.tech h2{font-family:var(--f-head);font-size:16px;margin:0;letter-spacing:.06em;text-transform:uppercase}
+.tech table{border-collapse:collapse;width:100%;max-width:720px}
+.tech td{color:inherit;padding:6px 10px 6px 0;border-top:1px solid var(--line);vertical-align:top}
+.tech td:first-child{white-space:nowrap;font-weight:600;color:var(--text)}
+
+body.shot{padding:0;background:#ffffff}
+body.shot .wrap{max-width:none;gap:0}
+body.shot .top,body.shot .tech,body.shot .tabs{display:none}
+body.shot .n.ic svg{width:42px;height:42px}
+body.shot .card{width:100vw;height:100vh;overflow:hidden;aspect-ratio:auto;border-radius:0;box-shadow:none;padding:64px 72px 48px;gap:34px}
+body.shot .head h2{font-size:58px}
+body.shot .head p{font-size:23px}
+body.shot .q{padding:36px 44px;gap:14px 26px}
+body.shot .q h3{font-size:38px;gap:14px}
+body.shot .q h3 svg{width:36px;height:36px}
+body.shot .q p{font-size:26px;line-height:1.4}
+body.shot .n{width:84px;height:84px;font-size:40px}
+body.shot .foot{font-size:22px}
+
+@media (max-width:760px){
+  .card{aspect-ratio:auto;padding:24px 20px}
+  .grid{grid-template-columns:1fr;grid-auto-rows:auto}
+  .q{padding:18px}
+  .n{width:44px;height:44px;font-size:21px}
+  .q h3{font-size:19px}.q p{font-size:15px}
+}
+/* embedded in the Level One page: match the dark SLE shell */
+html.embed:root:not(.x){--bg:#0A0A0A;--text:#ffffff;--muted:#b8bfca;color-scheme:dark}
+html.embed .top h1{display:none}
+html.embed body{padding-block:24px 8px}
+</style>
+<script>if(/[?&]embed\b/.test(location.search))document.documentElement.classList.add('embed');</script>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top">
+    <h1>Level 1 Agenda Card</h1>
+    <label for="coName">Company name on the card <input id="coName" type="text" placeholder="Your company name" autocomplete="organization"></label>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Card">
+    <button type="button" role="tab" id="tPlan" aria-controls="pPlan" aria-selected="true">Our plan</button>
+    <button type="button" role="tab" id="tGuar" aria-controls="pGuar" aria-selected="false" tabindex="-1">Our guarantees</button>
+  </div>
+
+  <section class="card" id="pPlan" role="tabpanel" aria-labelledby="tPlan">
+    <div class="head">
+      <div>
+        <div class="co">Your company name</div>
+        <h2>Here's our plan for today</h2>
+      </div>
+      <p>Four things we'll do together, so you know what to expect at every step.</p>
+    </div>
+
+    <div class="grid">
+      <div class="q">
+        <span class="n">1</span>
+        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/></svg>Hear your goals</h3>
+        <p>Tell us what's going on and what a great result looks like for you.</p>
+      </div>
+      <div class="q">
+        <span class="n">2</span>
+        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M13 8l-3 5h4l-3 5"/></svg>Safety check first</h3>
+        <p>We start at your main electrical panel so we know where the emergency shut-offs are.</p>
+      </div>
+      <div class="q">
+        <span class="n">3</span>
+        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>Find the cause</h3>
+        <p>Show us the problem. We'll track down what's behind it before we recommend anything.</p>
+      </div>
+      <div class="q last">
+        <span class="n">4</span>
+        <h3><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="4" rx="1"/><rect x="4" y="10" width="16" height="4" rx="1"/><rect x="4" y="16" width="16" height="4" rx="1"/></svg>Your options, your choice</h3>
+        <p>We'll put together a range of options, from the most permanent fix to the most economical. You pick what fits, and when.</p>
+      </div>
+    </div>
+
+    <div class="foot"><span><b>Questions?</b> Ask anytime. This is your home.</span><span>Before we leave, we'll make sure you're happy with everything.</span></div>
+  </section>
+
+  <section class="card" id="pGuar" role="tabpanel" aria-labelledby="tGuar" hidden>
+    <div class="head">
+      <div>
+        <div class="co">Your company name</div>
+        <h2>Our guarantees to you</h2>
+      </div>
+      <p>Four promises that come with every job we do.</p>
+    </div>
+
+    <div class="grid">
+      <div class="q">
+        <span class="n ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5-1.5-7.5"/></svg></span>
+        <h3>Licensed, bonded &amp; insured</h3>
+        <p>You're working with a licensed, bonded, and insured professional.</p>
+      </div>
+      <div class="q">
+        <span class="n ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <h3>Price lock guarantee</h3>
+        <p>Once you choose your best option, the price never changes.</p>
+      </div>
+      <div class="q">
+        <span class="n ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></span>
+        <h3>100% satisfaction guarantee</h3>
+        <p>We aim for a 5-star level of service, and we'll check in with you along the way. We won't leave until you're completely satisfied.</p>
+      </div>
+      <div class="q last">
+        <span class="n ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M13 11l-3 4h4l-3 4"/></svg></span>
+        <h3>Lifetime craftsmanship guarantee</h3>
+        <p>All of our wiring, splices, and connections are guaranteed for the life of your home.</p>
+      </div>
+    </div>
+
+    <div class="foot"><span><b>Questions?</b> Ask about any of these anytime.</span><span>Every job. Every time.</span></div>
+  </section>
+
+  <div class="tech">
+    <button type="button" class="l1" id="l1Btn" aria-expanded="false" aria-controls="l1Notes">L1</button>
+    <div id="l1Notes" hidden>
+    <h2>L1 key</h2>
+    <table>
+      <tr><td>1 · Hear your goals</td><td>Stages 1–2. Arrival, greeting, "What are we hoping to accomplish here today?"</td></tr>
+      <tr><td>2 · Safety check first</td><td>Stages 3–4. Panel first, the "why now," who else they've used.</td></tr>
+      <tr><td>3 · Find the cause</td><td>Stage 5. Who found it, what it was like. Diagnose quietly.</td></tr>
+      <tr><td>4 · Your options, your choice</td><td>Stages 6–9. "And when" covers the 2-call close: leave after Stage 6, build options at the shop, return to present. The footer line sets up the review ask.</td></tr>
+    </table>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  if(/^#shot/.test(location.hash))document.body.classList.add('shot');
+  const inp=document.getElementById('coName');
+  const set=v=>{document.querySelectorAll('.co').forEach(o=>o.textContent=v.trim()||'Your company name');};
+  const tabs=[['tPlan','pPlan'],['tGuar','pGuar']].map(([t,p])=>[document.getElementById(t),document.getElementById(p)]);
+  function show(k,focus){tabs.forEach(([t,p],i)=>{const on=i===k;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;p.hidden=!on;});if(focus)tabs[k][0].focus();}
+  tabs.forEach(([t],i)=>{t.addEventListener('click',()=>show(i));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();show(1-i,true);}});});
+  if(location.hash==='#guarantees'||location.hash==='#shot-g')show(1);
+  try{const s=localStorage.getItem('agendaCo');if(s){inp.value=s;set(s);}}catch(e){}
+  const b=document.getElementById('l1Btn'),n=document.getElementById('l1Notes');
+  b.addEventListener('click',()=>{const open=n.hidden;n.hidden=!open;b.setAttribute('aria-expanded',String(open));});
+  inp.addEventListener('input',()=>{set(inp.value);try{localStorage.setItem('agendaCo',inp.value);}catch(e){}});
+})();
+</script>
+</body>
+</html>

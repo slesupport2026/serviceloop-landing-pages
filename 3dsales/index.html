@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Service Loop Process Level One | Service Loop Electrical</title>
+<meta name="description" content="The Service Loop Process, Level One: nine stages walked through the home, with the script and the client agenda.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@1,700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: header, a 16:10 3D stage with the stage caption top-left, the step/stage player bottom-center, stage buttons under it.
+   Terms: 9 stages; each stage is a run of steps (the script lines). */
+:root{
+  --bg:#0A0A0A; --ink:#ffffff; --muted:#b8bfca; --line:#2c3443; --panel:rgba(27,42,69,.94);
+  --accent:#FDC33E; --accent-ink:#E3C575; --gold:#E3C575; --opp:#58c48f; --scene:#121c2b;
+  --f-display:"Montserrat","Segoe UI",Arial,sans-serif;
+  --f-serif:"Playfair Display",Georgia,serif;
+  --f-body:"Open Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 56px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(38px,6vw,56px);line-height:1;margin:0;text-transform:uppercase}
+.lede{color:var(--muted);max-width:66ch;margin:8px 0 0}
+.stage{position:relative;width:100%;aspect-ratio:16/10;border-radius:10px;overflow:hidden;background:var(--scene);border:1px solid var(--line);touch-action:none;cursor:grab}
+.stage:active{cursor:grabbing}
+.stage{min-width:0}.wrap>*{min-width:0}
+.stage canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
+.cap{position:absolute;left:16px;top:16px;max-width:min(460px,calc(100% - 32px));background:var(--panel);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;box-shadow:0 2px 10px rgba(0,0,0,.12);pointer-events:none}
+.caprow{display:flex;align-items:flex-start;gap:14px}
+.capttl{display:flex;flex-direction:column;gap:2px;min-width:0}
+.more[hidden],.cap .fork[hidden]{display:none}
+.cap{max-height:calc(100% - 100px)}
+.more{flex:1 1 auto;min-height:0;overflow-y:auto;pointer-events:auto;display:flex;flex-direction:column;gap:6px;padding-top:8px;margin-top:6px;border-top:1px solid var(--line)}
+.info{pointer-events:auto;flex:none;margin-left:auto;display:inline-flex;align-items:center;gap:6px;font:600 13px var(--f-body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 5px;cursor:pointer}
+.info span{width:18px;height:18px;border-radius:50%;background:var(--accent);color:#15212c;font:700 12px/18px var(--f-mono);text-align:center}
+.info:hover{border-color:var(--ink)}
+.info:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.info[aria-expanded="true"]{background:var(--accent);border-color:var(--accent);color:#15212c}
+.info[aria-expanded="true"] span{background:#15212c;color:var(--accent)}
+body.shot .info{display:none}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cap h2{font-family:var(--f-display);font-weight:800;font-size:23px;letter-spacing:.01em;line-height:1.05;margin:0;text-transform:uppercase;text-wrap:balance}
+.cap p{margin:0;font-size:15px}
+.cap .fork{color:var(--opp);font-size:13px;font-weight:600}
+.tag{position:absolute;transform:translate(-50%,-100%);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap;pointer-events:none;color:#fff}
+.tag.e{background:#1f3346}.tag.h{background:#1f7f73}
+.tag.say{z-index:3;white-space:normal;width:max-content;max-width:260px;text-transform:none;letter-spacing:0;font:500 13px/1.35 var(--f-body);padding:7px 11px;border-radius:10px;box-shadow:0 3px 12px rgba(0,0,0,.25);margin-top:-10px}
+.tag.say::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0}
+.tag.e.say::after{border-top-color:#1f3346}.tag.h.say::after{border-top-color:#1f7f73}
+.dlg{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:3px}
+.dlg li{display:grid;grid-template-columns:44px 1fr;gap:8px;font-size:13px;line-height:1.4;padding:4px 6px;border-radius:5px;cursor:pointer;opacity:.6}
+.dlg li.on{opacity:1;background:rgba(233,165,20,.18)}
+.dlg li:hover{opacity:1}
+.dlg .who{font:600 10px/1.9 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dlg li.E .who{color:var(--ink)}.dlg li.H .who{color:#2a9d8f}
+.dlg li.N{font-style:italic}
+.dlg li.P{grid-template-columns:1fr;font:700 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);opacity:1;cursor:default;padding-top:8px}
+.dctl{display:flex;align-items:center;gap:8px;padding:6px 0 2px;position:sticky;bottom:0;background:var(--panel);backdrop-filter:blur(4px)}
+.dctl[hidden]{display:none}
+.dctl button{font:600 12px var(--f-body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer}
+.dctl button:hover{border-color:var(--ink)}
+.dctl button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dctl span{font:500 11px var(--f-mono);color:var(--muted);margin-right:auto}
+/* on-stage player: » / « jump stages, › / ‹ play the script one step at a time */
+.play{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;align-items:center;gap:4px;background:var(--panel);border-radius:999px;padding:5px;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.play button{display:inline-flex;align-items:center;justify-content:center;border:0;cursor:pointer;color:var(--ink);background:transparent;border-radius:999px;width:42px;height:42px;padding:0}
+.play button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.play button.big{width:50px;height:50px;background:var(--ink);color:var(--bg)}
+.play button.big svg{width:28px;height:28px}
+.play button:hover{background:rgba(127,127,127,.18)}.play button.big{background:var(--accent);color:#0A0A0A}.play button.big:hover{background:#fff;color:#0A0A0A}
+.play button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.play .pos{display:flex;flex-direction:column;align-items:center;min-width:112px;padding:0 6px;line-height:1.2}
+.play .pos b{font:800 13px var(--f-display);text-transform:uppercase;letter-spacing:.02em}
+.play .pos span{font:500 11px var(--f-mono);color:var(--muted)}
+.coach{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);width:max-content;max-width:min(560px,calc(100% - 32px));background:var(--panel);border-left:3px solid var(--accent);border-radius:6px;padding:7px 12px;font-size:13px;line-height:1.4;font-style:italic;box-shadow:0 2px 10px rgba(0,0,0,.12);pointer-events:none;display:flex;flex-direction:column;gap:2px}
+.coach[hidden]{display:none}
+.coach b{font:700 10px var(--f-mono);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+.coach b:empty,.coach span:empty{display:none}
+body.shot .play,body.shot .coach{display:none}
+.hint{position:absolute;right:12px;bottom:10px;font-size:12px;color:var(--muted);background:var(--panel);padding:3px 8px;border-radius:4px;pointer-events:none}
+.legend{position:absolute;right:16px;top:16px;display:flex;gap:12px;font-size:12px;background:var(--panel);padding:5px 10px;border-radius:4px;pointer-events:none;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+nav button{font:600 15px var(--f-body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer;min-width:44px}
+nav button:hover{border-color:var(--ink)}
+nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav button[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:#15212c}
+nav .sp{flex:1}
+.err{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:var(--muted)}
+/* still-export mode */
+body.shot{padding:0}
+body.shot .wrap{max-width:none;gap:0}
+body.shot header,body.shot nav,body.shot .hint{display:none}
+body.shot .stage{width:100vw;height:100vh;aspect-ratio:auto;border:0;border-radius:0}
+body.shot .cap{left:28px;top:28px;padding:18px 22px;max-width:620px}
+body.shot .cap h2{font-size:32px}
+body.shot .cap p{font-size:18px}
+@media (max-width:900px){.legend,.hint{display:none}}
+@media (max-width:640px){.cap h2{font-size:18px}.cap p{font-size:13px}.stage{aspect-ratio:4/5}.play .pos{min-width:92px}.play button{width:38px;height:38px}.play button.big{width:44px;height:44px}.coach{bottom:76px}}
+@media (prefers-reduced-motion:reduce){.stage{scroll-behavior:auto}}
+/* SLE shell: brand bar, title, tabs, footer */
+.brandbar{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.brandbar img{height:44px;width:auto}
+.brandbar b{font:800 15px var(--f-display);letter-spacing:.04em;text-transform:uppercase}
+.brandbar b span{color:var(--gold)}
+.brandbar small{margin-left:auto;font:600 12px var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.title h1{font-family:var(--f-serif);font-style:italic;font-weight:700;text-transform:none;font-size:clamp(34px,5.4vw,52px);line-height:1.08;display:inline-block;padding-bottom:8px;border-bottom:3px solid var(--gold)}
+.title h1 span{color:var(--gold)}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line)}
+.tabs button{font:700 14px var(--f-display);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:transparent;border:0;border-bottom:3px solid transparent;padding:10px 16px;cursor:pointer;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button:hover{color:var(--ink)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.panel{display:flex;flex-direction:column;gap:20px}
+.panel[hidden]{display:none}
+.agenda-frame{width:100%;min-height:900px;border:0;display:block;background:var(--bg)}
+.foot{border-top:1px solid var(--line);padding-top:16px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot a{color:var(--gold);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+body.shot .brandbar,body.shot .title,body.shot .tabs,body.shot .foot{display:none}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brandbar"><img src="sle-mark.png" alt="Service Loop Electrical"><b>Service Loop <span>Process</span></b><small>Level One</small></div>
+  <header class="title">
+    <h1>Service Loop Process <span>Level One</span></h1>
+    <p class="lede">Walk the Service Loop Process through the house. Nine stages, each a short run of steps. Tap › to play the script one step at a time, » to jump a stage. Drag to look around, scroll to zoom.</p>
+  </header>
+  <div class="tabs" role="tablist" aria-label="Level One views">
+    <button type="button" role="tab" id="tMap" aria-controls="pMap" aria-selected="true">Home Map 3D</button>
+    <button type="button" role="tab" id="tAgenda" aria-controls="pAgenda" aria-selected="false" tabindex="-1">Agenda</button>
+  </div>
+  <section class="panel" id="pMap" role="tabpanel" aria-labelledby="tMap">
+  <div class="stage" id="stage">
+    <div class="cap" id="cap"><div class="caprow"><div class="capttl"><span class="eyebrow" id="capEye"></span><h2 id="capTitle"></h2></div><button type="button" class="info" id="infoBtn" aria-expanded="false" aria-controls="capMore"><span aria-hidden="true">i</span> Info</button></div><div class="more" id="capMore" hidden><p id="capJob"></p><ol class="dlg" id="dlg"></ol><div class="dctl" id="dctl"><button type="button" id="lPrev" aria-label="Previous step">◀</button><span id="lPos"></span><button type="button" id="lNext">Next step ▶</button></div><p class="fork" id="capFork" hidden>2-call close: if they aren't deciding today, leave after Stage 6. Build the options back at the shop (sharpen the pencil), then return for Stage 8.</p></div></div>
+    <div class="tag e" id="tagE">Electrician</div>
+    <div class="tag h" id="tagH">Homeowner</div>
+    <div class="legend"><span><i class="dot" style="background:#e9a514"></i>Now</span><span><i class="dot" style="background:#15212c"></i>Done</span><span><i class="dot" style="background:#c3ccd5"></i>Next</span></div>
+    <div class="coach" id="coach" hidden><b id="coachLane"></b><span id="coachTxt"></span></div>
+    <div class="play" id="play">
+      <button type="button" class="big" id="sPrev" aria-label="Previous stage" title="Previous stage (Shift+←)"><svg style="transform:scaleX(-1)" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l7 7-7 7M12 5l7 7-7 7"/></svg></button>
+      <button type="button" id="lP" aria-label="Previous step" title="Previous step (←)"><svg style="transform:scaleX(-1)" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="pos" aria-live="polite"><b id="pStage"></b><span id="pStep"></span></div>
+      <button type="button" id="lN" aria-label="Next step" title="Next step (→ or space)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button type="button" class="big" id="sNext" aria-label="Next stage" title="Next stage (Shift+→)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l7 7-7 7M12 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="hint">Drag to look · scroll to zoom</div>
+  </div>
+  <nav id="nav">
+    <button id="prev" aria-label="Previous stage">←</button>
+    <button data-s="0" id="b0">Overview</button>
+    <button data-s="1" id="b1">1</button><button data-s="2" id="b2">2</button><button data-s="3" id="b3">3</button>
+    <button data-s="4" id="b4">4</button><button data-s="5" id="b5">5</button><button data-s="6" id="b6">6</button>
+    <button data-s="7" id="b7">7</button><button data-s="8" id="b8">8</button><button data-s="9" id="b9">9</button>
+    <button id="next" aria-label="Next stage">→</button>
+  </nav>
+  </section>
+  <section class="panel" id="pAgenda" role="tabpanel" aria-labelledby="tAgenda" hidden>
+    <iframe class="agenda-frame" id="agendaFrame" title="Agenda card" data-src="agenda.html?embed" loading="lazy"></iframe>
+  </section>
+  <footer class="foot"><span>Property of Service Loop Electrical Inc</span><a href="https://serviceloopelectrical.com">ServiceLoopElectrical.com</a><a href="mailto:LevelUp@serviceloopelectrical.com">LevelUp@serviceloopelectrical.com</a></footer>
+</div>
+<script>
+// tabs: Home Map 3D | Agenda (#agenda deep-links the second tab)
+(function(){
+  const tabs=[...document.querySelectorAll('.tabs [role=tab]')],fr=document.getElementById('agendaFrame');
+  function fit(){try{const d=fr.contentDocument;if(d&&d.body)fr.style.height=Math.max(600,d.documentElement.scrollHeight)+'px';}catch(e){}}
+  fr.addEventListener('load',()=>{fit();try{new ResizeObserver(fit).observe(fr.contentDocument.body);}catch(e){}});
+  function show(i,push){tabs.forEach((t,k)=>{t.setAttribute('aria-selected',String(k===i));t.tabIndex=k===i?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=k!==i;});
+    if(i===1){if(!fr.src)fr.src=fr.dataset.src;if(push)try{history.replaceState(null,'','#agenda');}catch(e){}}
+    else if(push){try{history.replaceState(null,'',window.__mapHash||'#overview');}catch(e){}window.dispatchEvent(new Event('resize'));}}
+  tabs.forEach((t,i)=>{t.addEventListener('click',()=>show(i,true));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();e.stopPropagation();const n=(i+1)%2;tabs[n].focus();show(n,true);}});});
+  if(location.hash==='#agenda')show(1,false);
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const stage=document.getElementById('stage');
+if(!window.THREE){stage.insertAdjacentHTML('beforeend','<div class="err">The 3D view could not load. Check your connection and reload.</div>');return;}
+const shot=/^#shot-(\d)$/.exec(location.hash);
+if(shot)document.body.classList.add('shot');
+
+// plan px (from the 2D map) -> world meters
+const W=(px,py,y=0)=>new THREE.Vector3((px-600)/100,y,(py-355)/100);
+
+function V(t,yaw,p,d){yaw*=Math.PI/180;p*=Math.PI/180;return [[t[0]+d*Math.sin(yaw)*Math.cos(p),t[1]+d*Math.sin(p),t[2]+d*Math.cos(yaw)*Math.cos(p)],t];}
+const STEPS=[
+ {n:0,where:'Overview',title:'Where each stage happens',job:'Van → front door → panel → area of concern → kitchen table.',
+  cam:V([0,0,0.9],0,48,15.5),E:[700,815,515,815],H:[930,520,515,600],tab:'E'},
+ {n:1,end:0,where:"On route · 1 mile out",title:"Pull up ready",job:"Remove the simple reasons you wouldn't be at your best, and spot something to connect on.",
+  cam:V([1.6,0.6,4.2],-25,35,8),E:[700,815,515,815],H:[930,520,515,600],tab:'E'},
+ {n:2,end:2,where:"Front door / foyer",title:"Greet and ask the one question",job:"Be a person before you're a business. Then find out which call you're on: they want it done, or they're just looking.",
+  cam:V([-0.85,0.9,2.7],20,40,6.5),E:[515,672,515,590],H:[515,590,515,672],tab:'E'},
+ {n:3,end:4,where:"Walking to the panel",title:"Panel first, and find the \"why now\"",job:"Get eyes on the main system and learn the real reason they're acting today.",
+  cam:V([-2.0,0.9,1.9],25,45,6.5),E:[485,560,200,480],H:[405,555,200,480],tab:'E'},
+ {n:4,end:5,where:"At the open panel",title:"Find out who else is in the picture",job:"Learn who could rain on the presentation, before you give it.",
+  cam:V([-3.6,1.0,1.3],45,40,5.5),E:[215,478,150,478],H:[310,545,215,478],tab:'E'},
+ {n:5,end:10,where:"Area of concern",title:"See the problem, learn the story",job:"Find out who decides and how the problem feels to them. Diagnose quietly.",
+  cam:V([-2.9,0.8,-1.2],65,50,6.2),E:[255,215,245,135],H:[370,265,255,215],tab:'E'},
+ {n:6,end:10,where:"Still at the area of concern",title:"Explain how we work, then pick the lane",job:"Set the expectation that they'll choose from a range of options, and let them decide when: today, or at a return visit. No pricing yet.",
+  cam:V([-2.7,0.8,-1.1],115,50,6.2),E:[285,250,370,250],H:[370,250,285,250],tab:'E'},
+ {n:7,end:13,where:"Kitchen table (today) · the shop (return visit)",title:"Build the options",job:"Keep momentum. On a same-day call, never walk out to the van to price it.",
+  cam:V([1.9,0.8,-0.4],15,50,7),E:[735,335,800,300],H:[960,250,800,300],tab:'E'},
+ {n:8,end:13,where:"Kitchen table",title:"Present top-down, then go quiet",job:"Close the deal without buyer's remorse.",
+  cam:V([2.0,0.8,0.0],145,52,7.2),E:[760,372,800,300],H:[842,372,800,300],tab:'E'},
+ {n:9,end:13,where:"Kitchen table → after the job",title:"Lock it in and ask for the review",job:"Thank them, collect payment, schedule, and get the review while you're still there.",
+  cam:V([2.0,0.8,0.1],-150,52,7.2),E:[760,372,842,372],H:[842,372,800,300],tab:'H'},
+];
+// Role-play script per stage; each speakable entry is one step. E = electrician, H = homeowner (sample reply), N = coaching note, P = path label.
+function renderLines(step){const L=LINES[step]||[];const dl=document.getElementById('dlg');if(!dl)return;
+  li=L.findIndex(l=>l[0]!=='P');if(li<0)li=0;dl.innerHTML='';
+  L.forEach(([w,t],i)=>{const el=document.createElement('li');el.className=w;
+    if(w!=='P'){const who=document.createElement('span');who.className='who';who.textContent={E:'Tech',H:'Owner',N:'Note'}[w];el.appendChild(who);}
+    const tx=document.createElement('span');tx.textContent=t;el.appendChild(tx);
+    if(w!=='P')el.addEventListener('click',()=>{li=i;markLine();});dl.appendChild(el);});
+  document.getElementById('dctl').hidden=!L.length;if(typeof markLine==='function')try{markLine();}catch(e){}}
+const LINES={
+1:[["N","Devices charged, paperwork ready, uniform clean."],["N","Practice saying the client's name out loud."],["N","Know if they're a new client, existing client, or referral."],["N","Scan the house and yard for one thing to compliment: a dog, the garden, a team flag, a project in the driveway. You'll use it at the door."],["N","Reset your head, then get out of the van smiling."]],
+2:[["N","Ring, step back two steps, hands visible."],["E","Hi, I'm ___ with ___. (Client's name)? I've really been looking forward to meeting you."],["E","[Now it's the time to compliment and relate, so that we can equalize person to person.]"],["N","When it winds down, a laugh or a quick pause, then:"],["E","Okay, before we get started, hey, just so we're on the same page, is the van parked okay there? Is that alright?"],["H","You're fine. Come on in."],["N","Put down floor protection."],["E","So what are we hoping to accomplish here today?"],["H","The bathroom outlet sparked and now it's dead. We want it fixed."],["N","Note the answer to the last question. \"Fix it today\" means you're on the Today lane. Anything vaguer means you may be on the Return-visit lane. Either way, keep going."]],
+3:[["E","In order to evaluate this safely, the first area we HAVE to inspect is the main electrical system, so we know where the emergency shut-offs are. Can you take me there?"],["H","Sure, it's in the garage."],["E","Why did you decide now was the time?"],["H","My partner smelled something burning."],["E","What do you think would happen if you didn't take care of it?"],["H","Honestly? A fire."],["N","Always go to the panel first. No exceptions."],["N","Ask about them, not the job. Save every suggestion for the presentation."]],
+4:[["P","New client"],["E","Have you ever hired another electrician, or a friend or handyman, for projects like this?"],["H","My brother-in-law usually helps out."],["E","You seem like a great person and I'd hate to lose the chance to work with you. Why am I here instead of them?"],["H","This one felt too big for him."],["P","Existing client"],["E","I know we did your ___ last time. How's it working for you?"],["N","If an existing client has a complaint, fix that before offering anything new."]],
+5:[["E","Now that we know where the emergency shut-offs are, can you please take me to the main point of concern?"],["E","Who found the problem?"],["H","My partner did."],["E","So I'm not rude, what's their name?"],["H","Sam."],["E","What did ___ say? What was that like?"],["H","Scary. The kids use this bathroom."],["E","I appreciate you sharing that. I'll do everything in my power to help prevent you having to experience that again."],["N","Don't educate yet. Early comments give them a reason to say no and give a competitor your diagnosis."]],
+6:[["E","Our goal is to give you complete control of the pricing. I'll design a range of choices, from the most permanent to the most economical, and you pick the best fit."],["E","Just so we're on the same page, no matter what I show you, you aren't ready to wrap this up while I'm here today, right?"],["N","Skip the second question if they already said \"fix it today\" at the door."],["N","No numbers in this step. Price comes with the options."],["P","Today"],["H","No, if it's reasonable, let's get it done."],["N","Stay in the house. Build the options right there (Stage 7)."],["P","Return visit (2-call close)"],["H","Right. Sam needs to be part of this."],["E","Totally fair. Let me head back to the shop and sharpen my pencil so I can bring you the best possible solutions. When can we sit down with both of you?"],["N","Book the return with every decision maker there, then leave. No pricing today; bond instead."]],
+7:[["N","Build a range from the most permanent fix down to the most temporary allowed."],["N","Name them Platinum, Gold, Silver, Bronze, Economy, Basic. Build bottom-up, present top-down."],["N","Level 1 floor: at least 3 tiers. Handbook standard: 5–6."],["P","Return visit (2-call close)"],["N","Build the options back at the shop (Stage 7)."],["N","Day of: call ahead."],["E","Does ___ still work for you and ___?"],["N","If someone can't make it, reschedule."]],
+8:[["P","Return visit (2-call close)"],["E","Has anything changed since we talked?"],["E","___, when we talked, ___ said ___. What are your thoughts on that?"],["P","The 4 what's, in order"],["N","What you called for: repeat their words back."],["N","What's more: why it's bigger than they thought."],["N","What's good: something positive, to slow the nosedive."],["N","What else I found: unrelated safety items."],["E","I'm going to show you the top option first. I don't expect you to take it, but I want you to see the best."],["N","Walk the top option line by line, with a reason each item matters to them. Ask for questions before the price."],["E","The total investment for this is only $___. Take a look at your other options and let me know how you'd like to proceed."],["N","Hand it over. Stay silent until they speak."],["H","What about Silver?"],["E","That's a good choice. What do you like about it?"],["N","Don't walk through every option. Present the top one, hand over the rest."]],
+9:[["E","You don't want to look at the cheaper options?"],["H","No, Silver's right for us."],["E","Thank you. You made a great choice, and we'll make sure it's done right."],["N","Collect payment and schedule. After the job:"],["E","Hey, as you know, we always aim for a 5-star level of service, right? How have we done for you today?"],["H","Five stars, for sure."],["E","Most of our clients find us online. Would you be willing to write us a review?"],["H","Sure."],["E","To make it easy, everything's right here on the tablet. Which site do you want to use?"],["N","Walk them through the review on your tablet. Stars only is fine."],["N","Anything less than 5 stars? Find out why and fix it before you leave."]]
+};
+const ROUTE=[[770,815],[515,815],[515,628],[515,560],[430,560],[200,480],[430,560],[515,500],[515,230],[430,230],[290,240],[515,230],[620,270],[745,320]];
+const MARK=[null,[930,815],[515,640],[470,560],[200,480],[255,195],[360,285],[730,255],[795,375],[875,375]];
+
+// renderer + scene
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+stage.prepend(renderer.domElement);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(45,16/10,0.1,100);
+function setBg(){scene.background=new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--scene').trim()||'#e6ebef');}
+setBg();try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',setBg);}catch(e){}
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x8a9099,0.75));
+const sun=new THREE.DirectionalLight(0xffffff,0.75);sun.position.set(-6,12,8);sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-9,right:9,top:9,bottom:-9,near:1,far:40});
+scene.add(sun);
+
+const mat=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.85,metalness:0},o));
+function box(w,h,d,c,x,y,z,o){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),c.isMaterial?c:mat(c,o));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;scene.add(m);return m;}
+function cyl(rt,rb,h,c,x,y,z,seg=24){const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg),mat(c));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;scene.add(m);return m;}
+function floorRect(x1,y1,x2,y2,c,y=0.01){const a=W(x1,y1),b=W(x2,y2);const m=new THREE.Mesh(new THREE.PlaneGeometry(b.x-a.x,b.z-a.z),mat(c));m.rotation.x=-Math.PI/2;m.position.set((a.x+b.x)/2,y,(a.z+b.z)/2);m.receiveShadow=true;scene.add(m);return m;}
+
+// ground, street, driveways
+floorRect(-400,-500,1600,1200,'#86a578',-0.01);
+floorRect(-400,700,1600,940,'#5d646b',0.005);
+for(let x=-350;x<1600;x+=120)floorRect(x,815,x+60,823,'#f4f4f4',0.012);
+floorRect(470,630,560,700,'#c9ccd0',0.008);floorRect(170,630,410,700,'#c9ccd0',0.008);
+// rooms
+floorRect(150,80,430,360,'#dce6ec');   // bath
+floorRect(150,360,430,630,'#c4c9ce');  // garage
+floorRect(430,80,600,630,'#c49a6c');   // hall + foyer
+floorRect(600,80,1050,400,'#ece2d0');  // kitchen
+floorRect(600,400,1050,630,'#d6cbb6'); // living
+
+// walls
+const WALLH=2.4,WT=0.12,walls=[];
+function wall(x1,y1,x2,y2,c='#f7f8f9',h=WALLH){const a=W(x1,y1),b=W(x2,y2);const len=a.distanceTo(b)+WT;
+  const m=box(Math.abs(b.x-a.x)>0.001?len:WT,h,Math.abs(b.z-a.z)>0.001?len:WT,mat(c,{transparent:true,opacity:1}),(a.x+b.x)/2,h/2,(a.z+b.z)/2);walls.push(m);return m;}
+[[150,80,1050,80],[150,80,150,630],[1050,80,1050,630],[150,630,180,630],[400,630,485,630],[545,630,1050,630],
+ [430,80,430,200],[430,260,430,530],[430,590,430,630],[150,360,430,360],[600,80,600,150],[600,380,600,470],[600,400,760,400],[900,400,1050,400]
+].forEach(s=>wall(...s));
+wall(180,630,400,630,'#9aa6b1',2.1); // garage door
+// wall caps (dark top edge so walls read as a cutaway)
+walls.forEach(w=>{const p=w.geometry.parameters;const cap=new THREE.Mesh(new THREE.BoxGeometry(p.width,0.03,p.depth),mat('#15212c',{transparent:true}));cap.position.set(w.position.x,p.height+0.015,w.position.z);scene.add(cap);w.userData.cap=cap;});
+
+// bath
+(()=>{const p=W(245,135);box(1.5,0.55,0.7,'#ffffff',p.x,0.28,p.z);const q=W(380,130);cyl(0.2,0.2,0.42,'#ffffff',q.x,0.21,q.z);box(0.42,0.5,0.14,'#ffffff',q.x,0.6,q.z-0.27);
+  const v=W(350,330);box(0.9,0.85,0.5,'#7d8b98',v.x,0.43,v.z);box(0.5,0.6,0.03,'#bfd3e0',v.x,1.6,v.z+0.27,{metalness:.3,roughness:.2});
+  // the problem: a scorched outlet glowing
+  const o=W(160,250);box(0.03,0.14,0.09,'#f3f3f3',o.x+0.07,0.45,o.z);const g=box(0.02,0.06,0.06,'#ff6a00',o.x+0.09,0.45,o.z,{emissive:'#ff4d00',emissiveIntensity:1.2});})();
+// garage: panel, shelves, car-free
+(()=>{const p=W(158,478);box(0.12,0.85,0.5,'#4a5561',p.x+0.08,1.45,p.z,{metalness:.5,roughness:.4});box(0.02,0.7,0.38,'#2b333b',p.x+0.145,1.45,p.z);
+  const bolt=new THREE.Mesh(new THREE.BoxGeometry(0.01,0.2,0.08),mat('#e9a514',{emissive:'#e9a514',emissiveIntensity:.5}));bolt.position.set(p.x+0.15,1.55,p.z);scene.add(bolt);
+  const s=W(320,385);box(1.4,0.9,0.5,'#8a7a66',s.x,0.45,s.z);
+  for(let i=0;i<3;i++)box(0.3,0.24,0.26,['#b8742f','#3d6b8f','#b8742f'][i],s.x-0.45+i*0.45,1.02,s.z);})();
+// kitchen
+(()=>{const a=W(610,90),b=W(1040,130);box(b.x-a.x,0.92,0.6,'#3e4c59',(a.x+b.x)/2,0.46,a.z+0.3);box(b.x-a.x,0.04,0.64,'#e9e4da',(a.x+b.x)/2,0.94,a.z+0.31);
+  const c=W(1000,130),d=W(1040,300);box(0.6,0.92,d.z-c.z,'#3e4c59',c.x+0.3,0.46,(c.z+d.z)/2);box(0.64,0.04,d.z-c.z,'#e9e4da',c.x+0.31,0.94,(c.z+d.z)/2);
+  box(0.8,1.9,0.7,'#cfd5da',W(640,0).x,0.95,a.z+0.35,{metalness:.4,roughness:.3});
+  const t=W(800,300);cyl(0.55,0.55,0.05,'#a0703f',t.x,0.76,t.z,40);cyl(0.06,0.18,0.74,'#5a3f24',t.x,0.37,t.z);
+  [[800,228],[870,300]].forEach(([x,y])=>{const q=W(x,y);box(0.4,0.45,0.4,'#5a3f24',q.x,0.23,q.z);box(0.4,0.5,0.06,'#5a3f24',q.x,0.7,q.z+(y<300?-0.17:0));});
+})();
+// living
+(()=>{const s=W(920,580);box(2.0,0.45,0.75,'#5f7d8c',s.x,0.23,s.z);box(2.0,0.45,0.18,'#5f7d8c',s.x,0.65,s.z+0.3);
+  box(1.0,0.4,0.55,'#a0703f',s.x,0.2,s.z-1.0);box(0.06,0.9,1.6,'#15212c',W(1045,0).x-0.1,1.3,s.z-1.0);})();
+
+// van
+(()=>{const v=W(930,815);const g=new THREE.Group();
+  const body=new THREE.Mesh(new THREE.BoxGeometry(2.3,1.15,1.1),mat('#15212c'));body.position.y=0.85;g.add(body);
+  const cab=new THREE.Mesh(new THREE.BoxGeometry(0.02,0.5,1.2),mat('#9fb3c6',{metalness:.3,roughness:.2}));cab.position.set(-1.16,1.1,0);g.add(cab);
+  const stripe=new THREE.Mesh(new THREE.BoxGeometry(2.32,0.16,1.12),mat('#e9a514'));stripe.position.y=0.75;g.add(stripe);
+  [[-0.75,0.5],[0.75,0.5],[-0.75,-0.5],[0.75,-0.5]].forEach(([x,z])=>{const w=new THREE.Mesh(new THREE.CylinderGeometry(0.3,0.3,0.2,20),mat('#222'));w.rotation.x=Math.PI/2;w.position.set(x,0.3,z);g.add(w);});
+  g.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});g.position.set(v.x,0,v.z);scene.add(g);})();
+
+// people
+function person(shirt,pants,hat){const g=new THREE.Group();const skin=mat('#e0b48f');
+  const add=(geo,m,x,y,z,rx=0,rz=0)=>{const o=new THREE.Mesh(geo,m);o.position.set(x,y,z);o.rotation.x=rx;o.rotation.z=rz;o.castShadow=true;g.add(o);return o;};
+  const legs=[];[-0.09,0.09].forEach(x=>{const hip=new THREE.Group();hip.position.set(x,0.82,0);g.add(hip);
+    const l=new THREE.Mesh(new THREE.CylinderGeometry(0.075,0.07,0.82,12),mat(pants));l.position.y=-0.41;l.castShadow=true;hip.add(l);
+    const sh=new THREE.Mesh(new THREE.BoxGeometry(0.12,0.07,0.24),mat('#2a2a2a'));sh.position.set(0,-0.785,0.04);sh.castShadow=true;hip.add(sh);legs.push(hip);});
+  g.userData.legs=legs;
+  add(new THREE.CylinderGeometry(0.19,0.16,0.62,16),mat(shirt),0,1.12,0);
+  add(new THREE.SphereGeometry(0.17,16,12),mat(shirt),0,1.4,0);
+  [-0.23,0.23].forEach((x,i)=>{add(new THREE.CylinderGeometry(0.055,0.05,0.6,10),mat(shirt),x,1.1,0.08,-0.35,i?-0.12:0.12);});
+  add(new THREE.SphereGeometry(0.125,20,16),skin,0,1.62,0);
+  if(hat){add(new THREE.CylinderGeometry(0.13,0.13,0.07,20),mat(hat),0,1.71,0);add(new THREE.BoxGeometry(0.2,0.015,0.12),mat(hat),0,1.68,0.15);}
+  else add(new THREE.SphereGeometry(0.13,20,16,0,Math.PI*2,0,Math.PI/2),mat('#3b2a20'),0,1.64,-0.01);
+  scene.add(g);return g;}
+const E=person('#1f3346','#2b2f33','#e9a514');
+const H=person('#2a9d8f','#5d6f8a',null);
+const tablet=new THREE.Mesh(new THREE.BoxGeometry(0.3,0.02,0.22),mat('#111',{emissive:'#3a7bd5',emissiveIntensity:.35}));tablet.castShadow=true;scene.add(tablet);
+
+// route ribbons
+const seg=[];
+for(let i=0;i<ROUTE.length-1;i++){const a=W(...ROUTE[i],0.03),b=W(...ROUTE[i+1],0.03);const len=a.distanceTo(b);
+  const m=new THREE.Mesh(new THREE.BoxGeometry(0.11,0.01,len+0.11),new THREE.MeshBasicMaterial({color:'#e9a514'}));
+  m.position.copy(a).add(b).multiplyScalar(0.5);m.lookAt(b.x,0.03,b.z);scene.add(m);seg.push(m);}
+
+// number markers
+function numTex(n,fill,stroke,txt){const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');
+  x.beginPath();x.arc(64,64,54,0,Math.PI*2);x.fillStyle=fill;x.fill();x.lineWidth=8;x.strokeStyle=stroke;x.stroke();
+  x.fillStyle=txt;x.font='700 72px "Barlow Condensed", Arial Narrow, Arial, sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(n,64,68);
+  return new THREE.CanvasTexture(c);}
+const TEX={};['now','done','next','all'].forEach(k=>{TEX[k]=[];for(let n=1;n<=9;n++)TEX[k][n]=numTex(n,
+  {now:'#e9a514',done:'#15212c',next:'#ffffff',all:'#e9a514'}[k],{now:'#15212c',done:'#15212c',next:'#c3ccd5',all:'#15212c'}[k],{now:'#15212c',done:'#ffffff',next:'#a9b4bf',all:'#15212c'}[k]);});
+const marks=[];for(let n=1;n<=9;n++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:TEX.all[n],depthTest:false,sizeAttenuation:false}));s.renderOrder=10;
+  const p=W(...MARK[n],2.85);s.position.copy(p);scene.add(s);marks[n]=s;
+  const stem=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,2.6,6),new THREE.MeshBasicMaterial({color:'#15212c',transparent:true,opacity:.35}));stem.position.set(p.x,1.3,p.z);scene.add(stem);s.userData.stem=stem;}
+
+// walking: people move room to room through doorways and the hall, never through walls
+const SPEED=1.8,E_DELAY=0.5; // m/s; the electrician follows half a second behind
+const roomOf=(x,y)=>y>630?'out':x<430?(y<360?'bath':'garage'):x<600?'hall':(y<400?'kit':'liv');
+const DOORS=[['out','hall',[515,664],[515,598]],['hall','garage',[462,560],[398,560]],['hall','bath',[462,230],[398,230]],
+  ['hall','kit',[568,265],[632,265]],['hall','liv',[568,550],[632,550]],['kit','liv',[830,366],[830,434]]];
+function roomRoute(a,b){if(a===b)return [];const prev={[a]:null},q=[a];
+  while(q.length){const r=q.shift();if(r===b)break;DOORS.forEach(d=>{const i=d[0]===r?0:d[1]===r?1:-1;if(i<0)return;const n=d[1-i];
+    if(!(n in prev)){prev[n]={r,pts:i===0?[d[2],d[3]]:[d[3],d[2]]};q.push(n);}});}
+  const out=[];for(let r=b;prev[r];r=prev[r].r)out.unshift(...prev[r].pts);return out;}
+function walkPath(fromV,c){const a=[fromV.x*100+600,fromV.z*100+355],b=[c[0],c[1]];
+  const pts=[a,...roomRoute(roomOf(...a),roomOf(...b)),b].map(q=>W(q[0],q[1]));const cum=[0];
+  for(let i=1;i<pts.length;i++)cum.push(cum[i-1]+pts[i].distanceTo(pts[i-1]));return {pts,cum,len:cum[cum.length-1]};}
+function along(w,d){let i=1;while(i<w.pts.length-1&&w.cum[i]<d)i++;const a=w.pts[i-1]||w.pts[0],b=w.pts[i]||a;
+  const seg=(w.cum[i]-w.cum[i-1])||1;const t=Math.min(1,Math.max(0,(d-(w.cum[i-1]||0))/seg));
+  return {p:a.clone().lerp(b,t),dir:b.clone().sub(a)};}
+let walk=null;
+function stepWalker(P,w,fy,el,snap){const d=Math.min(w.len,Math.max(0,el*SPEED));const {p,dir}=along(w,d);const moving=d<w.len-1e-3&&w.len>0.05;
+  P.position.copy(p);const ph=d*7.5;P.position.y=moving?Math.abs(Math.sin(ph))*0.03:0;
+  const ty=moving&&dir.lengthSq()>1e-6?Math.atan2(dir.x,dir.z):fy;P.rotation.y=snap?ty:lerpAng(P.rotation.y,ty,moving?0.22:0.12);
+  P.userData.legs.forEach((l,i)=>{const tgt=moving?Math.sin(ph+(i?Math.PI:0))*0.5:0;l.rotation.x+=(tgt-l.rotation.x)*(moving?1:0.2);});}
+
+// state + animation
+let cur=0;const camPos=new THREE.Vector3(),camTgt=new THREE.Vector3();
+const from={},to={};let t0=0,dur=1;
+const placeOf=(c)=>{const p=W(c[0],c[1]),f=W(c[2],c[3]);return {p,yaw:Math.atan2(f.x-p.x,f.z-p.z)};};
+function apply(step,instant,atEnd){
+  cur=step;const S=STEPS[step];
+  document.getElementById('capEye').textContent=step?`Stage ${step} of 9 · ${S.where}`:'Level 1 Sales Process';
+  document.getElementById('capTitle').textContent=S.title;document.getElementById('capJob').textContent=S.job;renderLines(step);if(atEnd){const ix=speakable();if(ix.length){li=ix[ix.length-1];markLine();}}
+  document.getElementById('capFork').hidden=!(step>=6&&step<=8);
+  document.querySelectorAll('nav [data-s]').forEach(b=>b.setAttribute('aria-current',String(+b.dataset.s===step)));
+  const prevEnd=step<=1?0:STEPS[step-1].end;
+  seg.forEach((m,i)=>{m.material.color.set(step===0?'#e9a514':i<prevEnd?'#3b4a58':i<S.end?'#e9a514':'#c3ccd5');m.scale.x=(step&&i>=prevEnd&&i<S.end)?1.8:1;});
+  for(let n=1;n<=9;n++){const k=step===0?'all':n===step?'now':n<step?'done':'next';marks[n].material.map=TEX[k][n];marks[n].material.needsUpdate=true;
+    const sc=k==='now'?0.085:0.055;marks[n].scale.set(sc,sc,1);marks[n].userData.stem.visible=step===0||n===step;}
+  Object.assign(from,{cp:camPos.clone(),ct:camTgt.clone(),e:{p:E.position.clone(),y:E.rotation.y},h:{p:H.position.clone(),y:H.rotation.y}});
+  const e=placeOf(S.E),h=placeOf(S.H);
+  Object.assign(to,{cp:new THREE.Vector3(...S.cam[0]),ct:new THREE.Vector3(...S.cam[1]),e:{p:e.p,y:e.yaw},h:{p:h.p,y:h.yaw}});
+  orbit.yaw=0;orbit.pitch=0;orbit.zoom=1;
+  walk={E:walkPath(E.position,S.E),H:walkPath(H.position,S.H),yE:e.yaw,yH:h.yaw};
+  const snap=instant||matchMedia('(prefers-reduced-motion: reduce)').matches;walk.snap=snap;
+  if(snap){t0=-1e9;dur=1;}else{t0=performance.now();dur=Math.max(1300,1000*Math.max(walk.H.len/SPEED,E_DELAY+walk.E.len/SPEED));}
+  tabletOwner=S.tab;
+  window.__mapHash=step?'#step-'+step:'#overview';if(!shot&&location.hash!=='#agenda'){try{history.replaceState(null,'',window.__mapHash);}catch(e){}}
+}
+let tabletOwner='E';
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const lerpAng=(a,b,t)=>{let d=((b-a+Math.PI*3)%(Math.PI*2))-Math.PI;return a+d*t;};
+
+// drag-to-look orbit around the current target
+const orbit={yaw:0,pitch:0,zoom:1};let drag=null;
+stage.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY,yaw:orbit.yaw,pitch:orbit.pitch};stage.setPointerCapture(e.pointerId);});
+stage.addEventListener('pointermove',e=>{if(!drag)return;orbit.yaw=drag.yaw-(e.clientX-drag.x)*0.006;orbit.pitch=Math.max(-0.5,Math.min(0.6,drag.pitch+(e.clientY-drag.y)*0.004));});
+stage.addEventListener('pointerup',()=>drag=null);stage.addEventListener('pointercancel',()=>drag=null);
+stage.addEventListener('wheel',e=>{e.preventDefault();orbit.zoom=Math.max(0.45,Math.min(1.8,orbit.zoom*(1+e.deltaY*0.001)));},{passive:false});
+
+const ray=new THREE.Raycaster(),tagE=document.getElementById('tagE'),tagH=document.getElementById('tagH');
+function resize(){const r=stage.getBoundingClientRect();if(!r.width||!r.height)return;renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(stage);resize();
+
+function frame(now){
+  const k=ease(Math.min(1,Math.max(0,(now-t0)/dur)));
+  camTgt.lerpVectors(from.ct,to.ct,k);camPos.lerpVectors(from.cp,to.cp,k);
+  if(walk){const el=(now-t0)/1000;stepWalker(H,walk.H,walk.yH,el,walk.snap);stepWalker(E,walk.E,walk.yE,el-E_DELAY,walk.snap);}
+  // apply orbit offsets
+  const off=camPos.clone().sub(camTgt);const sph=new THREE.Spherical().setFromVector3(off);
+  sph.theta+=orbit.yaw;sph.phi=Math.max(0.15,Math.min(1.45,sph.phi-orbit.pitch));sph.radius*=orbit.zoom;
+  camera.position.copy(camTgt).add(new THREE.Vector3().setFromSpherical(sph));camera.lookAt(camTgt);
+  // tablet in owner's hands
+  const o=tabletOwner==='E'?E:H;const fwd=new THREE.Vector3(Math.sin(o.rotation.y),0,Math.cos(o.rotation.y));
+  tablet.position.copy(o.position).add(fwd.multiplyScalar(0.32)).setY(1.0);tablet.rotation.set(-0.6,o.rotation.y,0,'YXZ');
+  // fade walls between camera and what we're looking at
+  const cd=new THREE.Vector3(camera.position.x-camTgt.x,0,camera.position.z-camTgt.z).normalize();
+  walls.forEach(w=>{w.material.opacity=1;w.userData.cap.material.opacity=1;
+    const h=w.geometry.parameters.height;const v=new THREE.Vector3(w.position.x-camTgt.x,0,w.position.z-camTgt.z);
+    const cut=cur!==0&&v.dot(cd)>0.4;const sy=cut?0.3/h:1;w.scale.y=sy;w.position.y=h*sy/2;w.userData.cap.position.y=h*sy+0.015;});
+  [camTgt,E.position.clone().setY(1.2),H.position.clone().setY(1.2)].forEach(p=>{
+    const dir=p.clone().sub(camera.position);const d=dir.length();ray.set(camera.position,dir.normalize());ray.far=d;
+    ray.intersectObjects(walls).forEach(h=>{h.object.material.opacity=0.12;h.object.userData.cap.material.opacity=0.2;});});
+  walls.forEach(w=>{w.material.depthWrite=w.material.opacity>0.5;w.castShadow=true;});
+  renderer.render(scene,camera);
+  // name tags
+  const r=stage.getBoundingClientRect();
+  [[E,tagE,'E','Electrician'],[H,tagH,'H','Homeowner']].forEach(([p,el,who,name])=>{const ln=activeLine();const speak=!!(ln&&ln[0]===who);const t=speak?ln[1]:name;
+    if(el.dataset.t!==t){el.dataset.t=t;el.textContent=t;el.classList.toggle('say',speak);}
+    const v=p.position.clone().setY(2.0).project(camera);
+    const vis=v.z<1&&Math.abs(v.x)<1.1&&Math.abs(v.y)<1.1&&cur!==0;el.hidden=!vis;
+    el.style.left=((v.x+1)/2*r.width)+'px';el.style.top=((1-v.y)/2*r.height)+'px';});
+  // the speech bubble always wins: hide the other person's name tag if it would touch the bubble
+  const sp=[tagE,tagH].find(t=>t.classList.contains('say')&&!t.hidden);
+  if(sp){const o=sp===tagE?tagH:tagE;if(!o.hidden){const a=sp.getBoundingClientRect(),b=o.getBoundingClientRect();
+    if(a.left<b.right+6&&b.left<a.right+6&&a.top<b.bottom+6&&b.top<a.bottom+6)o.hidden=true;}}
+  requestAnimationFrame(frame);
+}
+
+// role-play lines
+let li=0;const dlg=document.getElementById('dlg'),lPos=document.getElementById('lPos'),capMoreEl=document.getElementById('capMore');
+const speakable=()=>(LINES[cur]||[]).map((l,i)=>l[0]==='P'?-1:i).filter(i=>i>=0);
+function activeLine(){const L=LINES[cur];if(!L||shot)return null;return L[li]||null;}
+function markLine(){const idx=speakable();[...dlg.children].forEach((c,i)=>c.classList.toggle('on',i===li));
+  const k=idx.indexOf(li);lPos.textContent=idx.length?(k+1)+' / '+idx.length:'';
+  const on=dlg.children[li];if(on&&!capMoreEl.hidden)on.scrollIntoView({block:'nearest'});
+  document.getElementById('pStage').textContent=cur?'Stage '+cur+' of 9':'Overview';
+  document.getElementById('pStep').textContent=idx.length?'Step '+(k+1)+' of '+idx.length:'› to start';
+  const L=LINES[cur]||[],ln=L[li];let lane='';for(let i=li;i>=0;i--)if(L[i]&&L[i][0]==='P'){lane=L[i][1];break;}
+  const note=ln&&ln[0]==='N'?ln[1]:'';const c=document.getElementById('coach');
+  document.getElementById('coachLane').textContent=lane?'Lane: '+lane:'';document.getElementById('coachTxt').textContent=note;
+  c.hidden=!!shot||!capMoreEl.hidden||!(note||lane);}
+function stepLine(d){const idx=speakable();let k=idx.indexOf(li)+d;
+  if(!idx.length||k>=idx.length){if(d>0)apply((cur+1)%10);else apply((cur+9)%10,false,true);return;}
+  if(k<0){apply((cur+9)%10,false,true);return;}li=idx[k];markLine();}
+document.getElementById('lN').addEventListener('click',()=>stepLine(1));
+document.getElementById('lP').addEventListener('click',()=>stepLine(-1));
+document.getElementById('sNext').addEventListener('click',()=>apply((cur+1)%10));
+document.getElementById('sPrev').addEventListener('click',()=>apply((cur+9)%10));
+document.getElementById('lNext').addEventListener('click',()=>stepLine(1));
+document.getElementById('lPrev').addEventListener('click',()=>stepLine(-1));
+addEventListener('keydown',e=>{if(e.target.closest('input,textarea,button'))return;if(e.key===' '&&!document.getElementById('pMap').hidden){e.preventDefault();stepLine(1);}});
+// info toggle (remembered per viewer)
+const infoBtn=document.getElementById('infoBtn'),capMore=document.getElementById('capMore');
+function setInfo(open){infoBtn.setAttribute('aria-expanded',String(open));capMore.hidden=!open;markLine();try{localStorage.setItem('hm3dInfo',open?'1':'0');}catch(e){}}
+infoBtn.addEventListener('click',()=>setInfo(capMore.hidden));
+addEventListener('keydown',e=>{if((e.key==='i'||e.key==='I')&&!e.target.closest('input,textarea'))setInfo(capMore.hidden);});
+try{if(!shot&&localStorage.getItem('hm3dInfo')==='1')setInfo(true);}catch(e){}
+// nav
+document.querySelectorAll('nav [data-s]').forEach(b=>b.addEventListener('click',()=>apply(+b.dataset.s)));
+document.getElementById('prev').addEventListener('click',()=>apply((cur+9)%10));
+document.getElementById('next').addEventListener('click',()=>apply((cur+1)%10));
+// keys: ← → step through the script, Shift+← → (or PgUp/PgDn) jump stages
+addEventListener('keydown',e=>{if(e.target.closest('input,textarea,[role=tab]')||document.getElementById('pMap').hidden)return;
+  if(e.key==='PageDown'||(e.shiftKey&&e.key==='ArrowRight')){e.preventDefault();apply((cur+1)%10);return;}
+  if(e.key==='PageUp'||(e.shiftKey&&e.key==='ArrowLeft')){e.preventDefault();apply((cur+9)%10);return;}
+  if(e.key==='ArrowRight'){e.preventDefault();stepLine(1);}if(e.key==='ArrowLeft'){e.preventDefault();stepLine(-1);}});
+const fromHash=()=>{const m=/^#(?:step|shot)-(\d)$/.exec(location.hash);return m?+m[1]:0;};
+
+const start=fromHash();
+camPos.set(...STEPS[start].cam[0]);camTgt.set(...STEPS[start].cam[1]);
+const e0=placeOf(STEPS[start].E),h0=placeOf(STEPS[start].H);E.position.copy(e0.p);E.rotation.y=e0.yaw;H.position.copy(h0.p);H.rotation.y=h0.yaw;
+apply(start,true);
+addEventListener('hashchange',()=>{if(!/^#(step|shot)-\d$|^#overview$/.test(location.hash))return;const s=fromHash();if(s!==cur)apply(s);});
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
