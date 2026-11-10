@@ -101,3 +101,9 @@
 # - Unsold Follow-Up value piece (Nov 2026). Canonical is /Unsold/ -
 /unsold     /Unsold/  301
 /unsold/*   /Unsold/  301
+
+# — Group signing (Night School onboarding etc., Nov 2026). See sign/README.md —
+/sign/wall        /sign/wall/   301
+/sign/host        /sign/host/   301
+/sign/copy        /sign/copy/   301
+/sign/:code       /sign/index.html  200

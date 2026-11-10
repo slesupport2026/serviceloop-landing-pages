@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Signed Agreement · SLE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Caveat:wght@600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sign/shared.css">
+<style>
+.sigs{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:640px){.sigs{grid-template-columns:1fr}}
+.sigbox .img{height:110px;display:flex;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:4px;background:#fff;border-radius:8px 8px 0 0}
+.sigbox .img img{max-height:100px;max-width:100%}
+.sigbox .who{font-weight:800;margin-top:8px}
+.sigbox .when{font-size:15px;color:var(--ink-3)}
+.pending{color:var(--ink-3);font-style:italic;font-size:16px;align-self:center;padding-left:6px}
+.audit{font-size:13px;color:var(--ink-3);line-height:1.5;word-break:break-all}
+.audit b{color:var(--ink-2)}
+.voided{background:#B42318;color:#fff;font-weight:800;padding:12px 16px;border-radius:12px;margin:16px 0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+@media print{
+  :root{--surface:#fff;--panel:#fff;--wash:#fff;--ink:#000;--ink-2:#222;--ink-3:#555;--rule:#ccc;--rule-soft:#e5e5e5;--shadow:none;color-scheme:light}
+  body{font-size:13px;background:#fff}
+  .topbar{background:#fff;color:#000;border-bottom:2px solid #000;padding:4px 0}
+  .topbar .meta{color:#333}
+  .brand b{color:#000}
+  .actions,.foot{display:none}
+  .hero{padding:10px 0 0}.hero h1{font-size:28px}.hero p{font-size:14px}
+  .block{padding:10px 14px;margin:10px 0;break-inside:avoid;border-radius:6px}
+  .block h2{font-size:16px;margin-bottom:4px}
+  .line{padding:6px 0}.init.done b{font-size:18px;padding:2px 8px}
+  .closing{font-size:14px;margin:12px 0 6px}
+  .sigbox .img{height:70px}.sigbox .img img{max-height:64px}
+  .wrap{max-width:none}
+}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <div class="brand">Service Loop <b>Electrical</b></div>
+  <div class="meta" id="topmeta">Signed agreement</div>
+</div></header>
+<main id="app"><div class="notice"><p>Loading…</p></div></main>
+<div class="foot">This page is generated from a permanent copy of the agreement stored at the moment of signing. Later changes to the agreement do not affect it.</div>
+
+<script src="/sign/shared.js"></script>
+<script>
+(async function(){
+  const S = window.SIGN, app = document.getElementById("app");
+  const id = S.qs("id"), k = S.qs("k");
+  let a = null;
+  try{ if(id && k) a = await S.rpc("legal_receipt", { p_id: id, p_token: k }); }catch(e){}
+  if(!a){ app.innerHTML = `<div class="notice"><h1>Not found</h1><p>This copy link isn't valid. Check that you have the full link.</p></div>`; return; }
+  const c = a.contract;
+  document.title = `${a.full_name} · ${c.heading} · SLE`;
+  document.getElementById("topmeta").textContent = a.program + (a.cohort ? " · " + a.cohort : "");
+  app.innerHTML = `<div class="wrap">
+    ${a.voided_at ? `<div class="voided">This agreement was voided on ${S.esc(S.fmtDateTime(a.voided_at))}.</div>` : ""}
+    <div class="actions"><button class="btn" onclick="window.print()">Save as PDF / Print</button></div>
+    <div class="hero">
+      <div class="eyebrow">${S.esc(a.program)}</div>
+      <h1>${S.esc(c.heading)}</h1>
+      <p>${S.esc(c.intro)}</p>
+      <div class="facts">
+        <span>Name: <b>${S.esc(a.full_name)}</b></span>
+        ${a.business ? `<span>Business: <b>${S.esc(a.business)}</b></span>` : ""}
+        ${a.cohort ? `<span>Cohort: <b>${S.esc(a.cohort)}</b></span>` : ""}
+        ${a.kickoff ? `<span>Kickoff: <b>${S.esc(S.fmtDate(a.kickoff))}</b></span>` : ""}
+      </div>
+    </div>
+    ${S.contractHTML(c, { initials: a.initials })}
+    <section class="block">
+      <div class="sigs">
+        <div class="sigbox">
+          <div class="img"><img alt="Participant signature" src="${S.esc(a.signature_png)}"></div>
+          <div class="who">${S.esc(a.full_name)}${a.business ? ", " + S.esc(a.business) : ""}</div>
+          <div class="when">Participant · signed ${S.esc(S.fmtDateTime(a.signed_at))}</div>
+        </div>
+        <div class="sigbox">
+          <div class="img">${a.countersign_png ? `<img alt="Countersignature" src="${S.esc(a.countersign_png)}">` : `<span class="pending">Countersignature pending</span>`}</div>
+          <div class="who">${S.esc(a.countersign_name || c.countersigner)}</div>
+          <div class="when">${a.countersigned_at ? "Signed " + S.esc(S.fmtDateTime(a.countersigned_at)) : S.esc(c.company)}</div>
+        </div>
+      </div>
+      <p style="font-size:15px;color:var(--ink-3);margin:16px 0 0">${S.esc(a.consent_text)}</p>
+    </section>
+    <div class="audit">
+      <b>Record</b> · Agreement ID ${S.esc(a.id)} · Email ${S.esc(a.email)} · Signed ${S.esc(new Date(a.signed_at).toISOString())} (UTC)
+      · Template ${S.esc(a.template_key)} v${S.esc(a.template_version)} · Contract fingerprint (SHA-256) ${S.esc(a.contract_hash)}
+    </div>
+  </div>`;
+})();
+</script>
+</body>
+</html>

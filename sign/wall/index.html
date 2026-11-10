@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Signing Wall · SLE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1629;--navy-2:#17213A;--line:#2E3A55;--gold:#FCC23D;--deep:#FDA016;--soft:#C3CFE2;--paper:#FFFDF8;--ink:#0F1629;--ok:#5FD3A2}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#1d2b4d 0,transparent 60%),var(--navy);color:#fff;font-family:"Nunito",system-ui,sans-serif;overflow:hidden}
+.layout{display:grid;grid-template-columns:1fr 300px;height:100vh}
+.layout.noqr{grid-template-columns:1fr}
+.layout.noqr aside{display:none}
+.main{display:flex;flex-direction:column;min-width:0;padding:28px 32px 20px}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--gold);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:15px}
+h1{font-family:"Antonio",sans-serif;text-transform:uppercase;font-size:clamp(30px,3.6vw,54px);line-height:1;margin:6px 0 0}
+.count{text-align:right;flex:none}
+.count .num{font-family:"Antonio",sans-serif;font-size:clamp(48px,6vw,92px);line-height:.9;color:var(--gold)}
+.count .num small{font-size:.45em;color:var(--soft)}
+.count .lbl{color:var(--soft);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px}
+.bar{height:6px;background:var(--line);border-radius:99px;margin-top:10px;overflow:hidden;width:min(320px,30vw);margin-left:auto}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--deep),var(--gold));width:0;transition:width .6s}
+.grid{flex:1;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--card,280px),1fr));gap:16px;align-content:start;padding:20px 2px 10px;scrollbar-width:thin}
+.card{background:var(--paper);color:var(--ink);border-radius:14px;padding:12px 16px 14px;box-shadow:0 10px 30px -14px rgba(0,0,0,.7);position:relative}
+.card .sig{height:calc(var(--card,280px) * .34);display:flex;align-items:center;justify-content:center;border-bottom:1.5px solid #D8D1C0;margin-bottom:10px}
+.card .sig img{max-width:100%;max-height:100%}
+.card .nm{font-weight:800;font-size:calc(var(--card,280px) * .068);line-height:1.2}
+.card .bz{color:#5B6576;font-size:calc(var(--card,280px) * .052);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .tm{color:#7A8394;font-size:calc(var(--card,280px) * .046);margin-top:4px}
+.card.new{animation:pop 1.2s cubic-bezier(.2,.9,.3,1.2)}
+.card.new::after{content:"";position:absolute;inset:-3px;border-radius:16px;border:3px solid var(--gold);animation:glow 4s ease-out forwards;pointer-events:none}
+@keyframes pop{0%{transform:scale(.6) translateY(30px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes glow{0%,60%{opacity:1}100%{opacity:0}}
+.empty{grid-column:1/-1;text-align:center;color:var(--soft);font-size:26px;padding:12vh 0}
+.empty b{display:block;font-family:"Antonio",sans-serif;text-transform:uppercase;color:#fff;font-size:44px;margin-bottom:8px}
+aside{background:var(--navy-2);border-left:1px solid var(--line);padding:28px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px}
+aside .how{font-family:"Antonio",sans-serif;text-transform:uppercase;font-size:30px;line-height:1.05}
+#qr{background:#fff;padding:14px;border-radius:14px}
+#qr img,#qr canvas{display:block;width:220px;height:220px}
+.url{font-weight:800;font-size:17px;word-break:break-all;color:var(--gold)}
+.steps{color:var(--soft);font-size:16px;text-align:left;margin:0;padding-left:20px}
+.steps li{margin:4px 0}
+.closed{background:#B42318;color:#fff;font-weight:800;text-align:center;padding:8px;border-radius:10px;margin-top:12px;display:none}
+.tools{position:fixed;left:12px;bottom:10px;display:flex;gap:8px;opacity:.15;transition:opacity .2s}
+.tools:hover{opacity:1}
+.tools button{background:var(--navy-2);color:var(--soft);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font:inherit;font-size:13px;cursor:pointer}
+.live{display:inline-flex;align-items:center;gap:6px;color:var(--soft);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-left:12px;vertical-align:middle}
+.live i{width:9px;height:9px;border-radius:50%;background:#7A8394}
+.live.on i{background:var(--ok);box-shadow:0 0 0 0 rgba(95,211,162,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(95,211,162,0)}100%{box-shadow:0 0 0 0 rgba(95,211,162,0)}}
+@media (max-width:820px){.layout{grid-template-columns:1fr}aside{display:none}body{overflow:auto}.main{padding:18px 16px}}
+</style>
+</head>
+<body>
+<div class="layout" id="layout">
+  <div class="main">
+    <header>
+      <div>
+        <div class="eyebrow" id="eyebrow">Live signing<span class="live" id="live"><i></i>Live</span></div>
+        <h1 id="title">Loading…</h1>
+      </div>
+      <div class="count">
+        <div class="num" id="num">0</div>
+        <div class="lbl">Signed</div>
+        <div class="bar"><i id="bar"></i></div>
+      </div>
+    </header>
+    <div class="closed" id="closed">Signing is closed</div>
+    <div class="grid" id="grid"></div>
+  </div>
+  <aside>
+    <div class="how">Sign now</div>
+    <div id="qr"></div>
+    <div class="url" id="url"></div>
+    <ol class="steps"><li>Scan or open the link</li><li>Initial each line</li><li>Sign and submit</li><li>Watch for your name here</li></ol>
+  </aside>
+</div>
+<div class="tools"><button id="tq">Toggle QR (Q)</button><button id="tf">Full screen (F)</button></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="/sign/shared.js"></script>
+<script>
+(function(){
+  const S = window.SIGN, $ = s => document.querySelector(s);
+  const code = (S.qs("s") || "").toLowerCase();
+  const seen = new Map();
+  let session = null, first = true;
+
+  if(!code){ $("#title").textContent = "Add ?s=<code> to the link"; return; }
+
+  const signUrl = location.origin + "/sign/" + code;
+  $("#url").textContent = signUrl.replace(/^https?:\/\//, "");
+  try{ new QRCode($("#qr"), { text: signUrl, width: 220, height: 220, correctLevel: QRCode.CorrectLevel.M }); }catch(e){}
+
+  function sizeCards(){
+    const n = seen.size;
+    const px = n <= 6 ? 320 : n <= 12 ? 270 : n <= 24 ? 230 : n <= 40 ? 195 : 170;
+    document.documentElement.style.setProperty("--card", px + "px");
+  }
+  function counter(){
+    const n = seen.size, exp = session && session.expected;
+    $("#num").innerHTML = exp ? `${n}<small> / ${exp}</small>` : String(n);
+    $("#bar").style.width = exp ? Math.min(100, n / exp * 100) + "%" : (n ? "100%" : "0");
+    if(!n && !$("#grid .empty")) $("#grid").innerHTML = `<div class="empty"><b>Waiting for the first signature</b>Scan the code or open the link to sign.</div>`;
+    sizeCards();
+  }
+  function add(sig, animate){
+    if(seen.has(sig.id)) return;
+    const empty = $("#grid .empty"); if(empty) empty.remove();
+    const el = document.createElement("div");
+    el.className = "card" + (animate ? " new" : "");
+    el.innerHTML = `<div class="sig"><img alt="" src="${S.esc(sig.signature_png)}"></div>
+      <div class="nm">${S.esc(sig.full_name)}</div>
+      <div class="bz">${S.esc(sig.business || "")}&nbsp;</div>
+      <div class="tm">${S.esc(S.fmtDateTime(sig.signed_at))}</div>`;
+    seen.set(sig.id, el);
+    $("#grid").prepend(el);
+    counter();
+  }
+  function remove(id){ const el = seen.get(id); if(el){ el.remove(); seen.delete(id); counter(); } }
+
+  async function refresh(){
+    try{
+      const w = await S.rpc("legal_wall", { p_code: code });
+      if(!w){ $("#title").textContent = "Session not found"; return; }
+      session = w;
+      $("#title").textContent = w.title + (w.cohort ? " · " + w.cohort : "");
+      document.title = w.title + " · Signing Wall";
+      $("#closed").style.display = w.status === "open" ? "none" : "block";
+      const ids = new Set(w.signatures.map(s => s.id));
+      [...seen.keys()].forEach(id => { if(!ids.has(id)) remove(id); });
+      w.signatures.forEach(s => add(s, !first));
+      first = false; counter();
+      if(!rt) startRealtime();
+    }catch(e){ console.warn("wall refresh failed", e); }
+  }
+
+  let rt = null;
+  function startRealtime(){
+    if(!window.supabase || !session) return;
+    const client = window.supabase.createClient(S.SB_URL, S.SB_KEY);
+    rt = client.channel("wall-" + code)
+      .on("postgres_changes", { event: "INSERT", schema: "legal", table: "wall", filter: "session_id=eq." + session.session_id },
+          p => add({ id: p.new.agreement_id, ...p.new }, true))
+      .on("postgres_changes", { event: "DELETE", schema: "legal", table: "wall" },
+          p => p.old && p.old.agreement_id && remove(p.old.agreement_id))
+      .subscribe(st => $("#live").classList.toggle("on", st === "SUBSCRIBED"));
+  }
+
+  refresh();
+  setInterval(refresh, 6000); /* safety net if realtime drops */
+
+  const toggleQR = () => $("#layout").classList.toggle("noqr");
+  const full = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  $("#tq").onclick = toggleQR; $("#tf").onclick = full;
+  document.addEventListener("keydown", e => { if(e.key === "q" || e.key === "Q") toggleQR(); if(e.key === "f" || e.key === "F") full(); });
+})();
+</script>
+</body>
+</html>

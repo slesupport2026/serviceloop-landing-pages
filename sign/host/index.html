@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Signing Host · SLE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sign/shared.css">
+<style>
+body{font-size:16px}
+.wrap{max-width:1080px}
+h1.pg{font-family:var(--display);text-transform:uppercase;font-size:36px;margin:28px 0 4px}
+.sub{color:var(--ink-3);margin:0 0 18px}
+.field span{font-size:13px}
+.field input,.field select{height:46px;font-size:16px;width:100%;padding:0 12px;border:1.5px solid var(--rule);border-radius:10px;background:var(--panel);color:var(--ink)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 14px}
+@media (max-width:760px){.grid3{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--wash)}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.pill.open{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.pill.closed{background:var(--rule-soft);color:var(--ink-3)}
+.pill.void{background:color-mix(in srgb,var(--bad) 15%,transparent);color:var(--bad)}
+.links{display:grid;gap:10px}
+.lk{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.lk code{flex:1;min-width:220px;background:var(--wash);padding:10px 12px;border-radius:10px;font-size:15px;word-break:break-all}
+.lk b{width:110px;flex:none}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.scroll{overflow-x:auto}
+.padwrap canvas{height:160px}
+.muted{color:var(--ink-3);font-size:14px}
+.back{margin-top:22px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <div class="brand">Service Loop <b>Electrical</b> · Signing</div>
+  <div class="meta"><button class="linkbtn" id="logout" style="color:#C3CFE2;display:none">Lock</button></div>
+</div></header>
+<main class="wrap" id="app"></main>
+<div class="foot">Agreements are stored in the SLE Payroll database (legal schema). Signed agreements can be voided but never edited or deleted.</div>
+
+<script src="/sign/shared.js"></script>
+<script>
+(function(){
+  const S = window.SIGN, $ = s => document.querySelector(s), app = $("#app");
+  let pass = null, data = null;
+  try{ pass = sessionStorage.getItem("sle-sign-pass"); }catch(e){}
+  const origin = location.origin;
+
+  function errBox(msg){ return `<div class="err">${S.esc(msg)}</div>`; }
+  async function copyText(t, btn){ try{ await navigator.clipboard.writeText(t); const o = btn.textContent; btn.textContent = "Copied"; setTimeout(()=>btn.textContent=o, 1200); }catch(e){ prompt("Copy:", t); } }
+
+  function login(msg){
+    $("#logout").style.display = "none";
+    app.innerHTML = `<div class="card" style="max-width:420px;margin:60px auto">
+      <h2 style="margin-bottom:12px">Host passcode</h2>
+      <form id="lf"><label class="field"><span>Passcode</span><input id="pw" type="password" autocomplete="current-password" autofocus></label>
+      ${msg ? errBox(msg) : ""}<button class="btn block-btn">Unlock</button></form></div>`;
+    $("#lf").onsubmit = async e => { e.preventDefault(); pass = $("#pw").value.trim(); await home(); };
+  }
+
+  async function loadOverview(){
+    data = await S.rpc("legal_admin_overview", { p_pass: pass });
+    try{ sessionStorage.setItem("sle-sign-pass", pass); }catch(e){}
+    $("#logout").style.display = "";
+  }
+
+  async function home(){
+    try{ await loadOverview(); }catch(e){ try{ sessionStorage.removeItem("sle-sign-pass"); }catch(_){} return login(e.message); }
+    const tpls = data.templates.filter((t,i,arr) => arr.findIndex(x => x.key === t.key) === i);
+    app.innerHTML = `
+      <h1 class="pg">Group signing</h1>
+      <p class="sub">Start a session, share the link on the call, and screen-share the wall.</p>
+      <div class="card">
+        <h2 style="margin-bottom:14px">New session</h2>
+        <form id="nf">
+          <div class="grid3">
+            <label class="field"><span>Agreement</span><select id="tpl">${tpls.map(t => `<option value="${S.esc(t.key)}">${S.esc(t.name)} (v${t.version})</option>`).join("")}</select></label>
+            <label class="field"><span>Cohort / group name</span><input id="cohort" placeholder="November 2026"></label>
+            <label class="field"><span>Kickoff date</span><input id="kick" type="date"></label>
+            <label class="field"><span>Link code (go…/sign/<b>code</b>)</span><input id="code" placeholder="ns-nov26"></label>
+            <label class="field"><span>Expected signers (optional)</span><input id="exp" type="number" min="1" max="500"></label>
+            <label class="field"><span>Page title</span><input id="title" placeholder="Night School Onboarding"></label>
+          </div>
+          <label class="field"><span>Investment line (shown to everyone in this session)</span><input id="inv"></label>
+          <div id="nerr"></div>
+          <button class="btn">Create session</button>
+        </form>
+      </div>
+      <div class="card scroll">
+        <h2 style="margin-bottom:8px">Sessions</h2>
+        ${data.sessions.length ? `<table><thead><tr><th>Session</th><th>Code</th><th>Kickoff</th><th>Signed</th><th>Status</th></tr></thead><tbody>
+          ${data.sessions.map(s => `<tr class="click" data-id="${s.id}">
+            <td><b>${S.esc(s.title)}</b><div class="muted">${S.esc(s.cohort || "")}</div></td>
+            <td>${S.esc(s.code)}</td><td>${S.esc(s.kickoff ? S.fmtDate(s.kickoff) : "")}</td>
+            <td>${s.signed}${s.expected ? " / " + s.expected : ""}</td>
+            <td><span class="pill ${s.status}">${s.status}</span></td></tr>`).join("")}
+        </tbody></table>` : `<p class="muted">No sessions yet.</p>`}
+      </div>`;
+    const setInv = () => { const t = data.templates.find(x => x.key === $("#tpl").value); $("#inv").value = t ? t.investment : ""; };
+    $("#tpl").onchange = setInv; setInv();
+    $("#cohort").oninput = () => { if(!$("#code").dataset.touched) $("#code").value = ("ns-" + $("#cohort").value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40); };
+    $("#code").oninput = () => { $("#code").dataset.touched = 1; };
+    $("#nf").onsubmit = async e => {
+      e.preventDefault(); $("#nerr").innerHTML = "";
+      try{
+        const r = await S.rpc("legal_admin_create_session", { p_pass: pass, p_code: $("#code").value, p_title: $("#title").value,
+          p_cohort: $("#cohort").value, p_kickoff: $("#kick").value || null, p_expected: $("#exp").value ? +$("#exp").value : null,
+          p_template_key: $("#tpl").value, p_investment: $("#inv").value });
+        detail(r.id);
+      }catch(err){ $("#nerr").innerHTML = errBox(err.message); }
+    };
+    document.querySelectorAll("tr.click").forEach(tr => tr.onclick = () => detail(tr.dataset.id));
+  }
+
+  async function detail(id){
+    try{ await loadOverview(); }catch(e){ return login(e.message); }
+    const s = data.sessions.find(x => x.id === id); if(!s) return home();
+    let rows = [];
+    try{ rows = await S.rpc("legal_admin_agreements", { p_pass: pass, p_session_id: id }); }catch(e){}
+    const signLink = `${origin}/sign/${s.code}`, wallLink = `${origin}/sign/wall/?s=${s.code}`;
+    const copyLink = r => `${origin}/sign/copy/?id=${r.id}&k=${r.receipt_token}`;
+    app.innerHTML = `
+      <button class="linkbtn back" id="back">← All sessions</button>
+      <h1 class="pg">${S.esc(s.title)}</h1>
+      <p class="sub">${S.esc(s.cohort || "")}${s.kickoff ? " · kickoff " + S.esc(S.fmtDate(s.kickoff)) : ""} · ${S.esc(s.template_key)} v${s.template_version} · <span class="pill ${s.status}">${s.status}</span></p>
+      <div class="card links">
+        <div class="lk"><b>Signing link</b><code>${S.esc(signLink)}</code><button class="btn small ghost" data-copy="${S.esc(signLink)}">Copy</button></div>
+        <div class="lk"><b>Live wall</b><code>${S.esc(wallLink)}</code><button class="btn small ghost" data-copy="${S.esc(wallLink)}">Copy</button><a class="btn small" href="${S.esc(wallLink)}" target="_blank" rel="noopener">Open wall</a></div>
+        <div class="lk"><b>Investment</b><span>${S.esc(s.investment)}</span></div>
+        <div class="toolbar">
+          <button class="btn small ${s.status === "open" ? "ghost" : ""}" id="toggle">${s.status === "open" ? "Close signing" : "Reopen signing"}</button>
+          <button class="btn small ghost" id="csv">Download CSV</button>
+          <button class="btn small ghost" id="reload">Refresh</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2 style="margin-bottom:6px">Countersignature</h2>
+        <p class="muted" style="margin:0 0 12px">${s.countersigned ? "Signed. Every participant's copy shows it. Draw again to replace it." : "Sign once for the whole session. It appears on every participant's copy."}</p>
+        <label class="field" style="max-width:460px"><span>Name and title</span><input id="csn" value="${S.esc(s.countersign_name || "Clay Neumeyer, President, Service Loop Electrical")}"></label>
+        <div class="padwrap" id="cpw" style="max-width:560px"><canvas id="cpad"></canvas><div class="baseline"></div><div class="x">✕</div><div class="ph">Sign here</div></div>
+        <div class="toolbar" style="margin-top:10px"><button class="btn small" id="csave">Save countersignature</button><button class="linkbtn" id="cclear">Clear</button><span id="cmsg"></span></div>
+      </div>
+      <div class="card scroll">
+        <h2 style="margin-bottom:8px">Signed (${rows.filter(r => !r.voided_at).length}${s.expected ? " of " + s.expected : ""})</h2>
+        ${rows.length ? `<table><thead><tr><th>Name</th><th>Business</th><th>Email</th><th>Signed</th><th>Initials</th><th></th></tr></thead><tbody>
+          ${rows.map(r => `<tr>
+            <td><b>${S.esc(r.full_name)}</b>${r.voided_at ? `<div><span class="pill void">voided</span> <span class="muted">${S.esc(r.void_reason || "")}</span></div>` : ""}</td>
+            <td>${S.esc(r.business || "")}</td><td>${S.esc(r.email)}</td>
+            <td>${S.esc(S.fmtDateTime(r.signed_at))}</td><td>${S.esc((r.initials || []).join(" · "))}</td>
+            <td style="white-space:nowrap"><a href="${S.esc(copyLink(r))}" target="_blank" rel="noopener">Copy</a>
+              · <button class="linkbtn" data-copy="${S.esc(copyLink(r))}">Link</button>
+              ${r.voided_at ? "" : ` · <button class="linkbtn" style="color:var(--bad)" data-void="${r.id}" data-name="${S.esc(r.full_name)}">Void</button>`}</td>
+          </tr>`).join("")}</tbody></table>` : `<p class="muted">No signatures yet.</p>`}
+      </div>`;
+
+    $("#back").onclick = home;
+    $("#reload").onclick = () => detail(id);
+    document.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => copyText(b.dataset.copy, b));
+    $("#toggle").onclick = async () => { await S.rpc("legal_admin_set_status", { p_pass: pass, p_session_id: id, p_status: s.status === "open" ? "closed" : "open" }); detail(id); };
+    document.querySelectorAll("[data-void]").forEach(b => b.onclick = async () => {
+      const reason = prompt(`Void ${b.dataset.name}'s agreement? It stays on record but leaves the wall.\n\nReason:`);
+      if(!reason) return;
+      try{ await S.rpc("legal_admin_void", { p_pass: pass, p_agreement_id: b.dataset.void, p_reason: reason }); detail(id); }catch(e){ alert(e.message); }
+    });
+    $("#csv").onclick = () => {
+      const q = v => `"${String(v == null ? "" : v).replace(/"/g, '""')}"`;
+      const lines = [["name","business","email","signed_at_utc","initials","status","copy_link","agreement_id","contract_sha256"].join(",")]
+        .concat(rows.map(r => [r.full_name, r.business, r.email, r.signed_at, (r.initials||[]).join(" "), r.voided_at ? "voided: " + (r.void_reason||"") : "signed", copyLink(r), r.id, r.contract_hash].map(q).join(",")));
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/csv" }));
+      a.download = `${s.code}-signatures.csv`; a.click();
+    };
+    const pad = S.SignaturePad($("#cpad"), () => $("#cpw").classList.toggle("has", !pad.isEmpty()));
+    $("#cclear").onclick = () => pad.clear();
+    $("#csave").onclick = async () => {
+      if(pad.isEmpty()){ $("#cmsg").textContent = "Draw your signature first."; return; }
+      try{ await S.rpc("legal_admin_countersign", { p_pass: pass, p_session_id: id, p_name: $("#csn").value, p_png: pad.toPNG() }); detail(id); }
+      catch(e){ $("#cmsg").textContent = e.message; }
+    };
+  }
+
+  $("#logout").onclick = () => { try{ sessionStorage.removeItem("sle-sign-pass"); }catch(e){} pass = null; login(); };
+  if(pass) home(); else login();
+})();
+</script>
+</body>
+</html>

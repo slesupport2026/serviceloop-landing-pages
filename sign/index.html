@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Sign Your Agreement · SLE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Caveat:wght@600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sign/shared.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <div class="brand">Service Loop <b>Electrical</b></div>
+  <div class="meta" id="topmeta"></div>
+</div></header>
+
+<main id="app"><div class="notice"><p>Loading your agreement…</p></div></main>
+<div class="foot">Your signature is recorded with the date and time it was submitted. You'll get a link to your own copy.</div>
+
+<script src="/sign/shared.js"></script>
+<script>
+(function(){
+  const S = window.SIGN, $ = s => document.querySelector(s), app = $("#app");
+  const pathCode = (location.pathname.match(/^\/sign\/([a-z0-9-]{3,40})\/?$/i) || [])[1];
+  const code = (S.qs("s") || pathCode || "").toLowerCase();
+  let session = null, pad = null;
+
+  function notice(title, body){ app.innerHTML = `<div class="notice"><h1>${S.esc(title)}</h1><p>${body}</p></div>`; }
+
+  const doneKey = () => "sle-signed-" + code;
+  function savedReceipt(){ try{ return JSON.parse(localStorage.getItem(doneKey()) || "null"); }catch(e){ return null; } }
+
+  function showDone(r, fresh){
+    const link = `/sign/copy/?id=${encodeURIComponent(r.id)}&k=${encodeURIComponent(r.receipt_token)}`;
+    app.innerHTML = `<div class="wrap"><div class="notice">
+      <div class="eyebrow">${fresh ? "Signed" : "Already signed on this device"}</div>
+      <h1>You're on the wall${r.name ? ", " + S.esc(r.name.split(" ")[0]) : ""}.</h1>
+      <p>Signed ${S.esc(S.fmtDateTime(r.signed_at))}. Look up at the shared screen.</p>
+      <p style="margin-top:26px"><a class="btn" href="${link}" target="_blank" rel="noopener">View & save my copy</a></p>
+      <p style="font-size:15px;color:var(--ink-3);margin-top:14px">Bookmark that page or save it as a PDF. It always shows exactly what you signed.</p>
+      ${session && session.status === "open" ? `<p style="margin-top:30px"><button class="linkbtn" id="another">Someone else signing on this device?</button></p>` : ""}
+    </div></div>`;
+    const a = document.getElementById("another");
+    if(a) a.onclick = () => { try{ localStorage.removeItem(doneKey()); }catch(e){} window.scrollTo(0,0); render(); };
+  }
+
+  async function load(){
+    if(!code){ notice("Link missing", "Ask your host for the signing link."); return; }
+    try{ session = await S.rpc("legal_session", { p_code: code }); }
+    catch(e){ notice("Can't load", S.esc(e.message)); return; }
+    if(!session){ notice("Link not found", "Double-check the link from your host."); return; }
+    const prev = savedReceipt();
+    if(prev){ showDone(prev, false); return; }
+    if(session.status !== "open"){ notice("Signing is closed", "This session isn't taking signatures right now. Ask your host."); return; }
+    render();
+  }
+
+  function render(){
+    const c = session.contract;
+    document.title = (c.heading || session.title) + " · SLE";
+    $("#topmeta").textContent = session.program + (session.cohort ? " · " + session.cohort : "");
+    const n = c.commitments.length + 1;
+    app.innerHTML = `
+      <div class="wrap">
+        <div class="hero">
+          <div class="eyebrow">${S.esc(session.program)}</div>
+          <h1>${S.esc(c.heading || session.title)}</h1>
+          <p>${S.esc(c.intro)}</p>
+          <div class="facts">
+            ${session.cohort ? `<span>Cohort: <b>${S.esc(session.cohort)}</b></span>` : ""}
+            ${session.kickoff ? `<span>Kickoff: <b>${S.esc(S.fmtDate(session.kickoff))}</b></span>` : ""}
+          </div>
+        </div>
+        <form id="f" novalidate>
+          ${S.contractHTML(c, { inputs: true })}
+          <section class="block">
+            <h2>Your details</h2>
+            <label class="field"><span>Full name</span><input id="name" autocomplete="name" required></label>
+            <div class="row2">
+              <label class="field"><span>Business name</span><input id="biz" autocomplete="organization"></label>
+              <label class="field"><span>Email</span><input id="email" type="email" autocomplete="email" inputmode="email" required></label>
+            </div>
+            <h2 style="margin-top:6px">Your signature</h2>
+            <p class="hint" style="font-size:16px;color:var(--ink-3);margin:0 0 10px">Sign with your finger or mouse.</p>
+            <div class="padwrap" id="padwrap"><canvas id="pad"></canvas><div class="baseline"></div><div class="x">✕</div><div class="ph">Sign here</div></div>
+            <div class="padbar"><span id="today"></span><button type="button" class="linkbtn" id="clear">Clear</button></div>
+            <label class="check"><input type="checkbox" id="consent"><span>${S.esc(c.consent)}</span></label>
+            <div id="err"></div>
+            <button class="btn gold block-btn" id="go" type="submit">Sign the agreement</button>
+          </section>
+        </form>
+      </div>
+      <div class="sticky"><div class="wrap"><span id="progtxt">0 of ${n} initialed</span><div class="prog"><i id="prog"></i></div></div></div>`;
+
+    $("#today").textContent = new Date().toLocaleDateString(undefined, { weekday:"long", month:"long", day:"numeric", year:"numeric" });
+    pad = S.SignaturePad($("#pad"), () => $("#padwrap").classList.toggle("has", !pad.isEmpty()));
+    $("#clear").onclick = () => pad.clear();
+
+    const inits = [...document.querySelectorAll("[data-init]")];
+    const progress = () => {
+      const k = inits.filter(i => i.value.trim()).length;
+      inits.forEach(i => { i.classList.toggle("ok", !!i.value.trim()); if(i.value.trim()) i.closest(".line").classList.remove("missing"); });
+      $("#progtxt").textContent = `${k} of ${n} initialed`;
+      $("#prog").style.width = (k / n * 100) + "%";
+    };
+    inits.forEach(i => i.addEventListener("input", () => { i.value = i.value.toUpperCase().replace(/[^A-Z.\-' ]/g, ""); progress(); }));
+
+    $("#f").addEventListener("submit", async ev => {
+      ev.preventDefault();
+      const errEl = $("#err"); errEl.innerHTML = "";
+      const fail = (msg, el) => { errEl.innerHTML = `<div class="err">${S.esc(msg)}</div>`; if(el){ el.scrollIntoView({ behavior:"smooth", block:"center" }); el.focus && el.focus({ preventScroll:true }); } };
+      const missing = inits.filter(i => !i.value.trim());
+      if(missing.length){ missing.forEach(i => i.closest(".line").classList.add("missing")); return fail(`Please initial every line (${missing.length} left).`, missing[0]); }
+      const name = $("#name").value.trim(), email = $("#email").value.trim();
+      if(name.length < 2) return fail("Please enter your full name.", $("#name"));
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail("Please enter a valid email.", $("#email"));
+      if(pad.isEmpty()) return fail("Please sign in the box.", $("#padwrap"));
+      if(!$("#consent").checked) return fail("Please check the box to agree.", $("#consent"));
+      const btn = $("#go"); btn.disabled = true; btn.textContent = "Signing…";
+      try{
+        const r = await S.rpc("legal_sign", {
+          p_code: code, p_name: name, p_business: $("#biz").value.trim(), p_email: email,
+          p_initials: inits.map(i => i.value.trim()), p_signature: pad.toPNG(),
+          p_contract_hash: session.contract_hash, p_consent: session.contract.consent, p_user_agent: navigator.userAgent
+        });
+        const rec = { ...r, name };
+        try{ localStorage.setItem(doneKey(), JSON.stringify(rec)); }catch(e){}
+        window.scrollTo(0,0); showDone(rec, true);
+      }catch(e){
+        btn.disabled = false; btn.textContent = "Sign the agreement"; fail(e.message);
+      }
+    });
+  }
+  load();
+})();
+</script>
+</body>
+</html>
