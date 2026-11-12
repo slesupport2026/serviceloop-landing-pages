@@ -27,6 +27,18 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--f-b
 .lvl button{font:700 13px var(--f-head);color:var(--ink);background:#121c2b;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
 .lvl button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#0A0A0A}
 .lvl button:focus-visible,.jump a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lvg{display:inline-flex;align-items:center;gap:3px}
+.lvl .lvi{width:24px;height:24px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:italic 700 14px Georgia,serif;line-height:1;color:var(--muted);background:transparent;border:1px solid var(--line);cursor:pointer}
+.lvl .lvi:hover,.lvl .lvi[aria-expanded="true"]{color:#0A0A0A;background:var(--accent);border-color:var(--accent)}
+.lvabout{position:relative;margin-top:10px;padding:12px 40px 12px 14px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;background:rgba(127,140,160,.10);font-size:14px;line-height:1.45;max-width:640px}
+.lvabout[hidden],.lvabout [hidden]{display:none}
+.lvabout b{display:block;font-weight:700}
+.lvabout small{display:block;font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:2px 0 6px}
+.lvabout p{margin:0 0 6px}.lvabout p:last-of-type{margin:0}
+.lvx{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;background:transparent;color:var(--muted);font-size:20px;line-height:1;cursor:pointer;border-radius:50%}
+.lvx:hover{color:var(--ink)}
+.lvi:focus-visible,.lvx:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+html.embed .lvabout{display:none}
 .jump{display:flex;flex-wrap:wrap;gap:6px}
 .jump a{font:700 13px var(--f-head);color:var(--ink);text-decoration:none;min-width:32px;height:32px;padding:0 8px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid var(--line);background:#121c2b}
 .jump a:hover{background:var(--accent);color:#0A0A0A}
@@ -84,7 +96,8 @@ html.embed .lvl{display:none}</style>
   </header>
   <div class="bar">
     <div class="row">
-      <div class="lvl" role="group" aria-label="Training level"><span>Level</span><button type="button" data-l="F" aria-pressed="false">Foundations</button><button type="button" data-l="O" aria-pressed="false">L1 Opportunity</button><button type="button" data-l="D" aria-pressed="false">L1 Demand</button><button type="button" data-l="A" aria-pressed="false">Level 2</button></div>
+      <div class="lvl" role="group" aria-label="Training level"><span>Level</span><div class="lvg"><button type="button" data-l="F" aria-pressed="false">Foundations</button><button type="button" class="lvi" data-i="F" aria-expanded="false" aria-label="What's in Foundations" title="What's in Foundations">i</button></div><div class="lvg"><button type="button" data-l="O" aria-pressed="false">L1 Opportunity</button><button type="button" class="lvi" data-i="O" aria-expanded="false" aria-label="What's in L1 Opportunity" title="What's in L1 Opportunity">i</button></div><div class="lvg"><button type="button" data-l="D" aria-pressed="false">L1 Demand</button><button type="button" class="lvi" data-i="D" aria-expanded="false" aria-label="What's in L1 Demand" title="What's in L1 Demand">i</button></div><div class="lvg"><button type="button" data-l="A" aria-pressed="false">Level 2</button><button type="button" class="lvi" data-i="A" aria-expanded="false" aria-label="What's in Level 2" title="What's in Level 2">i</button></div></div>
+<div class="lvabout" hidden role="note" aria-live="polite"><div data-a="F" hidden><b>Foundations</b><small>8 stages · 26 electrician lines</small><p>Start here. The same-day path in 8 stages, cut to the 26 lines that matter most, in Joe's own words.</p><p>Stalls &amp; objections: 3 stalls + 3 objections (email it over, talk to my partner, think about it; why so much, break down the pricing, over budget).</p></div><div data-a="O" hidden><b>Level 1 · Opportunity call</b><small>8 stages · 43 electrician lines</small><p>Joe's full same-day script for opportunity calls (upgrades and projects). Stage 5 runs the opportunity lane: build the relationship and learn what matters before offering any solution.</p><p>Stalls &amp; objections: reviews the Foundations six, then unlocks 3 new stalls + 3 new objections (12 in all).</p></div><div data-a="D" hidden><b>Level 1 · Demand call</b><small>8 stages · 45 electrician lines</small><p>Same as Level 1 Opportunity, but Stage 5 runs the demand lane for fix-it calls: who's involved, how the problem has affected them, and finish the diagnosis before presenting solutions.</p><p>Stalls &amp; objections: the same 12 as Level 1 Opportunity.</p></div><div data-a="A" hidden><b>Level 2 · Full process</b><small>10 stages · 58 electrician lines</small><p>Everything Joe teaches: both Stage 5 lanes, plus Stages 7–8 for the return visit (the call on route and the pulse check at the table).</p><p>Stalls &amp; objections: reviews all 12, then unlocks the 6 hardest ones (18 in all).</p></div><button type="button" class="lvx" aria-label="Close">×</button></div>
       <div class="tog" role="group" aria-label="Practice view">
         <button type="button" id="tH" aria-pressed="true">Homeowner</button>
         <button type="button" id="tN" aria-pressed="true">Notes</button>
@@ -1104,6 +1117,11 @@ html.embed .lvl{display:none}</style>
   if(!document.querySelector('.lv[data-l="'+k+'"]'))k='F';setLv(k);
   document.querySelectorAll('.lvl [data-l]').forEach(el=>el.addEventListener('click',()=>setLv(el.dataset.l)));
 })();
+(function(){document.querySelectorAll('.lvl').forEach(row=>{const box=row.nextElementSibling;if(!box||!box.classList.contains('lvabout'))return;let open=null;
+  const show=k=>{open=k;box.hidden=!k;box.querySelectorAll('[data-a]').forEach(d=>d.hidden=d.dataset.a!==k);row.querySelectorAll('.lvi').forEach(b=>b.setAttribute('aria-expanded',String(b.dataset.i===k)));};
+  row.querySelectorAll('.lvi').forEach(b=>b.addEventListener('click',()=>show(open===b.dataset.i?null:b.dataset.i)));
+  box.querySelector('.lvx').addEventListener('click',()=>show(null));
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&open)show(null);});});})();
 </script>
 </body>
 </html>

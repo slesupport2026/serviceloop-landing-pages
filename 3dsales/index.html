@@ -113,6 +113,17 @@ body.shot .cap p{font-size:18px}
 .lvl button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .lvl button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 nav button[hidden]{display:none}
+.lvg{display:inline-flex;align-items:center;gap:3px}
+.lvl .lvi{width:24px;height:24px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:italic 700 14px Georgia,serif;line-height:1;color:var(--muted);background:transparent;border:1px solid var(--line);cursor:pointer}
+.lvl .lvi:hover,.lvl .lvi[aria-expanded="true"]{color:#0A0A0A;background:var(--accent);border-color:var(--accent)}
+.lvabout{position:relative;margin-top:10px;padding:12px 40px 12px 14px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;background:rgba(127,140,160,.10);font-size:14px;line-height:1.45;max-width:640px}
+.lvabout[hidden],.lvabout [hidden]{display:none}
+.lvabout b{display:block;font-weight:700}
+.lvabout small{display:block;font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:2px 0 6px}
+.lvabout p{margin:0 0 6px}.lvabout p:last-of-type{margin:0}
+.lvx{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;background:transparent;color:var(--muted);font-size:20px;line-height:1;cursor:pointer;border-radius:50%}
+.lvx:hover{color:var(--ink)}
+.lvi:focus-visible,.lvx:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 nav button.so{display:inline-flex;align-items:center;gap:6px}
 .ic{display:inline-block;width:16px;height:15px;flex:none}
 .ic.s{background:#FFC928;clip-path:polygon(50% 0,100% 100%,0 100%)}
@@ -145,6 +156,8 @@ body.shot .alert{display:none}
 .tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .panel{display:flex;flex-direction:column;gap:20px}
 .panel[hidden],.lvl[hidden]{display:none}
+.lvl[hidden]+.lvabout{display:none}
+@media (max-width:560px){.brandbar{gap:10px}.brandbar img{height:34px}.brandbar b{font-size:13px;white-space:nowrap}.brandbar small{display:none}.tabs{overflow-x:auto;scrollbar-width:none}.tabs button{padding:10px 10px;font-size:13px;white-space:nowrap}.title h1{font-size:30px}}
 .agenda-frame{width:100%;min-height:900px;border:0;display:block;background:var(--bg)}
 .foot{border-top:1px solid var(--line);padding-top:16px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 18px}
 .foot a{color:var(--gold);text-decoration:none}
@@ -159,7 +172,8 @@ body.shot .brandbar,body.shot .title,body.shot .tabs,body.shot .foot{display:non
   <header class="title">
     <h1>Service Loop <span>Sales Process</span></h1>
     <p class="lede">Walk the Service Loop Sales Process through the house at your level. Stage 11 drills the stalls and objections: each level reviews the ones before it and unlocks three new stalls and three new objections. Tap › to play the script one step at a time, » to jump a stage. Drag to look around, scroll to zoom.</p>
-    <div class="lvl" id="lvl" role="group" aria-label="Training level"><span>Level</span><button type="button" data-l="F" aria-pressed="false">Foundations</button><button type="button" data-l="O" aria-pressed="false">L1 Opportunity</button><button type="button" data-l="D" aria-pressed="false">L1 Demand</button><button type="button" data-l="A" aria-pressed="false">Level 2</button></div>
+    <div class="lvl" id="lvl" role="group" aria-label="Training level"><span>Level</span><div class="lvg"><button type="button" data-l="F" aria-pressed="false">Foundations</button><button type="button" class="lvi" data-i="F" aria-expanded="false" aria-label="What's in Foundations" title="What's in Foundations">i</button></div><div class="lvg"><button type="button" data-l="O" aria-pressed="false">L1 Opportunity</button><button type="button" class="lvi" data-i="O" aria-expanded="false" aria-label="What's in L1 Opportunity" title="What's in L1 Opportunity">i</button></div><div class="lvg"><button type="button" data-l="D" aria-pressed="false">L1 Demand</button><button type="button" class="lvi" data-i="D" aria-expanded="false" aria-label="What's in L1 Demand" title="What's in L1 Demand">i</button></div><div class="lvg"><button type="button" data-l="A" aria-pressed="false">Level 2</button><button type="button" class="lvi" data-i="A" aria-expanded="false" aria-label="What's in Level 2" title="What's in Level 2">i</button></div></div>
+<div class="lvabout" hidden role="note" aria-live="polite"><div data-a="F" hidden><b>Foundations</b><small>8 stages · 26 electrician lines</small><p>Start here. The same-day path in 8 stages, cut to the 26 lines that matter most, in Joe's own words.</p><p>Stalls &amp; objections: 3 stalls + 3 objections (email it over, talk to my partner, think about it; why so much, break down the pricing, over budget).</p></div><div data-a="O" hidden><b>Level 1 · Opportunity call</b><small>8 stages · 43 electrician lines</small><p>Joe's full same-day script for opportunity calls (upgrades and projects). Stage 5 runs the opportunity lane: build the relationship and learn what matters before offering any solution.</p><p>Stalls &amp; objections: reviews the Foundations six, then unlocks 3 new stalls + 3 new objections (12 in all).</p></div><div data-a="D" hidden><b>Level 1 · Demand call</b><small>8 stages · 45 electrician lines</small><p>Same as Level 1 Opportunity, but Stage 5 runs the demand lane for fix-it calls: who's involved, how the problem has affected them, and finish the diagnosis before presenting solutions.</p><p>Stalls &amp; objections: the same 12 as Level 1 Opportunity.</p></div><div data-a="A" hidden><b>Level 2 · Full process</b><small>10 stages · 58 electrician lines</small><p>Everything Joe teaches: both Stage 5 lanes, plus Stages 7–8 for the return visit (the call on route and the pulse check at the table).</p><p>Stalls &amp; objections: reviews all 12, then unlocks the 6 hardest ones (18 in all).</p></div><button type="button" class="lvx" aria-label="Close">×</button></div>
   </header>
   <div class="tabs" role="tablist" aria-label="Sales process views">
     <button type="button" role="tab" id="tMap" aria-controls="pMap" aria-selected="true">Home Map 3D</button>
@@ -545,6 +559,11 @@ function setLevel(k){if(!LV[k]||k===LVK)return;LVK=k;LINES=LV[k].lines;try{local
 document.querySelectorAll('#lvl [data-l]').forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.l)));
 addEventListener('lvsync',()=>{try{const v=localStorage.getItem('hm3dLvl');if(v&&LV[v]&&v!==LVK)setLevel(v);}catch(e){}});
 showLevel();
+(function(){document.querySelectorAll('.lvl').forEach(row=>{const box=row.nextElementSibling;if(!box||!box.classList.contains('lvabout'))return;let open=null;
+  const show=k=>{open=k;box.hidden=!k;box.querySelectorAll('[data-a]').forEach(d=>d.hidden=d.dataset.a!==k);row.querySelectorAll('.lvi').forEach(b=>b.setAttribute('aria-expanded',String(b.dataset.i===k)));};
+  row.querySelectorAll('.lvi').forEach(b=>b.addEventListener('click',()=>show(open===b.dataset.i?null:b.dataset.i)));
+  box.querySelector('.lvx').addEventListener('click',()=>show(null));
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&open)show(null);});});})();
 let start=fromHash();if(!inLv(start))start=0;
 camPos.set(...STEPS[start].cam[0]);camTgt.set(...STEPS[start].cam[1]);
 const e0=placeOf(STEPS[start].E),h0=placeOf(STEPS[start].H);E.position.copy(e0.p);E.rotation.y=e0.yaw;H.position.copy(h0.p);H.rotation.y=h0.yaw;
