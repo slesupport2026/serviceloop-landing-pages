@@ -39,6 +39,10 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--f-b
 .lvx:hover{color:var(--ink)}
 .lvi:focus-visible,.lvx:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 html.embed .lvabout{display:none}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(20px,env(safe-area-inset-bottom,0px));z-index:50;display:inline-flex;align-items:center;gap:6px;height:48px;padding:0 18px 0 14px;border-radius:999px;border:0;background:#FDC33E;color:#0A0A0A;font:800 14px "Montserrat","Segoe UI",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+.totop[hidden]{display:none}.totop svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.totop:hover{background:#fff}.totop:focus-visible{outline:2px solid #fff;outline-offset:3px}
+html.embed .totop{display:none}
 .jump{display:flex;flex-wrap:wrap;gap:6px}
 .jump a{font:700 13px var(--f-head);color:var(--ink);text-decoration:none;min-width:32px;height:32px;padding:0 8px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid var(--line);background:#121c2b}
 .jump a:hover{background:var(--accent);color:#0A0A0A}
@@ -1299,6 +1303,7 @@ html.embed .lvl{display:none}</style>
 </section>
 </div>
   <p class="foot">Sources: “Latest updates 11/10/26 level 1 opt process” and “Demand call edits from level 1 opt process” (Joseph Lucanie). Stalls and objections: Joe's own words from the training videos (Circle, $1M+ Sales › 8. They Object; lesson number on each) and the Level 0 and Level I objection guides, trimmed to the core. Compliment-and-relate lines are a suggestion pending Joe's OK. Drill mode hides the electrician's lines; tap a line to reveal it.</p>
+<button type="button" class="totop" id="toTop" hidden aria-label="Back to the top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12l6-6 6 6"/><path d="M6 19l6-6 6 6"/></svg><span>Top</span></button>
 </div>
 <script>
 (function(){const b=document.body;
@@ -1321,6 +1326,7 @@ html.embed .lvl{display:none}</style>
   row.querySelectorAll('.lvi').forEach(b=>b.addEventListener('click',()=>show(open===b.dataset.i?null:b.dataset.i)));
   box.querySelector('.lvx').addEventListener('click',()=>show(null));
   addEventListener('keydown',e=>{if(e.key==='Escape'&&open)show(null);});});})();
+(function(){const t=document.getElementById('toTop');const f=()=>{t.hidden=scrollY<500;};addEventListener('scroll',f,{passive:true});f();t.addEventListener('click',()=>{scrollTo({top:0,behavior:'smooth'});});})();
 </script>
 </body>
 </html>

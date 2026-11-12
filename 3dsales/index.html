@@ -163,6 +163,9 @@ body.shot .lvbadge,body.shot .lvload{display:none}
 .tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .panel{display:flex;flex-direction:column;gap:20px}
 .panel[hidden],.lvl[hidden]{display:none}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(20px,env(safe-area-inset-bottom,0px));z-index:50;display:inline-flex;align-items:center;gap:6px;height:48px;padding:0 18px 0 14px;border-radius:999px;border:0;background:#FDC33E;color:#0A0A0A;font:800 14px "Montserrat","Segoe UI",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+.totop[hidden]{display:none}.totop svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.totop:hover{background:#fff}.totop:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .lvl[hidden]+.lvabout{display:none}
 @media (max-width:560px){.brandbar{gap:10px}.brandbar img{height:34px}.brandbar b{font-size:13px;white-space:nowrap}.brandbar small{display:none}.tabs{overflow-x:auto;scrollbar-width:none}.tabs button{padding:10px 10px;font-size:13px;white-space:nowrap}.title h1{font-size:30px}}
 .agenda-frame{width:100%;min-height:900px;border:0;display:block;background:var(--bg)}
@@ -220,6 +223,7 @@ body.shot .brandbar,body.shot .title,body.shot .tabs,body.shot .foot{display:non
   <section class="panel" id="pAgenda" role="tabpanel" aria-labelledby="tAgenda" hidden>
     <iframe class="agenda-frame" id="agendaFrame" title="Agenda card" data-src="agenda.html?embed" loading="lazy"></iframe>
   </section>
+  <button type="button" class="totop" id="toTop" hidden aria-label="Back to the top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12l6-6 6 6"/><path d="M6 19l6-6 6 6"/></svg><span>Top</span></button>
   <footer class="foot"><span>Property of Service Loop Electrical Inc</span><a href="https://serviceloopelectrical.com">ServiceLoopElectrical.com</a><a href="mailto:LevelUp@serviceloopelectrical.com">LevelUp@serviceloopelectrical.com</a></footer>
 </div>
 <script>
@@ -240,7 +244,8 @@ body.shot .brandbar,body.shot .title,body.shot .tabs,body.shot .foot{display:non
   // one level switch for the page: on the Script tab it reloads the script at that level; hidden on the Agenda tab
   const lv=document.getElementById('lvl');
   lv.addEventListener('click',e=>{if(!e.target.closest('[data-l]')||FR[1].closest('section').hidden)return;setTimeout(()=>show(1,false),0);});
-  const h=HASH.indexOf(location.hash);if(h>0)show(h,false);
+  const tt=document.getElementById('toTop'),ttf=()=>{tt.hidden=FR[1].closest('section').hidden||scrollY<500;};addEventListener('scroll',ttf,{passive:true});tabs.forEach(t=>t.addEventListener('click',()=>setTimeout(ttf,0)));tt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+  const h=HASH.indexOf(location.hash);if(h>0)show(h,false);ttf();
 })();
 </script>
 
