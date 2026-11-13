@@ -136,6 +136,7 @@ details.rates:not([open]) summary .chev::after{content:" \25BE"}
 .c-grip{grid-area:grip} .c-act{grid-area:act;display:flex;gap:2px;justify-content:flex-end} .c-desc{grid-area:desc} .c-hrs{grid-area:hrs} .c-mat{grid-area:mat} .c-sub{grid-area:sub} .c-misc{grid-area:misc} .c-price{grid-area:price}
 .grid-head{padding:8px 0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .grid-head .num,.grid-head .c-price{text-align:right}
+.grid-head .c-price{font-family:inherit;font-size:inherit;white-space:nowrap}
 .row{padding:4px 0;border-top:1px solid var(--line)}
 .row input{width:100%;background:transparent;border:1px solid transparent;border-radius:10px;padding:8px 9px}
 .row input:hover{border-color:var(--line)}
@@ -641,7 +642,7 @@ body.on-home .toast{bottom:calc(74px + env(safe-area-inset-bottom,0px))}
   .b-acts .btn{flex:1}
 }
 
-.sheet-view{position:fixed;inset:0;z-index:50;background:var(--bg);color:var(--ink);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sheet-view{position:fixed;inset:0;z-index:50;background:var(--bg);color:var(--ink);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:var(--kb,0px)}
 .sheet-view .p-bar{background:var(--night)}
 .sheet-view .p-page{max-width:880px;padding-block:18px 60px;display:grid;gap:14px;align-content:start}
 .set-title{font-family:var(--f-display);font-size:18px;font-weight:600}
@@ -819,10 +820,10 @@ details.tx:not([open]) summary .chev::before{content:""}
     <h2 class="sec-title" style="margin-bottom:4px">Client</h2>
     <p class="fin-ex" id="clientHint" style="margin:0 0 12px">Type the client for now. Once your CRM is connected under Settings &rarr; Connections, this becomes a search of your client list.</p>
     <div class="fields">
-      <div class="crm-pick"><label class="f"><span>Client</span><input id="jobCustomer" data-k="job.customer" list="clientList" autocomplete="off" placeholder="e.g. Hansen residence"></label>
+      <div class="crm-pick"><label class="f"><span>Client</span><input id="jobCustomer" data-k="job.customer" list="clientList" name="ob-client" autocomplete="ob-client" placeholder="e.g. Hansen residence"></label>
         <div class="crm-menu" id="crmMenu" role="listbox" hidden></div><div class="crm-tag" id="crmTag" hidden></div></div>
-      <label class="f"><span>Address</span><input id="jobAddress" data-k="job.address" autocomplete="off" placeholder="e.g. 1234 Oak St, Lakeville"></label>
-      <label class="f"><span>Job name</span><input id="jobName" data-k="job.name" placeholder="e.g. Panel upgrade"></label>
+      <label class="f"><span>Address</span><input id="jobAddress" data-k="job.address" name="ob-site" autocomplete="ob-site" placeholder="e.g. 1234 Oak St, Lakeville"></label>
+      <label class="f"><span>Job name</span><input id="jobName" data-k="job.name" name="ob-job" autocomplete="off" placeholder="e.g. Panel upgrade"></label>
     </div>
     <datalist id="clientList"></datalist>
   </section>
@@ -920,13 +921,13 @@ details.tx:not([open]) summary .chev::before{content:""}
     <h2 class="sec-title">Your brand</h2><p class="rate-line" id="brandLine"></p>
     <p class="fin-ex">Your logo, colors and fonts go on everything the homeowner sees.</p>
     <div class="fields">
-      <label class="f"><span>Company name</span><input id="bCompany" data-b="company" autocomplete="organization"></label>
-      <label class="f"><span>Phone</span><input id="bPhone" data-b="phone" inputmode="tel" autocomplete="tel"></label>
+      <label class="f"><span>Company name</span><input id="bCompany" data-b="company" autocomplete="section-company organization"></label>
+      <label class="f"><span>Phone</span><input id="bPhone" data-b="phone" inputmode="tel" autocomplete="section-company tel"></label>
       <label class="f"><span>Tagline (presentation footer)</span><input id="bTagline" data-b="tagline" placeholder="e.g. Lifetime craftsmanship guarantee"></label>
       <label class="f"><span>Footer line on the presentation</span><input id="bFooter" data-b="footer" placeholder="e.g. Licensed, insured, and review-backed"></label>
     </div>
     <div class="brand-row" style="margin-top:14px;align-items:flex-end">
-      <label class="f" style="flex:1;min-width:200px"><span>Website</span><input id="bSite" data-b="website" inputmode="url" autocomplete="url" placeholder="yourcompany.com"></label>
+      <label class="f" style="flex:1;min-width:200px"><span>Website</span><input id="bSite" data-b="website" inputmode="url" autocomplete="section-company url" placeholder="yourcompany.com"></label>
       <button type="button" class="btn primary" id="bPull">Pull my brand from my website</button>
     </div>
     <p class="fin-ex" id="bStatus" style="margin-top:8px"></p>
@@ -995,10 +996,10 @@ details.tx:not([open]) summary .chev::before{content:""}
         </div>
         <div>
           <div class="fields">
-            <label class="f"><span>Your name</span><input id="meName" autocomplete="name" placeholder="e.g. Jake Thompson"></label>
+            <label class="f"><span>Your name</span><input id="meName" autocomplete="section-tech name" placeholder="e.g. Jake Thompson"></label>
             <label class="f"><span>Title</span><input id="tTitle" data-t="title" placeholder="e.g. Service technician"></label>
-            <label class="f"><span>Mobile</span><input id="tPhone" data-t="phone" inputmode="tel" autocomplete="tel" placeholder="Shown on the presentation if filled in"></label>
-            <label class="f"><span>Email</span><input id="tEmail" data-t="email" inputmode="email" autocomplete="email"></label>
+            <label class="f"><span>Mobile</span><input id="tPhone" data-t="phone" inputmode="tel" autocomplete="section-tech tel" placeholder="Shown on the presentation if filled in"></label>
+            <label class="f"><span>Email</span><input id="tEmail" data-t="email" inputmode="email" autocomplete="section-tech email"></label>
             <label class="f"><span>License number</span><input id="tLicense" data-t="license" autocomplete="off" placeholder="e.g. Master electrician #EA123456"></label>
           </div>
           <label class="f" style="margin-top:12px"><span>A line about you</span><textarea id="tBio" data-t="bio" rows="2" maxlength="280" placeholder="e.g. 12 years in the trade, born and raised in Lakeville, dad of three."></textarea></label>
@@ -1500,6 +1501,13 @@ details.tx:not([open]) summary .chev::before{content:""}
     document.getElementById('toast').hidden = true; paintFields(); render(); save();
   });
 
+  /* on-screen keyboard (iPad/phone): pad full-screen sheets by its height so every field can scroll above it */
+  if (window.visualViewport) (function(){
+    var vv = window.visualViewport, root = document.documentElement;
+    function kb(){ var h = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop)); root.style.setProperty('--kb', (h > 80 ? h : 0) + 'px'); }
+    vv.addEventListener('resize', kb); vv.addEventListener('scroll', kb); kb();
+  })();
+
   /* ---------- editing the sheet ---------- */
   var opts = document.getElementById('options'), custT = null;
   opts.addEventListener('input', function(e){
@@ -1621,6 +1629,7 @@ details.tx:not([open]) summary .chev::before{content:""}
     applyPricing();
   });
   document.getElementById('finAdd').addEventListener('click', function(){
+    if (document.activeElement && finTable.contains(document.activeElement)) document.activeElement.blur();
     var cf = CP().fin; cf.terms.push({ apr:'', months:'' }); if (cf.show < 0) cf.show = cf.terms.length - 1;
     applyPricing(); focusLater('finApr' + (cf.terms.length - 1));
   });
