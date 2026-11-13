@@ -667,6 +667,35 @@ body.on-home .toast{bottom:calc(74px + env(safe-area-inset-bottom,0px))}
 .pill{border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;border:1px solid var(--line);white-space:nowrap}
 .pill.on{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%,transparent)}
 .pill.soon{color:var(--muted)}
+.pill{color:var(--muted)}
+.conn-act{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.conn-acct{margin:0;font-size:14px}
+.conn-msg{margin:0;font-size:14px;font-weight:600}
+.conn-msg.bad{color:var(--bad)}
+.conn-msg.ok{color:var(--good)}
+.conn-key{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:end}
+.conn-key .btn{align-self:end}
+.howto{border:1px solid var(--line);border-radius:12px;background:var(--surface);font-size:14px}
+.howto summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:9px 12px;font-weight:700}
+.howto summary::-webkit-details-marker{display:none}
+.howto .i{width:20px;height:20px;border-radius:50%;background:var(--red);color:var(--red-ink);display:grid;place-items:center;font-size:12px;font-style:italic;font-family:Georgia,serif;flex:none}
+.howto ol{margin:0;padding:0 14px 0 34px;display:grid;gap:6px}
+.howto p{margin:10px 12px 12px;color:var(--muted)}
+.conn-link{gap:12px}
+.conn-link > p{max-width:70ch}
+.link-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:10px}
+@media (max-width:640px){ .link-grid{grid-template-columns:minmax(0,1fr)} }
+.conn-note{font-size:13px !important}
+.conn-note:empty{display:none}
+.conn.is-on{border-color:color-mix(in srgb,var(--good) 45%,var(--line))}
+.crm-pick{position:relative}
+.crm-menu{position:absolute;left:0;right:0;top:100%;margin-top:4px;z-index:30;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px -14px rgba(0,0,0,.35);max-height:320px;overflow:auto;padding:4px}
+.crm-menu button{display:block;width:100%;text-align:left;background:none;border:0;border-radius:9px;padding:8px 10px;color:var(--ink)}
+.crm-menu button:hover,.crm-menu button.hi{background:var(--red-soft)}
+.crm-menu small{display:block;color:var(--muted);font-size:12.5px}
+.crm-menu .crm-none{padding:9px 10px;color:var(--muted);font-size:14px}
+.crm-tag{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:13px;font-weight:700;color:var(--good)}
+.crm-tag button{background:none;border:0;color:var(--muted);text-decoration:underline;font-weight:600;font-size:13px;padding:0}
 .book-list{display:grid;gap:2px;margin-top:12px}
 .book-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:9px 10px;border-radius:10px}
 .book-row:nth-child(odd){background:var(--sunk)}
@@ -790,7 +819,8 @@ details.tx:not([open]) summary .chev::before{content:""}
     <h2 class="sec-title" style="margin-bottom:4px">Client</h2>
     <p class="fin-ex" id="clientHint" style="margin:0 0 12px">Type the client for now. Once your CRM is connected under Settings &rarr; Connections, this becomes a search of your client list.</p>
     <div class="fields">
-      <label class="f"><span>Client</span><input id="jobCustomer" data-k="job.customer" list="clientList" autocomplete="off" placeholder="e.g. Hansen residence"></label>
+      <div class="crm-pick"><label class="f"><span>Client</span><input id="jobCustomer" data-k="job.customer" list="clientList" autocomplete="off" placeholder="e.g. Hansen residence"></label>
+        <div class="crm-menu" id="crmMenu" role="listbox" hidden></div><div class="crm-tag" id="crmTag" hidden></div></div>
       <label class="f"><span>Address</span><input id="jobAddress" data-k="job.address" autocomplete="off" placeholder="e.g. 1234 Oak St, Lakeville"></label>
       <label class="f"><span>Job name</span><input id="jobName" data-k="job.name" placeholder="e.g. Panel upgrade"></label>
     </div>
@@ -987,15 +1017,39 @@ details.tx:not([open]) summary .chev::before{content:""}
       <p class="fin-ex">Connect the tools you already use. Each connection is made once for your account, and the SLE apps you sign into can use it.</p>
       <h3 class="conn-h">CRM</h3>
       <div class="conn-grid">
-        <article class="conn"><div class="conn-top"><b>Jobber</b><span class="pill soon">Coming next</span></div><p>Search your Jobber clients when you start an estimate, and send the option they chose to Jobber as a quote with its line items.</p><button type="button" class="btn" disabled>Connect Jobber</button></article>
-        <article class="conn"><div class="conn-top"><b>Housecall Pro</b><span class="pill soon">Coming soon</span></div><p>Paste the API key from your Housecall Pro account. Your Housecall Pro plan has to include API access.</p><button type="button" class="btn" disabled>Connect Housecall Pro</button></article>
-        <article class="conn"><div class="conn-top"><b>Any CRM, by link</b><span class="pill on" id="crmPill">Works now</span></div><p>Send to CRM copies the option the customer chose and opens this link in a new tab, so the client, line items and deposit go in there.</p>
-    <div class="rate-grid">
-      <label class="f"><span>CRM name</span><input id="crmName" data-setup="crmName" autocomplete="off"></label>
-      <label class="f crm-url"><span>CRM link</span><input id="crmUrl" data-setup="crmUrl" inputmode="url" autocomplete="off"></label>
-    </div>
+        <article class="conn" id="cJobber"><div class="conn-top"><b>Jobber</b><span class="pill" data-pill>Not connected</span></div>
+          <p>Search your Jobber clients from the Client box, and Send to Jobber makes a quote on that client with the option they chose, line by line.</p>
+          <p class="conn-acct" data-acct hidden></p>
+          <div class="conn-act"><button type="button" class="btn primary" id="jobberGo">Connect Jobber</button><button type="button" class="gate-link" data-disc hidden>Disconnect</button></div>
+          <p class="conn-msg" data-msg hidden></p>
+        </article>
+        <article class="conn" id="cHcp"><div class="conn-top"><b>Housecall Pro</b><span class="pill" data-pill>Not connected</span></div>
+          <p>Search your Housecall Pro customers from the Client box, and Send to Housecall Pro makes an estimate with the option they chose.</p>
+          <details class="howto"><summary><span class="i" aria-hidden="true">i</span>How do I get my API key?</summary>
+            <ol>
+              <li>Sign in to Housecall Pro on a computer as an <b>Admin</b>. Office staff logins can't make keys.</li>
+              <li>Go to <b>My Apps</b> &rarr; <b>All Apps</b> and search for <b>API Key Management</b>.</li>
+              <li>Open it and click <b>Generate API Key</b>.</li>
+              <li>Name it <i>Option Builder</i>, set Permissions to <b>Full access</b> (Read-only can search but can't send estimates), and click <b>Generate key</b>.</li>
+              <li>Copy the key and paste it below. Housecall Pro only shows it once.</li>
+            </ol>
+            <p>API keys come with the Housecall Pro <b>MAX</b> plan. If you don't see API Key Management, your plan doesn't include it. To cut this app off later, delete the key in the same place.</p>
+          </details>
+          <div class="conn-key" data-keyrow><label class="f"><span>API key</span><input id="hcpKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Housecall Pro API key"></label><button type="button" class="btn primary" id="hcpGo">Connect</button></div>
+          <p class="conn-acct" data-acct hidden></p>
+          <div class="conn-act" data-discrow hidden><button type="button" class="gate-link" data-disc>Disconnect</button></div>
+          <p class="conn-msg" data-msg hidden></p>
         </article>
       </div>
+      <h3 class="conn-h">No connection? Use a link</h3>
+      <article class="conn conn-link" id="cLink">
+        <p id="linkLead">If your CRM isn't Jobber or Housecall Pro, you can still skip the retyping. When the customer picks an option, the <b>Send</b> button copies that option and its line items, then opens your CRM in a new tab so you can paste them into a quote. The label is the name on that button.</p>
+        <div class="link-grid">
+          <label class="f"><span>Button label</span><input id="crmName" data-setup="crmName" autocomplete="off" placeholder="e.g. ServiceTitan"></label>
+          <label class="f"><span>Address of your CRM</span><input id="crmUrl" data-setup="crmUrl" inputmode="url" autocomplete="off" placeholder="https://"></label>
+        </div>
+        <p class="conn-note" id="linkNote"></p>
+      </article>
       <h3 class="conn-h">Call transcripts</h3>
       <div class="conn-grid">
         <article class="conn"><div class="conn-top"><b>Paste or upload</b><span class="pill on">Works now</span></div><p>Open Call transcript on any estimate and paste it or drop the file. Fill observations drafts the four boxes from it.</p></article>
@@ -1418,6 +1472,7 @@ details.tx:not([open]) summary .chev::before{content:""}
     document.querySelectorAll('[data-k]').forEach(function(el){
       var k = el.getAttribute('data-k').split('.'); el.value = (S[k[0]] && S[k[0]][k[1]]) || '';
     });
+    if (typeof paintCrmTag === "function") paintCrmTag();
   }
 
   /* ---------- finding things ---------- */
@@ -1546,7 +1601,7 @@ details.tx:not([open]) summary .chev::before{content:""}
   document.getElementById('rSsr').addEventListener('input', function(e){ CP().rates.ssr = e.target.value; applyPricing(); });
   document.getElementById('rCons').addEventListener('input', function(e){ CP().rates.consumable = e.target.value; applyPricing(); });
   document.querySelectorAll('[data-setup]').forEach(function(el){
-    el.addEventListener('input', function(){ CP().rates[el.getAttribute('data-setup')] = el.value; applyPricing(); });
+    el.addEventListener('input', function(){ CP().rates[el.getAttribute('data-setup')] = el.value; applyPricing(); paintConn(); });
   });
   var finTable = document.getElementById('finTable');
   finTable.addEventListener('input', function(e){
@@ -2129,14 +2184,16 @@ details.tx:not([open]) summary .chev::before{content:""}
   })(webDictation());
 
   /* ---------- after the customer chooses: technician steps ---------- */
-  function crmName(){ return String(CP().rates.crmName || '').trim() || 'CRM'; }
-  function crmHref(){ var u = String(CP().rates.crmUrl || '').trim(); return /^https:\/\//i.test(u) ? u : ''; }
+  function crmOn(){ return typeof CRM !== "undefined" && CRM && CRM.provider ? CRM.provider : null; }
+  function crmName(){ if (crmOn()) return CRM_NAMES[CRM.provider]; return String(CP().rates.crmName || '').trim() || 'CRM'; }
+  function crmHref(){ if (crmOn()) return ""; var u = String(CP().rates.crmUrl || '').trim(); return /^https:\/\//i.test(u) ? u : ''; }
   function paintFlow(){
     var el = document.getElementById('flow'), ch = S.choice; if (!el) return;
     if (!ch) { el.innerHTML = ''; return; }
     var h = '<span class="chosen-chip">Chosen: <b>' + esc(ch.tier) + '</b> &middot; ' + esc(ch.initials) + '</span>';
     var href = crmHref();
-    h += href
+    if (S.crm && S.crm.url) h += '<a class="flow-btn done" id="crmGo" href="' + esc(S.crm.url) + '" target="_blank" rel="noopener">&#10003; ' + esc(S.crm.ref || "Sent") + ' in ' + esc(CRM_NAMES[S.crm.provider] || crmName()) + '</a>';
+    else h += href
       ? '<a class="flow-btn' + (S.crm ? ' done' : '') + '" id="crmGo" href="' + esc(href) + '" target="_blank" rel="noopener">' + (S.crm ? '&#10003; ' : '') + 'Send to ' + esc(crmName()) + '</a>'
       : '<button type="button" class="flow-btn' + (S.crm ? ' done' : '') + '" id="crmGo">' + (S.crm ? '&#10003; ' : '') + 'Send to ' + esc(crmName()) + '</button>';
     if (S.crm || S.wo) h += '<button type="button" class="flow-btn" id="woGo">' + (S.wo ? 'Open work order' : 'Send to Work Order') + '</button>';
@@ -2166,6 +2223,8 @@ details.tx:not([open]) summary .chev::before{content:""}
   document.getElementById('flow').addEventListener('click', function(e){
     var t = e.target.closest('a,button'); if (!t) return;
     if (t.id === 'crmGo') {
+      if (S.crm && S.crm.url) return;
+      if (crmOn()) { crmPush(t); return; }
       // the link itself opens the CRM in a new tab; this copies what goes into it
       copyText(crmText()).then(function(ok){
         showToast(ok ? 'Copied the ' + S.choice.tier + ' option and its line items. Paste them into ' + crmName() + ' and send the deposit request.'
@@ -2180,6 +2239,202 @@ details.tx:not([open]) summary .chev::before{content:""}
       snapshot('Choice cleared' + (S.wo ? ', with its work order' : '') + '.');
       delete S.choice; delete S.crm; delete S.wo; S.status = 'presented'; save(); paintFlow(); paintHead();
     }
+  });
+
+
+  /* ---------- CRM connection: Jobber or Housecall Pro, through the ob-crm function ----------
+     Tokens and API keys stay on the server. The browser only knows which CRM is connected. */
+  var CRM = { provider:null, account:null, known:false, offline:false };
+  var CRM_NAMES = { jobber:'Jobber', hcp:'Housecall Pro' };
+  var crmReturn = (function(){ try { var q = new URLSearchParams(location.search); return q.get('crm') ? { p:q.get('crm'), err:q.get('crm_error') || '' } : null; } catch(e){ return null; } })();
+  if (crmReturn) { try { history.replaceState(history.state, '', location.pathname); } catch(e){} }
+  function crmLabel(){ return CRM.provider ? CRM_NAMES[CRM.provider] : null; }
+  function crmCall(action, extra){
+    return token().then(function(t){
+      return fetch(SB_URL + '/functions/v1/ob-crm', { method:'POST',
+        headers:{ 'apikey':ANON, 'Authorization':'Bearer ' + t, 'Content-Type':'application/json' },
+        body: JSON.stringify(Object.assign({ action:action }, extra || {})) })
+      .then(function(r){ if (r.status === 404) return { status:'missing' }; return r.json().catch(function(){ return { status:'error' }; }); });
+    }).catch(function(){ return { status:'missing' }; });
+  }
+  function crmStatus(){
+    return crmCall('status').then(function(res){
+      CRM.known = true; CRM.offline = !res || res.status !== 'ok';
+      CRM.provider = res && res.status === 'ok' ? res.provider : null; CRM.account = res && res.account || null;
+      paintConn(); paintCrmUi(); paintFlow();
+      if (crmReturn) {
+        var r = crmReturn; crmReturn = null;
+        openSettings('conn');
+        connMsg(r.p === 'hcp' ? 'cHcp' : 'cJobber', r.err ? r.err : (CRM.provider === r.p ? 'Connected. Pick clients from ' + crmLabel() + ' in the Client box.' : ''), !!r.err);
+      }
+    });
+  }
+  function connMsg(card, text, bad){
+    var m = document.querySelector('#' + card + ' [data-msg]'); if (!m) return;
+    m.hidden = !text; m.textContent = text || ''; m.className = 'conn-msg' + (text ? (bad ? ' bad' : ' ok') : '');
+  }
+  function paintConn(){
+    var on = CRM.provider;
+    [['jobber','cJobber'],['hcp','cHcp']].forEach(function(p){
+      var card = document.getElementById(p[1]); if (!card) return;
+      var mine = on === p[0], pill = card.querySelector('[data-pill]'), acct = card.querySelector('[data-acct]');
+      card.classList.toggle('is-on', mine);
+      pill.className = 'pill' + (mine ? ' on' : '');
+      pill.textContent = mine ? 'Connected' : (CRM.offline ? 'Turning on shortly' : 'Not connected');
+      acct.hidden = !mine; acct.innerHTML = mine ? 'Connected to <b>' + esc(CRM.account || CRM_NAMES[p[0]]) + '</b>.' : '';
+      [].forEach.call(card.querySelectorAll('[data-disc]'), function(b){ b.hidden = !mine; b.textContent = 'Disconnect'; delete b.dataset.arm; });
+      var dr = card.querySelector('[data-discrow]'); if (dr) dr.hidden = !mine;
+      var kr = card.querySelector('[data-keyrow]'); if (kr) kr.hidden = mine;
+      var how = card.querySelector('.howto'); if (how) how.hidden = mine;
+    });
+    var jg = document.getElementById('jobberGo');
+    if (jg) { jg.hidden = on === 'jobber'; jg.textContent = on === 'hcp' ? 'Switch to Jobber' : 'Connect Jobber'; }
+    var hg = document.getElementById('hcpGo'); if (hg) hg.textContent = on === 'jobber' ? 'Switch to this' : 'Connect';
+    var note = document.getElementById('linkNote');
+    if (note) note.textContent = on ? 'You don’t need this while ' + crmLabel() + ' is connected: Send to ' + crmLabel() + ' makes the quote for you. If it ever can’t reach ' + crmLabel() + ', it copies the option instead so nothing is lost.'
+                                    : (crmHref() ? '' : 'Leave the address blank and the button just copies the option.');
+  }
+  function paintCrmUi(){
+    var el = document.getElementById('jobCustomer'), hint = document.getElementById('clientHint'), nm = crmLabel();
+    if (el) { if (nm) el.removeAttribute('list'); else el.setAttribute('list', 'clientList'); el.placeholder = nm ? 'Search your ' + nm + ' clients' : 'e.g. Hansen residence'; }
+    if (hint) hint.textContent = nm ? 'Start typing to search ' + nm + '. Pick the client so Send to ' + nm + ' can put the quote on them.'
+                                    : 'Type the client for now. Connect Jobber or Housecall Pro under Settings → Connections and this becomes a search of your client list.';
+    paintCrmTag();
+  }
+  function paintCrmTag(){
+    var tag = document.getElementById('crmTag'); if (!tag) return;
+    var c = S.job && S.job.crm;
+    tag.hidden = !c;
+    tag.innerHTML = c ? '&#10003; Linked to this ' + esc(CRM_NAMES[c.p] || 'CRM') + ' client <button type="button" data-unlink>Unlink</button>' : '';
+  }
+  document.getElementById('crmTag').addEventListener('click', function(e){
+    if (!e.target.closest('[data-unlink]')) return;
+    delete S.job.crm; paintCrmTag(); save();
+  });
+
+  /* client search in the Client box */
+  (function(){
+    var input = document.getElementById('jobCustomer'), menu = document.getElementById('crmMenu');
+    var timer = null, seq = 0, hits = [], hi = -1;
+    function close(){ menu.hidden = true; hi = -1; seq++; }
+    function paint(){
+      if (!hits.length) { menu.innerHTML = '<div class="crm-none">No ' + esc(crmLabel()) + ' clients match. Keep typing, or leave it as a new client.</div>'; return; }
+      menu.innerHTML = hits.map(function(c, i){
+        return '<button type="button" role="option" data-hit="' + i + '"' + (i === hi ? ' class="hi"' : '') + '><b>' + esc(c.name) + '</b>' +
+          (c.sub ? ' <span class="muted">· ' + esc(c.sub) + '</span>' : '') +
+          '<small>' + esc(c.address || c.email || c.phone || 'No address on file') + '</small></button>';
+      }).join('');
+    }
+    function pick(c){
+      S.job.customer = c.name;
+      if (c.address) S.job.address = c.address;
+      S.job.crm = { p:CRM.provider, id:c.id, prop:c.prop || null, name:c.name };
+      paintFields(); paintCrmTag(); close(); save();
+      showToast('Linked to ' + c.name + ' in ' + crmLabel() + '.', false);
+    }
+    input.addEventListener('input', function(){
+      if (S.job.crm && norm(input.value) !== norm(S.job.crm.name)) { delete S.job.crm; paintCrmTag(); }
+      if (!CRM.provider) return;
+      clearTimeout(timer);
+      var q = input.value.trim();
+      if (q.length < 2) { close(); return; }
+      timer = setTimeout(function(){
+        var my = ++seq;
+        menu.hidden = false; menu.innerHTML = '<div class="crm-none">Searching ' + esc(crmLabel()) + '&hellip;</div>';
+        crmCall('search', { q:q }).then(function(res){
+          if (my !== seq) return;
+          if (!res || res.status !== 'ok') { menu.innerHTML = '<div class="crm-none">' + esc((res && res.reason) || 'Could not reach ' + crmLabel() + '. Type the client and keep going.') + '</div>'; return; }
+          hits = res.clients || []; hi = hits.length ? 0 : -1; paint();
+        });
+      }, 300);
+    });
+    input.addEventListener('keydown', function(e){
+      if (menu.hidden || !hits.length) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); hi = (hi + (e.key === 'ArrowDown' ? 1 : hits.length - 1)) % hits.length; paint(); }
+      else if (e.key === 'Enter' && hi > -1) { e.preventDefault(); pick(hits[hi]); }
+      else if (e.key === 'Escape') close();
+    });
+    input.addEventListener('blur', function(){ setTimeout(close, 180); });
+    menu.addEventListener('mousedown', function(e){ e.preventDefault(); });
+    menu.addEventListener('click', function(e){ var b = e.target.closest('[data-hit]'); if (b) pick(hits[Number(b.getAttribute('data-hit'))]); });
+  })();
+
+  /* Send to Jobber / Housecall Pro: make the quote on the linked client */
+  function crmMessage(){
+    var ch = S.choice, out = ['Approved option: ' + ch.tier + ' — ' + money2(ch.price) + ' (initialed ' + ch.initials + ', ' + fmtDate(ch.at) + ')'];
+    if (ch.tech || techName()) out.push('Technician: ' + (ch.tech || techName()));
+    if (ch.monthly) out.push('Financing shown: ' + money(ch.monthly) + '/mo, ' + ch.term);
+    return out.join('\n');
+  }
+  function crmPush(btn){
+    var ch = S.choice, nm = crmLabel(), pick = S.job.crm;
+    if (!pick || pick.p !== CRM.provider || !pick.id) {
+      copyText(crmText());
+      showToast('Pick the client from your ' + nm + ' list in the Client box, then tap Send again. The option is copied in the meantime.', false);
+      var el = document.getElementById('jobCustomer');
+      if (el) { el.scrollIntoView({ block:'center', behavior: reduced() ? 'auto' : 'smooth' }); setTimeout(function(){ el.focus(); }, 300); }
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Sending to ' + nm + '…';
+    crmCall('push', {
+      client: { id:pick.id, prop:pick.prop || null },
+      title: String(S.job.name || '').trim() || (ch.tier + ' option'),
+      option: ch.tier, message: crmMessage(),
+      lines: ch.lines.map(function(L){
+        var d = String(L.desc || '').trim() || 'Line item', first = d.split('\n')[0];
+        return { name: first.length > 80 ? first.slice(0, 77) + '…' : first, description: d === first && first.length <= 80 ? '' : d, price: L.price };
+      })
+    }).then(function(res){
+      if (res && res.status === 'ok') {
+        S.crm = { at: new Date().toISOString(), provider: CRM.provider, ref: res.ref || '', url: res.url || '' };
+        save(); paintFlow();
+        showToast((res.ref || 'The quote') + ' is in ' + nm + ' with the ' + ch.tier + ' option. Send the deposit request from there.', false);
+        return;
+      }
+      paintFlow();
+      var why = res && res.reason;
+      if (!res || res.status === 'missing') why = 'Sending to ' + nm + ' turns on shortly.';
+      copyText(crmText()).then(function(ok){
+        showToast((why || 'That didn’t reach ' + nm + '.') + (ok ? ' The option and its lines are copied so you can paste them in.' : ''), false);
+      });
+    });
+  }
+
+  /* Connections buttons */
+  document.getElementById('jobberGo').addEventListener('click', function(){
+    var b = this; b.disabled = true; connMsg('cJobber', '');
+    crmCall('jobber_start').then(function(res){
+      b.disabled = false;
+      if (res && res.status === 'ok' && res.url) { flushCloud(); try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} location.href = res.url; return; }
+      connMsg('cJobber', res && res.status === 'not_ready' ? 'Jobber is waiting on one switch on our side. It turns on shortly.'
+                       : (res && res.status !== 'missing' && res.reason) || 'Jobber connections turn on shortly.', true);
+    });
+  });
+  document.getElementById('hcpGo').addEventListener('click', function(){
+    var b = this, k = document.getElementById('hcpKey'), key = k.value.trim();
+    if (!key) { connMsg('cHcp', 'Paste the API key first. Tap “How do I get my API key?” for the steps.', true); k.focus(); return; }
+    b.disabled = true; b.textContent = 'Checking…'; connMsg('cHcp', '');
+    crmCall('hcp_connect', { key:key }).then(function(res){
+      b.disabled = false;
+      if (res && res.status === 'ok') {
+        k.value = ''; CRM.provider = 'hcp'; CRM.account = res.account || null; CRM.offline = false;
+        paintConn(); paintCrmUi(); paintFlow();
+        connMsg('cHcp', 'Connected. Pick customers from Housecall Pro in the Client box.', false); return;
+      }
+      paintConn();
+      connMsg('cHcp', !res || res.status === 'missing' ? 'Housecall Pro connections turn on shortly.' : (res.reason || 'That key didn’t work.'), true);
+    });
+  });
+  document.getElementById('connBox').addEventListener('click', function(e){
+    var b = e.target.closest('[data-disc]'); if (!b) return;
+    var card = b.closest('.conn').id;
+    if (!b.dataset.arm) { b.dataset.arm = '1'; b.textContent = 'Tap again to disconnect'; setTimeout(function(){ if (b.dataset.arm) { delete b.dataset.arm; b.textContent = 'Disconnect'; } }, 4000); return; }
+    b.disabled = true;
+    crmCall('disconnect').then(function(res){
+      b.disabled = false;
+      if (res && res.status === 'ok') { CRM.provider = null; CRM.account = null; paintConn(); paintCrmUi(); paintFlow(); connMsg(card, 'Disconnected.', false); }
+      else connMsg(card, (res && res.reason) || 'Could not disconnect. Try again.', true);
+    });
   });
 
   /* ---------- work order ---------- */
@@ -2831,7 +3086,7 @@ details.tx:not([open]) summary .chev::before{content:""}
         S = exampleState(); SETUP = fixSetup(null); lastSavedJSON = null; PHOTOS = {};
         paintFields(); applyBrand(); paintBrandForm(); paintGuar(); render(); save();
       }
-      hideGate(); paintAcct();
+      hideGate(); paintAcct(); crmStatus();
       loadSetupFromDb().then(afterSetup, afterSetup); loadLib(); refreshList();
       if (S.estId && hasContent()) scheduleCloud();
       sb.rpc('ob_is_admin').then(function(a){ IS_ADMIN = a.data === true; paintAcct(); });
@@ -2845,6 +3100,7 @@ details.tx:not([open]) summary .chev::before{content:""}
   sb.auth.onAuthStateChange(function(ev, session){
     if (ev === 'SIGNED_OUT') {
       ME = null; IS_ADMIN = false; booted = null; DB = null; LIST = [];
+      CRM.provider = null; CRM.account = null; CRM.known = false;
       closeMe(); if (!setEl.hidden) closeSettings(); showHome(false); paintAcct(); gateStep('gPass');
     }
   });
@@ -3112,6 +3368,7 @@ details.tx:not([open]) summary .chev::before{content:""}
     if (k === 'acct') paintAcct();
     if (k === 'tech') paintTech();
     if (k === 'pricing') paintRates();
+    if (k === 'conn') { paintRates(); paintConn(); }
     setEl.scrollTop = 0;
   }
   function paintWiz(){
