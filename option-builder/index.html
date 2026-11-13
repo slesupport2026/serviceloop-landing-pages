@@ -554,46 +554,323 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   .sheet{padding:4px 6px}
   .tour-card{left:16px!important;width:calc(100vw - 32px)}
 }
+
+/* ================= Phase 1: top bar, home list, builder head, settings, transcript, notepad ================= */
+:root{--blue:#1D5FD1}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--blue:#7EA8F8} }
+:root[data-theme="dark"]{--blue:#7EA8F8}
+
+.topbar{position:sticky;top:0;z-index:20;background:var(--night);color:var(--on-night);border-bottom:1px solid rgba(255,255,255,.08);padding-block:calc(8px + env(safe-area-inset-top,0px)) 8px}
+.tb-row{display:flex;align-items:center;gap:12px;min-height:46px}
+.tb-row .sp{flex:1}
+.tb-home{background:transparent;border:0;padding:2px;display:flex;align-items:center;border-radius:10px;color:#fff;min-width:0}
+.topbar .logo{width:140px;max-width:36vw;display:flex;align-items:center;color:#fff}
+.topbar .logo img,.topbar .logo svg{max-height:40px;width:auto;max-width:100%}
+.topbar .wordmark{font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-app{font-family:var(--f-display);font-weight:600;font-size:14.5px;color:var(--on-night-muted);padding-left:12px;border-left:1px solid rgba(255,255,255,.16);white-space:nowrap}
+.tb-ic{width:44px;height:44px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;display:grid;place-items:center;padding:0}
+.tb-ic:hover{border-color:var(--red-hi);color:var(--red-hi)}
+.tb-me{width:44px;height:44px;flex:none;border-radius:50%;border:2px solid var(--red-hi);background:var(--red);color:var(--red-ink);font-family:var(--f-display);font-weight:700;font-size:15px;letter-spacing:.02em;display:grid;place-items:center;padding:0}
+.me-menu{position:fixed;z-index:31;top:calc(66px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));width:min(300px,calc(100vw - 32px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 60px -18px rgba(0,0,0,.5);padding:8px;display:grid;gap:2px}
+.mm-who{display:flex;gap:12px;align-items:center;padding:8px 8px 12px;border-bottom:1px solid var(--line);margin-bottom:4px;min-width:0}
+.mm-who > div{min-width:0}
+.mm-who b{display:block;font-weight:700;overflow-wrap:anywhere}
+.mm-who small{display:block;color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
+.me-menu [data-mm]{background:transparent;border:0;text-align:left;padding:11px 12px;border-radius:10px;font-weight:600}
+.me-menu [data-mm]:hover,.me-menu [data-mm]:focus-visible{background:var(--sunk)}
+@media (max-width:560px){ .tb-app{display:none} }
+
+body.on-home .ladder{display:none}
+body.on-home .fb-pill{bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+body.on-home .toast{bottom:calc(74px + env(safe-area-inset-bottom,0px))}
+.home .hero{padding-block:0 34px}
+.home .hero .inner{padding-top:30px}
+.btn.big{font-size:17px;padding:14px 28px;display:inline-flex;align-items:center;gap:10px}
+.btn.big .plus{font-size:24px;line-height:1;font-weight:500}
+.home-wrap{padding-block:22px 110px}
+.home-wrap > .inner,.builder > .inner{width:100%}
+.setup-nudge{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;background:var(--red-soft);border:1px solid color-mix(in srgb,var(--red) 35%,transparent);border-radius:16px;padding:12px 14px}
+.setup-nudge span{flex:1 1 280px}
+.home-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.seg{display:inline-flex;background:var(--sunk);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{background:transparent;border:0;border-radius:999px;padding:8px 15px;font-weight:700;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.14)}
+.seg b{font-family:var(--f-num);font-weight:500;margin-left:5px;opacity:.75}
+#estSearch{flex:1 1 220px;max-width:340px;background:var(--sunk);border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:16px;color:var(--ink)}
+#estSearch:focus{border-color:var(--red);outline:none;box-shadow:0 0 0 3px var(--red-soft)}
+.est-list{display:grid;gap:4px}
+.est-row{display:flex;align-items:center;gap:4px;border-radius:14px;border:1px solid transparent}
+.est-row:hover{border-color:var(--line);background:var(--sunk)}
+.est-row.current{border-color:color-mix(in srgb,var(--red) 30%,transparent)}
+.er-open{flex:1;min-width:0;background:transparent;border:0;text-align:left;padding:12px;border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;align-items:center;color:var(--ink)}
+.er-open.busy{opacity:.55}
+.er-open b{font-weight:700;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.er-open .meta{grid-column:1;color:var(--muted);font-size:13px}
+.er-open .st{grid-column:2;grid-row:1 / span 2}
+.st{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:700;white-space:nowrap;border:1px solid}
+.st-editing{color:var(--muted);border-color:var(--line);background:var(--sunk)}
+.st-presented{color:var(--blue);border-color:color-mix(in srgb,var(--blue) 40%,transparent);background:color-mix(in srgb,var(--blue) 10%,transparent)}
+.st-sold{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%,transparent);background:color-mix(in srgb,var(--good) 12%,transparent)}
+.st-wo{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent);background:color-mix(in srgb,var(--warn) 12%,transparent)}
+.st-install{color:#fff;background:var(--good);border-color:var(--good)}
+.est-empty.first{display:grid;gap:12px;justify-items:start;padding:18px 12px}
+@media (max-width:560px){
+  .er-open{grid-template-columns:minmax(0,1fr)}
+  .er-open .st{grid-column:1;grid-row:auto;justify-self:start;margin-top:4px}
+}
+
+.b-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:12px 14px}
+.b-back{background:transparent;border:0;color:var(--red);font-weight:700;padding:8px 4px}
+.b-title{flex:1 1 220px;min-width:0}
+.b-title b{display:block;font-family:var(--f-display);font-size:19px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.b-title .save-state{display:block;font-size:12.5px;color:var(--muted);text-align:left}
+.b-status{display:flex;align-items:center;gap:8px}
+.b-status > span{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.b-status select{font:inherit;font-size:16px;font-weight:700;background:var(--sunk);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 12px;max-width:100%}
+.b-status select[data-st="presented"]{color:var(--blue)}
+.b-status select[data-st="sold"],.b-status select[data-st="install"]{color:var(--good)}
+.b-status select[data-st="wo"]{color:var(--warn)}
+.b-acts{display:flex;gap:8px;flex-wrap:wrap}
+@media (max-width:640px){
+  .b-title{flex-basis:100%;order:2}
+  .b-back{order:1}
+  .b-status{order:3;flex:1 1 auto}
+  .b-status select{flex:1}
+  .b-acts{order:4;width:100%}
+  .b-acts .btn{flex:1}
+}
+
+.sheet-view{position:fixed;inset:0;z-index:50;background:var(--bg);color:var(--ink);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sheet-view .p-bar{background:var(--night)}
+.sheet-view .p-page{max-width:880px;padding-block:18px 60px;display:grid;gap:14px;align-content:start}
+.set-title{font-family:var(--f-display);font-size:18px;font-weight:600}
+.set-step{font-size:13px;color:var(--on-night-muted)}
+.set-tabs{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 4px;scrollbar-width:none}
+.set-tabs::-webkit-scrollbar{display:none}
+.set-tabs button{flex:none;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-weight:700;color:var(--muted)}
+.set-tabs button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:var(--red-ink)}
+.set-pane .sec-title{margin-bottom:2px}
+.set-pane > .rate-line{margin:0 0 6px}
+.set-pane > .fin-ex{margin:0 0 14px}
+.wiz-note{margin:0 0 12px;padding:10px 12px;border-radius:12px;background:var(--red-soft);font-weight:600}
+.wiz-nav{display:flex;align-items:center;gap:10px;position:sticky;bottom:0;background:var(--bg);padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.wiz-nav .sp{flex:1}
+.conn-h{font-size:16px;margin:18px 0 8px}
+.conn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.conn{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--sunk);display:flex;flex-direction:column;gap:10px;min-width:0}
+.conn p{margin:0;color:var(--muted);font-size:14px}
+.conn-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.conn .btn{align-self:flex-start}
+.conn .btn:disabled{opacity:.55;cursor:not-allowed}
+.conn .rate-grid{grid-template-columns:minmax(0,1fr);gap:10px}
+.pill{border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;border:1px solid var(--line);white-space:nowrap}
+.pill.on{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%,transparent)}
+.pill.soon{color:var(--muted)}
+.book-list{display:grid;gap:2px;margin-top:12px}
+.book-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:9px 10px;border-radius:10px}
+.book-row:nth-child(odd){background:var(--sunk)}
+.book-row small{color:var(--muted);grid-column:1}
+.book-row .p{font-family:var(--f-num);font-weight:500;grid-row:1 / span 2;grid-column:2;align-self:center}
+
+.tx-scope{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tx-scope p{flex-basis:100%;margin:0}
+.tx-chip{background:var(--surface);border:1px dashed var(--red);color:var(--ink);border-radius:999px;padding:8px 13px;font-weight:600;text-align:left}
+.tx-chip:hover{background:var(--red-soft)}
+details.tx:not([open]) summary .chev::before{content:""}
+.wo-ready{display:grid;gap:10px;justify-items:start;margin-top:6px}
+.wo-ready .fin-ex{margin:0}
+
+.np-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:45;background:var(--night);color:#fff;border:1px solid rgba(255,255,255,.2);border-right:0;border-radius:14px 0 0 14px;padding:14px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:-6px 8px 24px -10px rgba(0,0,0,.55);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.np-tab > span:nth-child(2){writing-mode:vertical-rl;transform:rotate(180deg)}
+.np-arrow{font-size:24px;line-height:.8;color:var(--red-hi);letter-spacing:0}
+.np-tab i{width:8px;height:8px;border-radius:50%;background:var(--red-hi)}
+.np-tab:hover{background:var(--night-2);border-color:var(--red-hi)}
+.np{position:fixed;top:0;right:0;bottom:0;z-index:46;width:min(660px,100vw);background:var(--surface);color:var(--ink);border-left:1px solid var(--line);box-shadow:-24px 0 60px -20px rgba(0,0,0,.45);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-reduced-motion:no-preference){ .np{animation:npin .22s cubic-bezier(.2,.7,.2,1)} @keyframes npin{from{transform:translateX(48px);opacity:0}} }
+.np-bar{padding:10px 12px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.np-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.np-row .sp{flex:1}
+.np-title{font-family:var(--f-display);font-size:18px;font-weight:600}
+.np-title small{font-family:var(--f-body);font-weight:600;font-size:12px;color:var(--muted);margin-left:6px}
+.np-grp{display:flex;align-items:center;gap:3px;background:var(--sunk);border:1px solid var(--line);border-radius:12px;padding:3px}
+.np-btn{background:transparent;border:0;border-radius:9px;padding:7px 10px;font-weight:700;font-size:13px;min-height:38px;min-width:38px;color:var(--ink)}
+.np-btn[aria-pressed="true"]{background:var(--red);color:var(--red-ink)}
+.np-btn:disabled{opacity:.35;cursor:default}
+.np-sw{width:32px;height:32px;border-radius:50%;border:3px solid var(--surface);box-shadow:0 0 0 1px var(--line);padding:0;margin:3px}
+.np-sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+.np-sz{width:38px;height:38px;display:grid;place-items:center;background:transparent;border:0;border-radius:9px;padding:0}
+.np-sz i{display:block;border-radius:50%;background:var(--ink)}
+.np-sz[aria-pressed="true"]{background:var(--surface);box-shadow:inset 0 0 0 2px var(--red)}
+.np-page{font-family:var(--f-num);font-size:13px;min-width:46px;text-align:center}
+.np-stage{flex:1;min-height:0;display:grid;place-items:center;padding:12px;background:var(--sunk);overflow:hidden}
+#npCanvas{display:block;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;background-color:#FFFDF7;background-image:linear-gradient(to bottom,transparent calc(100% - 1px),#D8E2EF calc(100% - 1px));background-size:100% 25px;border-radius:6px;box-shadow:0 10px 30px -14px rgba(0,0,0,.45);cursor:crosshair}
+@media (max-width:700px){ .np{width:100vw;border-left:0} .np-title small{display:none} }
+
 </style>
 </head>
 <body>
-<header class="hero pad">
-  <div class="inner">
-    <div class="brandrow">
-      <div class="logo" role="img" aria-label="Your company"></div>
-    </div>
-    <div class="hero-main">
-      <div>
-        <div class="eyebrow">Estimating</div>
-        <h1>Option <span>Builder</span></h1>
-        <p>Build one option line by line. Add another and it copies every line and price, so you only delete or adjust what changes. The top option is always Platinum.</p>
-      </div>
-      <div class="hero-side">
-        <div class="hero-stats">
-          <div class="stat"><b id="statOpts">1</b><small>Options</small></div>
-          <div class="stat"><b id="statRange">$0</b><small>Price range</small></div>
-        </div>
-        <div class="hero-actions">
-          <button class="btn ghost" id="saveEst" type="button">Save estimate</button>
-          <button class="btn ghost" id="openEst" type="button" aria-haspopup="true" aria-expanded="false">Saved estimates &#9662;</button>
-          <button class="btn ghost" id="copySummary" type="button">Copy summary</button>
-          <button class="btn ghost" id="startFresh" type="button">Start fresh</button>
-          <button class="btn ghost" id="tourBtn" type="button">Tour</button>
-        </div>
-        <div class="save-state" id="saveState"></div>
-        <div class="acct" id="acct"></div>
-      </div>
-    </div>
+<header class="topbar pad">
+  <div class="inner tb-row">
+    <button type="button" class="tb-home" id="tbHome" aria-label="Your estimates"><span class="logo" role="img" aria-label="Your company"></span></button>
+    <span class="tb-app">Option Builder</span>
+    <span class="sp"></span>
+    <button type="button" class="tb-ic" id="setOpen" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 13.5a7.6 7.6 0 0 0 0-3l2-1.6-2-3.4-2.4 1a7.5 7.5 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.5a7.5 7.5 0 0 0-2.6 1.5l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 3l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 0 0 2.6 1.5l.4 2.5h4l.4-2.5a7.5 7.5 0 0 0 2.6-1.5l2.4 1 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="tb-me" id="meBtn" aria-haspopup="true" aria-expanded="false" aria-label="Your account">?</button>
   </div>
 </header>
+<div class="me-menu" id="meMenu" role="menu" hidden></div>
 
-<main class="wrap pad">
+<main class="home" id="home">
+  <section class="hero pad">
+    <div class="inner">
+      <div class="hero-main">
+        <div>
+          <div class="eyebrow">Estimating</div>
+          <h1>Your <span>estimates</span></h1>
+          <p>Build good-better-best options at the kitchen table, present them in your brand, and follow every job from first visit to install.</p>
+        </div>
+        <button type="button" class="btn primary big" id="newEst"><span class="plus">+</span> Build a new estimate</button>
+      </div>
+    </div>
+  </section>
+  <div class="wrap pad home-wrap">
+    <div class="inner" style="display:flex;flex-direction:column;gap:16px">
+      <div class="setup-nudge" id="setupNudge" hidden>
+        <span><b>Finish your company setup.</b> Brand, pricing and guarantees take about three minutes, and every estimate uses them.</span>
+        <button type="button" class="btn primary" id="setupGo">Set up now</button>
+      </div>
+      <section class="panel est-panel">
+        <div class="home-tools">
+          <div class="seg" role="group" aria-label="Which estimates">
+            <button type="button" data-filter="open" aria-pressed="true">In progress <b id="cntOpen"></b></button>
+            <button type="button" data-filter="all" aria-pressed="false">All <b id="cntAll"></b></button>
+          </div>
+          <input type="search" id="estSearch" placeholder="Search by job or client" aria-label="Search estimates" autocomplete="off">
+        </div>
+        <div class="est-list" id="estList" aria-live="polite"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<main class="wrap pad builder" id="builder" hidden>
 <div class="inner" style="display:flex;flex-direction:column;gap:18px">
-  <section class="setup" aria-label="Company setup">
-    <div class="eyebrow" style="color:var(--muted)">Company setup</div>
-    <div class="lib" id="libBar" aria-live="polite"><span class="dotx"></span><span class="grow">Looking for the price book&hellip;</span></div>
-  <details class="panel rates" id="brandBox">
-    <summary><h2 class="sec-title" style="margin:0">Your brand</h2><span class="rate-line" id="brandLine"></span><span class="chev">Edit</span></summary>
+  <section class="b-head">
+    <button type="button" class="b-back" id="backHome">&larr; Estimates</button>
+    <div class="b-title"><b id="bTitle">New estimate</b><small class="save-state" id="saveState"></small></div>
+    <label class="b-status"><span>Status</span><select id="estStatus" aria-label="Estimate status"></select></label>
+    <div class="b-acts">
+      <button class="btn" id="saveEst" type="button">Save</button>
+      <button class="btn" id="copySummary" type="button">Copy summary</button>
+    </div>
+  </section>
+  <div class="example" id="exampleBar" hidden>
+    <span><b>Example job loaded.</b> These numbers are made up so you can see how it works.</span>
+    <button class="btn primary" id="startBlank" type="button">Start a blank quote</button>
+  </div>
+
+  <section class="panel" id="clientBox">
+    <h2 class="sec-title" style="margin-bottom:4px">Client</h2>
+    <p class="fin-ex" id="clientHint" style="margin:0 0 12px">Type the client for now. Once your CRM is connected under Settings &rarr; Connections, this becomes a search of your client list.</p>
+    <div class="fields">
+      <label class="f"><span>Client</span><input id="jobCustomer" data-k="job.customer" list="clientList" autocomplete="off" placeholder="e.g. Hansen residence"></label>
+      <label class="f"><span>Address</span><input id="jobAddress" data-k="job.address" autocomplete="off" placeholder="e.g. 1234 Oak St, Lakeville"></label>
+      <label class="f"><span>Job name</span><input id="jobName" data-k="job.name" placeholder="e.g. Panel upgrade"></label>
+    </div>
+    <datalist id="clientList"></datalist>
+  </section>
+
+  <div id="guarCard"></div>
+
+  <details class="panel rates tx" id="txBox">
+    <summary><h2 class="sec-title" style="margin:0">Call transcript</h2><span class="rate-line" id="txLine"></span><span class="chev">Open</span></summary>
+    <p class="fin-ex" style="margin:0 0 10px">Paste the transcript from Fathom, Fireflies, Zoom or your phone, or drop the file. It stays with this estimate and never shows to the customer.</p>
+    <label class="f"><span>Transcript</span><textarea id="txText" rows="7" maxlength="200000" placeholder="Paste the call transcript here"></textarea></label>
+    <div class="brand-row" style="margin-top:10px">
+      <label class="btn" style="cursor:pointer">Upload a file<input type="file" id="txFile" accept=".txt,.vtt,.srt,.md,text/plain,text/vtt" hidden></label>
+      <button type="button" class="btn primary" id="txFill">Fill observations from transcript</button>
+      <button type="button" class="btn" id="txClear">Remove transcript</button>
+    </div>
+    <div class="tx-scope" id="txScope" hidden></div>
+  </details>
+
+  <section class="panel">
+    <h2 class="sec-title" style="margin-bottom:4px">Observations</h2>
+    <p class="fin-ex" id="micHint" style="margin:0 0 12px">On a phone, tap the microphone key on your keyboard to talk instead of typing.</p>
+    <div class="fields one">
+      <label class="f"><span>Called about</span><textarea id="obsCallOut" data-k="obs.callOut" placeholder="e.g. Breaker for kitchen keeps tripping"></textarea></label>
+      <label class="f"><span>Connected to it</span><textarea id="obsRelated" data-k="obs.related" placeholder="e.g. Same circuit feeds garage sub-panel"></textarea></label>
+      <label class="f"><span>Working well</span><textarea id="obsPositives" data-k="obs.positives" placeholder="e.g. Main panel is newer, properly grounded"></textarea></label>
+      <label class="f"><span>Would recommend</span><textarea id="obsRecommend" data-k="obs.recommend" placeholder="e.g. Surge protection, AFCI upgrade, added circuit"></textarea></label>
+    </div>
+  </section>
+
+
+  <div class="stack">
+    <button class="add-end" id="addAbove" type="button"><span class="plus">+</span><span><b>Add a better option above</b><small id="addAboveSub"></small></span></button>
+    <div class="stack" id="options"></div>
+    <button class="add-end" id="addBelow" type="button"><span class="plus">+</span><span><b>Add a lesser option below</b><small id="addBelowSub"></small></span></button>
+  </div>
+
+  <section class="panel">
+    <h2 class="sec-title" style="margin-bottom:4px">What the customer sees</h2>
+    <p class="muted" style="margin:0 0 14px">Lines with no description are priced but left off this list.</p>
+    <div class="cust" id="customer"></div>
+  </section>
+</div>
+</main>
+
+<nav class="ladder pad" aria-label="Option prices"><div class="inner ladder-row"><div class="rungs" id="ladder"></div><div class="flow" id="flow"></div><button class="btn present-btn" id="presentBtn" type="button">Present to customer</button></div></nav>
+
+<div class="present" id="present" role="dialog" aria-modal="true" aria-label="Customer presentation" hidden>
+  <div class="p-bar pad">
+    <div class="inner">
+      <div class="logo" id="pLogoTop" role="img" aria-label="Your company"></div>
+      <span class="sp"></span>
+      <div class="p-seg" role="group" aria-label="Show prices">
+        <button type="button" id="pShow" data-prices="1">Prices on</button>
+        <button type="button" id="pHide" data-prices="0">Prices off</button>
+      </div>
+      <button type="button" class="p-close" id="pClose">Close</button>
+    </div>
+  </div>
+  <div class="p-page pad"><div id="pBody"></div></div>
+</div>
+
+<div class="wo-view" id="wo" role="dialog" aria-modal="true" aria-label="Work order" hidden>
+  <div class="p-bar pad">
+    <div class="inner">
+      <div class="logo" id="woLogo" role="img" aria-label="Your company"></div>
+      <b style="font-family:var(--f-display);font-size:17px">Work order</b>
+      <span class="sp"></span>
+      <button type="button" class="p-close" id="woCopy">Copy work order</button>
+      <button type="button" class="p-close" id="woClose">Back to the estimate</button>
+    </div>
+  </div>
+  <div class="p-page pad"><div id="woBody"></div></div>
+</div>
+
+<div class="sheet-view" id="settings" role="dialog" aria-modal="true" aria-labelledby="setTitle" hidden>
+  <div class="p-bar pad">
+    <div class="inner">
+      <b id="setTitle" class="set-title">Settings</b>
+      <span class="set-step" id="setStep"></span>
+      <span class="sp"></span>
+      <button type="button" class="p-close" id="setClose">Done</button>
+    </div>
+  </div>
+  <div class="p-page pad">
+    <nav class="set-tabs" id="setTabs" aria-label="Settings sections">
+      <button type="button" data-tab="brand">Brand</button>
+      <button type="button" data-tab="pricing">Pricing</button>
+      <button type="button" data-tab="guar">Guarantees</button>
+      <button type="button" data-tab="book">Price book</button>
+      <button type="button" data-tab="conn">Connections</button>
+      <button type="button" data-tab="acct">Account</button>
+    </nav>
+  <section class="panel set-pane" id="brandBox" data-pane="brand">
+    <h2 class="sec-title">Your brand</h2><p class="rate-line" id="brandLine"></p>
+    <p class="fin-ex">Your logo, colors and fonts go on everything the homeowner sees.</p>
     <div class="fields">
       <label class="f"><span>Company name</span><input id="bCompany" data-b="company" autocomplete="organization"></label>
       <label class="f"><span>Phone</span><input id="bPhone" data-b="phone" inputmode="tel" autocomplete="tel"></label>
@@ -628,23 +905,10 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     </div>
     <datalist id="fontList"></datalist>
     <div class="brand-row" style="margin-top:14px"><button type="button" class="btn" id="bReset">Reset my brand</button></div>
-  </details>
-
-  <details class="panel rates" id="guarBox">
-    <summary><h2 class="sec-title" style="margin:0">Guarantees</h2><span class="rate-line" id="guarLine"></span><span class="chev">Edit</span></summary>
-    <div class="fields">
-      <label class="f"><span>Card title</span><input id="gTitle" data-g="title"></label>
-      <label class="f"><span>Line under the title</span><input id="gSub" data-g="sub"></label>
-    </div>
-    <div class="g-list" id="gList"></div>
-    <div class="brand-row" style="margin-top:12px">
-      <button type="button" class="btn" id="gAdd">+ Add a guarantee</button>
-      <button type="button" class="btn" id="gReset">Go back to the standard four</button>
-    </div>
-  </details>
-
-  <details class="panel rates" id="ratesBox">
-    <summary><h2 class="sec-title" style="margin:0">Pricing</h2><span class="rate-line" id="rateLine"></span><span class="chev">Edit</span></summary>
+  </section>
+  <section class="panel set-pane" id="ratesBox" data-pane="pricing">
+    <h2 class="sec-title">Pricing</h2><p class="rate-line" id="rateLine"></p>
+    <p class="fin-ex">Your company pricing. New estimates start from it, and estimates still being built pick up changes. Sold estimates keep the price the customer saw.</p>
     <div class="rate-grid">
       <label class="f"><span>SSR ($ per hour)</span><input id="rSsr" inputmode="decimal" autocomplete="off"></label>
       <label class="f"><span>Consumable material ($ per hour)</span><input id="rCons" inputmode="decimal" autocomplete="off"></label>
@@ -657,85 +921,100 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
       <button type="button" class="btn" id="finAdd">+ Add a term</button>
       <span class="fin-ex" id="finEx" style="margin:0"></span>
     </div>
-    <h3 style="font-size:17px;margin:20px 0 4px">CRM</h3>
-    <p class="fin-ex" style="margin:0 0 8px">Send to CRM copies the option the customer chose and opens this link in a new tab, so the client, line items and deposit go in there.</p>
+</section>
+  <section class="panel set-pane" id="guarBox" data-pane="guar">
+    <h2 class="sec-title">Guarantees</h2><p class="rate-line" id="guarLine"></p>
+    <p class="fin-ex">The promises that come with every job. The card shows above the observations in the builder and the presentation.</p>
+    <div class="fields">
+      <label class="f"><span>Card title</span><input id="gTitle" data-g="title"></label>
+      <label class="f"><span>Line under the title</span><input id="gSub" data-g="sub"></label>
+    </div>
+    <div class="g-list" id="gList"></div>
+    <div class="brand-row" style="margin-top:12px">
+      <button type="button" class="btn" id="gAdd">+ Add a guarantee</button>
+      <button type="button" class="btn" id="gReset">Go back to the standard four</button>
+    </div>
+  </section>
+
+    <section class="panel set-pane" id="bookBox" data-pane="book">
+      <h2 class="sec-title">Price book</h2>
+      <p class="fin-ex">Every line you save with the bookmark lands here, private to your company. When you type a scope line, saved lines pop up with their hours and material filled in.</p>
+      <div class="lib" id="libBar" aria-live="polite"><span class="dotx"></span><span class="grow">Looking for the price book&hellip;</span></div>
+      <div class="book-list" id="bookList"></div>
+    </section>
+    <section class="panel set-pane" id="connBox" data-pane="conn">
+      <h2 class="sec-title">Connections</h2>
+      <p class="fin-ex">Connect the tools you already use. Each connection is made once for your account, and the SLE apps you sign into can use it.</p>
+      <h3 class="conn-h">CRM</h3>
+      <div class="conn-grid">
+        <article class="conn"><div class="conn-top"><b>Jobber</b><span class="pill soon">Coming next</span></div><p>Search your Jobber clients when you start an estimate, and send the option they chose to Jobber as a quote with its line items.</p><button type="button" class="btn" disabled>Connect Jobber</button></article>
+        <article class="conn"><div class="conn-top"><b>Housecall Pro</b><span class="pill soon">Coming soon</span></div><p>Paste the API key from your Housecall Pro account. Your Housecall Pro plan has to include API access.</p><button type="button" class="btn" disabled>Connect Housecall Pro</button></article>
+        <article class="conn"><div class="conn-top"><b>Any CRM, by link</b><span class="pill on" id="crmPill">Works now</span></div><p>Send to CRM copies the option the customer chose and opens this link in a new tab, so the client, line items and deposit go in there.</p>
     <div class="rate-grid">
       <label class="f"><span>CRM name</span><input id="crmName" data-setup="crmName" autocomplete="off"></label>
       <label class="f crm-url"><span>CRM link</span><input id="crmUrl" data-setup="crmUrl" inputmode="url" autocomplete="off"></label>
     </div>
-  </details>
-  </section>
-
-  <div class="example" id="exampleBar" hidden>
-    <span><b>Example job loaded.</b> These numbers are made up so you can see how it works.</span>
-    <button class="btn primary" id="startBlank" type="button">Start a blank quote</button>
-  </div>
-
-  <section class="panel">
-    <div class="fields">
-      <label class="f"><span>Job name</span><input id="jobName" data-k="job.name" placeholder="e.g. Panel upgrade"></label>
-      <label class="f"><span>Customer</span><input id="jobCustomer" data-k="job.customer" placeholder="e.g. Hansen residence"></label>
-    </div>
-  </section>
-
-  <div id="guarCard"></div>
-
-  <section class="panel">
-    <h2 class="sec-title" style="margin-bottom:4px">Observations</h2>
-    <p class="fin-ex" id="micHint" style="margin:0 0 12px">On a phone, tap the microphone key on your keyboard to talk instead of typing.</p>
-    <div class="fields one">
-      <label class="f"><span>Called about</span><textarea id="obsCallOut" data-k="obs.callOut" placeholder="e.g. Breaker for kitchen keeps tripping"></textarea></label>
-      <label class="f"><span>Connected to it</span><textarea id="obsRelated" data-k="obs.related" placeholder="e.g. Same circuit feeds garage sub-panel"></textarea></label>
-      <label class="f"><span>Working well</span><textarea id="obsPositives" data-k="obs.positives" placeholder="e.g. Main panel is newer, properly grounded"></textarea></label>
-      <label class="f"><span>Would recommend</span><textarea id="obsRecommend" data-k="obs.recommend" placeholder="e.g. Surge protection, AFCI upgrade, added circuit"></textarea></label>
-    </div>
-  </section>
-
-
-  <div class="stack">
-    <button class="add-end" id="addAbove" type="button"><span class="plus">+</span><span><b>Add a better option above</b><small id="addAboveSub"></small></span></button>
-    <div class="stack" id="options"></div>
-    <button class="add-end" id="addBelow" type="button"><span class="plus">+</span><span><b>Add a lesser option below</b><small id="addBelowSub"></small></span></button>
-  </div>
-
-  <section class="panel">
-    <h2 class="sec-title" style="margin-bottom:4px">What the customer sees</h2>
-    <p class="muted" style="margin:0 0 14px">Lines with no description are priced but left off this list.</p>
-    <div class="cust" id="customer"></div>
-  </section>
-</div>
-</main>
-
-<nav class="ladder pad" aria-label="Option prices"><div class="inner ladder-row"><div class="rungs" id="ladder"></div><div class="flow" id="flow"></div><button class="btn present-btn" id="presentBtn" type="button">Present to customer</button></div></nav>
-<div class="est-menu" id="estMenu" role="dialog" aria-label="Saved estimates" hidden></div>
-
-<div class="present" id="present" role="dialog" aria-modal="true" aria-label="Customer presentation" hidden>
-  <div class="p-bar pad">
-    <div class="inner">
-      <div class="logo" id="pLogoTop" role="img" aria-label="Your company"></div>
-      <span class="sp"></span>
-      <div class="p-seg" role="group" aria-label="Show prices">
-        <button type="button" id="pShow" data-prices="1">Prices on</button>
-        <button type="button" id="pHide" data-prices="0">Prices off</button>
+        </article>
       </div>
-      <button type="button" class="p-close" id="pClose">Close</button>
+      <h3 class="conn-h">Call transcripts</h3>
+      <div class="conn-grid">
+        <article class="conn"><div class="conn-top"><b>Paste or upload</b><span class="pill on">Works now</span></div><p>Open Call transcript on any estimate and paste it or drop the file. Fill observations drafts the four boxes from it.</p></article>
+        <article class="conn"><div class="conn-top"><b>Fathom, Fireflies and others</b><span class="pill soon">Coming soon</span></div><p>You will get a private link to paste into your recorder's settings. Every finished call lands in your transcript inbox, ready to attach to an estimate.</p></article>
+      </div>
+    </section>
+    <section class="panel set-pane" id="acctBox" data-pane="acct">
+      <h2 class="sec-title">Account</h2>
+      <p class="fin-ex" id="acctWho"></p>
+      <div class="fields">
+        <label class="f"><span>Your name</span><input id="meName" autocomplete="name" placeholder="Used for your initials up top"></label>
+      </div>
+      <div class="brand-row" style="margin-top:14px">
+        <button type="button" class="btn" id="acctTour">Take the tour</button>
+        <button type="button" class="btn" id="acctAdmin" hidden>Beta admin</button>
+        <button type="button" class="btn" id="acctOut">Sign out</button>
+      </div>
+      <p class="fin-ex" style="margin-top:12px">One SLE login works in every SLE app. Each app keeps its own sign-in, so signing out here leaves your other apps alone.</p>
+    </section>
+    <div class="wiz-nav" id="wizNav" hidden>
+      <button type="button" class="btn" id="wizBack">Back</button>
+      <span class="sp"></span>
+      <button type="button" class="gate-link" id="wizSkip">Skip setup for now</button>
+      <button type="button" class="btn primary" id="wizNext">Next</button>
     </div>
   </div>
-  <div class="p-page pad"><div id="pBody"></div></div>
 </div>
 
-<div class="wo-view" id="wo" role="dialog" aria-modal="true" aria-label="Work order" hidden>
-  <div class="p-bar pad">
-    <div class="inner">
-      <div class="logo" id="woLogo" role="img" aria-label="Your company"></div>
-      <b style="font-family:var(--f-display);font-size:17px">Work order</b>
+<button type="button" class="np-tab" id="npTab" aria-controls="np" aria-expanded="false" hidden><span class="np-arrow" aria-hidden="true">&lsaquo;</span><span>Notes</span><i id="npDot" hidden></i></button>
+<aside class="np" id="np" aria-label="Notepad" hidden>
+  <div class="np-bar">
+    <div class="np-row">
+      <b class="np-title">Notes <small>Only you see these</small></b>
       <span class="sp"></span>
-      <button type="button" class="p-close" id="woCopy">Copy work order</button>
-      <button type="button" class="p-close" id="woClose">Back to the estimate</button>
+      <button type="button" class="np-btn" id="npClose" aria-label="Close notes">Close &rsaquo;</button>
+    </div>
+    <div class="np-row np-tools">
+      <div class="np-grp" role="group" aria-label="Tool">
+        <button type="button" class="np-btn" data-tool="pen" aria-pressed="true">Pen</button>
+        <button type="button" class="np-btn" data-tool="hl" aria-pressed="false">Highlighter</button>
+        <button type="button" class="np-btn" data-tool="er" aria-pressed="false">Eraser</button>
+      </div>
+      <div class="np-grp np-colors" id="npColors" role="group" aria-label="Pen color"></div>
+      <div class="np-grp np-sizes" id="npSizes" role="group" aria-label="Pen thickness"></div>
+      <div class="np-grp" role="group" aria-label="Edit">
+        <button type="button" class="np-btn" id="npUndo">Undo</button>
+        <button type="button" class="np-btn" id="npRedo">Redo</button>
+        <button type="button" class="np-btn" id="npClear">Clear page</button>
+      </div>
+      <div class="np-grp" role="group" aria-label="Pages">
+        <button type="button" class="np-btn" id="npPrev" aria-label="Previous page">&lsaquo;</button>
+        <span class="np-page" id="npPage">1 / 1</span>
+        <button type="button" class="np-btn" id="npNext" aria-label="Next page">&rsaquo;</button>
+        <button type="button" class="np-btn" id="npAdd">+ Page</button>
+      </div>
     </div>
   </div>
-  <div class="p-page pad"><div id="woBody"></div></div>
-</div>
+  <div class="np-stage" id="npStage"><canvas id="npCanvas" aria-label="Drawing area"></canvas></div>
+</aside>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo" hidden>
   <button type="button" class="p-close" id="lbClose">Close</button>
@@ -846,12 +1125,12 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   function exampleState(){
     return {
       example:true,
-      job:{ name:'Panel upgrade', customer:'Hansen residence (example)' },
+      job:{ name:'Panel upgrade', customer:'Hansen residence (example)', address:'' },
       obs:{ callOut:'Breakers tripping in the kitchen when the microwave and toaster run together.',
             related:'Main panel is a 1978 Federal Pacific, 100A. Grounding is a single rod, no bond to the water line.',
             positives:'Branch wiring is copper and in good shape. Meter base is fine.',
             recommend:'200A panel replacement with surge protection and grounding brought to code.' },
-      rates: defaultRates(), fin: defaultFin(), showPrices: true,
+      rates: defaultRates(), fin: defaultFin(), showPrices: true, status:'editing',
       options:[{ id:nid(), except:false, lines:[
         mkLine('Replace main panel with 200A Square D QO', '7', '1150', '', ''),
         mkLine('Whole-home surge protection', '0.5', '240', '', ''),
@@ -862,9 +1141,12 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
       ]}]
     };
   }
-  function blankState(keepRates, keepFin){
-    return { example:false, job:{ name:'', customer:'' }, obs:{ callOut:'', related:'', positives:'', recommend:'' },
-             rates: keepRates || defaultRates(), fin: keepFin || defaultFin(), showPrices: true,
+  function clone(x){ return JSON.parse(JSON.stringify(x)); }
+  /* a new estimate starts from the company pricing in Settings */
+  function blankState(){
+    var cp = (typeof SETUP !== 'undefined' && SETUP && SETUP.pricing) ? SETUP.pricing : { rates: defaultRates(), fin: defaultFin() };
+    return { example:false, status:'editing', job:{ name:'', customer:'', address:'' }, obs:{ callOut:'', related:'', positives:'', recommend:'' },
+             rates: clone(cp.rates), fin: clone(cp.fin), showPrices: true,
              options:[{ id:nid(), except:false, lines:[mkLine()] }] };
   }
   /* Older drafts priced from overhead, labor and margin. Carry that hourly figure over as the SSR. */
@@ -881,6 +1163,8 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     if (s.rates.crmUrl == null) s.rates.crmUrl = defaultRates().crmUrl;
     if (!s.fin || !Array.isArray(s.fin.terms) || !s.fin.terms.length) s.fin = defaultFin();
     if (typeof s.showPrices !== 'boolean') s.showPrices = true;
+    s.job = s.job || { name:'', customer:'' }; if (s.job.address == null) s.job.address = '';
+    if (!s.status) s.status = s.wo ? 'wo' : s.choice ? 'sold' : 'editing';
     (s.options || []).forEach(function(o){ (o.lines || []).forEach(function(l){ delete l.saving; }); });
     return s;
   }
@@ -893,7 +1177,7 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   }
   var S = load() || exampleState();
   var saveT = null;
-  function save(){ clearTimeout(saveT); saveT = setTimeout(function(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} paintSaveState(); }, 250); }
+  function save(){ clearTimeout(saveT); saveT = setTimeout(function(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} paintSaveState(); scheduleCloud(); }, 250); }
 
   /* ---------- the maths ---------- */
   function R(){ return { sell: Math.max(num(S.rates.ssr), 0), cons: Math.max(num(S.rates.consumable), 0) }; }
@@ -1016,7 +1300,7 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     document.getElementById('addAboveSub').textContent = 'Copies ' + TIERS[0].n + '’s lines and prices. The new one becomes ' + TIERS[0].n + '.';
     document.getElementById('addBelowSub').textContent = 'Copies ' + TIERS[S.options.length - 1].n + '’s lines and prices. The new one becomes ' + (TIERS[S.options.length] ? TIERS[S.options.length].n : '') + '.';
     document.getElementById('exampleBar').hidden = !S.example;
-    paintRates(); renderCustomer(); paintLadder(); paintFlow(); fitDescs();
+    paintRates(); renderCustomer(); paintLadder(); paintFlow(); fitDescs(); paintHead();
   }
   function fitDesc(el){ el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }
   function fitDescs(){ [].forEach.call(document.querySelectorAll('textarea.desc'), fitDesc); }
@@ -1042,10 +1326,6 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     document.getElementById('ladder').innerHTML = '<span class="lbl">Ladder</span>' + S.options.map(function(O, i){
       return '<button type="button" class="rung" data-go="' + O.id + '">' + badge(i) + '<span>' + TIERS[i].n + '</span><b id="rung-' + O.id + '">' + money(prices[i]) + '</b></button>';
     }).join('');
-    var priced = prices.filter(function(p){ return p > 0; });
-    document.getElementById('statOpts').textContent = S.options.length;
-    document.getElementById('statRange').textContent = !priced.length ? '$0' :
-      (priced.length === 1 ? money(priced[0]) : money(Math.min.apply(null, priced)) + '–' + money(Math.max.apply(null, priced)).slice(1));
   }
   function tick(el){ if (!el) return; el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); }
   /* Update numbers in place while typing, so the cursor never jumps. */
@@ -1069,22 +1349,28 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
       var p = document.getElementById('exprev-' + O.id); if (p) p.innerHTML = exceptPreview(i);
     });
   }
+  function CP(){ return (typeof SETUP !== 'undefined' && SETUP && SETUP.pricing) ? SETUP.pricing : { rates:S.rates, fin:S.fin }; }
+  function livePricing(){ return !S.status || S.status === 'editing' || S.status === 'presented'; }
+  function applyPricing(){
+    if (livePricing()) { S.rates = clone(CP().rates); S.fin = clone(CP().fin); }
+    priceRefresh(); paintFlow(); saveSetup(); save();
+  }
   function paintRates(){
-    var r = R(), ssr = document.getElementById('rSsr');
-    if (ssr && document.activeElement !== ssr) ssr.value = S.rates.ssr;
+    var cr = CP().rates, cf = CP().fin, ssr = document.getElementById('rSsr');
+    if (ssr && document.activeElement !== ssr) ssr.value = cr.ssr;
     var cons = document.getElementById('rCons');
-    if (cons && document.activeElement !== cons) cons.value = S.rates.consumable;
-    ['crmName','crmUrl'].forEach(function(k){ var el = document.getElementById(k); if (el && document.activeElement !== el) el.value = S.rates[k] || ''; });
-    var term = shownTerm();
-    document.getElementById('rateLine').textContent = 'SSR ' + money2(r.sell) + '/hr · consumables ' + money2(r.cons) + '/hr' + (term ? ' · showing ' + termLabel(term) : '');
+    if (cons && document.activeElement !== cons) cons.value = cr.consumable;
+    ['crmName','crmUrl'].forEach(function(k){ var el = document.getElementById(k); if (el && document.activeElement !== el) el.value = cr[k] || ''; });
+    var ct = cf.terms && cf.terms[cf.show], term = ct && num(ct.months) > 0 ? { apr: num(ct.apr), months: Math.round(num(ct.months)) } : null;
+    document.getElementById('rateLine').textContent = 'SSR ' + money2(Math.max(num(cr.ssr), 0)) + '/hr · consumables ' + money2(Math.max(num(cr.consumable), 0)) + '/hr' + (term ? ' · showing ' + termLabel(term) : '');
     document.getElementById('finEx').textContent = term ? 'Example: a $10,000 option shows as ' + money(monthly(10000, term)) + '/mo.' : 'Mark a term to show monthly amounts.';
     var tbl = document.getElementById('finTable');
     if (!tbl.contains(document.activeElement)) {
-      tbl.innerHTML = S.fin.terms.map(function(t, i){
+      tbl.innerHTML = cf.terms.map(function(t, i){
         return '<div class="fin-row" data-term="' + i + '">' +
           '<label class="f"><span>APR %</span><input id="finApr' + i + '" data-fin="apr" inputmode="decimal" autocomplete="off" value="' + esc(t.apr) + '"></label>' +
           '<label class="f"><span>Months</span><input id="finMo' + i + '" data-fin="months" inputmode="numeric" autocomplete="off" value="' + esc(t.months) + '"></label>' +
-          '<label class="show"><input type="radio" name="finShow" data-fin="show"' + (S.fin.show === i ? ' checked' : '') + '>Show</label>' +
+          '<label class="show"><input type="radio" name="finShow" data-fin="show"' + (cf.show === i ? ' checked' : '') + '>Show</label>' +
           '<button type="button" class="icon-btn" data-fin="del" aria-label="Remove this term">' + TRASH + '</button></div>';
       }).join('');
     }
@@ -1219,36 +1505,37 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   document.querySelectorAll('[data-k]').forEach(function(el){
     el.addEventListener('input', function(){ var k = el.getAttribute('data-k').split('.'); S[k[0]][k[1]] = el.value; save(); });
   });
-  document.getElementById('rSsr').addEventListener('input', function(e){ S.rates.ssr = e.target.value; priceRefresh(); save(); });
-  document.getElementById('rCons').addEventListener('input', function(e){ S.rates.consumable = e.target.value; priceRefresh(); save(); });
+  document.getElementById('rSsr').addEventListener('input', function(e){ CP().rates.ssr = e.target.value; applyPricing(); });
+  document.getElementById('rCons').addEventListener('input', function(e){ CP().rates.consumable = e.target.value; applyPricing(); });
   document.querySelectorAll('[data-setup]').forEach(function(el){
-    el.addEventListener('input', function(){ S.rates[el.getAttribute('data-setup')] = el.value; paintFlow(); save(); });
+    el.addEventListener('input', function(){ CP().rates[el.getAttribute('data-setup')] = el.value; applyPricing(); });
   });
   var finTable = document.getElementById('finTable');
   finTable.addEventListener('input', function(e){
     var k = e.target.getAttribute('data-fin'), row = e.target.closest('[data-term]'); if (!row || (k !== 'apr' && k !== 'months')) return;
-    S.fin.terms[Number(row.getAttribute('data-term'))][k] = e.target.value; priceRefresh(); save();
+    CP().fin.terms[Number(row.getAttribute('data-term'))][k] = e.target.value; applyPricing();
   });
   finTable.addEventListener('change', function(e){
     if (e.target.getAttribute('data-fin') !== 'show') return;
-    S.fin.show = Number(e.target.closest('[data-term]').getAttribute('data-term')); priceRefresh(); save();
+    CP().fin.show = Number(e.target.closest('[data-term]').getAttribute('data-term')); applyPricing();
   });
   finTable.addEventListener('click', function(e){
     var b = e.target.closest('[data-fin="del"]'); if (!b) return;
     var i = Number(b.closest('[data-term]').getAttribute('data-term'));
-    S.fin.terms.splice(i, 1);
-    if (S.fin.show === i) S.fin.show = S.fin.terms.length ? 0 : -1; else if (S.fin.show > i) S.fin.show--;
+    var cf = CP().fin; cf.terms.splice(i, 1);
+    if (cf.show === i) cf.show = cf.terms.length ? 0 : -1; else if (cf.show > i) cf.show--;
     document.activeElement && document.activeElement.blur && document.activeElement.blur();
-    priceRefresh(); save();
+    applyPricing();
   });
   document.getElementById('finAdd').addEventListener('click', function(){
-    S.fin.terms.push({ apr:'', months:'' }); if (S.fin.show < 0) S.fin.show = S.fin.terms.length - 1;
-    paintRates(); save(); focusLater('finApr' + (S.fin.terms.length - 1));
+    var cf = CP().fin; cf.terms.push({ apr:'', months:'' }); if (cf.show < 0) cf.show = cf.terms.length - 1;
+    applyPricing(); focusLater('finApr' + (cf.terms.length - 1));
   });
   document.getElementById('startBlank').addEventListener('click', function(){
     snapshot('Example cleared.');
-    S = blankState(S.rates, S.fin); paintFields(); render(); save();
-    focusLater('desc-' + S.options[0].lines[0].id);
+    S = blankState(); S.estId = 'est-' + nid(); lastSavedJSON = null; NP.reset();
+    paintFields(); render(); paintTx(); save();
+    focusLater('jobCustomer');
   });
 
   /* ---------- copy summary ---------- */
@@ -1511,12 +1798,20 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   function localList(){ try { var a = JSON.parse(localStorage.getItem(LS_EST) || '[]'); return Array.isArray(a) ? a : []; } catch(e){ return []; } }
   function localWrite(a){ try { localStorage.setItem(LS_EST, JSON.stringify(a)); return true; } catch(e){ return false; } }
   function listEstimates(){
-    var local = localList().map(function(x){ x.where = 'device'; return x; });
+    var local = localList().map(function(x){
+      var st = {}; try { st = JSON.parse(x.state) || {}; } catch(e){}
+      x.where = 'device'; x.customer = (st.job && st.job.customer) || ''; x.chosen = st.choice ? st.choice.tier : '';
+      x.status = st.status || (st.wo ? 'wo' : st.choice ? 'sold' : 'editing'); return x; });
     if (!ME) return Promise.resolve(local);
-    return sb.from('ob_estimates').select('id,name,options,top,saved_at,state').eq('user_id', ME.id).order('saved_at', { ascending:false }).limit(200)
+    return sb.from('ob_estimates').select('id,name,options,top,saved_at,status:state->>status,customer:state->job->>customer,chosen:state->choice->>tier,wo:state->wo->>createdAt')
+      .eq('user_id', ME.id).order('saved_at', { ascending:false }).limit(300)
       .then(function(r){
         if (r.error) throw r.error;
-        return (r.data || []).map(function(x){ return { id:x.id, name:x.name, options:x.options, top:+x.top || 0, savedAt:x.saved_at, state: JSON.stringify(x.state) }; }).concat(local);
+        var ids = {};
+        var cloud = (r.data || []).map(function(x){ ids[x.id] = 1;
+          return { id:x.id, name:x.name, options:x.options, top:+x.top || 0, savedAt:x.saved_at, customer:x.customer || '', chosen:x.chosen || '',
+                   status: x.status || (x.wo ? 'wo' : x.chosen ? 'sold' : 'editing') }; });
+        return cloud.concat(local.filter(function(x){ return !ids[x.id]; }));
       });
   }
   function writeEstimate(rec){
@@ -1531,84 +1826,28 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   }
   function saveEstimate(){
     if (!S.estId) S.estId = 'est-' + nid();
+    if (S.example) { S.example = false; render(); }
+    clearTimeout(cloudT); cloudT = null;
     var btn = document.getElementById('saveEst'); btn.disabled = true; btn.textContent = 'Saving…';
     var rec = estRecord();
     Promise.resolve(writeEstimate(rec)).then(function(where){
-      lastSavedJSON = rec.state; lastSavedAt = new Date(rec.savedAt);
+      lastSavedJSON = rec.state; lastSavedAt = new Date(rec.savedAt); lastWhere = where;
       save(); paintSaveState();
       showToast('Saved “' + rec.name + '”' + (where === 'device' ? ' on this device.' : ' to your saved estimates.'), false);
     }, function(){ showToast('Not saved. This browser blocked storage and the store did not answer. Copy the summary to keep your work.', false); })
-    .then(function(){ btn.disabled = false; btn.textContent = 'Save estimate'; });
+    .then(function(){ btn.disabled = false; btn.textContent = 'Save'; });
   }
   function paintSaveState(){
     var el = document.getElementById('saveState'); if (!el) return;
-    if (!S.estId || !lastSavedJSON) { el.textContent = S.estId ? '' : 'Not saved yet'; return; }
+    if (savingNow) { el.textContent = 'Saving…'; return; }
+    if (S.example) { el.textContent = 'Example job. Not saved.'; return; }
+    if (!S.estId || !lastSavedJSON) { el.textContent = hasContent() ? (ME ? 'Saving soon…' : 'Not saved yet') : 'Saves itself as you go'; return; }
     el.textContent = JSON.stringify(S) === lastSavedJSON
-      ? 'Saved ' + lastSavedAt.toLocaleTimeString([], { hour:'numeric', minute:'2-digit' })
-      : 'Changes since your last save';
-  }
-  var estMenu = document.getElementById('estMenu'), openEstBtn = document.getElementById('openEst');
-  function placeMenu(){
-    var b = openEstBtn.getBoundingClientRect(), w = estMenu.offsetWidth;
-    var left = Math.min(Math.max(16, b.right - w), window.innerWidth - w - 16);
-    estMenu.style.top = Math.round(b.bottom + 8) + 'px'; estMenu.style.left = Math.round(left) + 'px';
+      ? 'Saved ' + lastSavedAt.toLocaleTimeString([], { hour:'numeric', minute:'2-digit' }) + (lastWhere === 'device' ? ' on this device' : '')
+      : (ME ? 'Saving soon…' : 'Changes since your last save');
   }
   function fmtDate(iso){ var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString([], { month:'short', day:'numeric' }) + ', ' + d.toLocaleTimeString([], { hour:'numeric', minute:'2-digit' }); }
-  var menuItems = [];
-  function paintMenu(items, loading){
-    var h = '<div class="hd"><div><b>Saved estimates</b><small>' + (DB ? 'Private to you, on any device you sign in from' : 'Saved in this browser only') + '</small></div>' +
-            '<button type="button" class="btn" data-est="new">New estimate</button></div>';
-    if (loading) h += '<div class="est-empty">Loading…</div>';
-    else if (!items.length) h += '<div class="est-empty">Nothing saved yet. Use Save estimate to keep this one.</div>';
-    else h += items.map(function(x, i){
-      return '<div class="est-item' + (x.id === S.estId ? ' current' : '') + '"><button type="button" class="est-open" data-est="open" data-i="' + i + '"><b>' + esc(x.name || 'Untitled estimate') + '</b>' +
-        '<span>' + esc(fmtDate(x.savedAt)) + ' · ' + (x.options || 1) + ' option' + (x.options === 1 ? '' : 's') + (x.top ? ' · up to ' + money(x.top) : '') + (x.where === 'device' ? ' · this device' : '') + '</span></button>' +
-        '<button type="button" class="est-del" data-est="del" data-i="' + i + '" aria-label="Delete ' + esc(x.name || 'estimate') + '">' + TRASH + '</button></div>';
-    }).join('');
-    estMenu.innerHTML = h;
-  }
-  function openMenu(){
-    estMenu.hidden = false; openEstBtn.setAttribute('aria-expanded', 'true');
-    paintMenu([], true); placeMenu();
-    listEstimates().then(function(a){
-      a.sort(function(x, y){ return String(y.savedAt).localeCompare(String(x.savedAt)); });
-      menuItems = a; paintMenu(a); placeMenu();
-    }, function(){ menuItems = []; paintMenu([]); });
-  }
-  function closeMenu(){ estMenu.hidden = true; openEstBtn.setAttribute('aria-expanded', 'false'); }
-  openEstBtn.addEventListener('click', function(e){ e.stopPropagation(); if (estMenu.hidden) openMenu(); else closeMenu(); });
-  document.getElementById('saveEst').addEventListener('click', saveEstimate);
-  document.addEventListener('click', function(e){ if (!estMenu.hidden && !estMenu.contains(e.target) && e.target !== openEstBtn) closeMenu(); });
-  window.addEventListener('resize', function(){ if (!estMenu.hidden) placeMenu(); });
-  estMenu.addEventListener('click', function(e){
-    var b = e.target.closest('[data-est]'); if (!b) return;
-    e.stopPropagation();
-    var act = b.getAttribute('data-est'), x = menuItems[Number(b.getAttribute('data-i'))];
-    if (act === 'new') {
-      snapshot('Started a new estimate.');
-      S = blankState(S.rates, S.fin); lastSavedJSON = null; paintFields(); render(); save(); closeMenu();
-      focusLater('desc-' + S.options[0].lines[0].id); return;
-    }
-    if (act === 'open' && x) {
-      try {
-        var st = upgrade(JSON.parse(x.state));
-        snapshot('Opened “' + (x.name || 'estimate') + '”.');
-        S = st; S.estId = x.id; lastSavedJSON = JSON.stringify(S); lastSavedAt = new Date(x.savedAt);
-        paintFields(); render(); save(); closeMenu();
-      } catch(err){ showToast('That estimate could not be opened.', false); }
-      return;
-    }
-    if (act === 'del' && x) {
-      if (!b.classList.contains('arm')) { b.classList.add('arm'); b.textContent = 'Delete'; return; }
-      var gone = x.where === 'device'
-        ? Promise.resolve(localWrite(localList().filter(function(y){ return y.id !== x.id; })))
-        : sb.from('ob_estimates').delete().eq('id', x.id).then(function(r){ if (r.error) throw r.error; });
-      gone.then(function(){
-        if (x.id === S.estId) { delete S.estId; lastSavedJSON = null; save(); }
-        showToast('Deleted “' + (x.name || 'estimate') + '”.', false); openMenu();
-      }, function(){ showToast('That estimate could not be deleted. Try again.', false); });
-    }
-  });
+  function closeMenu(){ /* the saved-estimates dropdown became the home screen */ }
 
   /* ---------- presentation ---------- */
   var present = document.getElementById('present');
@@ -1701,8 +1940,8 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
                  price: t.price, monthly: monthly(t.price), term: termLabel(),
                  lines: O.lines.filter(function(L){ return norm(L.desc) || lineCalc(L, R()).price; })
                    .map(function(L){ return { id:L.id, desc:L.desc, hrs:L.hrs, mat:L.mat, sub:L.sub, misc:L.misc, price: lineCalc(L, R()).price }; }) };
-    delete S.crm; delete S.wo;
-    save(); paintFlow();
+    delete S.crm; delete S.wo; S.status = 'sold';
+    save(); paintFlow(); paintHead();
     pBody.innerHTML = passHtml(); present.scrollTop = 0;
   }
   function paintPriceMode(){
@@ -1711,16 +1950,17 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     document.getElementById('pHide').setAttribute('aria-pressed', String(!S.showPrices));
   }
   function openPresent(){
-    closeMenu(); closeSugg();
+    closeMenu(); closeSugg(); npClose();
+    if (!S.status || S.status === 'editing') { S.status = 'presented'; paintHead(); save(); }
     document.getElementById('pLogoTop').innerHTML = logoSvg();
     document.getElementById('pBody').innerHTML = presentHtml();
     paintPriceMode();
-    present.hidden = false; present.scrollTop = 0;
+    present.hidden = false; present.scrollTop = 0; paintNpTab();
     document.documentElement.style.overflow = 'hidden';
     setTimeout(function(){ document.getElementById('pClose').focus(); }, 0);
   }
   function closePresent(){
-    present.hidden = true; document.documentElement.style.overflow = '';
+    present.hidden = true; document.documentElement.style.overflow = ''; paintNpTab();
     document.getElementById('presentBtn').focus();
   }
   document.getElementById('presentBtn').addEventListener('click', openPresent);
@@ -1734,7 +1974,9 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     if (lb && !lb.hidden) lb.hidden = true;
     else if (!present.hidden) closePresent();
     else if (wv && !wv.hidden) closeWO();
-    else if (!estMenu.hidden) closeMenu();
+    else if (!setEl.hidden) { if (wiz !== null) skipWizard(); else closeSettings(); }
+    else if (!npEl.hidden) npClose();
+    else if (!meMenu.hidden) closeMe();
   });
 
   /* ---------- talk instead of type (observations) ---------- */
@@ -1848,8 +2090,8 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   })(webDictation());
 
   /* ---------- after the customer chooses: technician steps ---------- */
-  function crmName(){ return String(S.rates.crmName || '').trim() || 'CRM'; }
-  function crmHref(){ var u = String(S.rates.crmUrl || '').trim(); return /^https:\/\//i.test(u) ? u : ''; }
+  function crmName(){ return String(CP().rates.crmName || '').trim() || 'CRM'; }
+  function crmHref(){ var u = String(CP().rates.crmUrl || '').trim(); return /^https:\/\//i.test(u) ? u : ''; }
   function paintFlow(){
     var el = document.getElementById('flow'), ch = S.choice; if (!el) return;
     if (!ch) { el.innerHTML = ''; return; }
@@ -1865,6 +2107,7 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   function crmText(){
     var ch = S.choice, out = [];
     out.push((S.job.customer || 'Customer') + (S.job.name ? ' — ' + S.job.name : ''));
+    if (String(S.job.address || '').trim()) out.push(S.job.address.trim());
     out.push('Approved option: ' + ch.tier + ' — ' + money2(ch.price) + ' (initialed ' + ch.initials + ', ' + fmtDate(ch.at) + ')');
     if (ch.monthly) out.push('Financing shown: ' + money(ch.monthly) + '/mo, ' + ch.term);
     out.push('', 'LINE ITEMS');
@@ -1888,14 +2131,14 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
         showToast(ok ? 'Copied the ' + S.choice.tier + ' option and its line items. Paste them into ' + crmName() + ' and send the deposit request.'
                      : 'Could not copy. Use Copy summary instead.', false);
       });
-      if (!crmHref()) showToast('Add your CRM link under Pricing → CRM so this opens it.', false);
+      if (!crmHref()) showToast('Add your CRM link under Settings → Connections so this opens it.', false);
       S.crm = { at: new Date().toISOString() }; save(); setTimeout(paintFlow, 0);
       return;
     }
     if (t.id === 'woGo') { if (!S.wo) makeWorkOrder(); openWO(); return; }
     if (t.id === 'choiceClear') {
       snapshot('Choice cleared' + (S.wo ? ', with its work order' : '') + '.');
-      delete S.choice; delete S.crm; delete S.wo; save(); paintFlow();
+      delete S.choice; delete S.crm; delete S.wo; S.status = 'presented'; save(); paintFlow(); paintHead();
     }
   });
 
@@ -1907,7 +2150,8 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
              obs: { callOut:S.obs.callOut || '', related:S.obs.related || '', positives:S.obs.positives || '', recommend:S.obs.recommend || '' },
              lines: ch.lines.map(function(L){ return { id:L.id, desc:L.desc, hrs:L.hrs, mat:L.mat, sub:L.sub, misc:L.misc, price:L.price, materials:[] }; }) };
     if (!S.estId) S.estId = 'est-' + nid();
-    save(); paintFlow();
+    S.status = 'wo';
+    save(); paintFlow(); paintHead();
   }
   function matTotal(W){ return (W.materials || []).reduce(function(a, m){ return a + num(m.qty) * num(m.unit); }, 0); }
   function matRowHtml(W, m){
@@ -1954,6 +2198,8 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
          w.lines.map(woLineHtml).join('') + '</section>';
     h += '<section class="panel wo-sec"><h2 class="sec-title">Install notes</h2>' +
          '<label class="f"><span>Anything the crew needs to know</span><textarea data-wnotes rows="5" placeholder="Access, parking, pets, where the panel is, utility timing, inspection notes">' + esc(w.notes) + '</textarea></label></section>';
+    h += '<section class="wo-sec wo-ready"><p class="fin-ex" id="woReadyMsg">' + (S.status === 'install' ? 'Marked install ready. It moves out of In progress on your estimates list.' : 'When materials, photos and notes are in, mark it ready and it moves to Install ready.') + '</p>' +
+         '<button type="button" class="btn primary" id="woInstall">' + (S.status === 'install' ? 'Back to work order editing' : 'Mark install ready') + '</button></section>';
     return h;
   }
   function openWO(){
@@ -1968,6 +2214,7 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   document.getElementById('woCopy').addEventListener('click', function(e){
     var b = e.currentTarget, w = S.wo, ch = S.choice, out = [];
     out.push('WORK ORDER — ' + (S.job.customer || '') + (S.job.name ? ' — ' + S.job.name : ''));
+    if (String(S.job.address || '').trim()) out.push(S.job.address.trim());
     out.push('They bought ' + ch.tier + ' — ' + money2(ch.price) + ' (initialed ' + ch.initials + ', ' + fmtDate(ch.at) + ')', '');
     [['Called about','callOut'],['Connected to it','related'],['Working well','positives'],['Would recommend','recommend']].forEach(function(p){
       if (String(w.obs[p[1]] || '').trim()) out.push(p[0].toUpperCase(), w.obs[p[1]].trim(), '');
@@ -2123,7 +2370,7 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   document.getElementById('lbClose').addEventListener('click', function(){ lightbox.hidden = true; });
 
   /* ================= COMPANY SETUP: brand + guarantees (per person, across estimates) ================= */
-  var BUILTIN_LOGO = (document.querySelector('.hero .logo') || {}).innerHTML || '';
+  var BUILTIN_LOGO = (document.querySelector('.topbar .logo') || {}).innerHTML || '';
   var SETUP_KEY = 'option-builder-setup-v1';
   var GICONS = {
     badge:'<circle cx="12" cy="9" r="5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5-1.5-7.5"/>',
@@ -2153,6 +2400,13 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     var b = defaultBrand(); s.brand = s.brand && typeof s.brand === 'object' ? s.brand : {};
     Object.keys(b).forEach(function(k){ if (s.brand[k] == null) s.brand[k] = b[k]; });
     if (!s.guar || !Array.isArray(s.guar.items)) s.guar = defaultGuar();
+    if (!s.pricing || !s.pricing.rates || !s.pricing.fin) {
+      var from = (typeof S !== 'undefined' && S) ? S : null;
+      s.pricing = { rates: clone(from && from.rates ? from.rates : defaultRates()), fin: clone(from && from.fin ? from.fin : defaultFin()) };
+    }
+    var dr = defaultRates(); Object.keys(dr).forEach(function(k){ if (s.pricing.rates[k] == null) s.pricing.rates[k] = dr[k]; });
+    if (!Array.isArray(s.pricing.fin.terms)) s.pricing.fin = defaultFin();
+    s.me = s.me && typeof s.me === 'object' ? s.me : { name:'' };
     return s;
   }
   var SETUP = loadSetupLocal(), setupT = null;
@@ -2166,7 +2420,8 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   function loadSetupFromDb(){
     return sb.from('ob_setups').select('setup').eq('user_id', ME.id).maybeSingle().then(function(r){
       var v = r && r.data && r.data.setup;
-      if (v && typeof v === 'object' && Object.keys(v).length) { SETUP = fixSetup(v); applyBrand(); paintBrandForm(); paintGuar(); }
+      var seeded = !(v && v.pricing && v.pricing.rates);
+      if (v && typeof v === 'object' && Object.keys(v).length) { SETUP = fixSetup(v); applyBrand(); paintBrandForm(); paintGuar(); paintRates(); if (seeded) saveSetup(); }
       else saveSetup();
     });
   }
@@ -2280,7 +2535,7 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     ensureFont(hf); ensureFont(bf);
     st.setProperty('--f-display', (hf ? '"' + hf + '",' : '') + '"Lexend","Plus Jakarta Sans",system-ui,sans-serif');
     st.setProperty('--f-body', (bf ? '"' + bf + '",' : '') + '"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif');
-    var hero = document.querySelector('.hero .logo');
+    var hero = document.querySelector('.topbar .logo');
     if (hero) { hero.innerHTML = logoMarkup('dark'); hero.setAttribute('aria-label', brandName()); }
     COMPANY = String(b.company || '').trim();
     var bl = document.getElementById('brandLine');
@@ -2447,13 +2702,6 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     undoSnap = null; guarUndo = JSON.stringify(SETUP.guar); SETUP.guar = defaultGuar(); saveSetup(); paintGuar(); showToast('Back to the standard four guarantees.', true);
   });
 
-  document.getElementById('startFresh').addEventListener('click', function(){
-    closeMenu();
-    snapshot('Started fresh. Undo brings the last estimate back.');
-    S = blankState(S.rates, S.fin); lastSavedJSON = null; PHOTOS = {};
-    paintFields(); render(); save();
-    window.scrollTo(0, 0);
-  });
 
   applyBrand(); paintBrandForm(); paintGuar();
 
@@ -2539,21 +2787,21 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
         paintFields(); applyBrand(); paintBrandForm(); paintGuar(); render(); save();
       }
       hideGate(); paintAcct();
-      loadSetupFromDb().then(maybeTour, maybeTour); loadLib();
+      loadSetupFromDb().then(afterSetup, afterSetup); loadLib(); refreshList();
+      if (S.estId && hasContent()) scheduleCloud();
       sb.rpc('ob_is_admin').then(function(a){ IS_ADMIN = a.data === true; paintAcct(); });
     }, function(){ booted = null; gateStep('gPass', 'Could not reach the server. Check your connection and try again.'); });
   }
   function paintAcct(){
-    var el = document.getElementById('acct'); if (!el) return;
-    el.innerHTML = ME ? 'Signed in as <b>' + esc(ME.email || '') + '</b> &middot; <button type="button" id="signOut">Sign out</button>' +
-      (IS_ADMIN ? ' &middot; <button type="button" id="adminOpen">Beta admin</button>' : '') : '';
+    paintMe();
+    var a = document.getElementById('acctAdmin'); if (a) a.hidden = !IS_ADMIN;
+    var w = document.getElementById('acctWho'); if (w) w.innerHTML = ME ? 'Signed in as <b>' + esc(ME.email || '') + '</b>' : '';
   }
-  document.getElementById('acct').addEventListener('click', function(e){
-    if (e.target.id === 'signOut') sb.auth.signOut();
-    if (e.target.id === 'adminOpen') openAdmin();
-  });
   sb.auth.onAuthStateChange(function(ev, session){
-    if (ev === 'SIGNED_OUT') { ME = null; IS_ADMIN = false; booted = null; DB = null; paintAcct(); gateStep('gPass'); }
+    if (ev === 'SIGNED_OUT') {
+      ME = null; IS_ADMIN = false; booted = null; DB = null; LIST = [];
+      closeMe(); if (!setEl.hidden) closeSettings(); showHome(false); paintAcct(); gateStep('gPass');
+    }
   });
   sb.auth.getSession().then(function(r){ boot(r.data.session); }, function(){ gateStep('gPass'); });
 
@@ -2561,9 +2809,12 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   var fb = document.getElementById('fb'), fbKind = '';
   function fbArea(){
     if (!document.getElementById('present').hidden) return 'presentation';
+    if (!setEl.hidden) return 'settings: ' + setTab;
+    if (!npEl.hidden) return 'notes';
+    if (VIEW === 'home') return 'home';
     if (!document.getElementById('wo').hidden) return 'work order';
     var y = window.scrollY + 120, best = 'top';
-    [['setup','.setup'],['observations','#obsCallOut'],['options','#options'],['customer view','#customer']].forEach(function(p){
+    [['client','#clientBox'],['transcript','#txBox'],['observations','#obsCallOut'],['options','#options'],['customer view','#customer']].forEach(function(p){
       var el = document.querySelector(p[1]); if (el && el.getBoundingClientRect().top + window.scrollY < y) best = p[0];
     });
     return best;
@@ -2629,22 +2880,544 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
       if (r.error) showToast('That tester was not added: ' + r.error.message, false); else { showToast('Added ' + email + '.', false); paintAdmin(); }
     });
   });
-  /* ================= FIRST-RUN TOUR (once per tester; replay with the Tour button) ================= */
+  /* ================= SCREENS: home (estimate list), builder, settings ================= */
+  var STATUS = [
+    { k:'editing', n:'Editing' }, { k:'presented', n:'Presented' }, { k:'sold', n:'Sold' },
+    { k:'wo', n:'Work order editing' }, { k:'install', n:'Install ready' }
+  ];
+  function statusName(k){ for (var i = 0; i < STATUS.length; i++) if (STATUS[i].k === k) return STATUS[i].n; return 'Editing'; }
+  var homeEl = document.getElementById('home'), builderEl = document.getElementById('builder'), VIEW = 'home';
+  var statusSel = document.getElementById('estStatus');
+  statusSel.innerHTML = STATUS.map(function(x){ return '<option value="' + x.k + '">' + x.n + '</option>'; }).join('');
+  function paintHead(){
+    if (!STATUS || !statusSel) return;
+    var t = document.getElementById('bTitle');
+    if (t) t.textContent = S.example ? 'Example job' : (String(S.job.name || '').trim() || String(S.job.customer || '').trim() ? estName() : 'New estimate');
+    statusSel.value = S.status || 'editing';
+    statusSel.setAttribute('data-st', S.status || 'editing');
+    paintSaveState();
+  }
+  statusSel.addEventListener('change', function(){
+    S.status = statusSel.value; paintHead(); save();
+    var ready = document.getElementById('woInstall'); if (ready && !woView.hidden) woBody.innerHTML = woHtml();
+    showToast('Status: ' + statusName(S.status) + '.', false);
+  });
+  builderEl.addEventListener('input', function(e){ var k = e.target.getAttribute && e.target.getAttribute('data-k'); if (k && k.indexOf('job.') === 0) paintHead(); });
+
+  /* autosave to your account: a few seconds after you stop typing */
+  var cloudT = null, savingNow = false, lastWhere = null;
+  function hasContent(){
+    if (S.example) return false;
+    var j = S.job || {};
+    if ([j.name, j.customer, j.address].some(function(v){ return String(v || '').trim(); })) return true;
+    if (S.obs && Object.keys(S.obs).some(function(k){ return String(S.obs[k] || '').trim(); })) return true;
+    var r = R();
+    if (S.options.some(function(O){ return O.lines.some(function(L){ return norm(L.desc) || lineCalc(L, r).price; }); })) return true;
+    if (S.transcript && String(S.transcript.text || '').trim()) return true;
+    if (S.notes && S.notes.pages && S.notes.pages.some(function(p){ return p.s && p.s.length; })) return true;
+    return false;
+  }
+  function scheduleCloud(){
+    clearTimeout(cloudT); cloudT = null;
+    if (!ME || !S.estId || !hasContent()) return;
+    if (JSON.stringify(S) === lastSavedJSON) return;
+    cloudT = setTimeout(cloudSave, 2500);
+  }
+  function cloudSave(){
+    clearTimeout(cloudT); cloudT = null;
+    if (!ME || !S.estId || !hasContent()) return Promise.resolve();
+    var rec = estRecord(); if (rec.state === lastSavedJSON) return Promise.resolve();
+    var mine = S; savingNow = true; paintSaveState();
+    return Promise.resolve(writeEstimate(rec)).then(function(where){
+      if (S === mine) { lastSavedJSON = rec.state; lastSavedAt = new Date(rec.savedAt); lastWhere = where; }
+      savingNow = false; paintSaveState(); return where;
+    }, function(){ savingNow = false; paintSaveState(); });
+  }
+  function flushCloud(){ return cloudT ? cloudSave() : Promise.resolve(); }
+  window.addEventListener('pagehide', function(){ if (cloudT) cloudSave(); });
+  document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden' && cloudT) cloudSave(); });
+
+  function showHome(fromHistory){
+    flushCloud();
+    VIEW = 'home'; builderEl.hidden = true; homeEl.hidden = false;
+    document.body.classList.add('on-home'); document.body.classList.remove('on-builder');
+    npClose(); paintNpTab(); window.scrollTo(0, 0); refreshList(); paintNudge();
+    if (!fromHistory && history.state && history.state.v === 'b') { ignorePop = true; history.back(); }
+  }
+  function showBuilder(){
+    VIEW = 'builder'; homeEl.hidden = true; builderEl.hidden = false;
+    document.body.classList.remove('on-home'); document.body.classList.add('on-builder');
+    paintFields(); render(); paintTx(); NP.reset(); paintNpTab(); window.scrollTo(0, 0);
+    if (!(history.state && history.state.v === 'b')) { try { history.pushState({ v:'b' }, ''); } catch(e){} }
+  }
+  var ignorePop = false;
+  window.addEventListener('popstate', function(){
+    if (ignorePop) { ignorePop = false; return; }
+    if (VIEW !== 'builder' || (history.state && history.state.v === 'b')) return;
+    if (!present.hidden) closePresent();
+    if (!woView.hidden) closeWO();
+    showHome(true);
+  });
+  document.getElementById('backHome').addEventListener('click', function(){ showHome(); });
+  document.getElementById('tbHome').addEventListener('click', function(){ if (!present.hidden) return; if (!woView.hidden) closeWO(); if (!setEl.hidden) closeSettings(); if (VIEW !== 'home') showHome(); });
+
+  function newEstimate(){
+    flushCloud();
+    S = blankState(); S.estId = 'est-' + nid(); lastSavedJSON = null; lastSavedAt = null; lastWhere = null; PHOTOS = {};
+    save(); showBuilder(); focusLater('jobCustomer');
+  }
+  document.getElementById('newEst').addEventListener('click', newEstimate);
+
+  /* the list */
+  var LIST = [], shown = [], listFilter = 'open', listState = 'idle';
+  var listEl = document.getElementById('estList'), searchEl = document.getElementById('estSearch');
+  function refreshList(){
+    listState = LIST.length ? 'ready' : 'loading'; paintList();
+    return listEstimates().then(function(a){
+      a.sort(function(x, y){ return String(y.savedAt).localeCompare(String(x.savedAt)); });
+      LIST = a; listState = 'ready'; paintList(); paintClients();
+    }, function(){ listState = 'error'; paintList(); });
+  }
+  function paintList(){
+    var q = norm(searchEl.value);
+    document.getElementById('cntOpen').textContent = LIST.filter(function(x){ return x.status !== 'install'; }).length || '';
+    document.getElementById('cntAll').textContent = LIST.length || '';
+    [].forEach.call(document.querySelectorAll('[data-filter]'), function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-filter') === listFilter)); });
+    shown = LIST.filter(function(x){
+      return (listFilter === 'all' || x.status !== 'install') && (!q || norm((x.name || '') + ' ' + (x.customer || '')).indexOf(q) > -1);
+    });
+    if (listState === 'loading') { listEl.innerHTML = '<div class="est-empty">Loading your estimates…</div>'; return; }
+    if (listState === 'error' && !LIST.length) { listEl.innerHTML = '<div class="est-empty">Your estimates did not load. <button type="button" class="gate-link" data-retry>Try again</button></div>'; return; }
+    if (!LIST.length) {
+      listEl.innerHTML = '<div class="est-empty first"><b>No estimates yet.</b> Tap Build a new estimate to start one.' +
+        '<button type="button" class="btn" data-example>Or open the example job to see how it works</button></div>'; return;
+    }
+    if (!shown.length) { listEl.innerHTML = '<div class="est-empty">' + (q ? 'Nothing matches “' + esc(searchEl.value.trim()) + '”.' : 'Nothing in progress. Tap All to see the jobs that are install ready.') + '</div>'; return; }
+    listEl.innerHTML = shown.map(function(x, i){
+      var meta = [fmtDate(x.savedAt)];
+      if (x.chosen) meta.push(esc(x.chosen) + ' chosen');
+      else meta.push((x.options || 1) + ' option' + (x.options === 1 ? '' : 's') + (x.top ? ', up to ' + money(x.top) : ''));
+      if (x.where === 'device') meta.push('this device only');
+      var nm = x.name || 'Untitled estimate', cur = x.id === S.estId ? ' current' : '';
+      return '<div class="est-row' + cur + '"><button type="button" class="er-open" data-open="' + i + '">' +
+        '<b>' + esc(nm) + '</b><span class="meta">' + meta.join(' · ') + '</span>' +
+        '<span class="st st-' + esc(x.status) + '">' + statusName(x.status) + '</span></button>' +
+        '<button type="button" class="est-del" data-del="' + i + '" aria-label="Delete ' + esc(nm) + '">' + TRASH + '</button></div>';
+    }).join('');
+  }
+  function paintClients(){
+    var seen = {}, out = [];
+    LIST.forEach(function(x){ var c = String(x.customer || '').trim(); if (c && !seen[norm(c)] && !/\(example\)/i.test(c)) { seen[norm(c)] = 1; out.push(c); } });
+    document.getElementById('clientList').innerHTML = out.slice(0, 200).map(function(c){ return '<option value="' + esc(c) + '">'; }).join('');
+  }
+  searchEl.addEventListener('input', paintList);
+  document.querySelector('.home-tools .seg').addEventListener('click', function(e){
+    var b = e.target.closest('[data-filter]'); if (!b) return; listFilter = b.getAttribute('data-filter'); paintList();
+  });
+  listEl.addEventListener('click', function(e){
+    if (e.target.closest('[data-retry]')) { refreshList(); return; }
+    if (e.target.closest('[data-example]')) {
+      flushCloud(); S = exampleState(); lastSavedJSON = null; lastWhere = null; PHOTOS = {}; save(); showBuilder(); return;
+    }
+    var o = e.target.closest('[data-open]');
+    if (o) { var x = shown[Number(o.getAttribute('data-open'))]; if (x) openEstimate(x, o); return; }
+    var d = e.target.closest('[data-del]');
+    if (d) {
+      var y = shown[Number(d.getAttribute('data-del'))]; if (!y) return;
+      if (!d.classList.contains('arm')) { d.classList.add('arm'); d.textContent = 'Delete'; setTimeout(function(){ if (d.isConnected) { d.classList.remove('arm'); d.innerHTML = TRASH; } }, 4000); return; }
+      var gone = y.where === 'device'
+        ? Promise.resolve(localWrite(localList().filter(function(z){ return z.id !== y.id; })))
+        : sb.from('ob_estimates').delete().eq('id', y.id).then(function(r){ if (r.error) throw r.error; });
+      gone.then(function(){
+        if (y.id === S.estId) { delete S.estId; lastSavedJSON = null; save(); }
+        LIST = LIST.filter(function(z){ return z !== y; }); paintList();
+        showToast('Deleted “' + (y.name || 'estimate') + '”.', false);
+      }, function(){ showToast('That estimate could not be deleted. Try again.', false); });
+    }
+  });
+  function openEstimate(x, btn){
+    if (btn) btn.classList.add('busy');
+    var got = x.state ? Promise.resolve(x.state)
+      : sb.from('ob_estimates').select('state').eq('id', x.id).single().then(function(r){ if (r.error) throw r.error; return JSON.stringify(r.data.state); });
+    flushCloud().then(function(){ return got; }).then(function(st){
+      var n = upgrade(JSON.parse(st));
+      S = n; S.estId = x.id; lastSavedJSON = JSON.stringify(S); lastSavedAt = new Date(x.savedAt); lastWhere = x.where === 'device' ? 'device' : 'account'; PHOTOS = {};
+      save(); showBuilder();
+    }).catch(function(){ if (btn) btn.classList.remove('busy'); showToast('That estimate could not be opened. Check your connection and try again.', false); });
+  }
+
+  /* ================= SETTINGS (the cog) + first-run setup ================= */
+  var setEl = document.getElementById('settings'), setTab = 'brand', wiz = null, WIZ = ['brand', 'pricing', 'guar'];
+  var WIZ_NOTE = { brand:'Step 1: your brand. Pull it from your website or upload your logo.', pricing:'Step 2: your pricing. Your SSR, consumables and the financing you offer.', guar:'Step 3: your guarantees. Keep the standard four, edit them, or add your own.' };
+  function openSettings(tab){
+    closeMe(); npClose();
+    setEl.hidden = false; document.documentElement.style.overflow = 'hidden'; paintNpTab();
+    paintWiz(); showTab(tab || setTab);
+    setTimeout(function(){ document.getElementById('setClose').focus(); }, 0);
+  }
+  function closeSettings(){
+    setEl.hidden = true; wiz = null; document.documentElement.style.overflow = '';
+    paintNudge(); paintNpTab(); if (VIEW === 'builder') render();
+  }
+  function showTab(k){
+    setTab = k;
+    [].forEach.call(setEl.querySelectorAll('[data-pane]'), function(p){ p.hidden = p.getAttribute('data-pane') !== k; });
+    [].forEach.call(setEl.querySelectorAll('[data-tab]'), function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-tab') === k)); });
+    if (k === 'book') paintBook();
+    if (k === 'acct') { paintAcct(); var mn = document.getElementById('meName'); if (document.activeElement !== mn) mn.value = (SETUP.me && SETUP.me.name) || ''; }
+    if (k === 'pricing') paintRates();
+    setEl.scrollTop = 0;
+  }
+  function paintWiz(){
+    var on = wiz !== null;
+    document.getElementById('setTabs').hidden = on;
+    document.getElementById('wizNav').hidden = !on;
+    document.getElementById('setTitle').textContent = on ? 'Set up your company' : 'Settings';
+    document.getElementById('setStep').textContent = on ? 'Step ' + (wiz + 1) + ' of ' + WIZ.length : '';
+    document.getElementById('setClose').textContent = on ? 'Finish later' : 'Done';
+    if (on) {
+      showTab(WIZ[wiz]);
+      document.getElementById('wizBack').style.visibility = wiz ? 'visible' : 'hidden';
+      document.getElementById('wizNext').textContent = wiz === WIZ.length - 1 ? 'Finish' : 'Next';
+      var note = setEl.querySelector('[data-pane="' + WIZ[wiz] + '"] .wiz-note');
+      [].forEach.call(setEl.querySelectorAll('.wiz-note'), function(n){ n.remove(); });
+      var pane = setEl.querySelector('[data-pane="' + WIZ[wiz] + '"]');
+      if (pane && !note) { var p = document.createElement('p'); p.className = 'wiz-note'; p.textContent = WIZ_NOTE[WIZ[wiz]]; pane.insertBefore(p, pane.firstChild); }
+    } else [].forEach.call(setEl.querySelectorAll('.wiz-note'), function(n){ n.remove(); });
+  }
+  function startWizard(){ wiz = 0; openSettings(WIZ[0]); }
+  function finishWizard(){
+    SETUP.setupDone = true; saveSetup(); closeSettings();
+    showToast('You are set up. Tap Build a new estimate for your first job.', false);
+    maybeTour();
+  }
+  function skipWizard(){ SETUP.setupSkipped = true; saveSetup(); closeSettings(); maybeTour(); }
+  function paintNudge(){ var n = document.getElementById('setupNudge'); if (n) n.hidden = !ME || !!SETUP.setupDone; }
+  function afterSetup(){
+    if (!SETUP.setupDone && !SETUP.brand.example) { SETUP.setupDone = true; saveSetup(); }
+    paintMe(); paintNudge(); paintRates();
+    if (!SETUP.setupDone && !SETUP.setupSkipped && gate.hidden) startWizard(); else maybeTour();
+  }
+  document.getElementById('setOpen').addEventListener('click', function(){ if (setEl.hidden) openSettings(); else closeSettings(); });
+  document.getElementById('setClose').addEventListener('click', function(){ if (wiz !== null) skipWizard(); else closeSettings(); });
+  document.getElementById('setTabs').addEventListener('click', function(e){ var b = e.target.closest('[data-tab]'); if (b) showTab(b.getAttribute('data-tab')); });
+  document.getElementById('wizNext').addEventListener('click', function(){ if (wiz < WIZ.length - 1) { wiz++; paintWiz(); } else finishWizard(); });
+  document.getElementById('wizBack').addEventListener('click', function(){ if (wiz > 0) { wiz--; paintWiz(); } });
+  document.getElementById('wizSkip').addEventListener('click', skipWizard);
+  document.getElementById('setupGo').addEventListener('click', startWizard);
+  document.getElementById('acctTour').addEventListener('click', function(){ closeSettings(); startTour(); });
+  document.getElementById('acctAdmin').addEventListener('click', function(){ closeSettings(); openAdmin(); });
+  document.getElementById('acctOut').addEventListener('click', function(){ sb.auth.signOut(); });
+  document.getElementById('meName').addEventListener('input', function(e){ SETUP.me = { name: e.target.value.slice(0, 80) }; saveSetup(); paintMe(); });
+
+  function paintBook(){
+    var el = document.getElementById('bookList'), r = R();
+    if (!LIB.length) { el.innerHTML = lib.state === 'ready' ? '<div class="est-empty">Nothing saved yet. Tap the bookmark on any line to save it here.</div>' : ''; return; }
+    el.innerHTML = LIB.slice(0, 400).map(function(x){
+      var p = x.h * r.sell + x.m + x.s + x.x;
+      return '<div class="book-row"><span>' + esc(x.d) + '</span><b class="p">' + money(p) + '</b><small>' + (+x.h.toFixed(2)) + ' hrs · ' + money2(x.m) + ' material' + (x.s ? ' · ' + money2(x.s) + ' sub' : '') + (x.x ? ' · ' + money2(x.x) + ' misc' : '') + '</small></div>';
+    }).join('') + (LIB.length > 400 ? '<div class="est-empty">Showing 400 of ' + LIB.length + '. Type in a scope line to search the rest.</div>' : '');
+  }
+
+  /* ================= account bubble ================= */
+  var meBtn = document.getElementById('meBtn'), meMenu = document.getElementById('meMenu');
+  function initials(){
+    var n = String((SETUP.me && SETUP.me.name) || '').trim();
+    var w = n ? n.split(/\s+/) : String((ME && ME.email) || '?').split('@')[0].split(/[._\-+]+/).filter(Boolean);
+    var out = w.length > 1 ? w[0].charAt(0) + w[w.length - 1].charAt(0) : String(w[0] || '?').slice(0, 2);
+    return out.toUpperCase();
+  }
+  function paintMe(){
+    meBtn.textContent = ME ? initials() : '?';
+    meBtn.hidden = !ME; document.getElementById('setOpen').hidden = !ME;
+    meBtn.title = ME ? 'Signed in as ' + (ME.email || '') : '';
+  }
+  function openMe(){
+    var nm = String((SETUP.me && SETUP.me.name) || '').trim();
+    meMenu.innerHTML = '<div class="mm-who"><span class="tb-me" aria-hidden="true">' + esc(initials()) + '</span><div><b>' + esc(nm || (ME && ME.email) || '') + '</b><small>' +
+      esc(nm ? (ME && ME.email) || '' : 'Signed in') + (COMPANY ? ' · ' + esc(COMPANY) : '') + '</small></div></div>' +
+      '<button type="button" role="menuitem" data-mm="settings">Settings</button>' +
+      '<button type="button" role="menuitem" data-mm="tour">Take the tour</button>' +
+      (IS_ADMIN ? '<button type="button" role="menuitem" data-mm="admin">Beta admin</button>' : '') +
+      '<button type="button" role="menuitem" data-mm="out">Sign out</button>';
+    meMenu.hidden = false; meBtn.setAttribute('aria-expanded', 'true');
+    var f = meMenu.querySelector('[data-mm]'); if (f) f.focus();
+  }
+  function closeMe(){ if (!meMenu) return; meMenu.hidden = true; meBtn.setAttribute('aria-expanded', 'false'); }
+  meBtn.addEventListener('click', function(e){ e.stopPropagation(); if (meMenu.hidden) openMe(); else closeMe(); });
+  meMenu.addEventListener('click', function(e){
+    var b = e.target.closest('[data-mm]'); if (!b) return;
+    var k = b.getAttribute('data-mm'); closeMe();
+    if (k === 'settings') openSettings();
+    if (k === 'tour') startTour();
+    if (k === 'admin') openAdmin();
+    if (k === 'out') sb.auth.signOut();
+  });
+  document.addEventListener('click', function(e){ if (!meMenu.hidden && !meMenu.contains(e.target) && e.target !== meBtn) closeMe(); });
+
+  /* ================= install ready, from the work order ================= */
+  woBody.addEventListener('click', function(e){
+    if (!e.target.closest('#woInstall')) return;
+    S.status = S.status === 'install' ? 'wo' : 'install'; paintHead(); save();
+    woBody.innerHTML = woHtml(); loadPhotos();
+    showToast(S.status === 'install' ? 'Install ready. It moved out of In progress on your estimates list.' : 'Back to work order editing.', false);
+  });
+
+  /* ================= CALL TRANSCRIPT ================= */
+  var txText = document.getElementById('txText'), txBox = document.getElementById('txBox');
+  function txWords(){ var t = (S.transcript && S.transcript.text) || ''; return t.trim() ? t.trim().split(/\s+/).length : 0; }
+  function paintTxLine(){
+    var w = txWords();
+    document.getElementById('txLine').textContent = w ? ((S.transcript.name ? S.transcript.name + ' · ' : '') + w.toLocaleString() + ' words') : 'None yet';
+    document.getElementById('txFill').disabled = w < 8;
+    document.getElementById('txClear').hidden = !w;
+  }
+  function paintTx(){
+    if (document.activeElement !== txText) txText.value = (S.transcript && S.transcript.text) || '';
+    paintTxLine(); paintTxScope();
+  }
+  function paintTxScope(){
+    var el = document.getElementById('txScope'), list = Array.isArray(S.txScope) ? S.txScope : [];
+    el.hidden = !list.length;
+    el.innerHTML = list.length ? '<p class="fin-ex"><b>Scope lines from the call.</b> Tap one to add it to ' + TIERS[0].n + '.</p>' +
+      list.map(function(t, i){ return '<button type="button" class="tx-chip" data-scope="' + i + '">+ ' + esc(t) + '</button>'; }).join('') +
+      '<button type="button" class="gate-link" data-scope-clear>Dismiss</button>' : '';
+  }
+  txText.addEventListener('input', function(){
+    var keep = S.transcript || {};
+    S.transcript = { text: txText.value, name: keep.name || '', at: new Date().toISOString() };
+    paintTxLine(); save();
+  });
+  function cleanCaptions(t){
+    if (!/-->/.test(t)) return t;
+    return t.split(/\r?\n/).filter(function(l){ l = l.trim(); return l && l !== 'WEBVTT' && !/^\d+$/.test(l) && !/-->/.test(l) && !/^(NOTE|STYLE)\b/.test(l); }).join('\n');
+  }
+  document.getElementById('txFile').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+    if (f.size > 3 * 1024 * 1024) { showToast('That file is too big. Paste the transcript text instead.', false); return; }
+    var rd = new FileReader();
+    rd.onload = function(){
+      var t = cleanCaptions(String(rd.result || '')).slice(0, 200000);
+      if (!t.trim()) { showToast('That file had no text in it.', false); return; }
+      S.transcript = { text: t, name: f.name.slice(0, 80), at: new Date().toISOString() };
+      txBox.open = true; paintTx(); save();
+      showToast('Transcript attached: ' + f.name + '.', false);
+    };
+    rd.onerror = function(){ showToast('That file could not be read. Paste the text instead.', false); };
+    rd.readAsText(f);
+  });
+  document.getElementById('txClear').addEventListener('click', function(){
+    snapshot('Transcript removed.'); S.transcript = null; delete S.txScope; paintTx(); save();
+  });
+  document.getElementById('txFill').addEventListener('click', function(){
+    var b = this; if (!ME || txWords() < 8) return;
+    b.disabled = true; b.textContent = 'Reading the call…';
+    function done(){ b.disabled = txWords() < 8; b.textContent = 'Fill observations from transcript'; }
+    token().then(function(t){
+      var ctl = new AbortController(), kill = setTimeout(function(){ ctl.abort(); }, 90000);
+      return fetch(SB_URL + '/functions/v1/ob-ai', {
+        method:'POST', signal: ctl.signal,
+        headers:{ 'apikey':ANON, 'Authorization':'Bearer ' + t, 'Content-Type':'application/json' },
+        body: JSON.stringify({ action:'observations', transcript: S.transcript.text, job: S.example ? '' : estName() })
+      }).then(function(r){ clearTimeout(kill); return r.json(); });
+    }).then(function(res){
+      done();
+      if (!res || res.status !== 'ok') {
+        var why = res && res.reason;
+        if (why === 'Unknown action') why = 'Drafting from transcripts turns on shortly. Your transcript is saved with this estimate.';
+        showToast(why || 'The draft did not come back. Try again.', false); return;
+      }
+      var o = res.obs || {}, n = 0;
+      snapshot('Observations filled from the transcript.');
+      ['callOut','related','positives','recommend'].forEach(function(k){ var v = String(o[k] || '').trim(); if (v) { S.obs[k] = v; n++; } });
+      S.txScope = Array.isArray(res.scope) ? res.scope.slice(0, 8) : [];
+      paintFields(); paintTxScope(); save();
+      showToast('Filled ' + n + ' observation' + (n === 1 ? '' : 's') + ' from the call. Read them over before you present.', true);
+      var ob = document.getElementById('obsCallOut'); if (ob) ob.scrollIntoView({ block:'center', behavior: reduced() ? 'auto' : 'smooth' });
+    }).catch(function(){ done(); showToast('The draft did not come back. Check your connection and try again.', false); });
+  });
+  document.getElementById('txScope').addEventListener('click', function(e){
+    if (e.target.closest('[data-scope-clear]')) { S.txScope = []; paintTxScope(); save(); return; }
+    var c = e.target.closest('[data-scope]'); if (!c) return;
+    var i = Number(c.getAttribute('data-scope')), text = S.txScope[i]; if (!text) return;
+    var O = S.options[0], blank = O.lines.filter(function(L){ return !norm(L.desc) && !lineCalc(L, R()).price; })[0];
+    if (blank) blank.desc = text; else O.lines.push(mkLine(text));
+    S.txScope.splice(i, 1); render(); paintTxScope(); save(); flash(O.id);
+  });
+
+  /* ================= NOTEPAD (drawer on the right; never shown to the customer) ================= */
+  var npEl = document.getElementById('np'), npTab = document.getElementById('npTab'), npCv = document.getElementById('npCanvas'), npCtx = npCv.getContext('2d');
+  var PW = 1000, PH = 1300;
+  var NP_COLORS = [['#111418','Black'],['#1D4ED8','Blue'],['#DC2626','Red'],['#15803D','Green'],['#EA580C','Orange'],['#7C3AED','Purple']];
+  var NP_SIZES = [[2,'Fine'],[4,'Medium'],[7,'Bold'],[12,'Marker']];
+  var NPS = { tool:'pen', color: NP_COLORS[0][0], size: 4, page: 0, scale: 1, pen: false, draw: null, hist: [], fut: [] };
+  try { var npPref = JSON.parse(localStorage.getItem('ob-np-pref') || 'null'); if (npPref) { NPS.color = npPref.c || NPS.color; NPS.size = npPref.w || NPS.size; } } catch(e){}
+  function npPrefSave(){ try { localStorage.setItem('ob-np-pref', JSON.stringify({ c:NPS.color, w:NPS.size })); } catch(e){} }
+  var NP = { reset: function(){ NPS.page = 0; NPS.hist = []; NPS.fut = []; NPS.draw = null; if (!npEl.hidden) { npLayout(); npPaintTools(); } } };
+  function npData(){ if (!S.notes || !Array.isArray(S.notes.pages) || !S.notes.pages.length) S.notes = { pages:[{ s:[] }] }; return S.notes; }
+  function npHas(){ return !!(S.notes && S.notes.pages && S.notes.pages.some(function(p){ return p.s && p.s.length; })); }
+  function paintNpTab(){
+    var show = !!ME && VIEW === 'builder' && present.hidden && setEl.hidden && npEl.hidden;
+    npTab.hidden = !show; document.getElementById('npDot').hidden = !npHas();
+  }
+  function npOpen(){
+    npData(); if (NPS.page >= S.notes.pages.length) NPS.page = 0;
+    npEl.hidden = false; npTab.setAttribute('aria-expanded', 'true'); paintNpTab();
+    npPaintTools(); requestAnimationFrame(npLayout);
+  }
+  function npClose(){
+    if (!npEl || npEl.hidden) return;
+    npEl.hidden = true; npTab.setAttribute('aria-expanded', 'false'); paintNpTab();
+  }
+  npTab.addEventListener('click', npOpen);
+  document.getElementById('npClose').addEventListener('click', function(){ npClose(); npTab.focus(); });
+  function npPaintTools(){
+    document.getElementById('npColors').innerHTML = NP_COLORS.map(function(c){
+      return '<button type="button" class="np-sw" data-color="' + c[0] + '" style="background:' + c[0] + '" aria-label="' + c[1] + '" aria-pressed="' + (NPS.color === c[0]) + '"></button>';
+    }).join('');
+    document.getElementById('npSizes').innerHTML = NP_SIZES.map(function(z){
+      var d = Math.max(3, Math.round(z[0] * 1.5));
+      return '<button type="button" class="np-sz" data-size="' + z[0] + '" aria-label="' + z[1] + '" aria-pressed="' + (NPS.size === z[0]) + '"><i style="width:' + d + 'px;height:' + d + 'px"></i></button>';
+    }).join('');
+    [].forEach.call(npEl.querySelectorAll('[data-tool]'), function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-tool') === NPS.tool)); });
+    var n = npData().pages.length;
+    document.getElementById('npPage').textContent = (NPS.page + 1) + ' / ' + n;
+    document.getElementById('npPrev').disabled = NPS.page === 0;
+    document.getElementById('npNext').disabled = NPS.page >= n - 1;
+    document.getElementById('npUndo').disabled = !NPS.hist.length;
+    document.getElementById('npRedo').disabled = !NPS.fut.length;
+  }
+  npEl.addEventListener('click', function(e){
+    var t = e.target.closest('button'); if (!t) return;
+    if (t.hasAttribute('data-tool')) { NPS.tool = t.getAttribute('data-tool'); npPaintTools(); return; }
+    if (t.hasAttribute('data-color')) { NPS.color = t.getAttribute('data-color'); if (NPS.tool === 'er') NPS.tool = 'pen'; npPrefSave(); npPaintTools(); return; }
+    if (t.hasAttribute('data-size')) { NPS.size = Number(t.getAttribute('data-size')); npPrefSave(); npPaintTools(); return; }
+    var pages = npData().pages;
+    if (t.id === 'npPrev' && NPS.page > 0) { NPS.page--; npRedraw(); npPaintTools(); }
+    if (t.id === 'npNext' && NPS.page < pages.length - 1) { NPS.page++; npRedraw(); npPaintTools(); }
+    if (t.id === 'npAdd') { pages.push({ s:[] }); NPS.page = pages.length - 1; npRedraw(); npPaintTools(); save(); }
+    if (t.id === 'npUndo') npUndo();
+    if (t.id === 'npRedo') npRedo();
+    if (t.id === 'npClear') {
+      var pg = pages[NPS.page]; if (!pg.s.length) return;
+      NPS.hist.push({ pg:NPS.page, k:'clear', list:pg.s }); NPS.fut = []; pg.s = [];
+      npRedraw(); npPaintTools(); save(); paintNpTab();
+      showToast('Page cleared. Tap Undo in the notes to bring it back.', false);
+    }
+  });
+  function npUndo(){
+    var h = NPS.hist.pop(); if (!h) return; var pg = npData().pages[h.pg]; if (!pg) { npPaintTools(); return; }
+    if (h.k === 'add') { var i = pg.s.lastIndexOf(h.st); if (i > -1) pg.s.splice(i, 1); }
+    else { pg.s = h.list.concat(pg.s); }
+    NPS.fut.push(h); NPS.page = h.pg; npRedraw(); npPaintTools(); save(); paintNpTab();
+  }
+  function npRedo(){
+    var h = NPS.fut.pop(); if (!h) return; var pg = npData().pages[h.pg]; if (!pg) { npPaintTools(); return; }
+    if (h.k === 'add') pg.s.push(h.st); else { h.list = pg.s; pg.s = []; }
+    NPS.hist.push(h); NPS.page = h.pg; npRedraw(); npPaintTools(); save(); paintNpTab();
+  }
+  function npLayout(){
+    if (npEl.hidden) return;
+    var st = document.getElementById('npStage'), r = st.getBoundingClientRect();
+    var w = Math.max(100, r.width - 24), h = Math.max(100, r.height - 24), sc = Math.min(w / PW, h / PH);
+    var cw = Math.floor(PW * sc), chh = Math.floor(PH * sc), dpr = Math.min(window.devicePixelRatio || 1, 3);
+    NPS.scale = sc;
+    npCv.style.width = cw + 'px'; npCv.style.height = chh + 'px';
+    npCv.width = Math.round(cw * dpr); npCv.height = Math.round(chh * dpr);
+    npCv.style.backgroundSize = '100% ' + (50 * sc) + 'px';
+    npCtx.setTransform(npCv.width / PW, 0, 0, npCv.height / PH, 0, 0);
+    npRedraw();
+  }
+  if (window.ResizeObserver) new ResizeObserver(function(){ npLayout(); }).observe(document.getElementById('npStage'));
+  else window.addEventListener('resize', npLayout);
+  function hlColor(c){ return c === NP_COLORS[0][0] ? '#FACC15' : c; }
+  function npStroke(st){
+    var p = st.p, n = p.length / 3; if (!n) return;
+    var c = npCtx; c.save(); c.lineCap = 'round'; c.lineJoin = 'round';
+    if (st.t === 'er') c.globalCompositeOperation = 'destination-out';
+    if (st.t === 'hl') c.globalAlpha = .35;
+    c.strokeStyle = c.fillStyle = st.t === 'er' ? '#000' : st.c;
+    if (n === 1) { c.beginPath(); c.arc(p[0], p[1], st.w / 2, 0, Math.PI * 2); c.fill(); c.restore(); return; }
+    if (st.t !== 'pen') {
+      c.lineWidth = st.w; c.beginPath(); c.moveTo(p[0], p[1]);
+      for (var i = 1; i < n; i++) c.lineTo(p[i * 3], p[i * 3 + 1]);
+      c.stroke(); c.restore(); return;
+    }
+    for (var j = 1; j < n; j++) npSeg(st, j);
+    c.restore();
+  }
+  function npSeg(st, j){
+    var p = st.p, c = npCtx, pr = (p[j * 3 + 2] + p[j * 3 - 1]) / 200;
+    c.lineWidth = st.w * (0.5 + pr);
+    c.beginPath(); c.moveTo(p[j * 3 - 3], p[j * 3 - 2]); c.lineTo(p[j * 3], p[j * 3 + 1]); c.stroke();
+  }
+  function npRedraw(){
+    npCtx.save(); npCtx.setTransform(1, 0, 0, 1, 0, 0); npCtx.clearRect(0, 0, npCv.width, npCv.height); npCtx.restore();
+    var pg = npData().pages[NPS.page]; if (!pg) return;
+    pg.s.forEach(npStroke);
+    if (NPS.draw) npStroke(NPS.draw.st);
+  }
+  function npPoint(e, st){
+    var r = npCv.getBoundingClientRect();
+    var x = Math.round((e.clientX - r.left) / r.width * PW), y = Math.round((e.clientY - r.top) / r.height * PH);
+    var pr = e.pointerType === 'pen' || (e.pressure && e.pressure !== .5 && e.pressure !== 0) ? Math.round(e.pressure * 100) : 50;
+    var p = st.p, k = p.length;
+    if (k && Math.abs(p[k - 3] - x) < 1 && Math.abs(p[k - 2] - y) < 1) return false;
+    p.push(x, y, pr); return true;
+  }
+  var npRaf = 0;
+  npCv.addEventListener('pointerdown', function(e){
+    if (e.pointerType === 'pen') NPS.pen = true;
+    if (e.pointerType === 'touch' && NPS.pen) return;      // resting palm or finger while a pencil is in use
+    if (e.button > 0 || NPS.draw) return;
+    e.preventDefault();
+    try { npCv.setPointerCapture(e.pointerId); } catch(x){}
+    var w = NPS.tool === 'er' ? NPS.size * 4 + 14 : NPS.tool === 'hl' ? NPS.size * 3 + 14 : NPS.size;
+    var st = { t:NPS.tool, c: NPS.tool === 'hl' ? hlColor(NPS.color) : NPS.color, w:w, p:[] };
+    NPS.draw = { id:e.pointerId, st:st }; npPoint(e, st);
+    if (st.t === 'pen') npStroke(st); else npRedraw();
+  });
+  npCv.addEventListener('pointermove', function(e){
+    var d = NPS.draw; if (!d || e.pointerId !== d.id) return;
+    e.preventDefault();
+    var evs = (e.getCoalescedEvents && e.getCoalescedEvents()) || []; if (!evs.length) evs = [e];
+    var before = d.st.p.length / 3;
+    evs.forEach(function(ev){ npPoint(ev, d.st); });
+    var after = d.st.p.length / 3; if (after === before) return;
+    if (d.st.t === 'pen') { npCtx.save(); npCtx.lineCap = 'round'; npCtx.strokeStyle = d.st.c; for (var j = Math.max(1, before); j < after; j++) npSeg(d.st, j); npCtx.restore(); }
+    else if (!npRaf) npRaf = requestAnimationFrame(function(){ npRaf = 0; npRedraw(); });
+  });
+  function npEnd(e){
+    var d = NPS.draw; if (!d || (e && e.pointerId !== d.id)) return;
+    NPS.draw = null;
+    if (!d.st.p.length) return;
+    var pg = npData().pages[NPS.page]; pg.s.push(d.st);
+    NPS.hist.push({ pg:NPS.page, k:'add', st:d.st }); NPS.fut = []; if (NPS.hist.length > 300) NPS.hist.shift();
+    npRedraw(); npPaintTools(); save();
+    document.getElementById('npDot').hidden = false;
+  }
+  npCv.addEventListener('pointerup', npEnd);
+  npCv.addEventListener('pointercancel', npEnd);
+  npCv.addEventListener('lostpointercapture', npEnd);
+  npCv.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+  document.addEventListener('keydown', function(e){
+    if (npEl.hidden || !(e.ctrlKey || e.metaKey) || e.key.toLowerCase() !== 'z') return;
+    if (document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+    e.preventDefault(); if (e.shiftKey) npRedo(); else npUndo();
+  });
+
+  document.body.classList.add('on-home');
+  paintMe();
+
+  /* ================= FIRST-RUN TOUR (once per tester; replay from the account menu) ================= */
   var TOUR = [
-    { t:'Welcome to Option Builder', x:'Build good-better-best options at the kitchen table, present them in your brand, let the homeowner pick one, then hand it to your office and your install crew. Two minutes and you will know your way around.' },
-    { el:'#brandBox', t:'Make it yours first', x:'Open Your brand and tap Pull my brand from my website. Your logo, colors and fonts land on everything, including what the homeowner sees. No website handy? Upload your logo and the colors are read from it.' },
-    { el:'#guarBox', t:'Your guarantees', x:'The four promises that come with every job. Change the wording, uncheck any you do not offer, or add your own. The card shows right above the observations, so you say it every time.' },
-    { el:'#ratesBox', t:'Your pricing', x:'Set your SSR (your hourly rate) and your consumables. Add the financing terms you offer; the one marked Show puts a monthly amount on every option. Put your CRM link here too.' },
-    { el:'#libBar', t:'Your price book', x:'Every line you save lands here, private to your company. Next time you start typing a scope line, your saved lines pop up with their hours and material already filled in.' },
-    { el:'#obsCallOut', pad:60, t:'Observations', x:'Called about, connected to it, working well, would recommend. Type it, or tap the mic and just talk. This is your why, and it carries into the presentation and the work order.' },
-    { el:'.opt', t:'Build your first option', x:'Each line is scope on the left, numbers on the right: hours, material, sub, misc. The price adds itself up. Drag the dots to reorder, tap the bookmark to save a line to your price book, the trash can to delete it.' },
-    { el:'#addBelow', t:'Add the next option', x:'Add a lesser option below and it copies every line and price, so you only delete what changes. Building from the bottom up? Add a better option above. Platinum is always the one on top. Lower options can say "Same as the one above, except…" with one checkbox.' },
-    { el:'#customer', t:'What the customer sees', x:'A live preview of the option sheet, stacked top to bottom, with the monthly amount under each price.' },
-    { el:'#presentBtn', pad:8, t:'Present to customer', x:'Opens the full-screen presentation: your guarantees, your observations, then the options. Switch Prices on or off at the top. The homeowner taps Choose and types their initials, then hands the device back to you.' },
-    { el:'.ladder', pad:0, t:'After they choose', x:'Send to CRM copies the option and opens your CRM for the deposit. Send to Work Order gives the crew only what they bought: material breakdown per line, photos per line, install notes and the observations.' },
-    { el:'.hero-actions', pad:10, t:'Save as you go', x:'Save estimate keeps this job so you can leave and come back. Saved estimates opens any of them on any device you sign in from. Start fresh clears the builder for the next house.' },
-    { el:'#fbOpen', pad:8, t:'Tell us everything', x:'This is a beta. If something breaks, sucks, or is amazing, tap Feedback and say it in a sentence. It comes straight to the SLE team.' },
-    { el:'#tourBtn', pad:8, t:'You are ready', x:'Start with Your brand, then build your first job. Want to see this again? Tap Tour, right here, anytime.' }
+    { t:'Welcome to Option Builder', x:'Build good-better-best options at the kitchen table, present them in your brand, let the homeowner pick one, then hand it to your office and your install crew. One minute and you will know your way around.' },
+    { el:'#newEst', pad:8, t:'Build a new estimate', x:'Every job starts here. Pick the client, paste the call transcript if you have one, write your observations, then build the options line by line.' },
+    { el:'.est-panel', t:'Every estimate, with its status', x:'Editing, Presented, Sold, Work order editing, Install ready. The status moves on its own when you present, when the customer chooses, and when you start the work order. In progress hides the jobs that are install ready; All shows everything.' },
+    { el:'#setOpen', pad:6, t:'Your settings', x:'The cog holds your brand, pricing, guarantees, price book and connections. Set them once and every estimate uses them.' },
+    { el:'#meBtn', pad:6, t:'That is you', x:'Your initials. Tap them to sign out, open Settings, or watch this tour again.' },
+    { t:'Inside an estimate', x:'Add a better option above or a lesser one below and it copies the one beside it, so you only change what is different. Tap Notes on the right edge for a scratch pad with your pencil or finger; the customer never sees it. Present to customer is at the bottom.' },
+    { el:'#fbOpen', pad:8, t:'Tell us everything', x:'This is a beta. If something breaks, sucks, or is amazing, tap Feedback and say it in a sentence. It comes straight to the SLE team.' }
   ];
   var tourEl = document.getElementById('tour'), tourI = 0, tourSteps = [];
   function tourTarget(s){ if (!s.el) return null; var el = document.querySelector(s.el); if (!el) return null; var r = el.getBoundingClientRect(); return (r.width || r.height) ? el : null; }
@@ -2678,7 +3451,9 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
     document.getElementById('tourNext').focus({ preventScroll:true });
   }
   function startTour(){
-    closeMenu(); closeSugg();
+    closeMenu(); closeSugg(); closeMe(); npClose();
+    if (!setEl.hidden) closeSettings();
+    if (VIEW !== 'home') showHome();
     tourSteps = TOUR.filter(function(s){ return !s.el || document.querySelector(s.el); });
     tourEl.hidden = false; showTourStep(0);
   }
@@ -2691,7 +3466,6 @@ body.is-dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
   document.getElementById('tourNext').addEventListener('click', function(){ if (tourI < tourSteps.length - 1) showTourStep(tourI + 1); else endTour(); });
   document.getElementById('tourBack').addEventListener('click', function(){ if (tourI > 0) showTourStep(tourI - 1); });
   document.getElementById('tourSkip').addEventListener('click', endTour);
-  document.getElementById('tourBtn').addEventListener('click', startTour);
   window.addEventListener('resize', placeTour);
   window.addEventListener('scroll', placeTour, { passive:true });
   document.addEventListener('keydown', function(e){
